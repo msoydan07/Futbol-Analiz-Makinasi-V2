@@ -24,6 +24,20 @@ class IdentityTests(unittest.TestCase):
             r.save()
             self.assertEqual(Registry(path).resolve_team("Galatasaray SK"), a)
 
+    def test_cross_provider_explicit_link(self):
+        with tempfile.TemporaryDirectory() as folder:
+            r = Registry(Path(folder) / "registry.json")
+            home = r.register_team("galatasaray-sk", "Galatasaray")
+            away = r.register_team("konyaspor", "Konyaspor")
+            fid = r.register_fixture("TUR1", "2026-2027", home, away, "official", "123")
+            self.assertEqual(r.link_fixture_source(fid, "provider-b", "987"), fid)
+            self.assertEqual(r.register_fixture("TUR1", "2026-2027", home, away, "provider-b", "987"), fid)
+            self.assertEqual(len(r.data["fixtures"]), 1)
+            with self.assertRaises(KeyError):
+                r.link_fixture_source("nonexistent", "provider-c", "1")
+            with self.assertRaises(ValueError):
+                r.register_fixture("TUR1", "2026-2027", away, home, "provider-b", "987")
+
     def test_fixture_stability_and_conflicts(self):
         with tempfile.TemporaryDirectory() as folder:
             r = Registry(Path(folder) / "registry.json")
