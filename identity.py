@@ -63,6 +63,50 @@ class Registry:
             raise KeyError(f"Unmapped team: {name}; manual review required")
         return self.data["aliases"][key]
 
+    def add_team_alias(self, team_id: str, alias: str, source: str) -> None:
+        """Attach a verified source-specific name without creating another club."""
+        if team_id not in self.data["teams"]:
+            raise KeyError("Unknown team ID")
+        if not source.strip():
+            raise ValueError("Alias source required")
+        normalized = normalize(alias)
+        owner = self.data["aliases"].get(normalized)
+        if owner and owner != team_id:
+            raise ValueError(f"Alias already belongs to another club: {alias}")
+        self.data["aliases"][normalized] = team_id
+        self.data.setdefault("alias_evidence", {})[json.dumps([source.strip().casefold(), normalized], ensure_ascii=False)] = team_id
+
+    def register_dated_fixture(self, league: str, season: str, home_id: str, away_id: str,
+                               match_date: str) -> str:
+        """Date is initial matching evidence, never the permanent fixture identity.
+
+        One home/away league fixture per season is expected for these domestic
+        competitions. Date corrections retain the same ID. Ambiguous matches fail.
+        """
+        import datetime
+        if league not in LEAGUES or season not in SEASONS:
+            raise ValueError("Unsupported league or season")
+        if home_id == away_id or home_id not in self.data["teams"] or away_id not in self.data["teams"]:
+            raise ValueError("Invalid participants")
+        datetime.date.fromisoformat(match_date)
+        match_key = json.dumps([league, season, home_id, away_id], ensure_ascii=False)
+        matches = [(fid, item) for fid, item in self.data["fixtures"].items()
+                   if item["match_key"] == match_key]
+        if len(matches) > 1:
+            raise ValueError("Ambiguous duplicate fixture; manual review required")
+        if matches:
+            fid, fixture = matches[0]
+            fixture["match_date"] = match_date
+            return fid
+        fid = stable_id("dated-league-fixture", match_key)
+        self.data["fixtures"][fid] = {
+            "match_key": match_key, "league": league, "season": season,
+            "home_id": home_id, "away_id": away_id, "match_date": match_date,
+            "kickoff": None, "source": "internal", "external_id": None,
+            "identity_basis": "LEAGUE_SEASON_HOME_AWAY_DATE_MATCHED"
+        }
+        return fid
+
     def link_fixture_source(self, fixture_id: str, source: str, external_id: str) -> str:
         """Explicitly link another provider ID to a verified existing fixture.
 
