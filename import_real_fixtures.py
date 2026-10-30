@@ -29,6 +29,8 @@ def main():
         raise SystemExit("Incomplete fixture source coverage")
     keys = Counter((r["season"], r["league"], r["home"], r["away"])
                    for r in rows if r["status"] == "CANDIDATE_ONLY")
+    match_dates = Counter((r["season"], r["league"], r["home"], r["away"], r["date"])
+                          for r in rows if r["status"] == "CANDIDATE_ONLY")
     errors, imported, skipped_empty = [], 0, 0
     error_types = Counter()
     error_samples = defaultdict(list)
@@ -45,14 +47,30 @@ def main():
             record_error(row["status"], f"Invalid candidate {row['season']}/{row['league']} row {row['source_row']}: {row['status']}")
             continue
         key = row["season"], row["league"], row["home"], row["away"]
-        if keys[key] > 1:
-            record_error("REPEATED_HOME_AWAY", "Repeated home/away league fixture: " + repr(key))
+        if match_dates[key + (row["date"],)] > 1:
+            record_error("AMBIGUOUS_SAME_DATE", "Repeated home/away on same date: " + repr(key + (row["date"],)))
             continue
         try:
             home = registry.resolve_team(row["home"])
             away = registry.resolve_team(row["away"])
             date = parse_date(row["date"])
-            registry.register_dated_fixture(row["league"], row["season"], home, away, date)
+            if keys[key] > 1:
+                # Belgium play-offs can repeat the same home/away pairing in one season.
+                # A date-qualified source observation is distinct; do not merge fixtures.
+                match_key = json.dumps([row["league"], row["season"], home, away, date], ensure_ascii=False)
+                from identity import stable_id
+                fid = stable_id("date-qualified-source-fixture", match_key)
+                if fid in registry.data["fixtures"]:
+                    raise ValueError("Duplicate date-qualified fixture")
+                registry.data["fixtures"][fid] = {
+                    "match_key": match_key, "league": row["league"], "season": row["season"],
+                    "home_id": home, "away_id": away, "match_date": date,
+                    "kickoff": None, "source": "football-data", "external_id": None,
+                    "identity_basis": "DATE_QUALIFIED_REPEATED_PAIR",
+                    "reschedule_requires_reconciliation": True
+                }
+            else:
+                registry.register_dated_fixture(row["league"], row["season"], home, away, date)
             imported += 1
         except (ValueError, KeyError) as exc:
             record_error(type(exc).__name__, repr(key) + ": " + str(exc))
