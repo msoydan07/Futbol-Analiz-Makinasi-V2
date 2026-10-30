@@ -11,6 +11,7 @@ on:
       - 'test_fixture_import.py'
       - 'audit_result_quality.py'
       - 'build_historical_results.py'
+      - 'audit_template_262_coverage.py'
       - 'data/official_team_names.csv'
 jobs:
   collect:
@@ -46,6 +47,8 @@ jobs:
         run: python audit_result_quality.py
       - name: Mac sonuclarini kimliklerle birlestir
         run: python build_historical_results.py
+      - name: Sablon 262 lig bazli veri kapsami
+        run: python audit_template_262_coverage.py
       - name: Sonuclari sakla
         if: always()
         uses: actions/upload-artifact@v4
@@ -70,4 +73,5 @@ jobs:
             data/unplayed_fixture_candidates.csv
             data/historical_results.csv
             data/historical_results_audit.json
+            data/template_262_coverage.json
           if-no-files-found: warn
