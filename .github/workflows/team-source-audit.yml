@@ -19,6 +19,8 @@ jobs:
         run: python audit_season_membership.py
       - name: Gecici takim kimliklerini olustur
         run: python import_provisional_teams.py
+      - name: Resmi isim inceleme tablosunu hazirla
+        run: python prepare_official_name_review.py
       - name: Federasyon isim eslestirmelerini uygula
         run: python apply_official_team_names.py
       - name: Mac kayitlarini ve tekrarlarini denetle
@@ -37,6 +39,7 @@ jobs:
             data/team_memberships.csv
             data/team_registry.json
             data/official_name_audit.csv
+            data/official_team_names.csv
             data/fixture_candidates.csv
             data/fixture_source_audit.csv
           if-no-files-found: warn
