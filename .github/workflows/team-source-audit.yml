@@ -1,8 +1,15 @@
-name: Mac kimligi cift kayit guvenlik testi
+name: Takim ve mac kimligi toplu kabul
 on:
   push:
     branches: [feature/01-kimlikler]
-    paths: ['.github/workflows/team-source-audit.yml']
+    paths:
+      - '.github/workflows/team-source-audit.yml'
+      - 'identity.py'
+      - 'import_real_fixtures.py'
+      - 'audit_fixture_candidates.py'
+      - 'test_identity.py'
+      - 'test_fixture_import.py'
+      - 'data/official_team_names.csv'
 jobs:
   collect:
     runs-on: ubuntu-latest
