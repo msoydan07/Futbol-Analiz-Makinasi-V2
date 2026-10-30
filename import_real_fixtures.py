@@ -1,6 +1,6 @@
 """Register real Football-Data league fixtures against persistent team IDs.
 
-Date is metadata; league+season+home+away is the stable domestic league identity.
+Unique pairings use stable league/season/team IDs; repeated pairings use provisional date-qualified IDs.
 Only valid, nonambiguous observed rows are imported.
 """
 import csv
@@ -55,20 +55,7 @@ def main():
             away = registry.resolve_team(row["away"])
             date = parse_date(row["date"])
             if keys[key] > 1:
-                # Belgium play-offs can repeat the same home/away pairing in one season.
-                # A date-qualified source observation is distinct; do not merge fixtures.
-                match_key = json.dumps([row["league"], row["season"], home, away, date], ensure_ascii=False)
-                from identity import stable_id
-                fid = stable_id("date-qualified-source-fixture", match_key)
-                if fid in registry.data["fixtures"]:
-                    raise ValueError("Duplicate date-qualified fixture")
-                registry.data["fixtures"][fid] = {
-                    "match_key": match_key, "league": row["league"], "season": row["season"],
-                    "home_id": home, "away_id": away, "match_date": date,
-                    "kickoff": None, "source": "football-data", "external_id": None,
-                    "identity_basis": "DATE_QUALIFIED_REPEATED_PAIR",
-                    "reschedule_requires_reconciliation": True
-                }
+                registry.register_repeated_fixture_observation(row["league"], row["season"], home, away, date)
             else:
                 registry.register_dated_fixture(row["league"], row["season"], home, away, date)
             imported += 1
