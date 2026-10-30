@@ -1,4 +1,4 @@
-name: Belcika mac kimligi ve regresyon kabul testi
+name: Mac kimligi cift kayit guvenlik testi
 on:
   push:
     branches: [feature/01-kimlikler]
