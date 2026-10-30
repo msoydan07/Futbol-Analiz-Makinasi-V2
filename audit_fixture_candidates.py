@@ -25,7 +25,7 @@ def main():
                     data = response.read().decode("utf-8-sig", errors="replace")
                 matches = list(csv.DictReader(io.StringIO(data)))
                 for index, row in enumerate(matches, start=2):
-                    home, away, date = (row.get(k) or "").strip() for k in ("HomeTeam", "AwayTeam", "Date")
+                    home, away, date = [(row.get(k) or "").strip() for k in ("HomeTeam", "AwayTeam", "Date")]
                     if not home or not away or not date:
                         rows_out.append({"season": season, "league": league, "source_row": index,
                                          "date": date, "home": home, "away": away,
