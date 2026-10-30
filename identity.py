@@ -57,6 +57,30 @@ class Registry:
             self.data["aliases"][name] = tid
         return tid
 
+    def set_official_team_name(self, team_id: str, official_name: str,
+                               federation: str, evidence_url: str) -> None:
+        """Promote an evidenced federation name to canonical display name.
+
+        Team ID/key never change; previous display name remains an alias.
+        """
+        if team_id not in self.data["teams"]:
+            raise KeyError("Unknown team ID")
+        if not federation.strip() or not evidence_url.startswith(("https://", "http://")):
+            raise ValueError("Federation and official evidence URL required")
+        official = official_name.strip()
+        normalized = normalize(official)
+        owner = self.data["aliases"].get(normalized)
+        if owner and owner != team_id:
+            raise ValueError("Official name conflicts with another team")
+        team = self.data["teams"][team_id]
+        previous = team["name"]
+        self.data["aliases"][normalize(previous)] = team_id
+        self.data["aliases"][normalized] = team_id
+        team["name"] = official
+        team["verification"] = "FEDERATION_VERIFIED"
+        team["official_name_source"] = federation.strip()
+        team["official_name_evidence_url"] = evidence_url
+
     def resolve_team(self, name: str) -> str:
         key = normalize(name)
         if key not in self.data["aliases"]:
