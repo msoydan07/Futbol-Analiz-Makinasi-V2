@@ -1,4 +1,4 @@
-name: Takim ve mac kimlikleri bos satir ayristirma testi
+name: Belcika play-off mac kimligi kabul testi
 on:
   push:
     branches: [feature/01-kimlikler]
