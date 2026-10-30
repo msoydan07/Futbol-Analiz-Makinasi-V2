@@ -22,7 +22,7 @@ Premier League, Championship, Bundesliga, La Liga, Serie A, Ligue 1, Eredivisie,
 ## Takip kaydı
 | Aşama | Durum | Kullanılan modül | Test kanıtı |
 |---|---|---|---|
-| 1 — Kimlikler | Başlanmadı | — | — |
+| 1 — Kimlikler | Birim testleri geçti; gerçek takım eşleştirmeleri bekleniyor | `identity.py` | `test_identity.py`, GitHub Actions yeşil (kullanıcı teyidi), dal: `feature/01-kimlikler`, commit: `4215c1e` |
 
 Bir aşama ancak kabul kriteri ve test kanıtı kaydedilince tamamlanır. Yeşil CI tek başına matematiksel doğrulama değildir. Tamamlanan modül yeniden yazılmaz. Aynı iş için paralel modül/klasör açılmaz. Değişiklik olmadan başarısız test tekrarlanmaz.
 
