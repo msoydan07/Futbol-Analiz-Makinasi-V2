@@ -1,4 +1,4 @@
-name: Belcika play-off mac kimligi kabul testi
+name: Belcika mac kimligi ve regresyon kabul testi
 on:
   push:
     branches: [feature/01-kimlikler]
@@ -12,7 +12,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Kimlik motoru birim testleri
-        run: python -m unittest -v test_identity.py
+        run: python -m unittest -v test_identity.py test_fixture_import.py
       - name: On lig iki sezon tarama
         run: python collect_team_candidates.py
       - name: Kimlik inceleme listesini hazirla
