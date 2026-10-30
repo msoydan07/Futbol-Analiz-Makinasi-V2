@@ -15,6 +15,8 @@ jobs:
         run: python collect_team_candidates.py
       - name: Kimlik inceleme listesini hazirla
         run: python prepare_team_identity_review.py
+      - name: Sezon lig degisimlerini denetle
+        run: python audit_season_membership.py
       - name: Sonuclari sakla
         if: always()
         uses: actions/upload-artifact@v4
@@ -24,4 +26,5 @@ jobs:
             data/team_candidates.csv
             data/source_audit.csv
             data/team_identity_review.csv
+            data/season_membership_audit.csv
           if-no-files-found: warn
