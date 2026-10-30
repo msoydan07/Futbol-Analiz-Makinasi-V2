@@ -1,0 +1,24 @@
+name: Takim kaynak taramasi
+on:
+  push:
+    branches: [feature/01-kimlikler]
+    paths: ['.github/workflows/team-source-audit.yml']
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: On lig iki sezon tarama
+        run: python collect_team_candidates.py
+      - name: Sonuclari sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: team-source-audit
+          path: |
+            data/team_candidates.csv
+            data/source_audit.csv
+          if-no-files-found: warn
