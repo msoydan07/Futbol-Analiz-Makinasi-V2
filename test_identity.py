@@ -22,6 +22,19 @@ class IdentityTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 r.register_dated_fixture("ENG1", "2026-2027", home, away, "not-a-date")
 
+    def test_federation_name_is_canonical_and_id_stays_stable(self):
+        with tempfile.TemporaryDirectory() as folder:
+            r = Registry(Path(folder) / "registry.json")
+            team = r.register_team("example-united", "Example Utd")
+            r.set_official_team_name(team, "Example United Football Club",
+                                     "Example Federation", "https://example.org/clubs/123")
+            self.assertEqual(r.data["teams"][team]["name"], "Example United Football Club")
+            self.assertEqual(r.resolve_team("Example Utd"), team)
+            self.assertEqual(r.resolve_team("Example United Football Club"), team)
+            self.assertEqual(r.data["teams"][team]["verification"], "FEDERATION_VERIFIED")
+            with self.assertRaises(ValueError):
+                r.set_official_team_name(team, "Unverified", "Federation", "")
+
     def test_league_season_scope(self):
         self.assertEqual(len(LEAGUES), 10)
         self.assertEqual(len(SEASONS), 2)
