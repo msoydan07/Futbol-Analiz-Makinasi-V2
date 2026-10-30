@@ -9,6 +9,7 @@ on:
       - 'audit_fixture_candidates.py'
       - 'test_identity.py'
       - 'test_fixture_import.py'
+      - 'audit_result_quality.py'
       - 'data/official_team_names.csv'
 jobs:
   collect:
@@ -40,6 +41,8 @@ jobs:
         run: python audit_fixture_candidates.py
       - name: Gercek maclari kalici kimliklere bagla
         run: python import_real_fixtures.py
+      - name: Mac sonucu ve skor veri kalitesi
+        run: python audit_result_quality.py
       - name: Sonuclari sakla
         if: always()
         uses: actions/upload-artifact@v4
@@ -60,4 +63,5 @@ jobs:
             data/fixture_source_audit.csv
             data/fixture_import_report.json
             data/match_registry.json
+            data/result_quality_report.json
           if-no-files-found: warn
