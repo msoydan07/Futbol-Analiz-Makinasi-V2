@@ -1,4 +1,4 @@
-name: Takim kaynak taramasi ve resmi isim toplu testi
+name: Takim kaynak taramasi ve 215 kimlik testi
 on:
   push:
     branches: [feature/01-kimlikler]
