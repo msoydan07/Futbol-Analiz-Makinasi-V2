@@ -5,6 +5,23 @@ from identity import Registry, LEAGUES, SEASONS
 
 
 class IdentityTests(unittest.TestCase):
+    def test_dated_fixture_reschedule_and_alias(self):
+        with tempfile.TemporaryDirectory() as folder:
+            r = Registry(Path(folder) / "registry.json")
+            home = r.register_team("manchester-united", "Manchester United")
+            away = r.register_team("arsenal", "Arsenal")
+            r.add_team_alias(home, "Man United", "football-data")
+            self.assertEqual(r.resolve_team("Man United"), home)
+            first = r.register_dated_fixture("ENG1", "2026-2027", home, away, "2026-10-31")
+            moved = r.register_dated_fixture("ENG1", "2026-2027", home, away, "2026-11-02")
+            self.assertEqual(first, moved)
+            self.assertEqual(r.data["fixtures"][first]["match_date"], "2026-11-02")
+            self.assertEqual(len(r.data["fixtures"]), 1)
+            with self.assertRaises(ValueError):
+                r.add_team_alias(away, "Man United", "other-source")
+            with self.assertRaises(ValueError):
+                r.register_dated_fixture("ENG1", "2026-2027", home, away, "not-a-date")
+
     def test_league_season_scope(self):
         self.assertEqual(len(LEAGUES), 10)
         self.assertEqual(len(SEASONS), 2)
