@@ -1,4 +1,4 @@
-name: Takim ve mac kimlikleri gercek veri testi
+name: Takim ve mac kimlikleri bos satir ayristirma testi
 on:
   push:
     branches: [feature/01-kimlikler]
