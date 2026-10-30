@@ -63,6 +63,23 @@ class Registry:
             raise KeyError(f"Unmapped team: {name}; manual review required")
         return self.data["aliases"][key]
 
+    def link_fixture_source(self, fixture_id: str, source: str, external_id: str) -> str:
+        """Explicitly link another provider ID to a verified existing fixture.
+
+        Never infer fixture identity solely from teams/date: cup or replay
+        matches can share participants. Manual/source-backed confirmation required.
+        """
+        if fixture_id not in self.data["fixtures"]:
+            raise KeyError("Unknown canonical fixture")
+        if not source.strip() or not str(external_id).strip():
+            raise ValueError("Stable source fixture ID required")
+        key = json.dumps([source.strip().casefold(), str(external_id).strip()], ensure_ascii=False)
+        existing = self.data["external_fixtures"].get(key)
+        if existing and existing != fixture_id:
+            raise ValueError("Provider fixture ID already linked to another match")
+        self.data["external_fixtures"][key] = fixture_id
+        return fixture_id
+
     def register_fixture(self, league: str, season: str, home_id: str, away_id: str,
                          source: str, external_id: str, kickoff: str | None = None) -> str:
         """Source fixture ID is mandatory; kickoff is metadata and can change."""
