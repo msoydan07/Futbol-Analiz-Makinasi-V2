@@ -15,6 +15,10 @@ def main():
     seen = set()
     failures = []
     verified = 0
+    if len(candidates) != 215:
+        failures.append(f"Unexpected source universe: {len(candidates)} instead of 215")
+    if len(mappings) != len(candidates):
+        failures.append(f"Mapping coverage {len(mappings)}/{len(candidates)}")
     for row in mappings:
         name = row["source_name"]
         if name in seen or name not in candidates:
