@@ -54,6 +54,8 @@ def main():
     totals = Counter()
     sources = []
     anomalies = []
+    fixture_candidates = []
+    today = dt.datetime.now(dt.timezone.utc).date()
     for season, short in SEASONS.items():
         for league, code in LEAGUES.items():
             url = f"{BASE}/{short}/{code}.csv"
@@ -68,6 +70,23 @@ def main():
                     raise ValueError("Missing required columns: " + repr(sorted(required - set(reader.fieldnames or []))))
                 for number, row in enumerate(reader, start=2):
                     status, reason = inspect(row)
+                    if status == "UNPLAYED":
+                        raw_date = (row.get("Date") or "").strip()
+                        match_date = None
+                        for fmt in ("%d/%m/%Y", "%d/%m/%y", "%Y-%m-%d"):
+                            try:
+                                match_date = dt.datetime.strptime(raw_date, fmt).date()
+                                break
+                            except ValueError:
+                                pass
+                        if match_date is not None:
+                            classification = "FUTURE_CANDIDATE" if match_date > today else "PAST_UNRESOLVED"
+                            fixture_candidates.append({"season": season, "league": league,
+                                "source_row": number, "date": match_date.isoformat(),
+                                "home": (row.get("HomeTeam") or "").strip(),
+                                "away": (row.get("AwayTeam") or "").strip(),
+                                "classification": classification,
+                                "verification": "UNVERIFIED_FIXTURE_CANDIDATE"})
                     counts[status] += 1
                     totals[status] += 1
                     if status not in ("COMPLETE", "UNPLAYED", "EMPTY"):
@@ -78,10 +97,16 @@ def main():
             except Exception as exc:
                 sources.append({"league": league, "season": season, "url": url,
                                 "status": "FAILED", "error": str(exc)[:250]})
-    report = {"source_count": len(sources), "sources_ok": sum(s["status"] == "OK" for s in sources),
+    with (OUT / "unplayed_fixture_candidates.csv").open("w", encoding="utf-8", newline="") as file:
+        fields = ["season", "league", "source_row", "date", "home", "away", "classification", "verification"]
+        writer = csv.DictWriter(file, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(fixture_candidates)
+    report = {"fixture_candidates": dict(Counter(r["classification"] for r in fixture_candidates)),
+              "audit_date_utc": today.isoformat(), "source_count": len(sources), "sources_ok": sum(s["status"] == "OK" for s in sources),
               "totals": dict(totals), "anomaly_count": len(anomalies),
               "anomaly_samples": anomalies[:100], "sources": sources,
-              "interpretation": "UNPLAYED is not a missing historical result; data may change between downloads."}
+              "interpretation": "Future blank-score rows are unverified fixture candidates, not confirmed schedules. Past blank-score rows require investigation. Sources may change between downloads."}
     (OUT / "result_quality_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in report.items() if k not in ("anomaly_samples", "sources")}, indent=2))
     if report["sources_ok"] != len(LEAGUES) * len(SEASONS) or anomalies:
