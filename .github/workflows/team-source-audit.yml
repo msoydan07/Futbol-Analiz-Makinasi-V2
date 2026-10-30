@@ -64,4 +64,5 @@ jobs:
             data/fixture_import_report.json
             data/match_registry.json
             data/result_quality_report.json
+            data/unplayed_fixture_candidates.csv
           if-no-files-found: warn
