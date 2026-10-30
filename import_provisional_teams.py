@@ -3,7 +3,6 @@
 No cross-source alias is guessed. Every entry remains unverified until reviewed.
 """
 import csv
-import json
 from pathlib import Path
 from identity import Registry
 
@@ -27,11 +26,6 @@ def main():
         name, key = row["source_name"], row["suggested_key"]
         team_id = registry.register_team(key, name)
         registry.data["teams"][team_id]["verification"] = "PROVISIONAL_SOURCE_NAME_ONLY"
-        for season in row["seasons"].split(";"):
-            for league in row["leagues"].split(";"):
-                # Cross-product is valid only if memberships are actually observed.
-                # The original candidate CSV is the authoritative source below.
-                pass
     with Path("data/team_candidates.csv").open(encoding="utf-8-sig", newline="") as f:
         for row in csv.DictReader(f):
             memberships.append({
