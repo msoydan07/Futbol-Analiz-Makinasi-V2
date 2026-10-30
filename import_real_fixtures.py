@@ -6,7 +6,7 @@ Only valid, nonambiguous observed rows are imported.
 import csv
 import datetime as dt
 import json
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 from identity import Registry
 
@@ -30,13 +30,20 @@ def main():
     keys = Counter((r["season"], r["league"], r["home"], r["away"])
                    for r in rows if r["status"] == "CANDIDATE_ONLY")
     errors, imported = [], 0
+    error_types = Counter()
+    error_samples = defaultdict(list)
+    def record_error(reason, detail):
+        errors.append(detail)
+        error_types[reason] += 1
+        if len(error_samples[reason]) < 8:
+            error_samples[reason].append(detail)
     for row in rows:
         if row["status"] != "CANDIDATE_ONLY":
-            errors.append(f"Invalid candidate {row['season']}/{row['league']} row {row['source_row']}: {row['status']}")
+            record_error(row["status"], f"Invalid candidate {row['season']}/{row['league']} row {row['source_row']}: {row['status']}")
             continue
         key = row["season"], row["league"], row["home"], row["away"]
         if keys[key] > 1:
-            errors.append("Repeated home/away league fixture: " + repr(key))
+            record_error("REPEATED_HOME_AWAY", "Repeated home/away league fixture: " + repr(key))
             continue
         try:
             home = registry.resolve_team(row["home"])
@@ -45,10 +52,11 @@ def main():
             registry.register_dated_fixture(row["league"], row["season"], home, away, date)
             imported += 1
         except (ValueError, KeyError) as exc:
-            errors.append(repr(key) + ": " + str(exc))
+            record_error(type(exc).__name__, repr(key) + ": " + str(exc))
     summary = {"source_count": len(source_audit), "candidate_rows": len(rows),
                "imported": imported, "registered": len(registry.data["fixtures"]),
-               "errors": errors[:100], "error_count": len(errors)}
+               "errors": errors[:100], "error_count": len(errors),
+               "error_types": dict(error_types), "error_samples": dict(error_samples)}
     (ROOT / "fixture_import_report.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k:v for k,v in summary.items() if k != "errors"}, indent=2))
     if errors:
