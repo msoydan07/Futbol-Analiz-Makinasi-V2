@@ -13,6 +13,8 @@ jobs:
           python-version: '3.11'
       - name: On lig iki sezon tarama
         run: python collect_team_candidates.py
+      - name: Kimlik inceleme listesini hazirla
+        run: python prepare_team_identity_review.py
       - name: Sonuclari sakla
         if: always()
         uses: actions/upload-artifact@v4
@@ -21,4 +23,5 @@ jobs:
           path: |
             data/team_candidates.csv
             data/source_audit.csv
+            data/team_identity_review.csv
           if-no-files-found: warn
