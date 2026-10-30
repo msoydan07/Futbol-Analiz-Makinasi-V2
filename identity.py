@@ -104,8 +104,8 @@ class Registry:
                                match_date: str) -> str:
         """Date is initial matching evidence, never the permanent fixture identity.
 
-        One home/away league fixture per season is expected for these domestic
-        competitions. Date corrections retain the same ID. Ambiguous matches fail.
+        Use only for uniquely paired league fixtures. Repeated pairings (such as
+        Belgian play-offs) require a distinct occurrence identity.
         """
         import datetime
         if league not in LEAGUES or season not in SEASONS:
@@ -128,6 +128,33 @@ class Registry:
             "home_id": home_id, "away_id": away_id, "match_date": match_date,
             "kickoff": None, "source": "internal", "external_id": None,
             "identity_basis": "LEAGUE_SEASON_HOME_AWAY_DATE_MATCHED"
+        }
+        return fid
+
+    def register_repeated_fixture_observation(self, league: str, season: str,
+                                              home_id: str, away_id: str,
+                                              match_date: str) -> str:
+        """Separate repeated league encounters using observed date as provisional evidence.
+
+        A rescheduled encounter needs source-backed reconciliation; never silently
+        merge two real encounters or claim date-derived IDs survive postponements.
+        """
+        import datetime
+        if league not in LEAGUES or season not in SEASONS:
+            raise ValueError("Unsupported league or season")
+        if home_id == away_id or home_id not in self.data["teams"] or away_id not in self.data["teams"]:
+            raise ValueError("Invalid participants")
+        datetime.date.fromisoformat(match_date)
+        key = json.dumps([league, season, home_id, away_id, match_date], ensure_ascii=False)
+        fid = stable_id("date-qualified-source-fixture", key)
+        if fid in self.data["fixtures"]:
+            raise ValueError("Duplicate date-qualified fixture")
+        self.data["fixtures"][fid] = {
+            "match_key": key, "league": league, "season": season,
+            "home_id": home_id, "away_id": away_id, "match_date": match_date,
+            "kickoff": None, "source": "football-data", "external_id": None,
+            "identity_basis": "DATE_QUALIFIED_REPEATED_PAIR",
+            "reschedule_requires_reconciliation": True
         }
         return fid
 
