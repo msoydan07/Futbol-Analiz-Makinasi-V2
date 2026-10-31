@@ -16,6 +16,13 @@ def norm(s):
 def extract(league,lines,home,away,now):
  matches=[]
  if league=="BEL1":
+  # Official club calendar table rows: local time and both teams in one row.
+  club_re=re.compile(r"^(?:za|zo|ma|di|wo|do|vr)\\s+(\\d{1,2})\\s+(okt|nov|dec)\\s*[-–]\\s*(\\d{1,2}):(\\d{2})\\s+(.+?)\\s+(.+)$",re.I)
+  for line in lines:
+   m=club_re.fullmatch(line)
+   if m and norm(m.group(5))==norm(home) and norm(m.group(6))==norm(away):
+    local=datetime(now.year,{"okt":10,"nov":11,"dec":12}[m.group(2).lower()],int(m.group(1)),int(m.group(3)),int(m.group(4)),tzinfo=ZoneInfo("Europe/Brussels"))
+    matches.append(local.astimezone(timezone.utc))
   # Official Pro League calendar cards: home / local? display kickoff / day / away.
   # Pro League website lists kickoffs in UTC (verified against match detail).
   datepat=re.compile(r"^(?:lun|mar|mer|jeu|ven|sam|dim|ma|di|wo|do|vr|za|zo)\.\s*(\d{1,2})\s+(oct|nov|okt)\.$",re.I)
@@ -68,7 +75,7 @@ def extract(league,lines,home,away,now):
     local=datetime.strptime(str(date)+" "+m.group(3),"%Y-%m-%d %H:%M").replace(tzinfo=ZoneInfo("Europe/London"))
     matches.append(local.astimezone(timezone.utc))
  return sorted(set(matches))
-FALLBACK_SOURCES={"BEL1":["https://www.proleague.be/jpl-calendar","https://www.proleague.be/nl/jpl-calendar"]}
+FALLBACK_SOURCES={"BEL1":["https://kvmechelen.be/kalenderupdatesept/","https://www.krcgenk.be/en","https://www.proleague.be/nl/jpl-calendar"]}
 def lookup(league,home,away):
  from playwright.sync_api import sync_playwright
  now=datetime.now(timezone.utc);url=SOURCES[league]
