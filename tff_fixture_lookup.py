@@ -46,7 +46,7 @@ def lookup(home,away,now=None,lines=None):
   tm=times.search(chunktext)
   if not tm:continue
   # Ignore referee and venue: team names must be in the section around the match time.
-  after=chunktext[tm.end():]
+  after=normalize(chunktext[tm.end():])
   nh,na=normalize(home),normalize(away)
   hpos=after.find(nh) if nh else -1
   apos=after.find(na) if na else -1
