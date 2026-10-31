@@ -10,7 +10,8 @@
     "away_team": "Lorient",
     "home_goals": 2,
     "away_goals": 0,
-    "evidence_url": "https://ligue1.com/fr/articles/l1_article_4078-programmation-tv-j21-l1-2526"
+    "evidence_url": "https://ligue1.com/fr/articles/l1_article_4078-programmation-tv-j21-l1-2526",
+    "source_url": "https://understat.com/match/29720"
   },
   {
     "source_row": 1134,
@@ -23,7 +24,8 @@
     "away_team": "Rennes",
     "home_goals": 3,
     "away_goals": 1,
-    "evidence_url": "https://ligue1.com/fr/articles/l1_article_4078-programmation-tv-j21-l1-2526"
+    "evidence_url": "https://ligue1.com/fr/articles/l1_article_4078-programmation-tv-j21-l1-2526",
+    "source_url": "https://understat.com/match/29722"
   },
   {
     "source_row": 1135,
@@ -36,7 +38,8 @@
     "away_team": "Lille",
     "home_goals": 0,
     "away_goals": 0,
-    "evidence_url": "https://ligue1.com/fr/articles/l1_article_4078-programmation-tv-j21-l1-2526"
+    "evidence_url": "https://ligue1.com/fr/articles/l1_article_4078-programmation-tv-j21-l1-2526",
+    "source_url": "https://understat.com/match/29723"
   },
   {
     "source_row": 1136,
@@ -49,6 +52,7 @@
     "away_team": "Lyon",
     "home_goals": 0,
     "away_goals": 1,
-    "evidence_url": "https://ligue1.com/fr/articles/l1_article_4078-programmation-tv-j21-l1-2526"
+    "evidence_url": "https://ligue1.com/fr/articles/l1_article_4078-programmation-tv-j21-l1-2526",
+    "source_url": "https://understat.com/match/29724"
   }
 ]
