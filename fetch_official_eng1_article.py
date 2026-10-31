@@ -40,7 +40,7 @@ def main():
   m=fixture_re.match(line)
   if not m:continue
   home=m.group(2).strip();away=m.group(3).strip()
-  if len(home)>60 or len(away)>60:continue
+  if len(home)>60 or len(away)>60 or any(z in home.lower()+" "+away.lower() for z in ("fixtures", "matchweek", "kick-off")):continue
   matches.append({"league":"ENG1","season":"2026-2027","match_date":active.isoformat(),"home_official":home,"away_official":away,"local_time_text":m.group(1),"kickoff_utc":None,"kickoff_turkey":None,"status":"OFFICIAL_ARTICLE_CANDIDATE_UNVERIFIED_TIME","source_url":URL})
  now=datetime.now(timezone.utc)
  upcoming=[m for m in matches if now.date()<=date.fromisoformat(m["match_date"])<=now.date().fromordinal(now.date().toordinal()+7)]
