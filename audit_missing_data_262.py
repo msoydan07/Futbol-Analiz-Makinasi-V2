@@ -25,7 +25,10 @@ def main():
    filled=sum(r.get(field,"")!="" for r in subset)
    entry["fields"][field]={"filled":filled,"missing":n-filled}
   out.append(entry)
- report={"version":"262_data_inventory_v1","historical_matches":len(h),
+ audit=json.loads((P/"historical_results_audit.json").read_text(encoding="utf-8"))
+ quarantine=audit.get("quarantined_stat_groups",[])
+ known=[dict(q,decision="EXCLUDE_AFFECTED_SHOT_PAIR_ONLY",manual_action="NOT_REQUIRED") for q in quarantine]
+ report={"known_source_anomalies":known,"known_anomaly_count":len(known),"known_anomaly_policy":"Retain valid fixture/results; ignore only invalid stat pair; revisit only if source changes","version":"262_data_inventory_v1","historical_matches":len(h),
          "verified_xg_matches":len(x),"xg_missing_total":len(h)-len(x),
          "by_league_season":out,
          "not_in_current_historical_sources":["first_half_corners","injuries","suspensions","lineups","odds"],
