@@ -17,12 +17,16 @@ jobs:
         with:
           python-version: '3.11'
       - name: Yedi gun kural testleri
-        run: python -m unittest -q test_verify_match_on_demand.py
+        run: python -m unittest -q test_verify_match_on_demand.py test_tff_fixture_lookup.py
       - name: TFF haftalik program gercek okuma testi
         run: python smoke_tff_official_detail.py
+      - name: Genel mac arama canli deneme
+        run: python tff_fixture_lookup.py Kasımpaşa Beşiktaş | tee data/tff_lookup_live.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: fixture-smoke-proof
-          path: data/tff_official_detail_smoke.json
+          path: |
+            data/tff_official_detail_smoke.json
+            data/tff_lookup_live.json
           if-no-files-found: warn
