@@ -107,6 +107,7 @@ def run(args):
                 checks = (
                     v["league"] == league and v["season"] == season,
                     v["source_date"] == day(r["match_date"]),
+                    v.get("source_url") == r.get("source_url"),
                     v["verified_date"] == day(target["match_date"]),
                     v["home_team"] == r["home_team"] and v["away_team"] == r["away_team"],
                     int(v["home_goals"]) == h and int(v["away_goals"]) == a,
