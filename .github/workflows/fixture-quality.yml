@@ -3,6 +3,8 @@ on:
   schedule:
     - cron: '20 6 * * 2'
   workflow_dispatch:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
     paths:
@@ -15,8 +17,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: feature/01-kimlikler
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
