@@ -31,10 +31,10 @@ def main():
  report={"known_source_anomalies":known,"known_anomaly_count":len(known),"known_anomaly_policy":"Retain valid fixture/results; ignore only invalid stat pair; revisit only if source changes","version":"262_data_inventory_v1","historical_matches":len(h),
          "verified_xg_matches":len(x),"xg_missing_total":len(h)-len(x),
          "by_league_season":out,
-         "not_in_current_historical_sources":["first_half_corners","injuries","suspensions","lineups","odds"],
+         "not_in_current_historical_sources":["injuries","suspensions","lineups","odds"],
          "asof_policy":"Only matches with match_date strictly before prediction date",
          "manual_policy":"Do not ask for manual entry before source search and impact assessment",
-         "integration_status":"verified historical xG file exists; prediction engine not yet wired"}
+         "excluded_by_user":["first_half_corners"],"integration_status":"verified historical xG file exists; prediction engine not yet wired"}
  (P/"missing_data_inventory_262.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  print(json.dumps({"historical_matches":len(h),"verified_xg_matches":len(x),
   "xg_missing_total":len(h)-len(x),"league_seasons":len(out)},ensure_ascii=False))
