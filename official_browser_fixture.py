@@ -36,8 +36,8 @@ def extract(league,lines,home,away,now):
   h=aliases.get(norm(home),{norm(home)})
   a=aliases.get(norm(away),{norm(away)})
   months={"jan":1,"fev":2,"mar":3,"abr":4,"mai":5,"jun":6,"jul":7,"ago":8,"set":9,"out":10,"nov":11,"dez":12}
-  dp=re.compile(r"(?:seg|ter|qua|qui|sex|s[aá]b|dom)\\.?\\s*(\\d{1,2})\\s+(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\\b",re.I)
-  tp=re.compile(r"\\b(\\d{1,2})h(\\d{2})\\b",re.I)
+  dp=re.compile(r"(?:seg|ter|qua|qui|sex|s[aá]b|dom)\.?\s*(\d{1,2})\s+(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\b",re.I)
+  tp=re.compile(r"\b(\d{1,2})h(\d{2})\b",re.I)
   for i,line in enumerate(lines):
    dm=dp.search(line)
    if not dm:continue
