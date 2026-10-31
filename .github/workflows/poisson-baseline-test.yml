@@ -5,6 +5,8 @@ on:
     branches: [feature/01-kimlikler]
     paths:
       - '.github/workflows/poisson-baseline-test.yml'
+      - 'experimental_poisson_baseline.py'
+      - 'test_experimental_poisson_baseline.py'
 jobs:
   poisson:
     runs-on: ubuntu-latest
