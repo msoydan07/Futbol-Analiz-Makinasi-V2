@@ -18,7 +18,7 @@ class TestNamedGate(unittest.TestCase):
   self.now=datetime.now(timezone.utc)
  def observation(self):
   return {"status":"VERIFIED_OFFICIAL_FIXTURE",
-          "kickoff_utc":(self.now+timedelta(days=1)).isoformat(),
+          "home":"Arsenal","away":"Chelsea",\n          "kickoff_utc":(self.now+timedelta(days=1)).isoformat(),
           "source_url":"https://www.premierleague.com/en/fixtures",
           "retrieved_at_utc":self.now.isoformat()}
  def test_official_observation_without_bulk_csv(self):
@@ -32,7 +32,7 @@ class TestNamedGate(unittest.TestCase):
  def test_unofficial_url_rejected(self):
   r=run("ENG1","Arsenal","Chelsea",lookup_override=lambda h,a:dict(self.observation(),source_url="https://fake.example"),registry_path=self.path)
   self.assertEqual(r["status"],"REJECTED")
- def test_missing_team_registry_never_fakes_success(self):
+ def test_wrong_observed_teams_rejected(self):\n  r=run("ENG1","Arsenal","Chelsea",lookup_override=lambda h,a:dict(self.observation(),away="Liverpool"),registry_path=self.path)\n  self.assertEqual(r["status"],"NOT_VERIFIED")\n def test_missing_team_registry_never_fakes_success(self):
   r=run("ENG1","Arsenal","Unknown",lookup_override=lambda h,a:self.observation(),registry_path=self.path)
   self.assertEqual(r["status"],"REVIEW_REQUIRED")
 
