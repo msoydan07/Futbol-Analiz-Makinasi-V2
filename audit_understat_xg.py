@@ -56,6 +56,14 @@ def run(args):
     if not candidates or not {"league","season","source_row","home","away"}.issubset(candidates[0]):
         raise ValueError("Fixture candidates missing required fields")
     aliases = json.loads(Path(args.aliases).read_text(encoding="utf-8")) if args.aliases else {}
+    overrides = json.loads(Path(args.reviewed_dates).read_text(encoding="utf-8")) if args.reviewed_dates else []
+    override_by_row = {int(v["source_row"]): v for v in overrides}
+    if len(override_by_row) != len(overrides):
+        raise ValueError("Duplicate reviewed date override row")
+    historical_by_id = {r["fixture_id"]: r for r in base}
+    if len(historical_by_id) != len(base):
+        raise ValueError("Duplicate historical fixture IDs")
+    used_overrides = set()
     names = {(r["league"],r["season"],r["source_row"]):r for r in candidates}
     index = defaultdict(list)
     for r in base:
@@ -88,6 +96,29 @@ def run(args):
             h,a = score(r["home_goals"]),score(r["away_goals"])
             hx,ax = xg(r["home_xg"]),xg(r["away_xg"])
             matches = index.get(key,[])
+            if not matches and row_no in override_by_row:
+                v = override_by_row[row_no]
+                target = historical_by_id.get(v["fixture_id"])
+                if target is None:
+                    raise ValueError("Reviewed override fixture not found")
+                target_name = names.get((target["league"],target["season"],target["source_row"]))
+                if not target_name:
+                    raise ValueError("Reviewed override candidate name missing")
+                checks = (
+                    v["league"] == league and v["season"] == season,
+                    v["source_date"] == day(r["match_date"]),
+                    v["verified_date"] == day(target["match_date"]),
+                    v["home_team"] == r["home_team"] and v["away_team"] == r["away_team"],
+                    int(v["home_goals"]) == h and int(v["away_goals"]) == a,
+                    target["league"] == league and target["season"] == season,
+                    norm(target_name["home"]) == norm(home) and norm(target_name["away"]) == norm(away),
+                    int(target["home_goals"]) == h and int(target["away_goals"]) == a,
+                    bool(v.get("evidence_url","").startswith("https://")),
+                )
+                if not all(checks):
+                    raise ValueError("Reviewed override evidence/identity/date/score mismatch")
+                matches = [target]
+                used_overrides.add(row_no)
             if len(matches) == 0:
                 status,reason = "UNMATCHED","No exact reviewed team/date match"
             elif len(matches) != 1:
@@ -110,10 +141,12 @@ def run(args):
                         "away_team":r.get("away_team",""),"fixture_id":fid,
                         "status":status,"reason":reason,
                         "source_url":r.get("source_url","")})
+    if used_overrides != set(override_by_row):
+        raise ValueError("Not all reviewed date overrides were applied")
     expected = Counter((r["league"],r["season"]) for r in base if r["league"] in LEAGUES)
     matched = Counter((r["league"],r["season"]) for r in base if r["fixture_id"] in seen)
     summary = {"read_only":True,"source_rows":len(source),"historical_eligible":sum(expected.values()),
-               "matched_unique":len(seen),"coverage_by_league_season":[
+               "matched_unique":len(seen),"reviewed_date_overrides_applied":len(used_overrides),"coverage_by_league_season":[
                    {"league":league,"season":season,"historical":total,
                     "matched":matched[(league,season)]}
                    for (league,season),total in sorted(expected.items())],
@@ -136,6 +169,7 @@ if __name__ == "__main__":
     p.add_argument("--historical",default="data/historical_results.csv")
     p.add_argument("--candidates",default="data/fixture_candidates.csv")
     p.add_argument("--aliases",default="")
+    p.add_argument("--reviewed-dates",default="")
     p.add_argument("--output",default="data/understat_xg_match_audit.csv")
     p.add_argument("--report",default="data/understat_xg_match_report.json")
     raise SystemExit(run(p.parse_args()))
