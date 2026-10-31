@@ -20,6 +20,7 @@ def classify(args):
     candidates=rows(args.candidates)
     source=rows(args.source)
     audit=rows(args.audit)
+    aliases=json.loads(Path(args.aliases).read_text(encoding="utf-8")) if Path(args.aliases).exists() else {}
     candidate_index={(r["league"],r["season"],r["source_row"]):r for r in candidates}
     by_group=defaultdict(list)
     for h in hist:
@@ -43,7 +44,8 @@ def classify(args):
             raise ValueError("Audit/source order mismatch at row "+a["source_row"])
         group=by_group[(r["league"],r["season"])]
         d=date.fromisoformat(r["match_date"][:10])
-        home,away=norm(r["home_team"]),norm(r["away_team"])
+        mapping=aliases.get(r["league"],{})
+        home,away=norm(mapping.get(r["home_team"],r["home_team"])),norm(mapping.get(r["away_team"],r["away_team"]))
         score=(int(r["home_goals"]),int(r["away_goals"]))
         same_names=[m for m in group if (m["home"],m["away"])==(home,away)]
         same_day=[m for m in group if m["date"]==d]
@@ -79,7 +81,8 @@ def classify(args):
     summary={"unmatched_total":len(results),"classification":[
         {"league":l,"season":s,"category":c,"count":n}
         for (l,s,c),n in sorted(totals.items())],
-        "warning":"Categories are diagnostic evidence only, not approved fixture joins."}
+        "diagnostic_uses_reviewed_aliases":True,
+        "warning":"Categories are mutually exclusive diagnostic evidence only, not approved fixture joins."}
     Path(args.report).write_text(json.dumps(summary,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(json.dumps(summary,ensure_ascii=False,indent=2))
 
@@ -89,6 +92,7 @@ if __name__=="__main__":
     p.add_argument("--candidates",default="data/fixture_candidates.csv")
     p.add_argument("--source",default="data/understat_matches.csv")
     p.add_argument("--audit",default="data/understat_xg_match_audit.csv")
+    p.add_argument("--aliases",default="data/understat_reviewed_aliases.json")
     p.add_argument("--output",default="data/understat_unmatched_diagnosis.csv")
     p.add_argument("--report",default="data/understat_unmatched_diagnosis.json")
     classify(p.parse_args())
