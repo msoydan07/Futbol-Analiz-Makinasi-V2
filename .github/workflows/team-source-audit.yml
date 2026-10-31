@@ -49,7 +49,9 @@ jobs:
         run: python audit_result_quality.py
       - name: Mac sonuclarini kimliklerle birlestir
         run: python build_historical_results.py
-      - name: Model B zaman agirligi karsilastirmasi\n        run: python experimental_model_b_recency.py data/historical_results.csv\n      - name: Sablon 262 lig bazli veri kapsami
+      - name: Model B zaman agirligi karsilastirmasi
+        run: python experimental_model_b_recency.py data/historical_results.csv
+      - name: Sablon 262 lig bazli veri kapsami
         run: python audit_template_262_coverage.py
       - name: 2.6.2 tek veri doluluk raporu
         if: always()
@@ -77,7 +79,8 @@ jobs:
             data/result_quality_report.json
             data/unplayed_fixture_candidates.csv
             data/historical_results.csv
-            data/historical_results_audit.json\n            data/model_b_recency_experiment.json
+            data/historical_results_audit.json
+            data/model_b_recency_experiment.json
             data/template_262_coverage.json
             data/262_data_acceptance_snapshot.json
           if-no-files-found: warn
