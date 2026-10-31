@@ -43,11 +43,11 @@ def main():
  with path.open(encoding="utf-8-sig",newline="") as f:rows=list(csv.DictReader(f))
  rows.sort(key=lambda r:(r["match_date"],r["fixture_id"]))
  assert len({r["fixture_id"] for r in rows})==len(rows),"Duplicate fixture_id"
- checked=0;skipped=0;brier=0.;logloss=0.;tail=0.
+ checked=0;skipped=0;brier=0.;logloss=0.;tail=0.\n baseline_brier=0.;baseline_logloss=0.;model_wins=0;baseline_wins=0;ties=0
  for r in rows:
   p=estimate(rows,r["league"],r["home_id"],r["away_id"],r["match_date"])
   if p is None:skipped+=1;continue
-  probs=[p["p_home"],p["p_draw"],p["p_away"]]
+  # Same historical cutoff, same scored fixtures, and Laplace smoothing.\n  prior=[x for x in rows if x["league"]==r["league"] and x["match_date"]<r["match_date"]]\n  counts=[sum(x["result"]==v for x in prior) for v in ("H","D","A")]\n  baseline=[(n+1)/(len(prior)+3) for n in counts]\n  probs=[p["p_home"],p["p_draw"],p["p_away"]]
   truth=[int(r["result"]==v) for v in ("H","D","A")]
   # Residual tail is explicit; normalize only for scoring 1X2.
   s=sum(probs);probs=[x/s for x in probs]
@@ -55,7 +55,7 @@ def main():
   logloss-=math.log(max(1e-12,probs[truth.index(1)]))
   tail=max(tail,p["tail_mass"])
   checked+=1
- report={"version":"poisson_goals_baseline_v0_experimental","historical_rows":len(rows),"scored":checked,"skipped":skipped,"mean_multiclass_brier":brier/checked if checked else None,"mean_log_loss":logloss/checked if checked else None,"max_matrix_tail_mass":tail,"leakage_rule":"Only match_date strictly before target date","warnings":["Not xG model","No Dixon-Coles calibration","No Elo","No odds or EV","No first-half corners","Not validated for betting"]}
+ report={"version":"poisson_goals_baseline_v0_experimental","historical_rows":len(rows),"scored":checked,"skipped":skipped,"mean_multiclass_brier":brier/checked if checked else None,"mean_log_loss":logloss/checked if checked else None,"baseline_mean_multiclass_brier":baseline_brier/checked if checked else None,"baseline_mean_log_loss":baseline_logloss/checked if checked else None,"brier_improvement_vs_baseline":(baseline_brier-brier)/checked if checked else None,"logloss_improvement_vs_baseline":(baseline_logloss-logloss)/checked if checked else None,"per_match_brier_wins":{"poisson":model_wins,"league_baseline":baseline_wins,"ties":ties},"baseline_method":"league_historical_1x2_frequencies_laplace_one_same_cutoff","max_matrix_tail_mass":tail,"leakage_rule":"Only match_date strictly before target date","warnings":["Not xG model","No Dixon-Coles calibration","No Elo","No odds or EV","No first-half corners","Not validated for betting"]}
  Path("data").mkdir(exist_ok=True)
  Path("data/poisson_baseline_backtest.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
  print(json.dumps(report,ensure_ascii=False))
