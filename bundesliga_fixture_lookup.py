@@ -31,7 +31,7 @@ def lookup(home,away,now=None,html=None):
  for row in p.rows:
   if len(row)<7:continue
   # DFL columns: Matchday, Day, Date, CET, UTC, Home, Away
-  date,utc,team_h,team_a=row[2],row[4],row[5],row[6]
+  date,utc,team_h,team_a=row[1].split("|")[-1].strip(),row[3],row[4],row[5]
   if norm(team_h)!=norm(home) or norm(team_a)!=norm(away):continue
   try:kick=datetime.strptime(date+" "+utc,"%d-%b-%Y %H:%M").replace(tzinfo=timezone.utc)
   except ValueError:continue
