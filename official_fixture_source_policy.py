@@ -5,7 +5,7 @@ OFFICIAL={
 "ENG1":{"authority":"Premier League","url":"https://www.premierleague.com/en/news/4675097/all-380-fixtures-for-season-202627-premier-league-season"},
 "ENG2":{"authority":"English Football League","url":"https://www.efl.com/matches/"},
 "GER1":{"authority":"Bundesliga / DFL","url":"https://products.bundesliga.com/fixtures"},
-"ESP1":{"authority":"LaLiga","url":"https://www.laliga.com/laliga-easports/calendario"},
+"ESP1":{"authority":"LaLiga","url":"https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-11"},
 "ITA1":{"authority":"Lega Serie A","url":"https://www.legaseriea.it/en/serie-a/fixture-and-results"},
 "FRA1":{"authority":"Ligue 1 / LFP","url":"https://ligue1.com/matches"},
 "NED1":{"authority":"Eredivisie","url":"https://eredivisie.nl/competitie/programma/"},
