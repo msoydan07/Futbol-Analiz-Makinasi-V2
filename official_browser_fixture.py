@@ -30,13 +30,28 @@ def extract(league,lines,home,away,now):
       d=datetime(now.year,10 if m.group(2).lower()=="oct" else 11,int(m.group(1)),*map(int,lines[j].split(":")),tzinfo=timezone.utc)
       matches.append(d)
  elif league=="POR1":
-  # Official Estoril team fixture card: date, J10, FCP, kickoff, EPF.
-  if norm(home)=="fcporto" and norm(away)=="estorilpraia":
-   for i,x in enumerate(lines):
-    if not re.search(r"(?:sáb\.?|sab\.?|sábado)\s*31\s*out",x,re.I):continue
-    context=" ".join(lines[i:i+16])
-    if re.search(r"\bFCP\b\s+20h30\s+\bEPF\b",context,re.I):
-     matches.append(datetime(now.year,10,31,20,30,tzinfo=ZoneInfo("Europe/Lisbon")).astimezone(timezone.utc))
+  # Parse visible match cards, not a particular club or a fixed date.
+  # Cards expose e.g. "sáb. 31 out", "FCP", "20h30", "EPF".
+  # Abbreviations are accepted only for a known exact team identity.
+  aliases={"fcporto":{"fcp","fcporto"},"estorilpraia":{"epf","estorilpraia"}}
+  h=aliases.get(norm(home),{norm(home)})
+  a=aliases.get(norm(away),{norm(away)})
+  months={"jan":1,"fev":2,"mar":3,"abr":4,"mai":5,"jun":6,"jul":7,"ago":8,"set":9,"out":10,"nov":11,"dez":12}
+  dp=re.compile(r"(?:seg|ter|qua|qui|sex|s[aá]b|dom)\\.?\\s*(\\d{1,2})\\s+(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\\b",re.I)
+  tp=re.compile(r"\\b(\\d{1,2})h(\\d{2})\\b",re.I)
+  for i,line in enumerate(lines):
+   dm=dp.search(line)
+   if not dm:continue
+   context=lines[i+1:i+17]
+   for j,x in enumerate(context):
+    if norm(x) not in h:continue
+    for k in range(j+1,min(j+7,len(context))):
+     tm=tp.fullmatch(context[k])
+     if not tm:continue
+     if any(norm(y) in a for y in context[k+1:k+5]):
+      year=now.year+(1 if now.month==12 and months[dm.group(2).lower()]<=2 else 0)
+      local=datetime(year,months[dm.group(2).lower()],int(dm.group(1)),int(tm.group(1)),int(tm.group(2)),tzinfo=ZoneInfo("Europe/Lisbon"))
+      matches.append(local.astimezone(timezone.utc))
  elif league=="ENG2":
   datepat=re.compile(r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(\d{1,2})\s+(October|November)$",re.I)
   matchpat=re.compile(r"^(.+?)\s+v\s+(.+?)\s+\((\d{1,2}:\d{2})\)$",re.I)
