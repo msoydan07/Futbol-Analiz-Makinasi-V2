@@ -22,7 +22,7 @@ OVERRIDES={
          "Borussia M.Gladbach":"M'gladbach","Bayern Munich":"Bayern Munich",
          "Eintracht Frankfurt":"Ein Frankfurt","FC Cologne":"FC Koln",
          "FC Heidenheim":"Heidenheim","Freiburg":"Freiburg","Hamburger SV":"Hamburg",
-         "Mainz 05":"Mainz","RasenBallsport Leipzig":"RB Leipzig",
+         "Mainz 05":"Mainz","RasenBallsport Leipzig":"RB Leipzig","St. Pauli":"St Pauli",
          "VfB Stuttgart":"Stuttgart","Werder Bremen":"Werder Bremen"},
  "ESP1":{"Alaves":"Alaves","Athletic Club":"Ath Bilbao","Atletico Madrid":"Ath Madrid",
          "Barcelona":"Barcelona","Celta Vigo":"Celta","Espanyol":"Espanol",
