@@ -98,6 +98,10 @@ jobs:
           Path("data").mkdir(exist_ok=True)
           Path("data/fixture_acceptance_report.json").write_text(json.dumps(out,ensure_ascii=False,indent=2))
           print(json.dumps(out,ensure_ascii=False,indent=2))
+          total=sum(v["verified_distinct_pairs"] for v in out.values())
+          print(f"CANLI_FIKSTUR_DOGRULAMA: {total}/6")
+          if total==0:
+           raise SystemExit("KABUL BASARISIZ: sifir gercek fikstur dogrulandi; HTTP 200 yeterli degil")
           PY
       - uses: actions/upload-artifact@v4
         if: always()
