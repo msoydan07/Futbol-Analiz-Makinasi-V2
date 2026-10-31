@@ -151,12 +151,20 @@ def run(args):
                         "away_team":r.get("away_team",""),"fixture_id":fid,
                         "status":status,"reason":reason,
                         "source_url":r.get("source_url","")})
+    # Always preserve row-level matching diagnostics, even when an override check fails.
+    Path(args.output).parent.mkdir(parents=True,exist_ok=True)
+    with Path(args.output).open("w",encoding="utf-8",newline="") as handle:
+        writer = csv.DictWriter(handle,fieldnames=list(results[0]) if results else
+            ["source_row","league","season","home_team","away_team","fixture_id","status","reason","source_url"])
+        writer.writeheader()
+        writer.writerows(results)
     stale_overrides = sorted(set(override_by_url) - observed_override_urls)
     if stale_overrides:
         raise ValueError("Reviewed source URLs no longer present: " + ", ".join(stale_overrides))
     not_applied = sorted(observed_override_urls - used_overrides - already_exact_overrides)
     if not_applied:
-        raise ValueError("Reviewed date overrides not applied or no longer needed; inspect matches: " + ", ".join(not_applied))
+        diagnostics = [r for r in results if r["source_url"] in not_applied]
+        raise ValueError("Reviewed date overrides unresolved: " + json.dumps(diagnostics,ensure_ascii=False))
     expected = Counter((r["league"],r["season"]) for r in base if r["league"] in LEAGUES)
     matched = Counter((r["league"],r["season"]) for r in base if r["fixture_id"] in seen)
     summary = {"read_only":True,"source_rows":len(source),"historical_eligible":sum(expected.values()),
