@@ -1,0 +1,28 @@
+name: Fikstur hizli resmi kaynak testi
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fixture-smoke.yml'
+  workflow_dispatch:
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/01-kimlikler
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Yedi gun kural testleri
+        run: python -m unittest -q test_verify_match_on_demand.py
+      - name: TFF haftalik program gercek okuma testi
+        run: python smoke_tff_official_detail.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fixture-smoke-proof
+          path: data/tff_official_detail_smoke.json
+          if-no-files-found: warn
