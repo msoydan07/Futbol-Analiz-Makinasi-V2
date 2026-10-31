@@ -6,6 +6,9 @@ from pathlib import Path
 from collect_team_candidates import LEAGUES
 from identity import Registry
 URL="https://www.football-data.co.uk/fixtures.csv"
+def _valid_date(value,fmt):
+ try: datetime.strptime(value,fmt);return True
+ except ValueError:return False
 def main():
  now=datetime.now(timezone.utc)
  req=urllib.request.Request(URL,headers={"User-Agent":"FutbolAnalizV2/1.0","Cache-Control":"no-cache"})
@@ -22,7 +25,8 @@ def main():
   if code not in inverse:continue
   league=inverse[code]
   try:
-   date=datetime.strptime((r.get("Date") or "").strip(),"%d/%m/%Y").date()
+   date=next((datetime.strptime((r.get("Date") or "").strip(),fmt).date() for fmt in ("%d/%m/%Y","%d/%m/%y") if _valid_date((r.get("Date") or "").strip(),fmt)),None)
+   if date is None: raise ValueError("invalid date")
   except ValueError:
    issues.append({"row":idx,"league":league,"reason":"invalid_date"});continue
   if not now.date()<=date<=now.date()+timedelta(days=7):continue
