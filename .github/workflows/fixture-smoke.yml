@@ -52,16 +52,21 @@ jobs:
           python eredivisie_fixture_lookup.py Feyenoord 'Fortuna Sittard' | tee data/eredivisie_lookup_live.json
           grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/eredivisie_lookup_live.json
           grep -q '"kickoff_utc": "2026-10-31T15:30:00+00:00"' data/eredivisie_lookup_live.json
-      - name: Fransa canli kabul ve Belcika eksik veri guvenlik testi
+      - name: Fransa Belcika Portekiz Championship resmi canli mac testleri
         run: |
           set -o pipefail
           python ligue1_fixture_lookup.py 'RC Strasbourg Alsace' 'AJ Auxerre' | tee data/ligue1_lookup_live.json
           grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/ligue1_lookup_live.json
           grep -q '"kickoff_utc": "2026-11-01T14:00:00+00:00"' data/ligue1_lookup_live.json
-          python belgium_fixture_lookup.py 'KV Mechelen' 'KRC Genk' > data/belgium_lookup_live.json || true
-          cat data/belgium_lookup_live.json
-          grep -q '"status": "NOT_VERIFIED"' data/belgium_lookup_live.json
-          grep -q '"reason": "fixture_not_unique"' data/belgium_lookup_live.json
+          python belgium_fixture_lookup.py 'KV Mechelen' 'KRC Genk' | tee data/belgium_lookup_live.json
+          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/belgium_lookup_live.json
+          grep -q '"kickoff_utc": "2026-10-31T15:00:00+00:00"' data/belgium_lookup_live.json
+          python portugal_fixture_lookup.py 'FC Porto' 'Estoril Praia' | tee data/portugal_lookup_live.json
+          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/portugal_lookup_live.json
+          grep -q '"kickoff_utc": "2026-10-31T20:30:00+00:00"' data/portugal_lookup_live.json
+          python championship_fixture_lookup.py 'Blackburn Rovers' 'Stoke City' | tee data/championship_lookup_live.json
+          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/championship_lookup_live.json
+          grep -q '"kickoff_utc": "2026-11-03T19:45:00+00:00"' data/championship_lookup_live.json
       - name: Belcika Fransa en guncel resmi sayfa denetimi
         run: python probe_belgium_france_latest.py
       - name: Kalan bes lig tek seferlik toplu resmi kaynak denetimi
@@ -86,4 +91,6 @@ jobs:
             data/belgium_france_latest_probe.json
             data/ligue1_lookup_live.json
             data/belgium_lookup_live.json
+            data/portugal_lookup_live.json
+            data/championship_lookup_live.json
           if-no-files-found: warn
