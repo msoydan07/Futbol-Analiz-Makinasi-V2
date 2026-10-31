@@ -69,3 +69,17 @@ def verify_listed_match(league,home,away,kickoff_iso,source_url,retrieved_at_iso
                                   now=now,source_checked=source_checked,registry_path=registry_path)
  if checked["status"]=="VERIFIED":checked["unplayed_list_match"]=True
  return checked
+
+def verify_named_match(league, home, away, kickoff_iso, source_url, retrieved_at_iso,
+                       now=None, source_checked=False, registry_path="data/match_registry.json"):
+ """Named-match gate: official observation only; no season-wide candidate CSV dependency.
+
+ The caller must independently fetch and inspect the official league/federation fixture
+ and assert source_checked only when both clubs, home/away order and kickoff match.
+ """
+ result=verify_requested_fixture(league,home,away,kickoff_iso,source_url,retrieved_at_iso,
+                                 now=now,source_checked=source_checked,registry_path=registry_path)
+ if result["status"]=="VERIFIED":
+  result["analysis_gate"]="READY_FOR_DATA_AUDIT"
+  result["fixture_verification_mode"]="ON_DEMAND_OFFICIAL_ONLY"
+ return result
