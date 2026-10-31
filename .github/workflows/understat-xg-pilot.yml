@@ -34,8 +34,10 @@ jobs:
         run: python -m pip install soccerdata
       - name: Understat mac xG verisini topla
         run: python collect_understat_xg.py
+      - name: Kaynak isimlerini mevcut dogrulanmis isimlere bagla
+        run: python build_understat_aliases.py
       - name: Kimlik skor ve xG eslesmesini denetle
-        run: python audit_understat_xg.py --understat-csv data/understat_matches.csv
+        run: python audit_understat_xg.py --understat-csv data/understat_matches.csv --aliases data/understat_reviewed_aliases.json
       - name: Eslesmeyen maclarin nedenlerini siniflandir
         run: python diagnose_understat_unmatched.py
       - name: Raporlari sakla
@@ -47,6 +49,8 @@ jobs:
             data/understat_matches.csv
             data/understat_xg_match_audit.csv
             data/understat_xg_match_report.json
+            data/understat_alias_review.csv
+            data/understat_reviewed_aliases.json
             data/understat_unmatched_diagnosis.csv
             data/understat_unmatched_diagnosis.json
             data/historical_results_audit.json
