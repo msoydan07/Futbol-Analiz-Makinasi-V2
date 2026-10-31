@@ -20,7 +20,7 @@ def main():
   text=re.sub(r"\s+"," "," ".join(p.parts)).upper()
   home="KASIMPAŞA" in text or "KASIMPASA" in text
   away="BEŞİKTAŞ" in text or "BESIKTAS" in text
-  date=bool(re.search(r"1\.11\.2026\s*[-–]\s*19:00",text))
+  date=bool(re.search(r"(?:0?1[./-]11[./-]2026).{0,180}?19[:.]00|19[:.]00.{0,180}?(?:0?1[./-]11[./-]2026)",text))
   status="PASS" if home and away and date else "FAIL"
   result={"status":status,"source":URL,"home_found":home,"away_found":away,"kickoff_found":date,"method":"official_match_detail_html"}
  except Exception as e:
