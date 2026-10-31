@@ -4,7 +4,7 @@ from datetime import datetime,timedelta,timezone
 from html.parser import HTMLParser
 from zoneinfo import ZoneInfo
 
-URL="https://www.tff.org/default.aspx?ftxtID=2966&pageID=600"
+URL="https://www.tff.org/Default.aspx?hafta=10&pageId=198"
 class Cells(HTMLParser):
  def __init__(self):super().__init__();self.parts=[];self.skip=0
  def handle_starttag(self,tag,attrs):
