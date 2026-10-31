@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      # Parser unit tests run without needing a browser installation. HTTP 403 is fail-closed.
+      # Parser unit tests run without needing a browser installation. Club fallback enabled.
       - name: Parser ve yedi gun kurallari regresyonu
         run: python -m unittest -v test_official_browser_fixture.py test_verify_match_on_demand.py test_tff_fixture_lookup.py
       - name: Resmi sayfa erisimi icin tarayici kur
