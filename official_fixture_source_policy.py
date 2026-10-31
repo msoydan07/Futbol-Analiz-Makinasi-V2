@@ -4,7 +4,7 @@ from pathlib import Path
 OFFICIAL={
 "ENG1":{"authority":"Premier League","url":"https://www.premierleague.com/en/fixtures"},
 "ENG2":{"authority":"English Football League","url":"https://www.efl.com/matches/"},
-"GER1":{"authority":"Bundesliga / DFL","url":"https://www.bundesliga.com/en/bundesliga/matchday"},
+"GER1":{"authority":"Bundesliga / DFL","url":"https://products.bundesliga.com/fixtures"},
 "ESP1":{"authority":"LaLiga","url":"https://www.laliga.com/laliga-easports/calendario"},
 "ITA1":{"authority":"Lega Serie A","url":"https://www.legaseriea.it/en/serie-a/fixture-and-results"},
 "FRA1":{"authority":"Ligue 1 / LFP","url":"https://ligue1.com/matches"},
