@@ -4,7 +4,6 @@ Fail closed: both teams, date, kickoff and league context must be present.
 import json,re,sys,unicodedata
 from datetime import datetime,timedelta,timezone
 from zoneinfo import ZoneInfo
-from playwright.sync_api import sync_playwright
 
 SOURCES={
  "BEL1":"https://www.proleague.be/fr/jpl-calendar",
@@ -70,6 +69,7 @@ def extract(league,lines,home,away,now):
     matches.append(local.astimezone(timezone.utc))
  return sorted(set(matches))
 def lookup(league,home,away):
+ from playwright.sync_api import sync_playwright
  now=datetime.now(timezone.utc);url=SOURCES[league]
  try:
   with sync_playwright() as p:
