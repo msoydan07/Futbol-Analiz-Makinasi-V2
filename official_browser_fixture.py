@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 SOURCES={
  "BEL1":"https://www.proleague.be/fr/jpl-calendar",
  "POR1":"https://www.ligaportugal.pt/calendar",
- "ENG2":"https://www.efl.com/news/2026/october/29/referee-appointments--30-october-4-november/",
+ "ENG2":"https://www.efl.com/match-centre/",
 }
 def norm(s):
  s=unicodedata.normalize("NFKD",s.casefold())
@@ -75,21 +75,34 @@ def extract(league,lines,home,away,now):
       local=datetime(year,months[dm.group(2).lower()],int(dm.group(1)),int(tm.group(1)),int(tm.group(2)),tzinfo=ZoneInfo("Europe/Lisbon"))
       matches.append(local.astimezone(timezone.utc))
  elif league=="ENG2":
-  datepat=re.compile(r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(\d{1,2})\s+(October|November)$",re.I)
+  # Official EFL match centre: date heading followed by home, kickoff, away.
+  months={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
+  datepat=re.compile(r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)$",re.I)
   matchpat=re.compile(r"^(.+?)\s+v\s+(.+?)\s+\((\d{1,2}:\d{2})\)$",re.I)
   date=None;champ=False
-  for line in lines:
+  for i,line in enumerate(lines):
    d=datepat.fullmatch(line)
    if d:
-    date=datetime.strptime(f"{d.group(2)} {d.group(3)} {now.year}","%d %B %Y").date()
+    mon=months.get(d.group(2).lower()[:3])
+    date=datetime(now.year+(1 if now.month==12 and mon and mon<=2 else 0),mon,int(d.group(1))).date() if mon else None
     champ=False
     continue
    if line.strip().lower() in ("efl championship","sky bet championship"):champ=True;continue
    if re.match(r"^(?:Sky Bet League|EFL League|Jersey Mike)",line,re.I):champ=False
+   if not date:continue
    m=matchpat.fullmatch(line)
-   if date and champ and m and norm(m.group(1))==norm(home) and norm(m.group(2))==norm(away):
+   if m and champ and norm(m.group(1))==norm(home) and norm(m.group(2))==norm(away):
     local=datetime.strptime(str(date)+" "+m.group(3),"%Y-%m-%d %H:%M").replace(tzinfo=ZoneInfo("Europe/London"))
     matches.append(local.astimezone(timezone.utc))
+   # Match centre renders home, kickoff, away as separate visible lines.
+   if norm(line)!=norm(home):continue
+   for j in range(i+1,min(i+7,len(lines)-1)):
+    if datepat.fullmatch(lines[j]):break
+    tm=re.fullmatch(r"(\d{1,2}):(\d{2})",lines[j])
+    if not tm:continue
+    if any(norm(y)==norm(away) for y in lines[j+1:min(j+5,len(lines))]):
+     local=datetime.combine(date,datetime.min.time()).replace(hour=int(tm.group(1)),minute=int(tm.group(2)),tzinfo=ZoneInfo("Europe/London"))
+     matches.append(local.astimezone(timezone.utc))
  return sorted(set(matches))
 FALLBACK_SOURCES={"BEL1":["https://kvmechelen.be/kalenderupdatesept/","https://www.krcgenk.be/en","https://www.proleague.be/nl/jpl-calendar"]}
 def lookup(league,home,away):
