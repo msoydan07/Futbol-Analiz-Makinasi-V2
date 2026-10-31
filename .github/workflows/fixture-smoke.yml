@@ -30,6 +30,11 @@ jobs:
           python bundesliga_fixture_lookup.py 'FC Bayern München' 'Borussia Dortmund' | tee data/bundesliga_lookup_live.json
           grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/bundesliga_lookup_live.json
           grep -q '"kickoff_utc": "2026-10-31T17:30:00+00:00"' data/bundesliga_lookup_live.json
+      - name: Premier League resmi canli mac testi
+        run: |
+          python premier_league_fixture_lookup.py Liverpool Arsenal | tee data/premier_league_lookup_live.json
+          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/premier_league_lookup_live.json
+          grep -q '"kickoff_utc": "2026-11-01T16:30:00+00:00"' data/premier_league_lookup_live.json
       - name: Dokuz lig resmi kaynak toplu denetimi
         run: python probe_official_league_fixtures.py
       - uses: actions/upload-artifact@v4
@@ -41,4 +46,5 @@ jobs:
             data/tff_lookup_live.json
             data/official_league_probe.json
             data/bundesliga_lookup_live.json
+            data/premier_league_lookup_live.json
           if-no-files-found: warn
