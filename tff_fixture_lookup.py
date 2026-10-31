@@ -51,8 +51,8 @@ def lookup(home,away,now=None,lines=None):
   hpos=after.find(nh) if nh else -1
   apos=after.find(na) if na else -1
   if hpos<0 or apos<=hpos:continue
-  # Exclude a search match spanning excessive unrelated text.
-  if apos-hpos>180:continue
+  # Do not match across another kickoff time in the same date block.
+  if apos-hpos>180 or times.search(after[hpos:apos]):continue
   try:local=datetime.strptime(dm.group(1)+" "+tm.group(0),"%d.%m.%Y %H:%M").replace(tzinfo=ZoneInfo("Europe/Istanbul"))
   except ValueError:continue
   records.append(local)
