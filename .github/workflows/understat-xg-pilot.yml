@@ -1,0 +1,49 @@
+name: Understat xG kaynak ve eslesme piloti
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/01-kimlikler]
+    paths:
+      - '.github/workflows/understat-xg-pilot.yml'
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Kimlik testleri
+        run: python -m unittest -q test_identity.py test_fixture_import.py
+      - name: Tarihsel veri altyapisini hazirla
+        run: |
+          python collect_team_candidates.py
+          python prepare_team_identity_review.py
+          python audit_season_membership.py
+          python import_provisional_teams.py
+          python prepare_official_name_review.py
+          python apply_official_team_names.py
+          python verify_official_mappings.py
+          python audit_identity_integrity.py
+          python audit_fixture_candidates.py
+          python import_real_fixtures.py
+          python audit_result_quality.py
+          python build_historical_results.py
+      - name: Understat okuyucu bagimliligi
+        run: python -m pip install soccerdata
+      - name: Understat mac xG verisini topla
+        run: python collect_understat_xg.py
+      - name: Kimlik skor ve xG eslesmesini denetle
+        run: python audit_understat_xg.py --understat-csv data/understat_matches.csv
+      - name: Raporlari sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: understat-xg-pilot
+          path: |
+            data/understat_matches.csv
+            data/understat_xg_match_audit.csv
+            data/understat_xg_match_report.json
+            data/historical_results_audit.json
+          if-no-files-found: warn
