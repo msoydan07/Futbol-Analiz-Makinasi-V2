@@ -17,7 +17,7 @@ from import_real_fixtures import parse_date
 ROOT = Path("data")
 STAT_COLUMNS = {"half_time_home_goals":"HTHG","half_time_away_goals":"HTAG","half_time_result":"HTR","home_shots":"HS","away_shots":"AS","home_shots_on_target":"HST","away_shots_on_target":"AST","home_corners":"HC","away_corners":"AC","home_fouls":"HF","away_fouls":"AF","home_yellow_cards":"HY","away_yellow_cards":"AY","home_red_cards":"HR","away_red_cards":"AR"}
 GROUPS = {"half_time":["half_time_home_goals","half_time_away_goals","half_time_result"],"shots":["home_shots","away_shots","home_shots_on_target","away_shots_on_target"],"corners":["home_corners","away_corners"],"fouls":["home_fouls","away_fouls"],"cards":["home_yellow_cards","away_yellow_cards","home_red_cards","away_red_cards"]}
-def read_stats(row, league, season, coverage):
+def read_stats(row, league, season, coverage, quarantined, source_row):
     result = {}
     for key, col in STAT_COLUMNS.items():
         raw = (row.get(col) or "").strip()
@@ -37,7 +37,10 @@ def read_stats(row, league, season, coverage):
         if r != "" and r != ("H" if h>a else "A" if h<a else "D"): raise ValueError("HTR mismatch")
     for side in ("home","away"):
         shots, target = result[side+"_shots"],result[side+"_shots_on_target"]
-        if shots != "" and target != "" and target > shots: raise ValueError("Shots on target exceed shots")
+        if shots != "" and target != "" and target > shots:
+            quarantined.append({"league":league,"season":season,"source_row":source_row,"side":side,"reason":"shots_on_target_exceed_shots","source_shots":shots,"source_shots_on_target":target})
+            result[side+"_shots"] = ""
+            result[side+"_shots_on_target"] = ""
     for group, fields in GROUPS.items():
         if all(result[k] != "" for k in fields): coverage[league+"/"+season+"/"+group] += 1
     return result
@@ -55,6 +58,7 @@ def build():
               "errors": [], "league_season_counts": {}}
     out = []
     coverage = Counter()
+    quarantined = []
     source_rows = {(r["season"], r["league"], int(r["source_row"])): r for r in candidates}
     fixture_index = {}
     for fid, fixture in registry.data["fixtures"].items():
@@ -93,7 +97,7 @@ def build():
                     fid = fixture_index.get(key)
                     if not fid:
                         raise ValueError(f"Unlinked fixture row {number}: {key}")
-                    stats = read_stats(row, league, season, coverage)
+                    stats = read_stats(row, league, season, coverage, quarantined, number)
                     out.append({"fixture_id": fid, "league": league, "season": season,
                                 "match_date": key[-1], "home_id": home_id, "away_id": away_id,
                                 "home_goals": int(row["FTHG"]), "away_goals": int(row["FTAG"]),
@@ -101,6 +105,9 @@ def build():
             except Exception as exc:
                 report["errors"].append(f"{season}/{league}: {exc}")
     report["linked"] = len(out)
+    report["quarantined_stat_groups"] = quarantined
+    report["quarantined_stat_group_count"] = len(quarantined)
+    report["quarantine_policy"] = "Only affected home/away shots pair blanked; valid goals, corners, and cards retained"
     report["stat_group_complete_rows_by_league_season"] = dict(sorted(coverage.items()))
     report["not_included"] = ["xG","xGA","first_half_corners","odds","lineups"]
     report["league_season_counts"] = dict(Counter(f'{r["league"]}/{r["season"]}' for r in out))
