@@ -47,6 +47,11 @@ jobs:
           grep -q '"kickoff_utc": "2026-11-02T19:45:00+00:00"' data/serie_a_lookup_live.json
       - name: LaLiga resmi sayfa eslestirme yapisi
         run: python probe_laliga_structure.py
+      - name: KNVB Hollanda resmi canli mac testi
+        run: |
+          python eredivisie_fixture_lookup.py Feyenoord 'Fortuna Sittard' | tee data/eredivisie_lookup_live.json
+          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/eredivisie_lookup_live.json
+          grep -q '"kickoff_utc": "2026-10-31T15:30:00+00:00"' data/eredivisie_lookup_live.json
       - name: Kalan bes lig tek seferlik toplu resmi kaynak denetimi
         run: python probe_remaining_leagues_batch.py
       - name: Dokuz lig resmi kaynak toplu denetimi
@@ -65,4 +70,5 @@ jobs:
             data/laliga_lookup_live.json
             data/serie_a_lookup_live.json
             data/remaining_leagues_batch_probe.json
+            data/eredivisie_lookup_live.json
           if-no-files-found: warn
