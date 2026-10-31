@@ -75,7 +75,10 @@ def lookup(league,home,away):
   with sync_playwright() as p:
    browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
    page=browser.new_page(locale="en-GB",timezone_id="Europe/London",user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36")
-   page.goto(url,wait_until="domcontentloaded",timeout=25000)
+   response=page.goto(url,wait_until="domcontentloaded",timeout=25000)
+   if response is None or response.status!=200:
+    browser.close()
+    return {"status":"NOT_VERIFIED","reason":"official_http_unavailable","http_status":response.status if response else None,"source_url":url}
    page.wait_for_timeout(5000)
    body=page.locator("body").inner_text(timeout=10000)
    browser.close()
