@@ -59,49 +59,45 @@ jobs:
           print(json.dumps(out,ensure_ascii=False,indent=2))
           if not all(v.get("healthy") for v in out.values()):raise SystemExit("Resmi kaynak erisiminde sorun: raporu inceleyin")
           PY
-      - name: Farkli takimlarla gercek fikstur kabul denetimi
+      - name: Resmi sayfadan gercek yedi gunluk mac kesfi
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          from datetime import datetime,timezone,timedelta
+          from datetime import datetime,timezone
           from playwright.sync_api import sync_playwright
-          from official_browser_fixture import SOURCES,FALLBACK_SOURCES,extract
+          from official_browser_fixture import SOURCES,FALLBACK_SOURCES,discover,extract
           now=datetime.now(timezone.utc)
-          targets={
-            "BEL1":[("KV Mechelen","KRC Genk"),("Club Brugge","Anderlecht")],
-            "POR1":[("FC Porto","Estoril Praia"),("SL Benfica","SC Braga")],
-            "ENG2":[("Blackburn Rovers","Stoke City"),("Preston North End","Sheffield United")],
-          }
           out={}
           with sync_playwright() as p:
            browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
-           for league,pairs in targets.items():
-            sources=[]
-            for url in [SOURCES[league]]+FALLBACK_SOURCES.get(league,[]):
+           for league,url in SOURCES.items():
+            attempts=[];verified={}
+            for candidate in [url]+FALLBACK_SOURCES.get(league,[]):
              try:
               page=browser.new_page(locale="fr-BE" if league=="BEL1" else "en-GB")
-              response=page.goto(url,wait_until="domcontentloaded",timeout=20000)
-              if response and response.status==200:
+              response=page.goto(candidate,wait_until="domcontentloaded",timeout=20000)
+              status=response.status if response else 0
+              lines=[]
+              if status==200:
                page.wait_for_timeout(2500)
                lines=[x.strip() for x in page.locator("body").inner_text(timeout=10000).splitlines() if x.strip()]
-               found=[]
-               for home,away in pairs:
+               for home,away in discover(league,lines,now):
                 hits=extract(league,lines,home,away,now)
-                found.append({"home":home,"away":away,"kickoffs_utc":[t.isoformat() for t in hits if now<=t<=now+timedelta(days=7)]})
-               sources.append({"url":url,"http":200,"fixtures":found})
-              else:sources.append({"url":url,"http":response.status if response else None})
+                if len(hits)==1:
+                 verified[(home,away)]={"home":home,"away":away,"kickoff_utc":hits[0].isoformat(),"source_url":candidate}
+              attempts.append({"url":candidate,"http":status,"visible_lines":len(lines),"discovered":len(verified)})
               page.close()
-             except Exception as e:sources.append({"url":url,"error":str(e)[:160]})
-            out[league]={"sources":sources,"verified_distinct_pairs":sum(1 for pair in pairs if any(len(next((f["kickoffs_utc"] for f in src.get("fixtures",[]) if f["home"]==pair[0] and f["away"]==pair[1]),[]))==1 for src in sources))}
+             except Exception as e:attempts.append({"url":candidate,"error":str(e)[:160]})
+            out[league]={"sources":attempts,"verified_fixtures":list(verified.values()),"verified_count":len(verified),
+                         "status":"VERIFIED" if verified else ("SOURCE_BLOCKED" if all(x.get("http")!=200 for x in attempts) else "NO_VERIFIED_FIXTURES")}
            browser.close()
           Path("data").mkdir(exist_ok=True)
           Path("data/fixture_acceptance_report.json").write_text(json.dumps(out,ensure_ascii=False,indent=2))
-          print(json.dumps(out,ensure_ascii=False,indent=2))
-          total=sum(v["verified_distinct_pairs"] for v in out.values())
-          print(f"CANLI_FIKSTUR_DOGRULAMA: {total}/6")
-          if total==0:
-           raise SystemExit("KABUL BASARISIZ: sifir gercek fikstur dogrulandi; HTTP 200 yeterli degil")
+          print(json.dumps({k:{"status":v["status"],"verified_count":v["verified_count"]} for k,v in out.items()},ensure_ascii=False))
+          total=sum(v["verified_count"] for v in out.values())
+          print(f"CANLI_FIKSTUR_DOGRULAMA: {total} verified fixtures")
+          if total==0:raise SystemExit("NO_LIVE_FIXTURE_EVIDENCE: inspect source status and parser")
           PY
       - uses: actions/upload-artifact@v4
         if: always()
