@@ -1,5 +1,6 @@
 name: Takim ve mac kimligi toplu kabul
 on:
+  workflow_dispatch:
   push:
     branches: [feature/01-kimlikler]
     paths:
