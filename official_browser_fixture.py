@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 
 SOURCES={
  "BEL1":"https://www.proleague.be/fr/jpl-calendar",
- "POR1":"https://www.ligaportugal.pt/team/176/estoril-praia",
+ "POR1":"https://www.ligaportugal.pt/calendar",
  "ENG2":"https://www.efl.com/news/2026/october/29/referee-appointments--30-october-4-november/",
 }
 def norm(s):
@@ -41,8 +41,16 @@ def extract(league,lines,home,away,now):
   # Abbreviations are accepted only for a known exact team identity.
   # Exact aliases only: never guess an abbreviation from a team name.
   aliases={
-   "fcporto":{"fcp","fcporto"},
-   "estorilpraia":{"epf","estorilpraia"},
+   "fcporto":{"fcp","fcporto"},"estorilpraia":{"epf","estorilpraia"},
+   "slbenfica":{"slb","slbenfica"},"sportingcp":{"scp","sportingcp"},
+   "scbraga":{"scb","scbraga"},"vitoriasc":{"vsc","vitoriasc"},
+   "gilvicentefc":{"gvfc","gilvicentefc"},
+   "cdnacional":{"cdn","cdnacional"},"fcfamalicao":{"fcf","fcfamalicao"},
+   "moreirensefc":{"mfc","moreirensefc"},"rioavefc":{"rafc","rioavefc"},
+   "fcarouca":{"fca","fcarouca"},"fcalverca":{"alv","fcalverca"},
+   "casa piaac":{"cpac","casapiaac"},"casapiaac":{"cpac","casapiaac"},
+   "estrelaamadora":{"cfea","estrelaamadora"},
+   
   }
   h=aliases.get(norm(home),{norm(home)})
   a=aliases.get(norm(away),{norm(away)})
