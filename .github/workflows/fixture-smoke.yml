@@ -8,7 +8,7 @@ on:
 jobs:
   fixture:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
@@ -52,6 +52,10 @@ jobs:
           python eredivisie_fixture_lookup.py Feyenoord 'Fortuna Sittard' | tee data/eredivisie_lookup_live.json
           grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/eredivisie_lookup_live.json
           grep -q '"kickoff_utc": "2026-10-31T15:30:00+00:00"' data/eredivisie_lookup_live.json
+      - name: Dinamik resmi sayfalar icin Chromium kur
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
       - name: Fransa Belcika Portekiz Championship resmi canli mac testleri
         run: |
           set -o pipefail
@@ -61,9 +65,9 @@ jobs:
           python - <<'PY'
           import json,subprocess
           checks=[
-            ("BEL1",["python","belgium_fixture_lookup.py","KV Mechelen","KRC Genk"],"2026-10-31T15:00:00+00:00","data/belgium_lookup_live.json"),
-            ("POR1",["python","portugal_fixture_lookup.py","FC Porto","Estoril Praia"],"2026-10-31T20:30:00+00:00","data/portugal_lookup_live.json"),
-            ("ENG2",["python","championship_fixture_lookup.py","Blackburn Rovers","Stoke City"],"2026-11-03T19:45:00+00:00","data/championship_lookup_live.json"),
+            ("BEL1",["python","official_browser_fixture.py","BEL1","KV Mechelen","KRC Genk"],"2026-10-31T15:00:00+00:00","data/belgium_lookup_live.json"),
+            ("POR1",["python","official_browser_fixture.py","POR1","FC Porto","Estoril Praia"],"2026-10-31T20:30:00+00:00","data/portugal_lookup_live.json"),
+            ("ENG2",["python","official_browser_fixture.py","ENG2","Blackburn Rovers","Stoke City"],"2026-11-03T19:45:00+00:00","data/championship_lookup_live.json"),
           ]
           summary={}
           for league,cmd,expected,path in checks:
