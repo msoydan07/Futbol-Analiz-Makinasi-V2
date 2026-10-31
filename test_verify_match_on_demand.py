@@ -4,7 +4,7 @@ import tempfile,csv
 from pathlib import Path
 from identity import Registry
 from datetime import datetime,timedelta,timezone
-from verify_match_on_demand import verify_requested_fixture,match_unplayed_candidate,verify_listed_match
+from verify_match_on_demand import verify_requested_fixture,match_unplayed_candidate,verify_listed_match,verify_named_match
 class TestOnDemand(unittest.TestCase):
  def setUp(self):
   self.now=datetime(2026,10,31,12,tzinfo=timezone.utc)
@@ -43,5 +43,23 @@ class TestExistingUnplayedList(unittest.TestCase):
        source_checked=True,**kwargs)
    self.assertEqual(result["status"],"VERIFIED")
    self.assertTrue(result["unplayed_list_match"])
+
+class TestNamedMatchWithoutBulkFixture(unittest.TestCase):
+ def test_missing_bulk_fixture_does_not_block_named_match(self):
+  with tempfile.TemporaryDirectory() as folder:
+   reg=Registry(Path(folder)/"registry.json")
+   reg.register_team("arsenal","Arsenal")
+   reg.register_team("chelsea","Chelsea")
+   reg.save()
+   now=datetime(2026,10,31,12,tzinfo=timezone.utc)
+   args=dict(league="ENG1",home="Arsenal",away="Chelsea",
+             kickoff_iso=(now+timedelta(days=1)).isoformat(),
+             source_url="https://www.premierleague.com/en/fixtures",
+             retrieved_at_iso=now.isoformat(),now=now,registry_path=str(Path(folder)/"registry.json"))
+   self.assertEqual(verify_named_match(**args)["status"],"NOT_VERIFIED")
+   verified=verify_named_match(**args,source_checked=True)
+   self.assertEqual(verified["status"],"VERIFIED")
+   self.assertEqual(verified["analysis_gate"],"READY_FOR_DATA_AUDIT")
+   self.assertEqual(verify_named_match(**dict(args,source_url="https://example.com"),source_checked=True)["status"],"REJECTED")
 
 if __name__=="__main__":unittest.main()
