@@ -65,6 +65,7 @@ def run(args):
         raise ValueError("Duplicate historical fixture IDs")
     used_overrides = set()
     observed_override_urls = set()
+    already_exact_overrides = set()
     names = {(r["league"],r["season"],r["source_row"]):r for r in candidates}
     index = defaultdict(list)
     for r in base:
@@ -100,6 +101,10 @@ def run(args):
             url = r.get("source_url", "")
             if url in override_by_url:
                 observed_override_urls.add(url)
+                if len(matches) == 1 and (h,a) == (int(matches[0]["home_goals"]),int(matches[0]["away_goals"])):
+                    v = override_by_url[url]
+                    if (v["league"],v["season"],v["home_team"],v["away_team"],int(v["home_goals"]),int(v["away_goals"])) == (league,season,r["home_team"],r["away_team"],h,a) and v["fixture_id"] == matches[0]["fixture_id"]:
+                        already_exact_overrides.add(url)
             if not matches and url in override_by_url:
                 v = override_by_url[url]
                 target = historical_by_id.get(v["fixture_id"])
@@ -149,13 +154,13 @@ def run(args):
     stale_overrides = sorted(set(override_by_url) - observed_override_urls)
     if stale_overrides:
         raise ValueError("Reviewed source URLs no longer present: " + ", ".join(stale_overrides))
-    not_applied = sorted((observed_override_urls - used_overrides))
+    not_applied = sorted(observed_override_urls - used_overrides - already_exact_overrides)
     if not_applied:
         raise ValueError("Reviewed date overrides not applied or no longer needed; inspect matches: " + ", ".join(not_applied))
     expected = Counter((r["league"],r["season"]) for r in base if r["league"] in LEAGUES)
     matched = Counter((r["league"],r["season"]) for r in base if r["fixture_id"] in seen)
     summary = {"read_only":True,"source_rows":len(source),"historical_eligible":sum(expected.values()),
-               "matched_unique":len(seen),"reviewed_date_overrides_applied":len(used_overrides),"coverage_by_league_season":[
+               "matched_unique":len(seen),"reviewed_date_overrides_applied":len(used_overrides),"reviewed_overrides_already_exact":len(already_exact_overrides),"coverage_by_league_season":[
                    {"league":league,"season":season,"historical":total,
                     "matched":matched[(league,season)]}
                    for (league,season),total in sorted(expected.items())],
