@@ -77,6 +77,8 @@ jobs:
           with open("data/remaining_three_acceptance.json","w") as f:json.dump(summary,f,indent=2)
           # Always collect all three diagnostics; individual acceptance is visible in JSON.
           PY
+      - name: Kalan uc lig HTML satir dizilimi tek seferlik tani
+        run: python probe_three_exact_lines.py
       - name: Belcika Fransa en guncel resmi sayfa denetimi
         run: python probe_belgium_france_latest.py
       - name: Kalan bes lig tek seferlik toplu resmi kaynak denetimi
@@ -104,4 +106,5 @@ jobs:
             data/portugal_lookup_live.json
             data/championship_lookup_live.json
             data/remaining_three_acceptance.json
+            data/three_exact_line_diagnostics.json
           if-no-files-found: warn
