@@ -68,22 +68,31 @@ def extract(league,lines,home,away,now):
     local=datetime.strptime(str(date)+" "+m.group(3),"%Y-%m-%d %H:%M").replace(tzinfo=ZoneInfo("Europe/London"))
     matches.append(local.astimezone(timezone.utc))
  return sorted(set(matches))
+FALLBACK_SOURCES={"BEL1":["https://www.proleague.be/jpl-calendar","https://www.proleague.be/nl/jpl-calendar"]}
 def lookup(league,home,away):
  from playwright.sync_api import sync_playwright
  now=datetime.now(timezone.utc);url=SOURCES[league]
- try:
-  with sync_playwright() as p:
-   browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
-   page=browser.new_page(locale="en-GB",timezone_id="Europe/London",user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36")
-   response=page.goto(url,wait_until="domcontentloaded",timeout=25000)
-   if response is None or response.status!=200:
+ body=None
+ attempts=[]
+ for candidate in [url]+FALLBACK_SOURCES.get(league,[]):
+  try:
+   with sync_playwright() as p:
+    browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
+    page=browser.new_page(locale="fr-BE" if league=="BEL1" else "en-GB")
+    response=page.goto(candidate,wait_until="domcontentloaded",timeout=20000)
+    status=response.status if response else None
+    if status==200:
+     page.wait_for_timeout(3500)
+     candidate_body=page.locator("body").inner_text(timeout=10000)
+     if len(candidate_body)>300:
+      body=candidate_body;url=candidate
+    attempts.append({"url":candidate,"http_status":status,"visible_chars":len(candidate_body) if status==200 else 0})
     browser.close()
-    return {"status":"NOT_VERIFIED","reason":"official_http_unavailable","http_status":response.status if response else None,"source_url":url}
-   page.wait_for_timeout(5000)
-   body=page.locator("body").inner_text(timeout=10000)
-   browser.close()
- except Exception as e:
-  return {"status":"NOT_VERIFIED","reason":"browser_fetch_failed","detail":str(e)[:240],"source_url":url}
+    if body is not None:break
+  except Exception as e:
+   attempts.append({"url":candidate,"error":str(e)[:120]})
+ if body is None:
+  return {"status":"NOT_VERIFIED","reason":"official_sources_unavailable","attempts":attempts}
  lines=[x.strip() for x in body.splitlines() if x.strip()]
  hits=extract(league,lines,home,away,now)
  if len(hits)!=1:
