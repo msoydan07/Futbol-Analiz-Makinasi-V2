@@ -14,9 +14,9 @@ def main():
  base=defaultdict(list)
  for r in hist:
   name=lookup.get((r["league"],r["season"],r["source_row"]))
-  if name:
+  if name and r["season"]=="2026-2027":
    base[(r["league"],r["match_date"],name["home"].casefold().strip(),name["away"].casefold().strip())].append(r)
- report={"source":"open-matchday","read_only":True,"matched":0,"unmatched":0,"ambiguous":0,"invalid":0,"sample_source_columns":{},"by_league":[],"rule":"Only exact verified team/date/score + whole-match corner agreement; no fuzzy joins; no database writes"}
+ report={"source":"open-matchday","read_only":True,"matched":0,"unmatched":0,"ambiguous":0,"invalid":0,"sample_source_columns":{},"by_league":[],"rule":"Only exact league, 2026-2027 season, team/date/score and full-match corner agreement; no fuzzy joins; no database writes"}
  for league,folder in FOLDERS.items():
   url=f"{BASE}/{folder}/results_2627.csv"
   n=Counter()
@@ -44,6 +44,15 @@ def main():
       continue
      if len(options)!=1:n["ambiguous"]+=1;continue
      h=options[0]
+     # Full-time goals are a mandatory cross-source identity check.
+     home_goal_key=next((k for k in ("home_goals","fthg","FTHG") if k in r),None)
+     away_goal_key=next((k for k in ("away_goals","ftag","FTAG") if k in r),None)
+     if not home_goal_key or not away_goal_key:
+      n["score_schema_unmapped"]+=1;continue
+     try:
+      if int(r[home_goal_key])!=int(h["home_goals"]) or int(r[away_goal_key])!=int(h["away_goals"]):
+       n["score_mismatch"]+=1;continue
+     except (ValueError,TypeError):n["score_mismatch"]+=1;continue
      try:
       if int(r["home_corners"])!=int(h["home_corners"]) or int(r["away_corners"])!=int(h["away_corners"]):n["invalid"]+=1;continue
      except (ValueError,TypeError):n["invalid"]+=1;continue
