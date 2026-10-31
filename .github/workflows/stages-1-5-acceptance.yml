@@ -45,6 +45,8 @@ jobs:
         run: python audit_262_data_readiness.py
       - name: Gelecek fikstur kaynagi kapsama denetimi
         run: python audit_future_fixture_source.py
+      - name: Premier League resmi fikstur cekme testi
+        run: python fetch_official_eng1_article.py
       - name: Ilk bes asama kabul raporu
         run: python audit_stages_1_5_acceptance.py
       - name: Kanit raporunu kaydet
@@ -53,6 +55,7 @@ jobs:
         with:
           name: stages-1-5-acceptance
           path: |
+            data/official_eng1_article_candidates.json
             data/future_fixture_source_audit.json
             data/future_fixture_candidates.json
             data/262_data_readiness.json
