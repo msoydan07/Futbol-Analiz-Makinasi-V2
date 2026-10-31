@@ -104,6 +104,58 @@ def extract(league,lines,home,away,now):
      local=datetime.combine(date,datetime.min.time()).replace(hour=int(tm.group(1)),minute=int(tm.group(2)),tzinfo=ZoneInfo("Europe/London"))
      matches.append(local.astimezone(timezone.utc))
  return sorted(set(matches))
+
+def discover(league, lines, now):
+ """Discover real upcoming fixture pairings from visible official cards; never fabricate teams."""
+ found=[]
+ if league=="ENG2":
+  months={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
+  datepat=re.compile(r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\\s+(\\d{1,2})(?:st|nd|rd|th)?\\s+([A-Za-z]+)$",re.I)
+  matchpat=re.compile(r"^(.+?)\\s+v\\s+(.+?)\\s+\\((\\d{1,2}:\\d{2})\\)$",re.I)
+  date=None;champ=False
+  for i,line in enumerate(lines):
+   d=datepat.fullmatch(line)
+   if d:
+    mon=months.get(d.group(2).lower()[:3])
+    date=datetime(now.year+(1 if now.month==12 and mon and mon<=2 else 0),mon,int(d.group(1))).date() if mon else None
+    champ=False;continue
+   if line.lower() in ("efl championship","sky bet championship"):champ=True;continue
+   if re.match(r"^(?:Sky Bet League|EFL League|Jersey Mike)",line,re.I):champ=False
+   if not champ or not date:continue
+   m=matchpat.fullmatch(line)
+   if m:found.append((m.group(1),m.group(2)))
+ elif league=="POR1":
+  # Official calendar abbreviations are only accepted through the explicit alias dictionary.
+  aliases={"fcp":"FC Porto","epf":"Estoril Praia","slb":"SL Benfica",
+           "scp":"Sporting CP","scb":"SC Braga","vsc":"Vitoria SC",
+           "gvfc":"Gil Vicente FC","cdn":"CD Nacional","fcf":"FC Famalicao",
+           "mfc":"Moreirense FC","rafc":"Rio Ave FC","fca":"FC Arouca",
+           "alv":"FC Alverca","cpac":"Casa Pia AC","cfea":"Estrela Amadora"}
+  day=re.compile(r"(?:seg|ter|qua|qui|sex|s[aá]b|dom)\\.?\\s*\\d{1,2}\\s+(?:jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\\b",re.I)
+  time=re.compile(r"\\d{1,2}h\\d{2}")
+  for i,line in enumerate(lines):
+   if not day.search(line):continue
+   end=next((k for k in range(i+1,len(lines)) if day.search(lines[k])),len(lines))
+   block=lines[i+1:min(i+25,end)]
+   for j,x in enumerate(block):
+    home=aliases.get(norm(x))
+    if not home:continue
+    for k in range(j+1,min(j+7,len(block))):
+     if not time.fullmatch(block[k]):continue
+     for y in block[k+1:k+5]:
+      away=aliases.get(norm(y))
+      if away and away!=home:found.append((home,away))
+ elif league=="BEL1":
+  # Belgium official cards have home, clock, date, away on adjacent lines.
+  day=re.compile(r"^(?:lun|mar|mer|jeu|ven|sam|dim|ma|di|wo|do|vr|za|zo)\\.\\s*\\d{1,2}\\s+(?:oct|nov|okt)\\.$",re.I)
+  clock=re.compile(r"\\d{1,2}:\\d{2}")
+  for i,line in enumerate(lines):
+   if i+3>=len(lines):break
+   if clock.fullmatch(lines[i+1]) and day.fullmatch(lines[i+2]):
+    found.append((line,lines[i+3]))
+ return sorted(set((h,a) for h,a in found if len(h)>2 and len(a)>2 and len(h)<90 and len(a)<90
+                    and len([t for t in extract(league,lines,h,a,now) if now<=t<=now+timedelta(days=7)])==1))
+
 FALLBACK_SOURCES={"BEL1":["https://kvmechelen.be/kalenderupdatesept/","https://www.krcgenk.be/en","https://www.proleague.be/nl/jpl-calendar"]}
 def lookup(league,home,away):
  from playwright.sync_api import sync_playwright
