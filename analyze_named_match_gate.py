@@ -29,7 +29,7 @@ def run(league,home,away,lookup_override=None,registry_path="data/match_registry
   return {"status":"NOT_VERIFIED","reason":"official_lookup_error","detail":str(exc)[:160]}
  if not isinstance(observed,dict) or observed.get("status")!="VERIFIED_OFFICIAL_FIXTURE":
   return {"status":"NOT_VERIFIED","reason":"official_match_not_confirmed","observation":observed}
- # Only a successfully fetched and parsed official observation can enter the identity gate.
+ # A successful observation must identify the requested participants, not just a kickoff.\n from identity import normalize\n try:\n  if normalize(observed.get("home"))!=normalize(home) or normalize(observed.get("away"))!=normalize(away):\n   return {"status":"NOT_VERIFIED","reason":"official_observation_teams_mismatch"}\n except (ValueError,TypeError):\n  return {"status":"NOT_VERIFIED","reason":"official_observation_teams_missing"}\n # Only a successfully fetched and parsed official observation can enter the identity gate.
  checked=verify_named_match(league,home,away,observed.get("kickoff_utc"),
                             observed.get("source_url"),observed.get("retrieved_at_utc"),
                             source_checked=True,registry_path=registry_path)
