@@ -33,6 +33,11 @@ def candidate(rows, league, home_id, away_id, cutoff, half_life, window=20, shri
         # Prior weight is relative to the effective weighted sample size;
         # this preserves the existing five-match shrinkage interpretation.
         weights = [2 ** (-(date.fromisoformat(cutoff)-date.fromisoformat(r["match_date"])).days / half_life) for r in team_rows]
+        # Normalize recency weights to the original match count so that
+        # shrink=5 retains the same effective prior strength as baseline.
+        # Only relative recency, not the absolute age of the season, changes.
+        scale = len(weights) / sum(weights)
+        weights = [w * scale for w in weights]
         effective = sum(weights)
         observed = sum(w * int(r[field]) for w,r in zip(weights,team_rows))
         return ((observed + shrink*prior)/(effective+shrink))/prior
