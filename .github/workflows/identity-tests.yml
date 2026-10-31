@@ -13,4 +13,4 @@ jobs:
         with:
           python-version: '3.11'
       - name: Birim testleri
-        run: python -m unittest -v test_identity.py test_verify_match_on_demand.py
+        run: python -m unittest -v test_identity.py test_verify_match_on_demand.py test_analyze_named_match_gate.py
