@@ -57,13 +57,14 @@ def run(args):
         raise ValueError("Fixture candidates missing required fields")
     aliases = json.loads(Path(args.aliases).read_text(encoding="utf-8")) if args.aliases else {}
     overrides = json.loads(Path(args.reviewed_dates).read_text(encoding="utf-8")) if args.reviewed_dates else []
-    override_by_row = {int(v["source_row"]): v for v in overrides}
-    if len(override_by_row) != len(overrides):
-        raise ValueError("Duplicate reviewed date override row")
+    override_by_url = {v["source_url"]: v for v in overrides}
+    if len(override_by_url) != len(overrides):
+        raise ValueError("Duplicate reviewed date override source URL")
     historical_by_id = {r["fixture_id"]: r for r in base}
     if len(historical_by_id) != len(base):
         raise ValueError("Duplicate historical fixture IDs")
     used_overrides = set()
+    observed_override_urls = set()
     names = {(r["league"],r["season"],r["source_row"]):r for r in candidates}
     index = defaultdict(list)
     for r in base:
@@ -96,8 +97,11 @@ def run(args):
             h,a = score(r["home_goals"]),score(r["away_goals"])
             hx,ax = xg(r["home_xg"]),xg(r["away_xg"])
             matches = index.get(key,[])
-            if not matches and row_no in override_by_row:
-                v = override_by_row[row_no]
+            url = r.get("source_url", "")
+            if url in override_by_url:
+                observed_override_urls.add(url)
+            if not matches and url in override_by_url:
+                v = override_by_url[url]
                 target = historical_by_id.get(v["fixture_id"])
                 if target is None:
                     raise ValueError("Reviewed override fixture not found")
@@ -119,7 +123,7 @@ def run(args):
                 if not all(checks):
                     raise ValueError("Reviewed override evidence/identity/date/score mismatch")
                 matches = [target]
-                used_overrides.add(row_no)
+                used_overrides.add(url)
             if len(matches) == 0:
                 status,reason = "UNMATCHED","No exact reviewed team/date match"
             elif len(matches) != 1:
@@ -142,8 +146,12 @@ def run(args):
                         "away_team":r.get("away_team",""),"fixture_id":fid,
                         "status":status,"reason":reason,
                         "source_url":r.get("source_url","")})
-    if used_overrides != set(override_by_row):
-        raise ValueError("Not all reviewed date overrides were applied")
+    stale_overrides = sorted(set(override_by_url) - observed_override_urls)
+    if stale_overrides:
+        raise ValueError("Reviewed source URLs no longer present: " + ", ".join(stale_overrides))
+    not_applied = sorted((observed_override_urls - used_overrides))
+    if not_applied:
+        raise ValueError("Reviewed date overrides not applied or no longer needed; inspect matches: " + ", ".join(not_applied))
     expected = Counter((r["league"],r["season"]) for r in base if r["league"] in LEAGUES)
     matched = Counter((r["league"],r["season"]) for r in base if r["fixture_id"] in seen)
     summary = {"read_only":True,"source_rows":len(source),"historical_eligible":sum(expected.values()),
