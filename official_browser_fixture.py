@@ -17,7 +17,7 @@ def extract(league,lines,home,away,now):
  matches=[]
  if league=="BEL1":
   # Official club calendar table rows: local time and both teams in one row.
-  club_re=re.compile(r"^(?:za|zo|ma|di|wo|do|vr)\\s+(\\d{1,2})\\s+(okt|nov|dec)\\s*[-–]\\s*(\\d{1,2}):(\\d{2})\\s+(.+?)\\s+(.+)$",re.I)
+  club_re=re.compile(r"^(?:za|zo|ma|di|wo|do|vr)\s+(\d{1,2})\s+(okt|nov|dec)\s*[-–]\s*(\d{1,2}):(\d{2})\s+(.+?)\s+(.+)$",re.I)
   for line in lines:
    m=club_re.fullmatch(line)
    if m and norm(m.group(5))==norm(home) and norm(m.group(6))==norm(away):
@@ -79,37 +79,33 @@ FALLBACK_SOURCES={"BEL1":["https://kvmechelen.be/kalenderupdatesept/","https://w
 def lookup(league,home,away):
  from playwright.sync_api import sync_playwright
  now=datetime.now(timezone.utc);url=SOURCES[league]
- body=None
  attempts=[]
  for candidate in [url]+FALLBACK_SOURCES.get(league,[]):
   try:
    with sync_playwright() as p:
     browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
-    page=browser.new_page(locale="fr-BE" if league=="BEL1" else "en-GB")
-    response=page.goto(candidate,wait_until="domcontentloaded",timeout=20000)
-    status=response.status if response else None
-    if status==200:
-     page.wait_for_timeout(3500)
-     candidate_body=page.locator("body").inner_text(timeout=10000)
-     if len(candidate_body)>300:
-      body=candidate_body;url=candidate
-    attempts.append({"url":candidate,"http_status":status,"visible_chars":len(candidate_body) if status==200 else 0})
-    browser.close()
-    if body is not None:break
+    try:
+     page=browser.new_page(locale="fr-BE" if league=="BEL1" else "en-GB")
+     response=page.goto(candidate,wait_until="domcontentloaded",timeout=20000)
+     status=response.status if response else None
+     body=""
+     if status==200:
+      page.wait_for_timeout(3500)
+      body=page.locator("body").inner_text(timeout=10000)
+     lines=[x.strip() for x in body.splitlines() if x.strip()]
+     hits=extract(league,lines,home,away,now) if status==200 else []
+     attempts.append({"url":candidate,"http_status":status,"visible_chars":len(body),"matches":len(hits)})
+     if len(hits)!=1:continue
+     kick=hits[0]
+     if not now<=kick<=now+timedelta(days=7):
+      return {"status":"OUTSIDE_WINDOW","kickoff_utc":kick.isoformat(),"source_url":candidate,"attempts":attempts}
+     return {"status":"VERIFIED_OFFICIAL_FIXTURE","home":home,"away":away,"kickoff_utc":kick.isoformat(),"source_url":candidate,"retrieved_at_utc":now.isoformat(),"identity_match":"PENDING","attempts":attempts}
+    finally:
+     browser.close()
   except Exception as e:
    attempts.append({"url":candidate,"error":str(e)[:120]})
- if body is None:
-  return {"status":"NOT_VERIFIED","reason":"official_sources_unavailable","attempts":attempts}
- lines=[x.strip() for x in body.splitlines() if x.strip()]
- hits=extract(league,lines,home,away,now)
- if len(hits)!=1:
-  terms=[norm(home),norm(away),"fcp","epf","blackburn","stoke","mechelen","genk"]
-  samples=[lines[max(0,i-3):i+7] for i,x in enumerate(lines) if any(t in norm(x) for t in terms)][:6]
-  return {"status":"NOT_VERIFIED","reason":"fixture_not_unique","count":len(hits),"lines_seen":len(lines),"samples":samples,"source_url":url}
- kick=hits[0]
- if not now<=kick<=now+timedelta(days=7):
-  return {"status":"OUTSIDE_WINDOW","kickoff_utc":kick.isoformat(),"source_url":url}
- return {"status":"VERIFIED_OFFICIAL_FIXTURE","home":home,"away":away,"kickoff_utc":kick.isoformat(),"source_url":url,"retrieved_at_utc":now.isoformat(),"identity_match":"PENDING"}
+ return {"status":"NOT_VERIFIED","reason":"no_unique_fixture_in_official_sources","attempts":attempts}
+
 if __name__=="__main__":
  r=lookup(sys.argv[1],sys.argv[2],sys.argv[3]);print(json.dumps(r,ensure_ascii=False,indent=2))
  sys.exit(0 if r["status"]=="VERIFIED_OFFICIAL_FIXTURE" else 1)
