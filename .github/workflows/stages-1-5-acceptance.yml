@@ -43,6 +43,8 @@ jobs:
           python audit_missing_data_262.py
       - name: 2.6.2 veri eksikligi sayisal raporu
         run: python audit_262_data_readiness.py
+      - name: Gelecek fikstur kaynagi kapsama denetimi
+        run: python audit_future_fixture_source.py
       - name: Ilk bes asama kabul raporu
         run: python audit_stages_1_5_acceptance.py
       - name: Kanit raporunu kaydet
@@ -51,6 +53,8 @@ jobs:
         with:
           name: stages-1-5-acceptance
           path: |
+            data/future_fixture_source_audit.json
+            data/future_fixture_candidates.json
             data/262_data_readiness.json
             data/stages_1_5_acceptance.json
             data/historical_results_audit.json
