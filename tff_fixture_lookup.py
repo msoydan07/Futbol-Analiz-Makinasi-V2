@@ -29,34 +29,31 @@ def lookup(home,away,now=None,lines=None):
  now=now or datetime.now(timezone.utc)
  try:lines=lines if lines is not None else read_lines()
  except Exception as e:return {"status":"NOT_VERIFIED","reason":"official_source_unavailable","detail":str(e)[:120]}
- start=next((i for i,x in enumerate(lines) if "Trendyol Süper Lig" in x),-1)
- end=next((i for i,x in enumerate(lines) if i>start and "Trendyol 1. Lig" in x),len(lines))
- if start<0:return {"status":"NOT_VERIFIED","reason":"super_lig_section_missing"}
+ # Only the official Super Lig section, not any other league or archived season.
+ start=next((i for i,x in enumerate(lines) if "Trendyol Süper Lig" in x and "Hafta" in x),-1)
+ if start<0:return {"status":"NOT_VERIFIED","reason":"super_lig_section_missing","sample":lines[:8]}
+ end=next((i for i in range(start+1,len(lines)) if "Trendyol 1. Lig" in lines[i] and "Hafta" in lines[i]),len(lines))
  lines=lines[start:end]
- dates=re.compile(r"\b(\d{1,2}\.\d{1,2}\.20\d\d)\b")
- times=re.compile(r"\b([01]?\d|2[0-3]):([0-5]\d)\b")
+ date_re=re.compile(r"\\b(\\d{1,2}\\.\\d{1,2}\\.20\\d\\d)\\b")
+ time_re=re.compile(r"\\b([01]?\\d|2[0-3]):([0-5]\\d)\\b")
+ dates=[(i,date_re.search(line)) for i,line in enumerate(lines) if date_re.search(line)]
  records=[]
- # A fixture row is bounded by the next date; do not mix different fixtures.
- for i,line in enumerate(lines):
-  dm=dates.search(line)
-  if not dm:continue
-  next_date=next((j for j in range(i+1,len(lines)) if dates.search(lines[j])),len(lines))
-  chunk=lines[i:next_date]
-  chunktext=" ".join(chunk)
-  tm=times.search(chunktext)
-  if not tm:continue
-  # Ignore referee and venue: team names must be in the section around the match time.
-  after=normalize(chunktext[tm.end():])
-  nh,na=normalize(home),normalize(away)
-  hpos=after.find(nh) if nh else -1
-  apos=after.find(na) if na else -1
-  if hpos<0 or apos<=hpos:continue
-  # Do not match across another kickoff time in the same date block.
-  if apos-hpos>180 or times.search(after[hpos:apos]):continue
-  try:local=datetime.strptime(dm.group(1)+" "+tm.group(0),"%d.%m.%Y %H:%M").replace(tzinfo=ZoneInfo("Europe/Istanbul"))
-  except ValueError:continue
-  records.append(local)
- if len(records)!=1:return {"status":"NOT_VERIFIED","reason":"fixture_not_unique","count":len(records),"diagnostics":{"line_count":len(lines),"sample_lines":[x[:110] for x in lines[:20]],"date_hits":sum(bool(dates.search(x)) for x in lines),"time_hits":sum(bool(times.search(x)) for x in lines)}}
+ nh,na=normalize(home),normalize(away)
+ for index,(i,dm) in enumerate(dates):
+  stop=dates[index+1][0] if index+1<len(dates) else len(lines)
+  block=lines[i:stop]
+  # Split multiple matches on the same date by kickoff time.
+  time_positions=[(j,time_re.search(line)) for j,line in enumerate(block) if time_re.search(line)]
+  for k,(j,tm) in enumerate(time_positions):
+   finish=time_positions[k+1][0] if k+1<len(time_positions) else len(block)
+   segment=normalize(" ".join(block[j+1:finish]))
+   hpos=segment.find(nh) if nh else -1
+   apos=segment.find(na) if na else -1
+   if hpos<0 or apos<=hpos or apos-hpos>180:continue
+   try:local=datetime.strptime(dm.group(1)+" "+tm.group(0),"%d.%m.%Y %H:%M").replace(tzinfo=ZoneInfo("Europe/Istanbul"))
+   except ValueError:continue
+   records.append(local)
+ if len(records)!=1:return {"status":"NOT_VERIFIED","reason":"fixture_not_unique","count":len(records),"diagnostics":{"lines":len(lines),"date_count":len(dates),"sample":lines[:12]}}
  kickoff=records[0].astimezone(timezone.utc)
  if not now<=kickoff<=now+timedelta(days=7):return {"status":"OUTSIDE_WINDOW"}
  return {"status":"VERIFIED_OFFICIAL_FIXTURE","home":home,"away":away,"kickoff_utc":kickoff.isoformat(),"kickoff_turkey":records[0].isoformat(),"source_url":URL,"retrieved_at_utc":now.isoformat(),"identity_match":"PENDING"}
