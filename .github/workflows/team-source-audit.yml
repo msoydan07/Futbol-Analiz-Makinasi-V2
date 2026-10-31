@@ -1,0 +1,86 @@
+name: Takim ve mac kimligi toplu kabul
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/01-kimlikler]
+    paths:
+      - '.github/workflows/team-source-audit.yml'
+      - 'identity.py'
+      - 'import_real_fixtures.py'
+      - 'audit_fixture_candidates.py'
+      - 'test_identity.py'
+      - 'test_fixture_import.py'
+      - 'audit_result_quality.py'
+      - 'build_historical_results.py'
+      - 'audit_template_262_coverage.py'
+      - 'audit_262_data_snapshot.py'
+      - 'data/official_team_names.csv'
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Kimlik motoru birim testleri
+        run: python -m unittest -v test_identity.py test_fixture_import.py
+      - name: On lig iki sezon tarama
+        run: python collect_team_candidates.py
+      - name: Kimlik inceleme listesini hazirla
+        run: python prepare_team_identity_review.py
+      - name: Sezon lig degisimlerini denetle
+        run: python audit_season_membership.py
+      - name: Gecici takim kimliklerini olustur
+        run: python import_provisional_teams.py
+      - name: Resmi isim inceleme tablosunu hazirla
+        run: python prepare_official_name_review.py
+      - name: Federasyon isim eslestirmelerini uygula
+        run: python apply_official_team_names.py
+      - name: Resmi isim eslestirmelerini dogrula
+        run: python verify_official_mappings.py
+      - name: Ayni kulubun iki kimlikte bulunmasini denetle
+        run: python audit_identity_integrity.py
+      - name: Mac kayitlarini ve tekrarlarini denetle
+        run: python audit_fixture_candidates.py
+      - name: Gercek maclari kalici kimliklere bagla
+        run: python import_real_fixtures.py
+      - name: Mac sonucu ve skor veri kalitesi
+        run: python audit_result_quality.py
+      - name: Mac sonuclarini kimliklerle birlestir
+        run: python build_historical_results.py
+      - name: Model B zaman agirligi karsilastirmasi
+        run: python experimental_model_b_recency.py data/historical_results.csv
+      - name: Sablon 262 lig bazli veri kapsami
+        run: python audit_template_262_coverage.py
+      - name: 2.6.2 tek veri doluluk raporu
+        if: always()
+        run: python audit_262_data_snapshot.py
+      - name: Sonuclari sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: team-source-audit
+          path: |
+            data/team_candidates.csv
+            data/source_audit.csv
+            data/team_identity_review.csv
+            data/season_membership_audit.csv
+            data/team_registry_provisional.json
+            data/team_memberships.csv
+            data/team_registry.json
+            data/official_name_audit.csv
+            data/official_team_names.csv
+            data/identity_integrity_report.json
+            data/fixture_candidates.csv
+            data/fixture_source_audit.csv
+            data/fixture_import_report.json
+            data/match_registry.json
+            data/result_quality_report.json
+            data/unplayed_fixture_candidates.csv
+            data/historical_results.csv
+            data/historical_results_audit.json
+            data/model_b_recency_experiment.json
+            data/template_262_coverage.json
+            data/262_data_acceptance_snapshot.json
+          if-no-files-found: warn

@@ -1,0 +1,51 @@
+name: Bes lig dogrulanmis xG deneyi
+on:
+  workflow_dispatch:
+jobs:
+  verified-xg:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Understat veri okuyucusunu kur
+        run: python -m pip install soccerdata pandas
+      - name: On lig iki sezon mac kayitlarini olustur
+        run: |
+          python collect_team_candidates.py
+          python prepare_team_identity_review.py
+          python audit_season_membership.py
+          python import_provisional_teams.py
+          python prepare_official_name_review.py
+          python apply_official_team_names.py
+          python verify_official_mappings.py
+          python audit_identity_integrity.py
+          python audit_fixture_candidates.py
+          python import_real_fixtures.py
+          python audit_result_quality.py
+          python build_historical_results.py
+      - name: Understat bes lig iki sezon xG topla
+        run: python collect_understat_xg.py
+      - name: Yalniz denetlenmis isim eslestirmelerini hazirla
+        run: python build_understat_aliases.py
+      - name: Mac kimligi tarih ve skoru denetle
+        run: |
+          python audit_understat_xg.py --understat-csv data/understat_matches.csv --aliases data/understat_reviewed_aliases.json --reviewed-dates data/reviewed_understat_date_overrides.json
+      - name: Dogrulanmis xG gecmisini olustur
+        run: python build_verified_xg_history.py
+      - name: Ayni maclarda gol ve xG modelini karsilastir
+        run: python experimental_paired_xg_poisson.py
+      - name: Tek kanit paketini sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-xg-audit
+          if-no-files-found: warn
+          path: |
+            data/historical_results_audit.json
+            data/understat_alias_review.csv
+            data/understat_xg_match_report.json
+            data/historical_verified_xg_report.json
+            data/paired_xg_poisson_report.json

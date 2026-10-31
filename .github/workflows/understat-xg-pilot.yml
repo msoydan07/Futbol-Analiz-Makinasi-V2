@@ -1,0 +1,72 @@
+name: Understat xG kaynak ve eslesme piloti
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/01-kimlikler]
+    paths:
+      - '.github/workflows/understat-xg-pilot.yml'
+      - 'audit_understat_xg.py'
+      - 'data/reviewed_understat_date_overrides.json'
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Kimlik testleri
+        run: python -m unittest -q test_identity.py test_fixture_import.py
+      - name: Tarihsel veri altyapisini hazirla
+        run: |
+          python collect_team_candidates.py
+          python prepare_team_identity_review.py
+          python audit_season_membership.py
+          python import_provisional_teams.py
+          python prepare_official_name_review.py
+          python apply_official_team_names.py
+          python verify_official_mappings.py
+          python audit_identity_integrity.py
+          python audit_fixture_candidates.py
+          python import_real_fixtures.py
+          python audit_result_quality.py
+          python build_historical_results.py
+      - name: Understat okuyucu bagimliligi
+        run: python -m pip install soccerdata
+      - name: Understat mac xG verisini topla
+        run: python collect_understat_xg.py
+      - name: Kaynak isimlerini mevcut dogrulanmis isimlere bagla
+        run: python build_understat_aliases.py
+      - name: Kimlik skor ve xG eslesmesini denetle
+        run: python audit_understat_xg.py --understat-csv data/understat_matches.csv --aliases data/understat_reviewed_aliases.json --reviewed-dates data/reviewed_understat_date_overrides.json
+      - name: Dogrulanmis xG tarihsel tablosunu olustur
+        run: python build_verified_xg_history.py
+      - name: Tum liglerde eksik veri envanterini cikar
+        run: python audit_missing_data_262.py
+      - name: Eslesmeyen maclarin nedenlerini siniflandir
+        run: python diagnose_understat_unmatched.py
+      - name: 2.6.2 tum ligler veri doluluk kabul raporu
+        if: always()
+        run: python audit_262_data_snapshot.py
+      - name: Raporlari sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: understat-xg-pilot
+          path: |
+            data/understat_matches.csv
+            data/understat_xg_match_audit.csv
+            data/understat_xg_match_report.json
+            data/historical_verified_xg.csv
+            data/historical_verified_xg_report.json
+            data/missing_data_inventory_262.json
+            data/understat_alias_review.csv
+            data/understat_reviewed_aliases.json
+            data/understat_unmatched_diagnosis.csv
+            data/understat_unmatched_diagnosis.json
+            data/historical_results_audit.json
+            data/historical_results.csv
+            data/source_audit.csv
+            data/262_data_acceptance_snapshot.json
+          if-no-files-found: warn

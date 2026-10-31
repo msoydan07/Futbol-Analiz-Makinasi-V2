@@ -1,0 +1,25 @@
+name: Ilk yari korner kaynak kapsama piloti
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/01-kimlikler]
+    paths:
+      - '.github/workflows/first-half-corners-probe.yml'
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Kaynak kapsami ve korner tutarliligini oku
+        run: python probe_first_half_corner_source.py
+      - name: Salt okunur raporu sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: first-half-corner-probe
+          path: data/first_half_corner_source_probe.json
+          if-no-files-found: error
