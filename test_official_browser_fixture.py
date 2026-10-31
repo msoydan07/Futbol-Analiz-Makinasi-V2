@@ -10,6 +10,15 @@ class TestOfficialBrowserParser(unittest.TestCase):
  def test_portugal_other_date(self):
   lines=["dom. 1 nov","J11","FCP","21h15","EPF"]
   self.assertEqual([x.isoformat() for x in extract("POR1",lines,"FC Porto","Estoril Praia",NOW)],["2026-11-01T21:15:00+00:00"])
+ def test_portugal_other_teams_full_names(self):
+  lines=["sáb. 31 out","J10","Benfica","18h00","Braga"]
+  self.assertEqual([x.isoformat() for x in extract("POR1",lines,"Benfica","Braga",NOW)],["2026-10-31T18:00:00+00:00"])
+ def test_portugal_different_date_not_mixed(self):
+  lines=["sáb. 31 out","FCP","dom. 1 nov","20h30","EPF"]
+  self.assertEqual(extract("POR1",lines,"FC Porto","Estoril Praia",NOW),[])
+ def test_portugal_unknown_abbreviation_not_guessed(self):
+  lines=["sáb. 31 out","SLB","18h00","SCB"]
+  self.assertEqual(extract("POR1",lines,"Benfica","Braga",NOW),[])
  def test_portugal_wrong_order(self):
   lines=["sáb. 31 out","J10","EPF","20h30","FCP"]
   self.assertEqual(extract("POR1",lines,"FC Porto","Estoril Praia",NOW),[])
