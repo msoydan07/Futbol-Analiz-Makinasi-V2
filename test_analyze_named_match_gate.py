@@ -18,7 +18,8 @@ class TestNamedGate(unittest.TestCase):
   self.now=datetime.now(timezone.utc)
  def observation(self):
   return {"status":"VERIFIED_OFFICIAL_FIXTURE",
-          "home":"Arsenal","away":"Chelsea",\n          "kickoff_utc":(self.now+timedelta(days=1)).isoformat(),
+          "home":"Arsenal","away":"Chelsea",
+          "kickoff_utc":(self.now+timedelta(days=1)).isoformat(),
           "source_url":"https://www.premierleague.com/en/fixtures",
           "retrieved_at_utc":self.now.isoformat()}
  def test_official_observation_without_bulk_csv(self):
