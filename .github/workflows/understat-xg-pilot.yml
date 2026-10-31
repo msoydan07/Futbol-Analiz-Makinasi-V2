@@ -36,6 +36,8 @@ jobs:
         run: python collect_understat_xg.py
       - name: Kimlik skor ve xG eslesmesini denetle
         run: python audit_understat_xg.py --understat-csv data/understat_matches.csv
+      - name: Eslesmeyen maclarin nedenlerini siniflandir
+        run: python diagnose_understat_unmatched.py
       - name: Raporlari sakla
         if: always()
         uses: actions/upload-artifact@v4
@@ -45,5 +47,7 @@ jobs:
             data/understat_matches.csv
             data/understat_xg_match_audit.csv
             data/understat_xg_match_report.json
+            data/understat_unmatched_diagnosis.csv
+            data/understat_unmatched_diagnosis.json
             data/historical_results_audit.json
           if-no-files-found: warn
