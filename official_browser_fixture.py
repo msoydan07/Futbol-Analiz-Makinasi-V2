@@ -39,16 +39,24 @@ def extract(league,lines,home,away,now):
   # Parse visible match cards, not a particular club or a fixed date.
   # Cards expose e.g. "sáb. 31 out", "FCP", "20h30", "EPF".
   # Abbreviations are accepted only for a known exact team identity.
-  aliases={"fcporto":{"fcp","fcporto"},"estorilpraia":{"epf","estorilpraia"}}
+  # Exact aliases only: never guess an abbreviation from a team name.
+  aliases={
+   "fcporto":{"fcp","fcporto"},
+   "estorilpraia":{"epf","estorilpraia"},
+  }
   h=aliases.get(norm(home),{norm(home)})
   a=aliases.get(norm(away),{norm(away)})
+  if h & a:
+   return []
   months={"jan":1,"fev":2,"mar":3,"abr":4,"mai":5,"jun":6,"jul":7,"ago":8,"set":9,"out":10,"nov":11,"dez":12}
   dp=re.compile(r"(?:seg|ter|qua|qui|sex|s[aá]b|dom)\.?\s*(\d{1,2})\s+(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\b",re.I)
   tp=re.compile(r"\b(\d{1,2})h(\d{2})\b",re.I)
   for i,line in enumerate(lines):
    dm=dp.search(line)
    if not dm:continue
-   context=lines[i+1:i+17]
+   # Do not borrow a kickoff or team from the following match-day card.
+   next_day=next((k for k in range(i+1,len(lines)) if dp.search(lines[k])),len(lines))
+   context=lines[i+1:min(i+17,next_day)]
    for j,x in enumerate(context):
     if norm(x) not in h:continue
     for k in range(j+1,min(j+7,len(context))):
