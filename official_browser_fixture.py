@@ -95,7 +95,7 @@ def extract(league,lines,home,away,now):
     local=datetime.strptime(str(date)+" "+m.group(3),"%Y-%m-%d %H:%M").replace(tzinfo=ZoneInfo("Europe/London"))
     matches.append(local.astimezone(timezone.utc))
    # Match centre renders home, kickoff, away as separate visible lines.
-   if norm(line)!=norm(home):continue
+   if not champ or norm(line)!=norm(home):continue
    for j in range(i+1,min(i+7,len(lines)-1)):
     if datepat.fullmatch(lines[j]):break
     tm=re.fullmatch(r"(\d{1,2}):(\d{2})",lines[j])
