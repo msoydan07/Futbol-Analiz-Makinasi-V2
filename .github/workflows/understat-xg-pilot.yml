@@ -40,6 +40,8 @@ jobs:
         run: python audit_understat_xg.py --understat-csv data/understat_matches.csv --aliases data/understat_reviewed_aliases.json
       - name: Dogrulanmis xG tarihsel tablosunu olustur
         run: python build_verified_xg_history.py
+      - name: Tum liglerde eksik veri envanterini cikar
+        run: python audit_missing_data_262.py
       - name: Eslesmeyen maclarin nedenlerini siniflandir
         run: python diagnose_understat_unmatched.py
       - name: Raporlari sakla
@@ -53,6 +55,7 @@ jobs:
             data/understat_xg_match_report.json
             data/historical_verified_xg.csv
             data/historical_verified_xg_report.json
+            data/missing_data_inventory_262.json
             data/understat_alias_review.csv
             data/understat_reviewed_aliases.json
             data/understat_unmatched_diagnosis.csv
