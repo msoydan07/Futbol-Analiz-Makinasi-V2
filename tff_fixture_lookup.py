@@ -56,7 +56,7 @@ def lookup(home,away,now=None,lines=None):
   try:local=datetime.strptime(dm.group(1)+" "+tm.group(0),"%d.%m.%Y %H:%M").replace(tzinfo=ZoneInfo("Europe/Istanbul"))
   except ValueError:continue
   records.append(local)
- if len(records)!=1:return {"status":"NOT_VERIFIED","reason":"fixture_not_unique","count":len(records)}
+ if len(records)!=1:return {"status":"NOT_VERIFIED","reason":"fixture_not_unique","count":len(records),"diagnostics":{"line_count":len(lines),"sample_lines":[x[:110] for x in lines[:20]],"date_hits":sum(bool(dates.search(x)) for x in lines),"time_hits":sum(bool(times.search(x)) for x in lines)}}
  kickoff=records[0].astimezone(timezone.utc)
  if not now<=kickoff<=now+timedelta(days=7):return {"status":"OUTSIDE_WINDOW"}
  return {"status":"VERIFIED_OFFICIAL_FIXTURE","home":home,"away":away,"kickoff_utc":kickoff.isoformat(),"kickoff_turkey":records[0].isoformat(),"source_url":URL,"retrieved_at_utc":now.isoformat(),"identity_match":"PENDING"}
