@@ -39,11 +39,14 @@ class TestOfficialBrowserParser(unittest.TestCase):
   lines=["Tuesday 3 November","Sky Bet Championship","Blackburn Rovers v Stoke City (19:45)"]
   self.assertEqual([x.isoformat() for x in extract("ENG2",lines,"Blackburn Rovers","Stoke City",NOW)],["2026-11-03T19:45:00+00:00"])
  def test_championship_match_centre_other_teams(self):
-  lines=["Tuesday 3rd November","Preston North End","19:45","Sheffield United"]
+  lines=["Tuesday 3rd November","Sky Bet Championship","Preston North End","19:45","Sheffield United"]
   self.assertEqual([x.isoformat() for x in extract("ENG2",lines,"Preston North End","Sheffield United",NOW)],["2026-11-03T19:45:00+00:00"])
  def test_championship_match_centre_wrong_opponent(self):
-  lines=["Tuesday 3rd November","Preston North End","19:45","Sheffield United"]
+  lines=["Tuesday 3rd November","Sky Bet Championship","Preston North End","19:45","Sheffield United"]
   self.assertEqual(extract("ENG2",lines,"Preston North End","Stoke City",NOW),[])
+ def test_championship_separate_lines_wrong_division(self):
+  lines=["Tuesday 3rd November","Sky Bet League One","Preston North End","19:45","Sheffield United"]
+  self.assertEqual(extract("ENG2",lines,"Preston North End","Sheffield United",NOW),[])
  def test_championship_wrong_division(self):
   lines=["Tuesday 3 November","Sky Bet League One","Blackburn Rovers v Stoke City (19:45)"]
   self.assertEqual(extract("ENG2",lines,"Blackburn Rovers","Stoke City",NOW),[])
