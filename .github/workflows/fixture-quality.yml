@@ -57,6 +57,52 @@ jobs:
           print(json.dumps(out,ensure_ascii=False,indent=2))
           if not all(v.get("healthy") for v in out.values()):raise SystemExit("Resmi kaynak erisiminde sorun: raporu inceleyin")
           PY
+      - name: Farkli takimlarla gercek fikstur kabul denetimi
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from datetime import datetime,timezone,timedelta
+          from playwright.sync_api import sync_playwright
+          from official_browser_fixture import SOURCES,FALLBACK_SOURCES,extract
+          now=datetime.now(timezone.utc)
+          targets={
+            "BEL1":[("KV Mechelen","KRC Genk"),("Club Brugge","Anderlecht")],
+            "POR1":[("FC Porto","Estoril Praia"),("SL Benfica","SC Braga")],
+            "ENG2":[("Blackburn Rovers","Stoke City"),("Preston North End","Sheffield United")],
+          }
+          out={}
+          with sync_playwright() as p:
+           browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
+           for league,pairs in targets.items():
+            sources=[]
+            for url in [SOURCES[league]]+FALLBACK_SOURCES.get(league,[]):
+             try:
+              page=browser.new_page(locale="fr-BE" if league=="BEL1" else "en-GB")
+              response=page.goto(url,wait_until="domcontentloaded",timeout=20000)
+              if response and response.status==200:
+               page.wait_for_timeout(2500)
+               lines=[x.strip() for x in page.locator("body").inner_text(timeout=10000).splitlines() if x.strip()]
+               found=[]
+               for home,away in pairs:
+                hits=extract(league,lines,home,away,now)
+                found.append({"home":home,"away":away,"kickoffs_utc":[t.isoformat() for t in hits if now<=t<=now+timedelta(days=7)]})
+               sources.append({"url":url,"http":200,"fixtures":found})
+              else:sources.append({"url":url,"http":response.status if response else None})
+              page.close()
+             except Exception as e:sources.append({"url":url,"error":str(e)[:160]})
+            out[league]={"sources":sources,"verified_distinct_pairs":sum(1 for pair in pairs if any(len(next((f["kickoffs_utc"] for f in src.get("fixtures",[]) if f["home"]==pair[0] and f["away"]==pair[1]),[]))==1 for src in sources))}
+           browser.close()
+          Path("data").mkdir(exist_ok=True)
+          Path("data/fixture_acceptance_report.json").write_text(json.dumps(out,ensure_ascii=False,indent=2))
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fixture-acceptance-report
+          path: data/fixture_acceptance_report.json
+          if-no-files-found: warn
       - uses: actions/upload-artifact@v4
         if: always()
         with:
