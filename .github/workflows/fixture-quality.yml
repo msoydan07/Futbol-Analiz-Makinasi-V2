@@ -33,20 +33,24 @@ jobs:
           import json
           from pathlib import Path
           from playwright.sync_api import sync_playwright
-          from official_browser_fixture import SOURCES
+          from official_browser_fixture import SOURCES,FALLBACK_SOURCES
           out={}
           with sync_playwright() as p:
            browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
            for league,url in SOURCES.items():
-            try:
-             page=browser.new_page()
-             response=page.goto(url,wait_until="domcontentloaded",timeout=25000)
-             page.wait_for_timeout(3500)
-             body=page.locator("body").inner_text(timeout=10000)
-             code=response.status if response else 0
-             out[league]={"http":code,"visible_chars":len(body),"healthy":code==200 and len(body)>300,"url":url}
-             page.close()
-            except Exception as e:out[league]={"healthy":False,"error":str(e)[:250],"url":url}
+            attempts=[]
+            for candidate in [url]+FALLBACK_SOURCES.get(league,[]):
+             try:
+              page=browser.new_page(locale="fr-BE" if league=="BEL1" else "en-GB")
+              response=page.goto(candidate,wait_until="domcontentloaded",timeout=20000)
+              page.wait_for_timeout(2500)
+              body=page.locator("body").inner_text(timeout=10000)
+              code=response.status if response else 0
+              attempts.append({"url":candidate,"http":code,"visible_chars":len(body),"healthy":code==200 and len(body)>300})
+              page.close()
+              if attempts[-1]["healthy"]:break
+             except Exception as e:attempts.append({"url":candidate,"healthy":False,"error":str(e)[:180]})
+            out[league]={"healthy":any(a["healthy"] for a in attempts),"attempts":attempts}
            browser.close()
           Path("data").mkdir(exist_ok=True)
           Path("data/fixture_quality_report.json").write_text(json.dumps(out,ensure_ascii=False,indent=2))
