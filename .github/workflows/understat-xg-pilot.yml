@@ -5,6 +5,8 @@ on:
     branches: [feature/01-kimlikler]
     paths:
       - '.github/workflows/understat-xg-pilot.yml'
+      - 'audit_understat_xg.py'
+      - 'data/reviewed_understat_date_overrides.json'
 jobs:
   audit:
     runs-on: ubuntu-latest
@@ -37,7 +39,7 @@ jobs:
       - name: Kaynak isimlerini mevcut dogrulanmis isimlere bagla
         run: python build_understat_aliases.py
       - name: Kimlik skor ve xG eslesmesini denetle
-        run: python audit_understat_xg.py --understat-csv data/understat_matches.csv --aliases data/understat_reviewed_aliases.json
+        run: python audit_understat_xg.py --understat-csv data/understat_matches.csv --aliases data/understat_reviewed_aliases.json --reviewed-dates data/reviewed_understat_date_overrides.json
       - name: Dogrulanmis xG tarihsel tablosunu olustur
         run: python build_verified_xg_history.py
       - name: Tum liglerde eksik veri envanterini cikar
