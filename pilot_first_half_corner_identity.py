@@ -34,8 +34,10 @@ def main():
     n["schema_unmapped"]=len(rows)
    else:
     for r in rows:
+     n["source_rows"]+=1
      vals=("home_corners_1h","away_corners_1h","home_corners","away_corners")
-     if not all((r.get(v) or "").strip() for v in vals):continue
+     if not all((r.get(v) or "").strip() for v in vals):
+      n["missing_corner_fields"]+=1;continue
      date=r[date_key][:10]
      options=base.get((league,date,r[home_key].casefold().strip(),r[away_key].casefold().strip()),[])
      if not options:
@@ -59,7 +61,7 @@ def main():
      n["matched"]+=1
   except Exception as exc:n["source_error"]+=1;report.setdefault("source_errors",{})[league]=str(exc)[:180]
   report["by_league"].append({"league":league,**n})
-  for key in ("matched","unmatched","ambiguous","invalid"):report[key]+=n[key]
+  for key in ("matched","unmatched","ambiguous","invalid","score_mismatch","score_schema_unmapped","schema_unmapped","source_error","missing_corner_fields"):report[key]=report.get(key,0)+n[key]
  P.joinpath("first_half_corner_match_pilot.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
- print(json.dumps({k:report[k] for k in ("matched","unmatched","ambiguous","invalid")},ensure_ascii=False))
+ print(json.dumps({k:report.get(k,0) for k in ("matched","unmatched","ambiguous","invalid","score_mismatch","score_schema_unmapped","schema_unmapped","source_error","missing_corner_fields")},ensure_ascii=False))
 if __name__=="__main__":main()
