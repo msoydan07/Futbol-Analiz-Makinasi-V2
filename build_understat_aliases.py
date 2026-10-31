@@ -26,7 +26,7 @@ OVERRIDES={
          "VfB Stuttgart":"Stuttgart","Werder Bremen":"Werder Bremen"},
  "ESP1":{"Alaves":"Alaves","Athletic Club":"Ath Bilbao","Atletico Madrid":"Ath Madrid",
          "Barcelona":"Barcelona","Celta Vigo":"Celta","Espanyol":"Espanol",
-         "Deportivo La Coruna":"La Coruna","Real Betis":"Betis",
+         "Deportivo La Coruna":"La Coruna","Racing Santander":"Santander","Real Betis":"Betis",
          "Real Sociedad":"Sociedad","Rayo Vallecano":"Vallecano"},
  "ITA1":{"AC Milan":"Milan","Inter":"Inter","Parma Calcio 1913":"Parma"},
  "FRA1":{"Paris Saint Germain":"Paris SG","Marseille":"Marseille","Monaco":"Monaco"}
