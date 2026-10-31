@@ -40,6 +40,11 @@ jobs:
           python laliga_fixture_lookup.py 'Athletic Club' 'Real Sociedad' | tee data/laliga_lookup_live.json
           grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/laliga_lookup_live.json
           grep -q '"kickoff_utc": "2026-11-01T20:00:00+00:00"' data/laliga_lookup_live.json
+      - name: Serie A resmi mac ve saat testi
+        run: |
+          python serie_a_fixture_lookup.py Atalanta Parma | tee data/serie_a_lookup_live.json
+          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/serie_a_lookup_live.json
+          grep -q '"kickoff_utc": "2026-11-02T19:45:00+00:00"' data/serie_a_lookup_live.json
       - name: LaLiga resmi sayfa eslestirme yapisi
         run: python probe_laliga_structure.py
       - name: Dokuz lig resmi kaynak toplu denetimi
@@ -56,4 +61,5 @@ jobs:
             data/premier_league_lookup_live.json
             data/laliga_structure_probe.json
             data/laliga_lookup_live.json
+            data/serie_a_lookup_live.json
           if-no-files-found: warn
