@@ -36,3 +36,33 @@ def verify_requested_fixture(league,home,away,kickoff_iso,source_url,retrieved_a
 
 # The caller must actually fetch the official source and confirm the fixture.
 # source_checked=True is an explicit trusted integration assertion, never inferred from a URL.
+
+def match_unplayed_candidate(league, home, away, candidates_path="data/unplayed_fixture_candidates.csv", season="2026-2027"):
+ """Find the requested pairing in the existing unplayed list; date is NOT required to match."""
+ import csv
+ from pathlib import Path
+ p=Path(candidates_path)
+ if not p.is_file():
+  return {"status":"LIST_UNAVAILABLE","path":str(p)}
+ from identity import normalize
+ with p.open(encoding="utf-8-sig",newline="") as f:
+  rows=list(csv.DictReader(f))
+ hits=[r for r in rows if r.get("league")==league and r.get("season")==season
+       and r.get("classification")=="FUTURE_CANDIDATE"
+       and normalize(r.get("home",""))==normalize(home)
+       and normalize(r.get("away",""))==normalize(away)]
+ if not hits:return {"status":"NOT_IN_LIST"}
+ if len(hits)!=1:return {"status":"AMBIGUOUS","count":len(hits)}
+ return {"status":"MATCHED_UNPLAYED","league":league,"season":season,"home":hits[0]["home"],"away":hits[0]["away"]}
+
+def verify_listed_match(league,home,away,kickoff_iso,source_url,retrieved_at_iso,now=None,
+                        source_checked=False,candidates_path="data/unplayed_fixture_candidates.csv",
+                        registry_path="data/match_registry.json"):
+ """One requested match: unplayed pair first, official kickoff second. No date equality gate."""
+ listed=match_unplayed_candidate(league,home,away,candidates_path)
+ if listed["status"]!="MATCHED_UNPLAYED":return listed
+ checked=verify_requested_fixture(league,home,away,kickoff_iso,source_url,retrieved_at_iso,
+                                  now=now,source_checked=source_checked,registry_path=registry_path)
+ if checked["status"]=="VERIFIED":
+  checked["unplayed_list_match"]=True
+ return checked
