@@ -34,8 +34,8 @@ def lookup(home,away,now=None,lines=None):
  if start<0:return {"status":"NOT_VERIFIED","reason":"super_lig_section_missing","sample":lines[:8]}
  end=next((i for i in range(start+1,len(lines)) if "Trendyol 1. Lig" in lines[i] and "Hafta" in lines[i]),len(lines))
  lines=lines[start:end]
- date_re=re.compile(r"\\b(\\d{1,2}\\.\\d{1,2}\\.20\\d\\d)\\b")
- time_re=re.compile(r"\\b([01]?\\d|2[0-3]):([0-5]\\d)\\b")
+ date_re=re.compile(r"\b(\d{1,2}\.\d{1,2}\.20\d\d)\b")
+ time_re=re.compile(r"\b([01]?\d|2[0-3]):([0-5]\d)\b")
  dates=[(i,date_re.search(line)) for i,line in enumerate(lines) if date_re.search(line)]
  records=[]
  nh,na=normalize(home),normalize(away)
