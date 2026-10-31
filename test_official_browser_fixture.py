@@ -18,6 +18,9 @@ class TestOfficialBrowserParser(unittest.TestCase):
  def test_belgium(self):
   lines=["KV Mechelen","15:00","sam. 31 oct.","KRC Genk"]
   self.assertEqual([x.isoformat() for x in extract("BEL1",lines,"KV Mechelen","KRC Genk",NOW)],["2026-10-31T15:00:00+00:00"])
+ def test_belgium_club_calendar_row(self):
+  lines=["za 31 okt - 16:00 KV Mechelen KRC Genk"]
+  self.assertEqual([x.isoformat() for x in extract("BEL1",lines,"KV Mechelen","KRC Genk",NOW)],["2026-10-31T15:00:00+00:00"])
  def test_belgium_wrong_away(self):
   self.assertEqual(extract("BEL1",["KV Mechelen","15:00","sam. 31 oct.","Anderlecht"],"KV Mechelen","KRC Genk",NOW),[])
  def test_championship(self):
