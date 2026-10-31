@@ -19,6 +19,9 @@ class TestOfficialBrowserParser(unittest.TestCase):
  def test_portugal_unknown_abbreviation_not_guessed(self):
   lines=["sáb. 31 out","SLB","18h00","SCB"]
   self.assertEqual(extract("POR1",lines,"Benfica","Braga",NOW),[])
+ def test_portugal_other_club_abbreviations(self):
+  lines=["dom. 1 nov","J10","SLB","20h15","SCB"]
+  self.assertEqual([x.isoformat() for x in extract("POR1",lines,"SL Benfica","SC Braga",NOW)],["2026-11-01T20:15:00+00:00"])
  def test_portugal_wrong_order(self):
   lines=["sáb. 31 out","J10","EPF","20h30","FCP"]
   self.assertEqual(extract("POR1",lines,"FC Porto","Estoril Praia",NOW),[])
