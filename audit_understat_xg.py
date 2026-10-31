@@ -160,7 +160,7 @@ def run(args):
             ["source_row","league","season","home_team","away_team","fixture_id","status","reason","source_url"])
         writer.writeheader()
         writer.writerows(results)
-    Path(args.report).write_text(json.dumps(summary,indent=2,ensure_ascii=False)+"\\n",encoding="utf-8")
+    Path(args.report).write_text(json.dumps(summary,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     print(json.dumps(summary,indent=2,ensure_ascii=False))
     return 0
 
