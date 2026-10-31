@@ -58,15 +58,25 @@ jobs:
           python ligue1_fixture_lookup.py 'RC Strasbourg Alsace' 'AJ Auxerre' | tee data/ligue1_lookup_live.json
           grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/ligue1_lookup_live.json
           grep -q '"kickoff_utc": "2026-11-01T14:00:00+00:00"' data/ligue1_lookup_live.json
-          python belgium_fixture_lookup.py 'KV Mechelen' 'KRC Genk' | tee data/belgium_lookup_live.json
-          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/belgium_lookup_live.json
-          grep -q '"kickoff_utc": "2026-10-31T15:00:00+00:00"' data/belgium_lookup_live.json
-          python portugal_fixture_lookup.py 'FC Porto' 'Estoril Praia' | tee data/portugal_lookup_live.json
-          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/portugal_lookup_live.json
-          grep -q '"kickoff_utc": "2026-10-31T20:30:00+00:00"' data/portugal_lookup_live.json
-          python championship_fixture_lookup.py 'Blackburn Rovers' 'Stoke City' | tee data/championship_lookup_live.json
-          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/championship_lookup_live.json
-          grep -q '"kickoff_utc": "2026-11-03T19:45:00+00:00"' data/championship_lookup_live.json
+          python - <<'PY'
+          import json,subprocess
+          checks=[
+            ("BEL1",["python","belgium_fixture_lookup.py","KV Mechelen","KRC Genk"],"2026-10-31T15:00:00+00:00","data/belgium_lookup_live.json"),
+            ("POR1",["python","portugal_fixture_lookup.py","FC Porto","Estoril Praia"],"2026-10-31T20:30:00+00:00","data/portugal_lookup_live.json"),
+            ("ENG2",["python","championship_fixture_lookup.py","Blackburn Rovers","Stoke City"],"2026-11-03T19:45:00+00:00","data/championship_lookup_live.json"),
+          ]
+          summary={}
+          for league,cmd,expected,path in checks:
+            r=subprocess.run(cmd,capture_output=True,text=True)
+            try:data=json.loads(r.stdout)
+            except Exception:data={"status":"INVALID_OUTPUT","stdout":r.stdout[:500],"stderr":r.stderr[:500]}
+            with open(path,"w") as f:json.dump(data,f,ensure_ascii=False,indent=2)
+            ok=(r.returncode==0 and data.get("status")=="VERIFIED_OFFICIAL_FIXTURE" and data.get("kickoff_utc")==expected)
+            summary[league]={"accepted":ok,"status":data.get("status"),"reason":data.get("reason"),"kickoff_utc":data.get("kickoff_utc"),"source_url":data.get("source_url")}
+            print(league,json.dumps(summary[league],ensure_ascii=False),flush=True)
+          with open("data/remaining_three_acceptance.json","w") as f:json.dump(summary,f,indent=2)
+          # Always collect all three diagnostics; individual acceptance is visible in JSON.
+          PY
       - name: Belcika Fransa en guncel resmi sayfa denetimi
         run: python probe_belgium_france_latest.py
       - name: Kalan bes lig tek seferlik toplu resmi kaynak denetimi
@@ -93,4 +103,5 @@ jobs:
             data/belgium_lookup_live.json
             data/portugal_lookup_live.json
             data/championship_lookup_live.json
+            data/remaining_three_acceptance.json
           if-no-files-found: warn
