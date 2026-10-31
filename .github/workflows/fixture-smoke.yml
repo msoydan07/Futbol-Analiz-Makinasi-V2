@@ -25,6 +25,8 @@ jobs:
           python tff_fixture_lookup.py Kasımpaşa Beşiktaş | tee data/tff_lookup_live.json
           grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/tff_lookup_live.json
           grep -q '"kickoff_turkey": "2026-11-01T19:00:00+03:00"' data/tff_lookup_live.json
+      - name: Dokuz lig resmi kaynak toplu denetimi
+        run: python probe_official_league_fixtures.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -32,4 +34,5 @@ jobs:
           path: |
             data/tff_official_detail_smoke.json
             data/tff_lookup_live.json
+            data/official_league_probe.json
           if-no-files-found: warn
