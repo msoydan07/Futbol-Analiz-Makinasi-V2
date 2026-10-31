@@ -18,7 +18,7 @@ def extract(league,lines,home,away,now):
  if league=="BEL1":
   # Official Pro League calendar cards: home / local? display kickoff / day / away.
   # Pro League website lists kickoffs in UTC (verified against match detail).
-  datepat=re.compile(r"^(?:lun|mar|mer|jeu|ven|sam|dim)\.\s*(\d{1,2})\s+(oct|nov)\.$",re.I)
+  datepat=re.compile(r"^(?:lun|mar|mer|jeu|ven|sam|dim|ma|di|wo|do|vr|za|zo)\.\s*(\d{1,2})\s+(oct|nov|okt)\.$",re.I)
   for i,x in enumerate(lines):
    if norm(x)!=norm(home):continue
    for j in range(i+1,min(i+7,len(lines)-1)):
@@ -26,7 +26,7 @@ def extract(league,lines,home,away,now):
     for k in range(j+1,min(j+5,len(lines)-1)):
      m=datepat.fullmatch(lines[k])
      if m and any(norm(y)==norm(away) for y in lines[k+1:k+5]):
-      d=datetime(now.year,10 if m.group(2).lower()=="oct" else 11,int(m.group(1)),*map(int,lines[j].split(":")),tzinfo=timezone.utc)
+      d=datetime(now.year,10 if m.group(2).lower() in ("oct","okt") else 11,int(m.group(1)),*map(int,lines[j].split(":")),tzinfo=timezone.utc)
       matches.append(d)
  elif league=="POR1":
   # Parse visible match cards, not a particular club or a fixed date.
