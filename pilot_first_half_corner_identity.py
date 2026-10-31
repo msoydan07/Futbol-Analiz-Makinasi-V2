@@ -38,7 +38,10 @@ def main():
      if not all((r.get(v) or "").strip() for v in vals):continue
      date=r[date_key][:10]
      options=base.get((league,date,r[home_key].casefold().strip(),r[away_key].casefold().strip()),[])
-     if not options:n["unmatched"]+=1;continue
+     if not options:
+      n["unmatched"]+=1
+      if len(n.setdefault("_examples",[]))<8:n["_examples"].append({"date":date,"home":r[home_key],"away":r[away_key]})
+      continue
      if len(options)!=1:n["ambiguous"]+=1;continue
      h=options[0]
      try:
