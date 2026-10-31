@@ -52,6 +52,15 @@ jobs:
           python eredivisie_fixture_lookup.py Feyenoord 'Fortuna Sittard' | tee data/eredivisie_lookup_live.json
           grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/eredivisie_lookup_live.json
           grep -q '"kickoff_utc": "2026-10-31T15:30:00+00:00"' data/eredivisie_lookup_live.json
+      - name: Fransa ve Belcika iki resmi mac canli testi
+        run: |
+          set -o pipefail
+          python ligue1_fixture_lookup.py 'RC Strasbourg Alsace' 'AJ Auxerre' | tee data/ligue1_lookup_live.json
+          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/ligue1_lookup_live.json
+          grep -q '"kickoff_utc": "2026-11-01T14:00:00+00:00"' data/ligue1_lookup_live.json
+          python belgium_fixture_lookup.py 'KV Mechelen' 'KRC Genk' | tee data/belgium_lookup_live.json
+          grep -q '"status": "VERIFIED_OFFICIAL_FIXTURE"' data/belgium_lookup_live.json
+          grep -q '"kickoff_utc": "2026-10-31T14:00:00+00:00"' data/belgium_lookup_live.json
       - name: Belcika Fransa en guncel resmi sayfa denetimi
         run: python probe_belgium_france_latest.py
       - name: Kalan bes lig tek seferlik toplu resmi kaynak denetimi
@@ -74,4 +83,6 @@ jobs:
             data/remaining_leagues_batch_probe.json
             data/eredivisie_lookup_live.json
             data/belgium_france_latest_probe.json
+            data/ligue1_lookup_live.json
+            data/belgium_lookup_live.json
           if-no-files-found: warn
