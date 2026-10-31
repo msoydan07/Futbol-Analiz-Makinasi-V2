@@ -43,10 +43,10 @@ jobs:
           python audit_missing_data_262.py
       - name: 2.6.2 veri eksikligi sayisal raporu
         run: python audit_262_data_readiness.py
-      - name: Gelecek fikstur kaynagi kapsama denetimi
-        run: python audit_future_fixture_source.py
-      - name: Premier League resmi fikstur cekme testi
-        run: python fetch_official_eng1_article.py
+      - name: Yedi gunluk fikstur kapi testleri
+        run: python -m unittest -q test_verify_match_on_demand.py
+      - name: TFF gercek mac detay sayfasi kanit testi
+        run: python smoke_tff_official_detail.py
       - name: Ilk bes asama kabul raporu
         run: python audit_stages_1_5_acceptance.py
       - name: Kanit raporunu kaydet
@@ -55,8 +55,7 @@ jobs:
         with:
           name: stages-1-5-acceptance
           path: |
-            data/official_eng1_article_candidates.json
-            data/future_fixture_source_audit.json
+            data/tff_official_detail_smoke.json
             data/future_fixture_candidates.json
             data/262_data_readiness.json
             data/stages_1_5_acceptance.json
