@@ -138,5 +138,19 @@
     "away_goals": 0,
     "evidence_url": "https://www.sofascore.com/football/match/toulouse-troyes/cIsGI",
     "source_url": "https://understat.com/match/32010"
+  },
+  {
+    "source_row": 1326,
+    "fixture_id": "e44a94d5-ae39-54fb-9e47-b3331d8368be",
+    "league": "FRA1",
+    "season": "2026-2027",
+    "source_date": "2026-10-25",
+    "verified_date": "2026-10-26",
+    "home_team": "Paris Saint Germain",
+    "away_team": "Lyon",
+    "home_goals": 2,
+    "away_goals": 0,
+    "evidence_url": "https://www.lfp.fr/article/paris-saint-germain-olympique-lyonnais-decale-au-lundi-26-octobre-a-20-h30",
+    "source_url": "https://understat.com/match/32011"
   }
 ]
