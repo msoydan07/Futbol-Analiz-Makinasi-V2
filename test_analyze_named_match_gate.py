@@ -37,7 +37,7 @@ class TestNamedGate(unittest.TestCase):
   r=run("ENG1","Arsenal","Chelsea",lookup_override=lambda h,a:dict(self.observation(),away="Liverpool"),registry_path=self.path)
   self.assertEqual(r["status"],"NOT_VERIFIED")
  def test_missing_team_registry_never_fakes_success(self):
-  r=run("ENG1","Arsenal","Unknown",lookup_override=lambda h,a:self.observation(),registry_path=self.path)
+  r=run("ENG1","Arsenal","Unknown",lookup_override=lambda h,a:dict(self.observation(),away="Unknown"),registry_path=self.path)
   self.assertEqual(r["status"],"REVIEW_REQUIRED")
 
 if __name__=="__main__":unittest.main()
