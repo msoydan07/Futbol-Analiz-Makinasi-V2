@@ -22,10 +22,10 @@ def main():
    with urllib.request.urlopen(req,timeout=18) as response:
     raw=response.read(2000000);entry["http_status"]=response.status;entry["final_url"]=response.url;entry["content_type"]=response.headers.get("Content-Type","")
    html=raw.decode("utf-8",errors="replace")
-   p=Visible();p.feed(html);visible=re.sub(r"\\s+"," "," ".join(p.parts))
+   p=Visible();p.feed(html);visible=re.sub(r"\s+"," "," ".join(p.parts))
    entry["html_bytes"]=len(raw);entry["visible_chars"]=len(visible)
-   entry["date_pattern_hits"]=len(re.findall(r"\\b(?:20\\d{2}[-/.]\\d{1,2}[-/.]\\d{1,2}|\\d{1,2}[-/.]\\d{1,2}[-/.]20\\d{2})\\b",visible))
-   entry["time_pattern_hits"]=len(re.findall(r"\\b(?:[01]?\\d|2[0-3]):[0-5]\\d\\b",visible))
+   entry["date_pattern_hits"]=len(re.findall(r"\b(?:20\d{2}[-/.]\d{1,2}[-/.]\d{1,2}|\d{1,2}[-/.]\d{1,2}[-/.]20\d{2})\b",visible))
+   entry["time_pattern_hits"]=len(re.findall(r"\b(?:[01]?\d|2[0-3]):[0-5]\d\b",visible))
    entry["has_structured_data"]="application/ld+json" in html
    entry["has_next_data"]="__NEXT_DATA__" in html
    entry["status"]="FETCHED_NEEDS_MATCH_PARSER" if entry["visible_chars"]>500 else "FETCHED_LOW_CONTENT"
@@ -35,5 +35,5 @@ def main():
   print(code,entry["status"],entry.get("date_pattern_hits"),entry.get("time_pattern_hits"),flush=True)
  from pathlib import Path
  Path("data").mkdir(exist_ok=True)
- Path("data/official_league_probe.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+ Path("data/official_league_probe.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 if __name__=="__main__":main()
