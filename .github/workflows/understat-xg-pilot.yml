@@ -44,6 +44,9 @@ jobs:
         run: python audit_missing_data_262.py
       - name: Eslesmeyen maclarin nedenlerini siniflandir
         run: python diagnose_understat_unmatched.py
+      - name: 2.6.2 tum ligler veri doluluk kabul raporu
+        if: always()
+        run: python audit_262_data_snapshot.py
       - name: Raporlari sakla
         if: always()
         uses: actions/upload-artifact@v4
@@ -61,4 +64,7 @@ jobs:
             data/understat_unmatched_diagnosis.csv
             data/understat_unmatched_diagnosis.json
             data/historical_results_audit.json
+            data/historical_results.csv
+            data/source_audit.csv
+            data/262_data_acceptance_snapshot.json
           if-no-files-found: warn
