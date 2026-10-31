@@ -47,8 +47,8 @@ def main():
      if len(options)!=1:n["ambiguous"]+=1;continue
      h=options[0]
      # Full-time goals are a mandatory cross-source identity check.
-     home_goal_key=next((k for k in ("home_goals","fthg","FTHG") if k in r),None)
-     away_goal_key=next((k for k in ("away_goals","ftag","FTAG") if k in r),None)
+     home_goal_key=next((k for k in ("ft_home","home_goals","fthg","FTHG") if k in r),None)
+     away_goal_key=next((k for k in ("ft_away","away_goals","ftag","FTAG") if k in r),None)
      if not home_goal_key or not away_goal_key:
       n["score_schema_unmapped"]+=1;continue
      try:
