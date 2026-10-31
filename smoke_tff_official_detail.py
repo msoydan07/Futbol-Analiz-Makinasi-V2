@@ -2,7 +2,7 @@
 import re,urllib.request,json
 from html.parser import HTMLParser
 from pathlib import Path
-URL="https://www.tff.org/Default.aspx?macId=317866&pageId=29"
+URL="https://www.tff.org/default.aspx?ftxtID=2966&pageID=600"
 class Reader(HTMLParser):
  def __init__(self):super().__init__();self.parts=[];self.skip=0
  def handle_starttag(self,tag,attrs):
@@ -16,7 +16,7 @@ def main():
  req=urllib.request.Request(URL,headers={"User-Agent":"Mozilla/5.0"})
  try:
   with urllib.request.urlopen(req,timeout=25) as r:raw=r.read()
-  p=Reader();p.feed(raw.decode("utf-8",errors="replace"))
+  p=Reader();p.feed(raw.decode("windows-1254",errors="replace"))
   text=re.sub(r"\s+"," "," ".join(p.parts)).upper()
   home="KASIMPAŞA" in text or "KASIMPASA" in text
   away="BEŞİKTAŞ" in text or "BESIKTAS" in text
