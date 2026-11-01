@@ -25,7 +25,7 @@ class TestNamedGate(unittest.TestCase):
  def test_official_observation_without_bulk_csv(self):
   r=run("ENG1","Arsenal","Chelsea",lookup_override=lambda h,a:self.observation(),registry_path=self.path)
   self.assertEqual(r["status"],"VERIFIED")
-  self.assertEqual(r["next_step"],"COLLECT_AND_VALIDATE_2_6_2_INPUTS")
+  self.assertEqual(r["next_step"],"COLLECT_AND_VALIDATE_2_6_3_INPUTS")
   self.assertFalse(r["first_xi_required"])
  def test_unverified_never_enters_analysis(self):
   r=run("ENG1","Arsenal","Chelsea",lookup_override=lambda h,a:{"status":"NOT_VERIFIED"},registry_path=self.path)
@@ -39,5 +39,21 @@ class TestNamedGate(unittest.TestCase):
  def test_missing_team_registry_never_fakes_success(self):
   r=run("ENG1","Arsenal","Unknown",lookup_override=lambda h,a:dict(self.observation(),away="Unknown"),registry_path=self.path)
   self.assertEqual(r["status"],"REVIEW_REQUIRED")
+
+ def test_mackolik_registered_spelling_and_official_alias(self):
+  reg=Registry(self.path)
+  team_id=reg.resolve_team("Arsenal")
+  reg.add_team_alias(team_id,"Arsenal FC","Maçkolik")
+  reg.save()
+  def official(h,a):
+   if h!="Arsenal" or a!="Chelsea":return {"status":"NOT_VERIFIED","reason":"name_variant"}
+   return self.observation()
+  result=run("ENG1","Arsenal FC","Chelsea",lookup_override=official,registry_path=self.path)
+  self.assertEqual(result["status"],"VERIFIED")
+  self.assertEqual(result["home_id"],team_id)
+
+ def test_wrong_source_match_ids_not_accepted(self):
+  result=run("ENG1","Arsenal","Chelsea",lookup_override=lambda h,a:dict(self.observation(),home="Chelsea",away="Arsenal"),registry_path=self.path)
+  self.assertEqual(result["status"],"NOT_VERIFIED")
 
 if __name__=="__main__":unittest.main()
