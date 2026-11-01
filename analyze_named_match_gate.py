@@ -6,6 +6,7 @@ import importlib
 import json
 import sys
 from verify_match_on_demand import verify_named_match
+from identity import Registry
 
 LOOKUPS={
  "ENG1":"premier_league_fixture_lookup",
@@ -37,7 +38,11 @@ def run(league,home,away,lookup_override=None,registry_path="data/match_registry
  except (ValueError,TypeError):
   return {"status":"NOT_VERIFIED","reason":"official_observation_teams_missing"}
  # Only a successfully fetched and parsed official observation can enter the identity gate.
- checked=verify_named_match(league,home,away,observed.get("kickoff_utc"),
+ # Resolve requested names through verified federation aliases without changing team IDs.
+ aliases={"TUR1":{"Kasımpaşa":"KASIMPAŞA A.Ş.","Beşiktaş":"BEŞİKTAŞ A.Ş."}}
+ verified_home=aliases.get(league,{}).get(home,home)
+ verified_away=aliases.get(league,{}).get(away,away)
+ checked=verify_named_match(league,verified_home,verified_away,observed.get("kickoff_utc"),
                             observed.get("source_url"),observed.get("retrieved_at_utc"),
                             source_checked=True,registry_path=registry_path)
  if checked.get("status")=="VERIFIED":
