@@ -6,6 +6,7 @@ An official-source observation is accepted only after its source is actually che
 from datetime import datetime,timedelta,timezone
 from zoneinfo import ZoneInfo
 from identity import Registry
+from team_name_resolver import resolve as resolve_team_name
 from official_fixture_source_policy import OFFICIAL
 
 def verify_requested_fixture(league,home,away,kickoff_iso,source_url,retrieved_at_iso,now=None,source_checked=False,registry_path="data/match_registry.json"):
@@ -28,7 +29,7 @@ def verify_requested_fixture(league,home,away,kickoff_iso,source_url,retrieved_a
   if not now<=kickoff<=now+timedelta(days=7):
    return {"status":"OUTSIDE_WINDOW","reason":"not_within_next_7_days"}
   reg=Registry(registry_path)
-  home_id=reg.resolve_team(home);away_id=reg.resolve_team(away)
+  home_id=resolve_team_name(reg,league,home);away_id=resolve_team_name(reg,league,away)
   if home_id==away_id:raise ValueError("same_team")
   return {"status":"VERIFIED","league":league,"home_id":home_id,"away_id":away_id,"kickoff_utc":kickoff.isoformat(),"kickoff_turkey":kickoff.astimezone(ZoneInfo("Europe/Istanbul")).isoformat(),"source_url":source_url,"retrieved_at_utc":retrieved.isoformat()}
  except (KeyError,ValueError,TypeError) as e:
