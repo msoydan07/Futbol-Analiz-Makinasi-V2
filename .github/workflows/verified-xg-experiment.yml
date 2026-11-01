@@ -26,6 +26,7 @@ jobs:
           python import_real_fixtures.py
           python audit_result_quality.py
           python build_historical_results.py
+          python audit_single_match_generated_identity.py
       - name: Understat bes lig iki sezon xG topla
         run: python collect_understat_xg.py
       - name: Yalniz denetlenmis isim eslestirmelerini hazirla
@@ -61,3 +62,4 @@ jobs:
             data/model_b_forward_calibration.json
             data/elo_auxiliary_audit.json
             data/model_b_elo_forward_blend.json
+            data/single_match_identity_integration_audit.json
