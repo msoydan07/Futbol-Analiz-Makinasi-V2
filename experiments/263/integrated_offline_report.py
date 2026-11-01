@@ -15,6 +15,7 @@ from pathlib import Path
 
 from analysis_math_core import build_analysis, load_history
 from data_context_263 import build_data_context
+from identity_provenance_263 import audit_registry_linkage, load_registry, IdentityProvenanceError
 from quality_gate_263 import (
     HISTORICAL_SHA256, QualityGateError, build_quality_report,
     locked_evidence, render_markdown,
@@ -89,7 +90,8 @@ def _check_records(rows: list[dict], c: dict) -> None:
 
 
 def build_offline_bundle(rows: list[dict], source: dict, evidence: dict,
-                         cases: list[dict], require_locked_source: bool = True) -> dict:
+                         cases: list[dict], require_locked_source: bool = True,
+                         identity_audit: dict | None = None) -> dict:
     """Build entire pipeline in-memory: no third-party supplied probabilities accepted.
 
     Set require_locked_source=False only in synthetic *unit tests*.
@@ -101,6 +103,18 @@ def build_offline_bundle(rows: list[dict], source: dict, evidence: dict,
         raise IntegratedReportError('History count/provenance mismatch')
     if evidence.get('coverage', {}).get('target_matches') != 880:
         raise IntegratedReportError('Acceptance provenance failed')
+    # Offline identity evidence is optional for legacy synthetic tests, but when
+    # supplied it MUST be complete and bound to the exact same history digest.
+    # No caller-controlled Boolean can be used to elevate model reliability.
+    if identity_audit is not None and (
+        not isinstance(identity_audit, dict) or
+        identity_audit.get('status') != 'OFFLINE_REGISTRY_LINKAGE_VALIDATED' or
+        identity_audit.get('history_sha256') != source.get('sha256') or
+        identity_audit.get('historical_rows_linked') != len(rows) or
+        identity_audit.get('independently_verified_official_fixture') is not False or
+        identity_audit.get('independently_verified_squad_or_lineups') is not False
+    ):
+        raise IntegratedReportError('Historical identity attestation did not match locked data')
     results = []
     for c in cases:
         _check_records(rows, c)
@@ -109,6 +123,12 @@ def build_offline_bundle(rows: list[dict], source: dict, evidence: dict,
                                   home=c['home_id'], away=c['away_id'])
         quality = build_quality_report(analysis, rows, source, evidence)
         data_context = build_data_context(rows, source, c)
+        data_context['registry_linkage'] = {
+            'status': 'NOT_CHECKED' if identity_audit is None else identity_audit['status'],
+            'registry_sha256': None if identity_audit is None else identity_audit['registry_sha256'],
+            'historical_rows_linked': None if identity_audit is None else identity_audit['historical_rows_linked'],
+            'does_not_verify_live_fixture_or_lineup': True,
+        }
         if quality['recommendations'] or quality['best_pick'] is not None or quality['high_probability_alert'] is not None:
             raise IntegratedReportError('Unsafe recommendations appeared in offline result')
         all_markets = quality['markets'] + quality['experimental_audit']
@@ -122,6 +142,10 @@ def build_offline_bundle(rows: list[dict], source: dict, evidence: dict,
             'model_promotions': [], 'recommendations': [],
             'data_provenance': source,
             'acceptance_sha256': evidence.get('source', {}).get('sha256'),
+            'historical_identity_linkage': {
+                'status': 'NOT_CHECKED' if identity_audit is None else identity_audit['status'],
+                'registry_sha256': None if identity_audit is None else identity_audit['registry_sha256'],
+            },
             'sections': [{'number': i, 'title': name, 'status': status, 'reason': reason}
                          for i, (name, status, reason) in enumerate(SECTIONS, 1)],
             'cases': results}
@@ -165,6 +189,10 @@ def render_bundle_markdown(bundle: dict) -> str:
             val = '—' if row['probability'] is None else f"{100*row['probability']:.1f}%"
             lines.append(f"- {_safe(row['market'])}: {val} — {_safe(row['status'])}; önerilebilir: HAYIR")
         lines.extend(['', '#### Kaynak, örneklem ve güncellik dürüstlüğü', ''])
+        id_status = context['registry_linkage']
+        lines.append('Tarihsel takım/fikstür kimliği: **' + _safe(id_status['status']) + '**; GitHub Actions kayıt dosyası gerçek zamanlı resmî kaynak doğrulaması değildir.')
+        if id_status['registry_sha256']:
+            lines.append('Sabit kimlik kayıt özeti SHA-256: `' + _safe(id_status['registry_sha256']) + '`.')
         counts = context['eligible_league_games']
         lines.append(f"Lig veri kapsamı (kesim öncesi): güncel sezon **{counts['current_season']}**, önceki sezon **{counts['previous_season']}** maç.")
         for team in ('home', 'away'):
@@ -194,6 +222,8 @@ def main():
     p = argparse.ArgumentParser(description='Only offline hypothetical match audit; no live predictions')
     p.add_argument('--history', required=True)
     p.add_argument('--evidence', required=True)
+    p.add_argument('--registry', help='Historical registry JSON extracted from the SAME frozen source artifact')
+    p.add_argument('--registry-sha256', help='Expected registry SHA-256; mandatory with --registry')
     p.add_argument('--cases', required=True, help='JSON list of abstract explicit cases, max 20')
     p.add_argument('--out-json', required=True)
     p.add_argument('--out-markdown', required=True)
@@ -201,7 +231,13 @@ def main():
     rows, source = load_history(a.history)
     evidence = locked_evidence(a.evidence)
     cases = json.loads(Path(a.cases).read_text(encoding='utf-8'))
-    bundle = build_offline_bundle(rows, source, evidence, cases)
+    if bool(a.registry) != bool(a.registry_sha256):
+        raise IntegratedReportError('--registry and --registry-sha256 must be provided together')
+    identity_audit = None
+    if a.registry:
+        registry, sha = load_registry(a.registry, expected_sha256=a.registry_sha256)
+        identity_audit = audit_registry_linkage(rows, source, registry, sha)
+    bundle = build_offline_bundle(rows, source, evidence, cases, identity_audit=identity_audit)
     # Defensive: no overwrite by default for audit artifacts, no append-only forecast ledger created.
     for target in (a.out_json, a.out_markdown):
         if Path(target).exists():

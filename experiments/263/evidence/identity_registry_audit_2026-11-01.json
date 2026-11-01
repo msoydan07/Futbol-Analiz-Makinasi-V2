@@ -1,0 +1,16 @@
+{
+  "version": "263_identity_provenance_v1_offline",
+  "status": "OFFLINE_REGISTRY_LINKAGE_VALIDATED",
+  "scope": "HISTORICAL_IDS_ONLY_NO_LIVE_VERIFICATION",
+  "history_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "registry_sha256": "c7d31ea3a039e926e72c4a87806d7675384d6a2deeadc86f8ab7ded35e9fda98",
+  "historical_rows_linked": 4413,
+  "canonical_team_count": 215,
+  "canonical_fixture_count": 4413,
+  "alias_count": 370,
+  "claimed_official_name_flags_not_rechecked": 215,
+  "independently_verified_official_fixture": false,
+  "independently_verified_squad_or_lineups": false,
+  "source_is_original_github_actions_artifact_not_live": true,
+  "mathematical_parameters_changed": false
+}
