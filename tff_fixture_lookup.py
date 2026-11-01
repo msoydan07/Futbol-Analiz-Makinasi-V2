@@ -31,9 +31,9 @@ def lookup(home,away,now=None,lines=None):
  try:lines=lines if lines is not None else read_lines()
  except Exception as e:return {"status":"NOT_VERIFIED","reason":"official_source_unavailable","detail":str(e)[:120]}
  # Only the official Super Lig section, not any other league or archived season.
- start=next((i for i,x in enumerate(lines) if "TRENDYOLSUPERLIG" in normalize(x) and re.search(r"\\b\\d{1,2}\\s*\\.?\\s*HAFTA\\b",x.upper())), -1)
+ start=next((i for i,x in enumerate(lines) if "TRENDYOLSUPERLIG" in normalize(x) and re.search(r"\b\d{1,2}\s*\.?\s*HAFTA\b",x.upper())), -1)
  if start<0:return {"status":"NOT_VERIFIED","reason":"super_lig_section_missing","source_url":URL,"sample":lines[:8]}
- end=next((i for i in range(start+1,len(lines)) if "TRENDYOL1LIG" in normalize(lines[i]) and re.search(r"\\b\\d{1,2}\\s*\\.?\\s*HAFTA\\b",lines[i].upper())),len(lines))
+ end=next((i for i in range(start+1,len(lines)) if "TRENDYOL1LIG" in normalize(lines[i]) and re.search(r"\b\d{1,2}\s*\.?\s*HAFTA\b",lines[i].upper())),len(lines))
  lines=lines[start:end]
  date_re=re.compile(r"\b(\d{1,2}\.\d{1,2}\.20\d\d)\b")
  time_re=re.compile(r"\b([01]?\d|2[0-3]):([0-5]\d)\b")
