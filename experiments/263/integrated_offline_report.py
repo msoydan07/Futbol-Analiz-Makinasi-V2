@@ -14,6 +14,7 @@ from datetime import date
 from pathlib import Path
 
 from analysis_math_core import build_analysis, load_history
+from data_context_263 import build_data_context
 from quality_gate_263 import (
     HISTORICAL_SHA256, QualityGateError, build_quality_report,
     locked_evidence, render_markdown,
@@ -107,13 +108,14 @@ def build_offline_bundle(rows: list[dict], source: dict, evidence: dict,
                                   previous_season=c['previous_season'], target_date=c['target_date'],
                                   home=c['home_id'], away=c['away_id'])
         quality = build_quality_report(analysis, rows, source, evidence)
+        data_context = build_data_context(rows, source, c)
         if quality['recommendations'] or quality['best_pick'] is not None or quality['high_probability_alert'] is not None:
             raise IntegratedReportError('Unsafe recommendations appeared in offline result')
         all_markets = quality['markets'] + quality['experimental_audit']
         if any(m.get('can_recommend') is not False or m.get('calibrated') is not False
                for m in all_markets):
             raise IntegratedReportError('Unapproved market was marked approved')
-        results.append({'identity': c, 'analysis': analysis, 'quality': quality})
+        results.append({'identity': c, 'analysis': analysis, 'quality': quality, 'data_context': data_context})
     return {'version': VERSION, 'scope': 'HYPOTHETICAL_OFFLINE_AUDIT',
             'not_live_match_analysis': True, 'production_changed': False,
             'real_fixture_verified': False, 'odds_EV': None,
@@ -143,6 +145,7 @@ def render_bundle_markdown(bundle: dict) -> str:
     for i, case in enumerate(bundle['cases'], 1):
         identity = case['identity']
         quality = case['quality']
+        context = case['data_context']
         lines.append(f"### {i}. {_safe(identity['league'])}: {_safe(identity['home_id'])} – {_safe(identity['away_id'])}")
         lines.append(f"Veri kesimi (gün hariç): **{_safe(identity['target_date'])}**. Kaynak SHA-256: `{_safe(quality['provenance']['sha256'])}`.")
         lines.append('')
@@ -161,6 +164,23 @@ def render_bundle_markdown(bundle: dict) -> str:
         for row in quality['experimental_audit'][:6]:
             val = '—' if row['probability'] is None else f"{100*row['probability']:.1f}%"
             lines.append(f"- {_safe(row['market'])}: {val} — {_safe(row['status'])}; önerilebilir: HAYIR")
+        lines.extend(['', '#### Kaynak, örneklem ve güncellik dürüstlüğü', ''])
+        counts = context['eligible_league_games']
+        lines.append(f"Lig veri kapsamı (kesim öncesi): güncel sezon **{counts['current_season']}**, önceki sezon **{counts['previous_season']}** maç.")
+        for team in ('home', 'away'):
+            t = context['team_context'][team]
+            context_n = t['current_home'] if team == 'home' else t['current_away']
+            lines.append(f"- {('Ev' if team == 'home' else 'Deplasman')} takımının ilgili saha örneklemi: **{context_n}** maç.")
+        dates = context['last_historical_result_dates']
+        lines.append(f"Son gözlenen lig maç tarihi: **{_safe(dates['last_league_result'] or 'YOK')}**. Bu tarih, aradaki bütün maçların kaydedildiğinin kanıtı değildir.")
+        providers = context['provenance']['historical_source_references']
+        lines.append(f"CSV kaynak referansları: {_safe(', '.join(sorted(providers)) if providers else 'YOK')}; URL'ler bağımsız erişim/doğrulama kanıtı değildir.")
+        cov = context['current_season_market_coverage']
+        for field, label in [('final_goals','Gol'),('first_half','İlk yarı'),('full_time_corners','Korner'),('shots','Şut'),('xg','CSV içi xG')]:
+            lines.append(f"- {label}: **{cov[field]['usable']}/{cov[field]['total']}** kullanılabilir maç.")
+        lines.append('Resmî fikstür, ilk 11, sakatlık/ceza ve taktik kaynakları: **HENÜZ KONTROL EDİLMEDİ**. İnternet üzerinden doğrulama yapılmadı.')
+        if context['review_flags']:
+            lines.append('Kontrol bekleyen alanlar: ' + _safe(', '.join(context['review_flags'])))
         lines.extend(['', '#### Dış bilgi ve ertelenen alanlar',
                       'Resmî fikstür/ilk 11, güncel taktik/kadro, xG, Elo, oran/EV ve sonuç takibi doğrulanmadı.',
                       'Hesaplanan oranlar model çıktısıdır, kalibrasyon veya bahis tavsiyesi değildir.', ''])

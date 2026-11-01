@@ -83,6 +83,20 @@ class Combined263Suite(unittest.TestCase):
         with self.assertRaises(IntegratedReportError):
             _check_cases([{**self.case,'fixture_verified':True}])
 
+    def test_historical_context_is_attached_without_raising_confidence(self):
+        b=self.bundle
+        d=b['cases'][0]['data_context']
+        self.assertEqual(d['official_match_fixture']['status'],'NOT_CHECKED')
+        self.assertFalse(d['recommendation_eligible'])
+        self.assertIn('current_season_market_coverage',d)
+        self.assertFalse(b['cases'][0]['quality']['recommendations'])
+
+    def test_historical_context_is_in_markdown_and_not_a_live_assertion(self):
+        md=render_bundle_markdown(self.bundle)
+        self.assertIn('Kaynak, örneklem ve güncellik',md)
+        self.assertIn('HENÜZ KONTROL EDİLMEDİ',md)
+        self.assertIn('URL',md)
+
     def test_many_case_mode(self):
         second={**self.case,'home_id':'T2','away_id':'T3'}
         b=build_offline_bundle(self.rows,self.source,self.evidence,[self.case,second],require_locked_source=False)
