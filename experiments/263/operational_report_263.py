@@ -274,6 +274,12 @@ def main(argv=None):
     path.mkdir(parents=True,exist_ok=True)
     (path/'operational_report.json').write_text(json.dumps(bundle,ensure_ascii=False,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     (path/'operational_report.md').write_text(render_operational_markdown(bundle)+'\n',encoding='utf-8')
+    # One read-only 17-section acceptance gate, from the very same report.
+    # This is NOT a second historical backtest or a live fixture verification.
+    from section_acceptance_263 import audit as audit_sections, render as render_section_audit
+    acceptance=audit_sections(bundle)
+    (path/'section_acceptance_263.json').write_text(json.dumps(acceptance,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    (path/'section_acceptance_263.md').write_text(render_section_audit(acceptance),encoding='utf-8')
     print(json.dumps({'status':'OFFLINE_MATH_COMPLETED','cases':len(bundle['cases']),
                       'not_live_forecast':True,'recommendations':0,'output':str(path)},ensure_ascii=False))
 
