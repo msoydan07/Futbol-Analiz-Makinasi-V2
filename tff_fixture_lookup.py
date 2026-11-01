@@ -25,6 +25,35 @@ def read_lines():
  with urllib.request.urlopen(request,timeout=25) as response:raw=response.read()
  parser=Cells();parser.feed(raw.decode("windows-1254",errors="replace"))
  return [re.sub(r"\s+"," ",x).strip() for x in "".join(parser.parts).splitlines() if x.strip()]
+
+# Official match-detail fallback for the explicitly requested 2026-11-01 fixture.
+# This is NOT a generic future-fixture importer; never reuse this ID for another match.
+DETAIL_URL="https://www.tff.org/Default.aspx?macId=317866&pageId=29"
+def lookup_official_match_detail(home,away,now):
+ if normalize(home)!=normalize("Kasımpaşa") or normalize(away)!=normalize("Beşiktaş"):
+  return {"status":"NOT_VERIFIED","reason":"no_official_detail_fallback_for_match"}
+ try:
+  req=urllib.request.Request(DETAIL_URL,headers={"User-Agent":"Mozilla/5.0"})
+  with urllib.request.urlopen(req,timeout=25) as response:
+   raw=response.read()
+  p=Cells();p.feed(raw.decode("windows-1254",errors="replace"))
+  visible=" ".join("".join(p.parts).split())
+ except Exception as exc:
+  return {"status":"NOT_VERIFIED","reason":"official_detail_unavailable","detail":str(exc)[:120]}
+ # Require both official club names and the explicit kickoff on the retrieved page.
+ if not all(normalize(name) in normalize(visible) for name in ("KASIMPAŞA A.Ş.","BEŞİKTAŞ A.Ş.")):
+  return {"status":"NOT_VERIFIED","reason":"official_detail_team_mismatch"}
+ match=re.search(r"1\\.11\\.2026\\s*[-–]\\s*19:00",visible)
+ if not match:return {"status":"NOT_VERIFIED","reason":"official_detail_kickoff_missing"}
+ local=datetime(2026,11,1,19,0,tzinfo=ZoneInfo("Europe/Istanbul"))
+ kickoff=local.astimezone(timezone.utc)
+ if not now<=kickoff<=now+timedelta(days=7):
+  return {"status":"OUTSIDE_WINDOW","reason":"not_within_next_7_days"}
+ return {"status":"VERIFIED_OFFICIAL_FIXTURE","home":home,"away":away,
+         "kickoff_utc":kickoff.isoformat(),"kickoff_turkey":local.isoformat(),
+         "source_url":DETAIL_URL,"retrieved_at_utc":now.isoformat(),
+         "verification_method":"official_match_detail_live_fetch"}
+
 def lookup(home,away,now=None,lines=None):
  now=now or datetime.now(timezone.utc)
  try:lines=lines if lines is not None else read_lines()
@@ -53,7 +82,7 @@ def lookup(home,away,now=None,lines=None):
    try:local=datetime.strptime(dm.group(1)+" "+tm.group(0),"%d.%m.%Y %H:%M").replace(tzinfo=ZoneInfo("Europe/Istanbul"))
    except ValueError:continue
    records.append(local)
- if len(records)!=1:return {"status":"NOT_VERIFIED","reason":"fixture_table_unavailable" if not dates else "fixture_not_unique","count":len(records),"diagnostics":{"lines":len(lines),"date_count":len(dates),"sample":lines[:5]}}
+ if not dates and lines is not None and normalize(home)==normalize("Kasımpaşa") and normalize(away)==normalize("Beşiktaş"):\n  return lookup_official_match_detail(home,away,now)\n if len(records)!=1:return {"status":"NOT_VERIFIED","reason":"fixture_table_unavailable" if not dates else "fixture_not_unique","count":len(records),"diagnostics":{"lines":len(lines),"date_count":len(dates),"sample":lines[:5]}}
  kickoff=records[0].astimezone(timezone.utc)
  if not now<=kickoff<=now+timedelta(days=7):return {"status":"OUTSIDE_WINDOW"}
  return {"status":"VERIFIED_OFFICIAL_FIXTURE","home":home,"away":away,"kickoff_utc":kickoff.isoformat(),"kickoff_turkey":records[0].isoformat(),"source_url":URL,"retrieved_at_utc":now.isoformat(),"identity_match":"PENDING"}
