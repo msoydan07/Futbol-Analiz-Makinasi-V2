@@ -9,7 +9,7 @@ from operational_report_263 import named_cases
 HERE=Path(__file__).resolve().parent
 NOW=datetime(2026,11,2,15,0,tzinfo=timezone.utc)
 INDEX=HERE/'evidence'/'identity_index_263.json'
-ALIASES=HERE/'mackolik_reviewed_aliases.csv'
+ALIASES=HERE.parents[1]/'data'/'team_aliases_reviewed.csv'
 HISTORY=Path(os.environ.get('M263_FROZEN_HISTORY',str(HERE/'frozen_historical_results.csv')))
 EVIDENCE=HERE/'evidence'/'acceptance_263.json'
 IDENTITY=named_cases(INDEX,ALIASES,[{'league':'TUR1','home':'Galatasaray','away':'Konyaspor','target_date':'2026-11-03'}])[0]

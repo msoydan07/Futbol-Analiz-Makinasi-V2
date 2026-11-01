@@ -1,0 +1,62 @@
+name: 263 tek mac baglantisi - sabit arsiv CI
+
+on:
+  push:
+    branches:
+      - experiment/263-toplu-karsilastirma
+    paths:
+      - .github/workflows/263-single-path-acceptance.yml
+      - experiments/263/requested_match_runner_263.py
+      - experiments/263/test_requested_match_runner_263.py
+      - experiments/263/on_demand_context_263.py
+      - experiments/263/operational_report_263.py
+      - experiments/263/section_acceptance_263.py
+      - experiments/263/updated_preview_263.py
+      - data/team_aliases_reviewed.csv
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  requested-single-match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out exact experimental branch commit
+        uses: actions/checkout@v4
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install mathematical dependencies
+        run: python -m pip install numpy scipy
+      - name: Download already-accepted historical artifact (no source re-collection)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/263-frozen"
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" \
+            --name team-source-audit --dir "$RUNNER_TEMP/263-frozen"
+          test -s "$RUNNER_TEMP/263-frozen/historical_results.csv"
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  '"$RUNNER_TEMP/263-frozen/historical_results.csv" | sha256sum --check
+      - name: One focused 11-test integration acceptance (zero skips)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          export M263_FROZEN_HISTORY="$RUNNER_TEMP/263-frozen/historical_results.csv"
+          python -m unittest -v test_requested_match_runner_263 2>&1 | tee "$RUNNER_TEMP/263-single-path-test.log"
+          grep -Eq '^Ran 11 tests in ' "$RUNNER_TEMP/263-single-path-test.log"
+          grep -Eq '^OK$' "$RUNNER_TEMP/263-single-path-test.log"
+          if grep -Eq 'skipped=[1-9]|FAILED|ERROR' "$RUNNER_TEMP/263-single-path-test.log"; then
+            echo 'Unexpected skipped/failed test'; exit 1
+          fi
+      - name: Attach only the focused test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-single-path-test-log
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/263-single-path-test.log
