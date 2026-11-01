@@ -9,6 +9,7 @@ import json
 import math
 from pathlib import Path
 from quality_gate_263 import HISTORICAL_SHA256
+from decision_preflight_263 import SIDE, GENERAL, WATCH_MARKETS, VERSION as PREFLIGHT_VERSION
 
 VERSION = '263_section_contract_gate_v1'
 HEADINGS = (
@@ -114,13 +115,45 @@ def audit(bundle):
                      for r in ranking['rows']),'invalid displayed probability')
         _require(not any('FIRST_HALF_CORNERS' in str(k).upper() for k in analysis['other_markets']),
                  'removed first-half corner market reappeared')
+        # Contract 12-14: descriptive math and WATCH are never A/B/C, GEÇTİ, EV or a real pick.
+        dp=e.get('decision_preflight_263')
+        _require(isinstance(dp,dict) and dp.get('version')==PREFLIGHT_VERSION, 'decision preflight missing')
+        _require(dp.get('league')==c['league'] and dp.get('cutoff_exclusive')==c['target_date'],
+                 'decision preflight wrong match/cutoff')
+        _require(dp.get('canonical_model')==('C2' if c2 else None), 'preflight fake primary')
+        _require(dp.get('recommendation_eligible') is False and dp.get('pilot_record_eligible') is False
+                 and dp.get('independent_forward_validation') is False, 'preflight falsely approved')
+        _require(dp.get('A_B_C_official_candidates')==[] and dp.get('passed_filter')==[]
+                 and dp.get('value_selections')==[] and dp.get('odds_or_EV') is None,
+                 'preflight fabricated picks or value')
+        candidates=dp.get('high_probability_filter')
+        _require(isinstance(candidates,list), 'preflight candidates missing')
+        if c2:
+            _require([r['market'] for r in candidates]==list(WATCH_MARKETS), 'preflight wrong markets')
+            ps=c2['goals']['markets']
+            for row in candidates:
+                market=row['market'];prob=row['p_model']
+                _require(abs(prob-ps[market])<1e-8, 'preflight probability mismatch')
+                _require(row.get('filter_state')==('IZLEME' if prob>=.75 else 'ELENDI_ESIK_ALTI')
+                         and row.get('recommended') is False and row.get('A_B_C')=='DEGERLENDIRILEMEDI',
+                         'preflight gate manipulated')
+                baseline=row.get('base_rate',{})
+                _require(baseline.get('prediction_model_input') is False and baseline.get('changes_filter') is False,
+                         'base rate improperly changed filter')
+            _require(dp.get('main_side_descriptive',{}).get('market')==max(SIDE,key=lambda k:ps[k])
+                     and dp.get('main_general_descriptive',{}).get('market')==max(GENERAL,key=lambda k:ps[k]),
+                     'preflight descriptive main selection mismatch')
+        else:
+            _require(candidates==[] and dp.get('main_side_descriptive') is None
+                     and dp.get('main_general_descriptive') is None, 'preflight fallback from Model B')
         case_results.append({'case':i,'league':c['league'],'cutoff_exclusive':c['target_date'],
                              'canonical_c2':'CALCULATED_NOT_VALIDATED' if c2 else 'INSUFFICIENT_CONTEXT',
                              'model_b':'COMPARISON_ONLY' if b.get('probabilities') else 'INSUFFICIENT_CONTEXT',
                              'xg':xg['status'],
                              'first_half':analysis['other_markets']['first_half']['status'],
                              'corners':analysis['other_markets']['full_time_corners']['status'],
-                             'real_fixture_verified':False,'bet_approved':False})
+                             'real_fixture_verified':False,'bet_approved':False,
+                             'watch_candidates':sum(r['filter_state']=='IZLEME' for r in candidates)})
     n_c2=sum(c['canonical_c2']=='CALCULATED_NOT_VALIDATED' for c in case_results)
     has_half=sum(c['first_half']=='EXPERIMENTAL_NOT_VALIDATED' for c in case_results)
     has_corners=sum(c['corners']=='EXPERIMENTAL_NOT_VALIDATED' for c in case_results)
@@ -136,7 +169,7 @@ def audit(bundle):
       9:('KISMI','C2 olan örneklerde gol/KG aynı olasılık dağılımından türetildi'),
       10:('KISMI',f'İlk yarı {has_half}/{len(case_results)} örnekte deneysel; doğru skorlar açıklayıcı'),
       11:('KISMI',f'Maç sonu korner {has_corners}/{len(case_results)} örnekte deneysel; ilk yarı korner yok'),
-      12:('BEKLIYOR','Onaylı güven derecesi veya A/B/C seçimi yok'),
+      12:('KISMI','§12.1 izleme filtresi ve §12.4 lig taban çizgisi hesaplandı; canlı A/B/C seçimi hâlâ kapalı'),
       13:('SONRA','Oran ve EV kullanıcı kararıyla sonraki aşamada'),
       14:('KISMI','Veri ve kalibrasyon uyarıları var; bağımsız ileri dönem doğrulaması yok'),
       15:('KISMI','Tekli/çoklu offline Markdown/JSON var; canlı maç raporu değil'),

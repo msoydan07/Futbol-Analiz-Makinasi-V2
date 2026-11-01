@@ -1,10 +1,15 @@
 import copy, json, unittest
 from pathlib import Path
 from section_acceptance_263 import audit, SectionAcceptanceError
-BASE=Path(__file__).with_name('section_contract_sample_263.json')
+from decision_preflight_263 import evaluate_case
+BASE=Path(__file__).parent/'evidence'/'section_contract_sample_263.json'
 class SectionGateTests(unittest.TestCase):
  @classmethod
- def setUpClass(cls):cls.report=json.loads(BASE.read_text(encoding='utf-8'))
+ def setUpClass(cls):
+  cls.report=json.loads(BASE.read_text(encoding='utf-8'))
+  rows=[{'league':e['identity']['league'],'season':e['identity']['season'],
+         'match_date':'2026-10-01','home_goals':'2','away_goals':'1'} for e in cls.report['cases']]
+  for e in cls.report['cases']:e['decision_preflight_263']=evaluate_case(e,rows)
  def check_bad(self, mutate):
   x=copy.deepcopy(self.report);mutate(x)
   with self.assertRaises(SectionAcceptanceError):audit(x)

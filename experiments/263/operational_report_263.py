@@ -13,6 +13,7 @@ import math
 from pathlib import Path
 from datetime import date
 from verified_xg_context_263 import load_audited_xg, descriptive_xg_asof
+from decision_preflight_263 import evaluate_case as evaluate_decision_preflight, render_markdown as render_preflight
 
 from analysis_math_core import load_history, score_market, sensitivity
 from experimental_poisson_baseline import estimate as frozen_model_b
@@ -140,6 +141,7 @@ def build_operational_offline_bundle(rows:list[dict],source:dict,evidence:dict,
                     else {'status':'AUDITED_XG_FILE_NOT_PROVIDED','asof_exclusive':case['target_date'],
                           'used_as_lambda_multiplier':False,'used_to_select_primary_model':False})
         entry['descriptive_xg']=xg_context
+        entry['decision_preflight_263']=evaluate_decision_preflight(entry,rows)
         entry['external_factors']={'xg':xg_context['status'],
                                   'elo':'AUXILIARY_NOT_APPLIED','lineups':'NOT_CHECKED',
                                   'injuries_suspensions':'NOT_CHECKED',
@@ -241,6 +243,8 @@ def render_operational_markdown(bundle:dict) -> str:
             lines.append('**Doğrulanmış geçmiş xG (açıklayıcı, tahmin girdisi değil):** ev iç saha '+fmt(h)+'; deplasman dış saha '+fmt(a)+'. Aynı gün ve sonraki maçlar hariç; resmî kaynak yeniden canlı kontrol edilmedi.')
         lines.append('Elo, kadro, hava/tempo çarpanı uygulanmadı. İlk 11 henüz yoksa analize engel değildir. Oran/EV ve pilot yok.')
         lines.append('')
+    lines+=['---','','## §12–14 karar hazırlığı — GEÇTİ / A/B/C YOK','',
+            render_preflight([entry['decision_preflight_263'] for entry in bundle['cases']]),'']
     lines+=['---','','## Orijinal kalite ve 17 bölüm uygunluk denetimi','','Bu ek, önceki kanıt sınıflandırmasını değiştirmez.','',md]
     return '\n'.join(lines)
 
