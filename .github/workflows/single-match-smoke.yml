@@ -1,0 +1,13 @@
+name: Tek mac Model B smoke testi
+on:
+  workflow_dispatch:
+jobs:
+  single-match-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Tek mac adaptorunu dogrula
+        run: python test_single_match_model_b.py
