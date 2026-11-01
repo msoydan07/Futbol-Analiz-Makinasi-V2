@@ -40,6 +40,8 @@ jobs:
           python build_historical_results.py
           python audit_single_match_generated_identity.py
           python audit_team_name_coverage.py
+          python audit_model_b_calibration.py
+          python -m unittest -v test_model_b_reliability_note.py
       - name: Check official fixture and run Model B only when verified
         env:
           MATCH_LEAGUE: ${{ inputs.league || 'TUR1' }}
@@ -66,3 +68,4 @@ jobs:
             data/historical_results_audit.json
             data/team_name_coverage_audit.json
             data/team_name_coverage_audit.csv
+            data/model_b_calibration_audit.json
