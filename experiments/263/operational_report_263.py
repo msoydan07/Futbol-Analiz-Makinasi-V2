@@ -12,6 +12,7 @@ import json
 import math
 from pathlib import Path
 from datetime import date
+from verified_xg_context_263 import load_audited_xg, descriptive_xg_asof
 
 from analysis_math_core import load_history, score_market, sensitivity
 from experimental_poisson_baseline import estimate as frozen_model_b
@@ -111,11 +112,16 @@ def _ranking(c2:dict, model_b:dict) -> dict:
 
 def build_operational_offline_bundle(rows:list[dict],source:dict,evidence:dict,
                                       cases:list[dict],*,require_locked_source=True,
-                                      identity_audit:dict|None=None) -> dict:
+                                      identity_audit:dict|None=None,
+                                      xg_rows:list[dict]|None=None, xg_info:dict|None=None) -> dict:
     """Frozen 2.6.3 math/explanation/report path; never certify a real fixture."""
     if require_locked_source and source.get('sha256')!=HISTORICAL_SHA256:
         raise OperationalError('Historical snapshot changed; refuse to run')
     base=build_offline_bundle(rows,source,evidence,cases,require_locked_source=require_locked_source,identity_audit=identity_audit)
+    if (xg_rows is None)!=(xg_info is None):
+        raise OperationalError('xG data and audit info must be supplied together')
+    if xg_info is not None and xg_info.get('status')!='AUDIT_FILE_AND_HISTORY_IDENTITY_MATCHED_NOT_LIVE_REVERIFIED':
+        raise OperationalError('unverified xG evidence status')
     for entry in base['cases']:
         case=entry['identity'];c2=entry['analysis']['model_outputs'].get('C2')
         b=_reference_model_b(rows,case)
@@ -130,12 +136,18 @@ def build_operational_offline_bundle(rows:list[dict],source:dict,evidence:dict,
         }
         entry['descriptive_form']=_scenarios(rows,case)
         entry['probability_ranking']=_ranking(c2,b)
-        entry['external_factors']={'xg':'SEPARATE_JOIN_NOT_VERIFIED',
+        xg_context=(descriptive_xg_asof(xg_rows,case,xg_info) if xg_rows is not None
+                    else {'status':'AUDITED_XG_FILE_NOT_PROVIDED','asof_exclusive':case['target_date'],
+                          'used_as_lambda_multiplier':False,'used_to_select_primary_model':False})
+        entry['descriptive_xg']=xg_context
+        entry['external_factors']={'xg':xg_context['status'],
                                   'elo':'AUXILIARY_NOT_APPLIED','lineups':'NOT_CHECKED',
                                   'injuries_suspensions':'NOT_CHECKED',
                                   'tactics':'NOT_CHECKED',
                                   'weather':'NOT_CHECKED',
                                   'verified_external_lambda_adjustments':0}
+        if xg_context['used_as_lambda_multiplier'] or xg_context['used_to_select_primary_model']:
+            raise OperationalError('historical xG context cannot affect prediction engine')
         if b['probabilities'] and b['source_cutoff_exclusive']!=case['target_date']:
             raise OperationalError('Model B data cutoff mismatch')
         if entry['quality']['recommendations'] or entry['probability_ranking']['recommended']:
@@ -216,7 +228,18 @@ def render_operational_markdown(bundle:dict) -> str:
         ranking=entry['probability_ranking']
         if ranking['rows']:
             lines.append('En yüksek **hesaplanmış** olasılıklar ('+ranking['model']+', **öneri değil**): '+', '.join(f'{x["market"]} %{100*x["probability"]:.1f}' for x in ranking['rows'][:3])+'.')
-        lines.append('xG ayrı kaynaktan henüz güvenle eşleştirilmedi; Elo, kadro, hava/tempo çarpanı uygulanmadı. İlk 11 henüz yoksa analize engel değildir. Oran/EV ve pilot yok.')
+        xg=entry['descriptive_xg']
+        if xg['status']=='AUDITED_XG_FILE_NOT_PROVIDED':
+            lines.append('xG doğrulanmış geçmiş dosyası sağlanmadı; xG bilgisi rapora eklenmedi.')
+        elif xg['status']=='NO_PRIOR_AUDITED_XG_FOR_LEAGUE':
+            lines.append('xG dosyası kimlikle kontrol edildi ancak bu lig ve tarih için geçmiş xG gözlemi yok.')
+        else:
+            h,a=xg['home'],xg['away']
+            def fmt(part):
+                if part['venue_matches_with_xg']==0:return 'Örnek yok'
+                return f"{part['venue_matches_with_xg']} maç, xG atılan/yenen {part['mean_xg_for']:.2f}/{part['mean_xg_against']:.2f}"
+            lines.append('**Doğrulanmış geçmiş xG (açıklayıcı, tahmin girdisi değil):** ev iç saha '+fmt(h)+'; deplasman dış saha '+fmt(a)+'. Aynı gün ve sonraki maçlar hariç; resmî kaynak yeniden canlı kontrol edilmedi.')
+        lines.append('Elo, kadro, hava/tempo çarpanı uygulanmadı. İlk 11 henüz yoksa analize engel değildir. Oran/EV ve pilot yok.')
         lines.append('')
     lines+=['---','','## Orijinal kalite ve 17 bölüm uygunluk denetimi','','Bu ek, önceki kanıt sınıflandırmasını değiştirmez.','',md]
     return '\n'.join(lines)
@@ -230,12 +253,23 @@ def main(argv=None):
     parser.add_argument('--aliases',required=True)
     parser.add_argument('--named',required=True,help='JSON array of user-supplied named hypothetical cases')
     parser.add_argument('--out',required=True)
+    parser.add_argument('--verified-xg',help='Optional audited historical_verified_xg.csv; never changes lambdas')
+    parser.add_argument('--xg-audit',help='Required together with --verified-xg: historical_verified_xg_report.json')
     args=parser.parse_args(argv)
     rows,source=load_history(args.history)
     evidence=locked_evidence(args.evidence)
     req=json.loads(Path(args.named).read_text(encoding='utf-8'))
     cases=named_cases(args.index,args.aliases,req)
-    bundle=build_operational_offline_bundle(rows,source,evidence,cases)
+    if bool(args.verified_xg)!=bool(args.xg_audit):
+        parser.error('--verified-xg and --xg-audit must be supplied together')
+    xg_rows=xg_info=None
+    if args.verified_xg:
+        audit=json.loads(Path(args.xg_audit).read_text(encoding='utf-8'))
+        xg_rows,xg_info=load_audited_xg(args.verified_xg,audit,rows)
+    bundle=build_operational_offline_bundle(rows,source,evidence,cases,xg_rows=xg_rows,xg_info=xg_info)
+    bundle['xg_dataset_audit']=xg_info if xg_info else {'status':'AUDITED_XG_FILE_NOT_PROVIDED'}
+    bundle['weekly_update_policy']={'day':'TUESDAY','timezone':'Europe/Istanbul',
+         'automation_verified':False,'historical_base_immutable':True}
     path=Path(args.out)
     path.mkdir(parents=True,exist_ok=True)
     (path/'operational_report.json').write_text(json.dumps(bundle,ensure_ascii=False,indent=2,allow_nan=False)+'\n',encoding='utf-8')
