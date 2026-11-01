@@ -1,0 +1,96 @@
+name: C3 named-match forward record (EXPERIMENT ONLY)
+on:
+  push:
+    branches: ['experiment/263-toplu-karsilastirma']
+    paths:
+      - 'experiments/263/requests/*.json'
+permissions:
+  contents: write
+concurrency:
+  group: c3-263-forward-append-only
+  cancel-in-progress: false
+jobs:
+  new-request-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout request branch (all history; NEVER force push)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Determine exclusively NEW requests
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff-tree --no-commit-id --name-status -r HEAD -- experiments/263/requests/ > /tmp/c3_delta.tsv
+          if grep -Eq -v '^A[[:space:]]+experiments/263/requests/[a-zA-Z0-9_-]+\.json$' /tmp/c3_delta.tsv; then
+            echo 'Modified/deleted/malformed requests are forbidden'; exit 1
+          fi
+          cut -f 2 /tmp/c3_delta.tsv > /tmp/c3_new_requests.txt
+          test -s /tmp/c3_new_requests.txt || { echo 'No new valid request'; exit 1; }
+          test "$(wc -l < /tmp/c3_new_requests.txt)" -le 12 || { echo 'Too many requests'; exit 1; }
+      - name: Install fixed numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Rebuild one verified two-season ten-league snapshot
+        run: |
+          python collect_team_candidates.py
+          python prepare_team_identity_review.py
+          python audit_season_membership.py
+          python import_provisional_teams.py
+          python prepare_official_name_review.py
+          python apply_official_team_names.py
+          python verify_official_mappings.py
+          python audit_identity_integrity.py
+          python audit_fixture_candidates.py
+          python import_real_fixtures.py
+          python audit_result_quality.py
+          python build_historical_results.py
+      - name: Make prospective forecasts using LIVE official named-match verification
+        id: forecast
+        continue-on-error: true
+        env:
+          C3_BATCH_COMMIT: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/run_requested_batch.py \
+            --manifest /tmp/c3_new_requests.txt \
+            --history data/historical_results.csv \
+            --records forward_263 \
+            --report "experiments/263/batch_reports/${C3_BATCH_COMMIT}.json"
+      - name: Commit ONLY new predictions and one batch report (no forced updates)
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for folder in forward_263 experiments/263/batch_reports; do
+            if [ -d "$folder" ]; then git add -A -- "$folder"; fi
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m 'Store sealed prospective C3 match records and batch evidence'
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - name: Preserve evidence even when fixture/data gate blocks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: c3-forward-request-evidence
+          if-no-files-found: warn
+          path: |
+            experiments/263/batch_reports/*.json
+            forward_263/*/*.json
+            data/historical_results_audit.json
+      - name: Final status (do not disguise blocked forecasts as success)
+        if: always()
+        env:
+          FORECAST_RESULT: ${{ steps.forecast.outcome }}
+        shell: bash
+        run: |
+          if [ "${FORECAST_RESULT}" != 'success' ]; then
+            echo 'No successful complete forward prediction batch'; exit 1
+          fi
