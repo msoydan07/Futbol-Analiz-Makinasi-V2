@@ -103,13 +103,30 @@ def run(args):
                 observed_override_urls.add(url)
                 if len(matches) == 1 and (h,a) == (int(matches[0]["home_goals"]),int(matches[0]["away_goals"])):
                     v = override_by_url[url]
-                    if (v["league"],v["season"],v["home_team"],v["away_team"],int(v["home_goals"]),int(v["away_goals"])) == (league,season,r["home_team"],r["away_team"],h,a) and v["fixture_id"] == matches[0]["fixture_id"]:
+                    if (v["league"],v["season"],v["home_team"],v["away_team"],int(v["home_goals"]),int(v["away_goals"])) == (league,season,r["home_team"],r["away_team"],h,a):
                         already_exact_overrides.add(url)
             if not matches and url in override_by_url:
                 v = override_by_url[url]
                 target = historical_by_id.get(v["fixture_id"])
                 if target is None:
                     raise ValueError("Reviewed override fixture not found")
+                # A previously reviewed fixture ID may be stale after registry regeneration.
+                # Never trust it blindly: recover only a unique fixture with the reviewed
+                # league, season, verified date, reviewed teams and exact final score.
+                target_name_probe = names.get((target["league"],target["season"],target["source_row"]))
+                expected_names = (norm(home),norm(away))
+                actual_names = (norm(target_name_probe["home"]),norm(target_name_probe["away"])) if target_name_probe else None
+                if actual_names != expected_names:
+                    possible = []
+                    for candidate in base:
+                        if candidate["league"] != league or candidate["season"] != season or day(candidate["match_date"]) != v["verified_date"]:
+                            continue
+                        candidate_names = names.get((candidate["league"],candidate["season"],candidate["source_row"]))
+                        if candidate_names and (norm(candidate_names["home"]),norm(candidate_names["away"])) == expected_names and (int(candidate["home_goals"]),int(candidate["away_goals"])) == (h,a):
+                            possible.append(candidate)
+                    if len(possible) != 1:
+                        raise ValueError("Reviewed fixture identity stale; exact date/team/score candidate count=" + str(len(possible)))
+                    target = possible[0]
                 target_name = names.get((target["league"],target["season"],target["source_row"]))
                 if not target_name:
                     raise ValueError("Reviewed override candidate name missing")
