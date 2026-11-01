@@ -39,6 +39,8 @@ jobs:
         run: python experimental_paired_xg_poisson.py
       - name: Model B kalibrasyonunu denetle
         run: python audit_model_b_calibration.py
+      - name: Model B ileri sezon kalibrasyon testi
+        run: python validate_model_b_forward_calibration.py
       - name: Tek kanit paketini sakla
         if: always()
         uses: actions/upload-artifact@v4
@@ -52,3 +54,4 @@ jobs:
             data/historical_verified_xg_report.json
             data/paired_xg_poisson_report.json
             data/model_b_calibration_audit.json
+            data/model_b_forward_calibration.json
