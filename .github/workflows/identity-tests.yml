@@ -18,3 +18,5 @@ jobs:
         run: python test_single_match_model_b.py
       - name: Entegrasyon smoke testi
         run: python test_analyze_verified_match.py
+      - name: TFF fikstur okuyucu testi
+        run: python -m unittest -v test_tff_fixture_lookup.py
