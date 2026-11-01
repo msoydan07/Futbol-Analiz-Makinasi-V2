@@ -1,5 +1,8 @@
 name: Gercek tek mac uctan uca deneme
 on:
+  push:
+    branches: [feature/01-kimlikler]
+    paths: ['.github/workflows/real-single-match.yml']
   workflow_dispatch:
     inputs:
       league:
@@ -38,9 +41,9 @@ jobs:
           python audit_single_match_generated_identity.py
       - name: Check official fixture and run Model B only when verified
         env:
-          MATCH_LEAGUE: ${{ inputs.league }}
-          MATCH_HOME: ${{ inputs.home }}
-          MATCH_AWAY: ${{ inputs.away }}
+          MATCH_LEAGUE: ${{ inputs.league || 'TUR1' }}
+          MATCH_HOME: ${{ inputs.home || 'Kasımpaşa' }}
+          MATCH_AWAY: ${{ inputs.away || 'Beşiktaş' }}
         run: |
           python - <<'PY'
           import json,os
