@@ -1,0 +1,3118 @@
+{
+  "version": "2.6.3_acceptance_v1_experimental",
+  "status": "RETROSPECTIVE_REUSED_2026_27_NOT_UNTOUCHED",
+  "production_changes": false,
+  "pilot_started": false,
+  "live_match_log": false,
+  "source": {
+    "filename": "historical_results.csv",
+    "sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+    "rows": 4413,
+    "leagues": 10,
+    "market_quarantine": {}
+  },
+  "old_1x2_predictions": {
+    "sha256": "e41f9fc3dd80d00714e015304ba3beb1e69f309abea5bc71ce8c71f462efdbbf",
+    "status": "REUSED_NOT_REFITTED",
+    "selected_models": [
+      "C0",
+      "C1",
+      "C3"
+    ]
+  },
+  "locked_protocol": {
+    "test_season": "2026-2027",
+    "prev_season": "2025-2026",
+    "history_cutoff": "match_date < target_match_date; whole day excluded",
+    "C2": "k=5 w=.5 min_context=4",
+    "C3": "frozen evidence only",
+    "ridge_half_and_corner": "previous source coefficients REG=6; no retuning",
+    "half_min_history": 40,
+    "half_min_context": 4,
+    "corner_min_history": 40,
+    "corner_min_context": 4,
+    "logloss_clip": [
+      0.001,
+      0.999
+    ],
+    "minimum_paired": 150,
+    "minimum_logloss_improvement": 0.005,
+    "day_block_replicates": 750,
+    "seed": 20261101
+  },
+  "coverage": {
+    "target_matches": 880,
+    "C2": 105
+  },
+  "blocked": {
+    "C2:CURRENT_SEASON_CONTEXT_LT_4": 775,
+    "HALF_INSUFFICIENT_CONTEXT": 231,
+    "CORN_INSUFFICIENT_CONTEXT": 231
+  },
+  "num_market_pairs": 16,
+  "comparisons": [
+    {
+      "market": "FT_1X2",
+      "candidate": "C2",
+      "reference": "C0",
+      "same_matches": 105,
+      "coverage_of_2026_27": 0.119318,
+      "reference_stats": {
+        "n": 105,
+        "logloss": 1.0738606086340872,
+        "brier": 0.6509396428784876
+      },
+      "candidate_stats": {
+        "n": 105,
+        "logloss": 1.0365089928435507,
+        "brier": 0.6232370140380643
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": 0.037351615790536474,
+        "brier": 0.027702628840423293
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 16,
+        "replicates": 750,
+        "logloss_95": [
+          -0.027725790137846193,
+          0.0941979229603442
+        ],
+        "brier_95": [
+          -0.018212675393774712,
+          0.06653395863706774
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 8,
+          "reference": {
+            "n": 8,
+            "logloss": 1.0060098832857522,
+            "brier": 0.5983558818914853
+          },
+          "candidate": {
+            "n": 8,
+            "logloss": 0.9526700224095672,
+            "brier": 0.5600336157267045
+          }
+        },
+        "ENG2": {
+          "n": 47,
+          "reference": {
+            "n": 47,
+            "logloss": 1.0860627518879715,
+            "brier": 0.6590865604721298
+          },
+          "candidate": {
+            "n": 47,
+            "logloss": 1.0909998672788368,
+            "brier": 0.6650936861759689
+          }
+        },
+        "ESP1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 1.0789839975085085,
+            "brier": 0.6534063671662868
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.9222653077120931,
+            "brier": 0.5452532523029238
+          }
+        },
+        "FRA1": {
+          "n": 1,
+          "reference": {
+            "n": 1,
+            "logloss": 0.7825922409118721,
+            "brier": 0.44349280791558227
+          },
+          "candidate": {
+            "n": 1,
+            "logloss": 0.5341213572622584,
+            "brier": 0.25803559811335797
+          }
+        },
+        "ITA1": {
+          "n": 5,
+          "reference": {
+            "n": 5,
+            "logloss": 0.9658598550436656,
+            "brier": 0.5831142154168828
+          },
+          "candidate": {
+            "n": 5,
+            "logloss": 0.7431392608800836,
+            "brier": 0.40823376953587165
+          }
+        },
+        "NED1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 1.119300700874366,
+            "brier": 0.6814121134647865
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 1.1943021905556517,
+            "brier": 0.7262823411727246
+          }
+        },
+        "POR1": {
+          "n": 9,
+          "reference": {
+            "n": 9,
+            "logloss": 1.0668213723223063,
+            "brier": 0.6522462723958784
+          },
+          "candidate": {
+            "n": 9,
+            "logloss": 0.9898959447012076,
+            "brier": 0.5913157267406935
+          }
+        },
+        "TUR1": {
+          "n": 3,
+          "reference": {
+            "n": 3,
+            "logloss": 1.0921654868004986,
+            "brier": 0.6661236927530422
+          },
+          "candidate": {
+            "n": 3,
+            "logloss": 0.9703763903111639,
+            "brier": 0.5781996052810802
+          }
+        }
+      },
+      "reliability": {
+        "status": "MULTICLASS_RELIABILITY_DEFERRED"
+      },
+      "decision": "INSUFFICIENT_COVERAGE"
+    },
+    {
+      "market": "FT_1X2",
+      "candidate": "C2",
+      "reference": "C1",
+      "same_matches": 79,
+      "coverage_of_2026_27": 0.089773,
+      "reference_stats": {
+        "n": 79,
+        "logloss": 1.0171322193884191,
+        "brier": 0.6083281637892938
+      },
+      "candidate_stats": {
+        "n": 79,
+        "logloss": 1.0188695012745554,
+        "brier": 0.6091765756329378
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.0017372818861363104,
+        "brier": -0.0008484118436440369
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 13,
+        "replicates": 750,
+        "logloss_95": [
+          -0.07266429978721735,
+          0.0324063217849044
+        ],
+        "brier_95": [
+          -0.0533541453774781,
+          0.02241963824351306
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 6,
+          "reference": {
+            "n": 6,
+            "logloss": 0.7827585283467015,
+            "brier": 0.4402305915030589
+          },
+          "candidate": {
+            "n": 6,
+            "logloss": 0.7309915956680776,
+            "brier": 0.4012987476754164
+          }
+        },
+        "ENG2": {
+          "n": 37,
+          "reference": {
+            "n": 37,
+            "logloss": 1.0729519573746842,
+            "brier": 0.6524268380451527
+          },
+          "candidate": {
+            "n": 37,
+            "logloss": 1.082708994011678,
+            "brier": 0.6603152076898137
+          }
+        },
+        "ESP1": {
+          "n": 10,
+          "reference": {
+            "n": 10,
+            "logloss": 0.9283914983155535,
+            "brier": 0.5385512737545334
+          },
+          "candidate": {
+            "n": 10,
+            "logloss": 0.9077247329870486,
+            "brier": 0.5263237825790785
+          }
+        },
+        "FRA1": {
+          "n": 1,
+          "reference": {
+            "n": 1,
+            "logloss": 0.6266686553797637,
+            "brier": 0.3266752142711228
+          },
+          "candidate": {
+            "n": 1,
+            "logloss": 0.5341213572622584,
+            "brier": 0.25803559811335797
+          }
+        },
+        "ITA1": {
+          "n": 4,
+          "reference": {
+            "n": 4,
+            "logloss": 0.7291651811587672,
+            "brier": 0.40285788854608573
+          },
+          "candidate": {
+            "n": 4,
+            "logloss": 0.7428226670934238,
+            "brier": 0.40682106041468546
+          }
+        },
+        "NED1": {
+          "n": 12,
+          "reference": {
+            "n": 12,
+            "logloss": 1.161362105897992,
+            "brier": 0.7019971859976111
+          },
+          "candidate": {
+            "n": 12,
+            "logloss": 1.2649640351175517,
+            "brier": 0.7729300590327917
+          }
+        },
+        "POR1": {
+          "n": 7,
+          "reference": {
+            "n": 7,
+            "logloss": 1.037353539667656,
+            "brier": 0.6238497883240068
+          },
+          "candidate": {
+            "n": 7,
+            "logloss": 0.9387821010617,
+            "brier": 0.5520832664590674
+          }
+        },
+        "TUR1": {
+          "n": 2,
+          "reference": {
+            "n": 2,
+            "logloss": 0.9663036635608665,
+            "brier": 0.5811070632125137
+          },
+          "candidate": {
+            "n": 2,
+            "logloss": 0.8554028819501662,
+            "brier": 0.49859653262831677
+          }
+        }
+      },
+      "reliability": {
+        "status": "MULTICLASS_RELIABILITY_DEFERRED"
+      },
+      "decision": "INSUFFICIENT_COVERAGE"
+    },
+    {
+      "market": "FT_1X2",
+      "candidate": "C2",
+      "reference": "C3",
+      "same_matches": 105,
+      "coverage_of_2026_27": 0.119318,
+      "reference_stats": {
+        "n": 105,
+        "logloss": 1.0222628722092364,
+        "brier": 0.6138409149515109
+      },
+      "candidate_stats": {
+        "n": 105,
+        "logloss": 1.0365089928435507,
+        "brier": 0.6232370140380643
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.014246120634314297,
+        "brier": -0.009396099086553367
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 16,
+        "replicates": 750,
+        "logloss_95": [
+          -0.07013947543187916,
+          0.020381155656616256
+        ],
+        "brier_95": [
+          -0.048862150459476957,
+          0.01283229358505304
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 8,
+          "reference": {
+            "n": 8,
+            "logloss": 0.9223749700799017,
+            "brier": 0.5449474302037036
+          },
+          "candidate": {
+            "n": 8,
+            "logloss": 0.9526700224095672,
+            "brier": 0.5600336157267045
+          }
+        },
+        "ENG2": {
+          "n": 47,
+          "reference": {
+            "n": 47,
+            "logloss": 1.078066514313567,
+            "brier": 0.6565951647285985
+          },
+          "candidate": {
+            "n": 47,
+            "logloss": 1.0909998672788368,
+            "brier": 0.6650936861759689
+          }
+        },
+        "ESP1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.9013177705329054,
+            "brier": 0.5315102769510658
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.9222653077120931,
+            "brier": 0.5452532523029238
+          }
+        },
+        "FRA1": {
+          "n": 1,
+          "reference": {
+            "n": 1,
+            "logloss": 0.7255530972581717,
+            "brier": 0.4038630829327622
+          },
+          "candidate": {
+            "n": 1,
+            "logloss": 0.5341213572622584,
+            "brier": 0.25803559811335797
+          }
+        },
+        "ITA1": {
+          "n": 5,
+          "reference": {
+            "n": 5,
+            "logloss": 0.7308998358870863,
+            "brier": 0.3956107809915261
+          },
+          "candidate": {
+            "n": 5,
+            "logloss": 0.7431392608800836,
+            "brier": 0.40823376953587165
+          }
+        },
+        "NED1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 1.080151827453655,
+            "brier": 0.6504665694416314
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 1.1943021905556517,
+            "brier": 0.7262823411727246
+          }
+        },
+        "POR1": {
+          "n": 9,
+          "reference": {
+            "n": 9,
+            "logloss": 1.1421833229276155,
+            "brier": 0.6885495820989003
+          },
+          "candidate": {
+            "n": 9,
+            "logloss": 0.9898959447012076,
+            "brier": 0.5913157267406935
+          }
+        },
+        "TUR1": {
+          "n": 3,
+          "reference": {
+            "n": 3,
+            "logloss": 0.9754199659219455,
+            "brier": 0.581083705657077
+          },
+          "candidate": {
+            "n": 3,
+            "logloss": 0.9703763903111639,
+            "brier": 0.5781996052810802
+          }
+        }
+      },
+      "reliability": {
+        "status": "MULTICLASS_RELIABILITY_DEFERRED"
+      },
+      "decision": "INSUFFICIENT_COVERAGE"
+    },
+    {
+      "market": "FT_1X2",
+      "candidate": "C3",
+      "reference": "C1",
+      "same_matches": 614,
+      "coverage_of_2026_27": 0.697727,
+      "reference_stats": {
+        "n": 614,
+        "logloss": 0.9965338918378992,
+        "brier": 0.5942648711985908
+      },
+      "candidate_stats": {
+        "n": 614,
+        "logloss": 0.985946894027956,
+        "brier": 0.5869207219798219
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": 0.01058699780994321,
+        "brier": 0.007344149218768914
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 58,
+        "replicates": 750,
+        "logloss_95": [
+          0.0021777402140150423,
+          0.01896458830018995
+        ],
+        "brier_95": [
+          0.0013982848569193088,
+          0.01309294871444743
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 0.9810959757726875,
+            "brier": 0.587877346996633
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 0.9213590349447351,
+            "brier": 0.5426878356040062
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 1.0596382679841507,
+            "brier": 0.6408018601767393
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 1.050570773448329,
+            "brier": 0.6316101092063459
+          }
+        },
+        "ENG2": {
+          "n": 91,
+          "reference": {
+            "n": 91,
+            "logloss": 1.0881600146566726,
+            "brier": 0.6598811476885841
+          },
+          "candidate": {
+            "n": 91,
+            "logloss": 1.0653552681142344,
+            "brier": 0.6442186340068282
+          }
+        },
+        "ESP1": {
+          "n": 70,
+          "reference": {
+            "n": 70,
+            "logloss": 0.9558803384460824,
+            "brier": 0.5665343673509464
+          },
+          "candidate": {
+            "n": 70,
+            "logloss": 0.9418189336599488,
+            "brier": 0.5560771350852751
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 1.0166657842301654,
+            "brier": 0.6032773388547883
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 1.0113037370219808,
+            "brier": 0.6024148736387706
+          }
+        },
+        "GER1": {
+          "n": 41,
+          "reference": {
+            "n": 41,
+            "logloss": 0.9562785905910897,
+            "brier": 0.5656265434346115
+          },
+          "candidate": {
+            "n": 41,
+            "logloss": 1.0086696255827419,
+            "brier": 0.604757802448068
+          }
+        },
+        "ITA1": {
+          "n": 64,
+          "reference": {
+            "n": 64,
+            "logloss": 0.8873639805053521,
+            "brier": 0.5150371922881145
+          },
+          "candidate": {
+            "n": 64,
+            "logloss": 0.8996512779487176,
+            "brier": 0.523681114194896
+          }
+        },
+        "NED1": {
+          "n": 60,
+          "reference": {
+            "n": 60,
+            "logloss": 1.065652336814903,
+            "brier": 0.6379563588138856
+          },
+          "candidate": {
+            "n": 60,
+            "logloss": 1.0524434526071107,
+            "brier": 0.6323431729521591
+          }
+        },
+        "POR1": {
+          "n": 64,
+          "reference": {
+            "n": 64,
+            "logloss": 0.9469134758647563,
+            "brier": 0.5638185235528475
+          },
+          "candidate": {
+            "n": 64,
+            "logloss": 0.9333990360925988,
+            "brier": 0.5519228230590217
+          }
+        },
+        "TUR1": {
+          "n": 55,
+          "reference": {
+            "n": 55,
+            "logloss": 0.9658775472257279,
+            "brier": 0.5713970309178157
+          },
+          "candidate": {
+            "n": 55,
+            "logloss": 0.9557783083258024,
+            "brier": 0.5657852352893046
+          }
+        }
+      },
+      "reliability": {
+        "status": "MULTICLASS_RELIABILITY_DEFERRED"
+      },
+      "decision": "RETROSPECTIVE_SIGNAL_NOT_APPROVED"
+    },
+    {
+      "market": "CORN_OVER_10.5",
+      "candidate": "RIDGE_CORNERS",
+      "reference": "LEAGUE",
+      "same_matches": 649,
+      "coverage_of_2026_27": 0.7375,
+      "reference_stats": {
+        "n": 649,
+        "logloss": 0.6689802057771731,
+        "brier": 0.23809552186641592
+      },
+      "candidate_stats": {
+        "n": 649,
+        "logloss": 0.6783906203842405,
+        "brier": 0.24196647314404873
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.009410414607067374,
+        "brier": -0.003870951277632817
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 59,
+        "replicates": 750,
+        "logloss_95": [
+          -0.02816808504097095,
+          0.008848549380225458
+        ],
+        "brier_95": [
+          -0.01204735284832401,
+          0.004212700418838115
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.685210188251055,
+            "brier": 0.24603363686817334
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.6626619736673123,
+            "brier": 0.23532365042379566
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 0.6874406666493382,
+            "brier": 0.24713790134678276
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 0.7148726364457886,
+            "brier": 0.2603242827034683
+          }
+        },
+        "ENG2": {
+          "n": 101,
+          "reference": {
+            "n": 101,
+            "logloss": 0.68617919802169,
+            "brier": 0.24652042051663872
+          },
+          "candidate": {
+            "n": 101,
+            "logloss": 0.7112446899122504,
+            "brier": 0.25815457880080656
+          }
+        },
+        "ESP1": {
+          "n": 76,
+          "reference": {
+            "n": 76,
+            "logloss": 0.6651581704007699,
+            "brier": 0.23613160294879296
+          },
+          "candidate": {
+            "n": 76,
+            "logloss": 0.6655722613980624,
+            "brier": 0.2365678340543272
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 0.6429065318909987,
+            "brier": 0.22525046919574548
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 0.627499912049769,
+            "brier": 0.2176663819694204
+          }
+        },
+        "GER1": {
+          "n": 43,
+          "reference": {
+            "n": 43,
+            "logloss": 0.7304953859299397,
+            "brier": 0.2683137210243045
+          },
+          "candidate": {
+            "n": 43,
+            "logloss": 0.7296582477693693,
+            "brier": 0.2669533463191118
+          }
+        },
+        "ITA1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.623043823078342,
+            "brier": 0.21570583437645574
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.6258141306990119,
+            "brier": 0.21589854679492984
+          }
+        },
+        "NED1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.6966807112836665,
+            "brier": 0.25176374925673317
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.687649421280072,
+            "brier": 0.24726492637560524
+          }
+        },
+        "POR1": {
+          "n": 66,
+          "reference": {
+            "n": 66,
+            "logloss": 0.6213453669794378,
+            "brier": 0.21476291499741557
+          },
+          "candidate": {
+            "n": 66,
+            "logloss": 0.6470576528329696,
+            "brier": 0.2265540997895379
+          }
+        },
+        "TUR1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.6645055047824466,
+            "brier": 0.23579805702818202
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.7146725781624736,
+            "brier": 0.2559203933492201
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 32,
+            "mean_prediction": 0.176268,
+            "event_rate": 0.3125
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 306,
+            "mean_prediction": 0.317414,
+            "event_rate": 0.356209
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 283,
+            "mean_prediction": 0.476311,
+            "event_rate": 0.448763
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 28,
+            "mean_prediction": 0.650288,
+            "event_rate": 0.535714
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          }
+        ]
+      },
+      "decision": "NO_ESTABLISHED_GAIN"
+    },
+    {
+      "market": "CORN_OVER_7.5",
+      "candidate": "RIDGE_CORNERS",
+      "reference": "LEAGUE",
+      "same_matches": 649,
+      "coverage_of_2026_27": 0.7375,
+      "reference_stats": {
+        "n": 649,
+        "logloss": 0.5784361001865953,
+        "brier": 0.19541685414270446
+      },
+      "candidate_stats": {
+        "n": 649,
+        "logloss": 0.5874298993408581,
+        "brier": 0.19824929959026263
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.008993799154262794,
+        "brier": -0.002832445447558174
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 59,
+        "replicates": 750,
+        "logloss_95": [
+          -0.026127361339912215,
+          0.007244886701031884
+        ],
+        "brier_95": [
+          -0.00947276403409217,
+          0.0035439224052091238
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.5547500303542046,
+            "brier": 0.18385290712836308
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.5471560655583619,
+            "brier": 0.18130941263835917
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 0.6165473307568685,
+            "brier": 0.21207748123581913
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 0.5994772515061555,
+            "brier": 0.20295116082394873
+          }
+        },
+        "ENG2": {
+          "n": 101,
+          "reference": {
+            "n": 101,
+            "logloss": 0.5256989873502375,
+            "brier": 0.1708843376035713
+          },
+          "candidate": {
+            "n": 101,
+            "logloss": 0.5595334467317097,
+            "brier": 0.18159115274574825
+          }
+        },
+        "ESP1": {
+          "n": 76,
+          "reference": {
+            "n": 76,
+            "logloss": 0.6631332537918044,
+            "brier": 0.23435050069672797
+          },
+          "candidate": {
+            "n": 76,
+            "logloss": 0.6527288268202491,
+            "brier": 0.2280065589819645
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 0.6154791373059167,
+            "brier": 0.2121048113658755
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 0.6098577043644025,
+            "brier": 0.21009975737976203
+          }
+        },
+        "GER1": {
+          "n": 43,
+          "reference": {
+            "n": 43,
+            "logloss": 0.44650759608476415,
+            "brier": 0.13438577286874318
+          },
+          "candidate": {
+            "n": 43,
+            "logloss": 0.4885085053463432,
+            "brier": 0.15356447566445688
+          }
+        },
+        "ITA1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.6440760398074585,
+            "brier": 0.2258453614290907
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.6740453055944464,
+            "brier": 0.240563234186897
+          }
+        },
+        "NED1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.4331292129922189,
+            "brier": 0.1305463877968823
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.4470463474814699,
+            "brier": 0.13551464271198943
+          }
+        },
+        "POR1": {
+          "n": 66,
+          "reference": {
+            "n": 66,
+            "logloss": 0.6845057914946753,
+            "brier": 0.2450414964450142
+          },
+          "candidate": {
+            "n": 66,
+            "logloss": 0.6722505932321684,
+            "brier": 0.23628606074761738
+          }
+        },
+        "TUR1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.5788933086182884,
+            "brier": 0.19476299155966026
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.5961535084832865,
+            "brier": 0.20257709992645195
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 1,
+            "mean_prediction": 0.398993,
+            "event_rate": 1.0
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 94,
+            "mean_prediction": 0.541719,
+            "event_rate": 0.595745
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 429,
+            "mean_prediction": 0.711923,
+            "event_rate": 0.748252
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 125,
+            "mean_prediction": 0.842052,
+            "event_rate": 0.752
+          }
+        ]
+      },
+      "decision": "NO_ESTABLISHED_GAIN"
+    },
+    {
+      "market": "CORN_OVER_8.5",
+      "candidate": "RIDGE_CORNERS",
+      "reference": "LEAGUE",
+      "same_matches": 649,
+      "coverage_of_2026_27": 0.7375,
+      "reference_stats": {
+        "n": 649,
+        "logloss": 0.6624562411263111,
+        "brier": 0.2349772954795893
+      },
+      "candidate_stats": {
+        "n": 649,
+        "logloss": 0.6714902032976771,
+        "brier": 0.23845594213510624
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.009033962171365983,
+        "brier": -0.003478646655516948
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 59,
+        "replicates": 750,
+        "logloss_95": [
+          -0.02855576315137484,
+          0.01027765083373549
+        ],
+        "brier_95": [
+          -0.012284693863233692,
+          0.005493161620998675
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.6565237186984205,
+            "brier": 0.23184851745000248
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.6558512531652411,
+            "brier": 0.23063608321296816
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 0.7046218952401413,
+            "brier": 0.255148589015492
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 0.702991770396112,
+            "brier": 0.252137433979134
+          }
+        },
+        "ENG2": {
+          "n": 101,
+          "reference": {
+            "n": 101,
+            "logloss": 0.6562617768636512,
+            "brier": 0.23154951749777697
+          },
+          "candidate": {
+            "n": 101,
+            "logloss": 0.693593794786941,
+            "brier": 0.2465288144991895
+          }
+        },
+        "ESP1": {
+          "n": 76,
+          "reference": {
+            "n": 76,
+            "logloss": 0.7253263879991473,
+            "brier": 0.26578735806724707
+          },
+          "candidate": {
+            "n": 76,
+            "logloss": 0.7134814107656746,
+            "brier": 0.25828313967697125
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 0.6650823275116077,
+            "brier": 0.23606394337114686
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 0.6651829928647237,
+            "brier": 0.2369387115877092
+          }
+        },
+        "GER1": {
+          "n": 43,
+          "reference": {
+            "n": 43,
+            "logloss": 0.6017650494860408,
+            "brier": 0.20509201382932118
+          },
+          "candidate": {
+            "n": 43,
+            "logloss": 0.6102897904586605,
+            "brier": 0.20967129103928492
+          }
+        },
+        "ITA1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.6930595544318785,
+            "brier": 0.24995608670655994
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.7226793308981145,
+            "brier": 0.2644939881280327
+          }
+        },
+        "NED1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.5427128808497339,
+            "brier": 0.17802983817686668
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.5547226680308635,
+            "brier": 0.18438531531911914
+          }
+        },
+        "POR1": {
+          "n": 66,
+          "reference": {
+            "n": 66,
+            "logloss": 0.6895400463407662,
+            "brier": 0.2481617548098321
+          },
+          "candidate": {
+            "n": 66,
+            "logloss": 0.684541619122142,
+            "brier": 0.244377505468774
+          }
+        },
+        "TUR1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.6699677264777092,
+            "brier": 0.2384650084793187
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.6750222150328956,
+            "brier": 0.2412411887440342
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 33,
+            "mean_prediction": 0.366013,
+            "event_rate": 0.484848
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 257,
+            "mean_prediction": 0.521434,
+            "event_rate": 0.571984
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 337,
+            "mean_prediction": 0.679719,
+            "event_rate": 0.646884
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 22,
+            "mean_prediction": 0.829863,
+            "event_rate": 0.727273
+          }
+        ]
+      },
+      "decision": "NO_ESTABLISHED_GAIN"
+    },
+    {
+      "market": "CORN_OVER_9.5",
+      "candidate": "RIDGE_CORNERS",
+      "reference": "LEAGUE",
+      "same_matches": 649,
+      "coverage_of_2026_27": 0.7375,
+      "reference_stats": {
+        "n": 649,
+        "logloss": 0.6909667718123849,
+        "brier": 0.2489063927302302
+      },
+      "candidate_stats": {
+        "n": 649,
+        "logloss": 0.6977559082567947,
+        "brier": 0.2516672345928019
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.006789136444409816,
+        "brier": -0.002760841862571667
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 59,
+        "replicates": 750,
+        "logloss_95": [
+          -0.023325816564531525,
+          0.010542457098246763
+        ],
+        "brier_95": [
+          -0.010692761168471928,
+          0.005406741202756371
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.699151161296237,
+            "brier": 0.25296253309558825
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.67580962430342,
+            "brier": 0.24148512631665667
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 0.6990898107978882,
+            "brier": 0.25294717907141834
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 0.6970640959838762,
+            "brier": 0.2511915721943953
+          }
+        },
+        "ENG2": {
+          "n": 101,
+          "reference": {
+            "n": 101,
+            "logloss": 0.6901302860493634,
+            "brier": 0.24848859666304102
+          },
+          "candidate": {
+            "n": 101,
+            "logloss": 0.7262719916064456,
+            "brier": 0.2649470102610036
+          }
+        },
+        "ESP1": {
+          "n": 76,
+          "reference": {
+            "n": 76,
+            "logloss": 0.6909610484472798,
+            "brier": 0.2489070402838697
+          },
+          "candidate": {
+            "n": 76,
+            "logloss": 0.6911955650510161,
+            "brier": 0.2493186082308779
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 0.6948666749875301,
+            "brier": 0.2508589577650045
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 0.6648738697289883,
+            "brier": 0.23589813280595898
+          }
+        },
+        "GER1": {
+          "n": 43,
+          "reference": {
+            "n": 43,
+            "logloss": 0.6811387671912386,
+            "brier": 0.244001142624375
+          },
+          "candidate": {
+            "n": 43,
+            "logloss": 0.6856275791522883,
+            "brier": 0.24632766556586536
+          }
+        },
+        "ITA1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.6754531899594575,
+            "brier": 0.24119001876816776
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.6782803844929384,
+            "brier": 0.24264995954992125
+          }
+        },
+        "NED1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.6851629006789182,
+            "brier": 0.2460096424765029
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.6876220626917656,
+            "brier": 0.24600289047133467
+          }
+        },
+        "POR1": {
+          "n": 66,
+          "reference": {
+            "n": 66,
+            "logloss": 0.6951279531017792,
+            "brier": 0.2509792646972357
+          },
+          "candidate": {
+            "n": 66,
+            "logloss": 0.715784400680176,
+            "brier": 0.26066065347319867
+          }
+        },
+        "TUR1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.6996745861479972,
+            "brier": 0.25325844637352324
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.7337496839174779,
+            "brier": 0.2681790846595274
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 2,
+            "mean_prediction": 0.192871,
+            "event_rate": 0.0
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 134,
+            "mean_prediction": 0.333064,
+            "event_rate": 0.440299
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 384,
+            "mean_prediction": 0.500237,
+            "event_rate": 0.515625
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 126,
+            "mean_prediction": 0.662082,
+            "event_rate": 0.563492
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 3,
+            "mean_prediction": 0.819706,
+            "event_rate": 0.333333
+          }
+        ]
+      },
+      "decision": "NO_ESTABLISHED_GAIN"
+    },
+    {
+      "market": "FT_BTTS",
+      "candidate": "C2",
+      "reference": "LEAGUE",
+      "same_matches": 105,
+      "coverage_of_2026_27": 0.119318,
+      "reference_stats": {
+        "n": 105,
+        "logloss": 0.6691334383106854,
+        "brier": 0.23823038295342622
+      },
+      "candidate_stats": {
+        "n": 105,
+        "logloss": 0.6874525905946312,
+        "brier": 0.2472462777228667
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.01831915228394576,
+        "brier": -0.00901589476944048
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 16,
+        "replicates": 750,
+        "logloss_95": [
+          -0.04928055766422665,
+          0.0032878736621983424
+        ],
+        "brier_95": [
+          -0.023375526839399276,
+          0.0011116694995877594
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 8,
+          "reference": {
+            "n": 8,
+            "logloss": 0.6853538784677948,
+            "brier": 0.24610474581423628
+          },
+          "candidate": {
+            "n": 8,
+            "logloss": 0.626824357931487,
+            "brier": 0.21806041352195601
+          }
+        },
+        "ENG2": {
+          "n": 47,
+          "reference": {
+            "n": 47,
+            "logloss": 0.6970089850159462,
+            "brier": 0.2518754786511293
+          },
+          "candidate": {
+            "n": 47,
+            "logloss": 0.7427481868295682,
+            "brier": 0.2735372385174681
+          }
+        },
+        "ESP1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.6680768443018956,
+            "brier": 0.2375293767170663
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.7143951462216124,
+            "brier": 0.26044983547584377
+          }
+        },
+        "FRA1": {
+          "n": 1,
+          "reference": {
+            "n": 1,
+            "logloss": 0.7567924457203016,
+            "brier": 0.2817816558733262
+          },
+          "candidate": {
+            "n": 1,
+            "logloss": 1.3491649851193186,
+            "brier": 0.548404200668453
+          }
+        },
+        "ITA1": {
+          "n": 5,
+          "reference": {
+            "n": 5,
+            "logloss": 0.7064912435053978,
+            "brier": 0.2566641405155614
+          },
+          "candidate": {
+            "n": 5,
+            "logloss": 0.6246300888942502,
+            "brier": 0.21629604925988372
+          }
+        },
+        "NED1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.5524962293728846,
+            "brier": 0.18133248029032945
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.5192949711995528,
+            "brier": 0.16849428116833223
+          }
+        },
+        "POR1": {
+          "n": 9,
+          "reference": {
+            "n": 9,
+            "logloss": 0.6851523861510216,
+            "brier": 0.24600325001992462
+          },
+          "candidate": {
+            "n": 9,
+            "logloss": 0.6606972573855238,
+            "brier": 0.23406284806520938
+          }
+        },
+        "TUR1": {
+          "n": 3,
+          "reference": {
+            "n": 3,
+            "logloss": 0.677322793909053,
+            "brier": 0.24209447541466608
+          },
+          "candidate": {
+            "n": 3,
+            "logloss": 0.7003765810652469,
+            "brier": 0.2535232321809269
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 2,
+            "mean_prediction": 0.355651,
+            "event_rate": 0.0
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 65,
+            "mean_prediction": 0.513866,
+            "event_rate": 0.569231
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 37,
+            "mean_prediction": 0.657048,
+            "event_rate": 0.621622
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 1,
+            "mean_prediction": 0.819268,
+            "event_rate": 1.0
+          }
+        ]
+      },
+      "decision": "INSUFFICIENT_COVERAGE"
+    },
+    {
+      "market": "FT_OVER_1.5",
+      "candidate": "C2",
+      "reference": "LEAGUE",
+      "same_matches": 105,
+      "coverage_of_2026_27": 0.119318,
+      "reference_stats": {
+        "n": 105,
+        "logloss": 0.5043060611736773,
+        "brier": 0.16317528564742378
+      },
+      "candidate_stats": {
+        "n": 105,
+        "logloss": 0.5352038240745971,
+        "brier": 0.1728406547945306
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.030897762900919834,
+        "brier": -0.009665369147106806
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 16,
+        "replicates": 750,
+        "logloss_95": [
+          -0.06482138955007694,
+          -0.003529839079873084
+        ],
+        "brier_95": [
+          -0.019175514186353826,
+          -0.0015377907398288748
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 8,
+          "reference": {
+            "n": 8,
+            "logloss": 0.26470187408786205,
+            "brier": 0.05408762179322259
+          },
+          "candidate": {
+            "n": 8,
+            "logloss": 0.2105209694891833,
+            "brier": 0.040378139527672524
+          }
+        },
+        "ENG2": {
+          "n": 47,
+          "reference": {
+            "n": 47,
+            "logloss": 0.6203673610331758,
+            "brier": 0.21342404625501943
+          },
+          "candidate": {
+            "n": 47,
+            "logloss": 0.6846534687545706,
+            "brier": 0.23073677638152604
+          }
+        },
+        "ESP1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.48742825448664406,
+            "brier": 0.1539731597576718
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.5532220696017972,
+            "brier": 0.17955329403848302
+          }
+        },
+        "FRA1": {
+          "n": 1,
+          "reference": {
+            "n": 1,
+            "logloss": 0.3048073219772442,
+            "brier": 0.06902946186632547
+          },
+          "candidate": {
+            "n": 1,
+            "logloss": 0.08131454463229507,
+            "brier": 0.006099037386676961
+          }
+        },
+        "ITA1": {
+          "n": 5,
+          "reference": {
+            "n": 5,
+            "logloss": 0.3204694403552646,
+            "brier": 0.07518210428483496
+          },
+          "candidate": {
+            "n": 5,
+            "logloss": 0.26225268931962054,
+            "brier": 0.054871259298410045
+          }
+        },
+        "NED1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.2569698385053304,
+            "brier": 0.06290170107116176
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.2625324918308402,
+            "brier": 0.06637905582417182
+          }
+        },
+        "POR1": {
+          "n": 9,
+          "reference": {
+            "n": 9,
+            "logloss": 0.6536239474962916,
+            "brier": 0.2290694974110301
+          },
+          "candidate": {
+            "n": 9,
+            "logloss": 0.6543111822707952,
+            "brier": 0.22801368660669702
+          }
+        },
+        "TUR1": {
+          "n": 3,
+          "reference": {
+            "n": 3,
+            "logloss": 0.6590386409607271,
+            "brier": 0.2310702037988961
+          },
+          "candidate": {
+            "n": 3,
+            "logloss": 0.6666897086215521,
+            "brier": 0.23770634537704352
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 1,
+            "mean_prediction": 0.574534,
+            "event_rate": 1.0
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 55,
+            "mean_prediction": 0.722743,
+            "event_rate": 0.8
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 49,
+            "mean_prediction": 0.861211,
+            "event_rate": 0.77551
+          }
+        ]
+      },
+      "decision": "INSUFFICIENT_COVERAGE"
+    },
+    {
+      "market": "FT_OVER_2.5",
+      "candidate": "C2",
+      "reference": "LEAGUE",
+      "same_matches": 105,
+      "coverage_of_2026_27": 0.119318,
+      "reference_stats": {
+        "n": 105,
+        "logloss": 0.6732895646773801,
+        "brier": 0.2402301654503111
+      },
+      "candidate_stats": {
+        "n": 105,
+        "logloss": 0.6875998961851115,
+        "brier": 0.245889931244215
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.014310331507731422,
+        "brier": -0.005659765793903898
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 16,
+        "replicates": 750,
+        "logloss_95": [
+          -0.051396188788947146,
+          0.020587788571612656
+        ],
+        "brier_95": [
+          -0.023439355595812034,
+          0.010857240247933095
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 8,
+          "reference": {
+            "n": 8,
+            "logloss": 0.6601439749052453,
+            "brier": 0.2335049440107656
+          },
+          "candidate": {
+            "n": 8,
+            "logloss": 0.5188363034268841,
+            "brier": 0.16873952331809972
+          }
+        },
+        "ENG2": {
+          "n": 47,
+          "reference": {
+            "n": 47,
+            "logloss": 0.6915547022839029,
+            "brier": 0.24920378924900463
+          },
+          "candidate": {
+            "n": 47,
+            "logloss": 0.737660090409911,
+            "brier": 0.2699846158680635
+          }
+        },
+        "ESP1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.6941157856802225,
+            "brier": 0.2504840606718305
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.7214931181967783,
+            "brier": 0.2635381597149894
+          }
+        },
+        "FRA1": {
+          "n": 1,
+          "reference": {
+            "n": 1,
+            "logloss": 0.6034584257995991,
+            "brier": 0.20528430449439006
+          },
+          "candidate": {
+            "n": 1,
+            "logloss": 0.23634092110560417,
+            "brier": 0.04430542255646794
+          }
+        },
+        "ITA1": {
+          "n": 5,
+          "reference": {
+            "n": 5,
+            "logloss": 0.7023158855292119,
+            "brier": 0.25458170309451533
+          },
+          "candidate": {
+            "n": 5,
+            "logloss": 0.5927758218743223,
+            "brier": 0.2008496291755803
+          }
+        },
+        "NED1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.592085371522022,
+            "brier": 0.20049965938442837
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.6411849704187003,
+            "brier": 0.2185351861346479
+          }
+        },
+        "POR1": {
+          "n": 9,
+          "reference": {
+            "n": 9,
+            "logloss": 0.6895210242837936,
+            "brier": 0.24818414031865726
+          },
+          "candidate": {
+            "n": 9,
+            "logloss": 0.6765514396836976,
+            "brier": 0.2412771979033874
+          }
+        },
+        "TUR1": {
+          "n": 3,
+          "reference": {
+            "n": 3,
+            "logloss": 0.6704119657679398,
+            "brier": 0.23865337391943342
+          },
+          "candidate": {
+            "n": 3,
+            "logloss": 0.7617473390925591,
+            "brier": 0.28200925504657953
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 11,
+            "mean_prediction": 0.363359,
+            "event_rate": 0.545455
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 53,
+            "mean_prediction": 0.509247,
+            "event_rate": 0.603774
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 37,
+            "mean_prediction": 0.681115,
+            "event_rate": 0.648649
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 4,
+            "mean_prediction": 0.83522,
+            "event_rate": 0.5
+          }
+        ]
+      },
+      "decision": "INSUFFICIENT_COVERAGE"
+    },
+    {
+      "market": "FT_OVER_3.5",
+      "candidate": "C2",
+      "reference": "LEAGUE",
+      "same_matches": 105,
+      "coverage_of_2026_27": 0.119318,
+      "reference_stats": {
+        "n": 105,
+        "logloss": 0.6938965613564297,
+        "brier": 0.2486949811836375
+      },
+      "candidate_stats": {
+        "n": 105,
+        "logloss": 0.7214742330386338,
+        "brier": 0.2588452206414364
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.02757767168220404,
+        "brier": -0.010150239457798887
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 16,
+        "replicates": 750,
+        "logloss_95": [
+          -0.09762620880460991,
+          0.042162209977598016
+        ],
+        "brier_95": [
+          -0.040393732070393096,
+          0.01961873697260988
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 8,
+          "reference": {
+            "n": 8,
+            "logloss": 0.9109476872630868,
+            "brier": 0.3502203280927966
+          },
+          "candidate": {
+            "n": 8,
+            "logloss": 0.8270234445308997,
+            "brier": 0.30742689376020527
+          }
+        },
+        "ENG2": {
+          "n": 47,
+          "reference": {
+            "n": 47,
+            "logloss": 0.6747767655707454,
+            "brier": 0.2394013531722299
+          },
+          "candidate": {
+            "n": 47,
+            "logloss": 0.6956806419110021,
+            "brier": 0.24810777225628183
+          }
+        },
+        "ESP1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.5655385348837502,
+            "brier": 0.18877123392191175
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.6273139456702224,
+            "brier": 0.2123219031841448
+          }
+        },
+        "FRA1": {
+          "n": 1,
+          "reference": {
+            "n": 1,
+            "logloss": 0.40814967347883335,
+            "brier": 0.1123058456540333
+          },
+          "candidate": {
+            "n": 1,
+            "logloss": 0.9269623339064732,
+            "brier": 0.36511316204923977
+          }
+        },
+        "ITA1": {
+          "n": 5,
+          "reference": {
+            "n": 5,
+            "logloss": 0.9700298162721271,
+            "brier": 0.371038390831409
+          },
+          "candidate": {
+            "n": 5,
+            "logloss": 0.7498323039873984,
+            "brier": 0.2785999732473003
+          }
+        },
+        "NED1": {
+          "n": 16,
+          "reference": {
+            "n": 16,
+            "logloss": 0.7422054233517152,
+            "brier": 0.27432476529962235
+          },
+          "candidate": {
+            "n": 16,
+            "logloss": 0.7946202867361137,
+            "brier": 0.2980919733175608
+          }
+        },
+        "POR1": {
+          "n": 9,
+          "reference": {
+            "n": 9,
+            "logloss": 0.6385543678567615,
+            "brier": 0.22310741434171183
+          },
+          "candidate": {
+            "n": 9,
+            "logloss": 0.7171977338722912,
+            "brier": 0.24948827775184684
+          }
+        },
+        "TUR1": {
+          "n": 3,
+          "reference": {
+            "n": 3,
+            "logloss": 0.6426193550592064,
+            "brier": 0.22478209467124166
+          },
+          "candidate": {
+            "n": 3,
+            "logloss": 0.8532551885989289,
+            "brier": 0.2960460563814256
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 14,
+            "mean_prediction": 0.176895,
+            "event_rate": 0.428571
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 56,
+            "mean_prediction": 0.305858,
+            "event_rate": 0.392857
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 30,
+            "mean_prediction": 0.480455,
+            "event_rate": 0.466667
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 5,
+            "mean_prediction": 0.658126,
+            "event_rate": 0.2
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          }
+        ]
+      },
+      "decision": "INSUFFICIENT_COVERAGE"
+    },
+    {
+      "market": "HALF_1X2",
+      "candidate": "RIDGE_HALF",
+      "reference": "LEAGUE",
+      "same_matches": 649,
+      "coverage_of_2026_27": 0.7375,
+      "reference_stats": {
+        "n": 649,
+        "logloss": 1.0936943812620559,
+        "brier": 0.663279128329468
+      },
+      "candidate_stats": {
+        "n": 649,
+        "logloss": 1.0552991651195778,
+        "brier": 0.6397115511289151
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": 0.038395216142478095,
+        "brier": 0.023567577200552914
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 59,
+        "replicates": 750,
+        "logloss_95": [
+          0.017141513244185162,
+          0.059852893367649214
+        ],
+        "brier_95": [
+          0.010989915158041902,
+          0.0366035336287232
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 1.1079906107382043,
+            "brier": 0.6731717316006318
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 1.0923086987571518,
+            "brier": 0.6616995819948976
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 1.0554357957133205,
+            "brier": 0.6397021870671408
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 1.046150445960847,
+            "brier": 0.6292465933533241
+          }
+        },
+        "ENG2": {
+          "n": 101,
+          "reference": {
+            "n": 101,
+            "logloss": 1.1121355516387024,
+            "brier": 0.6748466864113357
+          },
+          "candidate": {
+            "n": 101,
+            "logloss": 1.0804487758940189,
+            "brier": 0.654307395805652
+          }
+        },
+        "ESP1": {
+          "n": 76,
+          "reference": {
+            "n": 76,
+            "logloss": 1.0831474639112688,
+            "brier": 0.6549147597541154
+          },
+          "candidate": {
+            "n": 76,
+            "logloss": 1.0589305237086828,
+            "brier": 0.6420118492051765
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 1.085543970881241,
+            "brier": 0.6586187779016225
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 1.0448986585588016,
+            "brier": 0.6337701361144504
+          }
+        },
+        "GER1": {
+          "n": 43,
+          "reference": {
+            "n": 43,
+            "logloss": 1.0788492787897899,
+            "brier": 0.6540162996979093
+          },
+          "candidate": {
+            "n": 43,
+            "logloss": 1.0094091858767715,
+            "brier": 0.6113166571331091
+          }
+        },
+        "ITA1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 1.081921647639635,
+            "brier": 0.655432532481501
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 1.056122586049731,
+            "brier": 0.6461675730548947
+          }
+        },
+        "NED1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 1.1485631297697139,
+            "brier": 0.6984103352464729
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 1.0644672035894442,
+            "brier": 0.6428270389899898
+          }
+        },
+        "POR1": {
+          "n": 66,
+          "reference": {
+            "n": 66,
+            "logloss": 1.064171934997218,
+            "brier": 0.6433957386642914
+          },
+          "candidate": {
+            "n": 66,
+            "logloss": 1.026808593777111,
+            "brier": 0.6227069354558428
+          }
+        },
+        "TUR1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 1.1013905264531143,
+            "brier": 0.6698480824514645
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 1.0436694669079132,
+            "brier": 0.6346582235109014
+          }
+        }
+      },
+      "reliability": {
+        "status": "MULTICLASS_RELIABILITY_DEFERRED"
+      },
+      "decision": "RETROSPECTIVE_SIGNAL_NOT_APPROVED"
+    },
+    {
+      "market": "HALF_OVER_0.5",
+      "candidate": "RIDGE_HALF",
+      "reference": "LEAGUE",
+      "same_matches": 649,
+      "coverage_of_2026_27": 0.7375,
+      "reference_stats": {
+        "n": 649,
+        "logloss": 0.5780100328709302,
+        "brier": 0.1952202063717753
+      },
+      "candidate_stats": {
+        "n": 649,
+        "logloss": 0.5780965938328545,
+        "brier": 0.19538089580159892
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -8.656096192427576e-05,
+        "brier": -0.00016068942982361278
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 59,
+        "replicates": 750,
+        "logloss_95": [
+          -0.009113438869525044,
+          0.009475465645135588
+        ],
+        "brier_95": [
+          -0.003944121271646322,
+          0.003778957309063126
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.4607560742816246,
+            "brier": 0.13989844173407237
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.4543373115998285,
+            "brier": 0.13821993020689652
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 0.734033581694995,
+            "brier": 0.26781862353767044
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 0.6987604947572104,
+            "brier": 0.25177155876825447
+          }
+        },
+        "ENG2": {
+          "n": 101,
+          "reference": {
+            "n": 101,
+            "logloss": 0.5526406450589708,
+            "brier": 0.18283804605810278
+          },
+          "candidate": {
+            "n": 101,
+            "logloss": 0.5436337655478743,
+            "brier": 0.17982159827075234
+          }
+        },
+        "ESP1": {
+          "n": 76,
+          "reference": {
+            "n": 76,
+            "logloss": 0.6574397349675548,
+            "brier": 0.23200256215833254
+          },
+          "candidate": {
+            "n": 76,
+            "logloss": 0.6593811716253299,
+            "brier": 0.23218607172090297
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 0.615056943293961,
+            "brier": 0.2119223043376123
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 0.602998330316184,
+            "brier": 0.20757551993003334
+          }
+        },
+        "GER1": {
+          "n": 43,
+          "reference": {
+            "n": 43,
+            "logloss": 0.48755103338276895,
+            "brier": 0.15384912418459537
+          },
+          "candidate": {
+            "n": 43,
+            "logloss": 0.4802573650082635,
+            "brier": 0.15140770074018367
+          }
+        },
+        "ITA1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.6440507157663995,
+            "brier": 0.22583020182436275
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.6537386211080585,
+            "brier": 0.22971036901838135
+          }
+        },
+        "NED1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.42930426064855487,
+            "brier": 0.12931182379858688
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.4592730102031913,
+            "brier": 0.14219811178187422
+          }
+        },
+        "POR1": {
+          "n": 66,
+          "reference": {
+            "n": 66,
+            "logloss": 0.6141660742382288,
+            "brier": 0.21152572135940087
+          },
+          "candidate": {
+            "n": 66,
+            "logloss": 0.6352327602869787,
+            "brier": 0.2189359422778894
+          }
+        },
+        "TUR1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.5676722806956656,
+            "brier": 0.18932639116991587
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.5701324670664686,
+            "brier": 0.19179212147318944
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 61,
+            "mean_prediction": 0.569103,
+            "event_rate": 0.672131
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 522,
+            "mean_prediction": 0.69778,
+            "event_rate": 0.724138
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 66,
+            "mean_prediction": 0.830061,
+            "event_rate": 0.818182
+          }
+        ]
+      },
+      "decision": "NO_ESTABLISHED_GAIN"
+    },
+    {
+      "market": "HALF_OVER_1.5",
+      "candidate": "RIDGE_HALF",
+      "reference": "LEAGUE",
+      "same_matches": 649,
+      "coverage_of_2026_27": 0.7375,
+      "reference_stats": {
+        "n": 649,
+        "logloss": 0.6605318494048353,
+        "brier": 0.23386335476563205
+      },
+      "candidate_stats": {
+        "n": 649,
+        "logloss": 0.6655151121155127,
+        "brier": 0.2358838120875254
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.004983262710677394,
+        "brier": -0.0020204573218933486
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 59,
+        "replicates": 750,
+        "logloss_95": [
+          -0.0199449411665475,
+          0.009009081172812034
+        ],
+        "brier_95": [
+          -0.008861583845321746,
+          0.004149326060606655
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.6873180704348059,
+            "brier": 0.24681268606362183
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.6931406917862182,
+            "brier": 0.24968254557645184
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 0.6135133900585514,
+            "brier": 0.2111162214837898
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 0.5816380751545314,
+            "brier": 0.1977154131551041
+          }
+        },
+        "ENG2": {
+          "n": 101,
+          "reference": {
+            "n": 101,
+            "logloss": 0.6637327329395251,
+            "brier": 0.23539178361105634
+          },
+          "candidate": {
+            "n": 101,
+            "logloss": 0.6850024864262234,
+            "brier": 0.24406275956541676
+          }
+        },
+        "ESP1": {
+          "n": 76,
+          "reference": {
+            "n": 76,
+            "logloss": 0.6913374807401248,
+            "brier": 0.24845590320137662
+          },
+          "candidate": {
+            "n": 76,
+            "logloss": 0.6660382001681391,
+            "brier": 0.23675141865460017
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 0.630193893959466,
+            "brier": 0.21911985952560814
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 0.6290063632128796,
+            "brier": 0.21815025572884364
+          }
+        },
+        "GER1": {
+          "n": 43,
+          "reference": {
+            "n": 43,
+            "logloss": 0.6937041758395965,
+            "brier": 0.25025750522280943
+          },
+          "candidate": {
+            "n": 43,
+            "logloss": 0.7229163835775346,
+            "brier": 0.2643043356969317
+          }
+        },
+        "ITA1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.6351032112049623,
+            "brier": 0.22143491055948747
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.6435758619665013,
+            "brier": 0.22514088921276781
+          }
+        },
+        "NED1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.7085851210673925,
+            "brier": 0.2576752253244524
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.729090016337504,
+            "brier": 0.26629202584316947
+          }
+        },
+        "POR1": {
+          "n": 66,
+          "reference": {
+            "n": 66,
+            "logloss": 0.6312493922375713,
+            "brier": 0.21956123574755992
+          },
+          "candidate": {
+            "n": 66,
+            "logloss": 0.6649332514973495,
+            "brier": 0.23488356387705706
+          }
+        },
+        "TUR1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.6458980794703492,
+            "brier": 0.22669193994879328
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.6309595471514313,
+            "brier": 0.21868896615957317
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 19,
+            "mean_prediction": 0.178657,
+            "event_rate": 0.315789
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 463,
+            "mean_prediction": 0.309758,
+            "event_rate": 0.354212
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 162,
+            "mean_prediction": 0.464563,
+            "event_rate": 0.475309
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 5,
+            "mean_prediction": 0.654485,
+            "event_rate": 0.0
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          }
+        ]
+      },
+      "decision": "NO_ESTABLISHED_GAIN"
+    },
+    {
+      "market": "HALF_OVER_2.5",
+      "candidate": "RIDGE_HALF",
+      "reference": "LEAGUE",
+      "same_matches": 649,
+      "coverage_of_2026_27": 0.7375,
+      "reference_stats": {
+        "n": 649,
+        "logloss": 0.42284705373806974,
+        "brier": 0.127685242133614
+      },
+      "candidate_stats": {
+        "n": 649,
+        "logloss": 0.4245838077839173,
+        "brier": 0.12828813172174805
+      },
+      "ref_minus_candidate_positive_is_better": {
+        "logloss": -0.001736754045847555,
+        "brier": -0.0006028895881340368
+      },
+      "bootstrap_by_day": {
+        "block": "calendar_day",
+        "days": 59,
+        "replicates": 750,
+        "logloss_95": [
+          -0.013324225872508704,
+          0.009474433950224062
+        ],
+        "brier_95": [
+          -0.0035585844971947325,
+          0.002162859739247897
+        ]
+      },
+      "by_league": {
+        "BEL1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.40231241358842995,
+            "brier": 0.11916015061741186
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.40853392446910963,
+            "brier": 0.12031030875643986
+          }
+        },
+        "ENG1": {
+          "n": 57,
+          "reference": {
+            "n": 57,
+            "logloss": 0.44578645376706266,
+            "brier": 0.13509117200134624
+          },
+          "candidate": {
+            "n": 57,
+            "logloss": 0.4371926186669333,
+            "brier": 0.13353070588524502
+          }
+        },
+        "ENG2": {
+          "n": 101,
+          "reference": {
+            "n": 101,
+            "logloss": 0.4232244438742893,
+            "brier": 0.12716271737556584
+          },
+          "candidate": {
+            "n": 101,
+            "logloss": 0.4344204899013574,
+            "brier": 0.12941063829389707
+          }
+        },
+        "ESP1": {
+          "n": 76,
+          "reference": {
+            "n": 76,
+            "logloss": 0.30966304285700774,
+            "brier": 0.08404856425252065
+          },
+          "candidate": {
+            "n": 76,
+            "logloss": 0.2766279934104987,
+            "brier": 0.07766507361430752
+          }
+        },
+        "FRA1": {
+          "n": 56,
+          "reference": {
+            "n": 56,
+            "logloss": 0.37901476168631293,
+            "brier": 0.10989659461463068
+          },
+          "candidate": {
+            "n": 56,
+            "logloss": 0.3730313462689219,
+            "brier": 0.10916365786866564
+          }
+        },
+        "GER1": {
+          "n": 43,
+          "reference": {
+            "n": 43,
+            "logloss": 0.48334248749807107,
+            "brier": 0.15224728348346764
+          },
+          "candidate": {
+            "n": 43,
+            "logloss": 0.4856667341947351,
+            "brier": 0.15434740355372636
+          }
+        },
+        "ITA1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.4011878682385241,
+            "brier": 0.11757646100163273
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.42235820637581556,
+            "brier": 0.12182165648109959
+          }
+        },
+        "NED1": {
+          "n": 67,
+          "reference": {
+            "n": 67,
+            "logloss": 0.6336309512062573,
+            "brier": 0.21539611964939365
+          },
+          "candidate": {
+            "n": 67,
+            "logloss": 0.6267439529135773,
+            "brier": 0.2133911861595117
+          }
+        },
+        "POR1": {
+          "n": 66,
+          "reference": {
+            "n": 66,
+            "logloss": 0.34099982216700553,
+            "brier": 0.09541150996781102
+          },
+          "candidate": {
+            "n": 66,
+            "logloss": 0.38247529435738437,
+            "brier": 0.10482118108252235
+          }
+        },
+        "TUR1": {
+          "n": 58,
+          "reference": {
+            "n": 58,
+            "logloss": 0.4406263302077,
+            "brier": 0.13306803822417998
+          },
+          "candidate": {
+            "n": 58,
+            "logloss": 0.4264329022050663,
+            "brier": 0.13050289103255314
+          }
+        }
+      },
+      "reliability": {
+        "status": "DESCRIPTIVE_ONLY",
+        "bins": [
+          {
+            "range": [
+              0.0,
+              0.2
+            ],
+            "n": 559,
+            "mean_prediction": 0.113588,
+            "event_rate": 0.144902
+          },
+          {
+            "range": [
+              0.2,
+              0.4
+            ],
+            "n": 89,
+            "mean_prediction": 0.24806,
+            "event_rate": 0.191011
+          },
+          {
+            "range": [
+              0.4,
+              0.6
+            ],
+            "n": 1,
+            "mean_prediction": 0.467398,
+            "event_rate": 0.0
+          },
+          {
+            "range": [
+              0.6,
+              0.8
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          },
+          {
+            "range": [
+              0.8,
+              1.0
+            ],
+            "n": 0,
+            "mean_prediction": null,
+            "event_rate": null
+          }
+        ]
+      },
+      "decision": "NO_ESTABLISHED_GAIN"
+    }
+  ],
+  "notes": [
+    "Old final period already reviewed: never promote models solely from this report",
+    "Separate models for halves and corners; no use of final-goal lambda",
+    "C2 scored using corrected 2.6.3 four-match context, not old C2 file",
+    "No odds, xG, Elo, real fixtures, lineup, bets, bankroll or pilot",
+    "Per-market scores are correlated within matches, not independent evidence",
+    "No candidate hyperparameter tuning performed by these results"
+  ]
+}
