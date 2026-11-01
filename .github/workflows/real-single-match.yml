@@ -39,6 +39,7 @@ jobs:
           python audit_result_quality.py
           python build_historical_results.py
           python audit_single_match_generated_identity.py
+          python audit_team_name_coverage.py
       - name: Check official fixture and run Model B only when verified
         env:
           MATCH_LEAGUE: ${{ inputs.league || 'TUR1' }}
@@ -63,3 +64,5 @@ jobs:
             data/real_single_match_report.json
             data/single_match_identity_integration_audit.json
             data/historical_results_audit.json
+            data/team_name_coverage_audit.json
+            data/team_name_coverage_audit.csv
