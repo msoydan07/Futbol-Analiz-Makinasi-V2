@@ -20,3 +20,11 @@ jobs:
         run: python test_analyze_verified_match.py
       - name: TFF fikstur okuyucu testi
         run: python -m unittest -v test_tff_fixture_lookup.py
+      - name: TFF canlı fikstür doğrulama tanısı (yalnızca 1 Kasım örneği)
+        run: |
+          python - <<'PY'
+          import json
+          from tff_fixture_lookup import lookup
+          result=lookup("Kasımpaşa","Beşiktaş")
+          print("LIVE_TFF_DIAGNOSTIC="+json.dumps(result,ensure_ascii=False))
+          PY
