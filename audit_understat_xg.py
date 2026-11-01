@@ -128,7 +128,8 @@ def run(args):
                 if not all(checks):
                     labels = ("league_season","source_date","source_url","verified_date","source_teams","source_score","target_league_season","target_teams","target_score","evidence_url")
                     failing = [label for label,ok in zip(labels,checks) if not ok]
-                    raise ValueError("Reviewed override mismatch: " + ",".join(failing))
+                    detail = {"failed":failing,"expected_target": {"home":home,"away":away},"actual_target":{"home":target_name["home"],"away":target_name["away"]},"target_fixture_id":target["fixture_id"]}
+                    raise ValueError("Reviewed override mismatch: " + json.dumps(detail,ensure_ascii=False))
                 matches = [target]
                 used_overrides.add(url)
             if len(matches) == 0:
