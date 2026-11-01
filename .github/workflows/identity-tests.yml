@@ -14,3 +14,5 @@ jobs:
           python-version: '3.11'
       - name: Birim testleri
         run: python -m unittest -v test_identity.py test_verify_match_on_demand.py test_analyze_named_match_gate.py test_manual_match_intake.py
+      - name: Tek mac Model B smoke testi
+        run: python test_single_match_model_b.py
