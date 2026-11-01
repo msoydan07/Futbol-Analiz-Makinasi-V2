@@ -31,7 +31,8 @@
 
 ## Tek grup test kaydı
 
-- 14 yeni sentetik isimli-maç / kaynak / ilk 11 / saat bölgesi testi başarılı.
+- 16 yeni sentetik isimli-maç / kaynak / ilk 11 / saat bölgesi testi başarılı.
 - Önceki matematik, veri bağlamı, kalite kapısı ve kimlik entegrasyonundan 61 regresyon testi başarılı.
-- Toplam **75/75** test geçti. **Yeni gerçek maç tahmini veya tarihsel model performans karşılaştırması yapılmadı.**
+- Toplam **77/77** test geçti. **Yeni gerçek maç tahmini veya tarihsel model performans karşılaştırması yapılmadı.**
 - Açık işler: resmî adı farklı yazılmış takımın eşdeğer kimlikten doğrulanması; başlangıç saati açıklanmamış maçlarda `DATE_VERIFIED_TIME_PENDING` yolu; güncel kadro adaptörleri; matematik modelini güvenli analiz girişine bağlama. Bunlar bu turda tamamlanmış gibi gösterilemez.
+- Güvenlik sertleştirmesi: kadro/kart gözlemleri artık doğrudan kullanıcı JSON/dict girdisi olarak kabul edilmiyor; yalnız trusted `observation_provider(fixture)` adaptörünün ürettiği veri okunabilir. Adaptör hata verirse bilgi `NOT_CHECKED` kalır ve matematik durmaz. Adaptörün kendisi sonraki aşamada resmî kaynağa bağlanmalıdır.

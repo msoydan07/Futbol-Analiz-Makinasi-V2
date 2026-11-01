@@ -94,14 +94,15 @@ def _observed_context(value: Any, kind: str, fixture: dict,
 
 def prepare_named_match(league: str, home: str, away: str, *, now: datetime | None = None,
                         fixture_gate: Callable | None = None,
-                        observations: dict | None = None,
+                        observation_provider: Callable | None = None,
                         extra_official_domains: tuple[str, ...] = (),
                         registry_path: str = 'data/match_registry.json') -> dict:
     """Check user-selected match, then prepare 2.6.3 context; no forecast yet.
 
     fixture_gate injection exists for deterministic unit tests; in production the
     callable is the existing analyze_named_match_gate.run official live parser.
-    Only authenticated/internal adapters may construct the observations argument.
+    Only a trusted callable may obtain current lineup/absence observations.
+    Direct user-provided evidence dictionaries are NEVER accepted as input.
     """
     if not all(isinstance(s, str) and s.strip() for s in (league, home, away)):
         return {'status': 'REJECTED', 'reason': 'named_match_required'}
@@ -140,9 +141,21 @@ def prepare_named_match(league: str, home: str, away: str, *, now: datetime | No
         return {'status': 'NOT_VERIFIED', 'reason': 'invalid_official_verification',
                 'detail':str(exc)[:140]}
     domains = approved | {d.lower() for d in extra_official_domains if isinstance(d, str) and d}
-    obs = observations or {}
-    if not isinstance(obs, dict):
+    # No caller-supplied evidence dictionary: observation provider must FETCH and PARSE
+    # an official source, and is trusted code, never derived from a chat/user flag.
+    context_collection_error = None
+    if observation_provider is None:
         obs = {}
+    elif not callable(observation_provider):
+        return {'status': 'REJECTED', 'reason': 'trusted_observation_provider_required'}
+    else:
+        try:
+            obs = observation_provider(fixture)
+            if not isinstance(obs, dict):
+                raise ValueError('observation_adapter_must_return_dict')
+        except Exception as exc:
+            obs = {}
+            context_collection_error = 'official_context_adapter_failed: ' + type(exc).__name__
     facts = {kind: _observed_context(obs.get(kind), kind, fixture, now, domains)
              for kind in EVIDENCE_FIELDS}
     # Date must be interpreted in the match location, not blindly in UTC.
@@ -159,6 +172,7 @@ def prepare_named_match(league: str, home: str, away: str, *, now: datetime | No
                     'local_timezone': LEAGUE_TIMEZONES[league],
                     'timezone_note': 'Match date interpreted in league timezone, not UTC calendar date.'},
         'facts': facts,
+        'context_collection_error': context_collection_error,
         'lineups_missing_blocks_analysis': False,
         'external_context_modified_lambdas': False,
         'c2_c3_must_pass_separate_historical_data_audit': True,
