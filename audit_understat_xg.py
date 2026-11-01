@@ -126,7 +126,9 @@ def run(args):
                     bool(v.get("evidence_url","").startswith("https://")),
                 )
                 if not all(checks):
-                    raise ValueError("Reviewed override evidence/identity/date/score mismatch")
+                    labels = ("league_season","source_date","source_url","verified_date","source_teams","source_score","target_league_season","target_teams","target_score","evidence_url")
+                    failing = [label for label,ok in zip(labels,checks) if not ok]
+                    raise ValueError("Reviewed override mismatch: " + ",".join(failing))
                 matches = [target]
                 used_overrides.add(url)
             if len(matches) == 0:
