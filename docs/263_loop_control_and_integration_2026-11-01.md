@@ -29,7 +29,7 @@ Deney dalında `analysis_math_core.py`, `acceptance_263.py`, karar belgeleri ve 
 Deney dalında örnek kayıtlar kullanılabilir ama gerçek maçın resmî fikstürü doğrulanmış değildir. `--cases` dosyası yalnızca aşağıdaki alanlardan oluşan JSON dizisidir:
 
 ```
-[{"league":"<lig_id>","season":"2026/27","previous_season":"2025/26",
+[{"league":"<lig_id>","season":"2026-2027","previous_season":"2025-2026",
   "target_date":"YYYY-MM-DD","home_id":"<canonical_id>","away_id":"<canonical_id>"}]
 ```
 
