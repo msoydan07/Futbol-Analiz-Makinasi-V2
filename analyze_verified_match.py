@@ -4,6 +4,7 @@ from pathlib import Path
 from datetime import datetime
 from analyze_named_match_gate import run as verify
 from single_match_model_b import analyze
+from model_b_reliability_note import assess
 
 def run(league,home,away,lookup_override=None,registry_path="data/match_registry.json",history_path="data/historical_results.csv"):
  checked=verify(league,home,away,lookup_override=lookup_override,registry_path=registry_path)
@@ -19,6 +20,8 @@ def run(league,home,away,lookup_override=None,registry_path="data/match_registry
  result["fixture_verification"]={k:checked[k] for k in ("status","league","home_id","away_id","kickoff_utc","source_url","retrieved_at_utc") if k in checked}
  result["fixture"]["home_name"]=home
  result["fixture"]["away_name"]=away
+ if result["status"]=="READY":
+  result["reliability_note"]=assess(result["model"])
  result["status"]="ANALYZED_EXPERIMENTAL" if result["status"]=="READY" else "INSUFFICIENT_HISTORY"
  return result
 
