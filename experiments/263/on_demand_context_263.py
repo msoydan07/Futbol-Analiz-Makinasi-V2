@@ -134,13 +134,23 @@ def prepare_named_match(league: str, home: str, away: str, *, now: datetime | No
             raise ValueError('stale_fixture_observation')
         approved = {LEAGUE_DOMAINS[league]}
         if league == 'TUR1':
-            approved.add('bjk.com.tr')  # Legacy first-party club exception in existing fixture gate.
+            approved.add('bjk.com.tr')  # Explicit source-backed club exception.
+        if league == 'BEL1':
+            approved.add('kvmechelen.be')  # Existing official club fixture adapter.
+        if league == 'FRA1':
+            approved.add('psg.fr')  # Existing PSG official club fixture adapter.
+        if league == 'NED1':
+            approved.add('knvb.nl')  # Existing KNVB federation fixture adapter.
         if not _official_url(fixture.get('source_url'), approved):
             raise ValueError('source_domain_mismatch')
     except (KeyError, TypeError, ValueError, OverflowError) as exc:
         return {'status': 'NOT_VERIFIED', 'reason': 'invalid_official_verification',
                 'detail':str(exc)[:140]}
-    domains = approved | {d.lower() for d in extra_official_domains if isinstance(d, str) and d}
+    # Additional domains are NOT arbitrary caller whitelists. Require an explicit
+    # first-party source-policy update before accepting other clubs.
+    if any(not isinstance(d,str) or d.lower() not in approved for d in extra_official_domains):
+        return {'status':'REJECTED','reason':'unreviewed_extra_official_domain'}
+    domains = approved
     # No caller-supplied evidence dictionary: observation provider must FETCH and PARSE
     # an official source, and is trusted code, never derived from a chat/user flag.
     context_collection_error = None

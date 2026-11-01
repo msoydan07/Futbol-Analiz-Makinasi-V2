@@ -117,6 +117,24 @@ class NamedFixtureContextTests(unittest.TestCase):
         self.assertEqual(r['facts']['lineups']['status'],'NOT_CHECKED')
         self.assertIn('official_context_adapter_failed',r['context_collection_error'])
 
+    def test_belgian_first_party_club_fixture_source_allowed(self):
+        def belgium(*args,**kwargs):
+            return fixture(league='BEL1',source_url='https://kvmechelen.be/kalender/')
+        r=prepare_named_match('BEL1','Home','Away',now=NOW,fixture_gate=belgium)
+        self.assertEqual(r['status'],'READY_FOR_DATA_AUDIT')
+
+    def test_french_official_club_and_dutch_federation_allowlisted(self):
+        for league,url in [('FRA1','https://www.psg.fr/fixture'),('NED1','https://www.knvb.nl/eredivisie')]:
+            def official(*args,**kwargs):
+                return fixture(league=league,source_url=url)
+            r=prepare_named_match(league,'Home','Away',now=NOW,fixture_gate=official)
+            self.assertEqual(r['status'],'READY_FOR_DATA_AUDIT')
+
+    def test_cannot_inject_unreviewed_extra_source_domain(self):
+        r=prepare_named_match('TUR1','Home','Away',now=NOW,fixture_gate=accepted,
+                              extra_official_domains=('fake-sports.example',))
+        self.assertEqual(r['status'],'REJECTED')
+
     def test_utc_date_edge_does_not_claim_other_league_date(self):
         def kickoff(*a,**k):return fixture(league='ENG1',source_url='https://www.premierleague.com/matches',kickoff_utc='2026-11-01T23:30:00+00:00')
         r=prepare_named_match('ENG1','Home','Away',now=NOW,fixture_gate=kickoff)
