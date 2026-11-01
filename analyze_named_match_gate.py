@@ -15,7 +15,7 @@ LOOKUPS={
  "ITA1":"serie_a_fixture_lookup",
  "FRA1":"ligue1_fixture_lookup",
  "NED1":"eredivisie_fixture_lookup",
- "TUR1":"tff_fixture_lookup",
+ "TUR1":"besiktas_official_fixture_lookup",
  "POR1":"portugal_fixture_lookup",
  "BEL1":"belgium_fixture_lookup",
 }
