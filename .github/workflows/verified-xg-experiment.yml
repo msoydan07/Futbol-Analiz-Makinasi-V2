@@ -43,6 +43,8 @@ jobs:
         run: python validate_model_b_forward_calibration.py
       - name: Kendi Elo yardimci motorunu denetle
         run: python audit_elo_auxiliary.py
+      - name: Model B Elo birlesim testi
+        run: python validate_model_b_elo_blend.py
       - name: Tek kanit paketini sakla
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,3 +60,4 @@ jobs:
             data/model_b_calibration_audit.json
             data/model_b_forward_calibration.json
             data/elo_auxiliary_audit.json
+            data/model_b_elo_forward_blend.json
