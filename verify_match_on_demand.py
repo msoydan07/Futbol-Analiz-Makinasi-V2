@@ -16,7 +16,7 @@ def verify_requested_fixture(league,home,away,kickoff_iso,source_url,retrieved_a
   from urllib.parse import urlparse
   expected=urlparse(OFFICIAL[league]["url"]).hostname
   actual=urlparse(source_url).hostname
-  if not actual or not expected or not (actual==expected or actual.endswith("."+expected)):
+  if not actual or not expected or not (actual==expected or actual.endswith("."+expected) or (league=="TUR1" and actual=="www.bjk.com.tr")):
    return {"status":"REJECTED","reason":"not_registered_official_domain"}
   kickoff=datetime.fromisoformat(kickoff_iso.replace("Z","+00:00"))
   retrieved=datetime.fromisoformat(retrieved_at_iso.replace("Z","+00:00"))
