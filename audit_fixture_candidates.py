@@ -10,6 +10,7 @@ import urllib.request
 from collections import Counter
 from pathlib import Path
 from collect_team_candidates import LEAGUES, SEASONS, BASE
+from audit_result_quality import inspect
 
 OUT = Path("data")
 def main():
@@ -36,10 +37,19 @@ def main():
                                          "date": date, "home": home, "away": away,
                                          "candidate_key": "", "status": "MISSING_REQUIRED_FIELD"})
                         continue
-                    key = json.dumps([season, league, date, home, away], ensure_ascii=False)
+                    result_status, result_reason = inspect(row)
+                    if result_status == "COMPLETE":
+                        status = "CANDIDATE_ONLY"
+                        key = json.dumps([season, league, date, home, away], ensure_ascii=False)
+                    elif result_status == "UNPLAYED":
+                        # Future fixtures are not score records and must never enter
+                        # history/model training. The original source row is retained.
+                        status, key = "UNPLAYED_SOURCE_ROW", ""
+                    else:
+                        status, key = "INVALID_RESULT_" + result_status, ""
                     rows_out.append({"season": season, "league": league, "source_row": index,
                                      "date": date, "home": home, "away": away,
-                                     "candidate_key": key, "status": "CANDIDATE_ONLY"})
+                                     "candidate_key": key, "status": status})
                 audit.append({"season": season, "league": league, "status": "OK", "rows": len(matches), "error": ""})
             except Exception as exc:
                 audit.append({"season": season, "league": league, "status": "FAILED", "rows": 0, "error": str(exc)[:160]})

@@ -31,7 +31,7 @@ def main():
                    for r in rows if r["status"] == "CANDIDATE_ONLY")
     match_dates = Counter((r["season"], r["league"], r["home"], r["away"], r["date"])
                           for r in rows if r["status"] == "CANDIDATE_ONLY")
-    errors, imported, skipped_empty = [], 0, 0
+    errors, imported, skipped_empty, skipped_unplayed = [], 0, 0, 0
     error_types = Counter()
     error_samples = defaultdict(list)
     def record_error(reason, detail):
@@ -42,6 +42,9 @@ def main():
     for row in rows:
         if row["status"] == "EMPTY_SOURCE_ROW":
             skipped_empty += 1
+            continue
+        if row["status"] == "UNPLAYED_SOURCE_ROW":
+            skipped_unplayed += 1
             continue
         if row["status"] != "CANDIDATE_ONLY":
             record_error(row["status"], f"Invalid candidate {row['season']}/{row['league']} row {row['source_row']}: {row['status']}")
@@ -64,13 +67,14 @@ def main():
     summary = {"source_count": len(source_audit), "candidate_rows": len(rows),
                "imported": imported, "registered": len(registry.data["fixtures"]),
                "skipped_empty_source_rows": skipped_empty,
+               "skipped_unplayed_source_rows": skipped_unplayed,
                "errors": errors[:100], "error_count": len(errors),
                "error_types": dict(error_types), "error_samples": dict(error_samples)}
     (ROOT / "fixture_import_report.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k:v for k,v in summary.items() if k != "errors"}, indent=2))
     if errors:
         raise SystemExit("Fixture import rejected; inspect fixture_import_report.json")
-    if imported + skipped_empty + len(errors) != len(rows):
+    if imported + skipped_empty + skipped_unplayed + len(errors) != len(rows):
         raise SystemExit("Unaccounted source rows")
     if imported == 0 or len(registry.data["fixtures"]) != imported:
         raise SystemExit("Fixture identity count mismatch")

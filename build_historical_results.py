@@ -84,12 +84,17 @@ def build():
                     candidate = source_rows.get((season, league, number))
                     if candidate is None:
                         raise ValueError(f"Missing source row {number}")
+                    status, reason = inspect(row)
+                    if status in ("UNPLAYED", "EMPTY"):
+                        required = "UNPLAYED_SOURCE_ROW" if status == "UNPLAYED" else "EMPTY_SOURCE_ROW"
+                        if candidate["status"] != required:
+                            raise ValueError(f"Source result changed since fixture audit at {number}")
+                        continue
                     home, away, date = ((row.get(k) or "").strip() for k in ("HomeTeam", "AwayTeam", "Date"))
                     if (home, away, date) != (candidate["home"], candidate["away"], candidate["date"]):
                         raise ValueError(f"Source row changed at {number}; refuse stale join")
                     if candidate["status"] != "CANDIDATE_ONLY":
                         raise ValueError(f"Noncandidate source row {number}: {candidate['status']}")
-                    status, reason = inspect(row)
                     if status != "COMPLETE":
                         raise ValueError(f"Source row {number} no longer complete: {status} {reason}")
                     home_id, away_id = registry.resolve_team(home), registry.resolve_team(away)

@@ -1,0 +1,22 @@
+name: 263 Tuesday source empty-score guard - new targeted checks
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'audit_fixture_candidates.py'
+      - 'import_real_fixtures.py'
+      - 'build_historical_results.py'
+      - 'test_tuesday_unplayed_guard_263.py'
+      - '.github/workflows/263-tuesday-guard-check.yml'
+permissions:
+  contents: read
+jobs:
+  unplayed-fixture-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only new completed vs upcoming source tests, no old backtests
+        run: python -m unittest -v test_tuesday_unplayed_guard_263.py
