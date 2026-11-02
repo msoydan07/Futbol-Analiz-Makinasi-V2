@@ -1,0 +1,37 @@
+name: 263 UEFA 432 real historic matches - tactical context experiment
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_tactical_study_263.py
+      - experiments/263/europe/test_uefa_tactical_study_263.py
+      - .github/workflows/263-uefa-tactical-ablation.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pinned-uefa-history-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only study runtime dependency
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5
+      - name: Source and pre-kickoff guard tests, no prior league test
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_tactical_study_263.py
+      - name: Fetch THREE pinned 2024-25 / 2025-26 public-source snapshots, study once
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python experiments/263/europe/uefa_tactical_study_263.py
+      - name: Store output separately - not prediction, odds, or pilot
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-context-study-432-historical-experiment
+          if-no-files-found: error
+          retention-days: 30
+          path: data/europe_staged_263/uefa_context_ablation_263.json
