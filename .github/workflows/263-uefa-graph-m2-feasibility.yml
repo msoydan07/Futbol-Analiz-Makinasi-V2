@@ -1,0 +1,48 @@
+name: 263 UEFA xG-free ten-league graph and M2 UEFA prior history feasibility
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_xg_free_graph_m2_feasibility_263.py
+      - experiments/263/europe/test_uefa_xg_free_graph_m2_feasibility_263.py
+      - .github/workflows/263-uefa-graph-m2-feasibility.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  new-graph-and-prior-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reuse only accepted official link, goals, frozen prereg artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p preflight_inputs/official preflight_inputs/goals preflight_inputs/prereg
+          gh run download 41488522760 --repo '${{ github.repository }}' -n 263-uefa-2025-26-official-132-match-id-links -D preflight_inputs/official
+          gh run download 41493071435 --repo '${{ github.repository }}' -n 263-uefa-2025-26-goal-only-prematch-input-readiness -D preflight_inputs/goals
+          gh run download 41494401386 --repo '${{ github.repository }}' -n 263-uefa-xg-free-m0-m1-m2-prereg-frozen -D preflight_inputs/prereg
+          test -s preflight_inputs/official/132_UEFA_MATCH_IDS_REVIEW_ONLY.json
+          test -s preflight_inputs/goals/132_goal_only_feature_inputs_REVIEW_ONLY.json
+          test -s preflight_inputs/prereg/locked_experiment_preflight.json
+      - name: Test new round-mapping strict source cutoff checks only
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_xg_free_graph_m2_feasibility_263.py
+      - name: One read-only train-only league graph and prior UEFA completeness test
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python experiments/263/europe/uefa_xg_free_graph_m2_feasibility_263.py             --official preflight_inputs/official/132_UEFA_MATCH_IDS_REVIEW_ONLY.json             --goals preflight_inputs/goals/132_goal_only_feature_inputs_REVIEW_ONLY.json             --prereg preflight_inputs/prereg/locked_experiment_preflight.json
+      - name: Upload feasibility evidence only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-xg-free-M1-graph-M2-prior-feasibility
+          if-no-files-found: error
+          retention-days: 60
+          path: data/europe_staged_263/2025_26_xg_free_model_graph_preflight/*.json
