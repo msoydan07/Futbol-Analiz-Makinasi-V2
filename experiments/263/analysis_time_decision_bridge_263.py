@@ -85,8 +85,8 @@ def offline_appendix(verified_context:dict, bundle:dict, now:datetime, quote_pro
                         context_ok=False,critical_unverified_effect=False,
                         fixture_verified=True,quote=quotes.get(market))
         if (result["candidate_class"]!="DEGERLENDIRILEMEDI" or
-                result["official_class"] is not None or result["EV"] is not None or
-                result["pilot_registered"]):
+                result["official_class"] is not None or
+                result["B_condition"] is True or result["pilot_registered"]):
             raise BridgeError("offline_report_claimed_approved_class")
         out["rows"].append(result)
     out["observed_selection_prices"]=sum(r["price"]["decimal_odds"] is not None for r in out["rows"])
