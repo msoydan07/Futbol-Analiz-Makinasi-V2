@@ -1,0 +1,1338 @@
+{
+  "schema": "263_UEFA_CL_EL_2025_26_MATCH_ID_FROM_OFFICIAL_RESULTS_ARTICLE_HANDOFF_V1",
+  "retrieval_method": "ASSISTANT_WEB_CLICK_THROUGH_DIRECT_OFFICIAL_UEFA_RESULT_ARTICLE_LINKS",
+  "web_researched_on": "2026-11-02",
+  "claimed_independent_github_uefa_fetch": false,
+  "status": "OFFICIAL_MATCH_LINKS_REVIEW_ONLY_UNTIL_132_RECORD_COMPARE",
+  "official_result_articles": {
+    "UEFA_CL": "https://www.uefa.com/uefachampionsleague/news/029c-1e9a2f63fe2d-ebf9ad643892-1000--champions-league-2025-26-all-the-results/",
+    "UEFA_EL": "https://www.uefa.com/uefaeuropaleague/news/029c-1e9b4e18c28e-3bb76afa22ac-1000--europa-league-league-phase-results-by-team/"
+  },
+  "source_count_by_competition": {
+    "UEFA_CL": 95,
+    "UEFA_EL": 37
+  },
+  "source_note": "Every match ID and slug transcribed from clicking its direct link in the official UEFA result article. Date and score transcribed from adjacent official result-list entry. Github checks both participant/score/date against previous 132 source records; it does not independently browse UEFA.com.",
+  "matches": [
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 53,
+      "uefa_match_id": 2046043,
+      "match_date": "2026-01-28",
+      "source_score_home": 0,
+      "source_score_away": 0,
+      "uefa_match_slug": "monaco-vs-juventus",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046043--monaco-vs-juventus/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 54,
+      "uefa_match_id": 2046045,
+      "match_date": "2026-01-28",
+      "source_score_home": 2,
+      "source_score_away": 3,
+      "uefa_match_slug": "athletic-club-vs-sporting-cp",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046045--athletic-club-vs-sporting-cp/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 56,
+      "uefa_match_id": 2046035,
+      "match_date": "2026-01-28",
+      "source_score_home": 3,
+      "source_score_away": 0,
+      "uefa_match_slug": "leverkusen-vs-villarreal",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046035--leverkusen-vs-villarreal/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 57,
+      "uefa_match_id": 2046032,
+      "match_date": "2026-01-28",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "b-dortmund-vs-inter",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046032--b-dortmund-vs-inter/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 58,
+      "uefa_match_id": 2046039,
+      "match_date": "2026-01-28",
+      "source_score_home": 3,
+      "source_score_away": 0,
+      "uefa_match_slug": "club-brugge-vs-marseille",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046039--club-brugge-vs-marseille/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 59,
+      "uefa_match_id": 2046038,
+      "match_date": "2026-01-28",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "frankfurt-vs-tottenham",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046038--frankfurt-vs-tottenham/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 62,
+      "uefa_match_id": 2046030,
+      "match_date": "2026-01-28",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "man-city-vs-galatasaray",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046030--man-city-vs-galatasaray/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 64,
+      "uefa_match_id": 2046029,
+      "match_date": "2026-01-28",
+      "source_score_home": 1,
+      "source_score_away": 1,
+      "uefa_match_slug": "paris-vs-newcastle",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046029--paris-vs-newcastle/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 65,
+      "uefa_match_id": 2046040,
+      "match_date": "2026-01-28",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "psv-vs-bayern-munchen",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046040--psv-vs-bayern-munchen/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 66,
+      "uefa_match_id": 2046044,
+      "match_date": "2026-01-28",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "union-sg-vs-atalanta",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046044--union-sg-vs-atalanta/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 67,
+      "uefa_match_id": 2046037,
+      "match_date": "2026-01-28",
+      "source_score_home": 4,
+      "source_score_away": 2,
+      "uefa_match_slug": "benfica-vs-real-madrid",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046037--benfica-vs-real-madrid/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 68,
+      "uefa_match_id": 2046042,
+      "match_date": "2026-01-28",
+      "source_score_home": 2,
+      "source_score_away": 3,
+      "uefa_match_slug": "napoli-vs-chelsea",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046042--napoli-vs-chelsea/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 72,
+      "uefa_match_id": 2046012,
+      "match_date": "2026-01-20",
+      "source_score_home": 1,
+      "source_score_away": 3,
+      "uefa_match_slug": "inter-vs-arsenal",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046012--inter-vs-arsenal/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 74,
+      "uefa_match_id": 2046011,
+      "match_date": "2026-01-20",
+      "source_score_home": 6,
+      "source_score_away": 1,
+      "uefa_match_slug": "real-madrid-vs-monaco",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046011--real-madrid-vs-monaco/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 75,
+      "uefa_match_id": 2046015,
+      "match_date": "2026-01-20",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "sporting-cp-vs-paris",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046015--sporting-cp-vs-paris/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 76,
+      "uefa_match_id": 2046014,
+      "match_date": "2026-01-20",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "tottenham-vs-b-dortmund",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046014--tottenham-vs-b-dortmund/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 77,
+      "uefa_match_id": 2046013,
+      "match_date": "2026-01-20",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "villarreal-vs-ajax",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046013--villarreal-vs-ajax/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 78,
+      "uefa_match_id": 2046025,
+      "match_date": "2026-01-21",
+      "source_score_home": 1,
+      "source_score_away": 1,
+      "uefa_match_slug": "galatasaray-vs-atleti",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046025--galatasaray-vs-atleti/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 80,
+      "uefa_match_id": 2046021,
+      "match_date": "2026-01-21",
+      "source_score_home": 2,
+      "source_score_away": 3,
+      "uefa_match_slug": "atalanta-vs-athletic-club",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046021--atalanta-vs-athletic-club/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 82,
+      "uefa_match_id": 2046028,
+      "match_date": "2026-01-21",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "bayern-munchen-vs-union-sg",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046028--bayern-munchen-vs-union-sg/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 83,
+      "uefa_match_id": 2046022,
+      "match_date": "2026-01-21",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "juventus-vs-benfica",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046022--juventus-vs-benfica/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 84,
+      "uefa_match_id": 2046027,
+      "match_date": "2026-01-21",
+      "source_score_home": 3,
+      "source_score_away": 0,
+      "uefa_match_slug": "newcastle-vs-psv",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046027--newcastle-vs-psv/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 85,
+      "uefa_match_id": 2046024,
+      "match_date": "2026-01-21",
+      "source_score_home": 0,
+      "source_score_away": 3,
+      "uefa_match_slug": "marseille-vs-liverpool",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046024--marseille-vs-liverpool/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 88,
+      "uefa_match_id": 2045993,
+      "match_date": "2025-12-09",
+      "source_score_home": 3,
+      "source_score_away": 1,
+      "uefa_match_slug": "bayern-munchen-vs-sporting-cp",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045993--bayern-munchen-vs-sporting-cp/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 89,
+      "uefa_match_id": 2045999,
+      "match_date": "2025-12-09",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "monaco-vs-galatasaray",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045999--monaco-vs-galatasaray/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 90,
+      "uefa_match_id": 2045996,
+      "match_date": "2025-12-09",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "atalanta-vs-chelsea",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045996--atalanta-vs-chelsea/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 91,
+      "uefa_match_id": 2045995,
+      "match_date": "2025-12-09",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "barcelona-vs-frankfurt",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045995--barcelona-vs-frankfurt/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 92,
+      "uefa_match_id": 2045994,
+      "match_date": "2025-12-09",
+      "source_score_home": 0,
+      "source_score_away": 1,
+      "uefa_match_slug": "inter-vs-liverpool",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045994--inter-vs-liverpool/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 93,
+      "uefa_match_id": 2045998,
+      "match_date": "2025-12-09",
+      "source_score_home": 2,
+      "source_score_away": 3,
+      "uefa_match_slug": "psv-vs-atleti",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045998--psv-vs-atleti/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 94,
+      "uefa_match_id": 2046000,
+      "match_date": "2025-12-09",
+      "source_score_home": 2,
+      "source_score_away": 3,
+      "uefa_match_slug": "union-sg-vs-marseille",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046000--union-sg-vs-marseille/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 98,
+      "uefa_match_id": 2046009,
+      "match_date": "2025-12-10",
+      "source_score_home": 0,
+      "source_score_away": 0,
+      "uefa_match_slug": "athletic-club-vs-paris",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046009--athletic-club-vs-paris/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 99,
+      "uefa_match_id": 2046003,
+      "match_date": "2025-12-10",
+      "source_score_home": 2,
+      "source_score_away": 2,
+      "uefa_match_slug": "leverkusen-vs-newcastle",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046003--leverkusen-vs-newcastle/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 101,
+      "uefa_match_id": 2046007,
+      "match_date": "2025-12-10",
+      "source_score_home": 0,
+      "source_score_away": 3,
+      "uefa_match_slug": "club-brugge-vs-arsenal",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046007--club-brugge-vs-arsenal/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 103,
+      "uefa_match_id": 2046010,
+      "match_date": "2025-12-10",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "real-madrid-vs-man-city",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046010--real-madrid-vs-man-city/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 104,
+      "uefa_match_id": 2046004,
+      "match_date": "2025-12-10",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "benfica-vs-napoli",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2046004--benfica-vs-napoli/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 105,
+      "uefa_match_id": 2045978,
+      "match_date": "2025-11-25",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "ajax-vs-benfica",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045978--ajax-vs-benfica/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 106,
+      "uefa_match_id": 2045983,
+      "match_date": "2025-11-25",
+      "source_score_home": 0,
+      "source_score_away": 1,
+      "uefa_match_slug": "galatasaray-vs-union-sg",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045983--galatasaray-vs-union-sg/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 107,
+      "uefa_match_id": 2045977,
+      "match_date": "2025-11-25",
+      "source_score_home": 4,
+      "source_score_away": 0,
+      "uefa_match_slug": "b-dortmund-vs-villarreal",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045977--b-dortmund-vs-villarreal/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 108,
+      "uefa_match_id": 2045976,
+      "match_date": "2025-11-25",
+      "source_score_home": 3,
+      "source_score_away": 0,
+      "uefa_match_slug": "chelsea-vs-barcelona",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045976--chelsea-vs-barcelona/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 110,
+      "uefa_match_id": 2045975,
+      "match_date": "2025-11-25",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "man-city-vs-leverkusen",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045975--man-city-vs-leverkusen/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 111,
+      "uefa_match_id": 2045982,
+      "match_date": "2025-11-25",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "marseille-vs-newcastle",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045982--marseille-vs-newcastle/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 116,
+      "uefa_match_id": 2045986,
+      "match_date": "2025-11-26",
+      "source_score_home": 3,
+      "source_score_away": 1,
+      "uefa_match_slug": "arsenal-vs-bayern-munchen",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045986--arsenal-vs-bayern-munchen/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 117,
+      "uefa_match_id": 2045987,
+      "match_date": "2025-11-26",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "atleti-vs-inter",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045987--atleti-vs-inter/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 118,
+      "uefa_match_id": 2045988,
+      "match_date": "2025-11-26",
+      "source_score_home": 0,
+      "source_score_away": 3,
+      "uefa_match_slug": "frankfurt-vs-atalanta",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045988--frankfurt-vs-atalanta/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 119,
+      "uefa_match_id": 2045985,
+      "match_date": "2025-11-26",
+      "source_score_home": 1,
+      "source_score_away": 4,
+      "uefa_match_slug": "liverpool-vs-psv",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045985--liverpool-vs-psv/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 121,
+      "uefa_match_id": 2045984,
+      "match_date": "2025-11-26",
+      "source_score_home": 5,
+      "source_score_away": 3,
+      "uefa_match_slug": "paris-vs-tottenham",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045984--paris-vs-tottenham/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 122,
+      "uefa_match_id": 2045989,
+      "match_date": "2025-11-26",
+      "source_score_home": 3,
+      "source_score_away": 0,
+      "uefa_match_slug": "sporting-cp-vs-club-brugge",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045989--sporting-cp-vs-club-brugge/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 124,
+      "uefa_match_id": 2045962,
+      "match_date": "2025-11-04",
+      "source_score_home": 0,
+      "source_score_away": 0,
+      "uefa_match_slug": "napoli-vs-frankfurt",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045962--napoli-vs-frankfurt/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 125,
+      "uefa_match_id": 2045959,
+      "match_date": "2025-11-04",
+      "source_score_home": 3,
+      "source_score_away": 1,
+      "uefa_match_slug": "atleti-vs-union-sg",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045959--atleti-vs-union-sg/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 127,
+      "uefa_match_id": 2045960,
+      "match_date": "2025-11-04",
+      "source_score_home": 1,
+      "source_score_away": 1,
+      "uefa_match_slug": "juventus-vs-sporting-cp",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045960--juventus-vs-sporting-cp/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 128,
+      "uefa_match_id": 2045958,
+      "match_date": "2025-11-04",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "liverpool-vs-real-madrid",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045958--liverpool-vs-real-madrid/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 130,
+      "uefa_match_id": 2045957,
+      "match_date": "2025-11-04",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "paris-vs-bayern-munchen",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045957--paris-vs-bayern-munchen/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 134,
+      "uefa_match_id": 2045970,
+      "match_date": "2025-11-05",
+      "source_score_home": 0,
+      "source_score_away": 3,
+      "uefa_match_slug": "ajax-vs-galatasaray",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045970--ajax-vs-galatasaray/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 135,
+      "uefa_match_id": 2045969,
+      "match_date": "2025-11-05",
+      "source_score_home": 3,
+      "source_score_away": 3,
+      "uefa_match_slug": "club-brugge-vs-barcelona",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045969--club-brugge-vs-barcelona/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 137,
+      "uefa_match_id": 2045966,
+      "match_date": "2025-11-05",
+      "source_score_home": 4,
+      "source_score_away": 1,
+      "uefa_match_slug": "man-city-vs-b-dortmund",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045966--man-city-vs-b-dortmund/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 138,
+      "uefa_match_id": 2045973,
+      "match_date": "2025-11-05",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "newcastle-vs-athletic-club",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045973--newcastle-vs-athletic-club/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 139,
+      "uefa_match_id": 2045971,
+      "match_date": "2025-11-05",
+      "source_score_home": 0,
+      "source_score_away": 1,
+      "uefa_match_slug": "marseille-vs-atalanta",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045971--marseille-vs-atalanta/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 140,
+      "uefa_match_id": 2045968,
+      "match_date": "2025-11-05",
+      "source_score_home": 0,
+      "source_score_away": 1,
+      "uefa_match_slug": "benfica-vs-leverkusen",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045968--benfica-vs-leverkusen/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 143,
+      "uefa_match_id": 2045940,
+      "match_date": "2025-10-21",
+      "source_score_home": 4,
+      "source_score_away": 0,
+      "uefa_match_slug": "arsenal-vs-atleti",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045940--arsenal-vs-atleti/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 144,
+      "uefa_match_id": 2045941,
+      "match_date": "2025-10-21",
+      "source_score_home": 2,
+      "source_score_away": 7,
+      "uefa_match_slug": "leverkusen-vs-paris",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045941--leverkusen-vs-paris/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 146,
+      "uefa_match_id": 2045946,
+      "match_date": "2025-10-21",
+      "source_score_home": 3,
+      "source_score_away": 0,
+      "uefa_match_slug": "newcastle-vs-benfica",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045946--newcastle-vs-benfica/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 147,
+      "uefa_match_id": 2045943,
+      "match_date": "2025-10-21",
+      "source_score_home": 6,
+      "source_score_away": 2,
+      "uefa_match_slug": "psv-vs-napoli",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045943--psv-vs-napoli/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 148,
+      "uefa_match_id": 2045945,
+      "match_date": "2025-10-21",
+      "source_score_home": 0,
+      "source_score_away": 4,
+      "uefa_match_slug": "union-sg-vs-inter",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045945--union-sg-vs-inter/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 149,
+      "uefa_match_id": 2045942,
+      "match_date": "2025-10-21",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "villarreal-vs-man-city",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045942--villarreal-vs-man-city/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 152,
+      "uefa_match_id": 2045952,
+      "match_date": "2025-10-22",
+      "source_score_home": 0,
+      "source_score_away": 0,
+      "uefa_match_slug": "monaco-vs-tottenham",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045952--monaco-vs-tottenham/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 154,
+      "uefa_match_id": 2045948,
+      "match_date": "2025-10-22",
+      "source_score_home": 5,
+      "source_score_away": 1,
+      "uefa_match_slug": "chelsea-vs-ajax",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045948--chelsea-vs-ajax/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 155,
+      "uefa_match_id": 2045950,
+      "match_date": "2025-10-22",
+      "source_score_home": 1,
+      "source_score_away": 5,
+      "uefa_match_slug": "frankfurt-vs-liverpool",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045950--frankfurt-vs-liverpool/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 156,
+      "uefa_match_id": 2045956,
+      "match_date": "2025-10-22",
+      "source_score_home": 4,
+      "source_score_away": 0,
+      "uefa_match_slug": "bayern-munchen-vs-club-brugge",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045956--bayern-munchen-vs-club-brugge/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 157,
+      "uefa_match_id": 2045955,
+      "match_date": "2025-10-22",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "real-madrid-vs-juventus",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045955--real-madrid-vs-juventus/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 158,
+      "uefa_match_id": 2045951,
+      "match_date": "2025-10-22",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "sporting-cp-vs-marseille",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045951--sporting-cp-vs-marseille/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 159,
+      "uefa_match_id": 2045924,
+      "match_date": "2025-09-30",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "atalanta-vs-club-brugge",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045924--atalanta-vs-club-brugge/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 161,
+      "uefa_match_id": 2045923,
+      "match_date": "2025-09-30",
+      "source_score_home": 5,
+      "source_score_away": 1,
+      "uefa_match_slug": "atleti-vs-frankfurt",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045923--atleti-vs-frankfurt/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 162,
+      "uefa_match_id": 2045922,
+      "match_date": "2025-09-30",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "chelsea-vs-benfica",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045922--chelsea-vs-benfica/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 165,
+      "uefa_match_id": 2045927,
+      "match_date": "2025-09-30",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "galatasaray-vs-liverpool",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045927--galatasaray-vs-liverpool/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 166,
+      "uefa_match_id": 2045926,
+      "match_date": "2025-09-30",
+      "source_score_home": 4,
+      "source_score_away": 0,
+      "uefa_match_slug": "marseille-vs-ajax",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045926--marseille-vs-ajax/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 169,
+      "uefa_match_id": 2045935,
+      "match_date": "2025-10-01",
+      "source_score_home": 0,
+      "source_score_away": 4,
+      "uefa_match_slug": "union-sg-vs-newcastle",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045935--union-sg-vs-newcastle/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 171,
+      "uefa_match_id": 2045934,
+      "match_date": "2025-10-01",
+      "source_score_home": 2,
+      "source_score_away": 2,
+      "uefa_match_slug": "monaco-vs-man-city",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045934--monaco-vs-man-city/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 172,
+      "uefa_match_id": 2045931,
+      "match_date": "2025-10-01",
+      "source_score_home": 1,
+      "source_score_away": 1,
+      "uefa_match_slug": "leverkusen-vs-psv",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045931--leverkusen-vs-psv/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 173,
+      "uefa_match_id": 2045937,
+      "match_date": "2025-10-01",
+      "source_score_home": 4,
+      "source_score_away": 1,
+      "uefa_match_slug": "b-dortmund-vs-athletic-club",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045937--b-dortmund-vs-athletic-club/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 174,
+      "uefa_match_id": 2045938,
+      "match_date": "2025-10-01",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "barcelona-vs-paris",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045938--barcelona-vs-paris/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 175,
+      "uefa_match_id": 2045933,
+      "match_date": "2025-10-01",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "napoli-vs-sporting-cp",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045933--napoli-vs-sporting-cp/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 176,
+      "uefa_match_id": 2045932,
+      "match_date": "2025-10-01",
+      "source_score_home": 2,
+      "source_score_away": 2,
+      "uefa_match_slug": "villarreal-vs-juventus",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045932--villarreal-vs-juventus/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 177,
+      "uefa_match_id": 2045908,
+      "match_date": "2025-09-16",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "athletic-club-vs-arsenal",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045908--athletic-club-vs-arsenal/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 178,
+      "uefa_match_id": 2045907,
+      "match_date": "2025-09-16",
+      "source_score_home": 1,
+      "source_score_away": 3,
+      "uefa_match_slug": "psv-vs-union-sg",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045907--psv-vs-union-sg/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 179,
+      "uefa_match_id": 2045905,
+      "match_date": "2025-09-16",
+      "source_score_home": 4,
+      "source_score_away": 4,
+      "uefa_match_slug": "juventus-vs-b-dortmund",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045905--juventus-vs-b-dortmund/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 180,
+      "uefa_match_id": 2045903,
+      "match_date": "2025-09-16",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "real-madrid-vs-marseille",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045903--real-madrid-vs-marseille/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 182,
+      "uefa_match_id": 2045906,
+      "match_date": "2025-09-16",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "tottenham-vs-villarreal",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045906--tottenham-vs-villarreal/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 185,
+      "uefa_match_id": 2045912,
+      "match_date": "2025-09-17",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "ajax-vs-inter",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045912--ajax-vs-inter/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 186,
+      "uefa_match_id": 2045910,
+      "match_date": "2025-09-17",
+      "source_score_home": 3,
+      "source_score_away": 1,
+      "uefa_match_slug": "bayern-munchen-vs-chelsea",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045910--bayern-munchen-vs-chelsea/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 187,
+      "uefa_match_id": 2045911,
+      "match_date": "2025-09-17",
+      "source_score_home": 3,
+      "source_score_away": 2,
+      "uefa_match_slug": "liverpool-vs-atleti",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045911--liverpool-vs-atleti/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 188,
+      "uefa_match_id": 2045909,
+      "match_date": "2025-09-17",
+      "source_score_home": 4,
+      "source_score_away": 0,
+      "uefa_match_slug": "paris-vs-atalanta",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045909--paris-vs-atalanta/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 189,
+      "uefa_match_id": 2045917,
+      "match_date": "2025-09-18",
+      "source_score_home": 4,
+      "source_score_away": 1,
+      "uefa_match_slug": "club-brugge-vs-monaco",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045917--club-brugge-vs-monaco/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 191,
+      "uefa_match_id": 2045916,
+      "match_date": "2025-09-18",
+      "source_score_home": 5,
+      "source_score_away": 1,
+      "uefa_match_slug": "frankfurt-vs-galatasaray",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045916--frankfurt-vs-galatasaray/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 192,
+      "uefa_match_id": 2045915,
+      "match_date": "2025-09-18",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "man-city-vs-napoli",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045915--man-city-vs-napoli/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_link_number": 193,
+      "uefa_match_id": 2045920,
+      "match_date": "2025-09-18",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "newcastle-vs-barcelona",
+      "official_uefa_match_url": "https://www.uefa.com/uefachampionsleague/match/2045920--newcastle-vs-barcelona/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 4,
+      "uefa_match_id": 2046167,
+      "match_date": "2025-09-25",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "aston-villa-vs-bologna",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046167--aston-villa-vs-bologna/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 5,
+      "uefa_match_id": 2046175,
+      "match_date": "2025-10-02",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "feyenoord-vs-aston-villa",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046175--feyenoord-vs-aston-villa/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 6,
+      "uefa_match_id": 2046206,
+      "match_date": "2025-10-23",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "go-ahead-eagles-vs-aston-villa",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046206--go-ahead-eagles-vs-aston-villa/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 10,
+      "uefa_match_id": 2046268,
+      "match_date": "2026-01-22",
+      "source_score_home": 0,
+      "source_score_away": 1,
+      "uefa_match_slug": "fenerbahce-vs-aston-villa",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046268--fenerbahce-vs-aston-villa/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 21,
+      "uefa_match_id": 2046186,
+      "match_date": "2025-10-02",
+      "source_score_home": 1,
+      "source_score_away": 1,
+      "uefa_match_slug": "bologna-vs-freiburg",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046186--bologna-vs-freiburg/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 25,
+      "uefa_match_id": 2046258,
+      "match_date": "2025-12-11",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "celta-vs-bologna",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046258--celta-vs-bologna/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 29,
+      "uefa_match_id": 2046157,
+      "match_date": "2025-09-24",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "braga-vs-feyenoord",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046157--braga-vs-feyenoord/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 32,
+      "uefa_match_id": 2046214,
+      "match_date": "2025-11-06",
+      "source_score_home": 3,
+      "source_score_away": 4,
+      "uefa_match_slug": "braga-vs-genk",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046214--braga-vs-genk/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 34,
+      "uefa_match_id": 2046257,
+      "match_date": "2025-12-11",
+      "source_score_home": 0,
+      "source_score_away": 1,
+      "uefa_match_slug": "nice-vs-braga",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046257--nice-vs-braga/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 35,
+      "uefa_match_id": 2046269,
+      "match_date": "2026-01-22",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "braga-vs-nott-m-forest",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046269--braga-vs-nott-m-forest/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 36,
+      "uefa_match_id": 2046297,
+      "match_date": "2026-01-29",
+      "source_score_home": 0,
+      "source_score_away": 0,
+      "uefa_match_slug": "go-ahead-eagles-vs-braga",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046297--go-ahead-eagles-vs-braga/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 46,
+      "uefa_match_id": 2046170,
+      "match_date": "2025-09-25",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "stuttgart-vs-celta",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046170--stuttgart-vs-celta/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 48,
+      "uefa_match_id": 2046204,
+      "match_date": "2025-10-23",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "celta-vs-nice",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046204--celta-vs-nice/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 51,
+      "uefa_match_id": 2046277,
+      "match_date": "2026-01-22",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "celta-vs-lille",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046277--celta-vs-lille/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 74,
+      "uefa_match_id": 2046176,
+      "match_date": "2025-10-02",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "fenerbahce-vs-nice",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046176--fenerbahce-vs-nice/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 75,
+      "uefa_match_id": 2046195,
+      "match_date": "2025-10-23",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "fenerbahce-vs-stuttgart",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046195--fenerbahce-vs-stuttgart/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 88,
+      "uefa_match_id": 2046224,
+      "match_date": "2025-11-06",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "stuttgart-vs-feyenoord",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046224--stuttgart-vs-feyenoord/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 90,
+      "uefa_match_id": 2046283,
+      "match_date": "2026-01-29",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "real-betis-vs-feyenoord",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046283--real-betis-vs-feyenoord/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 92,
+      "uefa_match_id": 2046201,
+      "match_date": "2025-10-23",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "freiburg-vs-utrecht",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046201--freiburg-vs-utrecht/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 93,
+      "uefa_match_id": 2046222,
+      "match_date": "2025-11-06",
+      "source_score_home": 1,
+      "source_score_away": 3,
+      "uefa_match_slug": "nice-vs-freiburg",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046222--nice-vs-freiburg/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 97,
+      "uefa_match_id": 2046282,
+      "match_date": "2026-01-29",
+      "source_score_home": 1,
+      "source_score_away": 0,
+      "uefa_match_slug": "lille-vs-freiburg",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046282--lille-vs-freiburg/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 100,
+      "uefa_match_id": 2046207,
+      "match_date": "2025-10-23",
+      "source_score_home": 0,
+      "source_score_away": 0,
+      "uefa_match_slug": "genk-vs-real-betis",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046207--genk-vs-real-betis/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 102,
+      "uefa_match_id": 2046279,
+      "match_date": "2026-01-22",
+      "source_score_home": 0,
+      "source_score_away": 2,
+      "uefa_match_slug": "utrecht-vs-genk",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046279--utrecht-vs-genk/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 113,
+      "uefa_match_id": 2046243,
+      "match_date": "2025-11-27",
+      "source_score_home": 0,
+      "source_score_away": 4,
+      "uefa_match_slug": "go-ahead-eagles-vs-stuttgart",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046243--go-ahead-eagles-vs-stuttgart/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 114,
+      "uefa_match_id": 2046247,
+      "match_date": "2025-12-11",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "lyon-vs-go-ahead-eagles",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046247--lyon-vs-go-ahead-eagles/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 115,
+      "uefa_match_id": 2046275,
+      "match_date": "2026-01-22",
+      "source_score_home": 3,
+      "source_score_away": 1,
+      "uefa_match_slug": "nice-vs-go-ahead-eagles",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046275--nice-vs-go-ahead-eagles/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 117,
+      "uefa_match_id": 2046173,
+      "match_date": "2025-10-02",
+      "source_score_home": 0,
+      "source_score_away": 1,
+      "uefa_match_slug": "roma-vs-lille",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046173--roma-vs-lille/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 130,
+      "uefa_match_id": 2046211,
+      "match_date": "2025-11-06",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "real-betis-vs-lyon",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046211--real-betis-vs-lyon/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 128,
+      "uefa_match_id": 2046172,
+      "match_date": "2025-09-25",
+      "source_score_home": 0,
+      "source_score_away": 1,
+      "uefa_match_slug": "utrecht-vs-lyon",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046172--utrecht-vs-lyon/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 148,
+      "uefa_match_id": 2046162,
+      "match_date": "2025-09-24",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "nice-vs-roma",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046162--nice-vs-roma/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 149,
+      "uefa_match_id": 2046228,
+      "match_date": "2025-11-27",
+      "source_score_home": 3,
+      "source_score_away": 0,
+      "uefa_match_slug": "porto-vs-nice",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046228--porto-vs-nice/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 151,
+      "uefa_match_id": 2046156,
+      "match_date": "2025-09-24",
+      "source_score_home": 2,
+      "source_score_away": 2,
+      "uefa_match_slug": "real-betis-vs-nott-m-forest",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046156--real-betis-vs-nott-m-forest/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 152,
+      "uefa_match_id": 2046202,
+      "match_date": "2025-10-23",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "nott-m-forest-vs-porto",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046202--nott-m-forest-vs-porto/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 154,
+      "uefa_match_id": 2046261,
+      "match_date": "2025-12-11",
+      "source_score_home": 1,
+      "source_score_away": 2,
+      "uefa_match_slug": "utrecht-vs-nott-m-forest",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046261--utrecht-vs-nott-m-forest/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 165,
+      "uefa_match_id": 2046226,
+      "match_date": "2025-11-06",
+      "source_score_home": 1,
+      "source_score_away": 1,
+      "uefa_match_slug": "utrecht-vs-porto",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046226--utrecht-vs-porto/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 172,
+      "uefa_match_id": 2046232,
+      "match_date": "2025-11-27",
+      "source_score_home": 2,
+      "source_score_away": 1,
+      "uefa_match_slug": "real-betis-vs-utrecht",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046232--real-betis-vs-utrecht/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_link_number": 175,
+      "uefa_match_id": 2046263,
+      "match_date": "2026-01-22",
+      "source_score_home": 2,
+      "source_score_away": 0,
+      "uefa_match_slug": "roma-vs-stuttgart",
+      "official_uefa_match_url": "https://www.uefa.com/uefaeuropaleague/match/2046263--roma-vs-stuttgart/"
+    }
+  ]
+}
