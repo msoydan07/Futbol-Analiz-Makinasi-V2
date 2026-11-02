@@ -1,0 +1,31 @@
+name: 263 UEFA requested named-match official gate - new focused acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_requested_match_entry_263.py
+      - experiments/263/europe/test_uefa_requested_match_entry_263.py
+      - .github/workflows/263-uefa-named-entry-check.yml
+permissions:
+  contents: read
+jobs:
+  scope-first-then-official-uefa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only new requested-match entry boundary tests
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_requested_match_entry_263.py
+      - name: Real official UEFA source smoke (nonfatal if upstream blocks, MUST fail closed)
+        run: |
+          python experiments/263/europe/uefa_requested_match_entry_263.py \
+            --competition UEFA_CL --home Barcelona --away "Aston Villa"
+          python experiments/263/europe/uefa_requested_match_entry_263.py \
+            --competition UEFA_EL --home "Crystal Palace" --away Hoffenheim
+          python experiments/263/europe/uefa_requested_match_entry_263.py \
+            --competition UEFA_EL --home Celtic --away "Beşiktaş"
