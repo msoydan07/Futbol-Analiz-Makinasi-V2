@@ -1,0 +1,27 @@
+name: 263 UEFA Elo kaynagi - tek seferde baglanti ve tarihsel veri kabul
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-elo-source-one-shot.yml
+      - experiments/263/europe/elo_source_acceptance_263.py
+permissions:
+  contents: read
+jobs:
+  single-source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One pass real source, history and team identity audit
+        run: python experiments/263/europe/elo_source_acceptance_263.py
+      - name: Save factual report even if a source is unavailable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-elo-source-one-shot
+          if-no-files-found: warn
+          path: data/europe_staged_263/elo_source_one_shot_2026_11_03.json
