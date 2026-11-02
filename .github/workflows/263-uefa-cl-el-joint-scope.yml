@@ -1,0 +1,35 @@
+name: 263 2025-26 UEFA CL EL joint league scope
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_cl_el_2025_26_joint_scope_263.py
+      - experiments/263/europe/test_uefa_cl_el_2025_26_joint_scope_263.py
+      - .github/workflows/263-uefa-cl-el-joint-scope.yml
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned historical parser dependency
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5
+      - name: Run focused tests once
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_cl_el_2025_26_joint_scope_263.py
+      - name: Build same-season identity coverage
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python experiments/263/europe/uefa_cl_el_2025_26_joint_scope_263.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-cl-el-2025-26-joint-scope-review
+          if-no-files-found: error
+          retention-days: 30
+          path: data/europe_staged_263/cl_el_2025_26_scope/*.json
