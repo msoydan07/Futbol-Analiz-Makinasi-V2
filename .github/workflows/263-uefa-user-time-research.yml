@@ -1,0 +1,28 @@
+name: 263 UEFA user supplied kickoff skips fixture search - focused acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_user_time_research_263.py
+      - experiments/263/europe/test_uefa_user_time_research_263.py
+      - .github/workflows/263-uefa-user-time-research.yml
+permissions:
+  contents: read
+jobs:
+  new-user-supplied-time-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Isolated new user-time policy guards, zero external HTTP
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_user_time_research_263.py
+      - name: Offline sample, not claim of actual fixture
+        run: |
+          python experiments/263/europe/uefa_user_time_research_263.py \
+            --competition UEFA_CL --home Galatasaray --away Barcelona \
+            --date 2026-11-03 --time 21:00
