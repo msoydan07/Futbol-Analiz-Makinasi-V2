@@ -1,0 +1,23 @@
+name: 263 UEFA T60 lineups cross-check named match without fixture search
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_t60_lineup_overlay_263.py
+      - experiments/263/europe/test_uefa_t60_lineup_overlay_263.py
+      - .github/workflows/263-uefa-t60-lineups.yml
+permissions:
+  contents: read
+jobs:
+  one-trusted-source-claim-no-premature-promotion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only NEW T60 deterministic safety checks; no fixture HTTP or models
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_t60_lineup_overlay_263.py
