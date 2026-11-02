@@ -1,0 +1,19 @@
+name: 263 UEFA one-shot transport differential diagnostic
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_network_diagnostics_263.py
+      - .github/workflows/263-uefa-transport-diagnostic.yml
+permissions:
+  contents: read
+jobs:
+  one-shot-comparison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python experiments/263/europe/uefa_network_diagnostics_263.py
