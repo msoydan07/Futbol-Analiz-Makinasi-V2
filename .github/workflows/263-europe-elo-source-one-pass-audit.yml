@@ -1,0 +1,148 @@
+name: 263 Europe Elo external source one-pass availability and history audit
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-europe-elo-source-one-pass-audit.yml
+permissions:
+  contents: read
+jobs:
+  source-health-not-a-model-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Probe public current and 2024-25 / 2025-26 / 2026-27 Elo CSV once
+        run: |
+          import csv, hashlib, io, json, math, re, unicodedata, urllib.request
+          from collections import Counter
+          from datetime import datetime, date, timezone
+          from pathlib import Path
+          
+          ROOT="https://public-api.beyondelo.com/v1/datasets/"
+          SOURCES={"current":"club-ratings.csv","history_2024_25":"club-elo-history/2024-2025.csv",
+                   "history_2025_26":"club-elo-history/2025-2026.csv",
+                   "history_2026_27":"club-elo-history/2026-2027.csv"}
+          DEST=Path("data/europe_staged_263/elo_source_health")
+          NOW=datetime.now(timezone.utc).date()
+          result={"schema":"263_EUROPE_ELO_OPEN_CSV_DATA_PROBE_V1",
+                  "checked_at_utc":datetime.now(timezone.utc).isoformat(),
+                  "provider":"beyondELO","licence":"CC BY 4.0",
+                  "attribution":"beyondELO (https://beyondelo.com)",
+                  "data":{},"failures":{},
+                  "model_fitted":False,"predictions_generated":False,
+                  "elo_integration_authorized":False,"main_modified":False,
+                  "historical_first_publication_proven":False}
+          tables={}
+          for key,path in SOURCES.items():
+              url=ROOT+path
+              try:
+                  req=urllib.request.Request(url,headers={"User-Agent":"UEFA-Elo-data-health-audit-263/1.0","Accept":"text/csv"})
+                  with urllib.request.urlopen(req,timeout=25) as response:
+                      if response.geturl()!=url or response.status!=200:
+                          raise ValueError("HTTP_200_OR_URL_REDIRECT_INVALID")
+                      raw=response.read(12_000_001)
+                      if len(raw)>12_000_000 or len(raw)<60:
+                          raise ValueError("UNSAFE_CSV_BYTE_COUNT")
+                  reader=csv.DictReader(io.StringIO(raw.decode("utf-8-sig")))
+                  rows=list(reader)
+                  expected={"slug","name","country_code","elo","rd","as_of","last_match_date"} if key=="current" else {"date","club","elo","rd"}
+                  if not reader.fieldnames or not expected.issubset(reader.fieldnames) or not rows:
+                      raise ValueError("CSV_REQUIRED_COLUMNS_OR_ROWS_MISSING")
+                  groups=set();days=[];slugs=set();dup=0
+                  for row in rows:
+                      club=row["slug"] if key=="current" else row["club"]
+                      if not club:raise ValueError("EMPTY_TEAM_ID")
+                      day=date.fromisoformat(row["as_of"] if key=="current" else row["date"])
+                      elo=float(row["elo"]);rd=float(row["rd"])
+                      if not all(math.isfinite(z) for z in (elo,rd)) or not (600<=elo<=3500 and 0<=rd<=500):
+                          raise ValueError("INVALID_ELO_OR_UNCERTAINTY")
+                      if key=="current":
+                          if club in slugs:raise ValueError("DUPLICATE_CURRENT_CLUB_ID")
+                          if row["last_match_date"] and date.fromisoformat(row["last_match_date"])>day:
+                              raise ValueError("MATCH_DATE_AFTER_RATING_SNAPSHOT")
+                      slugs.add(club);days.append(day)
+                      if key=="current":groups.add(row["country_code"])
+                  if key=="current":
+                      asof=set(days)
+                      if len(asof)!=1 or min(asof)>NOW or (NOW-min(asof)).days>14:
+                          raise ValueError("STALE_FUTURE_OR_MIXED_CURRENT_SNAPSHOTS")
+                  else:
+                      yr=int(key.split("_")[1])
+                      if max(days).year<yr or min(days).year>yr+1:
+                          raise ValueError("HISTORY_SEASON_WRONG_DATE_RANGE")
+                  result["data"][key]={"status":"HTTP_200_FORMAT_CHECK_PASSED","url":url,
+                                        "sha256":hashlib.sha256(raw).hexdigest(),
+                                        "csv_bytes":len(raw),"rows":len(rows),
+                                        "distinct_club_ids":len(slugs),
+                                        "dates":{"first":min(days).isoformat(),"last":max(days).isoformat()},
+                                        "unique_countries":len(groups) if key=="current" else None,
+                                        "schema_columns":reader.fieldnames}
+                  tables[key]=rows
+              except Exception as exc:
+                  result["failures"][key]={"error_type":type(exc).__name__,"detail":str(exc)[:300]}
+                  result["data"][key]={"status":"NOT_VERIFIED","url":url}
+          
+          def norm(s):
+              a=unicodedata.normalize("NFKD",s.casefold())
+              return re.sub(r"\s+"," ","".join(c for c in a if not unicodedata.combining(c))).strip()
+          
+          if "current" in tables:
+              index=json.loads(Path("experiments/263/evidence/identity_index_263.json").read_text(encoding="utf-8"))
+              alias=index["aliases"];all_names={}
+              for row in tables["current"]:
+                  for name in (row["name"],row["slug"].replace("-"," ")):
+                      all_names.setdefault(norm(name),set()).add(row["slug"])
+              memberships=index["season_memberships"]["2026-2027"]
+              coverage={}
+              for league,team_ids in memberships.items():
+                  found=0;multi=0
+                  for team in team_ids:
+                      t=index["teams"][team]
+                      names={norm(t["name"]),norm(t["key"].replace("-"," "))}
+                      names.update(n for n,t_id in alias.items() if t_id==team)
+                      matches=set().union(*(all_names.get(n,set()) for n in names))
+                      if len(matches)==1:found+=1
+                      if len(matches)>1:multi+=1
+                  coverage[league]={"member_teams":len(team_ids),
+                                    "unambiguous_name_match_candidates":found,
+                                    "ambiguous_matches":multi,
+                                    "not_name_matched":len(team_ids)-found-multi}
+              result["ten_league_2026_27_name_candidate_coverage"]=coverage
+              result["name_match_status"]="CANDIDATE_ONLY_NOT_INDEPENDENTLY_VERIFIED"
+              result["sample_current_ratings"]=[{"name":row["name"],"elo":row["elo"],"rd":row["rd"],
+                                                 "as_of":row["as_of"],"country":row["country_code"]}
+                                                for row in tables["current"] if norm(row["name"]) in
+                                                {"galatasaray","liverpool","arsenal","fenerbahce","barcelona"}][:8]
+          if all(k in tables for k in SOURCES):
+              result["status"]="PUBLIC_CURRENT_AND_THREE_HISTORICAL_CSVS_ACCESSIBLE"
+              result["source_data_available"]=True
+          else:
+              result["status"]="SOURCE_INCOMPLETE_OR_UNAVAILABLE"
+              result["source_data_available"]=False
+          DEST.mkdir(parents=True,exist_ok=True)
+          (DEST/"beyondelo_elo_source_health.json").write_text(json.dumps(result,ensure_ascii=False,sort_keys=True,indent=2)+"\n",encoding="utf-8")
+          print("ELO_ONE_PASS_SOURCE_AUDIT="+json.dumps(result,ensure_ascii=False,sort_keys=True))
+          
+      - name: Preserve one complete provider acceptance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-europe-elo-source-one-pass-read-only-audit
+          if-no-files-found: warn
+          retention-days: 60
+          path: data/europe_staged_263/elo_source_health/beyondelo_elo_source_health.json
+      - name: Reject missing provider data (green is NOT model approved)
+        run: |
+          python - <<'PY'
+          import json
+          p='data/europe_staged_263/elo_source_health/beyondelo_elo_source_health.json'
+          r=json.load(open(p,encoding='utf8'))
+          assert r['source_data_available'] is True, 'ELO_SOURCE_CSV_BLOCKED_OR_MISSING'
+          assert r['elo_integration_authorized'] is False
+          assert r['model_fitted'] is False
+          print('ELO_SOURCE_CSV_DOWNLOADS_CHECK_PASSED; MODEL_NOT_APPROVED')
+          PY
