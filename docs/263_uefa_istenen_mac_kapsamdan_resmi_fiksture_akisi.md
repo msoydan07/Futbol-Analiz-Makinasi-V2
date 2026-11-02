@@ -47,3 +47,37 @@ Ana 10 lig, Tuesday yenileme, B/C2/C3/M4 ve pilot değişmez.
 Yalnız 2026/27 **lig aşaması** desteklenir. UEFA eleme/final
 fikstürü, dış sezon otomatik güncelleme ve gerçek Avrupa
 tahminleri henüz kabul edilmedi.
+
+
+## Kabul gözlemi ve GitHub erişim engeli
+
+2 Kasım 2026 hedefli CI:
+https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41468839187
+
+**15/15 yeni sentetik kabul testi geçti.** Kapsam dışı ve tanınmayan
+takım için resmî UEFA URL'si dahi açılmıyor (gerçek fonksiyon
+sınırında test edildi). Turnuva değiştirilirse yanlış resmî
+URL reddediliyor, 7 gün dışında maç kabul edilmiyor,
+skorlu sonuçtan gelecek fikstür uydurulmuyor. Bu testler
+gerçek maç tahmin matematiğini doğrulamıyor.
+
+**Gerçek kaynak erişimi:** Aynı CI'da GitHub runner'ın CL ve EL
+resmî haber sayfalarını açma denemeleri ayrı ayrı
+`TimeoutError` verdi. Kod **`OFFICIAL_UEFA_FIXTURE_NOT_VERIFIED`**
+döndürdü, maç veya tahmin uydurmadı. GitHub workflow'unun
+yeşil olması gerçek UEFA canlı ulaşımı başarılı demek DEĞİL.
+Bu nedenle canlı UEFA erişimi **AÇIK BLOKER**; ayrı bir
+araştırma/güvenilir veri erişim yöntemi olmadan otomatik
+"UEFA fikstürü doğrulandı" denemez.
+
+**Tekrarı önleme:** Aynı başarısız iki ağ isteğini
+her yeni push'ta tekrar çalıştırmayacağız. Ağ diagnostik
+basamağı `workflow_dispatch` moduna taşındı; sadece
+bilinçli elle çalıştırılabilir. Manuel denemede resmî
+kaynak gerçekten doğrulanmazsa iş **başarısız** biter.
+Normal push'ta güvenlik birim testleri yeterlidir.
+
+**Mühendislik kararı:** Kapsam kontrolü + kaynak-adapter giriş
+bağlantısı **tamam**; **canlı UEFA otomatik doğrulama ve
+Avrupa tahmin motoru henüz tamam değil.** Ana dal,
+yerel 10 lig, Salı otomasyonu ve dört model değişmedi.

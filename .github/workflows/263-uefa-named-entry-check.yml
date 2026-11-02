@@ -6,6 +6,7 @@ on:
       - experiments/263/europe/uefa_requested_match_entry_263.py
       - experiments/263/europe/test_uefa_requested_match_entry_263.py
       - .github/workflows/263-uefa-named-entry-check.yml
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -21,11 +22,10 @@ jobs:
         env:
           PYTHONPATH: experiments/263/europe
         run: python -m unittest -v experiments/263/europe/test_uefa_requested_match_entry_263.py
-      - name: Real official UEFA source smoke (nonfatal if upstream blocks, MUST fail closed)
+      - name: Manual ONLY official-site diagnostic - no repeated timeout on push
+        if: github.event_name == 'workflow_dispatch'
         run: |
           python experiments/263/europe/uefa_requested_match_entry_263.py \
-            --competition UEFA_CL --home Barcelona --away "Aston Villa"
-          python experiments/263/europe/uefa_requested_match_entry_263.py \
-            --competition UEFA_EL --home "Crystal Palace" --away Hoffenheim
-          python experiments/263/europe/uefa_requested_match_entry_263.py \
-            --competition UEFA_EL --home Celtic --away "Beşiktaş"
+            --competition UEFA_CL --home Barcelona --away "Aston Villa" > /tmp/uefa_live.json
+          cat /tmp/uefa_live.json
+          python -c 'import json; r=json.load(open("/tmp/uefa_live.json")); assert r["fixture_verified"] is True, "OFFICIAL_UEFA_LIVE_NOT_VERIFIED: do not promote model"'
