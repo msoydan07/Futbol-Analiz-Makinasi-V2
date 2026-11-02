@@ -1,0 +1,23 @@
+name: 263 UEFA xG-free identical both teams research contract
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_no_xg_contract_263.py
+      - experiments/263/europe/test_uefa_no_xg_contract_263.py
+      - .github/workflows/263-uefa-no-xg-contract.yml
+permissions:
+  contents: read
+jobs:
+  only-new-xg-free-policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New only no-xG data contract tests no old source or model runs
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_no_xg_contract_263.py

@@ -2,6 +2,10 @@
 
 Karar tarihi: 2026-11-02. Durum: TASARIM / VERİ KANITI BEKLEYEN, UYGULANMAMIŞ.
 
+**2 Kasım 2026 kapsam güncellemesi:** Avrupa CL/EL'de xG/xGA kullanılmayacak veya ayrıca araştırılmayacak; iki takım aynı xG'siz kaynak listesiyle incelenecek. Tarihsel xG eksikliği engel değil. Bu karar yalnız Avrupa hattı için geçerlidir. Güncel bağlayıcı ayrıntılar: `docs/263_uefa_xg_siz_analiz_kesin_kural_2026_11_02.md`.
+
+**Aşağıda geçen eski xG araştırma önerileri bu karar ile geçersiz kılındı; geçmiş tasarım bağlamı olarak tutuldu.**
+
 ## Problem — örnek
 
 2026-10-14 Aston Villa 6-0 Fenerbahçe UEFA Şampiyonlar Ligi.
