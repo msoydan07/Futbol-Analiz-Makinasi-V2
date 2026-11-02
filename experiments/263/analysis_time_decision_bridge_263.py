@@ -14,7 +14,7 @@ VERSION="263_readonly_analysis_time_decision_appendix_v1"
 class BridgeError(ValueError):pass
 
 
-def offline_appendix(verified_context:dict, bundle:dict, now:datetime) -> dict:
+def offline_appendix(verified_context:dict, bundle:dict, now:datetime, quote_provider=None) -> dict:
     """Add an honest no-quote A/B/C explanation to an official named fixture preview.
 
     Real-time quotes need a separate independently inspected source. This adapter
@@ -63,6 +63,18 @@ def offline_appendix(verified_context:dict, bundle:dict, now:datetime) -> dict:
     if entry["decision_preflight_263"]["canonical_model"]!="C2":
         raise BridgeError("canonical_model_readiness_mismatch")
     out["model_status"]="CALCULATED_NOT_FORWARD_CALIBRATED"
+    quotes={}
+    if quote_provider is not None:
+        if not callable(quote_provider):
+            raise BridgeError("trusted_quote_provider_callable_required")
+        # Trusted integration must ACTUALLY fetch source; a flag alone is not proof.
+        observed=quote_provider(fixture)
+        if not isinstance(observed,dict):
+            raise BridgeError("trusted_quote_provider_invalid_return")
+        if not set(observed).issubset(set(MARKETS)):
+            raise BridgeError("unrecognized_quote_market")
+        quotes=observed
+        out["price_source_status"]="EXTERNAL_QUOTE_ADAPTER_NOT_SELF_VERIFIED_BY_BRIDGE"
     for market in MARKETS:
         result=classify(model="C2",markets=goals["markets"],selection=market,
                         lambda_home=detail["lambda_home"],
@@ -71,12 +83,14 @@ def offline_appendix(verified_context:dict, bundle:dict, now:datetime) -> dict:
                         kickoff=fixture["kickoff_utc"],now=ts.isoformat(),league=fixture["league"],
                         model_level="BASIT",data_reliability="DOGRULANAMADI",
                         context_ok=False,critical_unverified_effect=False,
-                        fixture_verified=True,quote=None)
+                        fixture_verified=True,quote=quotes.get(market))
         if (result["candidate_class"]!="DEGERLENDIRILEMEDI" or
                 result["official_class"] is not None or result["EV"] is not None or
                 result["pilot_registered"]):
             raise BridgeError("offline_report_claimed_approved_class")
         out["rows"].append(result)
+    out["observed_selection_prices"]=sum(r["price"]["decimal_odds"] is not None for r in out["rows"])
+    out["mathematical_EV_calculations"]=sum(r["EV"] is not None for r in out["rows"])
     return out
 
 
@@ -88,7 +102,7 @@ def render_appendix(appendix:dict) -> str:
            "Gerçek maç analizinde oran, analiz anında doğrulanacak; kontrol saati ve kaynak belirtilir.",
            "Analizden sonra oran değişirse bu önceki değerlendirmeyi değiştirmez.",
            "C2 dışındaki B/C3/M4 modelleri otomatik ana model yapılmadı.",
-           "**Oran/EV:** DOĞRULANAMADI — kaynak sorgulanmadı. **Resmî A/B/C:** ONAYSIZ.",
+           "**Resmî A/B/C:** ONAYSIZ. Eski veriyle model güveni veya değer sınıfı ilan edilmez.",
            "İlk 11 yokluğu analiz matematiğini durdurmaz.",
            ""]
     if not appendix["rows"]:
@@ -97,8 +111,20 @@ def render_appendix(appendix:dict) -> str:
         lines+=["| Pazar | C2 matematik olasılığı | Oran (analiz anı) | Sınıf |",
                 "|---|---:|---|---|"]
         for row in appendix["rows"]:
+            price=row["price"]
+            source=str(price["source"] or "").replace("|","/").replace("\n"," ")
+            if price["decimal_odds"] is None:
+                observed="DOĞRULANAMADI"
+            else:
+                observed=(format(price["decimal_odds"],".2f")+" ("+source+"; "+
+                          str(price["checked_at_utc"] or "saat yok")+")")
             lines.append("| "+row["selection"]+" | %"+format(100*row["model_probability"],".1f")+
-                         " | DOĞRULANAMADI | DEĞERLENDİRİLEMEDİ |")
+                         " | "+observed+" | DEĞERLENDİRİLEMEDİ |")
     lines.append("")
+    lines.append("Gözlenen fiyat analiz anının fiyatıdır; sonradan değişse bile bu raporda güncellenmez.")
+    for row in appendix["rows"]:
+        if row["price"]["decimal_odds"] is not None:
+            lines.append(explain(row))
+    lines.append("Dış sağlayıcının gerçek sayfa kontrolünü bu kod tek başına ispatlayamaz.")
     lines.append("Bağımsız güncel veri, fiyat ve model kalibrasyonu olmadan bahis/değer onayı yoktur; pilot kaydı oluşturulmadı.")
     return "\n".join(lines)

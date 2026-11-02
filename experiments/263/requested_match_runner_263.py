@@ -37,7 +37,7 @@ def _file_sha_matches(base_rows,base_meta):
 
 def requested_match(*, league,home,away,index_path,alias_path,history_path,
                     evidence_path=None,refresh_audit_path=None,base_path=None,
-                    fixture_gate:Callable|None=None,now:datetime|None=None,
+                    fixture_gate:Callable|None=None,quote_provider:Callable|None=None,now:datetime|None=None,
                     registry_path='data/match_registry.json'):
     """One invocation. Fixture gate must fetch/parse official source; no supplied flags.
 
@@ -96,7 +96,7 @@ def requested_match(*, league,home,away,index_path,alias_path,history_path,
         envelope['status']='OFFICIAL_FIXTURE_CHECKED_FROZEN_MATH_PREVIEW_ONLY'
         envelope['live_analysis_accepted']=False
         envelope['model_readiness']='FROZEN_4413_ONLY_NOT_CURRENT_DATA_VERIFIED'
-        decision_appendix=offline_appendix(verification,bundle,now)
+        decision_appendix=offline_appendix(verification,bundle,now,quote_provider=quote_provider)
         return envelope,{
             'model_preview.json':bundle,
             'model_preview.md':render_operational_markdown(bundle)+'\n\n'+render_appendix(decision_appendix),

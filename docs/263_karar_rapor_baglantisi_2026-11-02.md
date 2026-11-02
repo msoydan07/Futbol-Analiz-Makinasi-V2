@@ -24,3 +24,7 @@
 - Bu ek 2.6.3'ün arşiv sabit 17-bölüm offline kabulünü yeni/staged veri için
   otomatik olarak devralmaz. Yarınki 10 lig güncellemesi ayrıca kabul bekliyor.
 - Pilot kayıtları 0/100; `forward_quad_263`, `main` ve eski modeller değişmedi.
+
+## Güncel oran girdisi (2 Kasım)
+
+`requested_match(..., quote_provider=trusted_callable)` dış fiyat adapterinin analiz anında gerçekten gözlediği fiyatı yalnız **bilgilendirme** olarak alabilir. Bu kaynak adapteri bugün otomatik site sorgusu yapmıyor; gösterilen değerlerin bağımsız kaynak teyidi rapor hazırlama sırasında ayrıca yapılmalıdır. Seçim fiyatı tek başına bulunursa görülür; karşı oran yoksa EV/marjsız fark yoktur. Bu frozen tarihsel raporunda A/B/C resmî onayı yok, pilot kaydı yok.

@@ -69,5 +69,38 @@ class ReportConnection(unittest.TestCase):
             offline_appendix(*samples(),datetime(2026,11,9,tzinfo=timezone.utc))
 
 
+    def test_trusted_current_quote_reports_source_time_without_official_grade(self):
+        context,bundle=samples()
+        f=context["fixture"]
+        k=f["league"]+":"+f["home_id"]+":"+f["away_id"]+":"+f["local_date"]
+        q={"fixture_key":k,"market_group":"MS","verification":"INDEPENDENTLY_CHECKED",
+           "stage":"PREMATCH","source":"EXAMPLE_TEST_ONLY",
+           "source_url":"https://example.org/synthetic",
+           "checked_at_utc":NOW.isoformat(),
+           "decimal_odds":{"MS1":1.50,"MSX":4.20,"MS2":7.90}}
+        calls=[]
+        def provider(fixture):
+            calls.append(fixture["home_id"])
+            return {"MS1":q}
+        result=offline_appendix(context,bundle,NOW,quote_provider=provider)
+        self.assertEqual(calls,[HOME])
+        self.assertEqual(result["observed_selection_prices"],1)
+        self.assertEqual(result["mathematical_EV_calculations"],1)
+        p=next(r for r in result["rows"] if r["selection"]=="MS1")
+        self.assertEqual(p["price"]["decimal_odds"],1.50)
+        self.assertEqual(p["candidate_class"],"DEGERLENDIRILEMEDI")
+        self.assertIsNone(p["official_class"])
+        self.assertIn("1.50 (EXAMPLE_TEST_ONLY",render_appendix(result))
+        self.assertFalse(result["pilot_registered"])
+
+    def test_no_untrusted_json_or_fake_market_injection(self):
+        context,bundle=samples()
+        with self.assertRaisesRegex(BridgeError,"callable_required"):
+            offline_appendix(context,bundle,NOW,quote_provider={"MS1":1.50})
+        with self.assertRaisesRegex(BridgeError,"invalid_return"):
+            offline_appendix(context,bundle,NOW,quote_provider=lambda _:None)
+        with self.assertRaisesRegex(BridgeError,"unrecognized_quote_market"):
+            offline_appendix(context,bundle,NOW,quote_provider=lambda _:{"invented_market":{}})
+
 if __name__=="__main__":
     unittest.main()
