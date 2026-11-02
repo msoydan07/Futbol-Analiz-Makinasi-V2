@@ -1,0 +1,20 @@
+name: 263 sali sonucu kesinlesen mac satiri sayaci - hedefli kabul
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - build_historical_results.py
+      - test_tuesday_completed_counter_263.py
+      - .github/workflows/263-tuesday-completed-count-ci.yml
+permissions:
+  contents: read
+jobs:
+  verified-row-counter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Two new 20-source finished-versus-unplayed mocked checks
+        run: python -m unittest -v test_tuesday_completed_counter_263.py

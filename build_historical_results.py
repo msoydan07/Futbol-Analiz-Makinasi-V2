@@ -54,7 +54,16 @@ def build():
         candidates = list(csv.DictReader(f))
     with (ROOT / "fixture_source_audit.csv").open(encoding="utf-8-sig", newline="") as f:
         audits = list(csv.DictReader(f))
-    report = {"expected_rows": len(candidates), "sources": 0, "linked": 0,
+    completed_candidates = [r for r in candidates if r["status"] == "CANDIDATE_ONLY"]
+    unplayed_candidates = [r for r in candidates if r["status"] == "UNPLAYED_SOURCE_ROW"]
+    empty_candidates = [r for r in candidates if r["status"] == "EMPTY_SOURCE_ROW"]
+    # Pipeline acceptance counts ONLY completed score records, never future
+    # scoreless fixtures or provider padding. Keep totals as separate evidence.
+    report = {"expected_rows": len(completed_candidates),
+              "candidate_source_rows_total": len(candidates),
+              "skipped_unplayed_source_rows": len(unplayed_candidates),
+              "skipped_empty_source_rows": len(empty_candidates),
+              "sources": 0, "linked": 0,
               "errors": [], "league_season_counts": {}}
     out = []
     coverage = Counter()
@@ -120,8 +129,10 @@ def build():
     report["chronology_rule"] = "Order by match_date; same-date matches have no assumed kickoff order"
     report["future_leakage_rule"] = "For predictions, use only prior dates, never same-day or later matches"
     report["accepted"] = (not report["errors"] and report["sources"] == 20 and
-                          len(out) == len(candidates) == len(registry.data["fixtures"]) and
-                          report["distinct_fixture_ids"] == len(out))
+                          len(out) == len(completed_candidates) == len(registry.data["fixtures"]) and
+                          report["distinct_fixture_ids"] == len(out) and
+                          len(candidates) == (len(completed_candidates)
+                                              + len(unplayed_candidates) + len(empty_candidates)))
     (ROOT / "historical_results_audit.json").write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
     if not report["accepted"]:
