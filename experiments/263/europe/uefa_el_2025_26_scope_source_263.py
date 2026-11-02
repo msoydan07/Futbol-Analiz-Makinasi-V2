@@ -48,6 +48,24 @@ DATES={1:{"2025-09-24","2025-09-25"},2:{"2025-10-02"},3:{"2025-10-23"},
 
 class CohortError(ValueError):pass
 
+# Source-specific alias is proven by BOTH UEFA club history and Portugal league federation.
+# Never update canonical registry and never guess any other club name.
+OFFICIAL_ALIAS_BRIDGES={
+    "braga":{"canonical_alias":"sc braga",
+             "uefa_club_id":"52336",
+             "uefa_club_history":"https://www.uefa.com/uefaeuropaleague/history/clubs/52336--braga/",
+             "league_2025_26":"https://www.ligaportugal.pt/team/285/sc-braga/20252026"},
+}
+
+def referenced_alias(name,index):
+    direct=index["aliases"].get(norm(name))
+    if direct is not None:return direct,False
+    bridge=OFFICIAL_ALIAS_BRIDGES.get(norm(name))
+    if bridge is None:return None,False
+    team_id=index["aliases"].get(bridge["canonical_alias"])
+    if team_id is None:raise CohortError("PROVEN_ALIAS_NOT_IN_CANONICAL_INDEX")
+    return team_id,True
+
 def fetch_public_feed():
     req=Request(FEED_URL,headers={"User-Agent":"2.6.3-europe-source-audit/1.0",
                                   "Accept":"application/json"})
@@ -119,10 +137,11 @@ def audit_ten_league_scope(games,index,source_sha256):
     if not isinstance(source_sha256,str) or not re.fullmatch(r"[a-f0-9]{64}",source_sha256):
         raise CohortError("FEED_SHA256_REQUIRED")
     members={id for league,ids in index["season_memberships"][SEASON].items() for id in ids}
-    approved=[];excluded=Counter();unmatched=Counter()
+    approved=[];excluded=Counter();unmatched=Counter();explicit_bridge_match_count=0
     for r in games:
         names=(r["home"],r["away"])
-        ids=tuple(index["aliases"].get(norm(n)) for n in names)
+        links=tuple(referenced_alias(n,index) for n in names)
+        ids=tuple(pair[0] for pair in links)
         if None in ids:
             excluded["UNKNOWN_NAME_NO_RESEARCH"]+=1
             for name,id in zip(names,ids):
@@ -133,9 +152,11 @@ def audit_ten_league_scope(games,index,source_sha256):
             continue
         if ids[0]==ids[1]:
             raise CohortError("CANONICAL_ID_COLLISION")
+        explicit_bridge_match_count+=int(any(pair[1] for pair in links))
         approved.append({**r,"home_canonical_id_candidate":ids[0],
                          "away_canonical_id_candidate":ids[1],
                          "official_uefa_team_id_crosswalk_verified":False,
+                         "source_verified_special_alias_used":any(pair[1] for pair in links),
                          "model_eligible":False})
     report={"version":VERSION,
         "source":{"feed_url":FEED_URL,"sha256":source_sha256,
@@ -146,6 +167,7 @@ def audit_ten_league_scope(games,index,source_sha256):
         "coverage":{"league_phase_total":len(games),"league_phase_goals":EXPECTED_GOALS,
                     "teams":36,"2025_26_both_in_ten_leagues_name_candidates":len(approved),
                     "excluded_count":len(games)-len(approved),
+                    "matches_with_source_verified_Braga_name_bridge":explicit_bridge_match_count,
                     "excluded_reasons":dict(excluded),
                     "unknown_names_for_manual_alias_review_only":dict(sorted(unmatched.items())),
                     "approved_for_cross_league_model":0},

@@ -40,3 +40,18 @@ kanıtlanmalıdır.
 Toplu kabul: **tek yeni 2025/26 Avrupa Ligi kaynak
 testi ve tek özet**. 432 maçlık eski UEFA
 puan/hafta deneylerini tekrar ÇALIŞTIRMA.
+
+## 2 Kasım kaynaklı özel kimlik düzeltmesi: Braga
+
+İlk başarılı çalışma **32/144** birebir isimli aday buldu;
+ancak resmî UEFA'nın `Braga` adını yerel federation
+`SC Braga` olarak kaydediyor. Yalnız bu maç ve takım
+kimliği için iki resmî kaynakla KANITLI ek eşleme yapıldı:
+- UEFA kulüp tarihi (UEFA ID 52336): https://www.uefa.com/uefaeuropaleague/history/clubs/52336--braga/
+- Portekiz ligi SC Braga 2025/26: https://www.ligaportugal.pt/team/285/sc-braga/20252026
+
+Bu yeni kural hiçbir anonim fuzzy benzerlik yapmaz,
+registry dosyasını değiştirmez, tüm diğer bilinmeyen
+UEFA kulüplerini kapsam dışında tutar. Bu özel isim bağı
+**bütün UEFA karşılaşmalarını bağımsız maç-kayıt doğrulamasına
+dönüştürmez**. Sonuçta maç sayısı yeni CI'da tekrar ölçülecek.

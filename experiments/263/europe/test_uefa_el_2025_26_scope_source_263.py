@@ -30,6 +30,24 @@ class ElSourceSafety(unittest.TestCase):
         self.assertFalse(report["model_train_permitted"])
         self.assertFalse(subset[0]["official_uefa_team_id_crosswalk_verified"])
         self.assertEqual(idx,before)
+    def test_braga_verified_explicit_source_alias_without_registry_mutation(self):
+        import json
+        from pathlib import Path
+        index=json.loads(Path("experiments/263/evidence/identity_index_263.json").read_text(encoding="utf-8"))
+        before=copy.deepcopy(index)
+        rows=[{"home":"Braga","away":"Feyenoord","match_provider_id":1}]
+        report,subset=audit_ten_league_scope(rows,index,"f"*64)
+        self.assertEqual(len(subset),1)
+        self.assertEqual(report["coverage"]["matches_with_source_verified_Braga_name_bridge"],1)
+        self.assertTrue(subset[0]["source_verified_special_alias_used"])
+        self.assertFalse(subset[0]["official_uefa_team_id_crosswalk_verified"])
+        self.assertEqual(index,before)
+    def test_unverified_extra_alias_remains_outside_scope(self):
+        index=self.fake_index()
+        with self.assertRaisesRegex(CohortError,"PROVEN_ALIAS_NOT_IN_CANONICAL_INDEX"):
+            audit_ten_league_scope(
+                [{"home":"Braga","away":"Bologna","match_provider_id":2}],
+                index,"e"*64)
     def test_bad_sha_rejected(self):
         with self.assertRaisesRegex(CohortError,"SHA256_REQUIRED"):
             audit_ten_league_scope([],self.fake_index(),"BAD")
