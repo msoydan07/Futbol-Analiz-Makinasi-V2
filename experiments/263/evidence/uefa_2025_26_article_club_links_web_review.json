@@ -1,0 +1,385 @@
+{
+  "schema": "263_UEFA_2025_26_CL_EL_OFFICIAL_CLUB_PROFILE_WEB_REVIEW_V1",
+  "reviewed_by": "ASSISTANT_BROWSED_OFFICIAL_ARTICLE_CLUB_LINKS",
+  "review_date": "2026-11-02",
+  "source_note": "Official 2025/26 UEFA CL and EL team overview articles link to enduring numeric UEFA club-profile URLs. These are observed citations, NOT live HTTP fetched in GitHub Actions. This file is evidence handoff, not official match ID or prematch stats evidence.",
+  "approval": "OFFICIAL_PROFILE_LINK_CANDIDATE_FOR_INTEGRITY_REVIEW",
+  "clubs": [
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Ajax",
+      "canonical_existing_alias": "Ajax",
+      "uefa_numeric_club_id": 50143,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50143--ajax/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Arsenal",
+      "canonical_existing_alias": "Arsenal",
+      "uefa_numeric_club_id": 52280,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/52280--arsenal/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Atalanta",
+      "canonical_existing_alias": "Atalanta",
+      "uefa_numeric_club_id": 52816,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/52816--atalanta/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Athletic Club",
+      "canonical_existing_alias": "Athletic Club",
+      "uefa_numeric_club_id": 50125,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50125--athletic-club/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Atlético de Madrid",
+      "canonical_existing_alias": "Atlético de Madrid",
+      "uefa_numeric_club_id": 50124,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50124--atletico/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "B Dortmund",
+      "canonical_existing_alias": "Borussia Dortmund",
+      "uefa_numeric_club_id": 52758,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/52758--dortmund/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Barcelona",
+      "canonical_existing_alias": "Barcelona",
+      "uefa_numeric_club_id": 50080,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50080--barcelona/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Bayern München",
+      "canonical_existing_alias": "FC Bayern München",
+      "uefa_numeric_club_id": 50037,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50037--bayern/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Benfica",
+      "canonical_existing_alias": "Benfica",
+      "uefa_numeric_club_id": 50147,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50147--benfica/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Chelsea",
+      "canonical_existing_alias": "Chelsea",
+      "uefa_numeric_club_id": 52914,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/52914--chelsea/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Club Brugge",
+      "canonical_existing_alias": "Club Brugge",
+      "uefa_numeric_club_id": 50043,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50043--club-brugge/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Frankfurt",
+      "canonical_existing_alias": "Eintracht Frankfurt",
+      "uefa_numeric_club_id": 50072,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50072--frankfurt/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Galatasaray",
+      "canonical_existing_alias": "Galatasaray",
+      "uefa_numeric_club_id": 50067,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50067--galatasaray/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Inter",
+      "canonical_existing_alias": "Inter",
+      "uefa_numeric_club_id": 50138,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50138--inter/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Juventus",
+      "canonical_existing_alias": "Juventus",
+      "uefa_numeric_club_id": 50139,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50139--juventus/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Leverkusen",
+      "canonical_existing_alias": "Leverkusen",
+      "uefa_numeric_club_id": 50109,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50109--leverkusen/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Liverpool",
+      "canonical_existing_alias": "Liverpool",
+      "uefa_numeric_club_id": 7889,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/7889--liverpool/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Man City",
+      "canonical_existing_alias": "Manchester City",
+      "uefa_numeric_club_id": 52919,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/52919--man-city/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Marseille",
+      "canonical_existing_alias": "Marseille",
+      "uefa_numeric_club_id": 52748,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/52748--marseille/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Monaco",
+      "canonical_existing_alias": "Monaco",
+      "uefa_numeric_club_id": 50023,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50023--monaco/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Napoli",
+      "canonical_existing_alias": "Napoli",
+      "uefa_numeric_club_id": 50136,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50136--napoli/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Newcastle",
+      "canonical_existing_alias": "Newcastle",
+      "uefa_numeric_club_id": 59324,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/59324--newcastle/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Paris",
+      "canonical_existing_alias": "Paris Saint-Germain",
+      "uefa_numeric_club_id": 52747,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/52747--paris/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "PSV",
+      "canonical_existing_alias": "PSV",
+      "uefa_numeric_club_id": 50062,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50062--psv/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Real Madrid",
+      "canonical_existing_alias": "Real Madrid",
+      "uefa_numeric_club_id": 50051,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50051--real-madrid/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Sporting CP",
+      "canonical_existing_alias": "Sporting CP",
+      "uefa_numeric_club_id": 50149,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/50149--sporting-cp/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Tottenham",
+      "canonical_existing_alias": "Tottenham",
+      "uefa_numeric_club_id": 1652,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/1652--tottenham/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Union SG",
+      "canonical_existing_alias": "St. Gilloise",
+      "uefa_numeric_club_id": 64125,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/64125--union-sg/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_CL",
+      "uefa_article_label": "Villarreal",
+      "canonical_existing_alias": "Villarreal",
+      "uefa_numeric_club_id": 70691,
+      "official_uefa_club_profile": "https://www.uefa.com/uefachampionsleague/clubs/70691--villarreal/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefachampionsleague/news/029d-1ea2e7e3e5d8-c5227ee0ab3c-1000--meet-the-2025-26-champions-league-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Aston Villa",
+      "canonical_existing_alias": "Aston Villa",
+      "uefa_numeric_club_id": 52683,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52683--aston-villa/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Bologna",
+      "canonical_existing_alias": "Bologna",
+      "uefa_numeric_club_id": 52969,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52969--bologna/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Braga",
+      "canonical_existing_alias": "SC Braga",
+      "uefa_numeric_club_id": 52336,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52336--braga/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Celta",
+      "canonical_existing_alias": "Celta",
+      "uefa_numeric_club_id": 53043,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/53043--celta/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Fenerbahçe",
+      "canonical_existing_alias": "Fenerbahçe",
+      "uefa_numeric_club_id": 52692,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52692--fenerbahce/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Feyenoord",
+      "canonical_existing_alias": "Feyenoord",
+      "uefa_numeric_club_id": 52749,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52749--feyenoord/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Freiburg",
+      "canonical_existing_alias": "Freiburg",
+      "uefa_numeric_club_id": 59880,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/59880--freiburg/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Genk",
+      "canonical_existing_alias": "Genk",
+      "uefa_numeric_club_id": 61582,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/61582--genk/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Go Ahead Eagles",
+      "canonical_existing_alias": "Go Ahead Eagles",
+      "uefa_numeric_club_id": 64207,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/64207--go-ahead-eagles/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Lille",
+      "canonical_existing_alias": "Lille",
+      "uefa_numeric_club_id": 75797,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/75797--lille/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Lyon",
+      "canonical_existing_alias": "Lyon",
+      "uefa_numeric_club_id": 5312,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/5312--lyon/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Nice",
+      "canonical_existing_alias": "Nice",
+      "uefa_numeric_club_id": 52355,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52355--nice/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Nottingham Forest",
+      "canonical_existing_alias": "Nottingham Forest",
+      "uefa_numeric_club_id": 52681,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52681--nottm-forest/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Porto",
+      "canonical_existing_alias": "Porto",
+      "uefa_numeric_club_id": 50064,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/50064--porto/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Real Betis",
+      "canonical_existing_alias": "Real Betis",
+      "uefa_numeric_club_id": 52265,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52265--real-betis/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Roma",
+      "canonical_existing_alias": "Roma",
+      "uefa_numeric_club_id": 50137,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/50137--roma/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Stuttgart",
+      "canonical_existing_alias": "Stuttgart",
+      "uefa_numeric_club_id": 50107,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/50107--stuttgart/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    },
+    {
+      "competition": "UEFA_EL",
+      "uefa_article_label": "Utrecht",
+      "canonical_existing_alias": "Utrecht",
+      "uefa_numeric_club_id": 52323,
+      "official_uefa_club_profile": "https://www.uefa.com/uefaeuropaleague/clubs/52323--utrecht/",
+      "official_2025_26_participant_article": "https://www.uefa.com/uefaeuropaleague/news/029c-1e982c79daa1-597a684fc805-1000--2025-26-europa-league-meet-the-league-phase-teams/"
+    }
+  ]
+}
