@@ -17,6 +17,7 @@ jobs:
           python-version: '3.11'
       - name: Probe public current and 2024-25 / 2025-26 / 2026-27 Elo CSV once
         run: |
+          python - <<'PY'
           import csv, hashlib, io, json, math, re, unicodedata, urllib.request
           from collections import Counter
           from datetime import datetime, date, timezone
@@ -126,7 +127,7 @@ jobs:
           DEST.mkdir(parents=True,exist_ok=True)
           (DEST/"beyondelo_elo_source_health.json").write_text(json.dumps(result,ensure_ascii=False,sort_keys=True,indent=2)+"\n",encoding="utf-8")
           print("ELO_ONE_PASS_SOURCE_AUDIT="+json.dumps(result,ensure_ascii=False,sort_keys=True))
-          
+          PY
       - name: Preserve one complete provider acceptance report
         if: always()
         uses: actions/upload-artifact@v4
