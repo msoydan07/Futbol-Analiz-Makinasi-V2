@@ -1,0 +1,46 @@
+name: 263 M4 dortlu pilot - toplu yeni kabul
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/m4_integrated.py'
+      - 'experiments/263/m4_lock.json'
+      - 'experiments/263/forward_quad.py'
+      - 'experiments/263/evaluate_quad.py'
+      - 'experiments/263/test_quad_263.py'
+      - '.github/workflows/263-m4-quad-batch.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  m4-quad-one-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: python -m pip install 'numpy>=1.24,<3' 'scipy>=1.10,<2'
+      - name: Fetch original immutable 4413-match archive, not newly staged data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p m4_ci_source
+          gh run download 41251343847 --repo '${{ github.repository }}' -n team-source-audit -D m4_ci_source
+          test -f m4_ci_source/historical_results.csv
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_ci_source/historical_results.csv' | sha256sum -c -
+      - name: Single newly planned M4 / quadruple acceptance suite
+        env:
+          PYTHONPATH: experiments/263
+          M4_TEST_HISTORY: m4_ci_source/historical_results.csv
+        run: |
+          python -m unittest -v experiments/263/test_quad_263.py |& tee m4-quad-test-results.txt
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m4-quad-acceptance
+          path: m4-quad-test-results.txt
+          if-no-files-found: ignore

@@ -1,0 +1,235 @@
+{
+  "schema": "m4_dev_lock_263_v1",
+  "model": "m4_venue_opponent_time_poisson_v1",
+  "training_season": "2025-2026",
+  "evaluation_season_excluded": "2026-2027",
+  "cutoffs": [
+    [
+      "2025-11-15",
+      "2025-12-06"
+    ],
+    [
+      "2026-01-15",
+      "2026-02-05"
+    ],
+    [
+      "2026-03-15",
+      "2026-04-05"
+    ]
+  ],
+  "candidate_grid": [
+    {
+      "half_life_days": 90,
+      "ridge_shared": 4,
+      "ridge_venue": 12
+    },
+    {
+      "half_life_days": 90,
+      "ridge_shared": 4,
+      "ridge_venue": 48
+    },
+    {
+      "half_life_days": 90,
+      "ridge_shared": 12,
+      "ridge_venue": 12
+    },
+    {
+      "half_life_days": 90,
+      "ridge_shared": 12,
+      "ridge_venue": 48
+    },
+    {
+      "half_life_days": 180,
+      "ridge_shared": 4,
+      "ridge_venue": 12
+    },
+    {
+      "half_life_days": 180,
+      "ridge_shared": 4,
+      "ridge_venue": 48
+    },
+    {
+      "half_life_days": 180,
+      "ridge_shared": 12,
+      "ridge_venue": 12
+    },
+    {
+      "half_life_days": 180,
+      "ridge_shared": 12,
+      "ridge_venue": 48
+    },
+    {
+      "half_life_days": 360,
+      "ridge_shared": 4,
+      "ridge_venue": 12
+    },
+    {
+      "half_life_days": 360,
+      "ridge_shared": 4,
+      "ridge_venue": 48
+    },
+    {
+      "half_life_days": 360,
+      "ridge_shared": 12,
+      "ridge_venue": 12
+    },
+    {
+      "half_life_days": 360,
+      "ridge_shared": 12,
+      "ridge_venue": 48
+    }
+  ],
+  "settings": {
+    "half_life_days": 360,
+    "ridge_shared": 4,
+    "ridge_venue": 48
+  },
+  "winner_dev": {
+    "settings": {
+      "half_life_days": 360,
+      "ridge_shared": 4,
+      "ridge_venue": 48
+    },
+    "n": 702,
+    "failed": 0,
+    "logloss": 1.010659411364449,
+    "brier": 0.6022882617663073
+  },
+  "frozen_source_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "m4_engine_sha256": "eac755e54086738f40d7f30a514b2c9bb789b2c428ffef4ee70bb2fd2b49bc45",
+  "status": "CHRONOLOGICAL_DEVELOPMENT_ONLY_NO_PROMOTION",
+  "candidate_scores": [
+    {
+      "settings": {
+        "half_life_days": 90,
+        "ridge_shared": 4,
+        "ridge_venue": 12
+      },
+      "n": 701,
+      "logloss": 1.0133880395557782,
+      "brier": 0.6052173039454088,
+      "failed": 1
+    },
+    {
+      "settings": {
+        "half_life_days": 90,
+        "ridge_shared": 4,
+        "ridge_venue": 48
+      },
+      "n": 702,
+      "logloss": 1.0118494551595285,
+      "brier": 0.6032166697919094,
+      "failed": 0
+    },
+    {
+      "settings": {
+        "half_life_days": 90,
+        "ridge_shared": 12,
+        "ridge_venue": 12
+      },
+      "n": 702,
+      "logloss": 1.018059758523414,
+      "brier": 0.6074792679054172,
+      "failed": 0
+    },
+    {
+      "settings": {
+        "half_life_days": 90,
+        "ridge_shared": 12,
+        "ridge_venue": 48
+      },
+      "n": 702,
+      "logloss": 1.012146234215617,
+      "brier": 0.6041781942057735,
+      "failed": 0
+    },
+    {
+      "settings": {
+        "half_life_days": 180,
+        "ridge_shared": 4,
+        "ridge_venue": 12
+      },
+      "n": 701,
+      "logloss": 1.0120732158365766,
+      "brier": 0.60416177545052,
+      "failed": 1
+    },
+    {
+      "settings": {
+        "half_life_days": 180,
+        "ridge_shared": 4,
+        "ridge_venue": 48
+      },
+      "n": 702,
+      "logloss": 1.010829755173926,
+      "brier": 0.6024564038693776,
+      "failed": 0
+    },
+    {
+      "settings": {
+        "half_life_days": 180,
+        "ridge_shared": 12,
+        "ridge_venue": 12
+      },
+      "n": 702,
+      "logloss": 1.016609732257877,
+      "brier": 0.6064337919335822,
+      "failed": 0
+    },
+    {
+      "settings": {
+        "half_life_days": 180,
+        "ridge_shared": 12,
+        "ridge_venue": 48
+      },
+      "n": 702,
+      "logloss": 1.0112200277698682,
+      "brier": 0.6035063009644901,
+      "failed": 0
+    },
+    {
+      "settings": {
+        "half_life_days": 360,
+        "ridge_shared": 4,
+        "ridge_venue": 12
+      },
+      "n": 701,
+      "logloss": 1.011851777560068,
+      "brier": 0.6039072179315129,
+      "failed": 1
+    },
+    {
+      "settings": {
+        "half_life_days": 360,
+        "ridge_shared": 4,
+        "ridge_venue": 48
+      },
+      "n": 702,
+      "logloss": 1.010659411364449,
+      "brier": 0.6022882617663073,
+      "failed": 0
+    },
+    {
+      "settings": {
+        "half_life_days": 360,
+        "ridge_shared": 12,
+        "ridge_venue": 12
+      },
+      "n": 702,
+      "logloss": 1.0162600329058635,
+      "brier": 0.6061553735469647,
+      "failed": 0
+    },
+    {
+      "settings": {
+        "half_life_days": 360,
+        "ridge_shared": 12,
+        "ridge_venue": 48
+      },
+      "n": 702,
+      "logloss": 1.0109907091382853,
+      "brier": 0.6033278643507058,
+      "failed": 0
+    }
+  ]
+}
