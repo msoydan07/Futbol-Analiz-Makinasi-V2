@@ -1,0 +1,36 @@
+name: 263 missing EL 2025-26 official spotchecked ten-league coverage
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_el_2025_26_scope_source_263.py
+      - experiments/263/europe/test_uefa_el_2025_26_scope_source_263.py
+      - .github/workflows/263-el-2025-26-cohort-coverage.yml
+permissions:
+  contents: read
+jobs:
+  missing-season-source-readonly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: NEW isolated source-validation guards
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_el_2025_26_scope_source_263.py
+      - name: Fetch only 2025-26 missing UEFA EL from public documented JSON feed
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python experiments/263/europe/uefa_el_2025_26_scope_source_263.py
+      - name: Quarantined original assessment and 10-league-only candidate games
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-el-2025-26-ten-leagues-scope-review
+          if-no-files-found: error
+          retention-days: 60
+          path: |
+            data/europe_staged_263/el_2025_26_ten_league_review/el_2025_26_source_acceptance.json
+            data/europe_staged_263/el_2025_26_ten_league_review/el_2025_26_review_only_ten_leagues.json
