@@ -73,32 +73,53 @@ def stress_low(selection,lh,la):
                for x in (.9,1.,1.1) for y in (.9,1.,1.1))
 
 def odds_evidence(selection,quote,fixture_key,kickoff,now):
-    fallback={'status':'PRICE_NOT_VERIFIED','decimal_odds':None,'no_vig':None,'break_even':None,
-              'source':None,'market_margin':None}
+    """One snapshot observed near ANALYSIS TIME, never an odds-opening or -closing price.
+
+    A single observed selection price may be DISPLAYED without the competing
+    sides. No-vig advantage and B classification require COMPLETE, synchronized
+    opposite prices for an exclusive bookmaker market. Double chances overlap,
+    so their naked odds can be displayed but cannot be naively normalized.
+    """
+    current=aware(now);ko=aware(kickoff)
+    fallback={'status':'PRICE_NOT_VERIFIED','decimal_odds':None,'no_vig':None,
+              'break_even':None,'source':None,'source_url':None,
+              'checked_at_utc':None,'analysis_at_utc':current.isoformat(),
+              'market_margin':None,'analysis_snapshot_policy':'ONLY_ANALYSIS_TIME_MAX_10_MINUTES'}
     if quote is None:return fallback
-    if selection not in GROUP:return {**fallback,'status':'DOUBLE_CHANCE_COUNTERMARKET_NOT_COMPARABLE'}
+    if selection not in MARKETS:raise DecisionError('SELECTION_NOT_SUPPORTED')
     if not isinstance(quote,dict):raise DecisionError('ODDS_INVALID')
     if quote.get('fixture_key')!=fixture_key:raise DecisionError('WRONG_MATCH_ODDS')
-    if quote.get('market_group')!=GROUP[selection]:raise DecisionError('WRONG_MARKET_LINE')
+    expected_group=GROUP.get(selection,'DOUBLE_CHANCE')
+    if quote.get('market_group')!=expected_group:raise DecisionError('WRONG_MARKET_LINE')
     if quote.get('verification')!='INDEPENDENTLY_CHECKED' or quote.get('stage')!='PREMATCH':
         return {**fallback,'status':'SOURCE_OR_PRICE_NOT_CONFIRMED'}
-    if not quote.get('source') or not str(quote.get('source_url','')).startswith('https://'):
+    source=quote.get('source');source_url=quote.get('source_url')
+    if not isinstance(source,str) or not source.strip() or not isinstance(source_url,str) or not source_url.startswith('https://'):
         return {**fallback,'status':'ODDS_SOURCE_MISSING'}
-    checked=aware(quote.get('checked_at_utc'));current=aware(now);ko=aware(kickoff)
+    checked=aware(quote.get('checked_at_utc'))
     if not checked<=current<ko:return {**fallback,'status':'ODDS_WRONG_TIME'}
-    if (current-checked).total_seconds()>7200:return {**fallback,'status':'ODDS_STALE'}
+    if (current-checked).total_seconds()>600:
+        return {**fallback,'status':'ODDS_STALE_FOR_ANALYSIS_OVER_10_MINUTES'}
     v=quote.get('decimal_odds')
-    if not isinstance(v,dict) or set(v)!=set(GROUPS[GROUP[selection]]):
-        return {**fallback,'status':'NO_COMPLETE_OPPOSITE_PRICES'}
+    if not isinstance(v,dict) or selection not in v:
+        return {**fallback,'status':'SELECTION_ODDS_NOT_FOUND'}
+    selected=numeric(v[selection],1.000001,1000.)
+    partial={**fallback,'decimal_odds':selected,'break_even':1/selected,
+             'source':source,'source_url':source_url,
+             'checked_at_utc':checked.isoformat()}
+    if selection not in GROUP:
+        return {**partial,'status':'DOUBLE_CHANCE_PRICE_OBSERVED_NO_COMPARABLE_NO_VIG'}
+    group=GROUPS[GROUP[selection]]
+    if set(v)!=set(group):
+        return {**partial,'status':'SELECTION_PRICE_OBSERVED_NO_COMPLETE_MARKET'}
     odds={k:numeric(n,1.000001,1000.) for k,n in v.items()}
     inverse={k:1/x for k,x in odds.items()}
     margin=sum(inverse.values())-1
-    if not -.001<=margin<=.5:return {**fallback,'status':'BAD_BOOKMAKER_MARGIN'}
-    return {'status':'COMPLETE_PREMATCH_QUOTES_SOURCE_FLAGGED_AS_CHECKED',
-            'decimal_odds':odds[selection],'break_even':inverse[selection],
-            'no_vig':inverse[selection]/sum(inverse.values()),'source':quote['source'],
-            'source_url':quote['source_url'],'checked_at_utc':checked.isoformat(),
+    if not -.001<=margin<=.5:return {**partial,'status':'BAD_BOOKMAKER_MARGIN'}
+    return {**partial,'status':'COMPLETE_PREMATCH_QUOTES_SOURCE_FLAGGED_AS_CHECKED',
+            'no_vig':inverse[selection]/sum(inverse.values()),
             'market_margin':margin,'normalization':'proportional_no_vig'}
+
 
 def classify(*,model,markets,selection,lambda_home,lambda_away,fixture_key,kickoff,now,
              league,model_level,data_reliability,context_ok,critical_unverified_effect,
@@ -135,13 +156,21 @@ def classify(*,model,markets,selection,lambda_home,lambda_away,fixture_key,kicko
             'A_condition':A,'B_condition':B,'candidate_class':category,
             'official_class':None,'price':price,'EV':ev,
             'no_vig_edge_percentage_points':edge*100 if edge is not None else None,
+            'analysis_time_utc':aware(now).isoformat(),
+            'price_policy':'PRICE_CHECKED_WITHIN_10_MINUTES_OF_ANALYSIS; NO_AFTER_ANALYSIS_REFRESH',
             'betting_authorized':False,'pilot_registered':False}
 
 def explain(result):
     s=result['selection'];prob=result['model_probability'];e=result['price']
     line=f"{result['model']} {s}: %{prob*100:.1f}, {result['candidate_class']} (RESMİ ONAY YOK)."
-    if result['EV'] is None:return line+" Oran/EV: HESAPLANAMADI ["+e['status']+"]."
-    return (line+f" Oran {e['decimal_odds']:.2f} ({e['source']}); "
-            f"başa baş %{e['break_even']*100:.1f}; marjsız piyasa %{e['no_vig']*100:.1f}; "
+    if e['decimal_odds'] is None:
+        return line+" Analiz anı oranı: DOĞRULANAMADI. EV: HESAPLANAMADI ["+e['status']+"]."
+    stamp=e['checked_at_utc']
+    detail=(f" Analiz anı oranı {e['decimal_odds']:.2f} ({e['source']}; "
+            f"kontrol: {stamp}); başa baş %{e['break_even']*100:.1f}.")
+    if result['EV'] is None:
+        return line+detail+" EV/marjsız avantaj: HESAPLANAMADI ["+e['status']+"]."
+    return (line+detail+
+            f" Marjsız piyasa %{e['no_vig']*100:.1f}; "
             f"avantaj {result['no_vig_edge_percentage_points']:+.1f} puan; "
             f"EV %{result['EV']*100:+.1f}.")
