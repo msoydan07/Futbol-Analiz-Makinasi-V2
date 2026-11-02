@@ -1,0 +1,47 @@
+name: 263 UEFA xG-free M0 M1 M2 chronological preregistration preflight
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_xg_free_model_comparison_prereg_263.py
+      - experiments/263/europe/test_uefa_xg_free_model_comparison_prereg_263.py
+      - experiments/263/evidence/uefa_xg_free_m0_m1_m2_prereg_2026_11_02.json
+      - .github/workflows/263-uefa-prereg-m0-m1-m2-preflight.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  preregistration-only-not-model-evaluation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reuse TWO accepted inputs; do not recalculate 288 132 124 or UEFA fixtures
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p prereg_inputs/official prereg_inputs/goal_only
+          gh run download 41488522760 --repo '${{ github.repository }}' -n 263-uefa-2025-26-official-132-match-id-links -D prereg_inputs/official
+          gh run download 41493071435 --repo '${{ github.repository }}' -n 263-uefa-2025-26-goal-only-prematch-input-readiness -D prereg_inputs/goal_only
+          test -s prereg_inputs/official/132_UEFA_MATCH_IDS_REVIEW_ONLY.json
+          test -s prereg_inputs/goal_only/132_goal_only_feature_inputs_REVIEW_ONLY.json
+      - name: New preregistration split and anti-leak tests ONLY
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_xg_free_model_comparison_prereg_263.py
+      - name: Match 132 previous records to frozen 84 16 32 folds and 124 eligible
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python experiments/263/europe/uefa_xg_free_model_comparison_prereg_263.py             --official prereg_inputs/official/132_UEFA_MATCH_IDS_REVIEW_ONLY.json             --goal-inputs prereg_inputs/goal_only/132_goal_only_feature_inputs_REVIEW_ONLY.json
+      - name: One prereg readiness evidence artifact; no fitting or scoring
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-xg-free-m0-m1-m2-prereg-frozen
+          if-no-files-found: error
+          retention-days: 60
+          path: data/europe_staged_263/2025_26_xg_free_preregistered_experiment/*.json
