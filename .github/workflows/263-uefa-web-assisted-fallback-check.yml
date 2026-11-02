@@ -1,0 +1,38 @@
+name: 263 UEFA official-web assisted fallback - first real factual acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_web_evidence_handoff_263.py
+      - experiments/263/europe/test_uefa_web_evidence_handoff_263.py
+      - experiments/263/evidence/uefa_web_2026-11-02_review_only.json
+      - .github/workflows/263-uefa-web-assisted-fallback-check.yml
+permissions:
+  contents: read
+jobs:
+  official-web-capture-offline-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New isolated offline source handoff tests (zero network)
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_web_evidence_handoff_263.py
+      - name: Real UEFA fact snapshots as observed via external ChatGPT web official source
+        run: |
+          python experiments/263/europe/uefa_web_evidence_handoff_263.py \
+            --competition UEFA_CL --home "Galatasaray" --away Stuttgart \
+            --as-of 2026-11-02T14:00:00Z \
+            --evidence-file experiments/263/evidence/uefa_web_2026-11-02_review_only.json
+          python experiments/263/europe/uefa_web_evidence_handoff_263.py \
+            --competition UEFA_EL --home "Crystal Palace" --away Hoffenheim \
+            --as-of 2026-11-02T14:00:00Z \
+            --evidence-file experiments/263/evidence/uefa_web_2026-11-02_review_only.json
+          python experiments/263/europe/uefa_web_evidence_handoff_263.py \
+            --competition UEFA_EL --home Celtic --away "Beşiktaş" \
+            --as-of 2026-11-02T14:00:00Z \
+            --evidence-file experiments/263/evidence/uefa_web_2026-11-02_review_only.json
