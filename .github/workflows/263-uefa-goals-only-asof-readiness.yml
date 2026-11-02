@@ -1,0 +1,47 @@
+name: 263 UEFA 2025-26 goal-only predate feature readiness no old reruns
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_goal_only_asof_feature_readiness_263.py
+      - experiments/263/europe/test_uefa_goal_only_asof_feature_readiness_263.py
+      - .github/workflows/263-uefa-goals-only-asof-readiness.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  original-archived-source-goals-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch only 2 previously accepted snapshots, no UEFA network
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p audit_input/domestic audit_input/official
+          gh run download 41251343847 --repo '${{ github.repository }}' -n team-source-audit -D audit_input/domestic
+          gh run download 41488522760 --repo '${{ github.repository }}' -n 263-uefa-2025-26-official-132-match-id-links -D audit_input/official
+          test -s audit_input/domestic/historical_results.csv
+          test -s audit_input/official/132_UEFA_MATCH_IDS_REVIEW_ONLY.json
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  audit_input/domestic/historical_results.csv' | sha256sum -c -
+      - name: Only 5 new as-of read-only goal feature and safety tests
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_goal_only_asof_feature_readiness_263.py
+      - name: New 132-match goal-input coverage, no scoring or prediction
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python experiments/263/europe/uefa_goal_only_asof_feature_readiness_263.py             --domestic audit_input/domestic/historical_results.csv             --official-132 audit_input/official/132_UEFA_MATCH_IDS_REVIEW_ONLY.json
+      - name: Single read-only coverage and source-time evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-2025-26-goal-only-prematch-input-readiness
+          retention-days: 60
+          if-no-files-found: error
+          path: data/europe_staged_263/2025_26_goal_only_temporal_readiness/*.json
