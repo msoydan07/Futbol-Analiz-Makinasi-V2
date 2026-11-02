@@ -53,18 +53,39 @@ class ReadonlyReport(unittest.TestCase):
         self.assertNotIn(".write_text(",src)
         self.assertNotIn(".mkdir(",src)
     def test_cutoff_strict_and_missing_history_safe(self):
-        # 1 target-day match cannot be used as history or recorded.
         rows=[{"league":"TUR1","home_id":"H","away_id":"A","match_date":"2026-11-08",
                "fixture_id":"future","season":"2026-2027","home_goals":"4","away_goals":"0","result":"H"}]
-        with tempfile.TemporaryDirectory() as d:
-            with patch("readonly_quad_models_263.use_lock",return_value=object()),\
-                 patch("readonly_quad_models_263.Path.read_bytes",return_value=b"frozen"),\
-                 patch("readonly_quad_models_263.hashlib.sha256") as sha,\
-                 patch("readonly_quad_models_263.json.loads",return_value={
-                    "frozen_source_sha256":"35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
-                    "m4_engine_sha256":"expected"}):
-                sha.return_value.hexdigest.return_value="expected"
-                p=read_only_quad(rows,FIX,lock_path=Path(d)/"dummy.json")
-                self.assertTrue(all(x["status"]=="UNAVAILABLE" for x in p.values()))
+        case={"league":"TUR1","home_id":"H","away_id":"A","target_date":"2026-11-08"}
+        outputs=read_only_quad(rows,case)
+        self.assertEqual(set(outputs),{"B","C2","C3","M4"})
+        self.assertTrue(all(v["status"]=="UNAVAILABLE" for v in outputs.values()))
+
+    def test_frozen_model_functions_generate_four_outputs_without_any_files(self):
+        from datetime import date,timedelta
+        teams=["A","B","C","D"]
+        first=date(2025,9,1)
+        rows=[]
+        for i in range(140):
+            day=(first+timedelta(days=3*i)).isoformat()
+            h=teams[i%4];a=teams[(i+1+(i//4)%2)%4]
+            gh=i%4;ga=(i*7+1)%3
+            rows.append({"fixture_id":"SYNTHETIC_"+str(i),"league":"ENG1",
+                         "season":"2025-2026" if day<"2026-07-01" else "2026-2027",
+                         "match_date":day,"home_id":h,"away_id":a,
+                         "home_goals":str(gh),"away_goals":str(ga),
+                         "result":"H" if gh>ga else "A" if gh<ga else "D"})
+        case={"league":"ENG1","home_id":"A","away_id":"B","target_date":"2026-11-08"}
+        original=deepcopy(rows)
+        with tempfile.TemporaryDirectory() as td:
+            original_files=list(Path(td).iterdir())
+            outputs=read_only_quad(rows,case)
+            self.assertEqual(list(Path(td).iterdir()),original_files)
+        self.assertEqual(rows,original)
+        self.assertEqual(set(outputs),{"B","C2","C3","M4"})
+        self.assertTrue(all(v["status"]=="AVAILABLE" for v in outputs.values()))
+        for record in outputs.values():
+            p=record["goals"]["markets"]
+            d=p["1X2"] if "1X2" in p else {"H":p["MS1"],"D":p["MSX"],"A":p["MS2"]}
+            self.assertAlmostEqual(sum(d.values()),1,places=7)
 
 if __name__=="__main__":unittest.main()
