@@ -6,6 +6,7 @@ on:
       - 'experiments/263/readonly_quad_models_263.py'
       - 'experiments/263/readonly_quad_market_report_263.py'
       - 'experiments/263/test_readonly_quad_market_report_263.py'
+      - 'experiments/263/test_quad_full_report_e2e_263.py'
       - 'experiments/263/requested_match_runner_263.py'
       - '.github/workflows/263-quad-market-report-check.yml'
 permissions:
@@ -21,7 +22,19 @@ jobs:
           python-version: '3.11'
       - name: Install existing required numerical libraries
         run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
-      - name: Only new read-only market/report tests; no historical backtest
+      - name: Verify original SHA-locked 4413-match source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/263-base"
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" \
+            -n team-source-audit -D "$RUNNER_TEMP/263-base"
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  '"$RUNNER_TEMP/263-base/historical_results.csv" | sha256sum --check
+      - name: New pure model and one real-archive report integration acceptance; no backtest
         env:
           PYTHONPATH: experiments/263
-        run: python -m unittest -v experiments/263/test_readonly_quad_market_report_263.py
+        run: |
+          export M263_FROZEN_HISTORY="$RUNNER_TEMP/263-base/historical_results.csv"
+          python -m unittest -v experiments/263/test_readonly_quad_market_report_263.py experiments/263/test_quad_full_report_e2e_263.py
