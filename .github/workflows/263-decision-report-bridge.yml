@@ -1,0 +1,23 @@
+name: 263 karar ekini 17 bolum raporuna bagla - yeni toplu kontrol
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/analysis_time_decision_bridge_263.py'
+      - 'experiments/263/requested_match_runner_263.py'
+      - 'experiments/263/test_analysis_time_decision_bridge_263.py'
+      - '.github/workflows/263-decision-report-bridge.yml'
+permissions:
+  contents: read
+jobs:
+  new-readonly-bridge-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only new read-only connection checks; no historical refit
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_analysis_time_decision_bridge_263.py

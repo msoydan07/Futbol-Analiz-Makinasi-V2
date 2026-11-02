@@ -24,6 +24,7 @@ from operational_report_263 import (named_cases, build_operational_offline_bundl
 from quality_gate_263 import locked_evidence, HISTORICAL_SHA256
 from section_acceptance_263 import audit as audit_sections, render as render_sections
 from updated_preview_263 import preview as staged_preview
+from analysis_time_decision_bridge_263 import offline_appendix, render_appendix
 
 VERSION = '263_requested_match_single_path_v1'
 class RequestedMatchError(ValueError): pass
@@ -95,9 +96,11 @@ def requested_match(*, league,home,away,index_path,alias_path,history_path,
         envelope['status']='OFFICIAL_FIXTURE_CHECKED_FROZEN_MATH_PREVIEW_ONLY'
         envelope['live_analysis_accepted']=False
         envelope['model_readiness']='FROZEN_4413_ONLY_NOT_CURRENT_DATA_VERIFIED'
+        decision_appendix=offline_appendix(verification,bundle,now)
         return envelope,{
             'model_preview.json':bundle,
-            'model_preview.md':render_operational_markdown(bundle),
+            'model_preview.md':render_operational_markdown(bundle)+'\n\n'+render_appendix(decision_appendix),
+            'analysis_time_odds_abc_appendix.json':decision_appendix,
             'section_acceptance_263.json':contract,
             'section_acceptance_263.md':render_sections(contract),
         }
