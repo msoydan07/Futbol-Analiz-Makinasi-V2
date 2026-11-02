@@ -1,0 +1,45 @@
+name: 263 UEFA 2025-26 official 132 match IDs one source acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_2025_26_match_id_link_audit_263.py
+      - experiments/263/europe/test_uefa_2025_26_match_id_link_audit_263.py
+      - experiments/263/evidence/uefa_cl_el_2025_26_official_132_match_links_web_review.json
+      - .github/workflows/263-uefa-2025-26-official-132-match-links.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  official-source-links-readonly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download existing 132 candidate archive only, no UEFA remote fetch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p prior_uefa_263
+          gh run download 41480542512 --repo '${{ github.repository }}' -n 263-uefa-2025-26-cl-el-ten-league-single-coverage -D prior_uefa_263
+          test -s prior_uefa_263/2025_26_cl_el_review_only_matches.json
+      - name: New official source href / identity / date / scores safeguards
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_2025_26_match_id_link_audit_263.py
+      - name: Compare all 132 official article match URLs to locked 132 candidates
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python experiments/263/europe/uefa_2025_26_match_id_link_audit_263.py             --union prior_uefa_263/2025_26_cl_el_review_only_matches.json
+      - name: Single review-only matched source ID report
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-2025-26-official-132-match-id-links
+          if-no-files-found: error
+          retention-days: 60
+          path: data/europe_staged_263/uefa_2025_26_132_official_match_ids/*.json
