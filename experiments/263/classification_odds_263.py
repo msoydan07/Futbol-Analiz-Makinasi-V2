@@ -89,6 +89,10 @@ def odds_evidence(selection,quote,fixture_key,kickoff,now):
     if selection not in MARKETS:raise DecisionError('SELECTION_NOT_SUPPORTED')
     if not isinstance(quote,dict):raise DecisionError('ODDS_INVALID')
     if quote.get('fixture_key')!=fixture_key:raise DecisionError('WRONG_MATCH_ODDS')
+    # Legacy three-way quotes do not contain an observed 1X/X2/12 price.
+    # Preserve the old safe non-comparable status; only a real 1X quote is displayed.
+    if selection not in GROUP and quote.get('market_group')!='DOUBLE_CHANCE':
+        return {**fallback,'status':'DOUBLE_CHANCE_COUNTERMARKET_NOT_COMPARABLE'}
     expected_group=GROUP.get(selection,'DOUBLE_CHANCE')
     if quote.get('market_group')!=expected_group:raise DecisionError('WRONG_MARKET_LINE')
     if quote.get('verification')!='INDEPENDENTLY_CHECKED' or quote.get('stage')!='PREMATCH':
