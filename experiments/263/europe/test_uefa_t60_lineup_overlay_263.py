@@ -10,7 +10,7 @@ PLAYERS_A=[f"Away Player {i}" for i in range(1,12)]
 # All test players and matches are SYNTHETIC, not real lineup claims.
 EVENT={"competition":"UEFA_CL","home":"Galatasaray","away":"Barcelona",
        "kickoff_utc":"2026-11-02T18:00:00+00:00",
-       "observed_at_utc":"2026-11-02T17:58:00+00:00",
+       "observed_at_utc":"2026-11-02T16:58:00+00:00",
        "source_url":"https://www.livescore.com/en/football/champions-league/fixture/123/",
        "lineup_status":"CONFIRMED",
        "home_starting_xi":PLAYERS_H,"away_starting_xi":PLAYERS_A}
