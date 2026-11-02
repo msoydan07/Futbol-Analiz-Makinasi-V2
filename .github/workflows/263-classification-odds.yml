@@ -1,0 +1,22 @@
+name: 263 A-B-C odds and classification - new tests only
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/classification_odds_263.py'
+      - 'experiments/263/test_classification_odds_263.py'
+      - '.github/workflows/263-classification-odds.yml'
+permissions:
+  contents: read
+jobs:
+  isolated-classification-acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One new isolated A-B-C and odds verification test suite
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_classification_odds_263.py
