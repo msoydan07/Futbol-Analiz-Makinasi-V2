@@ -121,7 +121,14 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
     current=[r for r in past if r['season']=='2026-2027']
     previous=[r for r in past if r['season']=='2025-2026']
     c2,reason=canonical_c2_lambda(current,previous,home,away)
-    outputs['C2']={'status':'AVAILABLE','goals':score_market(c2['lambda_home'],c2['lambda_away'])} if c2 else {'status':'UNAVAILABLE','reason':reason}
+    if c2:
+        c2_goals=score_market(c2['lambda_home'],c2['lambda_away'])
+        markets=c2_goals['markets']
+        # Adapter only: no C2 formula or canonical probability is changed.
+        markets['1X2']={'H':markets['MS1'],'D':markets['MSX'],'A':markets['MS2']}
+        outputs['C2']={'status':'AVAILABLE','goals':c2_goals}
+    else:
+        outputs['C2']={'status':'UNAVAILABLE','reason':reason}
     fit3=fit_c3(past)
     lam3=predict_c3(fit3,home,away) if fit3 else None
     s3=scores(*lam3) if lam3 else None

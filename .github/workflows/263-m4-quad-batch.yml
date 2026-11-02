@@ -36,6 +36,7 @@ jobs:
           PYTHONPATH: experiments/263
           M4_TEST_HISTORY: m4_ci_source/historical_results.csv
         run: |
+          set -o pipefail
           python -m unittest -v experiments/263/test_quad_263.py |& tee m4-quad-test-results.txt
       - if: always()
         uses: actions/upload-artifact@v4
