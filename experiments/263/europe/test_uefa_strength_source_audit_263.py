@@ -35,7 +35,7 @@ class SourceAuditTests(unittest.TestCase):
         with self.assertRaises(CoverageError):split_uefa_club("Aston Villa")
     def test_index_wrong_universe_rejected(self):
         d=self.index();del d["season_memberships"]["2026-2027"]["ENG1"]
-        with self.assertRaisesRegex(CoverageError,"EXPECTED_TEN_LEAGUE"):
+        with self.assertRaisesRegex(CoverageError,"UNEXPECTED_DOMESTIC_LEAGUES"):
             validate_index(d)
     def test_csv_explicit_unverified_label(self):
         row=label_review("Aston Villa (ENG)",self.index())
