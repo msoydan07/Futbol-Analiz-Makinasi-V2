@@ -1,0 +1,38 @@
+name: 263 UEFA cross-league source identity coverage - new 432 corpus audit
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_strength_source_audit_263.py
+      - experiments/263/europe/test_uefa_strength_source_audit_263.py
+      - .github/workflows/263-uefa-strength-source-audit.yml
+permissions:
+  contents: read
+jobs:
+  readonly-uefa-identity-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Historical parser dependency only
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5
+      - name: New focused identity non-promotion unit tests
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_strength_source_audit_263.py
+      - name: One pin-frozen 432 game source and identity coverage inventory
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python experiments/263/europe/uefa_strength_source_audit_263.py
+      - name: One review-only archive, never model or ledger
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-strength-bridge-source-identity-review
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            data/europe_staged_263/strength_bridge_audit/source_coverage_263.json
+            data/europe_staged_263/strength_bridge_audit/uefa_club_identity_REVIEW_ONLY.csv
