@@ -44,7 +44,7 @@ class NoXGEuropeTests(unittest.TestCase):
             self.call(collector=fake)
     def test_unreviewed_arbitrary_feature_blocked(self):
         with self.assertRaisesRegex(XGPolicyViolation,"UNREVIEWED_EXTERNAL_FIELD"):
-            validate_research_facts({"experimentally_estimated_strength_xg_proxy":1.5})
+            validate_research_facts({"unreviewed_opponent_strength_scaler":1.5})
     def test_scope_outside_ten_stops_before_collector(self):
         called=[]
         g,f=self.call(away="Celtic",collector=lambda *a,**k:called.append(1))
