@@ -25,6 +25,8 @@ from quality_gate_263 import locked_evidence, HISTORICAL_SHA256
 from section_acceptance_263 import audit as audit_sections, render as render_sections
 from updated_preview_263 import preview as staged_preview
 from analysis_time_decision_bridge_263 import offline_appendix, render_appendix
+from readonly_quad_models_263 import read_only_quad
+from readonly_quad_market_report_263 import make_reference, render_four_report
 
 VERSION = '263_requested_match_single_path_v1'
 class RequestedMatchError(ValueError): pass
@@ -38,6 +40,7 @@ def _file_sha_matches(base_rows,base_meta):
 def requested_match(*, league,home,away,index_path,alias_path,history_path,
                     evidence_path=None,refresh_audit_path=None,base_path=None,
                     fixture_gate:Callable|None=None,quote_provider:Callable|None=None,now:datetime|None=None,
+                    include_four_model_market_reference:bool=False,
                     registry_path='data/match_registry.json'):
     """One invocation. Fixture gate must fetch/parse official source; no supplied flags.
 
@@ -96,14 +99,29 @@ def requested_match(*, league,home,away,index_path,alias_path,history_path,
         envelope['status']='OFFICIAL_FIXTURE_CHECKED_FROZEN_MATH_PREVIEW_ONLY'
         envelope['live_analysis_accepted']=False
         envelope['model_readiness']='FROZEN_4413_ONLY_NOT_CURRENT_DATA_VERIFIED'
-        decision_appendix=offline_appendix(verification,bundle,now,quote_provider=quote_provider)
-        return envelope,{
+        captured={}
+        def source_once(fixture_input):
+            values=quote_provider(fixture_input)
+            captured["snapshots"]=values
+            return values
+        decision_appendix=offline_appendix(
+            verification,bundle,now,quote_provider=source_once if quote_provider is not None else None)
+        comparison={}
+        extra_markdown=""
+        if include_four_model_market_reference:
+            models=read_only_quad(rows,c)
+            comparison=make_reference(models,captured.get("snapshots",{}),fixture,now)
+            extra_markdown="\n\n"+render_four_report(comparison)
+        result_files={
             'model_preview.json':bundle,
-            'model_preview.md':render_operational_markdown(bundle)+'\n\n'+render_appendix(decision_appendix),
+            'model_preview.md':render_operational_markdown(bundle)+'\n\n'+render_appendix(decision_appendix)+extra_markdown,
             'analysis_time_odds_abc_appendix.json':decision_appendix,
             'section_acceptance_263.json':contract,
             'section_acceptance_263.md':render_sections(contract),
         }
+        if comparison:
+            result_files["readonly_four_model_market_reference.json"]=comparison
+        return envelope,result_files
     base_rows,base_meta=load_history(base_path)
     _file_sha_matches(base_rows,base_meta)
     refresh=json.loads(Path(refresh_audit_path).read_text(encoding='utf-8'))
@@ -140,12 +158,15 @@ def main(argv=None):
     p.add_argument('--base',help='Pinned frozen data, required for staged-data mode')
     p.add_argument('--refresh-audit',help='Staged-data audit, required with --base')
     p.add_argument('--registry',default='data/match_registry.json',help='Existing team/match identity registry')
+    p.add_argument('--include-four-model-market-reference',action='store_true',
+                   help='Read-only four-model comparison; no pilot registration')
     a=p.parse_args(argv)
     envelope,outputs=requested_match(
         league=a.league,home=a.home,away=a.away,index_path=a.index,
         alias_path=a.aliases,history_path=a.history,evidence_path=a.evidence,
         base_path=a.base,refresh_audit_path=a.refresh_audit,
-        registry_path=a.registry)
+        registry_path=a.registry,
+        include_four_model_market_reference=a.include_four_model_market_reference)
     write_outputs(envelope,outputs,a.out)
     print(json.dumps({'status':envelope['status'],'outputs':len(outputs)+1,
                        'live_analysis_accepted':False,'recommendations':0},ensure_ascii=False))

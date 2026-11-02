@@ -1,0 +1,27 @@
+name: 263 dort model analizi ve piyasa rapor birlestirme - yeni kontrol
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/readonly_quad_models_263.py'
+      - 'experiments/263/readonly_quad_market_report_263.py'
+      - 'experiments/263/test_readonly_quad_market_report_263.py'
+      - 'experiments/263/requested_match_runner_263.py'
+      - '.github/workflows/263-quad-market-report-check.yml'
+permissions:
+  contents: read
+jobs:
+  no-ledger-report-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install existing required numerical libraries
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Only new read-only market/report tests; no historical backtest
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_readonly_quad_market_report_263.py
