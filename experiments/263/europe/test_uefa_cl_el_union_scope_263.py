@@ -60,7 +60,7 @@ class SameSeasonUnionChecks(unittest.TestCase):
                     "candidate_uefa_leagues_present":["ENG1"],
                     "candidate_leagues_without_uefa_match":["ENG2"]}}
         text=render_markdown(report)
-        self.assertIn("REVIEW_ONLY",text.upper())
+        self.assertIn("REVIEW-ONLY",text.upper())
         self.assertIn("NO",text)
         self.assertIn("288",text)
 if __name__=="__main__":unittest.main()
