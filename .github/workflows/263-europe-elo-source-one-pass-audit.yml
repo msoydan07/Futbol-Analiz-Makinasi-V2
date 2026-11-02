@@ -50,6 +50,19 @@ jobs:
                           raise ValueError("UNSAFE_CSV_BYTE_COUNT")
                   reader=csv.DictReader(io.StringIO(raw.decode("utf-8-sig")))
                   rows=list(reader)
+                  clubkey="slug" if key=="current" else "club"
+                  invalid=[r for r in rows if not (r.get(clubkey) or "").strip()]
+                  truly_empty=[r for r in invalid if not any(str(v or "").strip() for v in r.values())]
+                  substantive=[r for r in invalid if r not in truly_empty]
+                  if invalid:
+                      print("ELO_CSV_ID_DIAGNOSTIC="+json.dumps({
+                          "key":key,"total":len(rows),"missing_club_id_rows":len(invalid),
+                          "all_empty_rows":len(truly_empty),
+                          "substantive_missing_id_rows":len(substantive),
+                          "samples":invalid[:2]},ensure_ascii=False,sort_keys=True))
+                  if substantive:
+                      raise ValueError("NONEMPTY_RECORD_WITH_MISSING_CLUB_ID")
+                  rows=[r for r in rows if r not in truly_empty]
                   expected={"slug","name","country_code","elo","rd","as_of","last_match_date"} if key=="current" else {"date","club","elo","rd"}
                   if not reader.fieldnames or not expected.issubset(reader.fieldnames) or not rows:
                       raise ValueError("CSV_REQUIRED_COLUMNS_OR_ROWS_MISSING")
