@@ -1,0 +1,45 @@
+name: 263 UEFA historical prematch domestic input coverage
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_asof_domestic_input_audit_263.py
+      - experiments/263/europe/test_uefa_asof_domestic_input_audit_263.py
+      - .github/workflows/263-uefa-asof-domestic-input-audit.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  previous-artifacts-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download two previously verified artifacts no UEFA re-fetch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p asof_input/domestic asof_input/uefa
+          gh run download 41251343847 --repo '${{ github.repository }}' -n team-source-audit -D asof_input/domestic
+          gh run download 41480542512 --repo '${{ github.repository }}' -n 263-uefa-2025-26-cl-el-ten-league-single-coverage -D asof_input/uefa
+          test -f asof_input/domestic/historical_results.csv
+          test -f asof_input/uefa/2025_26_cl_el_review_only_matches.json
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  asof_input/domestic/historical_results.csv' | sha256sum -c -
+      - name: Only new as-of guard tests
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_asof_domestic_input_audit_263.py
+      - name: 132 candidates against original 4413 match time-sealed archive
+        run: |
+          python experiments/263/europe/uefa_asof_domestic_input_audit_263.py             --history asof_input/domestic/historical_results.csv             --union asof_input/uefa/2025_26_cl_el_review_only_matches.json
+      - name: One new temporal coverage report only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-2025-26-asof-domestic-input-coverage
+          if-no-files-found: error
+          retention-days: 60
+          path: data/europe_staged_263/2025_26_asof_strength_input/*.json
