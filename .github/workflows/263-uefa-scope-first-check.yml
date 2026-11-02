@@ -1,0 +1,28 @@
+name: 263 UEFA ten-league early skip gate - focused checks
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_ten_league_scope_gate_263.py
+      - experiments/263/europe/test_uefa_ten_league_scope_gate_263.py
+      - .github/workflows/263-uefa-scope-first-check.yml
+permissions:
+  contents: read
+jobs:
+  before-any-UEFA-research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New TEN focused no-scrape no-training checks
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_ten_league_scope_gate_263.py
+      - name: Real identity cache; two in-scope, one out-of-scope examples
+        run: |
+          python experiments/263/europe/uefa_ten_league_scope_gate_263.py --home Galatasaray --away Barcelona
+          python experiments/263/europe/uefa_ten_league_scope_gate_263.py --home Galatasaray --away Leicester
+          python experiments/263/europe/uefa_ten_league_scope_gate_263.py --home Galatasaray --away Celtic
