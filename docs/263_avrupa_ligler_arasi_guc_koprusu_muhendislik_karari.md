@@ -30,6 +30,59 @@ Bir takımın kendi liginde üst sıralarda bulunması, farklı güçlü bir ül
 - 'Avrupa maçı hep az gollü', 'İngiltere takımı hep kazanır', 'puan gerekliyse kesin hücum eder' gibi sabit dogmalar yasak.
 - Değişik taktik olasılıklarını doğrudan gerçekleşmiş motivasyon gibi sunma; belirsizlik belirt.
 
+### C: UEFA güncel puan durumu, fikstür zorluğu ve geçmiş ikili karşılaşmalar (2 Kasım ek kararı)
+
+Kullanıcının yeni fikri: Öncelikle resmî UEFA Şampiyonlar Ligi ve Avrupa Ligi
+**maç öncesindeki** puan durumu ile takımların daha önce birbirleriyle
+oynadıkları maçlar güç köprüsüne ek bağımsız referans olabilir.
+
+Veri kararları:
+- **Mevcut** `experiments/263/europe/uefa_match_context_263.py` lig
+  aşamasında iki tarafın maç öncesi `points, goal_difference, rank, played`
+  alanlarını zaten taslak seviyesinde alıyor. Henüz canlı kaynaktan
+  otomatik ve bağımsız doğrulanmış veri toplamıyor; bu alanlara
+  `VERIFIED` denmeyecek. Atılan/yenen gol ve kalan fikstür
+  eşleşmeleri, kaynaklı ek alan olarak hazırlanmalı.
+- **Fikstür zorluğu:** Her kulüp 8 farklı rakiple oynar;
+  sıralama/puan toplamları farklı rakiplerle edinilir. Ham puan
+  ve sıra doğrudan kıyaslanmaz. İlgili tarih itibarıyla
+  **oynanmış rakiplerin ortak ligler-arası güç skalasındaki
+  maç öncesi dereceleri** (mümkünse ev/deplasman) ayrı değerlendirilir.
+  Bunları hesaplamak için maç sonrası güncellenmiş rakip
+  derecesi kullanılamaz. 0 oynanmış maçta özellik `UNAVAILABLE`,
+  sıfır güç veya lig sırası 36 varsayımı yapılmaz.
+- **İkili geçmiş:** UEFA resmî maç kimliği, gerçek maç tarihi,
+  turnuva/tur, o maçtaki saha, taraflar, skor ve o günkü rakip
+  seviyesinin kaynak kanıtı gerekir. Farklı maçlardaki takım
+  adları birleştirilirken önce canonical kimlik doğrulaması
+  yapılır. Aynı maç hem rövanş sonucu hem ayrı head-to-head
+  gözlemi gibi iki kez hesaba sokulmaz.
+- **Zaman/örneklem:** Yalnız analiz anından kesin önce bitmiş
+  maçlar. H2H hiç yoksa `NO_PRIOR_MEETINGS`; 1-2 eski maç
+  varsa küçük ve değişken örneklem olarak işaretle. Bir önceki
+  teknik direktör/kadro ile oynanan yıllar önceki maçları
+  güncel güç farkının kesin delili sayma. İkili maç sonucu,
+  zaten rakip güçlü geçmiş maç setine giriyorsa iki defa sayma.
+- **Turnuva aşaması:** Şampiyonlar Ligi ve Avrupa Ligi lig
+  aşamasında 36 kulüp, sekiz farklı rakiple karşılaşır.
+  Güncel puan sırası oynanmış maçların sonucudur ve bitiş
+  sırasını garanti etmez; iki takımın ikili geçmişi lig
+  aşamasının puan eşitliği sıralama kriteri değildir.
+  UEFA 2026/27 resmî kaynaklar:
+  https://documents.uefa.com/r/Regulations-of-the-UEFA-Champions-League-2026/27/Article-17-Match-system-league-phase-Online
+  https://documents.uefa.com/r/Regulations-of-the-UEFA-Europa-League-2026/27/Article-17-Match-system-league-phase-Online
+  https://documents.uefa.com/r/Regulations-of-the-UEFA-Champions-League-2026/27/Article-18-Equality-of-points-league-phase-Online
+
+**Kabul deneyi**: Daha önce planlanmış tek kronolojik, maç bazında
+eşleşmiş toplu karşılaştırmada, ligler arası ortak güç bazına karşı
+(1) rakip zorluğu ayarlı UEFA puan durumu; (2) yeterli ve güncel
+ikili geçmiş; (3) ikisinin birleşimi ayrı özellik ablation'ları
+olarak incelensin. Yeni M5 veya otomatik yüzde katsayısı kurulmasın.
+Maç sonrası sıralama ve sonuçlar maç öncesi değişkene
+giremesin. Puan/maç haftası göstergeleriyle yapılan ilk 432
+maç deneyinin ileri sezon performansı kötüleştiğinden
+bunlara önceden fayda atfedilmesin.
+
 ## Ön-kayıt yapılacak tek toplu karşılaştırma
 
 - Referans M0: Yerel lig seviyelerinin doğrudan karşılaştırılması / halihazırdaki
