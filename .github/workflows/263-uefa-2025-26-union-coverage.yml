@@ -1,0 +1,39 @@
+name: 263 2025-26 UEFA CL EL same-season ten-league union - one new acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_cl_el_union_scope_263.py
+      - experiments/263/europe/test_uefa_cl_el_union_scope_263.py
+      - .github/workflows/263-uefa-2025-26-union-coverage.yml
+permissions:
+  contents: read
+jobs:
+  one-combined-season-coverage-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pin inherited historical parser dependency
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5
+      - name: Only new union and 2025-26 identity invariants
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_cl_el_union_scope_263.py
+      - name: Single 2025-26 CL + EL historical sources, 10-league audit
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python experiments/263/europe/uefa_cl_el_union_scope_263.py
+      - name: One combined source/identity report artifact (no production data)
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-2025-26-cl-el-ten-league-single-coverage
+          if-no-files-found: error
+          retention-days: 60
+          path: |
+            data/europe_staged_263/2025_26_cl_el_union_audit/2025_26_cl_el_ten_league_union_report.json
+            data/europe_staged_263/2025_26_cl_el_union_audit/2025_26_cl_el_review_only_matches.json
+            data/europe_staged_263/2025_26_cl_el_union_audit/2025_26_cl_el_summary.md
