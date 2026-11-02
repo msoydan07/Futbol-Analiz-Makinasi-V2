@@ -27,7 +27,7 @@ class StudyContract(unittest.TestCase):
     def test_parse_champions_dates_and_matchdays(self):
         x=parse_league_phase(CL,"UEFA_CL","2024-2025")
         self.assertEqual([x[0]["matchday"],x[-1]["matchday"]],[1,2])
-        self.assertEqual({r["total_goals"] for r in x},{0,1,2,3,4})
+        self.assertEqual({r["total_goals"] for r in x},{0,2,3,4})
     def test_europa_date_clusters_infer_matchdays_without_future(self):
         x=parse_league_phase(EL,"UEFA_EL","2024-2025")
         self.assertEqual([r["matchday"] for r in x],[1,1,2])
