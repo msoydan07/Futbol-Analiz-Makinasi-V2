@@ -1,0 +1,22 @@
+name: 263 UEFA Champions Europa source isolation - new checks
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/uefa_stage_263.py
+      - experiments/263/europe/test_uefa_stage_263.py
+      - .github/workflows/263-uefa-isolation-check.yml
+permissions:
+  contents: read
+jobs:
+  europe-candidate-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only new UEFA source-isolation checks; no model or backtest
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python -m unittest -v experiments/263/europe/test_uefa_stage_263.py
