@@ -36,10 +36,142 @@ jobs:
         run: |
           set -euo pipefail
           git diff-tree --no-commit-id --name-status -r HEAD -- experiments/263/quad_requests/ > /tmp/quad_delta.tsv
-          if grep -Eq -v '^A[[:space:]]+experiments/263/quad_requests/[A-Za-z0-9_-]+\.json$' /tmp/quad_delta.tsv; then
+          if grep -Ev '^(A[[:space:]]+experiments/263/quad_requests/[A-Za-z0-9_-]+\.json|A[[:space:]]+experiments/263/quad_requests/README\.md)
+          if [ -s /tmp/quad_new_requests.txt ]; then
+            test "$(wc -l < /tmp/quad_new_requests.txt)" -le 12
+            echo 'has_requests=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'has_requests=false' >> "$GITHUB_OUTPUT"
+            echo 'Bridge-only change: no fixture is invented or registered'
+          fi
+      - name: Retrieve immutable 4413-match baseline with SHA check
+        if: steps.requests.outputs.has_requests == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: Single official-gated append-only B/C2/C3/M4 batch
+        id: forward
+        if: steps.requests.outputs.has_requests == 'true'
+        continue-on-error: true
+        env:
+          PYTHONPATH: experiments/263
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/run_quad_requested_batch.py \
+            --manifest /tmp/quad_new_requests.txt \
+            --history data/quad_accepted_263/extended_history.csv \
+            --baseline m4_quad_base/historical_results.csv \
+            --source-acceptance data/quad_accepted_263/source_acceptance.json \
+            --records forward_quad_263 \
+            --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
+      - name: Commit new pilot predictions or honest blocked report
+        if: steps.requests.outputs.has_requests == 'true' && always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for folder in forward_quad_263 experiments/263/quad_batch_reports; do
+            if [ -d "$folder" ]; then git add -A -- "$folder"; fi
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m 'Store four-model sealed predictions or blocked batch audit'
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
+      - name: Preserve batch evidence
+        if: steps.requests.outputs.has_requests == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quad-263-forward-evidence
+          if-no-files-found: warn
+          path: |
+            forward_quad_263/*/*.json
+            experiments/263/quad_batch_reports/*.json
+      - name: Reject zero registered predictions
+        if: steps.requests.outputs.has_requests == 'true' && always()
+        env:
+          FORWARD_OUTCOME: ${{ steps.forward.outcome }}
+        run: |
+          test "$FORWARD_OUTCOME" = 'success' || {
+            echo 'Batch blocked; inspect source acceptance and saved audit; no rerun without fix.'
+            exit 1
+          }
+ /tmp/quad_delta.tsv | grep -q .; then
             echo 'Only ADD of a fresh JSON request is permitted'; exit 1
           fi
-          cut -f2 /tmp/quad_delta.tsv > /tmp/quad_new_requests.txt
+          grep -E '^A[[:space:]]+experiments/263/quad_requests/[A-Za-z0-9_-]+\.json
+          if [ -s /tmp/quad_new_requests.txt ]; then
+            test "$(wc -l < /tmp/quad_new_requests.txt)" -le 12
+            echo 'has_requests=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'has_requests=false' >> "$GITHUB_OUTPUT"
+            echo 'Bridge-only change: no fixture is invented or registered'
+          fi
+      - name: Retrieve immutable 4413-match baseline with SHA check
+        if: steps.requests.outputs.has_requests == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: Single official-gated append-only B/C2/C3/M4 batch
+        id: forward
+        if: steps.requests.outputs.has_requests == 'true'
+        continue-on-error: true
+        env:
+          PYTHONPATH: experiments/263
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/run_quad_requested_batch.py \
+            --manifest /tmp/quad_new_requests.txt \
+            --history data/quad_accepted_263/extended_history.csv \
+            --baseline m4_quad_base/historical_results.csv \
+            --source-acceptance data/quad_accepted_263/source_acceptance.json \
+            --records forward_quad_263 \
+            --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
+      - name: Commit new pilot predictions or honest blocked report
+        if: steps.requests.outputs.has_requests == 'true' && always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for folder in forward_quad_263 experiments/263/quad_batch_reports; do
+            if [ -d "$folder" ]; then git add -A -- "$folder"; fi
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m 'Store four-model sealed predictions or blocked batch audit'
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
+      - name: Preserve batch evidence
+        if: steps.requests.outputs.has_requests == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quad-263-forward-evidence
+          if-no-files-found: warn
+          path: |
+            forward_quad_263/*/*.json
+            experiments/263/quad_batch_reports/*.json
+      - name: Reject zero registered predictions
+        if: steps.requests.outputs.has_requests == 'true' && always()
+        env:
+          FORWARD_OUTCOME: ${{ steps.forward.outcome }}
+        run: |
+          test "$FORWARD_OUTCOME" = 'success' || {
+            echo 'Batch blocked; inspect source acceptance and saved audit; no rerun without fix.'
+            exit 1
+          }
+ /tmp/quad_delta.tsv | cut -f2 > /tmp/quad_new_requests.txt || true
           if [ -s /tmp/quad_new_requests.txt ]; then
             test "$(wc -l < /tmp/quad_new_requests.txt)" -le 12
             echo 'has_requests=true' >> "$GITHUB_OUTPUT"
