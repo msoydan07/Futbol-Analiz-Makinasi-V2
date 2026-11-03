@@ -11,7 +11,7 @@ def sample():
     return {"schema":"263_UEFA_STAGE8_PREMATCH_DUAL_SHADOW_RECORD_V1",
       "kickoff_utc":"2026-11-03T19:00:00+00:00",
       "data_captured_utc":"2026-11-03T17:50:00+00:00",
-      "competition":"UEFA_CL","uefa_match_id":"fixture-test",
+      "competition":"UEFA_CL","uefa_match_id":2049614,
       "lineup_status":"NOT_ANNOUNCED","lineup_source_urls":[],
       "lineup_used_as_numeric_adjustment":False,
       "elo_beta_production_approved":False,"pilot_100_matches_affected":False,
