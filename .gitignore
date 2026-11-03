@@ -1,0 +1,8 @@
+# Private provider snapshots and match-level Understat audit artifacts.
+# Never commit or upload these into a PUBLIC repository.
+/data/understat_matches.csv
+/data/historical_verified_xg.csv
+/data/understat_xg_match_audit.csv
+/data/understat_alias_review.csv
+/data/understat_unmatched_diagnosis.csv
+/data/understat_unmatched_diagnosis.json

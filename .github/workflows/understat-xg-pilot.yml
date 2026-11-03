@@ -1,17 +1,22 @@
 name: Understat xG kaynak ve eslesme piloti
 on:
   workflow_dispatch:
-  push:
-    branches: [feature/01-kimlikler]
-    paths:
-      - '.github/workflows/understat-xg-pilot.yml'
-      - 'audit_understat_xg.py'
-      - 'data/reviewed_understat_date_overrides.json'
+permissions:
+  contents: read
 jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
+      - name: Require explicit reviewed source permission BEFORE provider access
+        env:
+          XG_SOURCE_PERMISSION_CONFIRMED: ${{ vars.XG_SOURCE_PERMISSION_CONFIRMED }}
+        shell: bash
+        run: |
+          if [ "$XG_SOURCE_PERMISSION_CONFIRMED" != 'true' ]; then
+            echo 'XG_SOURCE_PERMISSION_NOT_CONFIRMED; no provider fetch'
+            exit 1
+          fi
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
@@ -49,24 +54,14 @@ jobs:
       - name: 2.6.2 tum ligler veri doluluk kabul raporu
         if: always()
         run: python audit_262_data_snapshot.py
-      - name: Raporlari sakla
-        if: always()
+      - name: Synthetic disclosure tests and strict aggregate exporter
+        run: |
+          python -m unittest -q test_build_xg_public_summary_safe.py
+          python build_xg_public_summary_safe.py
+      - name: Upload ONLY validated aggregate coverage (never match-level data)
         uses: actions/upload-artifact@v4
         with:
-          name: understat-xg-pilot
-          path: |
-            data/understat_matches.csv
-            data/understat_xg_match_audit.csv
-            data/understat_xg_match_report.json
-            data/historical_verified_xg.csv
-            data/historical_verified_xg_report.json
-            data/missing_data_inventory_262.json
-            data/understat_alias_review.csv
-            data/understat_reviewed_aliases.json
-            data/understat_unmatched_diagnosis.csv
-            data/understat_unmatched_diagnosis.json
-            data/historical_results_audit.json
-            data/historical_results.csv
-            data/source_audit.csv
-            data/262_data_acceptance_snapshot.json
-          if-no-files-found: warn
+          name: understat-xg-summary-only
+          path: data/xg_public_aggregate_safe.json
+          if-no-files-found: error
+          retention-days: 7
