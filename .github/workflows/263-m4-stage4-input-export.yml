@@ -1,0 +1,43 @@
+name: 263 M4 Stage4 - one-time research input export (NO MODEL RUN)
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - '.github/workflows/263-m4-stage4-input-export.yml'
+permissions:
+  contents: read
+jobs:
+  one-time-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify existing 2024 research input provenance before export
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object data/staged_263/2024_25_identity_resolved_research_history.csv)" = '26aaa482fedfa8aee3ca147878332e41cbeb4f46'
+          test "$(git hash-object experiments/263/exp_263_batch.py)" = 'ad0c620080aa98fd3ab339535f0f2824b823e586'
+          test "$(git hash-object experiments/263/m4_integrated.py)" = '645d907e8f5f38faaed4763ca557802cea766bc4'
+          python - <<'PY'
+          import csv
+          with open('data/staged_263/2024_25_identity_resolved_research_history.csv',encoding='utf-8') as f:
+              a=list(csv.DictReader(f))
+          assert len(a)==3576
+          assert sum(x['phase']=='REGULAR' for x in a)==3498
+          assert sum(x['phase']=='PLAYOFF_OR_FINAL' for x in a)==78
+          print('Pinned 2024 history accepted for research transport only')
+          PY
+      - name: Upload source files without running any model
+        uses: actions/upload-artifact@v4
+        with:
+          name: m4-stage4-pinned-source-and-math
+          path: |
+            data/staged_263/2024_25_identity_resolved_research_history.csv
+            data/staged_263/2024_25_historical_identity_registry.json
+            data/staged_263/2024_25_historical_quality_audit.json
+            experiments/263/exp_263_batch.py
+            experiments/263/m4_integrated.py
+            experiments/263/m4_lock.json
+            docs/263_M4_asama4_tek_toplu_ablasyon_protokolu_2026_11_03.md
+          if-no-files-found: error
