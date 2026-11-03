@@ -1,0 +1,23 @@
+name: 263 UEFA Stage8 — prepare guard only (NO predictions)
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-stage8-prep-guard-only.yml
+permissions:
+  contents: read
+jobs:
+  safety-tests-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only validate future pre-match record guard with synthetic inputs
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python -m py_compile experiments/263/europe/uefa_stage8_prematch_lock_guard_263.py
+          python -m unittest -v test_uefa_stage8_prematch_lock_guard_263
