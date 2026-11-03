@@ -144,7 +144,9 @@ def extract_one_official_fixture(html,competition,home_id,away_id,index,now):
         return ("OFFICIAL_UEFA_FIXTURE_NOT_FOUND_OR_AMBIGUOUS",None)
     return ("OFFICIAL_UEFA_ARTICLE_FIXTURE_FOUND",next(iter(unique.values())))
 
-def requested_europe_match(competition,home,away,*,index,now=None,official_provider=None):
+def requested_europe_match(competition,home,away,*,index,now=None,official_provider=None,
+                           enable_elo=False,elo_source_provider=None,
+                           elo_cohort=None,elo_review=None):
     """Trusted entrypoint for future European named-match orchestration.
 
     Call order is fixed: local index/scope -> trusted UEFA HTTPS adapter.
@@ -185,6 +187,25 @@ def requested_europe_match(competition,home,away,*,index,now=None,official_provi
         output["message"]="İki takım kapsamda ve UEFA fikstürü doğrulandı. Avrupa tahmin motoru henüz kabul edilmedi."
     else:
         output["message"]="Resmî UEFA kaynağında bu eşleşme gelecek 7 günde doğrulanamadı; analiz yapılmıyor."
+    # Source/identity gate is a read-only descriptive input to the European analysis;
+    # NEVER modify Poisson lambda, historical model B/C2/C3/M4, EV or pilot here.
+    # It runs ONLY when both the original ten-league scope AND official UEFA fixture passed.
+    if enable_elo and fixture:
+        try:
+            from uefa_elo_reference_263 import (
+                read_json,COHORT,ALIASES,reference_for_match)
+            cohort=elo_cohort if elo_cohort is not None else read_json(COHORT)
+            review=elo_review if elo_review is not None else read_json(ALIASES)
+            output["europe_elo_reference"]=reference_for_match(
+                scope,fixture,index,cohort,review,
+                source_provider=elo_source_provider,at_utc=now)
+        except (ValueError,KeyError,OSError) as exc:
+            output["europe_elo_reference"]={
+                "status":"ELO_INTEGRATION_INPUTS_NOT_VERIFIED",
+                "error_type":type(exc).__name__,
+                "model_calibration_approved":False,
+                "elo_affects_goal_lambda":False,
+                "elo_1x2_probabilities":None}
     return output
 
 def main(argv=None):
@@ -194,7 +215,8 @@ def main(argv=None):
     p.add_argument("--index",default=INDEX_DEFAULT)
     args=p.parse_args(argv)
     index=json.loads(Path(args.index).read_text(encoding="utf-8"))
-    result=requested_europe_match(args.competition,args.home,args.away,index=index)
+    result=requested_europe_match(args.competition,args.home,args.away,index=index,
+                                  enable_elo=True)
     print(json.dumps(result,ensure_ascii=False,indent=2,sort_keys=True))
     return 0
 if __name__=="__main__":raise SystemExit(main())
