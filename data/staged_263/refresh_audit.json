@@ -1,0 +1,72 @@
+{
+  "version": "263_append_only_provider_snapshot_v1",
+  "status": "STAGED_UNVERIFIED_SOURCE_FILES",
+  "base_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "base_rows": 4413,
+  "source_season": "2026-2027",
+  "as_of_exclusive": "2026-11-03",
+  "leagues_provided": 10,
+  "leagues_expected": 10,
+  "source_completeness": "TEN_LEAGUES",
+  "appended": 88,
+  "total_rows": 4501,
+  "source_file_audit": {
+    "ENG1": {
+      "new_completed": 9,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "ENG2": {
+      "new_completed": 12,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "GER1": {
+      "new_completed": 9,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "ESP1": {
+      "new_completed": 9,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "ITA1": {
+      "new_completed": 8,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "FRA1": {
+      "new_completed": 8,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "NED1": {
+      "new_completed": 9,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "TUR1": {
+      "new_completed": 8,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "POR1": {
+      "new_completed": 7,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    },
+    "BEL1": {
+      "new_completed": 9,
+      "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
+      "provider_fetch_independently_verified": false
+    }
+  },
+  "pipeline_audit_rechecked": true,
+  "regenerated_input_sha256": "0c5456ed3a5e3c88b3e28dc72f3e77ef7f2b69509b99f8cdba4088798e88e4a9",
+  "independent_source_verification": false,
+  "retrospective_model_acceptance_transferred": false,
+  "probability_recommendations_authorized": false,
+  "main_or_production_modified": false,
+  "extended_history_sha256": "279cb00096da270f6987ae9e518fbe7248c17c993c34508499a971cae76ca4e8"
+}
