@@ -1,0 +1,57 @@
+{
+  "schema": "263_UEFA_LINEUP_CONFIRMATION_APPEND_ONLY_V1",
+  "fixture_id": 2049614,
+  "fixture": "Galatasaray - VfB Stuttgart",
+  "kickoff_utc": "2026-11-03T17:45:00+00:00",
+  "observed_at_utc": "2026-11-03T17:30:46+00:00",
+  "status": "CONFIRMED_BY_OFFICIAL_BUNDESLIGA_MATCH_CENTRE_AND_BROADCASTER",
+  "home_starting_xi": [
+    "Uğurcan Çakır",
+    "Roland Sallai",
+    "Davinson Sánchez",
+    "Abdülkerim Bardakcı",
+    "Ismail Jakobs",
+    "Mario Lemina",
+    "Lucas Torreira",
+    "Aleksey Batrakov",
+    "Yunus Akgün",
+    "Barış Alper Yılmaz",
+    "Victor Osimhen"
+  ],
+  "away_starting_xi": [
+    "Fabian Bredlow",
+    "Ramon Hendriks",
+    "Jeff Chabot",
+    "Maximilian Mittelstädt",
+    "Jamie Leweling",
+    "Grischa Prömel",
+    "Atakan Karazor",
+    "Chris Führich",
+    "Ermedin Demirović",
+    "Bilal El Khannouss",
+    "Deniz Undav"
+  ],
+  "sources": [
+    {
+      "uri": "https://www.bundesliga.com/en/champions-league/matchday/2026-2027/4/galatasaray-sk-istanbul-vs-vfb-stuttgart/liveticker/",
+      "proof": "Bundesliga 2026/27 official match centre: Galatasaray Lemina starter and Sara substitute, Stuttgart Seimen substitute"
+    },
+    {
+      "uri": "https://beinsports.com.tr/haber/galatasaray-stuttgart",
+      "proof": "beIN SPORTS publishes eleven starting player names for both clubs"
+    },
+    {
+      "uri": "https://spor.haber7.com/galatasaray/haber/3673900-galatasaray-stuttgart-ilk-11ler-belli-oldu",
+      "proof": "19:35 TSİ published starting elevens match Bundesliga/beIN"
+    }
+  ],
+  "conflicts_resolved": {
+    "galatasaray": "Mario Lemina starts; Gabriel Sara on bench, unlike stale Sporx/AS",
+    "stuttgart": "Fabian Bredlow starts; Dennis Seimen on bench, unlike stale Sporx/AS"
+  },
+  "frozen_original_prediction_path": "experiments/263/europe/t60_locked/2026-11-03_2045_TR/2049614.json",
+  "original_prediction_sha256": "9deaf775878fa28d10910360396e8c74a93c6f983a5d719c34a3eca9d3a3a962",
+  "predictions_modified": false,
+  "extra_numerical_lineup_adjustment": false,
+  "counts_as_100_match_pilot": false
+}
