@@ -28,15 +28,24 @@ jobs:
           set -euo pipefail
           git diff-tree --no-commit-id --name-status -r HEAD > /tmp/t60_all_delta.tsv
           test "$(wc -l < /tmp/t60_all_delta.tsv)" -eq 1 || {
-            echo 'T60 request commit must add exactly one file'; exit 1;
+            echo 'T60 request commit must change exactly one file'; exit 1;
           }
-          path="$(awk -F '\t' '$1=="A" {print $2}' /tmp/t60_all_delta.tsv)"
+          op="$(awk -F '\t' '{print $1}' /tmp/t60_all_delta.tsv)"
+          path="$(awk -F '\t' '{print $2}' /tmp/t60_all_delta.tsv)"
           [[ "$path" =~ ^experiments/263/europe/t60_requests/2026-11-0[345]_(2045|2300)_TR\.json$ ]] || {
             echo 'Only six 2026/27 preplanned T60 request filenames are allowed'; exit 1;
           }
+          if [ "$op" = "M" ]; then
+            # Exact recovery of failed 22:02 URL comparison; never alter a locked forecast.
+            test "$path" = 'experiments/263/europe/t60_requests/2026-11-03_2300_TR.json'
+            test ! -e 'experiments/263/europe/t60_lock_reports/2026-11-03_2300_TR.json'
+            test ! -d 'experiments/263/europe/t60_locked/2026-11-03_2300_TR'
+          else
+            test "$op" = "A" || { echo 'Unexpected operation'; exit 1; }
+          fi
           test -s "$path"
           echo "request=$path" >> "$GITHUB_OUTPUT"
-          echo 'Only new append-only request accepted; no model/other code changed'
+          echo 'One isolated T60 request/review correction; no model/other code changed'
       - name: Fetch ORIGINAL 9 domestic league baseline plus data capture SHA evidence
         env:
           GH_TOKEN: ${{ github.token }}
