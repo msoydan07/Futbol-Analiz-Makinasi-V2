@@ -1,0 +1,79 @@
+{
+  "schema": "263_UEFA_NOV3_5_17_MATCH_TMINUS60_SLOT_PLAN_V1",
+  "timezone": "Europe/Istanbul",
+  "session_count": 6,
+  "fixture_count": 17,
+  "notes": [
+    "This is a scheduling plan, not a forecast, booking, automation, or registration.",
+    "A later fresh web review of official match center/lineups is preferred; source claims alone are not validated.",
+    "No prediction record is created by preparing this plan.",
+    "Each session is triggered only through a new append-only request near kickoff. GitHub scheduling on experiment branch is not automatic."
+  ],
+  "slots": [
+    {
+      "slot_key": "2026-11-03_2045_TR",
+      "date": "2026-11-03",
+      "turkey_kickoff_time": "20:45",
+      "turkey_tminus60_time": "19:45",
+      "uefa_match_ids": [
+        2049614
+      ]
+    },
+    {
+      "slot_key": "2026-11-03_2300_TR",
+      "date": "2026-11-03",
+      "turkey_kickoff_time": "23:00",
+      "turkey_tminus60_time": "22:00",
+      "uefa_match_ids": [
+        2049608,
+        2049607,
+        2049610,
+        2049609,
+        2049612
+      ]
+    },
+    {
+      "slot_key": "2026-11-04_2045_TR",
+      "date": "2026-11-04",
+      "turkey_kickoff_time": "20:45",
+      "turkey_tminus60_time": "19:45",
+      "uefa_match_ids": [
+        2049620
+      ]
+    },
+    {
+      "slot_key": "2026-11-04_2300_TR",
+      "date": "2026-11-04",
+      "turkey_kickoff_time": "23:00",
+      "turkey_tminus60_time": "22:00",
+      "uefa_match_ids": [
+        2049616,
+        2049617,
+        2049618,
+        2049619,
+        2049623
+      ]
+    },
+    {
+      "slot_key": "2026-11-05_2045_TR",
+      "date": "2026-11-05",
+      "turkey_kickoff_time": "20:45",
+      "turkey_tminus60_time": "19:45",
+      "uefa_match_ids": [
+        2050121,
+        2050115
+      ]
+    },
+    {
+      "slot_key": "2026-11-05_2300_TR",
+      "date": "2026-11-05",
+      "turkey_kickoff_time": "23:00",
+      "turkey_tminus60_time": "22:00",
+      "uefa_match_ids": [
+        2050114,
+        2050111,
+        2050123
+      ]
+    }
+  ]
+}
