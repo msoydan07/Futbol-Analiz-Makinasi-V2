@@ -1,6 +1,6 @@
 # xG kaynak paylaşımı — güvenlik kabul kaydı (3 Kasım 2026)
 
-**Durum: YENİ HAM ARTIFACT YOLU KAPATILDI / 18 ESKİ PUBLIC HAM-VERİ ARTIFACT'İ AÇIK / KAYNAK İZNİ ONAYLANMADI**
+**Durum: YENİ HAM ARTIFACT YOLU KAPATILDI / 18 ESKİ PUBLIC ARTIFACT 18/18 SİLİNDİ VE DOĞRULANDI / KAYNAK İZNİ ONAYLANMADI**
 
 ## Kanıtlanmış risk
 Public `msoydan07/Futbol-Analiz-Makinasi-V2` deposundaki `feature/01-kimlikler` dalı `.github/workflows/understat-xg-pilot.yml` eski sürümde `data/understat_matches.csv`, `data/historical_verified_xg.csv` ve diğer kaynaklı maç düzeyi CSV'leri GitHub Actions artifact'e yüklemiştir. Run `41287280687`, artifact `13074948510` (`understat-xg-pilot`), 2026-11-03 itibarıyla hâlâ mevcut, beklenen son gün 2027-01-30. Kaynakta erişim olması yeniden dağıtım iznini kanıtlamaz.
@@ -51,3 +51,16 @@ Public `msoydan07/Futbol-Analiz-Makinasi-V2` deposundaki `feature/01-kimlikler` 
 Kaynak kullanma ve özel saklama izni doğrulanmadan **yeni gerçek xG snapshot veya M4+xG testi çalıştırılmayacak**. 289 geçmiş xG uygunluk adayındaki tarihsel sürüm belirsizliği aynen sürüyor. 100 maçlık B/C2/C3/M4 yeni yerel lig pilotu ve 3 Kasım UEFA M0/M0+Elo kayıtları etkilenmez.
 
 **KAPANIŞ:** Yeni ham-xG Actions paylaşımı önlendi; eski public artifact hâlâ açık ve ayrı bir silme/koruma işlemi gerektiriyor.
+
+
+## 3 Kasım 2026 — KESİN GÜVENLİK KAPANIŞI (önceki plan artık tamamlandı)
+
+- Eski içerik listesi yalnız **silme öncesi tarihsel durumu** gösterir. Önceki açık risk notları artık güncel değildir.
+- Önce **18 ZIP'i** birleştiren, her orijinal dosyanın SHA-256'sını içeren özel arşiv kullanıcıya ait ChatGPT dosya kütüphanesinde `Futbol-Analiz-Makinasi/ozel-xg-arsiv/M4_xG_18_legacy_artifacts_PRIVATE_BACKUP_20261103.zip` konumuna yüklendi. ZIP: 5.712.072 bayt, SHA-256 `bb786c4e84e240f6a8479cff264688de7c08f2c09be3ae944a29436a6a887189`. Kütüphaneden yeniden indirilip SHA karşılaştırması bire bir doğrulandı. Bu, bağımsız Understat lisansı veya tarihsel as-of kanıtı değildir.
+- GitHub Actions [41718421285](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41718421285) **SUCCESS**: Önce 18 arşivin ID+run+adını kontrol etti, yalnız allowlist'teki 18 eski arşivi sildi, sonra her run'ın artifact listesinin boş olduğunu doğruladı.
+- Aynı 18 run, bundan sonra GitHub GitHub connector üzerinden **ayrı salt-okunur sorgulamayla** yeniden denetlendi: **18/18 run artifact sayısı sıfır**. GitHub Actions koşu geçmişi ve eski model kodu silinmedi.
+- Yalnız bir defa çalışan silme workflow dosyası, işlem sonrası araştırma dalından kaldırıldı; gelecekte yanlışlıkla yeniden tetiklenemez.
+- `feature/01-kimlikler` ve `experiment/263-toplu-karsilastirma` üzerinde ham xG artifact yüklemesi durduruldu; sağlayıcı erişimi izinsiz otomatik başlamıyor. Main üzerindeki ayrı xG manuel analiz workflow'larında sağlayıcı kullanım izni hâlâ ayrıca denetlenmeli; izin netleşene kadar çalıştırılmayacak.
+- Yeni xG testi, yeniden veri toplama, hiperparametre ayarı veya M4 terfisi **yapılmadı**. 100 maç yerel-lig pilotu ve Avrupa gölge kayıtları değişmedi.
+
+**Güvenlik kararı:** Eski arşivlerin public yeniden dağıtım yüzeyi azaltıldı; verinin özel araştırma kopyası korundu. Bu, geçmişteki olası indirmeleri geri alamaz ve kaynak lisansını onaylamaz. xG modelini geliştirmeye devam etmek için as-of ve kaynak hakkı ayrı bir kabul koşulu olmaya devam eder.
