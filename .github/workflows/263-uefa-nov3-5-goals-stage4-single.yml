@@ -1,0 +1,40 @@
+name: 263 UEFA Nov3-5 stage4 - one real 9-league goal data audit
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-nov3-5-goals-stage4-single.yml
+permissions:
+  contents: read
+jobs:
+  nine-domestic-league-prematch-features:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax and nine deterministic cutoff/identity/source tests
+        env:
+          PYTHONPATH: experiments/263:experiments/263/europe
+        run: |
+          python -m py_compile \
+            experiments/263/europe/uefa_nov3_5_domestic_goal_data_263.py \
+            experiments/263/europe/test_uefa_nov3_5_domestic_goal_data_263.py
+          python -m unittest -v test_uefa_nov3_5_domestic_goal_data_263
+      - name: Download once each of 9 existing 2026/27 Football-Data league files and audit 17 fixtures
+        env:
+          PYTHONPATH: experiments/263:experiments/263/europe
+        run: |
+          python experiments/263/europe/uefa_nov3_5_domestic_goal_data_263.py
+      - name: Archive immutable source bytes and full 17-match readiness diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-nov3-5-nine-league-goal-data-one-shot
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            data/europe_staged_263/2026_11_03_05_stage4_goals/stage4_goal_data_readiness.json
+            data/europe_staged_263/2026_11_03_05_stage4_goals/source_csv/*.csv
