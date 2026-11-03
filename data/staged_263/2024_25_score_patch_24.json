@@ -1,0 +1,379 @@
+{
+  "status": "RESEARCH_ONLY_SCORES_VERIFIED_NOT_TRAINING_APPROVED",
+  "season": "2024-2025",
+  "source_repo": "https://github.com/openfootball/football.json",
+  "source_commit": "e6744429ee395bc86f247348c6184bb08d4eb361",
+  "patched_count": 24,
+  "records": [
+    {
+      "league": "ESP1",
+      "home": "Real Betis Balompié",
+      "away": "Valencia CF",
+      "home_goals": 1,
+      "away_goals": 1,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-23",
+      "round": "Matchday 38",
+      "source_match_index": 371,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "Real Madrid CF",
+      "away": "Real Sociedad de Fútbol",
+      "home_goals": 2,
+      "away_goals": 0,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-24",
+      "round": "Matchday 38",
+      "source_match_index": 372,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "CD Leganés",
+      "away": "Real Valladolid CF",
+      "home_goals": 3,
+      "away_goals": 0,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-24",
+      "round": "Matchday 38",
+      "source_match_index": 373,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "RCD Espanyol de Barcelona",
+      "away": "UD Las Palmas",
+      "home_goals": 2,
+      "away_goals": 0,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-24",
+      "round": "Matchday 38",
+      "source_match_index": 374,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "Deportivo Alavés",
+      "away": "CA Osasuna",
+      "home_goals": 1,
+      "away_goals": 1,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-24",
+      "round": "Matchday 38",
+      "source_match_index": 375,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "Getafe CF",
+      "away": "RC Celta de Vigo",
+      "home_goals": 1,
+      "away_goals": 2,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-24",
+      "round": "Matchday 38",
+      "source_match_index": 376,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "Rayo Vallecano de Madrid",
+      "away": "RCD Mallorca",
+      "home_goals": 0,
+      "away_goals": 0,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-24",
+      "round": "Matchday 38",
+      "source_match_index": 377,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "Girona FC",
+      "away": "Club Atlético de Madrid",
+      "home_goals": 0,
+      "away_goals": 4,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 378,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "Villarreal CF",
+      "away": "Sevilla FC",
+      "home_goals": 4,
+      "away_goals": 2,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 379,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ESP1",
+      "home": "Athletic Club",
+      "away": "FC Barcelona",
+      "home_goals": 0,
+      "away_goals": 3,
+      "source_urls": [
+        "https://www.laliga.com/en-GB/laliga-easports/results/2024-25/gameweek-38"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 380,
+      "source_file": "2024-25/es.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "Como 1907",
+      "away": "FC Internazionale Milano",
+      "home_goals": 0,
+      "away_goals": 2,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-23",
+      "round": "Matchday 38",
+      "source_match_index": 371,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "SSC Napoli",
+      "away": "Cagliari Calcio",
+      "home_goals": 2,
+      "away_goals": 0,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-23",
+      "round": "Matchday 38",
+      "source_match_index": 372,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "Bologna FC 1909",
+      "away": "Genoa CFC",
+      "home_goals": 1,
+      "away_goals": 3,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-24",
+      "round": "Matchday 38",
+      "source_match_index": 373,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "AC Milan",
+      "away": "AC Monza",
+      "home_goals": 2,
+      "away_goals": 0,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-24",
+      "round": "Matchday 38",
+      "source_match_index": 374,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "Atalanta BC",
+      "away": "Parma Calcio 1913",
+      "home_goals": 2,
+      "away_goals": 3,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 375,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "Empoli FC",
+      "away": "Hellas Verona FC",
+      "home_goals": 1,
+      "away_goals": 2,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 376,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "SS Lazio",
+      "away": "US Lecce",
+      "home_goals": 0,
+      "away_goals": 1,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 377,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "Torino FC",
+      "away": "AS Roma",
+      "home_goals": 0,
+      "away_goals": 2,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 378,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "Udinese Calcio",
+      "away": "ACF Fiorentina",
+      "home_goals": 2,
+      "away_goals": 3,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 379,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "ITA1",
+      "home": "Venezia FC",
+      "away": "Juventus FC",
+      "home_goals": 2,
+      "away_goals": 3,
+      "source_urls": [
+        "https://en.as.com/resultados/futbol/italia/2024_2025/jornada/regular_a_38/",
+        "https://www.rsssf.org/tablesi/ital2025.html"
+      ],
+      "source_grade": "SECONDARY_TWO_SOURCES",
+      "match_date": "2025-05-25",
+      "round": "Matchday 38",
+      "source_match_index": 380,
+      "source_file": "2024-25/it.1.json"
+    },
+    {
+      "league": "TUR1",
+      "home": "Adana Demirspor",
+      "away": "Gaziantep FK",
+      "home_goals": 2,
+      "away_goals": 2,
+      "source_urls": [
+        "https://www.tff.org/default.aspx?pageID=1730"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-31",
+      "round": "Matchday 38",
+      "source_match_index": 339,
+      "source_file": "2024-25/tr.1.json"
+    },
+    {
+      "league": "TUR1",
+      "home": "Alanyaspor",
+      "away": "Sivasspor",
+      "home_goals": 2,
+      "away_goals": 0,
+      "source_urls": [
+        "https://www.tff.org/default.aspx?pageID=1730"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-05-31",
+      "round": "Matchday 38",
+      "source_match_index": 340,
+      "source_file": "2024-25/tr.1.json"
+    },
+    {
+      "league": "TUR1",
+      "home": "Bodrum FK",
+      "away": "Beşiktaş",
+      "home_goals": 0,
+      "away_goals": 4,
+      "source_urls": [
+        "https://www.tff.org/default.aspx?pageID=1730"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-06-01",
+      "round": "Matchday 38",
+      "source_match_index": 341,
+      "source_file": "2024-25/tr.1.json"
+    },
+    {
+      "league": "TUR1",
+      "home": "Samsunspor",
+      "away": "Kayserispor",
+      "home_goals": 2,
+      "away_goals": 1,
+      "source_urls": [
+        "https://www.tff.org/default.aspx?pageID=1730"
+      ],
+      "source_grade": "LEAGUE_FEDERATION_OFFICIAL",
+      "match_date": "2025-06-01",
+      "round": "Matchday 38",
+      "source_match_index": 342,
+      "source_file": "2024-25/tr.1.json"
+    }
+  ]
+}
