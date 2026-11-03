@@ -1,0 +1,91 @@
+name: 263 UEFA Elo 167-club bridge — single final acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-europe-elo-bridge-single-acceptance.yml
+      - experiments/263/europe/uefa_elo_reference_263.py
+      - experiments/263/europe/test_uefa_elo_reference_263.py
+      - experiments/263/europe/uefa_requested_match_entry_263.py
+      - experiments/263/evidence/elo_33_alias_name_review_2026_11_03.json
+      - experiments/263/evidence/elo_uefa_active_cohort_2026_11_03.json
+permissions:
+  contents: read
+  actions: read
+jobs:
+  final-source-name-bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Recover EXISTING immutable source artifact, never request the provider again
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/elo_integrity_acceptance
+          gh run download 41582947375 \
+            -R "$GITHUB_REPOSITORY" \
+            -n "263-uefa-elo-integrity-single-acceptance" \
+            -D data/europe_staged_263/elo_integrity_acceptance
+      - name: One planned bridge test batch, plus original scope and fixture gate regressions
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python -m py_compile experiments/263/europe/uefa_elo_reference_263.py \
+            experiments/263/europe/uefa_requested_match_entry_263.py \
+            experiments/263/europe/test_uefa_elo_reference_263.py
+          python -m unittest -v \
+            test_uefa_elo_reference_263 \
+            test_uefa_requested_match_entry_263 \
+            test_uefa_ten_league_scope_gate_263
+      - name: Save 167-club name-level crosswalk evidence — NOT calibrated model data
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          from uefa_elo_reference_263 import read_json,COHORT,ALIASES,build_crosswalk
+          index=read_json("experiments/263/evidence/identity_index_263.json")
+          cohort=read_json(COHORT)
+          review=read_json(ALIASES)
+          raw=Path("data/europe_staged_263/elo_integrity_acceptance/source_csv/current.csv").read_bytes()
+          mapping,blocked=build_crosswalk(index,cohort,review,raw)
+          assert len(mapping)==167 and not blocked and len(review["entries"])==33
+          result={"schema":"EUROPE_263_167_CLUB_SOURCE_NAME_CROSSWALK_ACCEPTANCE",
+                  "scope_size":len(cohort["eligible_team_ids"]),
+                  "reconciled_name_candidate_count":len(mapping),
+                  "reviewed_alias_count":33,
+                  "source_sha256":hashlib.sha256(raw).hexdigest(),
+                  "identity_verification":"NAME_LEAGUE_COUNTRY_PROVIDER_SLUG_ONLY_NO_SHARED_UEFA_ID",
+                  "production_main_modified":False,
+                  "poisson_lambda_modified":False,
+                  "model_weight_approved":False,
+                  "prediction_probs_computed":False,
+                  "source":"beyondELO https://beyondelo.com, CC BY 4.0",
+                  "clubs":[{"canonical_id":tid,"official_name":r["official_name"],
+                            "league":r["league"],"provider_slug":r["provider_slug"],
+                            "provider_name":r["provider_name"],"identity_check":r["source_identity_level"],
+                            "elo_snapshot":r["source_row"]["elo"],
+                            "rd_snapshot":r["source_row"]["rd"],
+                            "last_match_date":r["source_row"]["last_match_date"],
+                            "board_as_of":r["source_row"]["as_of"]}
+                           for tid,r in sorted(mapping.items())]}
+          out=Path("data/europe_staged_263/elo_bridge_crosswalk_167.json")
+          out.parent.mkdir(parents=True,exist_ok=True)
+          out.write_text(json.dumps(result,ensure_ascii=False,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+          print("ELO_BRIDGE_ACCEPTANCE",json.dumps({
+              "clubs":len(mapping),"manual_aliases":33,"source_sha256":result["source_sha256"],
+              "model_weight_approved":False},ensure_ascii=False))
+          PY
+      - name: Preserve one evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-elo-167-bridge-single-acceptance
+          if-no-files-found: warn
+          retention-days: 90
+          path: data/europe_staged_263/elo_bridge_crosswalk_167.json
