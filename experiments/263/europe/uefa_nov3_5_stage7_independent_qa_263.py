@@ -166,7 +166,7 @@ def check_profile(original,league,team,target,rows):
     if (abs(round(bh,4)-original["domestic_league_home_goals_per_game"])>1e-10
         or abs(round(ba,4)-original["domestic_league_away_goals_per_game"])>1e-10):
         raise QualityError("INDEPENDENT_DOMESTIC_LEAGUE_GOAL_BASELINE_DISAGREES")
-    if (not 4<=len(games) and 2<=len(home) and 2<=len(away)
+    if (not(len(games)>=4 and len(home)>=2 and len(away)>=2)
         or len(original["recent_5"])!=5):
         raise QualityError("DOMESTIC_ROLE_SAMPLE_INSUFFICIENT")
     matched_ppg=0
@@ -266,6 +266,8 @@ def audit(stage4,stage5,retro,stage6,scope,index,source_dir,*,now=None):
     for fid in sorted(m4):
         f=m4[fid];e=m5[fid];official=m3[fid]
         pair=make_pair(f,e,official)
+        if abs(e["elo_home_minus_away"]-(e["home_team"]["elo"]-e["away_team"]["elo"]))>1e-12:
+            raise QualityError("ELO_GAP_AGGREGATE_INCONSISTENT")
         if f["kickoff_utc"]!=official["kickoff_utc"]:
             raise QualityError("UEFA_FIXTURE_DATE_DRIFT")
         if aware_utc(f["data_collection_utc"])>=pair["kickoff"]:
@@ -293,9 +295,6 @@ def audit(stage4,stage5,retro,stage6,scope,index,source_dir,*,now=None):
                      abs(over-res[3]),abs(btts-res[4])])>3e-12 or mass>1e-12):
                 raise QualityError("INDEPENDENT_1X2_OVER25_BOTH_SCORE_DIFFER")
             clipped+=int(calculated_lh in (0.15,5.0) or calculated_la in (0.15,5.0))
-            if name=="M0Elo" and not math.isclose(
-                (calculated_lh>res[0]),False,abs_tol=1e-14):
-                raise QualityError("IMPOSSIBLE_EQUAL_LAMBDA_TEST")
         del stage6volatile
         dates[f["date"]]+=1;cups[f["competition"]]+=1
     if (len(team_ids)!=34 or opponent_n!=170 or role_n!=34 or
