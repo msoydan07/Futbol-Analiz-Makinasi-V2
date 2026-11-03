@@ -1,0 +1,121 @@
+{
+  "schema": "263_UEFA_OFFICIAL_WEB_ASSISTED_FACTS_V1",
+  "checked_on_istanbul": "2026-11-03",
+  "sources": {
+    "UEFA_CL": {
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "title": "2026/27 Champions League: All the league phase fixtures and results",
+      "default_kickoff_statement": "Kick-offs are 21:00 unless stated; all times CET."
+    },
+    "UEFA_EL": {
+      "source_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/",
+      "title": "2026/27 Europa League: All the league phase fixtures and results",
+      "default_kickoff_statement": "Kick-offs are 21:00 unless stated; all times CET."
+    }
+  },
+  "source_access_method": "ASSISTANT_WEB_OFFICIAL_ARTICLE_REFERENCE",
+  "fixtures": [
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Tuesday 3 November 2026",
+      "fixture_line": "Galatasaray vs Stuttgart (18:45)"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Tuesday 3 November 2026",
+      "fixture_line": "Atlético de Madrid vs Bayern München"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Tuesday 3 November 2026",
+      "fixture_line": "Barcelona vs Aston Villa"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Tuesday 3 November 2026",
+      "fixture_line": "Feyenoord vs Inter"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Tuesday 3 November 2026",
+      "fixture_line": "Manchester United vs Roma"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Tuesday 3 November 2026",
+      "fixture_line": "Villarreal vs Paris Saint-Germain"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Wednesday 4 November 2026",
+      "fixture_line": "Fenerbahçe vs Liverpool (18:45)"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Wednesday 4 November 2026",
+      "fixture_line": "Borussia Dortmund vs Real Betis"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Wednesday 4 November 2026",
+      "fixture_line": "Porto vs Napoli"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Wednesday 4 November 2026",
+      "fixture_line": "PSV Eindhoven vs Club Brugge"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Wednesday 4 November 2026",
+      "fixture_line": "Leipzig vs Manchester City"
+    },
+    {
+      "competition": "UEFA_CL",
+      "matchday": 4,
+      "date_line": "Wednesday 4 November 2026",
+      "fixture_line": "Lens vs Como"
+    },
+    {
+      "competition": "UEFA_EL",
+      "matchday": 4,
+      "date_line": "Thursday 5 November 2026",
+      "fixture_line": "Crystal Palace vs Hoffenheim (18:45)"
+    },
+    {
+      "competition": "UEFA_EL",
+      "matchday": 4,
+      "date_line": "Thursday 5 November 2026",
+      "fixture_line": "Real Sociedad vs Lyon (18:45)"
+    },
+    {
+      "competition": "UEFA_EL",
+      "matchday": 4,
+      "date_line": "Thursday 5 November 2026",
+      "fixture_line": "AZ Alkmaar vs Juventus"
+    },
+    {
+      "competition": "UEFA_EL",
+      "matchday": 4,
+      "date_line": "Thursday 5 November 2026",
+      "fixture_line": "Leverkusen vs Marseille"
+    },
+    {
+      "competition": "UEFA_EL",
+      "matchday": 4,
+      "date_line": "Thursday 5 November 2026",
+      "fixture_line": "Celta vs Union SG"
+    }
+  ]
+}
