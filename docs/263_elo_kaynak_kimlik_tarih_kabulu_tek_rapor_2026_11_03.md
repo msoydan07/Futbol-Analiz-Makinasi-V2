@@ -86,3 +86,13 @@ Buradaki **167**, otomatik eşleşmelerle birlikte henüz teyit edilmemiş 34 ö
 **Tek mühendislik kararı:** Mevcut dört CSV'yi yeniden indirmeden, saklanan anlık görüntüler üzerinden kimlikleri netleştirme ve kullanılabilir dokuz üst liglik alt kümeyi güvenli biçimde hazırlama; Championship eksikliğini kaynak gerçeği olarak kaydetme. Matematiksel model karşılaştırması ancak kimlik ve as-of kapısından sonra, önceden planlanmış tek ayrı testle değerlendirilebilir.
 
 — 3 Kasım 2026, yalnız \`experiment/263-toplu-karsilastirma\` denetim kapsamı.
+
+
+## 7. Kullanıcı kapsam daraltması — 3 Kasım 2026 (önceki tarihsel sonuçları değiştirmez)
+
+**Bağlayıcı karar:** Avrupa kupaları için **Elo veri çalışma listesinden** Championship/ENG2 ligindeki **24 takımın tamamı** ve TUR1'deki **ERZURUMSPOR FK (1 takım)** çıkarıldı. Bu, geçmiş kaynak denetimindeki 192 takımın gözlenmiş olduğunu veya 39 açık vaka sayısını değiştirmez; yeni **aktif Avrupa Elo aday havuzu 167 kanonik takım**dır (192 - 24 - 1). Bu 167 rakamı kimlik/eşleştirme onayı değildir.
+
+- Yeni makine-okunur aktif liste: `experiments/263/evidence/elo_uefa_active_cohort_2026_11_03.json`; yalnız burada yer alan kanonik takım kimlikleri Avrupa Elo aday havuzuna girer.
+- Önceki 34 isim önerisi arasındaki Cardiff City (ENG2) artık aktif incelemeden çıkarıldı; **33 öneri aktif**; Erzurumspor çakışması aktif incelemeden çıkarıldı. Kaldırılan kayıtlar geçmiş denetim kanıtı olarak ayrı `excluded_prior_review_entries` bölümünde korunur.
+- **Sadece Avrupa Elo katmanı daraltıldı.** Yerel lig veri havuzu, mevcut 10 ligli UEFA maç kapsam kapısı, `main`, geçmiş raporlar, model B/C2/C3/M4 ve pilot 0/100 değişmedi. Kapsam içi bir Avrupa maçında Elo hariç bir takıma Elo değeri uydurulmaz.
+- Yeni bir Elo kaynağı indirimi, GitHub Actions koşusu veya matematiksel tahmin testi yapılmadı. Önceki kaynak kabulü ve tarihsel sızıntı uyarıları geçerlidir.
