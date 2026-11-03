@@ -1,0 +1,60 @@
+{
+  "schema": "m4_2024_25_identity_and_match_quality_v1",
+  "status": "RESEARCH_QUALITY_GATE_PASS_NOT_PRODUCTION_PROMOTION",
+  "checks": [
+    "3576 parseable rows and 10 known leagues",
+    "191 distinct clubs resolved to unique league and global identities",
+    "171 teams maintain immutable existing UUIDs",
+    "20 new historical team UUIDs unique and disjoint from the 215 existing ones",
+    "24 patched final scores match separately stored evidence",
+    "Goals and final result internally consistent",
+    "All 3576 fixture keys unique by league,date,teams,round",
+    "All 10 league source match counts match source inventory",
+    "Eight leagues have correct exact regular-season games-per-team",
+    "Championship 46 and Belgium 30 regular-season games per club",
+    "Playoff matches separately flagged and never deduplicated by team matchup",
+    "Old 4413 snapshot untouched"
+  ],
+  "source_csv_blob_sha": "0aec4ae6369818ca660f63bbb0b6f864d621730f",
+  "registry_identity_index_blob_sha": "6951ac31c9d75b22116b0695b2a99581962814f0",
+  "source_commit": "e6744429ee395bc86f247348c6184bb08d4eb361",
+  "counts": {
+    "matches": 3576,
+    "leagues": 10,
+    "clubs": 191,
+    "existing_canonical_clubs": 171,
+    "new_historical_clubs": 20,
+    "identity_resolutions": {
+      "EXACT_EXISTING_ALIAS": 75,
+      "REVIEWED_LEXICAL_SUFFIX_MATCH": 52,
+      "NEW_HISTORICAL_CLUB_ID_SOURCE_REVIEWED": 20,
+      "REVIEWED_CURATED_CANONICAL_ALIAS": 44
+    },
+    "score_from_cc0_archive": 3552,
+    "external_patched_scores": 24,
+    "regular_season_matches": 3498,
+    "playoff_matches": 78,
+    "max_goals_in_single_team": 9
+  },
+  "by_league": {
+    "ENG1": 380,
+    "ENG2": 557,
+    "GER1": 306,
+    "ESP1": 380,
+    "ITA1": 380,
+    "FRA1": 306,
+    "NED1": 306,
+    "TUR1": 342,
+    "POR1": 306,
+    "BEL1": 313
+  },
+  "training_policy": "ISOLATED_RESEARCH_INPUT_ONLY_MUST_NOT_COUNT_AS_NEW_FORWARD_TEST_OR_MODIFY_4413",
+  "uncertainty": [
+    "3552 existing raw score pairs are not all independently checked against a second source",
+    "44 curated alias mappings based on canonical registry and archived 2024-25 league participation; source names not official uniform spelling",
+    "Existing 171 aliases matched to preserved IDs; this registry does not certify official name from every 2024-25 historical snapshot",
+    "Original 2024-25 file scores do not include shots, corners, xG",
+    "Belgium 73 and Championship 5 playoffs included but flagged; ablation should distinguish regular vs all history"
+  ],
+  "next_job": "Run only pre-registered retrospective M4 error diagnostics and 2024-25 history ablation experiment after fixing matched model evaluation cohorts."
+}
