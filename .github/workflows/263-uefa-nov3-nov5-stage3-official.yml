@@ -1,0 +1,33 @@
+name: 263 UEFA Nov 3-5 — one official fixture-scope acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-nov3-nov5-stage3-official.yml
+permissions:
+  contents: read
+jobs:
+  fixture-official-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax check of existing UEFA gate and stage-3 evidence audit
+        run: |
+          python -m py_compile experiments/263/europe/uefa_requested_match_entry_263.py \
+            experiments/263/europe/uefa_2026_11_03_05_fixture_scope_acceptance_263.py
+      - name: Read two official UEFA CL/EL matchday-4 articles exactly once and validate 17 fixtures
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: python experiments/263/europe/uefa_2026_11_03_05_fixture_scope_acceptance_263.py
+      - name: Save one status report even when official source not reachable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-03-05-nov-stage3-one-source-pass
+          retention-days: 90
+          if-no-files-found: warn
+          path: data/europe_staged_263/2026_11_03_05_fixture_scope_acceptance/fixture_scope_status.json
