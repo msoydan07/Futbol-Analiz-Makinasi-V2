@@ -189,7 +189,7 @@ def main():
     if all(src[s]["status"]=="STAGED" for s in SOURCES if s!="current"):
         report["history"]=history(tables,matched)
     else: report["history"]={"status":"HISTORY_SOURCE_BLOCKED"}
-    report["decision"]={"source_snapshots_preserved":True,
+    report["decision"]={"source_snapshots_preserved":all(src[s]["status"]=="STAGED" for s in SOURCES),
         "all_192_verified":False,
         "historical_first_publication_proven":False,
         "model_integration_authorized":False,
