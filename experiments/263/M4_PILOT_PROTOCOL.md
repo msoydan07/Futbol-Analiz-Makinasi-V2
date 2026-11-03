@@ -20,7 +20,7 @@
 - C2 minimum 4 ev/deplasman maçı koşulunu sağlamazsa `UNAVAILABLE` yazar, M4'e doğrudan aktarılmaz. Hem toplam kapsama hem ortak dört modelin bulunduğu maç sayısı raporlanır.
 - B/C3'ün eski 0–10 normalize skor yaklaşımı korunur ve açıklanır. C2/M4 daha tam Poisson dağılımı kullanır. İlk yarı/korner ve xG etki hesapları bu dörtlü deney kapsamında değildir.
 - Sadece aynı maçlar için 1X2 log-loss, çok sınıflı Brier, en yüksek olasılıklı sonuç isabeti; KG ve 2.5 üst için ikili logloss/Brier ve basit kalibrasyon kovaları; günlük blok bootstrap ve lig ayrımı.
-- 25 maçta yalnız veri/kod/hatalı olasılık kontrolü; modeli güncelleme yok. 96'de kapsamlı rapor ve manuel karar. 96 maç, kesin üstünlük veya bahis avantajı kanıtı sayılamaz. Oran, EV, bahis ve A/B/C onayı yok.
+- 25 maçta yalnız veri/kod/hatalı olasılık kontrolü; modeli güncelleme yok. 9 Kasım Pazartesi gerçek N ile tanımlayıcı rapor ve manuel değerlendirme. 96 maç, kesin üstünlük veya bahis avantajı kanıtı sayılamaz. Oran, EV, bahis ve A/B/C onayı yok.
 
 ## Veri kabul politikası
 

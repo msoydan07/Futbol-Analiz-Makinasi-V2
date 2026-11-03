@@ -56,7 +56,7 @@ C2'nin sık `UNAVAILABLE` kalabileceği biliniyor; en az üç geçerli model kur
 
 **Başarı iddiası için yeterli değildir:** yüksek tahmin yüzdesi, dört modelin anlaşması, tek hafta iyi ROI, birkaç kazanılmış kupon, sadece 96 maç veya yazılım CI'nın yeşil olması.
 
-**İlk deney kabulü:** (a) T−60'daki tahmin ve gölge karar *sonuçtan önce* gerçekten SHA+commit ile kilitlenmiş, (b) veri/oran kaynağı ile zaman damgası dürüst, (c) her maçın seçilme/pas nedeni tekrar üretilebilir, (d) skor sonradan ayrı kayıt edilmiş, (e) 25'te teknik kabul ve 96'de istatistiksel değerlendirme ayrı. Bu koşullar sağlansa bile **kârlı veya güvenli bahis yöntemi kanıtlanmış sayılmaz**.
+**İlk deney kabulü:** (a) T−60'daki tahmin ve gölge karar *sonuçtan önce* gerçekten SHA+commit ile kilitlenmiş, (b) veri/oran kaynağı ile zaman damgası dürüst, (c) her maçın seçilme/pas nedeni tekrar üretilebilir, (d) skor sonradan ayrı kayıt edilmiş, (e) 25'te teknik kabul ve 9 Kasımda tanımlayıcı değerlendirme ayrı. Bu koşullar sağlansa bile **kârlı veya güvenli bahis yöntemi kanıtlanmış sayılmaz**.
 
 ## 6. Yapılmadı / yapılmayacak
 

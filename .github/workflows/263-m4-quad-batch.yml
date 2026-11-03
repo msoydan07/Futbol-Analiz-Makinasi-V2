@@ -31,13 +31,13 @@ jobs:
           gh run download 41251343847 --repo '${{ github.repository }}' -n team-source-audit -D m4_ci_source
           test -f m4_ci_source/historical_results.csv
           echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_ci_source/historical_results.csv' | sha256sum -c -
-      - name: Single newly planned M4 / quadruple acceptance suite
+      - name: One batched M4 / 96-weekend synthetic acceptance suite
         env:
           PYTHONPATH: experiments/263
           M4_TEST_HISTORY: m4_ci_source/historical_results.csv
         run: |
           set -o pipefail
-          python -m unittest -v experiments/263/test_quad_263.py |& tee m4-quad-test-results.txt
+          python -m unittest -v experiments/263/test_quad_263.py experiments/263/test_weekend_96_scope_263.py |& tee m4-quad-test-results.txt
       - if: always()
         uses: actions/upload-artifact@v4
         with:
