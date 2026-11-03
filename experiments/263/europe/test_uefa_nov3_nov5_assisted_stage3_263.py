@@ -22,12 +22,12 @@ EVIDENCE=Path("experiments/263/evidence/uefa_web_2026_11_03_17_matches_review_on
 OUTPUT=Path("data/europe_staged_263/2026_11_03_05_fixture_scope_acceptance/assisted_17_scope_gate_report.json")
 NOW=datetime.fromisoformat("2026-11-03T06:10:00+00:00")
 
-def audit_offline():
+def audit_offline(evidence_override=None):
     index=json.loads(INDEX.read_text(encoding="utf-8"))
     before=copy.deepcopy(index)
     cohort=json.loads(COHORT.read_text(encoding="utf-8"))
     raw=json.loads(FIXTURES.read_text(encoding="utf-8"))
-    evidence=json.loads(EVIDENCE.read_text(encoding="utf-8"))
+    evidence=evidence_override if evidence_override is not None else json.loads(EVIDENCE.read_text(encoding="utf-8"))
     if not (len(cohort["eligible_team_ids"])==167 and
             len(raw["verified_fixtures"])==17 and
             len(raw["unselected_fixtures"])==19 and
@@ -141,10 +141,8 @@ class FixtureGate(unittest.TestCase):
         for row in rows["fixtures"]:
             if row["fixture_line"].startswith("Galatasaray vs Stuttgart"):
                 row["fixture_line"]="Galatasaray vs Stuttgart"
-        got=requested_from_web_evidence("UEFA_CL","Galatasaray","Stuttgart",
-            index=index,now=NOW,evidence=rows)
-        self.assertEqual(got["fixture"]["kickoff_utc"],"2026-11-03T20:00:00+00:00")
-        self.assertNotEqual(got["fixture"]["kickoff_utc"],"2026-11-03T17:45:00+00:00")
+        with self.assertRaisesRegex(ValueError,"ASSISTED_FIXTURE_OR_KICKOFF_NOT_ACCEPTED"):
+            audit_offline(rows)
 
 def main():
     report=audit_offline()
