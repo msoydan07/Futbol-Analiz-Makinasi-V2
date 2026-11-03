@@ -1,6 +1,6 @@
 # xG kaynak paylaşımı — güvenlik kabul kaydı (3 Kasım 2026)
 
-**Durum: YENİ HAM ARTIFACT YOLU KAPATILDI / ESKİ PUBLIC ARTIFACT HÂLÂ AÇIK / KAYNAK İZNİ ONAYLANMADI**
+**Durum: YENİ HAM ARTIFACT YOLU KAPATILDI / 18 ESKİ PUBLIC HAM-VERİ ARTIFACT'İ AÇIK / KAYNAK İZNİ ONAYLANMADI**
 
 ## Kanıtlanmış risk
 Public `msoydan07/Futbol-Analiz-Makinasi-V2` deposundaki `feature/01-kimlikler` dalı `.github/workflows/understat-xg-pilot.yml` eski sürümde `data/understat_matches.csv`, `data/historical_verified_xg.csv` ve diğer kaynaklı maç düzeyi CSV'leri GitHub Actions artifact'e yüklemiştir. Run `41287280687`, artifact `13074948510` (`understat-xg-pilot`), 2026-11-03 itibarıyla hâlâ mevcut, beklenen son gün 2027-01-30. Kaynakta erişim olması yeniden dağıtım iznini kanıtlamaz.
@@ -11,6 +11,35 @@ Public `msoydan07/Futbol-Analiz-Makinasi-V2` deposundaki `feature/01-kimlikler` 
 3. `.gitignore`, generated kaynak xG satırlarının yanlışlıkla GitHub commit'ine dahil edilmesine karşı ek bir önlemdir; önceki commitleri/artifact'leri geri almaz.
 4. Bu koruma `feature/01-kimlikler` ve `experiment/263-toplu-karsilastirma` dallarında aynı dosyalarla bulunur; **main, C3/M4, pilot ve Avrupa mühürlü kayıtlar değişmedi.**
 5. 7 yalnız sentetik sızıntı-kontrol testi yerelde başarılı. Geçmişte toplanmış xG artifact'in yalnız iki **agrega raporu** ile exporter doğrulaması: 2183 kaynak, 2155 eşleşmiş, 28 eşleşmeyen, 10 lig-sezon. Yeni sağlayıcı toplama/backtest yapılmadı.
+
+
+## EK KANIT — 603 GitHub Actions çalışmasındaki 18 eski Understat paketi
+3 Kasım 2026 tarihinde GitHub Actions geçmişinin 603 kaydı üzerinden `Understat xG kaynak ve eslesme piloti` adlı bütün **18 çalışmanın** artifact listesi ve ZIP dosya içi isimleri denetlendi. **18/18** artifact `understat_matches.csv` ham maç düzeyi Understat CSV içeriyor; **8/18** `historical_verified_xg.csv`; **14/18** `understat_xg_match_audit.csv` içeriyor. Hem başarılı hem hata veren çalışmalarda `if: always()` nedeniyle ham paket yaratılmış. Hepsi incelendiğinde `expired=false` durumundaydı.
+
+| GitHub Actions run | Artifact ID | Ham Understat CSV |
+|---:|---:|---|
+| 41287280687 | 13074948510 | EVET |
+| 41286983963 | 13075718244 | EVET |
+| 41286723326 | 13075243767 | EVET |
+| 41253655400 | 13062471987 | EVET |
+| 41253416576 | 13062660850 | EVET |
+| 41253154628 | 13061822391 | EVET |
+| 41232858196 | 13054995409 | EVET |
+| 41232670049 | 13054725747 | EVET |
+| 41232016656 | 13053863596 | EVET |
+| 41231332656 | 13053792841 | EVET |
+| 41231326346 | 13053926883 | EVET |
+| 41231267215 | 13053349126 | EVET |
+| 41228495924 | 13052368606 | EVET |
+| 41188440789 | 13037334050 | EVET |
+| 41187868494 | 13037068906 | EVET |
+| 41187334142 | 13036399839 | EVET |
+| 41186809429 | 13037825135 | EVET |
+| 41186244123 | 13035894311 | EVET |
+
+**Kapsam:** Bu sayılar adı belirtilen `understat-xg-pilot` workflow'unun taranan artifact'leri içindir; tüm olası geçmiş workflow varyantlarının içeriği aynı şekilde doğrulanmış sayılamaz. Arşiv ZIP'leri bu rapora eklenmedi ve başka bir public artefakta yeniden yüklenmedi.
+
+**Temizleme birimi tek dosya değil 18 artifact'tir.** Önce gerekli/izinli araştırma sürümünün erişim-kısıtlı ve kalıcı yedeği doğrulanmalı, ardından GitHub'da bu 18 artifact ayrı ayrı kaldırılmalı; en sonunda bütün run ID'leri yeniden sorgulanarak `artifacts: []` teyit edilmeli. Bu turn'de silme yapılmadı; silme GitHub UI veya yazma yetkili artifact API gerektirir. Başarısız Actions koşularının da paket bırakabildiği artık ayrıca kanıtlanmıştır.
 
 ## Eski artifact açık iş
 - **Silinmedi.** GitHub Actions artifact silmesi geri alınamaz. Ayrıca izinli ve erişim kontrollü özel, kalıcı yedek bulunup bulunmadığı doğrulanmadı. Kullanıcının açık onayı ve güvenli kopya olmadan silme yapılmayacak.
