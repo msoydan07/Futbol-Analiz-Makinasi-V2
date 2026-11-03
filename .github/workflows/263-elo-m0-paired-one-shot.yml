@@ -1,0 +1,72 @@
+name: 263 UEFA Elo M0 vs Elo — single locked retrospective comparison
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-elo-m0-paired-one-shot.yml
+      - experiments/263/europe/uefa_elo_m0_paired_retrospective_263.py
+permissions:
+  contents: read
+  actions: read
+jobs:
+  retrospective-once:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download only previously archived official 132 UEFA match-link review
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/elo_m0_inputs/official
+          gh run download 41488522760 \
+            -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-2025-26-official-132-match-id-links \
+            -D data/europe_staged_263/elo_m0_inputs/official
+      - name: Download only previously archived 132 pre-calendar-date domestic goal features
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/elo_m0_inputs/goals
+          gh run download 41493071435 \
+            -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-2025-26-goal-only-prematch-input-readiness \
+            -D data/europe_staged_263/elo_m0_inputs/goals
+      - name: Download only previously archived beyondELO dated historical CSV
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/elo_m0_inputs/provider
+          gh run download 41582947375 \
+            -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-elo-integrity-single-acceptance \
+            -D data/europe_staged_263/elo_m0_inputs/provider
+      - name: Download only previously accepted 167-club name crosswalk
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/elo_m0_inputs/bridge
+          gh run download 41585362134 \
+            -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-elo-167-bridge-single-acceptance \
+            -D data/europe_staged_263/elo_m0_inputs/bridge
+      - name: One paired 76-16-32 experiment with frozen protocol — no repeat old tests
+        run: |
+          python -m py_compile experiments/263/europe/uefa_elo_m0_paired_retrospective_263.py
+          python experiments/263/europe/uefa_elo_m0_paired_retrospective_263.py \
+            --official data/europe_staged_263/elo_m0_inputs/official/132_UEFA_MATCH_IDS_REVIEW_ONLY.json \
+            --goals data/europe_staged_263/elo_m0_inputs/goals/132_goal_only_feature_inputs_REVIEW_ONLY.json \
+            --history data/europe_staged_263/elo_m0_inputs/provider/source_csv/2025-2026.csv \
+            --crosswalk data/europe_staged_263/elo_m0_inputs/bridge/elo_bridge_crosswalk_167.json \
+            --out data/europe_staged_263/elo_m0_retro_263/retrospective_elo_vs_m0_report.json
+      - name: Preserve report regardless of a blocked comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-elo-m0-paired-one-shot-retrospective
+          retention-days: 90
+          if-no-files-found: warn
+          path: data/europe_staged_263/elo_m0_retro_263/retrospective_elo_vs_m0_report.json
