@@ -1,0 +1,30 @@
+name: 263 UEFA Elo identity + historical integrity — one planned acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/europe/elo_integrity_acceptance_263.py
+      - .github/workflows/263-elo-integrity-single-acceptance.yml
+permissions:
+  contents: read
+jobs:
+  elo-integrity-single-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate Python syntax before exactly one source pass
+        run: python -m py_compile experiments/263/europe/elo_integrity_acceptance_263.py
+      - name: Preserve provider CSV snapshot and examine identities + historical dates once
+        run: python experiments/263/europe/elo_integrity_acceptance_263.py
+      - name: Retain single report, review queue, and the four source snapshots for offline review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-elo-integrity-single-acceptance
+          retention-days: 90
+          if-no-files-found: warn
+          path: data/europe_staged_263/elo_integrity_acceptance/
