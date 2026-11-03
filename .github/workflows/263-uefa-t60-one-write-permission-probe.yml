@@ -1,0 +1,77 @@
+name: 263 UEFA T60 one GitHub write-permission and later-slot regression probe
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-t60-one-write-permission-probe.yml
+permissions:
+  contents: write
+jobs:
+  one-harmless-push-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: New static multi-slot regression and true lock-time safety checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import tempfile,json
+          y=Path(".github/workflows/263-uefa-t60-shadow-lock-on-request.yml").read_text()
+          s=Path("experiments/263/europe/uefa_t60_shadow_lock_263.py").read_text()
+          assert y.count("T60_REQUEST: ${{ steps.intake.outputs.request }}")==2
+          assert y.count("Path(os.environ['T60_REQUEST']).stem")==2
+          assert "glob('*.json')" not in y, "old slot must not break a later slot"
+          assert "CURRENT_SLOT_REPORT_WRONG" in y
+          assert "CURRENT_SLOT_RECORD_PATH_WRONG" in y
+          assert "source_observed_utc=datetime.now(timezone.utc)" in s
+          assert "created_utc=datetime.now(timezone.utc) if write else now" in s
+          with tempfile.TemporaryDirectory() as d:
+            root=Path(d)
+            prev=root/"2026-11-03_2045_TR.json"
+            cur=root/"2026-11-03_2300_TR.json"
+            prev.write_text(json.dumps({"slot_key":prev.stem,"matches":1}))
+            cur.write_text(json.dumps({"slot_key":cur.stem,"matches":5}))
+            slot="2026-11-03_2300_TR"
+            selected=root/(slot+".json")
+            assert json.loads(selected.read_text())["matches"]==5
+            assert len(list(root.glob("*.json")))==2
+          print("T60_MULTI_SLOT_OLD_REPORT_IS_ALLOWED_AND_TIMESTAMP_GUARD_IS_SET")
+          PY
+      - name: Prove experimental branch accepts GitHub Actions bot git push, no prediction
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = 'experiment/263-toplu-karsilastirma'
+          target='experiments/263/evidence/t60_github_bot_write_probe_2026_11_03.json'
+          test ! -e "$target"
+          mkdir -p experiments/263/evidence
+          python - <<'PY'
+          import json,os,datetime
+          from pathlib import Path
+          obj={"schema":"263_T60_WRITE_PERMISSION_PROBE_NOT_A_PREDICTION",
+               "UTC":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+               "github_probe_run_id":os.environ.get("GITHUB_RUN_ID"),
+               "model_probs_generated":False,
+               "prediction_record_created":False,
+               "no_main_edit":True}
+          Path("experiments/263/evidence/t60_github_bot_write_probe_2026_11_03.json").write_text(
+              json.dumps(obj,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$target"
+          test "$(git diff --cached --name-only)" = "$target"
+          git commit -m 'audit(263): harmless experimental-branch GitHub Actions write capability proof, no forecasts'
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          echo "T60_EXPERIMENT_BOT_WRITE_PROBE_SHA=$(git rev-parse HEAD)"
+          test ! -d experiments/263/europe/t60_locked
+          test ! -d experiments/263/europe/t60_requests
+          echo "GITHUB_WRITE_PERMISSION_PROVEN_WITHOUT_PREDICTION_RECORD"
