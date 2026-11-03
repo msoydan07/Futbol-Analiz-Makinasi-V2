@@ -1,0 +1,80 @@
+name: 263 xG — retire 18 verified legacy public raw-data artifacts ONCE
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - '.github/workflows/263-xg-retire-legacy-artifacts-once.yml'
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: m4-xg-18-legacy-artifact-retirement-once
+  cancel-in-progress: false
+jobs:
+  retire-only-listed-raw-xg-artifacts:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/experiment/263-toplu-karsilastirma'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TARGETS: |
+        41287280687 13074948510
+        41286983963 13075718244
+        41286723326 13075243767
+        41253655400 13062471987
+        41253416576 13062660850
+        41253154628 13061822391
+        41232858196 13054995409
+        41232670049 13054725747
+        41232016656 13053863596
+        41231332656 13053792841
+        41231326346 13053926883
+        41231267215 13053349126
+        41228495924 13052368606
+        41188440789 13037334050
+        41187868494 13037068906
+        41187334142 13036399839
+        41186809429 13037825135
+        41186244123 13035894311
+    steps:
+      - name: Fail closed unless all 18 exact historical artifacts exist and match their run IDs
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          while read -r run_id artifact_id; do
+            test -n "$artifact_id" || continue
+            gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}" \
+              | jq -e --argjson id "$artifact_id" --argjson run "$run_id" \
+                  '.id == $id and .name == "understat-xg-pilot" and .expired == false and .workflow_run.id == $run' \
+                  >/dev/null
+            count=$((count+1))
+          done <<< "$TARGETS"
+          test "$count" -eq 18 || { echo 'EXPECTED_EXACTLY_18'; exit 1; }
+          echo "Validated 18 exact historical artifacts. Private backup SHA-256 verified before this commit: bb786c4e84e240f6a8479cff264688de7c08f2c09be3ae944a29436a6a887189"
+      - name: Delete ONLY 18 allowlisted public raw xG artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          while read -r run_id artifact_id; do
+            test -n "$artifact_id" || continue
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}" >/dev/null
+            echo "Deleted exact allowlisted artifact ${artifact_id} from historical run ${run_id}"
+            count=$((count+1))
+          done <<< "$TARGETS"
+          test "$count" -eq 18
+      - name: Verify all 18 artifacts absent without deleting workflow run history
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=0
+          while read -r run_id artifact_id; do
+            test -n "$artifact_id" || continue
+            exists=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts" \
+              | jq --argjson id "$artifact_id" '[.artifacts[] | select(.id == $id)] | length')
+            test "$exists" -eq 0 || { echo "STILL_PUBLIC ${artifact_id}"; exit 1; }
+            count=$((count+1))
+          done <<< "$TARGETS"
+          test "$count" -eq 18
+          echo '18/18 listed public raw artifacts absent. GitHub runs and model code unchanged.'
