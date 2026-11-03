@@ -247,8 +247,11 @@ def current_elo(stage5,now,kickoff,*,elo_fetch=get_elo):
                 "last_rated_match":current["last_match_date"],
                 "rating_model_preapproved":False}
     if len(known)!=34:raise LockError("EXPECTED_34_ELO_TEAMS")
+    source_observed_utc=datetime.now(timezone.utc)
+    if source_observed_utc>=kickoff:
+        raise LockError("CURRENT_ELO_OBSERVED_AFTER_KICKOFF")
     return known,{"source_url":ELO_URL,"source_sha256":info["sha256"],
-                "observed_utc":now.isoformat(),
+                "observed_utc":source_observed_utc.isoformat(),
                 "last_modified_claim":info.get("last_modified"),
                 "board_ratings_not_certified_as_UEFA_club_ids":True}
 
@@ -389,11 +392,20 @@ def batch(request,*,now,fixture,slots,stage4,stage5,retro,index,
                   "github_actions_run_id":run_id}}
         rec["payload_sha256"]=stamp(rec)
         results.append(rec)
-    if len(results)!=len(ids) or any(r["lock_created_at_utc"]>=r["kickoff_utc"] for r in results):
+    if len(results)!=len(ids):
         raise LockError("BATCH_INCOMPLETE_OR_AFTER_KICKOFF")
-    if datetime.now(timezone.utc)>=kickoff:raise LockError("LOCK_READY_TOO_LATE_TO_PUBLISH")
+    # Persist the ACTUAL time the batch finished computing, never the
+    # earlier Python-entry timestamp that preceded network source fetches.
+    # Dry rehearsals remain deterministic and never create real records.
+    created_utc=datetime.now(timezone.utc) if write else now
+    if created_utc>=kickoff:
+        raise LockError("LOCK_READY_TOO_LATE_TO_PUBLISH")
+    for record in results:
+        record["lock_created_at_utc"]=created_utc.isoformat()
+        record["minutes_before_kickoff"]=round((kickoff-created_utc).total_seconds()/60,2)
+        record["payload_sha256"]=stamp({k:v for k,v in record.items() if k!="payload_sha256"})
     report={"schema":REPORT_SCHEMA,"status":"PREMATCH_SHADOW_LOCK_BATCH_READY",
-       "slot_key":slot_id,"lock_created_at_utc":now.isoformat(),
+       "slot_key":slot_id,"lock_created_at_utc":created_utc.isoformat(),
        "kickoff_utc":kickoff.isoformat(),
        "utc_pre_kickoff":True,"matches":len(results),
        "immutable_records":[{"uefa_match_id":r["uefa_match_id"],
