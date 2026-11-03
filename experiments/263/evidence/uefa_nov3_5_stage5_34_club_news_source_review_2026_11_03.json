@@ -1,0 +1,856 @@
+{
+  "schema": "263_UEFA_NOV_3_5_STAGE5_CL_OFFICIAL_EL_SECONDARY_NEWS_REVIEW_V1",
+  "prepared_on_istanbul": "2026-11-03",
+  "purpose": "34-club pre-match squad/injury/suspension claim staging, not verified matchday lineups or approved squad model weights",
+  "news_status_by_competition": {
+    "UEFA_CL": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+    "UEFA_EL": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK"
+  },
+  "independent_team_fitness_confirmation_complete": false,
+  "player_eligibility_verified_from_club_uefa_team_sheets": false,
+  "first_11_non_blocking": true,
+  "warnings": [
+    "A source statement Out: None means the cited article lists none; not proof of full fitness or availability.",
+    "UEFA editorial predicted lineups and injury news do not equal confirmed starting eleven.",
+    "Europa League claims are third-party, partial and not independently confirmed by each club; no application to predicted probabilities.",
+    "Matchday player news may change; recheck on matchday and T−60 when published.",
+    "This source-review record is not a forecast or immutable pre-match prediction ledger."
+  ],
+  "clubs": {
+    "ab16f146-5846-5854-b898-f7c1ae3583ba": {
+      "name_as_uefa": "Galatasaray",
+      "official_club_name": "GALATASARAY A.Ş.",
+      "league": "TUR1",
+      "fixture_id": 2049614,
+      "fixture_kickoff_utc": "2026-11-03T17:45:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": true,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "6aa36235-a890-5482-9fe3-06efab06f2f9": {
+      "name_as_uefa": "Stuttgart",
+      "official_club_name": "VfB Stuttgart",
+      "league": "GER1",
+      "fixture_id": 2049614,
+      "fixture_kickoff_utc": "2026-11-03T17:45:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Sauer (muscular)",
+        "Stiller (adductor)",
+        "Vagnoman (hamstring)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "edbec58b-b78d-5be6-8218-ba6ed96c0776": {
+      "name_as_uefa": "Atlético de Madrid",
+      "official_club_name": "Atlético de Madrid",
+      "league": "ESP1",
+      "fixture_id": 2049608,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Cardoso (hamstring)",
+        "Hjulmand (suspended)"
+      ],
+      "reported_doubtful": [
+        "Koke (hamstring)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "c8be3a92-94db-5ef4-9cb4-7a9877fc7bbe": {
+      "name_as_uefa": "Bayern München",
+      "official_club_name": "FC Bayern München",
+      "league": "GER1",
+      "fixture_id": 2049608,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Luis Díaz (hamstring)",
+        "Gnabry (hamstring)",
+        "Musiala (thigh)",
+        "Saibari (ankle)"
+      ],
+      "reported_doubtful": [
+        "Neuer (foot)",
+        "Olise (hamstring)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "aa66d325-fc60-5b5c-b510-900f1f30c3cc": {
+      "name_as_uefa": "Barcelona",
+      "official_club_name": "FC Barcelona",
+      "league": "ESP1",
+      "fixture_id": 2049607,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Christensen (hamstring)",
+        "Eric García (hamstring)",
+        "Xavi Espart (ankle)",
+        "Koundé (ankle)",
+        "Olmo (adductor)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "ae84a5fa-13c8-5d19-9151-4624f1159182": {
+      "name_as_uefa": "Aston Villa",
+      "official_club_name": "Aston Villa",
+      "league": "ENG1",
+      "fixture_id": 2049607,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Ruggeri (hamstring)",
+        "Wan-Bissaka (hamstring)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "1e7810fb-50b1-5185-8a6e-916a58d5a2be": {
+      "name_as_uefa": "Feyenoord",
+      "official_club_name": "Feyenoord",
+      "league": "NED1",
+      "fixture_id": 2049610,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Bos (knee)",
+        "Moder (back)",
+        "Nieuwkoop (knee)",
+        "Smal (ankle)",
+        "St. Juste (ankle)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "19a74312-3197-557e-bfe6-f90e30a78f09": {
+      "name_as_uefa": "Inter",
+      "official_club_name": "Inter",
+      "league": "ITA1",
+      "fixture_id": 2049610,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Bastoni (suspended)",
+        "Jones (thigh)",
+        "Lautaro Martínez (muscular)",
+        "Stones (thigh)"
+      ],
+      "reported_doubtful": [
+        "Luis Henrique (thigh)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "8c661a94-3348-5ee8-88cd-fed3afc9e03d": {
+      "name_as_uefa": "Manchester United",
+      "official_club_name": "Manchester United",
+      "league": "ENG1",
+      "fixture_id": 2049609,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Dorgu (hamstring)",
+        "Rashford (hip)",
+        "Šeško (shin)",
+        "Shaw (hamstring)"
+      ],
+      "reported_doubtful": [
+        "Diallo (muscular)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "40b9cd57-5584-525d-9bb5-bcdb26830ade": {
+      "name_as_uefa": "Roma",
+      "official_club_name": "Roma",
+      "league": "ITA1",
+      "fixture_id": 2049609,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Koné (hamstring)",
+        "Pellegrini (hamstring)",
+        "Svilar (hand)"
+      ],
+      "reported_doubtful": [
+        "Dybala (calf)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "1b2fb7db-bdb3-53ad-86f5-8c2992ee5293": {
+      "name_as_uefa": "Villarreal",
+      "official_club_name": "Villarreal CF",
+      "league": "ESP1",
+      "fixture_id": 2049612,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Akhomach (muscular)",
+        "Alassane (muscular)",
+        "Foyth (muscular)",
+        "Moreno (muscular)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "089ac458-9f7d-500f-9f62-44dfa8032f37": {
+      "name_as_uefa": "Paris Saint-Germain",
+      "official_club_name": "Paris Saint-Germain",
+      "league": "FRA1",
+      "fixture_id": 2049612,
+      "fixture_kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Dembélé (thigh)",
+        "Kvaratskhelia (knee)",
+        "Marquinhos (thigh)",
+        "Nuno Mendes (thigh)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "b70be320-82df-539d-9dc1-09f05137f08d": {
+      "name_as_uefa": "Fenerbahçe",
+      "official_club_name": "FENERBAHÇE A.Ş.",
+      "league": "TUR1",
+      "fixture_id": 2049620,
+      "fixture_kickoff_utc": "2026-11-04T17:45:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Aké (hamstring)",
+        "Asensio (knee)"
+      ],
+      "reported_doubtful": [
+        "Oppong (unspecified)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "ce71ab24-a25e-54ac-9023-c753dc549c88": {
+      "name_as_uefa": "Liverpool",
+      "official_club_name": "Liverpool",
+      "league": "ENG1",
+      "fixture_id": 2049620,
+      "fixture_kickoff_utc": "2026-11-04T17:45:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Bradley (knee)",
+        "Ekitiké (Achilles)",
+        "Frimpong (hamstring)",
+        "Leoni (knee)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "aec30ffc-fb2e-5d50-adac-f5472690a4a9": {
+      "name_as_uefa": "Borussia Dortmund",
+      "official_club_name": "Borussia Dortmund",
+      "league": "GER1",
+      "fixture_id": 2049616,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Kauã Prates (muscular)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "91862a7d-290b-50c5-9991-71ac9b47b872": {
+      "name_as_uefa": "Real Betis",
+      "official_club_name": "Real Betis",
+      "league": "ESP1",
+      "fixture_id": 2049616,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Cucho Hernández (calf)",
+        "Junior Firpo (muscular)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "7bec194f-4088-51f9-aeef-a9e5c3891f35": {
+      "name_as_uefa": "Porto",
+      "official_club_name": "FC Porto",
+      "league": "POR1",
+      "fixture_id": 2049617,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [],
+      "reported_doubtful": [
+        "William Gomes (ankle)",
+        "Pietuszewski (thigh)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": true,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "1404171b-d23a-5f5e-8909-2c7f1af827ff": {
+      "name_as_uefa": "Napoli",
+      "official_club_name": "Napoli",
+      "league": "ITA1",
+      "fixture_id": 2049617,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Badiashile (muscular)",
+        "Di Lorenzo (adductor)",
+        "Lobotka (ankle)",
+        "Neres (thigh)",
+        "Olivera (muscular)",
+        "Alisson Santos (thigh)",
+        "Spinazzola (leg)"
+      ],
+      "reported_doubtful": [
+        "De Bruyne (ankle)",
+        "Højlund (illness)",
+        "Milinković-Savić (muscular)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "0dd70a13-dbba-5c9e-b69b-0a5f006f43c5": {
+      "name_as_uefa": "PSV Eindhoven",
+      "official_club_name": "PSV",
+      "league": "NED1",
+      "fixture_id": 2049618,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Lammers (muscular)",
+        "Ouaissa (hamstring)",
+        "Wanner (foot)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "9cdec74d-e405-576f-adbf-c5ef040290e5": {
+      "name_as_uefa": "Club Brugge",
+      "official_club_name": "Club Brugge",
+      "league": "BEL1",
+      "fixture_id": 2049618,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Ordoñez (toe)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "ea18c9c4-9bc4-57c2-b57b-6bc8205a1683": {
+      "name_as_uefa": "Leipzig",
+      "official_club_name": "RB Leipzig",
+      "league": "GER1",
+      "fixture_id": 2049619,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Ouédraogo (shoulder)"
+      ],
+      "reported_doubtful": [
+        "Estève (knock)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "f7ba382d-cc35-5b2b-953b-ec56ef312010": {
+      "name_as_uefa": "Manchester City",
+      "official_club_name": "Manchester City",
+      "league": "ENG1",
+      "fixture_id": 2049619,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Semenyo (knee)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "f5fd5f35-351b-5c16-9eb6-09a660f73630": {
+      "name_as_uefa": "Lens",
+      "official_club_name": "RC Lens",
+      "league": "FRA1",
+      "fixture_id": 2049623,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Édouard (adductor)",
+        "Ganiou (knee)",
+        "Sima (thigh)"
+      ],
+      "reported_doubtful": [],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "ecfbc8bf-09bd-5417-8c73-b02d3b027116": {
+      "name_as_uefa": "Como",
+      "official_club_name": "Como",
+      "league": "ITA1",
+      "fixture_id": 2049623,
+      "fixture_kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "source_name": "UEFA Champions League editorial predicted lineups",
+      "source_url": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+      "source_article_date": "2026-11-02",
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "UEFA_EDITORIAL_PREMATCH_REPORT_NOT_CONFIRMED_TEAM_SHEET",
+      "reported_out": [
+        "Diao (hamstring)",
+        "Kean (shin)"
+      ],
+      "reported_doubtful": [
+        "Chalobah (muscular)"
+      ],
+      "list_completeness": "ALL_ITEMS_EXPLICITLY_LISTED_ON_OFFICIAL_UEFA_EDITORIAL",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "f4766b24-4533-540f-ab07-af3be2f16914": {
+      "name_as_uefa": "Crystal Palace",
+      "official_club_name": "Crystal Palace",
+      "league": "ENG1",
+      "fixture_id": 2050121,
+      "fixture_kickoff_utc": "2026-11-05T17:45:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Mateta (suspended)",
+        "Riad (knee)",
+        "Sarr (groin)",
+        "Tomiyasu (calf)"
+      ],
+      "reported_doubtful": [
+        "Larsen",
+        "Timber",
+        "Chilwell"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383": {
+      "name_as_uefa": "Hoffenheim",
+      "official_club_name": "TSG Hoffenheim",
+      "league": "GER1",
+      "fixture_id": 2050121,
+      "fixture_kickoff_utc": "2026-11-05T17:45:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Prass (listed suspended)",
+        "Conté (groin)",
+        "Coufal (muscle)",
+        "De Cat (knee)"
+      ],
+      "reported_doubtful": [
+        "Bernardo",
+        "Daghim"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "4d3fba55-3549-5874-b15c-5697f4e8f3f2": {
+      "name_as_uefa": "Real Sociedad",
+      "official_club_name": "Real Sociedad",
+      "league": "ESP1",
+      "fixture_id": 2050115,
+      "fixture_kickoff_utc": "2026-11-05T17:45:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Beitia (ankle)",
+        "Odriozola (knee)",
+        "Zakharyan (ankle)",
+        "Aramburu (leg)"
+      ],
+      "reported_doubtful": [
+        "Herrera"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "b8051c2b-f40f-5620-aca4-3ec5711567e1": {
+      "name_as_uefa": "Lyon",
+      "official_club_name": "Olympique Lyonnais",
+      "league": "FRA1",
+      "fixture_id": 2050115,
+      "fixture_kickoff_utc": "2026-11-05T17:45:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Kango (concussion)",
+        "Morton (groin)",
+        "Openda (leg)",
+        "Ouédraogo (knee)"
+      ],
+      "reported_doubtful": [
+        "Hamdani"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "7e830405-8cac-5e47-82bd-a8e8c1441ad6": {
+      "name_as_uefa": "AZ Alkmaar",
+      "official_club_name": "AZ",
+      "league": "NED1",
+      "fixture_id": 2050114,
+      "fixture_kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Hornkamp",
+        "Resink (knee)",
+        "Smit",
+        "Zoet",
+        "Verhulst"
+      ],
+      "reported_doubtful": [
+        "Goes",
+        "Clasie"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "fc9f8209-af3f-542c-83e0-366bf4af6ea1": {
+      "name_as_uefa": "Juventus",
+      "official_club_name": "Juventus",
+      "league": "ITA1",
+      "fixture_id": 2050114,
+      "fixture_kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Çelik (muscle)",
+        "Conceição (shoulder)",
+        "González (calf)",
+        "Grabara (knee)"
+      ],
+      "reported_doubtful": [
+        "Ekhator",
+        "Felipe"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "bec22b9c-1ac9-5351-b1a1-11ed122fe9f9": {
+      "name_as_uefa": "Leverkusen",
+      "official_club_name": "Bayer 04 Leverkusen",
+      "league": "GER1",
+      "fixture_id": 2050111,
+      "fixture_kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Badé (head)",
+        "Diaby (hamstring)",
+        "Doué (calf)",
+        "Eichhorn"
+      ],
+      "reported_doubtful": [
+        "Stepanov"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "4179dd45-fbcc-51ac-b48e-df05403a79ff": {
+      "name_as_uefa": "Marseille",
+      "official_club_name": "Olympique de Marseille",
+      "league": "FRA1",
+      "fixture_id": 2050111,
+      "fixture_kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Cornelius (hip)",
+        "Moumbagna"
+      ],
+      "reported_doubtful": [
+        "Mbondo",
+        "Højbjerg"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "6ad330c9-ad3c-5944-818d-c9a67a993f8e": {
+      "name_as_uefa": "Celta",
+      "official_club_name": "Celta",
+      "league": "ESP1",
+      "fixture_id": 2050123,
+      "fixture_kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "Cuenca (muscle)",
+        "El Abdellaoui (knee)",
+        "Iglesias (calf)",
+        "Núñez (groin)"
+      ],
+      "reported_doubtful": [
+        "Durán"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    },
+    "7d5aab11-5206-5d08-b7fd-541b218b635c": {
+      "name_as_uefa": "Union SG",
+      "official_club_name": "Royale Union Saint-Gilloise",
+      "league": "BEL1",
+      "fixture_id": 2050123,
+      "fixture_kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "source_name": "Starting11 Europa League third-party projected lineups",
+      "source_url": "https://starting11.com/europa-league",
+      "source_article_date": null,
+      "checked_istanbul_date": "2026-11-03",
+      "confidence": "SECONDARY_UNCONFIRMED_REPORT_REQUIRES_OFFICIAL_RECHECK",
+      "reported_out": [
+        "El Hadj",
+        "Hurtevent (knock)",
+        "Kričfaluši (knock)",
+        "Mac Allister (knee)"
+      ],
+      "reported_doubtful": [
+        "Rodríguez",
+        "Sykes"
+      ],
+      "list_completeness": "PARTIAL_SOURCE_MAY_INCLUDE_ADDITIONAL_UNLISTED_PLAYERS",
+      "reported_no_absences": false,
+      "confirmed_starting_eleven_available": false,
+      "source_player_club_identity_separately_verified": false,
+      "fitness_inference_or_probability_coefficient_authorized": false
+    }
+  }
+}
