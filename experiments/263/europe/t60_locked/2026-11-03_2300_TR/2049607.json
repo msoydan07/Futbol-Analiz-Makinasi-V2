@@ -1,0 +1,213 @@
+{
+  "away": "Aston Villa",
+  "away_id": "ae84a5fa-13c8-5d19-9151-4624f1159182",
+  "competition": "UEFA_CL",
+  "first_elevens": {
+    "away_starting_xi": null,
+    "home_starting_xi": null,
+    "source_ci_verified": false,
+    "status": "FIRST_XI_NOT_CONFIRMED_NON_BLOCKING"
+  },
+  "home": "Barcelona",
+  "home_id": "aa66d325-fc60-5b5c-b510-900f1f30c3cc",
+  "hypothesis": "First prospective independent comparison of M0 and unapproved M0+Elo",
+  "kickoff_utc": "2026-11-03T20:00:00+00:00",
+  "lock_created_at_utc": "2026-11-03T19:20:32.038846+00:00",
+  "minutes_before_kickoff": 39.47,
+  "model_parameters_predeclared": {
+    "Elo_normalization": 400,
+    "UEFA_train_away_goal_mean": 1.3289473684210527,
+    "UEFA_train_home_goal_mean": 1.7763157894736843,
+    "exploratory_Elo_beta": 0.5254760017675575,
+    "smoothing_k": 5.0
+  },
+  "models": {
+    "M0_ELO_EXPERIMENTAL_SHADOW": {
+      "1x2": {
+        "away": 0.0892902521484003,
+        "draw": 0.11957739986644353,
+        "home": 0.7911323479851561
+      },
+      "betting_pick_authorized": false,
+      "both_teams_score_no": 0.3603277571797868,
+      "both_teams_score_yes": 0.6396722428202132,
+      "expected_away_goals": 1.0937642674514203,
+      "expected_home_goals": 3.2661128524847802,
+      "market_ev": null,
+      "max_1x2_probability_label": "HOME",
+      "most_likely_exact_score": {
+        "away": 1,
+        "home": 3
+      },
+      "over_2p5": 0.8100368982474807,
+      "under_2p5": 0.1899631017525193
+    },
+    "M0_UNAPPROVED_REFERENCE": {
+      "1x2": {
+        "away": 0.10992281243523706,
+        "draw": 0.13494116557606753,
+        "home": 0.7551360219886956
+      },
+      "betting_pick_authorized": false,
+      "both_teams_score_no": 0.34496967930829037,
+      "both_teams_score_yes": 0.6550303206917096,
+      "expected_away_goals": 1.1603727077887995,
+      "expected_home_goals": 3.078629398582763,
+      "market_ev": null,
+      "max_1x2_probability_label": "HOME",
+      "most_likely_exact_score": {
+        "away": 1,
+        "home": 3
+      },
+      "over_2p5": 0.7948679889419223,
+      "under_2p5": 0.20513201105807766
+    }
+  },
+  "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049607--barcelona-vs-aston-villa/",
+  "payload_sha256": "96a5bc20c2be87a3ff12f35e68877404949a522d77d80764f8c6c06aece3b7bd",
+  "pre_match_context": {
+    "away": {
+      "away_games": 4,
+      "canonical_team_id": "ae84a5fa-13c8-5d19-9151-4624f1159182",
+      "current_season_games_before_UEFA_match": 9,
+      "elo_last_rated_match": "2026-10-31",
+      "home_games": 5,
+      "last_domestic_result": "2026-10-31",
+      "last_five_points": 11,
+      "league": "ENG1",
+      "rd": 68.5193887946372,
+      "recent_opponent_ppg": 1.527,
+      "source_elo_as_of": "2026-11-03"
+    },
+    "home": {
+      "away_games": 5,
+      "canonical_team_id": "aa66d325-fc60-5b5c-b510-900f1f30c3cc",
+      "current_season_games_before_UEFA_match": 11,
+      "elo_last_rated_match": "2026-10-31",
+      "home_games": 6,
+      "last_domestic_result": "2026-10-31",
+      "last_five_points": 12,
+      "league": "ESP1",
+      "rd": 74.0460938650737,
+      "recent_opponent_ppg": 1.844,
+      "source_elo_as_of": "2026-11-03"
+    }
+  },
+  "safety": {
+    "Elo_weight_not_approved": true,
+    "lineups_recorded_as_context_only_not_goal_multiplier": true,
+    "main_branch_not_modified": true,
+    "mathematical_probability_not_betting_advice": true,
+    "no_post_match_results_accessed": true,
+    "odds_EV_not_calculated": true,
+    "pilot_increment": 0,
+    "source_claim_not_actual_independent_UEFA_GitHub_fetch": true
+  },
+  "schema": "263_UEFA_T60_TWO_SHADOW_IMMUTABLE_RECORD_V1",
+  "season": "2026-2027",
+  "source_data": {
+    "domestic": {
+      "BEL1": {
+        "completed_matches": 89,
+        "fetched_utc": "2026-11-03T19:20:19.556021+00:00",
+        "last_completed_result": "2026-11-01",
+        "new_completed_since_first_snapshot": 0,
+        "sha256": "e929132f74b8d7e79720045dcadcd1a480d2bcc71ae987d11b5fb8717bf94fb1",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/B1.csv"
+      },
+      "ENG1": {
+        "completed_matches": 90,
+        "fetched_utc": "2026-11-03T19:20:20.872138+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "c429b75f681dc7aaec5641a23320402409530b4b01a9f147bb7e386fe508159b",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/E0.csv"
+      },
+      "ESP1": {
+        "completed_matches": 109,
+        "fetched_utc": "2026-11-03T19:20:22.285649+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "a382f00d78d85eae814e8b06a4a0d5ba0dd70905156f20b02f8c0e6c28b7c7d6",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/SP1.csv"
+      },
+      "FRA1": {
+        "completed_matches": 81,
+        "fetched_utc": "2026-11-03T19:20:23.632280+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "18fed04746c2f4d764e02a331d5e94b0ca6c71c102ee82ae95423e4de410f4c0",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/F1.csv"
+      },
+      "GER1": {
+        "completed_matches": 72,
+        "fetched_utc": "2026-11-03T19:20:25.013831+00:00",
+        "last_completed_result": "2026-11-01",
+        "new_completed_since_first_snapshot": 0,
+        "sha256": "490b69c06ec2890be818372c7ea3bd5413b7fe6539185890d9eaeb6b59a6f22b",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/D1.csv"
+      },
+      "ITA1": {
+        "completed_matches": 100,
+        "fetched_utc": "2026-11-03T19:20:26.346686+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 2,
+        "sha256": "4138a4f01e96312a7a5dc07450c7a520c3861a479620fe3d102f12d42a6678ba",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/I1.csv"
+      },
+      "NED1": {
+        "completed_matches": 99,
+        "fetched_utc": "2026-11-03T19:20:27.861001+00:00",
+        "last_completed_result": "2026-11-01",
+        "new_completed_since_first_snapshot": 0,
+        "sha256": "5f5cdffe5f8c413ae73bd1988b259d453a05ba6884e2a2b6060a17fa71867ed1",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/N1.csv"
+      },
+      "POR1": {
+        "completed_matches": 90,
+        "fetched_utc": "2026-11-03T19:20:29.209676+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 2,
+        "sha256": "eed51b09af8112e9f2e35d062f67dd07e5ae73ac267cd0235237f30eeabacae8",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/P1.csv"
+      },
+      "TUR1": {
+        "completed_matches": 90,
+        "fetched_utc": "2026-11-03T19:20:31.207992+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "2abfcfb6c19b1c25fbbc6084104bd365a371e2b1136117539a1793eab7b2ef7c",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/T1.csv"
+      }
+    },
+    "elo": {
+      "board_ratings_not_certified_as_UEFA_club_ids": true,
+      "last_modified_claim": "Tue, 03 Nov 2026 19:20:31 GMT",
+      "observed_utc": "2026-11-03T19:20:32.035005+00:00",
+      "source_sha256": "d88008b0747818fdc1b2af380af32240621038cc799e8cde9f66a26da2dad4fa",
+      "source_url": "https://public-api.beyondelo.com/v1/datasets/club-ratings.csv"
+    },
+    "fixture_review_url": "https://www.uefa.com/uefachampionsleague/match/2049607--barcelona-vs-aston-villa/",
+    "fixture_review_utc": "2026-11-03T19:19:53+00:00",
+    "historic_m0_experiment_sha256": "03c1b1fea46bcf941ad1271a0fe6fb0d536df8dcff9d2182a30bca91b7cdff17",
+    "source_review_status": "WEB_REVIEW_CLAIM_NOT_REFETCHED_BY_GITHUB_CI",
+    "stage4_accepted_sha256": "56e3210d425aeaa6b2a7bfc9d3244a0ae644b7a55b6c133308406a4647cb4c97",
+    "stage5_accepted_sha256": "6b4aa434357fdd9b75d0f6c0f3e730b48dec6e7dec1cf6266c7d328d1ce45c5c"
+  },
+  "status": "PREKICKOFF_EXPERIMENTAL_SHADOW_LOCK_NOT_PILOT",
+  "trigger": {
+    "github_actions_run_id": "41702284137",
+    "github_trigger_commit_sha": "ce235400567333b8a69bd62963b11ffb8e591f98",
+    "request_sha256": "f112b042ac50326e6b8a805c9b610dcb526105d52e404f52afa54a170e4a4fb2"
+  },
+  "uefa_match_id": 2049607
+}
