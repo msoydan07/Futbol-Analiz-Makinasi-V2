@@ -1,0 +1,118 @@
+{
+  "schema": "263_UEFA_PREMATCH_CONTEXT_APPEND_ONLY_V1",
+  "status": "PREMATCH_INDEPENDENT_WEB_REVIEW_NOT_NUMERICAL_RECALIBRATION",
+  "fixture": {
+    "match_id": 2049614,
+    "home": "Galatasaray",
+    "away": "VfB Stuttgart",
+    "competition": "UEFA Champions League",
+    "kickoff_utc": "2026-11-03T17:45:00+00:00",
+    "official_uefa_url": "https://www.uefa.com/uefachampionsleague/match/2049614--galatasaray-vs-stuttgart/",
+    "official_tff_match_news": "https://www.tff.org/default.aspx?ftxtID=51802&pageID=267",
+    "venue": "Ali Sami Yen / RAMS Park",
+    "referee": "Chris Kavanagh"
+  },
+  "review_time": "2026-11-03T19:47:19+03:00",
+  "record_links": {
+    "original_locked_record": "experiments/263/europe/t60_locked/2026-11-03_2045_TR/2049614.json",
+    "original_lock_payload_sha256": "9deaf775878fa28d10910360396e8c74a93c6f983a5d719c34a3eca9d3a3a962",
+    "original_lock_created_at_utc": "2026-11-03T16:41:44.965997+00:00"
+  },
+  "lineup_review": {
+    "status": "OFFICIAL_STARTING_XI_NOT_VERIFIED_CONFLICTING_SECONDARY_LISTS",
+    "official_uefa_predicted_only": "https://www.uefa.com/uefachampionsleague/news/02ab-21f9907f0a27-6a6a67e9775d-1000--champions-league-predicted-line-ups-matchday-4-team-news-/",
+    "publication_distinction": "UEFA source is explicitly PREDICTED; not a sealed actual starting XI.",
+    "secondary_lineup_urls": [
+      "https://www.sporx.com/galatasaray-vfb-stuttgart-maci-kadrolar-6106341",
+      "https://as.com/resultados/futbol/champions/2026_2027/directo/regular_a_4_6a92d4a865cad93/alineaciones/",
+      "https://elpais.com/deportes/resultados/futbol/champions/2026_2027/directo/regular-a-4-6a92d4a865cad93/alineaciones/"
+    ],
+    "conflict": "Secondary sources disagree on both teams' exact XI, particularly Stuttgart (e.g. Seimen vs Bredlow in dynamically changing Sporx; Assignon/Jeltsch/Mittelstaedt vs Jaquez/Atakan/Demirovic). Do not certify an XI or apply lineup-dependent goal multipliers.",
+    "predicted_galatasaray_uefa": [
+      "Uğurcan Çakır",
+      "Roland Sallai",
+      "Davinson Sánchez",
+      "Abdülkerim Bardakcı",
+      "Ismail Jakobs",
+      "Lucas Torreira",
+      "Gabriel Sara",
+      "Yunus Akgün",
+      "Aleksey Batrakov",
+      "Barış Alper Yılmaz",
+      "Victor Osimhen"
+    ],
+    "predicted_stuttgart_uefa": [
+      "Dennis Seimen",
+      "Luca Jaquez",
+      "Jeff Chabot",
+      "Ramon Hendriks",
+      "Jamie Leweling",
+      "Grischa Prömel",
+      "Atakan Karazor",
+      "Bilal El Khannouss",
+      "Deniz Undav",
+      "Chris Führich",
+      "Ermedin Demirović"
+    ],
+    "injury_availability_uefa_report": {
+      "home_out": [],
+      "away_out": [
+        "Leo Sauer (muscular)",
+        "Angelo Stiller (adductor)",
+        "Josha Vagnoman (hamstring)"
+      ],
+      "source_type": "UEFA predicted lineup article: reported unavailable, not confirmed actual XI"
+    },
+    "numerical_effect_on_existing_predictions": 0
+  },
+  "match_form_notes": {
+    "uefa_2026_27_result_before_kickoff": {
+      "galatasaray": [
+        "Sporting CP 3-1 Galatasaray",
+        "Galatasaray 1-4 Barcelona",
+        "Lille 2-4 Galatasaray"
+      ],
+      "stuttgart": [
+        "Stuttgart 3-1 Viking",
+        "Stuttgart 3-0 Slovan Bratislava",
+        "Atlético Madrid 1-1 Stuttgart"
+      ]
+    },
+    "domestic_from_original_shadow_record": {
+      "galatasaray_current_season_games": 10,
+      "galatasaray_last_five_points": 12,
+      "galatasaray_recent_opponent_ppg": 1.42,
+      "stuttgart_current_season_games": 8,
+      "stuttgart_last_five_points": 6,
+      "stuttgart_recent_opponent_ppg": 1.411
+    },
+    "sample_warning": "UEFA current season only three matches per team; raw European goals alone are poor basis for claiming opponent-quality-adjusted strength."
+  },
+  "locked_predictions": {
+    "M0": {
+      "win_home": 0.5052981940022387,
+      "draw": 0.2194436646538864,
+      "win_away": 0.2752581413438749,
+      "btts": 0.6468371207384936,
+      "over25": 0.6516970469441503,
+      "lambda_home": 1.9561787573373792,
+      "lambda_away": 1.3998278359962577
+    },
+    "M0_Elo": {
+      "win_home": 0.502418050999207,
+      "draw": 0.21991961809442861,
+      "win_away": 0.2776623309063644,
+      "btts": 0.6471802008493117,
+      "over25": 0.6512713687615662,
+      "lambda_home": 1.948484491675068,
+      "lambda_away": 1.4053555408857095
+    }
+  },
+  "limits": [
+    "NOT a B/C2/C3/M4 production/pilot record",
+    "Original SHA-locked 19:41:44 Turkish time T-60 numerical predictions are not edited",
+    "UEFA xG-free policy: no xG, no invented Elo-boost or lineup multiplier",
+    "No price or odds → no EV or betting recommendation",
+    "After the result, compare only original locked predictions with actual final result; this appendix is not a retroactively modified prediction"
+  ]
+}
