@@ -1,6 +1,6 @@
 # M4 GELISTIRME PROGRAMI — 2026-11-03
 ## Durum
-PLAN KILITLENDI / ASAMA 1 KAYNAK VE 24 EKSIK SKOR TAMAMLANDI / ASAMA 2 KIMLIK KABULU BEKLIYOR.
+PLAN KILITLENDI / ASAMA 1 VE 2 TAMAMLANDI (2024/25 ARASTIRMA ONLY) / ASAMA 3 HATA ANALIZI SIRADA.
 Dal: `experiment/263-toplu-karsilastirma`. Canli motor, main, B/C2/C3/M4 tahmin kurallari, 100 maclik ileri pilot ve eski raporlar DEGISTIRILMEZ.
 Yeni bir model terfi ettirilmez. Tum deneyler yalniz arastirma havuzunda.
 
@@ -51,3 +51,9 @@ Henüz 2024/25 veri importer'i yazma, eski modelleri yeniden kosma, Actions work
 ## 2026-11-03 uygulama kaydi
 Aşama 1 sonuç ve alt dosyalar: [263_M4_2024_25_asama1_kabul_2026_11_03.md](263_M4_2024_25_asama1_kabul_2026_11_03.md).
 3.576 2024/25 skor kaydı araştırma olarak kaydedildi. 24 skorsuz maç kaynaklı tamamlandı. 75 mevcut kesin isim eşleşmesi, 96 onay bekleyen mevcut takım adayı, 20 ayrı tarihsel takım kaydı gereksinimi belirlendi. Ana veri değişmedi. Sıradaki iş yalnız 2024/25 kimlik katmanının toplu kabulüdür.
+
+
+## 2026-11-03 Aşama 2 tamamlandı
+- [2024/25 kimlik ve veri kabul raporu](263_M4_2024_25_asama2_kabul_2026_11_03.md)
+- 3.576 geçmiş maç ayrı araştırma CSV'sinde, 191 lig/takım kimliği benzersiz, 20 yeni tarihsel kayıt, 78 playoff ayrı, 12 temel QA kontrolü geçti.
+- Yeni sezon verisi C3/M4 üretim koduna aktarılmadı. Sırada 880 maçın eski tahminlerinin salt okunur hata ayrıştırması var.
