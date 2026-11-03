@@ -1,6 +1,6 @@
 # M4 GELISTIRME PROGRAMI — 2026-11-03
 ## Durum
-PLAN KILITLENDI / ASAMA 1-4 TAMAMLANDI / ASAMA 5 XG VERI UYGUNLUK DENETIMI SIRADA.
+PLAN KILITLENDI / ASAMA 1-5 ARASTIRMA KABUL EDILDI (XG ASOF KAPISI BLOKE) / ASAMA 6 MUHENDISLIK KARARI VERILDI; ILERI PILOT KANITI BEKLENIYOR.
 Dal: `experiment/263-toplu-karsilastirma`. Canli motor, main, B/C2/C3/M4 tahmin kurallari, 100 maclik ileri pilot ve eski raporlar DEGISTIRILMEZ.
 Yeni bir model terfi ettirilmez. Tum deneyler yalniz arastirma havuzunda.
 
@@ -80,3 +80,16 @@ Aşama 1 sonuç ve alt dosyalar: [263_M4_2024_25_asama1_kabul_2026_11_03.md](263
 - Geliştirme döneminde daha eski geçmiş iyileşme gösterebilirken yeniden görülen 2026/27'de genel olarak iyileştirmedi; bu nedenle eski 2026/27 bağımsız final sayılamaz.
 - Tam yeniden üretilebilir kod, sabit kaynak dosyaları, 873 ortak eşleşme ve büyük sonuç CSV'si aynı sohbetteki M4 Asama4 ZIP paketinde. GitHub dokümanında sonuç var; Python kaynak kodu henüz repo içi dosya olarak yüklenmedi.
 - Model terfisi ve canlı iş akışı güncellemesi YOK. **Tek sonraki iş:** Aşama 5 yalnız xG bulunan liglerin güncel/gerçek maç verisi kapsamını doğrula; varlık ve tarih kesimi kanıtlanmadan xG ekleme veya etkisini iddia etme.
+
+
+## 2026-11-03 Aşama 5 xG kabul ve güvenlik sonucu
+- Önceki 2.155 doğrulanmış Understat kimlik eşleşmesi, 5 lig / 2 sezon, 1.549 eşleşmiş gol-vs-xG Poisson retrospektif karşılaştırması **tekrar çalıştırılmadı**. Bu, doğrudan M4+xG kanıtı değildir.
+- 873 ortak C3/M4 değerlendirmesinin 289'unda her iki takımda hedef tarihten eski, en az beşer iç/dış saha xG kaydı var. Ama bu 289 maçın tarihte o gün elde edilebilir xG sürümü bağımsız olarak belgelenemedi; güçlü as-of M4+xG backtest kapısı BLOKE.
+- Yeni araştırma kodu: [güvenli özel xG snapshot](../experiments/263/m4_xg_forward_snapshot_263.py) ve [11 sentetik güvenlik testi](../experiments/263/test_m4_xg_forward_snapshot_263.py). Kod henüz gerçek sağlayıcı çekimi veya harici zaman damgası uygulamıyor; model tahminlerine bağlı değil.
+- [5. aşama kaynak ve as-of kabul raporu](263_M4_asama5_xg_asof_lisans_kabul_2026_11_03.md) ve [gelecek snapshot altyapı raporu](263_M4_asama5_gelecek_xg_ozel_snapshot_2026_11_03.md). Public Actions'taki eski ham xG artifact erişimi/izin riski henüz açık; tekrar public upload yapma.
+
+## 2026-11-03 Aşama 6 — mühendislik hükmü
+- [M4 altı aşamalı tek karar raporu](263_M4_asama6_muhendislik_karari_2026_11_03.md) kabul edildi: tarihsel 873 maçta C3'ten güvenilir biçimde daha üstün M4/ablasyon bulunamadı; hiçbir varyant terfi etmiyor. C3, kilitli M4 ve 100 gerçek maçlık önce-kickoff dörtlü pilot protokolü değişmez.
+- 2025/26 ve görülmüş 2026/27 testleri bağımsız son karar değildir. Gelecek yeni maçlarda zaman damgalı sonuçlarla değerlendir; 25 maç yalnız operasyon kontrolü, 100 maç toplu kalibrasyon ve belirsizlik. xG için önce kaynak izni + gerçek özel as-of snapshot + güvenilir zaman çapası.
+- 3–5 Kasım UEFA M0/M0+Elo iki gölge model kayıtları M4 yerel-lig dörtlü pilotundan **ayrıdır**; birbirinin başarısı olarak sayılmaz.
+- **Bundan sonraki yeni matematik işi ertelenmiştir**: ilk bağımsız ileri veri kohortu olmadan geriye dönük aynı 873 maç üzerinde yeniden aday/hiperparametre aramak döngüdür.
