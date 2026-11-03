@@ -1,0 +1,66 @@
+name: 263 UEFA Nov3-5 Stage5 Elo news - one source-tier acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-stage5-elo-news-one-shot.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  validate-existing-evidence-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download prior immutable 3 November beyondELO source audit artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage5_inputs/elo
+          gh run download 41582947375 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-elo-integrity-single-acceptance \
+            -D data/europe_staged_263/stage5_inputs/elo
+      - name: Download already accepted 167 club ID-name bridge
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage5_inputs/bridge
+          gh run download 41585362134 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-elo-167-bridge-single-acceptance \
+            -D data/europe_staged_263/stage5_inputs/bridge
+      - name: Download prior 9-league 17 fixture goal data and UTC source stamps
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage5_inputs/goals
+          gh run download 41590323827 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-nine-league-goal-data-one-shot \
+            -D data/europe_staged_263/stage5_inputs/goals
+      - name: One deterministic validation of 34 Elo+RD points and separated CL/EL squad evidence
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python -m py_compile \
+            experiments/263/europe/uefa_nov3_5_stage5_elo_news_263.py \
+            experiments/263/europe/test_uefa_nov3_5_stage5_elo_news_263.py
+          python -m unittest -v test_uefa_nov3_5_stage5_elo_news_263
+          python experiments/263/europe/uefa_nov3_5_stage5_elo_news_263.py \
+            --elo-csv data/europe_staged_263/stage5_inputs/elo/source_csv/current.csv \
+            --elo-integrity data/europe_staged_263/stage5_inputs/elo/single_integrity_report.json \
+            --crosswalk data/europe_staged_263/stage5_inputs/bridge/elo_bridge_crosswalk_167.json \
+            --stage4 data/europe_staged_263/stage5_inputs/goals/stage4_goal_data_readiness.json \
+            --fixtures experiments/263/evidence/uefa_2026_11_03_05_fixture_scope_review.json \
+            --news experiments/263/evidence/uefa_nov3_5_stage5_34_club_news_source_review_2026_11_03.json \
+            --out data/europe_staged_263/2026_11_03_05_stage5/17_match_elo_news_readiness.json
+      - name: Single audited output, no forecast or immutable pilot records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-nov3-5-stage5-elo-news-one-shot
+          retention-days: 90
+          if-no-files-found: warn
+          path: data/europe_staged_263/2026_11_03_05_stage5/17_match_elo_news_readiness.json
