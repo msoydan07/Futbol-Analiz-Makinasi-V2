@@ -18,7 +18,7 @@ from datetime import datetime,date,time,timedelta,timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from uefa_ten_league_scope_gate_263 import check_europe_scope,norm,INDEX_DEFAULT
-from uefa_requested_match_entry_263 import SOURCES
+from uefa_requested_match_entry_263 import SOURCES,index_with_reviewed_uefa_names
 
 SCHEMA="263_UEFA_OFFICIAL_WEB_ASSISTED_FACTS_V1"
 VERSION="263_UEFA_ON_DEMAND_OFFLINE_WEB_HANDOFF_V1"
@@ -89,7 +89,8 @@ def requested_from_web_evidence(competition,home,away,*,index,now=None,evidence=
     now=now or datetime.now(timezone.utc)
     if not isinstance(now,datetime) or now.tzinfo is None:
         raise HandoffError("AS_OF_NEEDS_TIMEZONE")
-    scope=check_europe_scope(home,away,index) # MUST be first; no evidence I/O
+    reviewed_index=index_with_reviewed_uefa_names(index)
+    scope=check_europe_scope(home,away,reviewed_index) # MUST be first; no evidence I/O
     result={"version":VERSION,"status":scope["status"],"message":scope["message"],
             "competition":competition,"requested_home":home,"requested_away":away,
             "scope":scope,"fixture":None,
@@ -110,8 +111,8 @@ def requested_from_web_evidence(competition,home,away,*,index,now=None,evidence=
         for raw in evidence["fixtures"]:
             fx=one_row(raw,competition)
             if fx is None:continue
-            h=index["aliases"].get(norm(fx["home_uefa_name"]))
-            a=index["aliases"].get(norm(fx["away_uefa_name"]))
+            h=reviewed_index["aliases"].get(norm(fx["home_uefa_name"]))
+            a=reviewed_index["aliases"].get(norm(fx["away_uefa_name"]))
             if h!=scope["home"]["canonical_team_id"] or a!=scope["away"]["canonical_team_id"]:
                 continue
             kick=datetime.fromisoformat(fx["kickoff_utc"])
