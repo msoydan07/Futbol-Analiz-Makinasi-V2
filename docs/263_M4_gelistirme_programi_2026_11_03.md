@@ -57,3 +57,12 @@ Aşama 1 sonuç ve alt dosyalar: [263_M4_2024_25_asama1_kabul_2026_11_03.md](263
 - [2024/25 kimlik ve veri kabul raporu](263_M4_2024_25_asama2_kabul_2026_11_03.md)
 - 3.576 geçmiş maç ayrı araştırma CSV'sinde, 191 lig/takım kimliği benzersiz, 20 yeni tarihsel kayıt, 78 playoff ayrı, 12 temel QA kontrolü geçti.
 - Yeni sezon verisi C3/M4 üretim koduna aktarılmadı. Sırada 880 maçın eski tahminlerinin salt okunur hata ayrıştırması var.
+
+## Aşama 3 — 2026-11-03 ilk yeni teşhis
+2025/26+2026/27 dondurulmuş 4.413 maç geri çağrıldı ve hash doğrulandı. **880 maçlık yalnız sayım/örneklem diagnostigi** yeni çalışıldı; eski C3/M4 performans yeniden hesaplanmadı. 
+- 272/880 maçta en az bir tarafın 2025/26 aynı lig tarihçesi yok.
+- 775/880 maçta en az bir tarafın cari sezon bağlamındaki iç/dış saha örneği 4'ten az.
+- 2026/27 lig girişlerinde 31 takım-lig yeni; eklenen 2024/25 aynı lig geçmişi bu 31'in yalnız 7'sini karşılıyor.
+- İlgili aşama kanıt dosyası: [M4 Aşama 3 ilk yeni veri teşhisi](263_M4_asama3_veri_yeterliligi_teshisi_2026_11_03.md).
+- **Durum:** Veri yetersizliği teşhisi tamam; 880 maçın C3/M4 bireysel olasılık defterleri mevcut eski arşivde bulunmadığından özgül tahmin-hata profili **henüz tamamlanmadı**.
+- Tek sonraki iş: dondurulmuş kaynak ve aynı C3/M4 kodlarıyla bir defalık kayıtlı `matched error profile` tanısı; eski aggregate ölçütlere eşleşmezse sonuçları karantinaya al. Bu adım formül tuning veya ana model güncellemesi değildir.
