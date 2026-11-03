@@ -15,7 +15,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlsplit
 import urllib.request
-from uefa_ten_league_scope_gate_263 import check_europe_scope, norm, INDEX_DEFAULT
+from uefa_ten_league_scope_gate_263 import check_europe_scope, norm, INDEX_DEFAULT, validated_index
 
 VERSION="263_EUROPE_REQUESTED_MATCH_SCOPE_TO_UEFA_OFFICIAL_v1"
 SOURCES={
@@ -29,6 +29,36 @@ DATE_RE=re.compile(r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)
 MD_RE=re.compile(r"^Matchday\s+([1-8])$",re.I)
 
 class EuropeRequestError(ValueError):pass
+
+# Exact 2026/27 UEFA fixture spellings; federation-verified canonical names
+# are already in the 10-league read-only registry. No fuzzy identity matching.
+# The 167-club European Elo cohort is a SECOND, separate gate.
+UEFA_OFFICIAL_NAME_EQUIVALENCES={
+    "Bayern München":("FC Bayern München","GER1"),
+    "Leipzig":("RB Leipzig","GER1"),
+    "Union SG":("Royale Union Saint-Gilloise","BEL1"),
+}
+
+def index_with_reviewed_uefa_names(index):
+    """Build a copy for UEFA 2026/27 article aliases; never edit the base index."""
+    validated_index(index)
+    aliases=dict(index["aliases"])
+    by_name={team["name"]:tid for tid,team in index["teams"].items()}
+    active=index["season_memberships"]["2026-2027"]
+    for uefa_name,(official,league) in UEFA_OFFICIAL_NAME_EQUIVALENCES.items():
+        tid=by_name.get(official)
+        if not (tid and tid in active[league] and
+                index["teams"][tid].get("verification")=="FEDERATION_VERIFIED" and
+                index["teams"][tid].get("official_name_evidence_url") and
+                index["aliases"].get(norm(official))==tid):
+            raise EuropeRequestError("REVIEWED_UEFA_ALIAS_OFFICIAL_IDENTITY_MISSING")
+        k=norm(uefa_name)
+        if k in aliases and aliases[k]!=tid:
+            raise EuropeRequestError("REVIEWED_UEFA_ALIAS_COLLIDES")
+        aliases[k]=tid
+    reviewed={**index,"aliases":aliases}
+    validated_index(reviewed)
+    return reviewed
 
 def official_url_ok(url,competition):
     if not isinstance(url,str) or competition not in SOURCES:return False
@@ -157,7 +187,8 @@ def requested_europe_match(competition,home,away,*,index,now=None,official_provi
     now=now or datetime.now(timezone.utc)
     if not isinstance(now,datetime) or now.tzinfo is None:
         raise EuropeRequestError("TIMEZONE_AWARE_NOW_REQUIRED")
-    scope=check_europe_scope(home,away,index)
+    reviewed_index=index_with_reviewed_uefa_names(index)
+    scope=check_europe_scope(home,away,reviewed_index)
     output={"version":VERSION,"competition":competition,"requested":{"home":home,"away":away},
             "scope":scope,"status":scope["status"],"message":scope["message"],
             "fixture":None,"fixture_verified":False,
@@ -173,7 +204,7 @@ def requested_europe_match(competition,home,away,*,index,now=None,official_provi
             raise EuropeRequestError("OFFICIAL_PROVIDER_URL_NOT_ALLOWED")
         status,fixture=extract_one_official_fixture(
             html,competition,scope["home"]["canonical_team_id"],
-            scope["away"]["canonical_team_id"],index,now)
+            scope["away"]["canonical_team_id"],reviewed_index,now)
     except (EuropeRequestError,ValueError,UnicodeError,TimeoutError,OSError) as exc:
         output["status"]="OFFICIAL_UEFA_FIXTURE_NOT_VERIFIED"
         output["message"]="Resmî UEFA fikstürü doğrulanamadı; analiz yapılmıyor."
