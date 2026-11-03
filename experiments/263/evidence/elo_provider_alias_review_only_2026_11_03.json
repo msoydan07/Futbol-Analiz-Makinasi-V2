@@ -48,13 +48,6 @@
       "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
     },
     {
-      "league": "ENG2",
-      "canonical_name": "Cardiff City",
-      "provider_slug": "cardiff-city",
-      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
-      "freshness_note": "provider last rating 2019-05-12; country WAL despite ENG2 membership"
-    },
-    {
       "league": "ESP1",
       "canonical_name": "R. Racing Club",
       "provider_slug": "racing-santander",
@@ -244,48 +237,73 @@
       "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
     }
   ],
-  "no_current_provider_record": [
-    {
-      "league": "ENG2",
-      "name": "Bristol City"
-    },
-    {
-      "league": "ENG2",
-      "name": "Lincoln City"
-    },
-    {
-      "league": "ENG2",
-      "name": "Preston North End"
-    },
-    {
-      "league": "ENG2",
-      "name": "Wrexham"
-    }
-  ],
-  "ambiguous_sources": [
-    {
-      "league": "TUR1",
-      "name": "ERZURUMSPOR FK",
-      "provider_records": [
-        {
-          "slug": "erzurumspor",
-          "is_ranked": true,
-          "last_match_date": "2026-10-31"
-        },
-        {
-          "slug": "erzurumspor-fk",
-          "is_ranked": false,
-          "last_match_date": "2021-05-11"
-        }
-      ],
-      "note": "Do not silently choose current or legacy record; confirm federation/provider cross-ID."
-    }
-  ],
+  "no_current_provider_record": [],
+  "ambiguous_sources": [],
   "blocking_rules": [
     "Do not import this proposal file as a mapping into main or the model.",
     "Do not automatically accept fuzzy similarity; require independent corroboration.",
     "Provider country_code is not always the league country_code (Cardiff City WAL/ENG2).",
     "Old Elo or is_ranked=false does not constitute current 2026/27 rating.",
-    "Source historical first-publication dates have not been proven."
-  ]
+    "Source historical first-publication dates have not been proven.",
+    "Only teams listed in experiments/263/evidence/elo_uefa_active_cohort_2026_11_03.json are eligible for future European Elo processing.",
+    "ENG2 and ERZURUMSPOR FK are excluded from European Elo even when provider has an archived row."
+  ],
+  "active_europe_elo_review_count": 33,
+  "active_scope_file": "experiments/263/evidence/elo_uefa_active_cohort_2026_11_03.json",
+  "exclusions_applied": {
+    "all_championship_teams": 24,
+    "erzurumspor_fk": 1,
+    "excluded_total": 25,
+    "reason": "User explicitly narrowed UEFA Elo processing cohort",
+    "unchanged_original_audit_run": "41582947375",
+    "not_a_change_to_existing_ten_league_gate": true
+  },
+  "excluded_prior_review_entries": {
+    "proposed_names": [
+      {
+        "league": "ENG2",
+        "canonical_name": "Cardiff City",
+        "provider_slug": "cardiff-city",
+        "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+        "freshness_note": "provider last rating 2019-05-12; country WAL despite ENG2 membership"
+      }
+    ],
+    "no_current_provider_record": [
+      {
+        "league": "ENG2",
+        "name": "Bristol City"
+      },
+      {
+        "league": "ENG2",
+        "name": "Lincoln City"
+      },
+      {
+        "league": "ENG2",
+        "name": "Preston North End"
+      },
+      {
+        "league": "ENG2",
+        "name": "Wrexham"
+      }
+    ],
+    "ambiguous_sources": [
+      {
+        "league": "TUR1",
+        "name": "ERZURUMSPOR FK",
+        "provider_records": [
+          {
+            "slug": "erzurumspor",
+            "is_ranked": true,
+            "last_match_date": "2026-10-31"
+          },
+          {
+            "slug": "erzurumspor-fk",
+            "is_ranked": false,
+            "last_match_date": "2021-05-11"
+          }
+        ],
+        "note": "Do not silently choose current or legacy record; confirm federation/provider cross-ID."
+      }
+    ]
+  }
 }
