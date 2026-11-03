@@ -1,0 +1,114 @@
+{
+  "schema": "263_UEFA_POSTMATCH_TWO_SHADOW_EVALUATION_V1",
+  "fixture": {
+    "uefa_match_id": 2049614,
+    "competition": "UEFA_CL",
+    "date": "2026-11-03",
+    "home": "Galatasaray",
+    "away": "Stuttgart",
+    "kickoff_utc": "2026-11-03T17:45:00+00:00"
+  },
+  "full_time": {
+    "home_goals": 2,
+    "away_goals": 0,
+    "outcome_1x2": "HOME",
+    "over_2p5": false,
+    "btts_yes": false
+  },
+  "verified_result_sources": [
+    "https://www.beinsports.com/en-us/soccer/uefa-champions-league/articles/all-goals-galatasaray-vs-stuttgart-uefa-champions-league-2026-11-03",
+    "https://www.sofascore.com/news/galatasaray-2-0-stuttgart-batrakov-brace-and-big-saves-set-up-ucl-win"
+  ],
+  "goal_scorers": [
+    {
+      "name": "Aleksey Batrakov",
+      "minutes": [
+        12,
+        15
+      ]
+    }
+  ],
+  "original_prematch": {
+    "path": "experiments/263/europe/t60_locked/2026-11-03_2045_TR/2049614.json",
+    "kickoff_minus_minutes": 63.25,
+    "lock_created_at_utc": "2026-11-03T16:41:44.965997+00:00",
+    "payload_sha256": "9deaf775878fa28d10910360396e8c74a93c6f983a5d719c34a3eca9d3a3a962",
+    "unchanged": true
+  },
+  "scoring_definition": {
+    "multiclass_brier": "sum((p_k - y_k)^2) across home, draw, away (not divided by number of classes)",
+    "binary_brier": "(p_event - y_event)^2",
+    "logarithmic_loss": "-ln(probability assigned to observed outcome)"
+  },
+  "shadow_models": {
+    "M0_ELO_EXPERIMENTAL_SHADOW": {
+      "forecast": {
+        "one_x_two": {
+          "away": 0.2776623309063644,
+          "draw": 0.21991961809442861,
+          "home": 0.502418050999207
+        },
+        "top_result": "HOME",
+        "top_score": {
+          "away": 1,
+          "home": 1
+        },
+        "over_2p5_prob": 0.6512713687615662,
+        "btts_yes_prob": 0.6471802008493117
+      },
+      "evaluated": {
+        "match_winner_correct": true,
+        "top_score_correct": false,
+        "over_2p5_threshold_pick_correct": false,
+        "btts_yes_threshold_pick_correct": false,
+        "metrics": {
+          "one_x_two_logloss": 0.6883227349369604,
+          "one_x_two_brier": 0.37304880439858246,
+          "over_2p5_logloss": 1.0534612201583924,
+          "over_2p5_brier": 0.42415439576856395,
+          "btts_yes_logloss": 1.041797836382538,
+          "btts_yes_brier": 0.41884221237135544
+        }
+      }
+    },
+    "M0_UNAPPROVED_REFERENCE": {
+      "forecast": {
+        "one_x_two": {
+          "away": 0.2752581413438749,
+          "draw": 0.2194436646538864,
+          "home": 0.5052981940022387
+        },
+        "top_result": "HOME",
+        "top_score": {
+          "away": 1,
+          "home": 1
+        },
+        "over_2p5_prob": 0.6516970469441503,
+        "btts_yes_prob": 0.6468371207384936
+      },
+      "evaluated": {
+        "match_winner_correct": true,
+        "top_score_correct": false,
+        "over_2p5_threshold_pick_correct": false,
+        "btts_yes_threshold_pick_correct": false,
+        "metrics": {
+          "one_x_two_logloss": 0.6826065408006182,
+          "one_x_two_brier": 0.3686524431902586,
+          "over_2p5_logloss": 1.0546826231624897,
+          "over_2p5_brier": 0.42470904099572604,
+          "btts_yes_logloss": 1.0408259141291571,
+          "btts_yes_brier": 0.4183982607652646
+        }
+      }
+    }
+  },
+  "evaluation_flags": {
+    "is_future_prematch_prediction_record": true,
+    "pilot_increment": 0,
+    "counted_in_100_local_league_pilot": false,
+    "one_match_not_model_superiority_evidence": true,
+    "lineups_not_numerical_input": true,
+    "odds_ev_not_calculated": true,
+    "did_not_rewrite_locked_record": true
+  }
+}
