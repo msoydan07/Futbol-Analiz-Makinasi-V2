@@ -40,5 +40,5 @@ Başarısız deneme quad_batch_reports altına engel nedeni yazıp CI'yi başar�
 Bir koşu başarısız oldu diye aynı isteği tekrar tetikleme; önce kaynak hatasını düzelt.
 
 ## Kapsam
-100 yeni maç; 25 maçta yalnız teknik kontrol; 100'de tek bağımsız ileri karşılaştırma.
+6–8 Kasım'da 96 sabit aday maç; 25 geçerli kayıtta teknik kontrol; 9 Kasım Pazartesi gerçek pre-KO kayıtlar üzerinden tanımlayıcı sonuç raporu. 3 ayrı maç günü bağımsız istatistiksel üstünlük kanıtı değildir.
 Bahis, EV, resmî A/B/C sınıfı ve ana sisteme otomatik terfi YOK.

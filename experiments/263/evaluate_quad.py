@@ -1,8 +1,8 @@
 """Evaluate only sealed B/C2/C3/M4 pilot records after kickoff; never rewrite them.
 
 Paired metrics use identical matches. Model non-coverage is measured explicitly.
-At N=25 inspection is strictly operational; at N=100 statistical evidence
-is reported with date-block confidence intervals, without auto promotion.
+At N=25 inspection is strictly operational. At N=96, Nov 6-8 is a
+DESCRIPTIVE weekend report; under 10 distinct days gives no day-block CI.
 """
 from __future__ import annotations
 import argparse
@@ -16,7 +16,7 @@ from random import Random
 
 from exp_263_batch import clean_rows
 from forward_c3 import canonical_bytes, read_aware
-from forward_quad import SCHEMA
+from forward_quad import SCHEMA, PILOT_GOAL
 
 MODELS=('B','C2','C3','M4')
 
@@ -47,7 +47,7 @@ def collect(records_dir,actual_csv,now=None):
         key=(r['league'],r['home_id'],r['away_id'],r['match_date'])
         actuals[key].append(r)
     files=sorted(Path(records_dir).glob('*/*.json'))
-    if len(files)>100:raise ValueError('more_than_100_pilot_records')
+    if len(files)>PILOT_GOAL:raise ValueError('more_than_96_pilot_records')
     seen=set();complete=[];coverage={m:0 for m in MODELS}
     for f in files:
         raw=json.loads(f.read_text(encoding='utf-8'))
@@ -121,7 +121,7 @@ def _binary_summary(rows,model,market):
 def report(records_dir,actual_csv,now=None):
     rows,info=collect(records_dir,actual_csv,now)
     result={'schema':'quad_evaluation_263_v1','status':'EXPERIMENTAL_NO_AUTO_PROMOTION',
-            'pilot_goal':100,'registered':info['registered'],
+            'pilot_goal':PILOT_GOAL,'registered':info['registered'],
             'finished_matched':info['finished_matched'],
             'unresolved_fixtures':info['unresolved_fixtures'],
             'coverage_registered':info['coverage'],'model_scores':{},'markets':{},
@@ -147,11 +147,12 @@ def report(records_dir,actual_csv,now=None):
         sub=[r for r in rows if r['league']==league]
         result['by_league'][league]={'n':len(sub),**{m:{'n':sum(m in r['scores'] for r in sub),
           'logloss':_avg(sub,m)} for m in MODELS}}
-    result['milestone'] = ('PILOT_100_FOR_MANUAL_REVIEW' if info['registered']==100 and len(rows)==100
-                           else 'OPERATIONAL_ONLY_AT_25' if info['registered']>=25 and info['registered']<100
+    result['milestone'] = ('WEEKEND_96_DESCRIPTIVE_REPORT' if info['registered']==PILOT_GOAL and len(rows)==PILOT_GOAL
+                           else 'OPERATIONAL_ONLY_AT_25' if info['registered']>=25 and info['registered']<PILOT_GOAL
                            else 'INCOMPLETE_OR_PENDING')
     result['limitations']=['The 25-match checkpoint never changes coefficients',
-                           '100 future matches do not by themselves prove superiority',
+                           '96 candidate fixtures on three dates cannot establish independent superiority',
+                           'Date-block confidence intervals unavailable with fewer than ten distinct match days',
                            'Missing C2 output remains missing; four-way comparison uses common matches',
                            'No odds, betting return, or confidence class is certified',
                            'Git hash is tamper-evident but cannot defeat privileged history rewriting']

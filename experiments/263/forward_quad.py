@@ -21,6 +21,7 @@ from forward_c3 import valid_gate, sha256_file, canonical_bytes, MAX_DATA_AGE_DA
 from m4_integrated import Settings, fit_m4, predict_m4, score_markets, use_lock, FEATURE_VERSION
 
 SCHEMA='quad_forward_263_v1'
+PILOT_GOAL=96  # Nov 6-8, 2026 predeclared cohort.
 FROZEN='35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1'
 REQUIRED_BASE_COUNT=4413
 
@@ -158,8 +159,8 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
     digest=hashlib.sha256(canonical_bytes(data)).hexdigest();data['payload_sha256']=digest
     fixture_id=hashlib.sha256(canonical_bytes([league,home,away,kickoff.isoformat()])).hexdigest()[:24]
     target=Path(out_dir)/local_date/(fixture_id+'.json')
-    # Enforce exactly one immutable prediction per fixture and max 100 registrations.
-    if len(list(Path(out_dir).glob('*/*.json')))>=100:raise ValueError('quad_pilot_100_record_limit')
+    # Enforce exactly one immutable prediction per fixture and max PILOT_GOAL registrations.
+    if len(list(Path(out_dir).glob('*/*.json')))>=PILOT_GOAL:raise ValueError('quad_pilot_96_record_limit')
     target.parent.mkdir(parents=True,exist_ok=True)
     with target.open('x',encoding='utf-8') as f:
         json.dump(data,f,ensure_ascii=False,sort_keys=True,indent=2,allow_nan=False)

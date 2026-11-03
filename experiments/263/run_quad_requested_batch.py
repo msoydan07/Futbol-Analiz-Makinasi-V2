@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from forward_c3 import canonical_bytes, read_aware
-from forward_quad import predict_quad_from_verified_gate, SCHEMA
+from forward_quad import predict_quad_from_verified_gate, SCHEMA, PILOT_GOAL
 
 REQUEST_SCHEMA = "quad_named_match_batch_request_v1"
 REPORT_SCHEMA = "quad_named_match_batch_report_v1"
@@ -67,7 +67,7 @@ def prior_keys(records_dir):
         if key in keys:
             raise ValueError("duplicate_existing_pilot_fixture")
         keys.add(key)
-    if len(keys) > 100:
+    if len(keys) > PILOT_GOAL:
         raise ValueError("pilot_limit_exceeded")
     return keys
 
@@ -126,7 +126,7 @@ def record_batch(request_paths, *, root, history, baseline, acceptance, lock,
         "BLOCKED_NO_PREDICTION")}
     report = {"schema": REPORT_SCHEMA, "created_at_utc": now.isoformat(),
               "requests": requests, "statuses": status_counts, "outcomes": results,
-              "accepted_snapshot_required": True, "pilot_goal": 100,
+              "accepted_snapshot_required": True, "pilot_goal": PILOT_GOAL,
               "production_modified": False, "betting_authorized": False}
     target = Path(report_path)
     target.parent.mkdir(parents=True, exist_ok=True)

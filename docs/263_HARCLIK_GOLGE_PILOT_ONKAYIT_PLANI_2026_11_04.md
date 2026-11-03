@@ -1,15 +1,15 @@
 # Futbol Maç Analiz Makinası 2.6.3 — TEMKİNLİ SEÇİM / HARÇLIK SANAL PİLOTU
 
 **Tarih:** 4 Kasım 2026 (Türkiye saati)  
-**Durum:** ÖNCEDEN YAZILMIŞ DENEY PLANI — UYGULAMA / CANLI KABUL HENÜZ YOK  
+**Durum:** ÖNCEDEN YAZILMIŞ DENEY PLANI — UYGULAMA / CANLI KABUL HENÜZ YOK. **4 Kasım değişikliği:** yalnız 6–8 Kasım'daki sabit 96 aday; 9 Kasım Pazartesi geçerli kayıt sayısı N ile sonuç raporu, ileri başarı kanıtı değil.  
 **Dal:** `experiment/263-toplu-karsilastirma`  
-**Birincil pilot:** `experiments/263/M4_PILOT_PROTOCOL.md` — B, C2, C3, M4, 100 yeni yerel lig maçı.
+**Birincil pilot:** `experiments/263/M4_PILOT_PROTOCOL.md` — B, C2, C3, M4, 96 yeni yerel lig maçı.
 
 ## 0. Araştırma sorusu ve sınır
 
 Kullanıcı amacı: büyük getiriyi kovalamak değil, az sayıda ve daha güvenilir görünen **tekli** seçimi ayırarak mütevazı bir kazancın mümkün olup olmadığını **risk almadan önce** ölçmek. Sabit gelir, garantili kazanma veya günlük bahis mecburiyeti vaadi yok.
 
-Bu deney ana 100 maç pilotunun yerini almaz; onun **önceden mühürlenmiş**, aynı maç ve aynı pre-kickoff girdilerini *salt okunur* tüketen ayrı bir `shadow` karar defteridir. B/C2/C3/M4 model kodu, hiperparametreler, `m4_lock.json`, kaynak tarihsel kabulü, maç öncesi kayıtlar ve `main` **DEĞİŞMEZ**. Model sıralaması veya terfisi yapılmaz. Modül 0 yeniden çalıştırılmaz. Yeni bir risk tahmin modeli yaratılmaz. İlk 11 henüz açıklanmamış diye dört modelin hesaplaması durdurulmaz; seçim kararında hangi bağlamın kontrol edilmediği görünür olmalıdır.
+Bu deney ana 96 maç pilotunun yerini almaz; onun **önceden mühürlenmiş**, aynı maç ve aynı pre-kickoff girdilerini *salt okunur* tüketen ayrı bir `shadow` karar defteridir. B/C2/C3/M4 model kodu, hiperparametreler, `m4_lock.json`, kaynak tarihsel kabulü, maç öncesi kayıtlar ve `main` **DEĞİŞMEZ**. Model sıralaması veya terfisi yapılmaz. Modül 0 yeniden çalıştırılmaz. Yeni bir risk tahmin modeli yaratılmaz. İlk 11 henüz açıklanmamış diye dört modelin hesaplaması durdurulmaz; seçim kararında hangi bağlamın kontrol edilmediği görünür olmalıdır.
 
 Önemli: %75 gibi ham model olasılığı gerçek %75 güvenilirlik anlamına gelmez; dört model ortak veriden beslendiğinden birbirleriyle uyuşmaları da bağımsız kanıt sayılmaz. Resmî `A/B/C` hâlâ **ONAYSIZ** (`official_class=null`). Bu gölge deney bahis tavsiyesi/otomatik bahis veya yüksek güven onayı üretmez.
 
@@ -34,29 +34,29 @@ Aynı **en fazla bir** pazar ve yön, seçim yapılmadan önce tutarlı kural il
 
 ### Not: ileri model uyumu ve yüksek seçici eşik
 
-C2'nin sık `UNAVAILABLE` kalabileceği biliniyor; en az üç geçerli model kuralı nedeniyle kapsam az olabilir. **100 maçta sıfır/çok az seçim** çıkması başarısızlık değil önceden belirlenmiş `INSUFFICIENT_SAMPLE` sonucudur; eşiği oynatmayız. Diğer model yokken tek M4/C3 yüzdesini üç bağımsız görüş gibi saymayız. Model sonuçları bağımsız değildir.
+C2'nin sık `UNAVAILABLE` kalabileceği biliniyor; en az üç geçerli model kuralı nedeniyle kapsam az olabilir. **96 maçta sıfır/çok az seçim** çıkması başarısızlık değil önceden belirlenmiş `INSUFFICIENT_SAMPLE` sonucudur; eşiği oynatmayız. Diğer model yokken tek M4/C3 yüzdesini üç bağımsız görüş gibi saymayız. Model sonuçları bağımsız değildir.
 
 ## 3. Sanal risk ve ödeme hesapları (gerçek para yok)
 
 - Başlangıç sanal kasa: **1.000 birim**; **seçilen her tekli** için sabit **10 birim**. Her iki defterin kasası *ayrı*. Seçim yoksa 0 birim. Gerçek ödeme, bahis yerleştirme, artış/katlama, kayıp telafisi, kupon birleştirme, günlük harçlık hedefi, otomatik para transferi **YOK**.
 - Yalnız doğrulanmış analiz-anı oranı varsa net sonuç: kazanırsa `10*(oran-1)`, kaybederse `-10`. Oran yoksa `UNPRICED / ROI_NOT_EVALUABLE`, sahte 1.35 gibi oran atanmaz; S2 için zaten seçim olmayacak.
 - Başabaş: `1/decimal_odds`. Örnek 1.35 için yaklaşık %74,1; %75 nominal model olasılığı çok küçük marjdır ve **gerçek kalibrasyon kanıtı yoktur**.
-- **Ayrı tut:** İsabet başarısı (seçilen ve sonuçlanan maçlar), fırsat/kapsama (seçilen / pilot 100), net sanal birim, ROI = net sanal / toplam sanal stake, ortalama oran, en büyük düşüş, ardışık kayıp, lig/pazar kırılımı, başarısız veri/oran doğrulama sayısı.
-- Seçilmiş maçların yalnız isabeti vs tüm maçların en yüksek p seçiminin isabeti **tanımlayıcıdır**; farklı pazar/örneklemden sebepsel üstünlük kanıtı çıkmaz. Pazar bazında ve aynı seçim günü gözlemlerinde kontrol analizleri yapılır; 100 maçlık filtre net kazancı istikrarlı gelir kanıtı değildir.
+- **Ayrı tut:** İsabet başarısı (seçilen ve sonuçlanan maçlar), fırsat/kapsama (seçilen / pilot 96), net sanal birim, ROI = net sanal / toplam sanal stake, ortalama oran, en büyük düşüş, ardışık kayıp, lig/pazar kırılımı, başarısız veri/oran doğrulama sayısı.
+- Seçilmiş maçların yalnız isabeti vs tüm maçların en yüksek p seçiminin isabeti **tanımlayıcıdır**; farklı pazar/örneklemden sebepsel üstünlük kanıtı çıkmaz. Pazar bazında ve aynı seçim günü gözlemlerinde kontrol analizleri yapılır; 96 maçlık filtre net kazancı istikrarlı gelir kanıtı değildir.
 
 ## 4. Deney değerlendirmesi ve dondurma kuralı
 
 - **0. aşama:** Bu dokümandaki eşikleri uygulama başlamadan kesinleştir; model kodlarına dokunma. Gölge kayıt sözleşmesi: `match_key`, `official_fixture_source`, `kickoff_utc`, `locked_forecast_sha`, `forecasts_commit_sha`, `shadow_decision_sha`, `shadow_commit_sha`, `asof_utc`, `data_status`, `lineups_status`, `risk_notes`, `model_availability`, `candidates`, `chosen_market`, `S1_status`, `S2_status`, `reason_codes`, `price_snapshot`. Bunlar kayıt olmadan pas/geçme kanıtı değildir.
-- **1. aşama:** Mevcut 100 maç pilotunun ilk yeni yerel lig maçında (hedef 6 Kasım Cuma) T−60 gerçek veri ve odds koşullarını doğrula; temel dört-model kilit ile **iki ayrı** karar defterini kickoff öncesi SHA ve commit ile yaz. Başarısızsa gerekçe raporu, sahte kilit yok.
+- **1. aşama:** Mevcut 96 maç pilotunun ilk yeni yerel lig maçında (hedef 6 Kasım Cuma) T−60 gerçek veri ve odds koşullarını doğrula; temel dört-model kilit ile **iki ayrı** karar defterini kickoff öncesi SHA ve commit ile yaz. Başarısızsa gerekçe raporu, sahte kilit yok.
 - **2. aşama:** Aynı saatli maçlarda bir kez toplu kaynak/kod/kimlik veri kesimi; model başına tek karşılaştırma, maç başına bağımsız `PASS`/aday. Bir maçın veri sorunu diğerini engellemez. Saat alarmının kendisi **kilit değildir**.
 - **3. aşama:** Pilot 25 maçta yalnız kayıt bütünlüğü, zaman sızıntısı, odds eşleştirme, duplike ve veri açığı denetimi; **eşik optimize etme yok**.
-- **4. aşama:** Pilot 100 sonuçlandıktan sonra **tek birleşik rapor:** B/C2/C3/M4 doğruluğu/kalibrasyonu, S1 seçici isabet/kapsama, S2 doğrulanmış oranla sanal ROI, belirsizlik aralığı/örneklem, pas geçen maçların karşılaştırması, en kötü kayıp ve örnek sayısı. Eşik değişikliği veya yeni ölçü ancak **gelecek ve bağımsız** yeni pilot sürümü olabilir. 100 maç yetmezse daha uzun ileri pilot önerilir, sonuç uydurulmaz.
+- **4. aşama:** **9 Kasım Pazartesi**, gerçekleşen gerçek kickoff-öncesi kayıt ve sonuç sayısı kadar **tek tanımlayıcı rapor:** B/C2/C3/M4 doğruluğu/kalibrasyonu, S1 seçici isabet/kapsama, S2 doğrulanmış oranla sanal ROI, belirsizlik aralığı/örneklem, pas geçen maçların karşılaştırması, en kötü kayıp ve örnek sayısı. Eşik değişikliği veya yeni ölçü ancak **gelecek ve bağımsız** yeni pilot sürümü olabilir. Üç gün ve eksik N ile uzun dönem istikrarı kanıtlanamaz; geçerli kayıt N azsa `INSUFFICIENT_SAMPLE`, sonuç uydurulmaz.
 
 ## 5. Kabul ölçütü
 
-**Başarı iddiası için yeterli değildir:** yüksek tahmin yüzdesi, dört modelin anlaşması, tek hafta iyi ROI, birkaç kazanılmış kupon, sadece 100 maç veya yazılım CI'nın yeşil olması.
+**Başarı iddiası için yeterli değildir:** yüksek tahmin yüzdesi, dört modelin anlaşması, tek hafta iyi ROI, birkaç kazanılmış kupon, sadece 96 maç veya yazılım CI'nın yeşil olması.
 
-**İlk deney kabulü:** (a) T−60'daki tahmin ve gölge karar *sonuçtan önce* gerçekten SHA+commit ile kilitlenmiş, (b) veri/oran kaynağı ile zaman damgası dürüst, (c) her maçın seçilme/pas nedeni tekrar üretilebilir, (d) skor sonradan ayrı kayıt edilmiş, (e) 25'te teknik kabul ve 100'de istatistiksel değerlendirme ayrı. Bu koşullar sağlansa bile **kârlı veya güvenli bahis yöntemi kanıtlanmış sayılmaz**.
+**İlk deney kabulü:** (a) T−60'daki tahmin ve gölge karar *sonuçtan önce* gerçekten SHA+commit ile kilitlenmiş, (b) veri/oran kaynağı ile zaman damgası dürüst, (c) her maçın seçilme/pas nedeni tekrar üretilebilir, (d) skor sonradan ayrı kayıt edilmiş, (e) 25'te teknik kabul ve 96'de istatistiksel değerlendirme ayrı. Bu koşullar sağlansa bile **kârlı veya güvenli bahis yöntemi kanıtlanmış sayılmaz**.
 
 ## 6. Yapılmadı / yapılmayacak
 
