@@ -76,21 +76,28 @@ jobs:
           python experiments/263/europe/uefa_t60_shadow_lock_263.py \
             --request '${{ steps.intake.outputs.request }}'
       - name: Check files and record integrity before pushing
+        env:
+          T60_REQUEST: ${{ steps.intake.outputs.request }}
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
-          import json,hashlib
+          import json,hashlib,os
           from datetime import datetime,timezone
           from pathlib import Path
-          rr=list(Path('experiments/263/europe/t60_lock_reports').glob('*.json'))
-          if len(rr)!=1:raise SystemExit('EXPECT_EXACTLY_ONE_T60_REPORT')
-          report=json.loads(rr[0].read_text(encoding='utf8'))
+          slot=Path(os.environ['T60_REQUEST']).stem
+          report_path=Path('experiments/263/europe/t60_lock_reports')/(slot+'.json')
+          if not report_path.is_file():raise SystemExit('CURRENT_SLOT_REPORT_MISSING')
+          report=json.loads(report_path.read_text(encoding='utf8'))
+          if report['slot_key']!=slot or report['matches']!=len(report['immutable_records']):
+              raise SystemExit('CURRENT_SLOT_REPORT_ID_OR_COUNT_MISMATCH')
           ko=datetime.fromisoformat(report['kickoff_utc'])
           if datetime.now(timezone.utc)>=ko:
               raise SystemExit('KICKOFF_ALREADY_HAPPENED_NO_PREDICTION_COMMIT')
           for item in report['immutable_records']:
               path=Path(item['relative_path'])
+              if path.parent.as_posix()!='experiments/263/europe/t60_locked/'+slot:
+                  raise SystemExit('CURRENT_SLOT_RECORD_PATH_WRONG')
               if not path.is_file():raise SystemExit('MISSING_RECORD')
               row=json.loads(path.read_text(encoding='utf8'))
               payload=row.pop('payload_sha256',None)
@@ -105,6 +112,8 @@ jobs:
           PY
       - name: Atomic commit and push of NEW shadow predictions only, never main
         id: publish
+        env:
+          T60_REQUEST: ${{ steps.intake.outputs.request }}
         shell: bash
         run: |
           set -euo pipefail
@@ -117,12 +126,15 @@ jobs:
             echo 'UNEXPECTED_RECORD_FILES'; exit 1
           fi
           python - <<'PY'
-          import json
+          import json,os
           from datetime import datetime,timezone
           from pathlib import Path
-          rr=list(Path('experiments/263/europe/t60_lock_reports').glob('*.json'))
-          if len(rr)!=1:raise SystemExit('REPORT_NOT_UNIQUE')
-          ko=datetime.fromisoformat(json.loads(rr[0].read_text())['kickoff_utc'])
+          slot=Path(os.environ['T60_REQUEST']).stem
+          report_path=Path('experiments/263/europe/t60_lock_reports')/(slot+'.json')
+          if not report_path.is_file():raise SystemExit('CURRENT_SLOT_REPORT_NOT_FOUND')
+          report=json.loads(report_path.read_text())
+          if report['slot_key']!=slot:raise SystemExit('CURRENT_SLOT_REPORT_WRONG')
+          ko=datetime.fromisoformat(report['kickoff_utc'])
           if datetime.now(timezone.utc)>=ko:
               raise SystemExit('AFTER_KICKOFF_DO_NOT_COMMIT_OR_PUSH')
           PY
