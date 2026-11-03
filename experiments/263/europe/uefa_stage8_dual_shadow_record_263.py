@@ -60,11 +60,11 @@ def candidate_batch(s4,s5,retro,scope,evidence,now):
         sf=pairs4[key];e=pairs5[key];off=pairs3[key]
         pair=make_pair(sf,e,off)
         ko=pair["kickoff"]
+        if shared_kickoff is not None and shared_kickoff!=ko:
+            raise LockError("MIXED_KICKOFFS_REQUIRE_SEPARATE_RECORDS")
         # T-60: earliest allowed T-75, latest 1s before kickoff.
         if not 0<(ko-now).total_seconds()<=75*60:
             raise LockError("OUTSIDE_T_MINUS_75_KICKOFF_WINDOW")
-        if shared_kickoff is not None and shared_kickoff!=ko:
-            raise LockError("MIXED_KICKOFFS_REQUIRE_SEPARATE_RECORDS")
         shared_kickoff=ko
         # Morning snapshots can be used ONLY for same-day games after recheck;
         # later days require a separately refreshed archive.
