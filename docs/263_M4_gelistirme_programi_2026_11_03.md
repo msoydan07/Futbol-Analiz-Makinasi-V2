@@ -1,6 +1,6 @@
 # M4 GELISTIRME PROGRAMI — 2026-11-03
 ## Durum
-PLAN KILITLENDI / ASAMA 1 VE 2 TAMAMLANDI (2024/25 ARASTIRMA ONLY) / ASAMA 3 HATA ANALIZI SIRADA.
+PLAN KILITLENDI / ASAMA 1-3 TAMAMLANDI / ASAMA 4 TEK TOPLU ABLASYON KODLAMA SIRADA (HENÜZ TEST YOK).
 Dal: `experiment/263-toplu-karsilastirma`. Canli motor, main, B/C2/C3/M4 tahmin kurallari, 100 maclik ileri pilot ve eski raporlar DEGISTIRILMEZ.
 Yeni bir model terfi ettirilmez. Tum deneyler yalniz arastirma havuzunda.
 
@@ -66,3 +66,9 @@ Aşama 1 sonuç ve alt dosyalar: [263_M4_2024_25_asama1_kabul_2026_11_03.md](263
 - İlgili aşama kanıt dosyası: [M4 Aşama 3 ilk yeni veri teşhisi](263_M4_asama3_veri_yeterliligi_teshisi_2026_11_03.md).
 - **Durum:** Veri yetersizliği teşhisi tamam; 880 maçın C3/M4 bireysel olasılık defterleri mevcut eski arşivde bulunmadığından özgül tahmin-hata profili **henüz tamamlanmadı**.
 - Tek sonraki iş: dondurulmuş kaynak ve aynı C3/M4 kodlarıyla bir defalık kayıtlı `matched error profile` tanısı; eski aggregate ölçütlere eşleşmezse sonuçları karantinaya al. Bu adım formül tuning veya ana model güncellemesi değildir.
+
+## Aşama 3 — 2026-11-03 kesin kapanış
+- 873 ortak tahmin C3=0,997131, M4=0,999336, C3-M4=-0,002205, 8/8 eski rapor regresyon kapısı geçti.
+- En az bir önceki sezon lig geçmişsiz takım: 268/873 maç, fark=-0,008804; iki tarafı geçmişli: 605/873, fark=+0,000718. Her iki grupta bootstrap %95 sıfırı içerir, kesin üstünlük iddiası yok.
+- Ayrıntı: [880 maç C3–M4 eşleşmiş hata raporu](263_M4_asama3_880_eslesmis_hata_raporu_2026_11_03.md).
+- Tek sıradaki iş: [Aşama 4 planlı 10 kollu 2024/25-zaman-saha etkisi batch protokolü](263_M4_asama4_tek_toplu_ablasyon_protokolu_2026_11_03.md). 10 kol henüz çalıştırılmadı; protokolün adı test sonucu değildir.
