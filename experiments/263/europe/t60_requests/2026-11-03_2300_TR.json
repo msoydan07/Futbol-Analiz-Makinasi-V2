@@ -3,13 +3,13 @@
   "slot_key": "2026-11-03_2300_TR",
   "fixture_review": {
     "status": "ASSISTANT_WEB_OFFICIAL_PAGE_REVIEWED",
-    "reviewed_at_utc": "2026-11-03T19:01:39+00:00",
+    "reviewed_at_utc": "2026-11-03T19:19:53+00:00",
     "official_urls": {
-      "2049607": "https://www.uefa.com/uefachampionsleague/match/2049607/",
-      "2049608": "https://www.uefa.com/uefachampionsleague/match/2049608/",
-      "2049609": "https://www.uefa.com/uefachampionsleague/match/2049609/",
-      "2049610": "https://www.uefa.com/uefachampionsleague/match/2049610/",
-      "2049612": "https://www.uefa.com/uefachampionsleague/match/2049612/"
+      "2049607": "https://www.uefa.com/uefachampionsleague/match/2049607--barcelona-vs-aston-villa/",
+      "2049608": "https://www.uefa.com/uefachampionsleague/match/2049608--atleti-vs-bayern-munchen/",
+      "2049609": "https://www.uefa.com/uefachampionsleague/match/2049609--man-utd-vs-roma/",
+      "2049610": "https://www.uefa.com/uefachampionsleague/match/2049610--feyenoord-vs-inter/",
+      "2049612": "https://www.uefa.com/uefachampionsleague/match/2049612--villarreal-vs-paris/"
     }
   },
   "lineups": {
