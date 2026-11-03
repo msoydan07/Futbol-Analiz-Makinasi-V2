@@ -1,0 +1,1355 @@
+{
+  "status": "REVIEW_ONLY_NO_IDENTITY_CHANGE",
+  "source_commit": "e6744429ee395bc86f247348c6184bb08d4eb361",
+  "source_season": "2024-2025",
+  "registry_sha256": "c7d31ea3a039e926e72c4a87806d7675384d6a2deeadc86f8ab7ded35e9fda98",
+  "counts": {
+    "EXACT_EXISTING_ALIAS": 75,
+    "SUFFIX_PROPOSAL_NOT_APPROVED": 52,
+    "NO_SAFE_CANDIDATE": 64
+  },
+  "notes": [
+    "Source 2024/25 memberships are not in the current 2025/26+ registry.",
+    "SUFFIX_PROPOSAL_NOT_APPROVED is a lexical match only, not a verified identity.",
+    "No new canonical ID is synthesized; unresolved teams require future reviewed membership."
+  ],
+  "records": [
+    {
+      "league": "ENG1",
+      "source_name": "AFC Bournemouth",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "dbb1abd7-b219-5f87-b63e-04289b4dda45",
+      "candidate_canonical_name": "AFC Bournemouth"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Arsenal FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "5b218a5c-83ce-5c00-879b-1a8d5b70c572",
+      "candidate_canonical_name": "Arsenal"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Aston Villa FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "ae84a5fa-13c8-5d19-9151-4624f1159182",
+      "candidate_canonical_name": "Aston Villa"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Brentford FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "b26a259a-4bdf-57f1-8102-85eb5149dc81",
+      "candidate_canonical_name": "Brentford"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Brighton & Hove Albion FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "383619c8-7306-5814-a1c1-f7a2299da9ed",
+      "candidate_canonical_name": "Brighton & Hove Albion"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Chelsea FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "331335be-3469-59aa-8083-32e2637c064e",
+      "candidate_canonical_name": "Chelsea"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Crystal Palace FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "f4766b24-4533-540f-ab07-af3be2f16914",
+      "candidate_canonical_name": "Crystal Palace"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Everton FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "e5429756-1bab-5f06-8969-63e1faa0173b",
+      "candidate_canonical_name": "Everton"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Fulham FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "3b2f5981-4bcd-5794-b3f5-c7b52429a332",
+      "candidate_canonical_name": "Fulham"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Ipswich Town FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "28ce5115-c798-51cd-8aea-22ac5d6ffef0",
+      "candidate_canonical_name": "Ipswich Town"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Leicester City FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "53d9160e-978d-5c6f-ba1e-38b3ee50c719",
+      "candidate_canonical_name": "Leicester City"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Liverpool FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "ce71ab24-a25e-54ac-9023-c753dc549c88",
+      "candidate_canonical_name": "Liverpool"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Manchester City FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "f7ba382d-cc35-5b2b-953b-ec56ef312010",
+      "candidate_canonical_name": "Manchester City"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Manchester United FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "8c661a94-3348-5ee8-88cd-fed3afc9e03d",
+      "candidate_canonical_name": "Manchester United"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Newcastle United FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "624547ca-7438-532c-913b-0134501671b2",
+      "candidate_canonical_name": "Newcastle United"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Nottingham Forest FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "01a8f309-8c6f-5cf2-aafc-4909a6b5a1f1",
+      "candidate_canonical_name": "Nottingham Forest"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Southampton FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "6c87a0db-ad9a-5e71-8d13-f7d07b8e4144",
+      "candidate_canonical_name": "Southampton"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Tottenham Hotspur FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "354a2ed8-e82f-5373-bca8-1d9ac1accf90",
+      "candidate_canonical_name": "Tottenham Hotspur"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "West Ham United FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "1c190104-8bcc-56bd-a5ad-efeafef3a141",
+      "candidate_canonical_name": "West Ham United"
+    },
+    {
+      "league": "ENG1",
+      "source_name": "Wolverhampton Wanderers FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "b3cb203e-2740-5208-bcfc-e2cc9117d4bc",
+      "candidate_canonical_name": "Wolverhampton Wanderers"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Blackburn Rovers FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "82bc94ea-5ba5-5eb2-95fa-4f6b72bca546",
+      "candidate_canonical_name": "Blackburn Rovers"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Bristol City FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "1700c1d6-185c-5f12-84ed-613b6830285f",
+      "candidate_canonical_name": "Bristol City"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Burnley FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "fe937622-60da-5fb6-9a9c-0f47826ea189",
+      "candidate_canonical_name": "Burnley"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Cardiff City FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "a2f57044-1537-5485-8851-179a0f6eaa37",
+      "candidate_canonical_name": "Cardiff City"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Coventry City FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "4090fd8e-e904-56ad-a458-55ee6831441c",
+      "candidate_canonical_name": "Coventry City"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Derby County FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "3859533c-c10b-524b-a397-b77af7372482",
+      "candidate_canonical_name": "Derby County"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Hull City AFC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "beb4f31c-567e-5df8-8305-557d179cdbba",
+      "candidate_canonical_name": "Hull City"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Leeds United FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "e77c3788-0016-55f9-9435-1ca3bd9f88b0",
+      "candidate_canonical_name": "Leeds United"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Luton Town FC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Middlesbrough FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "417a4d42-480e-56f3-9da4-c2d1a2926a1d",
+      "candidate_canonical_name": "Middlesbrough"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Millwall FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "8ba3366b-c0ef-5a7b-b51a-e3d65442271b",
+      "candidate_canonical_name": "Millwall"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Norwich City FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "f13c0daf-b3f9-5838-a214-376dcd77a334",
+      "candidate_canonical_name": "Norwich City"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Oxford United FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "40acef99-65e7-593b-b317-ca17a16fc427",
+      "candidate_canonical_name": "Oxford United"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Plymouth Argyle FC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Portsmouth FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "e934c36b-171e-52e1-ab9a-86a128cbc691",
+      "candidate_canonical_name": "Portsmouth"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Preston North End FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "7ba6a3c4-555d-5302-9fbb-6dccaa04d43d",
+      "candidate_canonical_name": "Preston North End"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Queens Park Rangers FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "723987e4-7eef-5a34-a3a1-4d8f02fb9f19",
+      "candidate_canonical_name": "Queens Park Rangers"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Sheffield United FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "2316b187-cbb1-55df-bb33-707d37a1a31c",
+      "candidate_canonical_name": "Sheffield United"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Sheffield Wednesday FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "d136e60c-3b99-5cc7-abb9-505d5be0fef1",
+      "candidate_canonical_name": "Sheffield Wednesday"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Stoke City FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "e6080aec-0f50-5a18-be0e-500e910329ee",
+      "candidate_canonical_name": "Stoke City"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Sunderland AFC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "54562038-3366-538d-a2cb-96301351a0ab",
+      "candidate_canonical_name": "Sunderland"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Swansea City AFC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "977174b7-0fc4-5c4e-a413-55bb007f355a",
+      "candidate_canonical_name": "Swansea City"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "Watford FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "bea340a4-401d-5098-9d5e-3f0a33a9aa79",
+      "candidate_canonical_name": "Watford"
+    },
+    {
+      "league": "ENG2",
+      "source_name": "West Bromwich Albion FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "d45802e4-e05e-5266-a206-e19c9d12863f",
+      "candidate_canonical_name": "West Bromwich Albion"
+    },
+    {
+      "league": "GER1",
+      "source_name": "1. FC Heidenheim 1846",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "8ac5c4ea-8002-552c-8cfe-3dca9b3c7267",
+      "candidate_canonical_name": "1. FC Heidenheim 1846"
+    },
+    {
+      "league": "GER1",
+      "source_name": "1. FC Union Berlin",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "df9a3778-f7f8-585d-a996-e0cda64dcab5",
+      "candidate_canonical_name": "1. FC Union Berlin"
+    },
+    {
+      "league": "GER1",
+      "source_name": "1. FSV Mainz 05",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "47fb66a4-831b-567e-bd78-a7bfd9c93e0b",
+      "candidate_canonical_name": "1. FSV Mainz 05"
+    },
+    {
+      "league": "GER1",
+      "source_name": "Bayer 04 Leverkusen",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "bec22b9c-1ac9-5351-b1a1-11ed122fe9f9",
+      "candidate_canonical_name": "Bayer 04 Leverkusen"
+    },
+    {
+      "league": "GER1",
+      "source_name": "Borussia Dortmund",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "aec30ffc-fb2e-5d50-adac-f5472690a4a9",
+      "candidate_canonical_name": "Borussia Dortmund"
+    },
+    {
+      "league": "GER1",
+      "source_name": "Borussia Mönchengladbach",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "e05b54ee-124a-519f-a867-afbae14cb771",
+      "candidate_canonical_name": "Borussia Mönchengladbach"
+    },
+    {
+      "league": "GER1",
+      "source_name": "Eintracht Frankfurt",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "fcbfdf2b-827c-5930-a6c0-5931c4738864",
+      "candidate_canonical_name": "Eintracht Frankfurt"
+    },
+    {
+      "league": "GER1",
+      "source_name": "FC Augsburg",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "9ad66a68-e4df-530a-a7ae-f2bdaea9d862",
+      "candidate_canonical_name": "FC Augsburg"
+    },
+    {
+      "league": "GER1",
+      "source_name": "FC Bayern München",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "c8be3a92-94db-5ef4-9cb4-7a9877fc7bbe",
+      "candidate_canonical_name": "FC Bayern München"
+    },
+    {
+      "league": "GER1",
+      "source_name": "FC St. Pauli 1910",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "GER1",
+      "source_name": "Holstein Kiel",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "GER1",
+      "source_name": "RB Leipzig",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "ea18c9c4-9bc4-57c2-b57b-6bc8205a1683",
+      "candidate_canonical_name": "RB Leipzig"
+    },
+    {
+      "league": "GER1",
+      "source_name": "SC Freiburg",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "GER1",
+      "source_name": "SV Werder Bremen",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "299eb8c9-0d9e-58fd-bf1b-ef8c3491dce2",
+      "candidate_canonical_name": "SV Werder Bremen"
+    },
+    {
+      "league": "GER1",
+      "source_name": "TSG 1899 Hoffenheim",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "GER1",
+      "source_name": "VfB Stuttgart",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "6aa36235-a890-5482-9fe3-06efab06f2f9",
+      "candidate_canonical_name": "VfB Stuttgart"
+    },
+    {
+      "league": "GER1",
+      "source_name": "VfL Bochum 1848",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "GER1",
+      "source_name": "VfL Wolfsburg",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "0d93f282-b023-5ee7-9ab8-13147cff76d7",
+      "candidate_canonical_name": "VfL Wolfsburg"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Athletic Club",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "81715b99-691b-599e-bd2e-245163ce9a67",
+      "candidate_canonical_name": "Athletic Club"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "CA Osasuna",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "ff367e9a-2aed-53bb-aa1e-5e01de88b281",
+      "candidate_canonical_name": "CA Osasuna"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "CD Leganés",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Club Atlético de Madrid",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Deportivo Alavés",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "0e06d1f5-ca04-5138-bfbb-7c47db6bcba0",
+      "candidate_canonical_name": "Deportivo Alavés"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "FC Barcelona",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "aa66d325-fc60-5b5c-b510-900f1f30c3cc",
+      "candidate_canonical_name": "FC Barcelona"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Getafe CF",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "ee32e224-3f69-5103-9630-17f18670bc56",
+      "candidate_canonical_name": "Getafe CF"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Girona FC",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "c8aaa0ce-5668-5bfa-9f97-7b056c414b04",
+      "candidate_canonical_name": "Girona FC"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "RC Celta de Vigo",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ESP1",
+      "source_name": "RCD Espanyol de Barcelona",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "31ea963f-fa01-5f2a-b1cb-6cbe9d5d681e",
+      "candidate_canonical_name": "RCD Espanyol de Barcelona"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "RCD Mallorca",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "cc889a7a-5648-51d5-bc88-2ee8b6c06446",
+      "candidate_canonical_name": "RCD Mallorca"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Rayo Vallecano de Madrid",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Real Betis Balompié",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Real Madrid CF",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "62cb11a9-ee81-5d52-99f0-d04607fd248c",
+      "candidate_canonical_name": "Real Madrid"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Real Sociedad de Fútbol",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Real Valladolid CF",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Sevilla FC",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "ec5b2a37-17d1-550d-af88-2f5a6b74a951",
+      "candidate_canonical_name": "Sevilla FC"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "UD Las Palmas",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Valencia CF",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "5f2c15a6-2ae6-5d02-be4e-2f0aad8a6329",
+      "candidate_canonical_name": "Valencia CF"
+    },
+    {
+      "league": "ESP1",
+      "source_name": "Villarreal CF",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "1b2fb7db-bdb3-53ad-86f5-8c2992ee5293",
+      "candidate_canonical_name": "Villarreal CF"
+    },
+    {
+      "league": "ITA1",
+      "source_name": "AC Milan",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "AC Monza",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "ACF Fiorentina",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "AS Roma",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Atalanta BC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "f535b10e-40e6-5cf1-b2db-757e21860b7d",
+      "candidate_canonical_name": "Atalanta"
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Bologna FC 1909",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Cagliari Calcio",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Como 1907",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Empoli FC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "FC Internazionale Milano",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Genoa CFC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "8daa5691-08a7-5894-be9e-1a5d3415e989",
+      "candidate_canonical_name": "Genoa"
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Hellas Verona FC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Juventus FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "fc9f8209-af3f-542c-83e0-366bf4af6ea1",
+      "candidate_canonical_name": "Juventus"
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Parma Calcio 1913",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "SS Lazio",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "SSC Napoli",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Torino FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "4c4f2529-a579-56bd-b1fe-df743ee1e18c",
+      "candidate_canonical_name": "Torino"
+    },
+    {
+      "league": "ITA1",
+      "source_name": "US Lecce",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Udinese Calcio",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "ITA1",
+      "source_name": "Venezia FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "0f2d081e-241d-5c0f-95fc-f2d55f40d51a",
+      "candidate_canonical_name": "Venezia"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "AJ Auxerre",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "b7d45edc-75b9-5e0d-8ea2-5372071a457a",
+      "candidate_canonical_name": "AJ Auxerre"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "AS Monaco FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "e1d9d0f3-df1e-5be0-b101-84f949df9219",
+      "candidate_canonical_name": "AS Monaco"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "AS Saint-Étienne",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Angers SCO",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "23f10546-64fe-5ffc-a908-c5b67897859e",
+      "candidate_canonical_name": "Angers SCO"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "FC Nantes",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "c690be29-e87d-58c6-bb03-aaddf208f7c0",
+      "candidate_canonical_name": "FC Nantes"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Le Havre AC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "5c7c7667-36a2-59aa-b536-59b33ef230b6",
+      "candidate_canonical_name": "Havre AC"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Lille OSC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Montpellier HSC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "FRA1",
+      "source_name": "OGC Nice",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "a23cb5ad-b4b2-5f33-9ab5-ecabbf91996b",
+      "candidate_canonical_name": "OGC Nice"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Olympique Lyonnais",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "b8051c2b-f40f-5620-aca4-3ec5711567e1",
+      "candidate_canonical_name": "Olympique Lyonnais"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Olympique de Marseille",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "4179dd45-fbcc-51ac-b48e-df05403a79ff",
+      "candidate_canonical_name": "Olympique de Marseille"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Paris Saint-Germain FC",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "089ac458-9f7d-500f-9f62-44dfa8032f37",
+      "candidate_canonical_name": "Paris Saint-Germain"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "RC Strasbourg Alsace",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "9b4b87e9-b145-5869-8913-ef8712e21dad",
+      "candidate_canonical_name": "RC Strasbourg Alsace"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Racing Club de Lens",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Stade Brestois 29",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "5e8c20e5-5593-5891-a8ae-6d5864e44646",
+      "candidate_canonical_name": "Stade Brestois 29"
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Stade Rennais FC 1901",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Stade de Reims",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "FRA1",
+      "source_name": "Toulouse FC",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "558d465a-c00b-5294-a04a-17dbfb07e96a",
+      "candidate_canonical_name": "Toulouse FC"
+    },
+    {
+      "league": "NED1",
+      "source_name": "AFC Ajax",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "NED1",
+      "source_name": "AZ",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "7e830405-8cac-5e47-82bd-a8e8c1441ad6",
+      "candidate_canonical_name": "AZ"
+    },
+    {
+      "league": "NED1",
+      "source_name": "Almere City FC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "NED1",
+      "source_name": "FC Groningen",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "8ea05ba2-ecc7-5bda-8845-1ff0aff34a54",
+      "candidate_canonical_name": "FC Groningen"
+    },
+    {
+      "league": "NED1",
+      "source_name": "FC Twente '65",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "NED1",
+      "source_name": "FC Utrecht",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "84b899b8-2c9b-5136-9984-1544f83a01eb",
+      "candidate_canonical_name": "FC Utrecht"
+    },
+    {
+      "league": "NED1",
+      "source_name": "Feyenoord Rotterdam",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "NED1",
+      "source_name": "Fortuna Sittard",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "682222a8-9a76-5a2a-a716-21afe060b623",
+      "candidate_canonical_name": "Fortuna Sittard"
+    },
+    {
+      "league": "NED1",
+      "source_name": "Go Ahead Eagles",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "9dcd8da7-0ce9-571d-81ef-f46eca9ffc5e",
+      "candidate_canonical_name": "Go Ahead Eagles"
+    },
+    {
+      "league": "NED1",
+      "source_name": "Heracles Almelo",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "b0a5e1c5-7be5-5621-9845-e9293a937a7a",
+      "candidate_canonical_name": "Heracles Almelo"
+    },
+    {
+      "league": "NED1",
+      "source_name": "NAC Breda",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "6a7d545a-0098-552f-9b19-fc40640f874e",
+      "candidate_canonical_name": "NAC Breda"
+    },
+    {
+      "league": "NED1",
+      "source_name": "NEC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "NED1",
+      "source_name": "PEC Zwolle",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "f145f45f-b104-56cf-bdf6-37023cd0a8ca",
+      "candidate_canonical_name": "PEC Zwolle"
+    },
+    {
+      "league": "NED1",
+      "source_name": "PSV",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "0dd70a13-dbba-5c9e-b69b-0a5f006f43c5",
+      "candidate_canonical_name": "PSV"
+    },
+    {
+      "league": "NED1",
+      "source_name": "RKC Waalwijk",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "NED1",
+      "source_name": "SC Heerenveen",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "5e3a580b-c714-5f24-8d92-b67268dd52b0",
+      "candidate_canonical_name": "sc Heerenveen"
+    },
+    {
+      "league": "NED1",
+      "source_name": "Sparta Rotterdam",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "89cd413a-22b2-545c-9fd1-dfddc42eab9b",
+      "candidate_canonical_name": "Sparta Rotterdam"
+    },
+    {
+      "league": "NED1",
+      "source_name": "Willem II Tilburg",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Adana Demirspor",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Alanyaspor",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "525fd705-b724-5426-af7b-45dff87b352e",
+      "candidate_canonical_name": "CORENDON ALANYASPOR"
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Antalyaspor",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "7ed3850b-8099-5fa7-ab28-66f3895a68eb",
+      "candidate_canonical_name": "HESAP.COM ANTALYASPOR"
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Beşiktaş",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "4e0b2072-7256-59f1-a14a-1be0aa41827c",
+      "candidate_canonical_name": "BEŞİKTAŞ A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Bodrum FK",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Eyüpspor",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "fdfd35c2-83d9-532a-a0d8-bb4ecab26b29",
+      "candidate_canonical_name": "EYÜPSPOR"
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Fenerbahçe",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "b70be320-82df-539d-9dc1-09f05137f08d",
+      "candidate_canonical_name": "FENERBAHÇE A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Galatasaray",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "ab16f146-5846-5854-b898-f7c1ae3583ba",
+      "candidate_canonical_name": "GALATASARAY A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Gaziantep FK",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Göztepe",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Hatayspor",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Kasımpaşa SK",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "41b9043e-2819-52dc-963f-a5756b6e88c3",
+      "candidate_canonical_name": "KASIMPAŞA A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Kayserispor",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "e9787a33-b0cc-55ac-91e6-a64357c610e7",
+      "candidate_canonical_name": "ZECORNER KAYSERİSPOR"
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Konyaspor",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "bb38e922-20db-5aef-a48a-af74e163b6f3",
+      "candidate_canonical_name": "TÜMOSAN KONYASPOR"
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Samsunspor",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "f06aca12-75d2-5b48-aa34-8d0336e953e7",
+      "candidate_canonical_name": "SAMSUNSPOR A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Sivasspor",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Trabzonspor",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "17017361-4cc8-5b8f-8787-3b5e7e1260de",
+      "candidate_canonical_name": "TRABZONSPOR A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "source_name": "Çaykur Rizespor",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "TUR1",
+      "source_name": "İstanbul Başakşehir",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "AVS",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "c76828b9-d36b-5ee2-8457-953ba5b12567",
+      "candidate_canonical_name": "AVS - Futebol SAD"
+    },
+    {
+      "league": "POR1",
+      "source_name": "Boavista FC",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "CD Nacional",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "0a465111-bc04-5f82-9254-5b293c68298e",
+      "candidate_canonical_name": "CD Nacional"
+    },
+    {
+      "league": "POR1",
+      "source_name": "CD Santa Clara",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "CF Estrela da Amadora",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "Casa Pia AC",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "571f2b90-dce7-5283-8da1-83e933e13bfa",
+      "candidate_canonical_name": "Casa Pia AC"
+    },
+    {
+      "league": "POR1",
+      "source_name": "FC Arouca",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "cc6e7e27-e0d4-5319-9257-21b315ec9089",
+      "candidate_canonical_name": "FC Arouca"
+    },
+    {
+      "league": "POR1",
+      "source_name": "FC Famalicão",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "7ea98158-0ac2-5804-9087-d99e2caccd8d",
+      "candidate_canonical_name": "FC Famalicão"
+    },
+    {
+      "league": "POR1",
+      "source_name": "FC Porto",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "7bec194f-4088-51f9-aeef-a9e5c3891f35",
+      "candidate_canonical_name": "FC Porto"
+    },
+    {
+      "league": "POR1",
+      "source_name": "GD Estoril Praia",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "Gil Vicente FC",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "06377377-2b44-585e-bb1f-e9511796e72b",
+      "candidate_canonical_name": "Gil Vicente FC"
+    },
+    {
+      "league": "POR1",
+      "source_name": "Moreirense FC",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "455e6870-aa23-50e8-b7d6-ac4c133a49a8",
+      "candidate_canonical_name": "Moreirense FC"
+    },
+    {
+      "league": "POR1",
+      "source_name": "Rio Ave FC",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "3923a410-d444-5363-b9bc-a703ae65e1f0",
+      "candidate_canonical_name": "Rio Ave FC"
+    },
+    {
+      "league": "POR1",
+      "source_name": "SC Farense",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "Sport Lisboa e Benfica",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "Sporting Clube de Braga",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "Sporting Clube de Portugal",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "POR1",
+      "source_name": "Vitória Guimarães",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "BEL1",
+      "source_name": "Cercle Brugge",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "4b7c69d3-3dbd-59d3-9a71-2258bd032747",
+      "candidate_canonical_name": "Cercle Brugge"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "Club Brugge KV",
+      "status": "SUFFIX_PROPOSAL_NOT_APPROVED",
+      "candidate_id": "9cdec74d-e405-576f-adbf-c5ef040290e5",
+      "candidate_canonical_name": "Club Brugge"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "FCV Dender EH",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "3978e856-d49b-54b4-91a2-c94c1c149db0",
+      "candidate_canonical_name": "FCV Dender EH"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "K Beerschot VA",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "BEL1",
+      "source_name": "KAA Gent",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "7cfc4554-ff6a-50f5-9db7-a6bd34d9db9f",
+      "candidate_canonical_name": "KAA Gent"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "KRC Genk",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "360960ec-271d-510a-9e6f-0b74d0562222",
+      "candidate_canonical_name": "KRC Genk"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "KV Kortrijk",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "0b59ba7c-3cee-5d27-83ea-d10e7ce0339d",
+      "candidate_canonical_name": "KV Kortrijk"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "KV Mechelen",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "9a359176-6fe4-534b-8510-982255d1626d",
+      "candidate_canonical_name": "KV Mechelen"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "KVC Westerlo",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "fc572c45-ca2f-5ba3-be80-e51eb178b300",
+      "candidate_canonical_name": "KVC Westerlo"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "Oud-Heverlee Leuven",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "ba6d5b07-ea1b-5e89-91ea-58cf782aca74",
+      "candidate_canonical_name": "OH Leuven"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "RSC Anderlecht",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "71c1a84d-ff73-51ba-aba8-b2eb179624a5",
+      "candidate_canonical_name": "RSC Anderlecht"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "Royal Antwerp FC",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "88ea2377-315a-586e-aa7d-2a8c12d30089",
+      "candidate_canonical_name": "Royal Antwerp FC"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "Sint-Truidense VV",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "BEL1",
+      "source_name": "Sporting Charleroi",
+      "status": "EXACT_EXISTING_ALIAS",
+      "candidate_id": "562a223c-b91e-5b36-aca9-89af15514215",
+      "candidate_canonical_name": "Sporting Charleroi"
+    },
+    {
+      "league": "BEL1",
+      "source_name": "Standard Liège",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    },
+    {
+      "league": "BEL1",
+      "source_name": "Union Saint-Gilloise",
+      "status": "NO_SAFE_CANDIDATE",
+      "candidate_id": null,
+      "candidate_canonical_name": null
+    }
+  ]
+}
