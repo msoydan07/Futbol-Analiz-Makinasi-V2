@@ -1,0 +1,31 @@
+name: 263 UEFA T60 — prepare only, no locked forecasts yet
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-t60-prepare-only.yml
+permissions:
+  contents: read
+jobs:
+  validate-lock-ingest-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax check new append-only GitHub record processor and T60 contract
+        run: |
+          python -m py_compile experiments/263/europe/uefa_t60_shadow_lock_263.py \
+            experiments/263/europe/test_uefa_t60_shadow_lock_intake_263.py
+      - name: Only eleven NEW request format, timing, lineup and no-betting checks
+        env:
+          PYTHONPATH: experiments/263:experiments/263/europe
+        run: python -m unittest -v test_uefa_t60_shadow_lock_intake_263
+      - name: Verify request queue has no present-day record trigger
+        run: |
+          if [ -d experiments/263/europe/t60_requests ]; then
+            test -z "$(find experiments/263/europe/t60_requests -maxdepth 1 -name '*.json' -print -quit)"
+          fi
+          test ! -d experiments/263/europe/t60_locked
