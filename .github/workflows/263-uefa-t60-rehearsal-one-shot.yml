@@ -1,0 +1,64 @@
+name: 263 UEFA T60 — ONE read-only 6-slot 17-fixture rehearsal (NO locked records)
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-t60-rehearsal-one-shot.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  original-input-runtime-rehearsal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reuse previously archived real 9 league scored source data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/t60_inputs/goals
+          gh run download 41590323827 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-nine-league-goal-data-one-shot \
+            -D data/europe_staged_263/t60_inputs/goals
+      - name: Reuse 34-club current Elo and news source tiers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/t60_inputs/news
+          gh run download 41591598226 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-stage5-elo-news-one-shot \
+            -D data/europe_staged_263/t60_inputs/news
+      - name: Reuse never-refitted historical math protocol
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/t60_inputs/retro
+          gh run download 41586786116 -R "$GITHUB_REPOSITORY" \
+            -n 263-elo-m0-paired-one-shot-retrospective \
+            -D data/europe_staged_263/t60_inputs/retro
+      - name: Reuse original source current beyondELO with earlier captured SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/t60_inputs/source_elo
+          gh run download 41582947375 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-elo-integrity-single-acceptance \
+            -D data/europe_staged_263/t60_inputs/source_elo
+          test -s data/europe_staged_263/t60_inputs/source_elo/source_csv/current.csv
+          cp data/europe_staged_263/t60_inputs/source_elo/source_csv/current.csv \
+            data/europe_staged_263/t60_inputs/source_elo/current.csv
+      - name: Run two new full 6-slot read-only replay protections, no source network
+        env:
+          PYTHONPATH: experiments/263:experiments/263/europe
+        run: |
+          python -m unittest -v test_uefa_t60_shadow_lock_rehearsal_263
+      - name: Ensure absolutely no real prediction registration existed or appeared
+        run: |
+          test ! -d experiments/263/europe/t60_locked
+          test ! -d experiments/263/europe/t60_lock_reports
+          test ! -d experiments/263/europe/t60_requests
+          echo 'Six-slot T60 preflight only: zero predictions, zero user requests.'
