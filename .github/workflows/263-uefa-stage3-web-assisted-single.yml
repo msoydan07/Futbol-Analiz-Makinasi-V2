@@ -1,0 +1,36 @@
+name: 263 UEFA 3-5 Nov web-assisted scope - single offline acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-stage3-web-assisted-single.yml
+permissions:
+  contents: read
+jobs:
+  evidence-handoff-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate existing official-source handoff and targeted 17-match audit syntax
+        run: |
+          python -m py_compile experiments/263/europe/uefa_web_evidence_handoff_263.py \
+            experiments/263/europe/uefa_requested_match_entry_263.py \
+            experiments/263/europe/test_uefa_nov3_nov5_assisted_stage3_263.py
+      - name: One offline 17-match fixture/ID/time acceptance; NO new UEFA network request
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python -m unittest -v test_uefa_nov3_nov5_assisted_stage3_263
+          python experiments/263/europe/test_uefa_nov3_nov5_assisted_stage3_263.py --write-report
+      - name: Retain one review-only report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-03-05-nov-web-assisted-scope-accepted
+          retention-days: 90
+          if-no-files-found: warn
+          path: data/europe_staged_263/2026_11_03_05_fixture_scope_acceptance/assisted_17_scope_gate_report.json
