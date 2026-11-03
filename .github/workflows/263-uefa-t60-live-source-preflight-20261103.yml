@@ -1,0 +1,120 @@
+name: 263 UEFA 3 Nov T60 live provider connectivity READ-ONLY audit
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-t60-live-source-preflight-20261103.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  one-live-source-audit-no-predictions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reuse original nine league raw CSV and baseline report
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/t60_probe/old
+          gh run download 41590323827 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-nine-league-goal-data-one-shot \
+            -D data/europe_staged_263/t60_probe/old
+      - name: Reuse 34-club Elo identifiers only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/t60_probe/news
+          gh run download 41591598226 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-stage5-elo-news-one-shot \
+            -D data/europe_staged_263/t60_probe/news
+      - name: One read-only live 9-league plus beyondELO GET connectivity and source consistency check
+        env:
+          PYTHONPATH: experiments/263:experiments/263/europe
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,time
+          from datetime import datetime,timezone
+          from pathlib import Path
+          from uefa_nov3_5_domestic_goal_data_263 import DIVS,get_source,decode_league
+          from uefa_t60_shadow_lock_263 import current_elo
+          from mackolik_identity_gate_263 import _memberships,_validate_identity_source
+          from uefa_ten_league_scope_gate_263 import validated_index
+          from uefa_nov3_5_stage6_shadow_math_preflight_263 import checked_json,SOURCES
+
+          old=Path("data/europe_staged_263/t60_probe/old")
+          news=Path("data/europe_staged_263/t60_probe/news")
+          stage4=checked_json(old/"stage4_goal_data_readiness.json",SOURCES["stage4"])
+          stage5=checked_json(news/"17_match_elo_news_readiness.json",SOURCES["stage5"])
+          idx=json.loads(Path("experiments/263/evidence/identity_index_263.json").read_text(encoding="utf8"))
+          _validate_identity_source(idx);validated_index(idx)
+          membership=_memberships(idx,"2026-2027")
+          now=datetime.now(timezone.utc)
+          status={"schema":"263_UEFA_T60_LIVE_PROVIDER_CONNECTIVITY_ONE_READ_ONLY_PROBE",
+                  "checked_at_utc":now.isoformat(),"no_model_or_prediction_computed":True,
+                  "no_prematch_records_created":True,"league_sources":{},
+                  "elo_board":{},"issues":[]}
+          base="https://www.football-data.co.uk/mmz4281/2627/"
+          for league in sorted(DIVS):
+              division=DIVS[league];label=base+division+".csv"
+              row={"division":division,"source":label}
+              try:
+                  original=(old/"source_csv"/(division+".csv")).read_bytes()
+                  if hashlib.sha256(original).hexdigest()!=stage4["data_sources"][league]["source_sha256"]:
+                      raise ValueError("ORIGINAL_ARCHIVE_SOURCE_SHA_CHANGED")
+                  previous,prior_a=decode_league(original,league,idx,membership,now)
+                  fresh,received,final_url=get_source(league,now)
+                  if final_url!=label:raise ValueError("REDIRECT_OR_SOURCE_CHANGED")
+                  rows,a=decode_league(fresh,league,idx,membership,now)
+                  def pairs(records):
+                      return {(r["home_id"],r["away_id"]):
+                             (r["date"].isoformat(),r["home_goals"],r["away_goals"]) for r in records}
+                  baseline=pairs(previous);new=pairs(rows)
+                  changed=sum(new.get(k)!=v for k,v in baseline.items())
+                  row.update(status=("OK" if a["source_fully_usable"] and changed==0 else "BLOCKER"),
+                      timestamp_utc=received.isoformat(),completed_rows=len(rows),
+                      last_domestic_game=a["last_scored_date_from_matched_rows"],
+                      old_completed_rows=len(previous),
+                      changed_completed_old_games=changed,
+                      unverified_names=a["unmapped_source_names"],
+                      error_count=a["invalid_result_or_duplicate_count"],
+                      fresh_source_sha256=hashlib.sha256(fresh).hexdigest())
+                  if row["status"]!="OK":status["issues"].append("LEAGUE_UNSAFE:"+league)
+              except Exception as exc:
+                  row.update(status="FETCH_OR_SCHEMA_FAILURE",reason=type(exc).__name__+":"+str(exc)[:180])
+                  status["issues"].append("LEAGUE_FETCH_FAILED:"+league)
+              status["league_sources"][league]=row
+              print("T60_LIVE_SOURCE_PROBE",league,row["status"],row.get("reason",""),flush=True)
+          try:
+              pair,meta=current_elo(stage5,now,datetime.fromisoformat("2026-11-03T17:45:00+00:00"))
+              status["elo_board"]={"status":"OK","teams_checked":len(pair),
+                                   "source":meta["source_url"],
+                                   "new_sha256":meta["source_sha256"],
+                                   "ratings_not_model_approved":True}
+          except Exception as exc:
+              status["elo_board"]={"status":"FETCH_OR_SCHEMA_FAILURE",
+                                   "reason":type(exc).__name__+":"+str(exc)[:240]}
+              status["issues"].append("ELO_PROVIDER_FETCH_FAILED")
+          print("T60_LIVE_ELO_PROBE",status["elo_board"]["status"],status["elo_board"].get("reason",""),flush=True)
+          status["decision"]="LIVE_SOURCES_READY_NOW_NOT_GITHUB_WRITE_PROOF" if not status["issues"] else "LIVE_SOURCE_RISK_PRESENT_NEEDS_NONLOOPING_MITIGATION"
+          root=Path("data/europe_staged_263/t60_probe/one_readonly_result.json")
+          root.parent.mkdir(parents=True,exist_ok=True)
+          root.write_text(json.dumps(status,ensure_ascii=False,sort_keys=True,indent=2)+"\n",encoding="utf8")
+          print("T60_LIVE_SOURCE_SUMMARY="+json.dumps({"decision":status["decision"],"issues":status["issues"],
+             "leagues_ok":sum(x["status"]=="OK" for x in status["league_sources"].values()),
+             "elo":status["elo_board"]["status"],"no_forecasts":True},ensure_ascii=False))
+          PY
+      - name: Preserve only a small source status report; never save real match forecasts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-t60-live-source-readiness-one-shot
+          retention-days: 30
+          if-no-files-found: warn
+          path: data/europe_staged_263/t60_probe/one_readonly_result.json
