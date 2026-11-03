@@ -1,0 +1,808 @@
+{
+  "schema": "UEFA_263_NOV3_5_OFFICIAL_FIXTURE_SCOPE_ACCEPTANCE_REVIEW",
+  "as_checked_date": "2026-11-03",
+  "official_sources": [
+    "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+    "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+  ],
+  "source_article_last_updated": "2026-11-02",
+  "season": "2026-2027",
+  "phase": "league_phase",
+  "eligible_total": 17,
+  "all_fixtures": 36,
+  "unselected_total": 19,
+  "counts": {
+    "2026-11-03": {
+      "total": 9,
+      "eligible": 6
+    },
+    "2026-11-04": {
+      "total": 10,
+      "eligible": 6
+    },
+    "2026-11-05": {
+      "total": 17,
+      "eligible": 5
+    }
+  },
+  "source_semantics": "Original UEFA fixture listing plus each selected fixture's distinct official UEFA match URL; match URL ID is match ID, NOT team ID.",
+  "alias_policy": "Only 3 explicitly reviewed UEFA 2026/27 short names reconciled to federation-verified local IDs; never fuzzy matching; base identity registry unchanged.",
+  "note": "This is fixture and two-sided membership proof only. No team UEFA numeric IDs, live forecast, squad checks, source snapshots or immutable probability files approved.",
+  "verified_fixtures": [
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "Galatasaray",
+      "away_uefa": "Stuttgart",
+      "home_identity": {
+        "canonical_team_id": "ab16f146-5846-5854-b898-f7c1ae3583ba",
+        "canonical_name": "GALATASARAY A.Ş.",
+        "league": "TUR1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "6aa36235-a890-5482-9fe3-06efab06f2f9",
+        "canonical_name": "VfB Stuttgart",
+        "league": "GER1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "18:45",
+      "kickoff_turkey": "20:45",
+      "kickoff_utc": "2026-11-03T17:45:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049614,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049614--galatasaray-vs-stuttgart/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "Atlético de Madrid",
+      "away_uefa": "Bayern München",
+      "home_identity": {
+        "canonical_team_id": "edbec58b-b78d-5be6-8218-ba6ed96c0776",
+        "canonical_name": "Atlético de Madrid",
+        "league": "ESP1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "c8be3a92-94db-5ef4-9cb4-7a9877fc7bbe",
+        "canonical_name": "FC Bayern München",
+        "league": "GER1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049608,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049608--atleti-vs-bayern-munchen/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "Barcelona",
+      "away_uefa": "Aston Villa",
+      "home_identity": {
+        "canonical_team_id": "aa66d325-fc60-5b5c-b510-900f1f30c3cc",
+        "canonical_name": "FC Barcelona",
+        "league": "ESP1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "ae84a5fa-13c8-5d19-9151-4624f1159182",
+        "canonical_name": "Aston Villa",
+        "league": "ENG1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049607,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049607--barcelona-vs-aston-villa/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "Feyenoord",
+      "away_uefa": "Inter",
+      "home_identity": {
+        "canonical_team_id": "1e7810fb-50b1-5185-8a6e-916a58d5a2be",
+        "canonical_name": "Feyenoord",
+        "league": "NED1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "19a74312-3197-557e-bfe6-f90e30a78f09",
+        "canonical_name": "Inter",
+        "league": "ITA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049610,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049610--feyenoord-vs-inter/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "Manchester United",
+      "away_uefa": "Roma",
+      "home_identity": {
+        "canonical_team_id": "8c661a94-3348-5ee8-88cd-fed3afc9e03d",
+        "canonical_name": "Manchester United",
+        "league": "ENG1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "40b9cd57-5584-525d-9bb5-bcdb26830ade",
+        "canonical_name": "Roma",
+        "league": "ITA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049609,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049609--man-utd-vs-roma/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "Villarreal",
+      "away_uefa": "Paris Saint-Germain",
+      "home_identity": {
+        "canonical_team_id": "1b2fb7db-bdb3-53ad-86f5-8c2992ee5293",
+        "canonical_name": "Villarreal CF",
+        "league": "ESP1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "089ac458-9f7d-500f-9f62-44dfa8032f37",
+        "canonical_name": "Paris Saint-Germain",
+        "league": "FRA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-03T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049612,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049612--villarreal-vs-paris/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "Fenerbahçe",
+      "away_uefa": "Liverpool",
+      "home_identity": {
+        "canonical_team_id": "b70be320-82df-539d-9dc1-09f05137f08d",
+        "canonical_name": "FENERBAHÇE A.Ş.",
+        "league": "TUR1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "ce71ab24-a25e-54ac-9023-c753dc549c88",
+        "canonical_name": "Liverpool",
+        "league": "ENG1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "18:45",
+      "kickoff_turkey": "20:45",
+      "kickoff_utc": "2026-11-04T17:45:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049620,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049620--fenerbahce-vs-liverpool/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "Borussia Dortmund",
+      "away_uefa": "Real Betis",
+      "home_identity": {
+        "canonical_team_id": "aec30ffc-fb2e-5d50-adac-f5472690a4a9",
+        "canonical_name": "Borussia Dortmund",
+        "league": "GER1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "91862a7d-290b-50c5-9991-71ac9b47b872",
+        "canonical_name": "Real Betis",
+        "league": "ESP1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049616,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049616--b-dortmund-vs-real-betis/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "Porto",
+      "away_uefa": "Napoli",
+      "home_identity": {
+        "canonical_team_id": "7bec194f-4088-51f9-aeef-a9e5c3891f35",
+        "canonical_name": "FC Porto",
+        "league": "POR1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "1404171b-d23a-5f5e-8909-2c7f1af827ff",
+        "canonical_name": "Napoli",
+        "league": "ITA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049617,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049617--porto-vs-napoli/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "PSV Eindhoven",
+      "away_uefa": "Club Brugge",
+      "home_identity": {
+        "canonical_team_id": "0dd70a13-dbba-5c9e-b69b-0a5f006f43c5",
+        "canonical_name": "PSV",
+        "league": "NED1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "9cdec74d-e405-576f-adbf-c5ef040290e5",
+        "canonical_name": "Club Brugge",
+        "league": "BEL1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049618,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049618--psv-vs-club-brugge/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "Leipzig",
+      "away_uefa": "Manchester City",
+      "home_identity": {
+        "canonical_team_id": "ea18c9c4-9bc4-57c2-b57b-6bc8205a1683",
+        "canonical_name": "RB Leipzig",
+        "league": "GER1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "f7ba382d-cc35-5b2b-953b-ec56ef312010",
+        "canonical_name": "Manchester City",
+        "league": "ENG1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049619,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049619--leipzig-vs-man-city/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "Lens",
+      "away_uefa": "Como",
+      "home_identity": {
+        "canonical_team_id": "f5fd5f35-351b-5c16-9eb6-09a660f73630",
+        "canonical_name": "RC Lens",
+        "league": "FRA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "ecfbc8bf-09bd-5417-8c73-b02d3b027116",
+        "canonical_name": "Como",
+        "league": "ITA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-04T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2049623,
+      "official_match_url": "https://www.uefa.com/uefachampionsleague/match/2049623--lens-vs-como/",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Crystal Palace",
+      "away_uefa": "Hoffenheim",
+      "home_identity": {
+        "canonical_team_id": "f4766b24-4533-540f-ab07-af3be2f16914",
+        "canonical_name": "Crystal Palace",
+        "league": "ENG1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383",
+        "canonical_name": "TSG Hoffenheim",
+        "league": "GER1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "18:45",
+      "kickoff_turkey": "20:45",
+      "kickoff_utc": "2026-11-05T17:45:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2050121,
+      "official_match_url": "https://www.uefa.com/uefaeuropaleague/match/2050121--crystal-palace-vs-hoffenheim/",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Real Sociedad",
+      "away_uefa": "Lyon",
+      "home_identity": {
+        "canonical_team_id": "4d3fba55-3549-5874-b15c-5697f4e8f3f2",
+        "canonical_name": "Real Sociedad",
+        "league": "ESP1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "b8051c2b-f40f-5620-aca4-3ec5711567e1",
+        "canonical_name": "Olympique Lyonnais",
+        "league": "FRA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "18:45",
+      "kickoff_turkey": "20:45",
+      "kickoff_utc": "2026-11-05T17:45:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2050115,
+      "official_match_url": "https://www.uefa.com/uefaeuropaleague/match/2050115--real-sociedad-vs-lyon/",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "AZ Alkmaar",
+      "away_uefa": "Juventus",
+      "home_identity": {
+        "canonical_team_id": "7e830405-8cac-5e47-82bd-a8e8c1441ad6",
+        "canonical_name": "AZ",
+        "league": "NED1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "fc9f8209-af3f-542c-83e0-366bf4af6ea1",
+        "canonical_name": "Juventus",
+        "league": "ITA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2050114,
+      "official_match_url": "https://www.uefa.com/uefaeuropaleague/match/2050114--az-alkmaar-vs-juventus/",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Leverkusen",
+      "away_uefa": "Marseille",
+      "home_identity": {
+        "canonical_team_id": "bec22b9c-1ac9-5351-b1a1-11ed122fe9f9",
+        "canonical_name": "Bayer 04 Leverkusen",
+        "league": "GER1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "4179dd45-fbcc-51ac-b48e-df05403a79ff",
+        "canonical_name": "Olympique de Marseille",
+        "league": "FRA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2050111,
+      "official_match_url": "https://www.uefa.com/uefaeuropaleague/match/2050111--leverkusen-vs-marseille/",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Celta",
+      "away_uefa": "Union SG",
+      "home_identity": {
+        "canonical_team_id": "6ad330c9-ad3c-5944-818d-c9a67a993f8e",
+        "canonical_name": "Celta",
+        "league": "ESP1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_identity": {
+        "canonical_team_id": "7d5aab11-5206-5d08-b7fd-541b218b635c",
+        "canonical_name": "Royale Union Saint-Gilloise",
+        "league": "BEL1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "kickoff_cet": "21:00",
+      "kickoff_turkey": "23:00",
+      "kickoff_utc": "2026-11-05T20:00:00+00:00",
+      "matchday": 4,
+      "uefa_match_id": 2050123,
+      "official_match_url": "https://www.uefa.com/uefaeuropaleague/match/2050123--celta-vs-union-sg/",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/",
+      "status": "SOURCE_CONFIRMED_SCOPE_BOTH_TEAMS_AND_LINKED_MATCH_PAGE_NO_MODEL"
+    }
+  ],
+  "unselected_fixtures": [
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "Shakhtar Donetsk",
+      "away_uefa": "Sporting CP",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": "236a0a67-724b-50a0-a3c1-8965b6588da6",
+        "canonical_name": "Sporting CP",
+        "league": "POR1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/"
+    },
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "Bodø/Glimt",
+      "away_uefa": "Lille",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": "3f7ee66e-ea78-5826-a6ad-55142f1b5c4a",
+        "canonical_name": "LOSC",
+        "league": "FRA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/"
+    },
+    {
+      "date": "2026-11-03",
+      "competition": "UEFA_CL",
+      "home_uefa": "LASK",
+      "away_uefa": "Slovan Bratislava",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "AEK Athens",
+      "away_uefa": "Real Madrid",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": "62cb11a9-ee81-5d52-99f0-d04607fd248c",
+        "canonical_name": "Real Madrid",
+        "league": "ESP1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "Slavia Praha",
+      "away_uefa": "Arsenal",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": "5b218a5c-83ce-5c00-879b-1a8d5b70c572",
+        "canonical_name": "Arsenal",
+        "league": "ENG1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_CL",
+      "home_uefa": "Viking",
+      "away_uefa": "Sabah",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures/"
+    },
+    {
+      "date": "2026-11-04",
+      "competition": "UEFA_EL",
+      "home_uefa": "Rennes",
+      "away_uefa": "Olympiacos",
+      "home_scope": {
+        "canonical_team_id": "9d896e45-c3bb-5fbb-a637-9cbad967075a",
+        "canonical_name": "Stade Rennais FC",
+        "league": "FRA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Milan",
+      "away_uefa": "Ferencváros",
+      "home_scope": {
+        "canonical_team_id": "ee015ea4-6edb-583c-9464-e1c1dd42be6a",
+        "canonical_name": "Milan",
+        "league": "ITA1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Sparta Praha",
+      "away_uefa": "Bournemouth",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": "dbb1abd7-b219-5f87-b63e-04289b4dda45",
+        "canonical_name": "AFC Bournemouth",
+        "league": "ENG1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Lillestrøm",
+      "away_uefa": "Viktoria Plzeň",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "N.E.C. Nijmegen",
+      "away_uefa": "Omonia",
+      "home_scope": {
+        "canonical_team_id": "9915dcfe-aece-5cfa-be79-ce1028945c62",
+        "canonical_name": "N.E.C. Nijmegen",
+        "league": "NED1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Levski Sofia",
+      "away_uefa": "Jagiellonia",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Anderlecht",
+      "away_uefa": "Salzburg",
+      "home_scope": {
+        "canonical_team_id": "71c1a84d-ff73-51ba-aba8-b2eb179624a5",
+        "canonical_name": "RSC Anderlecht",
+        "league": "BEL1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Celtic",
+      "away_uefa": "Beşiktaş",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": "4e0b2072-7256-59f1-a14a-1be0aa41827c",
+        "canonical_name": "BEŞİKTAŞ A.Ş.",
+        "league": "TUR1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Hapoel Beer-Sheva",
+      "away_uefa": "OFI Crete",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Torreense",
+      "away_uefa": "Ararat-Armenia",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Sturm Graz",
+      "away_uefa": "Celje",
+      "home_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Benfica",
+      "away_uefa": "Lech Poznań",
+      "home_scope": {
+        "canonical_team_id": "a72a1a95-9489-526d-bc44-ee582fc559c6",
+        "canonical_name": "SL Benfica",
+        "league": "POR1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    },
+    {
+      "date": "2026-11-05",
+      "competition": "UEFA_EL",
+      "home_uefa": "Sunderland",
+      "away_uefa": "GNK Dinamo",
+      "home_scope": {
+        "canonical_team_id": "54562038-3366-538d-a2cb-96301351a0ab",
+        "canonical_name": "Sunderland",
+        "league": "ENG1",
+        "match": "TEN_LEAGUE_CANONICAL_ID_IN_EUROPE_ELO_SCOPE"
+      },
+      "away_scope": {
+        "canonical_team_id": null,
+        "match": "NOT_RECONCILED_WITH_REVIEWED_INDEX_DO_NOT_ASSERT_OUTSIDE"
+      },
+      "selection_status": "NOT_SELECTED_BOTH_ELO_CLUB_IDS_NOT_PRESENT",
+      "official_listing_url": "https://www.uefa.com/uefaeuropaleague/news/02a8-2174cafa5bb6-82bbc20c9b92-1000--2026-27-europa-league-all-the-league-phase-fixtures-and-results/"
+    }
+  ],
+  "model_approved": false,
+  "main_modified": false,
+  "elo_weight_approved": false
+}
