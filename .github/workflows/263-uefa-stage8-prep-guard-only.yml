@@ -4,6 +4,8 @@ on:
     branches: [experiment/263-toplu-karsilastirma]
     paths:
       - .github/workflows/263-uefa-stage8-prep-guard-only.yml
+      - experiments/263/europe/uefa_stage8_prematch_lock_guard_263.py
+      - experiments/263/europe/test_uefa_stage8_prematch_lock_guard_263.py
 permissions:
   contents: read
 jobs:
