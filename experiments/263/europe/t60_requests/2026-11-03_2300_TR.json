@@ -1,0 +1,52 @@
+{
+  "schema": "263_UEFA_T60_SHADOW_LOCK_REQUEST_V1",
+  "slot_key": "2026-11-03_2300_TR",
+  "fixture_review": {
+    "status": "ASSISTANT_WEB_OFFICIAL_PAGE_REVIEWED",
+    "reviewed_at_utc": "2026-11-03T19:01:39+00:00",
+    "official_urls": {
+      "2049607": "https://www.uefa.com/uefachampionsleague/match/2049607/",
+      "2049608": "https://www.uefa.com/uefachampionsleague/match/2049608/",
+      "2049609": "https://www.uefa.com/uefachampionsleague/match/2049609/",
+      "2049610": "https://www.uefa.com/uefachampionsleague/match/2049610/",
+      "2049612": "https://www.uefa.com/uefachampionsleague/match/2049612/"
+    }
+  },
+  "lineups": {
+    "2049607": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2049608": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2049609": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2049610": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2049612": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    }
+  }
+}
