@@ -1,0 +1,141 @@
+name: 263 UEFA T-60 — single slot immutable EXPERIMENTAL shadow lock
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/europe/t60_requests/*.json'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: uefa-t60-nov3-5-263-one-append-only-lock
+  cancel-in-progress: false
+jobs:
+  single-matchday-slot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Permit ONE added official-17-fixture session request per commit
+        id: intake
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff-tree --no-commit-id --name-status -r HEAD > /tmp/t60_all_delta.tsv
+          test "$(wc -l < /tmp/t60_all_delta.tsv)" -eq 1 || {
+            echo 'T60 request commit must add exactly one file'; exit 1;
+          }
+          path="$(awk -F '\t' '$1=="A" {print $2}' /tmp/t60_all_delta.tsv)"
+          [[ "$path" =~ ^experiments/263/europe/t60_requests/2026-11-0[345]_(2045|2300)_TR\.json$ ]] || {
+            echo 'Only six 2026/27 preplanned T60 request filenames are allowed'; exit 1;
+          }
+          test -s "$path"
+          echo "request=$path" >> "$GITHUB_OUTPUT"
+          echo 'Only new append-only request accepted; no model/other code changed'
+      - name: Fetch ORIGINAL 9 domestic league baseline plus data capture SHA evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/europe_staged_263/t60_inputs/goals
+          gh run download 41590323827 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-nine-league-goal-data-one-shot \
+            -D data/europe_staged_263/t60_inputs/goals
+      - name: Fetch ORIGINAL 34 Elo/lineup provenance source tier archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/europe_staged_263/t60_inputs/news
+          gh run download 41591598226 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-stage5-elo-news-one-shot \
+            -D data/europe_staged_263/t60_inputs/news
+      - name: Fetch frozen retrospective reference coefficients without retraining
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/europe_staged_263/t60_inputs/retro
+          gh run download 41586786116 -R "$GITHUB_REPOSITORY" \
+            -n 263-elo-m0-paired-one-shot-retrospective \
+            -D data/europe_staged_263/t60_inputs/retro
+      - name: Fresh once-per-league source and once-per-Elo-board fetch plus T60 math lock
+        env:
+          PYTHONPATH: experiments/263:experiments/263/europe
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/europe/uefa_t60_shadow_lock_263.py \
+            --request '${{ steps.intake.outputs.request }}'
+      - name: Check files and record integrity before pushing
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,hashlib
+          from datetime import datetime,timezone
+          from pathlib import Path
+          rr=list(Path('experiments/263/europe/t60_lock_reports').glob('*.json'))
+          if len(rr)!=1:raise SystemExit('EXPECT_EXACTLY_ONE_T60_REPORT')
+          report=json.loads(rr[0].read_text(encoding='utf8'))
+          ko=datetime.fromisoformat(report['kickoff_utc'])
+          if datetime.now(timezone.utc)>=ko:
+              raise SystemExit('KICKOFF_ALREADY_HAPPENED_NO_PREDICTION_COMMIT')
+          for item in report['immutable_records']:
+              path=Path(item['relative_path'])
+              if not path.is_file():raise SystemExit('MISSING_RECORD')
+              row=json.loads(path.read_text(encoding='utf8'))
+              payload=row.pop('payload_sha256',None)
+              canonical=json.dumps(row,ensure_ascii=False,sort_keys=True,
+                  separators=(',',':'),allow_nan=False).encode()
+              if (hashlib.sha256(canonical).hexdigest()!=payload or
+                  payload!=item['payload_sha256'] or
+                  datetime.fromisoformat(row['lock_created_at_utc'])>=ko or
+                  row['safety']['pilot_increment']!=0):
+                  raise SystemExit('RECORD_HASH_OR_TIMELINE_WRONG')
+          print('Pre-kickoff append-only files verified; no commit yet')
+          PY
+      - name: Atomic commit and push of NEW shadow predictions only, never main
+        id: publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = 'experiment/263-toplu-karsilastirma'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- experiments/263/europe/t60_locked experiments/263/europe/t60_lock_reports
+          test "$(git diff --cached --name-only | wc -l)" -gt 1
+          if git diff --cached --name-only | grep -vE '^experiments/263/europe/(t60_locked|t60_lock_reports)/'; then
+            echo 'UNEXPECTED_RECORD_FILES'; exit 1
+          fi
+          python - <<'PY'
+          import json
+          from datetime import datetime,timezone
+          from pathlib import Path
+          rr=list(Path('experiments/263/europe/t60_lock_reports').glob('*.json'))
+          if len(rr)!=1:raise SystemExit('REPORT_NOT_UNIQUE')
+          ko=datetime.fromisoformat(json.loads(rr[0].read_text())['kickoff_utc'])
+          if datetime.now(timezone.utc)>=ko:
+              raise SystemExit('AFTER_KICKOFF_DO_NOT_COMMIT_OR_PUSH')
+          PY
+          git commit -m 'lock(263): preserve requested T60 two-model experimental UEFA pre-match forecast snapshot'
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          echo "locked_commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Preserve evidence only after commit succeeded
+        if: steps.publish.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-t60-shadow-locked-${{ github.run_id }}
+          retention-days: 90
+          if-no-files-found: error
+          path: |
+            experiments/263/europe/t60_locked/**/*.json
+            experiments/263/europe/t60_lock_reports/*.json
