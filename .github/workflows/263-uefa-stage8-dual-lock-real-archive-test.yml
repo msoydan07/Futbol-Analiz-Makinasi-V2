@@ -1,0 +1,52 @@
+name: 263 UEFA Stage8 — 15 guard + 14 real-archive connector checks (NO PREDICTIONS)
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-stage8-dual-lock-real-archive-test.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  new-connector-tests-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reuse 2026-11-03 Stage4 archive
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          mkdir -p data/europe_staged_263/stage8_fixture/stage4
+          gh run download 41590323827 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-nine-league-goal-data-one-shot \
+            -D data/europe_staged_263/stage8_fixture/stage4
+      - name: Reuse frozen Elo and news Stage5 archive
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          mkdir -p data/europe_staged_263/stage8_fixture/stage5
+          gh run download 41591598226 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-stage5-elo-news-one-shot \
+            -D data/europe_staged_263/stage8_fixture/stage5
+      - name: Reuse historical beta M0 experiment PROTOCOL ONLY
+        env: {GH_TOKEN: '${{ github.token }}'}
+        run: |
+          mkdir -p data/europe_staged_263/stage8_fixture/retro
+          gh run download 41586786116 -R "$GITHUB_REPOSITORY" \
+            -n 263-elo-m0-paired-one-shot-retrospective \
+            -D data/europe_staged_263/stage8_fixture/retro
+      - name: One changed-guard regression and real fixtures integration batch; no files created
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python -m py_compile \
+            experiments/263/europe/uefa_stage8_prematch_lock_guard_263.py \
+            experiments/263/europe/uefa_stage8_dual_shadow_record_263.py \
+            experiments/263/europe/test_uefa_stage8_prematch_lock_guard_263.py \
+            experiments/263/europe/test_uefa_stage8_dual_shadow_record_263.py
+          python -m unittest -v \
+            test_uefa_stage8_prematch_lock_guard_263 \
+            test_uefa_stage8_dual_shadow_record_263
+          test ! -d experiments/263/locked_prematch
