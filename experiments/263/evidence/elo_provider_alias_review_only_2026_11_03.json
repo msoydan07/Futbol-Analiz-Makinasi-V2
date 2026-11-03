@@ -1,0 +1,291 @@
+{
+  "title": "263 beyondELO proposed identity reconciliation; NOT a model input or approved identity map",
+  "observed_snapshot": "2026-11-03",
+  "source_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41582947375",
+  "status": "REVIEW_ONLY_NOT_PRODUCTION_APPROVED",
+  "license": "beyondELO (https://beyondelo.com) CC BY 4.0",
+  "proposed_names": [
+    {
+      "league": "BEL1",
+      "canonical_name": "STVV",
+      "provider_slug": "sint-truidense-vv",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "BEL1",
+      "canonical_name": "Royale Union Saint-Gilloise",
+      "provider_slug": "union-sg",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "BEL1",
+      "canonical_name": "Standard de Liège",
+      "provider_slug": "standard-liege",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ENG1",
+      "canonical_name": "Tottenham Hotspur",
+      "provider_slug": "tottenham-hotspurs",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ENG1",
+      "canonical_name": "Sunderland",
+      "provider_slug": "sunderland-afc",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ENG1",
+      "canonical_name": "Brentford",
+      "provider_slug": "brentford-fc",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ENG2",
+      "canonical_name": "Cardiff City",
+      "provider_slug": "cardiff-city",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "provider last rating 2019-05-12; country WAL despite ENG2 membership"
+    },
+    {
+      "league": "ESP1",
+      "canonical_name": "R. Racing Club",
+      "provider_slug": "racing-santander",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ESP1",
+      "canonical_name": "RCD Espanyol de Barcelona",
+      "provider_slug": "espanyol",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ESP1",
+      "canonical_name": "Celta",
+      "provider_slug": "celta-vigo",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ESP1",
+      "canonical_name": "RC Deportivo",
+      "provider_slug": "deportivo",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ESP1",
+      "canonical_name": "Atlético de Madrid",
+      "provider_slug": "atletico-madrid",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "FRA1",
+      "canonical_name": "Havre AC",
+      "provider_slug": "le-havre-ac",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "GER1",
+      "canonical_name": "SV Werder Bremen",
+      "provider_slug": "bremen",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "GER1",
+      "canonical_name": "1. FC Köln",
+      "provider_slug": "koln",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "GER1",
+      "canonical_name": "Borussia Mönchengladbach",
+      "provider_slug": "monchengladbach",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "GER1",
+      "canonical_name": "SV Elversberg",
+      "provider_slug": "sv-07-elversberg",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "GER1",
+      "canonical_name": "Eintracht Frankfurt",
+      "provider_slug": "frankfurt",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ITA1",
+      "canonical_name": "Frosinone",
+      "provider_slug": "frosinone-calcio",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ITA1",
+      "canonical_name": "Venezia",
+      "provider_slug": "venezia-fc",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ITA1",
+      "canonical_name": "Monza",
+      "provider_slug": "ac-monza",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "ITA1",
+      "canonical_name": "Lecce",
+      "provider_slug": "us-lecce",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "NED1",
+      "canonical_name": "Telstar",
+      "provider_slug": "sc-telstar",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "NED1",
+      "canonical_name": "N.E.C. Nijmegen",
+      "provider_slug": "nec-nijmegen",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "POR1",
+      "canonical_name": "Sporting CP",
+      "provider_slug": "sporting-lisbon",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "POR1",
+      "canonical_name": "Académico",
+      "provider_slug": "academico-de-viseu",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "POR1",
+      "canonical_name": "SC Braga",
+      "provider_slug": "braga",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "POR1",
+      "canonical_name": "Estrela Amadora",
+      "provider_slug": "cf-estrela-da-amadora",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "TUR1",
+      "canonical_name": "ÇAYKUR RİZESPOR A.Ş.",
+      "provider_slug": "caykur-rizespor",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "TUR1",
+      "canonical_name": "ARCA ÇORUM FK",
+      "provider_slug": "corum-fk",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "TUR1",
+      "canonical_name": "İSTANBUL BAŞAKŞEHİR FK",
+      "provider_slug": "basaksehir",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "TUR1",
+      "canonical_name": "GÖZTEPE A.Ş.",
+      "provider_slug": "goztepe",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "TUR1",
+      "canonical_name": "GAZİANTEP FUTBOL KULÜBÜ A.Ş.",
+      "provider_slug": "gaziantep-fk",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    },
+    {
+      "league": "TUR1",
+      "canonical_name": "AMED SPORTİF FAALİYETLER",
+      "provider_slug": "amed-sk",
+      "identity_status": "NOT_INDEPENDENTLY_VERIFIED",
+      "freshness_note": "2026-11-03 provider file contains a current-season rated match; verify identity before use"
+    }
+  ],
+  "no_current_provider_record": [
+    {
+      "league": "ENG2",
+      "name": "Bristol City"
+    },
+    {
+      "league": "ENG2",
+      "name": "Lincoln City"
+    },
+    {
+      "league": "ENG2",
+      "name": "Preston North End"
+    },
+    {
+      "league": "ENG2",
+      "name": "Wrexham"
+    }
+  ],
+  "ambiguous_sources": [
+    {
+      "league": "TUR1",
+      "name": "ERZURUMSPOR FK",
+      "provider_records": [
+        {
+          "slug": "erzurumspor",
+          "is_ranked": true,
+          "last_match_date": "2026-10-31"
+        },
+        {
+          "slug": "erzurumspor-fk",
+          "is_ranked": false,
+          "last_match_date": "2021-05-11"
+        }
+      ],
+      "note": "Do not silently choose current or legacy record; confirm federation/provider cross-ID."
+    }
+  ],
+  "blocking_rules": [
+    "Do not import this proposal file as a mapping into main or the model.",
+    "Do not automatically accept fuzzy similarity; require independent corroboration.",
+    "Provider country_code is not always the league country_code (Cardiff City WAL/ENG2).",
+    "Old Elo or is_ranked=false does not constitute current 2026/27 rating.",
+    "Source historical first-publication dates have not been proven."
+  ]
+}
