@@ -1,6 +1,6 @@
 # M4 GELISTIRME PROGRAMI — 2026-11-03
 ## Durum
-PLAN KILITLENDI / ASAMA 1-3 TAMAMLANDI / ASAMA 4 TEK TOPLU ABLASYON KODLAMA SIRADA (HENÜZ TEST YOK).
+PLAN KILITLENDI / ASAMA 1-4 TAMAMLANDI / ASAMA 5 XG VERI UYGUNLUK DENETIMI SIRADA.
 Dal: `experiment/263-toplu-karsilastirma`. Canli motor, main, B/C2/C3/M4 tahmin kurallari, 100 maclik ileri pilot ve eski raporlar DEGISTIRILMEZ.
 Yeni bir model terfi ettirilmez. Tum deneyler yalniz arastirma havuzunda.
 
@@ -72,3 +72,11 @@ Aşama 1 sonuç ve alt dosyalar: [263_M4_2024_25_asama1_kabul_2026_11_03.md](263
 - En az bir önceki sezon lig geçmişsiz takım: 268/873 maç, fark=-0,008804; iki tarafı geçmişli: 605/873, fark=+0,000718. Her iki grupta bootstrap %95 sıfırı içerir, kesin üstünlük iddiası yok.
 - Ayrıntı: [880 maç C3–M4 eşleşmiş hata raporu](263_M4_asama3_880_eslesmis_hata_raporu_2026_11_03.md).
 - Tek sıradaki iş: [Aşama 4 planlı 10 kollu 2024/25-zaman-saha etkisi batch protokolü](263_M4_asama4_tek_toplu_ablasyon_protokolu_2026_11_03.md). 10 kol henüz çalıştırılmadı; protokolün adı test sonucu değildir.
+
+## 2026-11-03 Aşama 4 kesin kapanış
+- Tek önkayıtlı **10 kollu** matematik deneyinin **873/880 eski 2026/27** kapsamlı eşleştirmesi ve 2025/26 geliştirme karşılaştırması tamamlandı; 7/7 eski model regresyon kontrolü geçti.
+- [10 kol tek toplu deney sonucu](263_M4_asama4_tek_toplu_karsilastirma_sonuc_2026_11_03.md).
+- **F001:** C3 0,99713, takım-özel saha model 0,99685 log-loss, CI sıfır içeriyor; KG/2.5 kötüleşiyor. **M4+2024:** 1,00247, M4 0,99934; eski 2024/25 verisini üretim motoruna otomatik ekleme RED.
+- Geliştirme döneminde daha eski geçmiş iyileşme gösterebilirken yeniden görülen 2026/27'de genel olarak iyileştirmedi; bu nedenle eski 2026/27 bağımsız final sayılamaz.
+- Tam yeniden üretilebilir kod, sabit kaynak dosyaları, 873 ortak eşleşme ve büyük sonuç CSV'si aynı sohbetteki M4 Asama4 ZIP paketinde. GitHub dokümanında sonuç var; Python kaynak kodu henüz repo içi dosya olarak yüklenmedi.
+- Model terfisi ve canlı iş akışı güncellemesi YOK. **Tek sonraki iş:** Aşama 5 yalnız xG bulunan liglerin güncel/gerçek maç verisi kapsamını doğrula; varlık ve tarih kesimi kanıtlanmadan xG ekleme veya etkisini iddia etme.
