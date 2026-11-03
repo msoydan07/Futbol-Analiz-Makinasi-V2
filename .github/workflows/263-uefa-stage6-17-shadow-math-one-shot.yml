@@ -1,0 +1,63 @@
+name: 263 UEFA 17 matches — Stage 6 one no-record shadow maths preflight
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-stage6-17-shadow-math-one-shot.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  volatile-math-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reuse original archive for 9-league goals; no live download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage6_inputs/goals
+          gh run download 41590323827 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-nine-league-goal-data-one-shot \
+            -D data/europe_staged_263/stage6_inputs/goals
+      - name: Reuse original Elo and squad source-tier archive; no new fetch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage6_inputs/elo_news
+          gh run download 41591598226 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-stage5-elo-news-one-shot \
+            -D data/europe_staged_263/stage6_inputs/elo_news
+      - name: Reuse one historical paired experiment coefficients without refitting
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage6_inputs/historical
+          gh run download 41586786116 -R "$GITHUB_REPOSITORY" \
+            -n 263-elo-m0-paired-one-shot-retrospective \
+            -D data/europe_staged_263/stage6_inputs/historical
+      - name: One fixed 14-check proof and ephemeral 17-match M0 vs Elo math
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python -m py_compile experiments/263/europe/uefa_nov3_5_stage6_shadow_math_preflight_263.py \
+            experiments/263/europe/test_uefa_nov3_5_stage6_shadow_math_preflight_263.py
+          python -m unittest -v test_uefa_nov3_5_stage6_shadow_math_preflight_263
+          python experiments/263/europe/uefa_nov3_5_stage6_shadow_math_preflight_263.py \
+            --stage4 data/europe_staged_263/stage6_inputs/goals/stage4_goal_data_readiness.json \
+            --stage5 data/europe_staged_263/stage6_inputs/elo_news/17_match_elo_news_readiness.json \
+            --retro data/europe_staged_263/stage6_inputs/historical/retrospective_elo_vs_m0_report.json \
+            --stage3 experiments/263/evidence/uefa_2026_11_03_05_fixture_scope_review.json \
+            --out data/europe_staged_263/stage6_shadow_math_only/math_preflight_audit_NO_PREDICTIONS.json
+      - name: Upload only summary invariants without goals or individual match probabilities
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-17-stage6-math-preflight-NO-PREDICTIONS
+          retention-days: 90
+          if-no-files-found: warn
+          path: data/europe_staged_263/stage6_shadow_math_only/math_preflight_audit_NO_PREDICTIONS.json
