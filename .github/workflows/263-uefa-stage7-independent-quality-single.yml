@@ -1,0 +1,78 @@
+name: 263 UEFA 17 matches — Stage7 independent source and math quality one-shot
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - .github/workflows/263-uefa-stage7-independent-quality-single.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-qa-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Reuse frozen Stage4 raw nine 2026/27 domestic sources
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage7_inputs/goals
+          gh run download 41590323827 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-nine-league-goal-data-one-shot \
+            -D data/europe_staged_263/stage7_inputs/goals
+      - name: Reuse frozen Stage5 Elo and news source tiers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage7_inputs/elo_news
+          gh run download 41591598226 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-nov3-5-stage5-elo-news-one-shot \
+            -D data/europe_staged_263/stage7_inputs/elo_news
+      - name: Reuse prior historical M0/Elo protocol without retraining
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage7_inputs/retro
+          gh run download 41586786116 -R "$GITHUB_REPOSITORY" \
+            -n 263-elo-m0-paired-one-shot-retrospective \
+            -D data/europe_staged_263/stage7_inputs/retro
+      - name: Reuse single Stage6 no-forecast math QA report
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p data/europe_staged_263/stage7_inputs/s6
+          gh run download 41592763161 -R "$GITHUB_REPOSITORY" \
+            -n 263-uefa-17-stage6-math-preflight-NO-PREDICTIONS \
+            -D data/europe_staged_263/stage7_inputs/s6
+      - name: Only NEW 14 independent mathematical and evidence safety unit checks
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python -m py_compile experiments/263/europe/uefa_nov3_5_stage7_independent_qa_263.py \
+            experiments/263/europe/test_uefa_nov3_5_stage7_independent_qa_263.py
+          python -m unittest -v test_uefa_nov3_5_stage7_independent_qa_263
+      - name: Once reconstruct all 812 domestic rows 170 opponent PPG and 17x2 Poisson outputs
+        env:
+          PYTHONPATH: experiments/263/europe
+        run: |
+          python experiments/263/europe/uefa_nov3_5_stage7_independent_qa_263.py \
+            --stage4 data/europe_staged_263/stage7_inputs/goals/stage4_goal_data_readiness.json \
+            --stage5 data/europe_staged_263/stage7_inputs/elo_news/17_match_elo_news_readiness.json \
+            --retro data/europe_staged_263/stage7_inputs/retro/retrospective_elo_vs_m0_report.json \
+            --stage6 data/europe_staged_263/stage7_inputs/s6/math_preflight_audit_NO_PREDICTIONS.json \
+            --stage3 experiments/263/evidence/uefa_2026_11_03_05_fixture_scope_review.json \
+            --identity experiments/263/evidence/identity_index_263.json \
+            --source-csv-dir data/europe_staged_263/stage7_inputs/goals/source_csv \
+            --output data/europe_staged_263/stage7_qa_only/17_match_independent_quality_NO_PREDICTIONS.json
+      - name: One artifact, no single-match forecast or pilot record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-uefa-17-stage7-independent-quality-NO-PREDICTIONS
+          retention-days: 90
+          if-no-files-found: warn
+          path: data/europe_staged_263/stage7_qa_only/17_match_independent_quality_NO_PREDICTIONS.json
