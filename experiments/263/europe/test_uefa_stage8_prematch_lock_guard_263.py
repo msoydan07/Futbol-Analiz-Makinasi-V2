@@ -20,6 +20,16 @@ def sample():
       "odds_or_ev_present":False}
 class GuardTests(unittest.TestCase):
     def test_01_good_candidate_only_is_validated(self):self.assertTrue(validate(sample(),BASE.isoformat()))
+    def test_01b_real_uefa_integer_match_id_accepted(self):
+        x=sample();x["uefa_match_id"]=2049614
+        self.assertTrue(validate(x,BASE.isoformat()))
+    def test_01c_declared_unannounced_without_source_blocked(self):
+        x=sample();x["lineup_status"]="NOT_ANNOUNCED"
+        with self.assertRaisesRegex(LockError,"LINEUP_SOURCE_REQUIRED"):
+            validate(x,BASE.isoformat())
+    def test_01d_unverified_lineup_is_nonblocking_but_honest(self):
+        x=sample();x["lineup_status"]="NOT_VERIFIED"
+        self.assertTrue(validate(x,BASE.isoformat()))
     def test_02_after_kickoff_blocked(self):
         with self.assertRaises(LockError):validate(sample(),"2026-11-03T19:00:00+00:00")
     def test_03_future_data_blocked(self):
@@ -38,6 +48,7 @@ class GuardTests(unittest.TestCase):
         with self.assertRaises(LockError):validate(x,BASE.isoformat())
     def test_08_unannounced_lineup_allowed(self):
         x=sample();x["lineup_status"]="NOT_ANNOUNCED"
+        x["lineup_source_urls"]=["https://www.uefa.com/uefachampionsleague/"]
         self.assertTrue(validate(x,BASE.isoformat()))
     def test_09_unapproved_lineup_adjustment_blocked(self):
         x=sample();x["lineup_used_as_numeric_adjustment"]=True
