@@ -9,8 +9,13 @@ from collections import defaultdict
 from datetime import date,datetime,timezone,timedelta
 from pathlib import Path
 
-from forward_c3 import read_aware
 from full_match_eligibility_263 import full_match_rows
+
+def read_aware(value):
+    t=datetime.fromisoformat(str(value).replace("Z","+00:00"))
+    if t.tzinfo is None:
+        raise ValueError("ACCEPTANCE_TIME_MUST_HAVE_UTC_OFFSET")
+    return t.astimezone(timezone.utc)
 
 SOURCE_SHA="1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9"
 BASE_SHA="35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1"
