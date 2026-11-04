@@ -24,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python experiments/263/first_live_fixture_probe_263.py
+          PYTHONPATH=. python experiments/263/first_live_fixture_probe_263.py
       - name: Preserve fixture gate findings
         if: always()
         uses: actions/upload-artifact@v4
