@@ -1,0 +1,132 @@
+{
+  "schema": "263_ten_league_match_specific_external_review_v1",
+  "created_date_utc": "2026-11-04",
+  "staged_history_sha256": "69d687965500a260cc965a1482c23c1e07f11ebcabb1adaa9441dc6a17334a14",
+  "original_88_manifest": "data/staged_263/2026_10_30_11_01_previous_88_web_score_refs.json",
+  "review_scope": "ONE_DIRECT_OR_SCORE_SPECIFIC_EXTERNAL_RESULT_SOURCE_PER_LEAGUE",
+  "source_retrieval_method": "ASSISTANT_WEB_SEARCH_AND_VISIBLE_PAGE_TEXT_NO_ARCHIVED_RAW_HTML",
+  "human_sources_reviewed": false,
+  "github_live_quote_or_fixtures_registered": false,
+  "evidence": [
+    {
+      "league": "ENG1",
+      "fixture_id": "40ba2307-d4a5-5f28-824d-4fd1bd221959",
+      "home": "Chelsea",
+      "away": "Manchester United",
+      "match_date": "2026-10-31",
+      "score": "2-0",
+      "source_url": "https://www.premierleague.com/en/news/4751393",
+      "source_tier": "OFFICIAL_LEAGUE_RESULT_NEWS",
+      "observed_source_text_summary": "Chelsea 2-0 Manchester United; Sat 31 Oct",
+      "human_approved": false
+    },
+    {
+      "league": "ENG2",
+      "fixture_id": "0772a2f6-9bc5-5b57-8ea0-f78523260455",
+      "home": "Sheffield United",
+      "away": "Wrexham",
+      "match_date": "2026-10-30",
+      "score": "1-0",
+      "source_url": "https://www.efl.com/news/2026/october/30/brereton-diaz-goal-gives-sheffield-united-win-over-wrexham/",
+      "source_tier": "OFFICIAL_LEAGUE_RESULT_NEWS",
+      "observed_source_text_summary": "Sheffield United beat Wrexham, goal by Brereton Diaz; Fri 30 Oct",
+      "human_approved": false
+    },
+    {
+      "league": "GER1",
+      "fixture_id": "6e15b78b-9315-58b2-9dbb-0bf69f1da16d",
+      "home": "FC Bayern München",
+      "away": "Borussia Dortmund",
+      "match_date": "2026-10-31",
+      "score": "2-2",
+      "source_url": "https://www.bundesliga.com/en/bundesliga/news/bayern-munich-borussia-dortmund-match-report-highlights-matchday-8-kane-guirassy-silva-39815/",
+      "source_tier": "OFFICIAL_LEAGUE_RESULT_NEWS",
+      "observed_source_text_summary": "Bayern Munich 2-2 Borussia Dortmund; 31.10.2026",
+      "human_approved": false
+    },
+    {
+      "league": "ESP1",
+      "fixture_id": "c37d7f12-a080-58c9-9925-a3c869e4c463",
+      "home": "FC Barcelona",
+      "away": "Deportivo Alavés",
+      "match_date": "2026-10-31",
+      "score": "6-1",
+      "source_url": "https://www.laliga.com/en-EG/match/temporada-2026-2027-laliga-ea-sports-fc-barcelona-deportivo-alaves-11",
+      "source_tier": "OFFICIAL_LEAGUE_MATCH_PAGE",
+      "observed_source_text_summary": "FC Barcelona 6-1 Deportivo Alavés; Sat 31.10.2026",
+      "human_approved": false
+    },
+    {
+      "league": "ITA1",
+      "fixture_id": "150a27d3-12d2-53e4-8809-b60f4546bc94",
+      "home": "Milan",
+      "away": "Inter",
+      "match_date": "2026-10-31",
+      "score": "3-1",
+      "source_url": "https://www.legaseriea.it/serie-a/news/milan-inter-2026-2027-3-1-cronaca-risultato-gol",
+      "source_tier": "OFFICIAL_LEAGUE_RESULT_NEWS",
+      "observed_source_text_summary": "Milan-Inter 3-1; 31/10/2026",
+      "human_approved": false
+    },
+    {
+      "league": "FRA1",
+      "fixture_id": "2decb036-05ee-586f-8b3c-feb04d197962",
+      "home": "OGC Nice",
+      "away": "Stade Rennais FC",
+      "match_date": "2026-10-30",
+      "score": "5-2",
+      "source_url": "https://www.staderennais.com/matchs/2026-10-30-nice-vs-rennes",
+      "source_tier": "OFFICIAL_CLUB_MATCH_PAGE",
+      "observed_source_text_summary": "Nice vs Rennes 5-2; 30 Oct 2026",
+      "human_approved": false
+    },
+    {
+      "league": "NED1",
+      "fixture_id": "7a4cf949-0114-5387-9e6a-003425014601",
+      "home": "Excelsior Rotterdam",
+      "away": "FC Twente",
+      "match_date": "2026-11-01",
+      "score": "0-9",
+      "source_url": "https://eredivisie.nl/nieuws/terugblik-speelronde-11/",
+      "source_tier": "OFFICIAL_LEAGUE_MATCH_RESULT_RECAP",
+      "observed_source_text_summary": "FC Twente won 0-9 at Excelsior; article 2 Nov 2026",
+      "human_approved": false
+    },
+    {
+      "league": "POR1",
+      "fixture_id": "4e046f11-5c9a-5b64-b832-8ebaaf8528bc",
+      "home": "Casa Pia AC",
+      "away": "Sporting CP",
+      "match_date": "2026-10-30",
+      "score": "0-2",
+      "source_url": "https://www.ligaportugal.pt/match/20262027/ligaportugalbetclic/10/4",
+      "source_tier": "OFFICIAL_LEAGUE_MATCH_PAGE",
+      "observed_source_text_summary": "Casa Pia AC 0-2 Sporting CP; 30/10/2026",
+      "human_approved": false
+    },
+    {
+      "league": "BEL1",
+      "fixture_id": "0b7b7e2b-4e75-5214-85ba-2269481523fc",
+      "home": "SV Zulte Waregem",
+      "away": "Club Brugge",
+      "match_date": "2026-10-30",
+      "score": "2-4",
+      "source_url": "https://www.proleague.be/wedstrijden/seizoen-2026-2027-jupiler-pro-league-10-sv-zulte-waregem-vs-club-brugge-685",
+      "source_tier": "OFFICIAL_LEAGUE_MATCH_PAGE",
+      "observed_source_text_summary": "SV Zulte Waregem 2-4 Club Brugge; 30 Oct 2026",
+      "human_approved": false
+    },
+    {
+      "league": "TUR1",
+      "fixture_id": "60c4b068-4120-5435-8ab1-ec7bb09e18a9",
+      "home": "KASIMPAŞA A.Ş.",
+      "away": "BEŞİKTAŞ A.Ş.",
+      "match_date": "2026-11-01",
+      "score": "2-2",
+      "source_url": "https://beinsports.com.tr/haber/kasimpasa-besiktas-17",
+      "source_tier": "LICENSED_BROADCASTER_MATCH_REPORT",
+      "observed_source_text_summary": "Kasımpaşa 2-2 Beşiktaş; 1 Kasım 2026",
+      "human_approved": false
+    }
+  ]
+}

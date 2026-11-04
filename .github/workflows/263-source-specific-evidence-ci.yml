@@ -1,0 +1,50 @@
+name: 263 match-specific 10 league source evidence gate
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'data/staged_263/2026_11_04_ten_league_specific_web_results.json'
+      - 'experiments/263/source_evidence_strict_263.py'
+      - 'experiments/263/test_source_evidence_strict_263.py'
+      - '.github/workflows/263-source-specific-evidence-ci.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  read-only-matched-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only new anti-circular source-evidence tests
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_source_evidence_strict_263.py
+      - name: Download existing 4509 preflight once, never fetch historical sources again
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/4509-stage
+          gh run download 41802358251 --repo "$GITHUB_REPOSITORY" -n weekend-263-ten-league-source-evidence -D /tmp/4509-stage
+          echo '69d687965500a260cc965a1482c23c1e07f11ebcabb1adaa9441dc6a17334a14  /tmp/4509-stage/extended_history.csv' | sha256sum -c -
+      - name: Ten externally observed match-specific web refs vs locked stage
+        env:
+          PYTHONPATH: experiments/263
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/source_evidence_strict_263.py \
+            --stage /tmp/4509-stage/extended_history.csv \
+            --out /tmp/263_source_specific_review.json
+      - name: Preserve only truthful source review outcome (not model or human approval)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-ten-league-source-specific-review
+          if-no-files-found: warn
+          path: /tmp/263_source_specific_review.json
