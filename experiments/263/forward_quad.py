@@ -61,14 +61,16 @@ def _b_lambdas(past,home,away):
             max(.05,min(5,ma*sm(a,'away_goals',ma)*sm(h,'away_goals',ma))))
 
 
-def verify_snapshot(path,rows,now,base=None,source_audit=None):
+def verify_snapshot(path,rows,now,base=None,source_audit=None,shadow_evidence=None):
     digest=sha256_file(path)
     if digest==FROZEN:
         if len(rows)!=REQUIRED_BASE_COUNT:raise ValueError('frozen_row_count_mismatch')
         return 'PINNED_FROZEN_HISTORICAL_ARCHIVE',digest
-    if base is None or source_audit is None:
+    if shadow_evidence is None and (base is None or source_audit is None):
         raise ValueError('updated_history_requires_baseline_and_source_acceptance')
-    if sha256_file(base)!=FROZEN:raise ValueError('baseline_sha_mismatch')
+    if shadow_evidence is not None and source_audit is not None:
+        raise ValueError('shadow_and_human_source_acceptance_are_mutually_exclusive')
+    if base is None or sha256_file(base)!=FROZEN:raise ValueError('baseline_sha_mismatch')
     original=clean_rows(base)
     if len(original)!=REQUIRED_BASE_COUNT:raise ValueError('baseline_row_count_mismatch')
     known={r['fixture_id']:r for r in rows}
@@ -77,6 +79,13 @@ def verify_snapshot(path,rows,now,base=None,source_audit=None):
         if new is None or any(str(new.get(k))!=str(v) for k,v in old.items()):
             raise ValueError('append_only_historical_archive_modified')
     if len(rows)<=len(original):raise ValueError('no_new_rows_in_updated_history')
+    if shadow_evidence is not None:
+        # Separate EARLY RESEARCH SHADOW: machine integrity is not human
+        # source approval. Pin the real 2026-11-04 batch artifact, not an
+        # arbitrary self-written "approved" status.
+        from weekend_shadow_source_263 import verify_shadow_evidence
+        verify_shadow_evidence(digest, len(rows), shadow_evidence, now)
+        return 'MACHINE_STAGE_INTEGRITY_ONLY_NOT_HUMAN_VERIFIED_SHADOW',digest
     audit=json.loads(Path(source_audit).read_text(encoding='utf-8'))
     if audit.get('status')!='HUMAN_VERIFIED_SOURCE_ACCEPTANCE' or audit.get('snapshot_sha256')!=digest or audit.get('baseline_sha256')!=FROZEN:
         raise ValueError('source_provenance_not_accepted')
@@ -90,13 +99,13 @@ def verify_snapshot(path,rows,now,base=None,source_audit=None):
     return 'APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED',digest
 
 
-def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None,base=None,source_audit=None):
+def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None,base=None,source_audit=None,shadow_evidence=None):
     now=now or datetime.now(timezone.utc)
     if now.tzinfo is None:raise ValueError('aware_current_time_required')
     now=now.astimezone(timezone.utc)
     league,home,away,kickoff,checked,local_date=valid_gate(gate,now)
     rows=clean_rows(history_path)
-    source_status,source_sha=verify_snapshot(history_path,rows,now,base,source_audit)
+    source_status,source_sha=verify_snapshot(history_path,rows,now,base,source_audit,shadow_evidence=shadow_evidence)
     future_rows=[r for r in rows if r['match_date']>local_date and r['league']==league]
     if future_rows:raise ValueError('source_contains_same_day_or_future_results')
     league_rows=[r for r in rows if r['league']==league]
@@ -138,13 +147,17 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
     mlam=predict_m4(mfit,home,away)
     outputs['M4']={'status':'AVAILABLE','goals':score_markets(*mlam),'train_rows':mfit[3]} if mlam else {'status':'UNAVAILABLE_FIT_OR_RANGE'}
 
-    data={'schema':SCHEMA,'status':'EXPERIMENTAL_PREMATCH_FOUR_MODEL_NO_BETTING',
+    data={'schema':SCHEMA,'status':('EXPERIMENTAL_EARLY_SHADOW_UNVERIFIED_SOURCE_NO_BETTING'
+                                         if shadow_evidence is not None else
+                                         'EXPERIMENTAL_PREMATCH_FOUR_MODEL_NO_BETTING'),
           'created_at_utc':now.isoformat(),
           'fixture':{'league':league,'home_id':home,'away_id':away,'kickoff_utc':kickoff.isoformat(),
                      'match_local_date':local_date,'official_source':gate['source_url'],
                      'source_checked_at_utc':checked.isoformat(),
                      'fixture_verification':'VERIFIED_BY_LIVE_OFFICIAL_GATE'},
           'data':{'snapshot_sha256':source_sha,'snapshot_acceptance':source_status,
+                  'human_source_acceptance':shadow_evidence is None,
+                  'research_shadow_unverified_source':shadow_evidence is not None,
                   'league_history_rows':len(past),'league_latest_result_date':latest,
                   'cutoff_rule':'strictly_before_local_kickoff_date'},
           'code':{'B_C2_C3':'FROZEN_EXISTING_MODEL_FUNCTIONS',
@@ -155,7 +168,9 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
                   'm4_lock_sha256':sha256_file(lock_path),'m4':FEATURE_VERSION},
           'm4_learned_settings':lock['settings'],'model_predictions':outputs,
           'pilot_restrictions':['No odds, EV, bet or production promotion','No first-half or corner estimates',
-                                'C2 missing context is reported, never imputed','Human-attested updated data is not independently reverified by this code']}
+                                'C2 missing context is reported, never imputed',
+                                'Any machine-stage shadow data is NOT human verified and is NOT part of accepted 96-cohort',
+                                'Human-attested updated data is not independently reverified by this code']}
     digest=hashlib.sha256(canonical_bytes(data)).hexdigest();data['payload_sha256']=digest
     fixture_id=hashlib.sha256(canonical_bytes([league,home,away,kickoff.isoformat()])).hexdigest()[:24]
     target=Path(out_dir)/local_date/(fixture_id+'.json')

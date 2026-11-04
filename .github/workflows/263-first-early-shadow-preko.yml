@@ -1,0 +1,68 @@
+name: 263 FIRST real early PREKO machine-stage four-model shadow
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/weekend_shadow_source_263.py'
+      - 'experiments/263/first_real_early_shadow_263.py'
+      - 'experiments/263/test_weekend_shadow_source_263.py'
+      - '.github/workflows/263-first-early-shadow-preko.yml'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: quad-263-first-early-shadow-only
+  cancel-in-progress: false
+jobs:
+  first-real-early-shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fixed mathematical runtime
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Research-only machine-source flags targeted tests
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_weekend_shadow_source_263.py
+      - name: Pinned unchanged 4413 and staged 4509 from prior passing jobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/frozen_4413 /tmp/weekend_source_4509
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D /tmp/frozen_4413
+          gh run download 41802358251 --repo "$GITHUB_REPOSITORY" -n weekend-263-ten-league-source-evidence -D /tmp/weekend_source_4509
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  /tmp/frozen_4413/historical_results.csv' | sha256sum -c -
+          echo '69d687965500a260cc965a1482c23c1e07f11ebcabb1adaa9441dc6a17334a14  /tmp/weekend_source_4509/extended_history.csv' | sha256sum -c -
+      - name: SINGLE real live official-gated Nov6 match early research shadow
+        env:
+          PYTHONPATH: .:experiments/263
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/first_real_early_shadow_263.py
+      - name: Commit SHADOW ONLY if prediction was really generated PRE-KO
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d forward_quad_shadow_263
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- forward_quad_shadow_263
+          git diff --cached --quiet && { echo 'SHADOW_NOT_WRITTEN'; exit 1; }
+          git commit -m 'Seal 1 REAL pre-KO B/C2/C3/M4 early shadow - MACHINE staged 4509 NOT human accepted'
+          git push origin "HEAD:$GITHUB_REF_NAME"
+      - name: Preserve early shadow output, not official cohort
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-first-early-preko-shadow-NOT-pilot
+          if-no-files-found: warn
+          path: forward_quad_shadow_263/*/*.json
