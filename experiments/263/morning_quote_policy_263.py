@@ -185,8 +185,67 @@ def conditional(forecast_report,lock_path,root=".",now=None):
         with dest.with_suffix(".md").open("x",encoding="utf-8") as file:file.write(render(out))
         saved.append({"path":str(dest),"status":out["status"],"decision_sha256":out["payload_sha256"]})
     return saved
+
+def verify_conditional_precommit(forecast_report,root=".",now=None):
+    """Read-only precommit verification: morning SHA -> forecast SHA -> conditional SHA."""
+    from four_model_value_policy_263 import render
+    now=now or datetime.now(timezone.utc)
+    if now.tzinfo is None:raise ValueError("MORNING_AWARE_CLOCK_REQUIRED")
+    now=now.astimezone(timezone.utc)
+    report=json.loads(Path(forecast_report).read_text(encoding="utf-8"))
+    if report.get("schema")!="quad_named_match_batch_report_v1":
+        raise ValueError("MORNING_FORECAST_REPORT_SCHEMA_INVALID")
+    root=Path(root).resolve();checked=0
+    pattern=re.compile(r"forward_quad_263/(\d{4}-\d{2}-\d{2})/([a-f0-9]{24})\.json")
+    for row in report["outcomes"]:
+        if row.get("status")!="REGISTERED_FOUR_MODELS_EXPERIMENTAL":continue
+        rel=row.get("path")
+        matched=pattern.fullmatch(rel) if isinstance(rel,str) else None
+        if matched is None:raise ValueError("MORNING_UNSAFE_FORECAST_PATH")
+        fp=(root/rel).resolve()
+        if not fp.is_relative_to(root) or not fp.is_file():
+            raise ValueError("MORNING_FORECAST_MISSING")
+        f=json.loads(fp.read_text(encoding="utf-8"))
+        sealed_payload(f,"quad_forward_263_v1")
+        if f["payload_sha256"]!=row.get("payload_sha256"):
+            raise ValueError("MORNING_REPORT_FORECAST_SHA_MISMATCH")
+        day,stem=matched.groups()
+        if day!=f["fixture"]["match_local_date"]:
+            raise ValueError("MORNING_FORECAST_DATE_MISMATCH")
+        if not read_aware(f["created_at_utc"])<=now<read_aware(f["fixture"]["kickoff_utc"]):
+            raise ValueError("MORNING_PRECOMMIT_AFTER_KICKOFF")
+        snap=read_for_forecast(f,root/"experiments/263/morning_quotes_locked")
+        dest=root/"experiments/263/quad_conditional_morning_decisions"/day/(stem+".json")
+        if snap is None:
+            if dest.is_file():raise ValueError("MORNING_CONDITIONAL_WITHOUT_SOURCE")
+            continue
+        extract(snap,f,now)
+        original=root/snap["source_review"]["original_request_path"]
+        if not original.is_file() or hashlib.sha256(original.read_bytes()).hexdigest()!=snap["source_review"]["original_request_sha256"]:
+            raise ValueError("MORNING_ORIGINAL_REQUEST_REVISED")
+        if not dest.is_file():raise ValueError("MORNING_CONDITIONAL_RECORD_MISSING")
+        d=json.loads(dest.read_text(encoding="utf-8"))
+        sealed_payload(d,"263_four_model_value_decision_research_v1")
+        if (d.get("forecast_sha256")!=f["payload_sha256"]
+            or d.get("morning_quote_sha256")!=snap["payload_sha256"]
+            or d.get("quote_sha256") is not None
+            or d.get("fixture")!=f["fixture"]
+            or d.get("betting_authorized") is not False
+            or d.get("status") not in ("RESEARCH_CONDITIONAL_MORNING_PRICE_NOT_CURRENT","RESEARCH_PAS")):
+            raise ValueError("MORNING_CONDITIONAL_SHA_CHAIN_INVALID")
+        for entry in d.get("all_market_diagnostics",[]):
+            if entry.get("observed_odds") is not None:
+                if (entry.get("price_age_class")!="MORNING_ARCHIVE_NOT_CURRENT"
+                    or entry.get("price_snapshot_sha256")!=snap["payload_sha256"]):
+                    raise ValueError("MORNING_CONDITIONAL_PRICE_PROVENANCE_INVALID")
+        md=dest.with_suffix(".md")
+        if not md.is_file() or md.read_text(encoding="utf-8")!=render(d):
+            raise ValueError("MORNING_CONDITIONAL_REPORT_TAMPERED")
+        checked+=1
+    return checked
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument("mode",choices=("ingest","conditional"))
+    p=argparse.ArgumentParser();p.add_argument("mode",choices=("ingest","conditional","verify-conditional"))
     p.add_argument("--manifest");p.add_argument("--root",default=".")
     p.add_argument("--out",default="experiments/263/morning_quotes_locked")
     p.add_argument("--report");p.add_argument("--forecast-report")
@@ -197,7 +256,10 @@ def main():
         result=batch(a.manifest,a.root,a.out,a.report,now)
         print(json.dumps({"accepted":result["accepted"],"blocked":result["blocked"]}))
         if result["accepted"]==0:raise SystemExit("NO_VALID_MORNING_PRICE")
-    else:
+    elif a.mode=="conditional":
         if not a.forecast_report:raise SystemExit("FORECAST_REPORT_REQUIRED")
         print(json.dumps({"conditional_created":len(conditional(a.forecast_report,a.dev_lock,a.root,now))}))
+    else:
+        if not a.forecast_report:raise SystemExit("FORECAST_REPORT_REQUIRED")
+        print(json.dumps({"conditional_verified":verify_conditional_precommit(a.forecast_report,a.root,now)}))
 if __name__=="__main__":main()
