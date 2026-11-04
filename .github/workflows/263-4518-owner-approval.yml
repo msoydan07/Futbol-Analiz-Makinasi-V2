@@ -1,0 +1,130 @@
+name: 263 owner-approved 4518 research source one-shot publication
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'data/staged_263/owner_approval_4518.json'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: 263-4518-one-owner-acceptance
+  cancel-in-progress: false
+jobs:
+  publish-on-owner-approval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Retrieve exact fixed original and 4518 artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p pinned_base pinned_4518
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D pinned_base
+          gh run download 41854694583 --repo "$GITHUB_REPOSITORY" -n football-263-4518-score-checked-research-stage -D pinned_4518
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  pinned_base/historical_results.csv' | sha256sum -c -
+          echo '1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9  pinned_4518/extended_history.csv' | sha256sum -c -
+      - name: One source integrity and explicit signed-scope gate, never infer owner consent
+        run: |
+          python - <<'PY'
+          import csv,hashlib,json,shutil,datetime
+          from pathlib import Path
+          base_sha="35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1"
+          stage_sha="1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9"
+          approved=Path("data/staged_263/owner_approval_4518.json")
+          a=json.loads(approved.read_text(encoding="utf-8"))
+          if (a.get("schema")!="263_owner_evidence_review_v1"
+              or a.get("status")!="OWNER_EXPLICITLY_APPROVED_LIMITED_RESEARCH_SOURCE_ACCEPTANCE"
+              or a.get("reviewer_github_login")!="msoydan07"
+              or a.get("snapshot_sha256")!=stage_sha
+              or a.get("baseline_sha256")!=base_sha
+              or a.get("approval_text")!="4518 ONAYLIYORUM"
+              or a.get("limitations_accepted")!={"not_all_rows_independently_checked":True,
+                  "nine_added_matches_have_no_extended_stats":True,
+                  "abandoned_awarded_match_excluded_from_full_match_training":True,
+                  "research_only_no_production_or_betting":True}):
+              raise SystemExit("OWNER_EXPLICIT_LIMITED_RESEARCH_APPROVAL_REQUIRED")
+          approved_time=datetime.datetime.fromisoformat(a["reviewed_at_utc"].replace("Z","+00:00"))
+          now=datetime.datetime.now(datetime.timezone.utc)
+          if approved_time.tzinfo is None or approved_time>now or (now-approved_time).total_seconds()>7*86400:
+              raise SystemExit("OWNER_REVIEW_TIMESTAMP_INVALID")
+          def read(p):
+              with Path(p).open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
+          original=read("pinned_base/historical_results.csv")
+          stage=read("pinned_4518/extended_history.csv")
+          if len(original)!=4413 or len(stage)!=4518:raise SystemExit("UNEXPECTED_ROW_COUNTS")
+          by={r["fixture_id"]:r for r in stage}
+          if len(by)!=4518:raise SystemExit("DUPLICATE_FIXTURE_IDS")
+          if any(by.get(r["fixture_id"])!=r for r in original):
+              raise SystemExit("FROZEN_BASELINE_CHANGED")
+          if any(r["match_date"]>"2026-11-03" or r["result"]!=(
+              "H" if int(r["home_goals"])>int(r["away_goals"]) else
+              "A" if int(r["home_goals"])<int(r["away_goals"]) else "D") for r in stage):
+              raise SystemExit("RESULT_OR_TIME_INVALID")
+          # One-source-match equality from the previously collected 88 references.
+          oldrefs=json.loads(Path("data/staged_263/2026_10_30_11_01_previous_88_web_score_refs.json").read_text())["rows"]
+          if len(oldrefs)!=88:raise SystemExit("OLD_SOURCE_COUNT_WRONG")
+          for v in oldrefs:
+              r=by.get(v["fixture_id"])
+              if (not r or
+                  any(r[k]!=str(v[k]) for k in ("league","match_date","home_id","away_id")) or
+                  (r["home_goals"]+"-"+r["away_goals"])!=v["source_score"]):
+                  raise SystemExit("OLD_SOURCE_REFERENCE_MISMATCH")
+          # 8 earlier externally referenced Nov 2 results.
+          nov2=json.loads(Path("data/staged_263/2026_11_05_8_fresh_results_crosscheck.json").read_text())["results"]
+          used=set()
+          if len(nov2)!=8:raise SystemExit("NOV2_SOURCE_COUNT_WRONG")
+          for v in nov2:
+              matches=[r for r in stage if (r["league"],r["match_date"],r["home_goals"],r["away_goals"])==
+                  (v["league"],v["date"],str(v["home_goals"]),str(v["away_goals"]))]
+              if len(matches)!=1 or matches[0]["fixture_id"] in used:raise SystemExit("NOV2_SOURCE_REFERENCE_AMBIGUOUS")
+              used.add(matches[0]["fixture_id"])
+          # 9 new Nov 3 fixtures: approved team alias IDs and unchanged exact scores.
+          nov3=json.loads(Path("data/staged_263/2026_11_03_eng2_9_sources.json").read_text())
+          alias=json.loads(Path("experiments/263/evidence/identity_index_263.json").read_text())["aliases"]
+          new=[r for r in stage if r["match_date"]=="2026-11-03"]
+          if len(new)!=9 or len(nov3["matches"])!=9:raise SystemExit("NOV3_SOURCE_COUNT_WRONG")
+          expected={(alias[v["home"].lower()],alias[v["away"].lower()],str(v["hg"]),str(v["ag"])) for v in nov3["matches"]}
+          found={(r["home_id"],r["away_id"],r["home_goals"],r["away_goals"]) for r in new}
+          if expected!=found or any(r["league"]!="ENG2" or r["source_row"]!="" or r["home_corners"]!="" for r in new):
+              raise SystemExit("NOV3_MATCH_SOURCE_OR_MISSING_VALUES_CHANGED")
+          exception=json.loads(Path("data/staged_263/2026_10_31_ned1_abandoned_awarded_exception.json").read_text())
+          abandoned=by.get(exception["fixture_id"])
+          if (not abandoned or exception.get("training_eligibility_enforced") is not True or
+              (abandoned["league"],abandoned["home_goals"],abandoned["away_goals"])!=("NED1","4","0")):
+              raise SystemExit("ABANDONED_AWARDED_MATCH_POLICY_NOT_ACTIVE")
+          if Path("data/quad_accepted_263").exists():raise SystemExit("ACCEPTED_SNAPSHOT_ALREADY_EXISTS")
+          sources={r["source_url"] for r in stage if r.get("source_url")}
+          sources.update(r["source_url"] for r in oldrefs)
+          sources.update(r["source_url"] for r in nov2)
+          sources.update(s["url"] for s in nov3["sources"])
+          out=Path("data/quad_accepted_263");out.mkdir(parents=True)
+          shutil.copyfile("pinned_4518/extended_history.csv",out/"extended_history.csv")
+          record={"status":"HUMAN_VERIFIED_SOURCE_ACCEPTANCE",
+              "schema":"263_owner_accepted_research_source_v1",
+              "reviewer":a["reviewer_github_login"],"reviewed_at_utc":a["reviewed_at_utc"],
+              "snapshot_sha256":stage_sha,"baseline_sha256":base_sha,
+              "source_links":sorted(sources),
+              "review_scope":"OWNER_READ_EVIDENCE_SUMMARY_AND_ACCEPTED_LIMITED_EXPERIMENTAL_RESEARCH_USE",
+              "all_4518_independently_verified":False,
+              "independent_network_verification_by_this_workflow":False,
+              "nine_manual_rows_extended_statistics_missing":True,
+              "official_pilot_predictions_created":0,"betting_authorized":False,
+              "research_only":True}
+          (out/"source_acceptance.json").write_text(
+              json.dumps(record,ensure_ascii=False,sort_keys=True,indent=2)+"\n",encoding="utf-8")
+          print("OWNER_ACKNOWLEDGED_RESEARCH_SOURCE_ACCEPTANCE",len(stage),stage_sha)
+          PY
+      - name: Commit exactly one owner-reviewed accepted input; no predictions invented
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/quad_accepted_263/extended_history.csv data/quad_accepted_263/source_acceptance.json
+          git diff --cached --quiet && { echo 'No new acceptance output'; exit 1; }
+          git commit -m 'Record owner-approved limited research source evidence and pinned 4518 history'
+          git push origin "HEAD:$GITHUB_REF_NAME"
