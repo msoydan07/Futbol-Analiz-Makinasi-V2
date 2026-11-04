@@ -19,24 +19,34 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Distinguish frozen-model changes from result-view-only changes
+      - name: Skip historic M4 refit for goal-evaluator-only changes
         id: model_gate
         shell: bash
         run: |
           set -euo pipefail
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] ||
-             git diff-tree --no-commit-id --name-only -r HEAD | grep -Eq '^experiments/263/(m4_integrated.py|m4_lock.json|forward_quad.py|test_quad_263.py)
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo 'run_m4=true' >> "$GITHUB_OUTPUT"
+          elif git diff-tree --no-commit-id --name-only -r HEAD | grep -Eq '^experiments/263/(m4_integrated.py|m4_lock.json|forward_quad.py|test_quad_263.py)$'; then
+            echo 'run_m4=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run_m4=false' >> "$GITHUB_OUTPUT"
+            echo 'Only evaluation/workflow changed; skip frozen 4413-match refit'
+          fi
+      - uses: actions/setup-python@v5
+        if: steps.model_gate.outputs.run_m4 == 'true'
         with:
           python-version: '3.11'
-      - if: steps.model_gate.outputs.run_m4 == 'true'
+      - name: Install numerical dependencies only for frozen model changes
+        if: steps.model_gate.outputs.run_m4 == 'true'
         run: python -m pip install 'numpy>=1.24,<3' 'scipy>=1.10,<2'
       - name: Fetch original immutable 4413-match archive, not newly staged data
         if: steps.model_gate.outputs.run_m4 == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
           mkdir -p m4_ci_source
-          gh run download 41251343847 --repo '${{ github.repository }}' -n team-source-audit -D m4_ci_source
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_ci_source
           test -f m4_ci_source/historical_results.csv
           echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_ci_source/historical_results.csv' | sha256sum -c -
       - name: One batched M4 / 96-weekend synthetic acceptance suite
@@ -48,38 +58,6 @@ jobs:
           set -o pipefail
           python -m unittest -v experiments/263/test_quad_263.py experiments/263/test_weekend_96_scope_263.py |& tee m4-quad-test-results.txt
       - if: steps.model_gate.outputs.run_m4 == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: m4-quad-acceptance
-          path: m4-quad-test-results.txt
-          if-no-files-found: ignore
-; then
-            echo 'run_m4=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'run_m4=false' >> "$GITHUB_OUTPUT"
-            echo 'No frozen model changed; do not re-fit 4413 archived matches'
-          fi
-      - uses: actions/setup-python@v5
-        if: steps.model_gate.outputs.run_m4 == 'true'
-        with:
-          python-version: '3.11'
-      - run: python -m pip install 'numpy>=1.24,<3' 'scipy>=1.10,<2'
-      - name: Fetch original immutable 4413-match archive, not newly staged data
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          mkdir -p m4_ci_source
-          gh run download 41251343847 --repo '${{ github.repository }}' -n team-source-audit -D m4_ci_source
-          test -f m4_ci_source/historical_results.csv
-          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_ci_source/historical_results.csv' | sha256sum -c -
-      - name: One batched M4 / 96-weekend synthetic acceptance suite
-        env:
-          PYTHONPATH: experiments/263
-          M4_TEST_HISTORY: m4_ci_source/historical_results.csv
-        run: |
-          set -o pipefail
-          python -m unittest -v experiments/263/test_quad_263.py experiments/263/test_weekend_96_scope_263.py |& tee m4-quad-test-results.txt
-      - if: always()
         uses: actions/upload-artifact@v4
         with:
           name: m4-quad-acceptance
