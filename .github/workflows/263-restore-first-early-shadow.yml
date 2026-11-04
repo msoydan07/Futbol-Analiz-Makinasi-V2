@@ -1,0 +1,61 @@
+name: 263 rescue EXACT already-calculated pre-KO shadow artifact via GitHub Contents API
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - '.github/workflows/263-restore-first-early-shadow.yml'
+permissions:
+  contents: write
+  actions: read
+jobs:
+  restore-from-existing-artifact-no-math:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve original unmodified successful model artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/first-early-shadow
+          gh run download 41810178447 --repo "$GITHUB_REPOSITORY" -n 263-first-early-preko-shadow-NOT-pilot -D /tmp/first-early-shadow
+          test -f /tmp/first-early-shadow/2026-11-06/1d6b6f16fef8bac971c184c4.json
+      - name: Verify immutable ORIGINAL payload hash, timestamps, human/early-shadow labels
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,hashlib,datetime,pathlib
+          file=pathlib.Path('/tmp/first-early-shadow/2026-11-06/1d6b6f16fef8bac971c184c4.json')
+          obj=json.loads(file.read_text())
+          digest=obj['payload_sha256'];clean={k:v for k,v in obj.items() if k!='payload_sha256'}
+          actual=hashlib.sha256(json.dumps(clean,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()).hexdigest()
+          assert actual==digest=='1038b6e9cd1f0bcbceb97367e261bc579b07a56e4e2dc5193c2f247e51e18ffb'
+          created=datetime.datetime.fromisoformat(obj['created_at_utc'])
+          ko=datetime.datetime.fromisoformat(obj['fixture']['kickoff_utc'])
+          now=datetime.datetime.now(datetime.timezone.utc)
+          assert created<now<ko, 'Must restore original sealed record before kickoff'
+          assert obj['fixture']['league']=='TUR1' and obj['fixture']['official_source'].startswith('https://www.tff.org/')
+          assert obj['fixture']['fixture_verification']=='VERIFIED_BY_LIVE_OFFICIAL_GATE'
+          assert obj['data']['snapshot_sha256']=='69d687965500a260cc965a1482c23c1e07f11ebcabb1adaa9441dc6a17334a14'
+          assert obj['data']['human_source_acceptance'] is False and obj['data']['research_shadow_unverified_source'] is True
+          assert obj['status']=='EXPERIMENTAL_EARLY_SHADOW_UNVERIFIED_SOURCE_NO_BETTING'
+          assert set(obj['model_predictions'])=={'B','C2','C3','M4'}
+          assert all(p['status']=='AVAILABLE' for p in obj['model_predictions'].values())
+          print('VERIFIED ORIGINAL EARLY PREKO SHA:',digest,'CREATED:',created.isoformat(),'KO:',ko.isoformat())
+          PY
+      - name: Archive exact original file through REST Contents API (NO recomputation)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          file=/tmp/first-early-shadow/2026-11-06/1d6b6f16fef8bac971c184c4.json
+          target=forward_quad_shadow_263/2026-11-06/1d6b6f16fef8bac971c184c4.json
+          encoded=$(base64 -w0 "$file")
+          gh api -X PUT "repos/$GITHUB_REPOSITORY/contents/$target" \
+            -f branch="$GITHUB_REF_NAME" \
+            -f message='Seal existing NOV4 original four-model EARLY pre-KO shadow (unverified-stage; NOT 96 pilot)' \
+            -f content="$encoded" --jq '{commit_sha: .commit.sha, path: .content.path, size: .content.size}'
