@@ -1,0 +1,25 @@
+name: 263 forward asof baseline provenance acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/forward_baseline_provenance_263.py'
+      - 'experiments/263/test_forward_baseline_provenance_263.py'
+      - '.github/workflows/263-forward-baseline-provenance-ci.yml'
+  workflow_dispatch:
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Single acceptance batch
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python -m unittest discover -s experiments/263 -p 'test_forward_decision_candidate_263.py' -v
+          python -m unittest discover -s experiments/263 -p 'test_forward_decision_view_263.py' -v
+          python -m unittest discover -s experiments/263 -p 'test_forward_calibration_bridge_263.py' -v
+          python -m unittest discover -s experiments/263 -p 'test_forward_baseline_provenance_263.py' -v
