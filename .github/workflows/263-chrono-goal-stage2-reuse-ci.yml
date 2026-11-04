@@ -1,0 +1,47 @@
+name: 263 stage2 REUSE exact 880 already-calculated forecasts no extra fits
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/chrono_goal_stage2_263.py'
+      - 'experiments/263/test_chrono_goal_stage2_263.py'
+      - '.github/workflows/263-chrono-goal-stage2-reuse-ci.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  reuse-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only new re-use and anti-monopoly gate tests
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_chrono_goal_stage2_263.py
+      - name: Retrieve ONLY old already generated chronological prediction artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/stage2
+          gh run download 41836437930 --repo "$GITHUB_REPOSITORY" -n 263-880-four-model-goals-PAS-RESEARCH-ONLY -D /tmp/stage2
+          test -s /tmp/stage2/first_goal_pas_report.json
+          test -s /tmp/stage2/first_goal_market_asof_predictions.csv
+      - name: One report for C3/M4 availability, shrinkage and PAS behavior
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python experiments/263/chrono_goal_stage2_263.py \
+            --predictions /tmp/stage2/first_goal_market_asof_predictions.csv \
+            --prior-report /tmp/stage2/first_goal_pas_report.json \
+            --out /tmp/stage2/stage2_model_coverage_decision_research.json
+      - name: Preserve single result without repeating model calculation
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-stage2-C3-M4-PAS-calibration-REUSE-RESEARCH
+          path: /tmp/stage2/stage2_model_coverage_decision_research.json
+          if-no-files-found: error
