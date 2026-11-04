@@ -1,0 +1,25 @@
+{
+  "schema": "263_owner_evidence_review_v1",
+  "status": "OWNER_EXPLICITLY_APPROVED_LIMITED_RESEARCH_SOURCE_ACCEPTANCE",
+  "reviewer_github_login": "msoydan07",
+  "reviewed_at_utc": "2026-11-04T15:43:42+00:00",
+  "approval_text": "4518 ONAYLIYORUM",
+  "approval_channel": "owner_explicit_confirmation_in_chat",
+  "approval_scope": "LIMITED_EXPERIMENTAL_PREMATCH_RESEARCH_USE_ONLY",
+  "reviewed_evidence_document": "docs/263_4518_OWNER_REVIEW_2026_11_04.md",
+  "snapshot_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "baseline_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "limitations_accepted": {
+    "not_all_rows_independently_checked": true,
+    "nine_added_matches_have_no_extended_stats": true,
+    "abandoned_awarded_match_excluded_from_full_match_training": true,
+    "research_only_no_production_or_betting": true
+  },
+  "declarations": {
+    "human_reviewer_approved_limited_use": true,
+    "all_4518_scores_independently_verified": false,
+    "live_official_fixture_still_required": true,
+    "official_pilot_predictions_created_by_this_approval": 0,
+    "betting_authorized": false
+  }
+}
