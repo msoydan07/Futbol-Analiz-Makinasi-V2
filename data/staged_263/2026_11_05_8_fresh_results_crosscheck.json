@@ -1,0 +1,110 @@
+{
+  "schema": "263_20261102_8_added_scores_external_web_crosscheck_v1",
+  "date": "2026-11-02",
+  "evaluated_at_date": "2026-11-04",
+  "weekend_stage_sha256": "69d687965500a260cc965a1482c23c1e07f11ebcabb1adaa9441dc6a17334a14",
+  "weekend_stage_rows": 4509,
+  "base_4413_unchanged": true,
+  "prior_4501_unchanged": true,
+  "check_scope": "EIGHT_NEWLY_ADDED_2026_11_02_FULL_TIME_SCORES_ONLY",
+  "checked_count": 8,
+  "mismatch_count": 0,
+  "results": [
+    {
+      "league": "POR1",
+      "home": "Gil Vicente FC",
+      "away": "Vitória SC",
+      "home_goals": 0,
+      "away_goals": 0,
+      "source_url": "https://www.ligaportugal.pt/match/20262027/ligaportugalbetclic/10/5",
+      "source_kind": "OFFICIAL_LEAGUE",
+      "date": "2026-11-02",
+      "status": "EXTERNAL_SCORE_MATCHES_STAGED_FILE"
+    },
+    {
+      "league": "ITA1",
+      "home": "Sassuolo",
+      "away": "Fiorentina",
+      "home_goals": 2,
+      "away_goals": 4,
+      "source_url": "https://www.legaseriea.it/serie-a/match/932c3719da2a4fe4adba1c846cae9814/Sassuolo-vs-Fiorentina",
+      "source_kind": "OFFICIAL_LEAGUE",
+      "date": "2026-11-02",
+      "status": "EXTERNAL_SCORE_MATCHES_STAGED_FILE"
+    },
+    {
+      "league": "POR1",
+      "home": "SL Benfica",
+      "away": "FC Alverca",
+      "home_goals": 1,
+      "away_goals": 0,
+      "source_url": "https://www.ligaportugal.pt/match/20262027/ligaportugalbetclic/10/9",
+      "source_kind": "OFFICIAL_LEAGUE",
+      "date": "2026-11-02",
+      "status": "EXTERNAL_SCORE_MATCHES_STAGED_FILE"
+    },
+    {
+      "league": "TUR1",
+      "home": "Gençlerbirliği",
+      "away": "Corendon Alanyaspor",
+      "home_goals": 5,
+      "away_goals": 0,
+      "source_url": "https://www.alanyaspor.org.tr/Haber/genclerbirligi-corendon-alanyasporumuz-5-0",
+      "source_kind": "OFFICIAL_CLUB",
+      "date": "2026-11-02",
+      "status": "EXTERNAL_SCORE_MATCHES_STAGED_FILE"
+    },
+    {
+      "league": "FRA1",
+      "home": "Lorient",
+      "away": "Brest",
+      "home_goals": 0,
+      "away_goals": 2,
+      "source_url": "https://www.beinsports.com/en-us/soccer/ligue-1/lorient-vs-brest-2026-10-31?origin=app",
+      "source_kind": "BROADCASTER_SCORE",
+      "fixture_confirm_url": "https://www.lfp.fr/article/fc-lorient-stade-brestois-29-decale-au-lundi-2-novembre-a-20-h45",
+      "date": "2026-11-02",
+      "status": "EXTERNAL_SCORE_MATCHES_STAGED_FILE"
+    },
+    {
+      "league": "ITA1",
+      "home": "Atalanta",
+      "away": "Parma",
+      "home_goals": 0,
+      "away_goals": 3,
+      "source_url": "https://www.legaseriea.it/serie-a/news/atalanta-parma-2026-2027-0-3-cronaca-risultato-gol",
+      "source_kind": "OFFICIAL_LEAGUE",
+      "date": "2026-11-02",
+      "status": "EXTERNAL_SCORE_MATCHES_STAGED_FILE"
+    },
+    {
+      "league": "ESP1",
+      "home": "RC Deportivo",
+      "away": "CA Osasuna",
+      "home_goals": 2,
+      "away_goals": 1,
+      "source_url": "https://www.laliga.com/es-PE/partido/temporada-2026-2027-laliga-ea-sports-rc-deportivo-ca-osasuna-11",
+      "source_kind": "OFFICIAL_LEAGUE",
+      "date": "2026-11-02",
+      "status": "EXTERNAL_SCORE_MATCHES_STAGED_FILE"
+    },
+    {
+      "league": "ENG1",
+      "home": "Newcastle United",
+      "away": "Everton",
+      "home_goals": 0,
+      "away_goals": 1,
+      "source_url": "https://www.skysports.com/football/newcastle-united-vs-everton/report/559532",
+      "source_kind": "BROADCASTER_SCORE",
+      "fixture_confirm_url": "https://www.premierleague.com/en/news/4675097/all-380-fixtures-for-season-2026-27",
+      "date": "2026-11-02",
+      "status": "EXTERNAL_SCORE_MATCHES_STAGED_FILE"
+    }
+  ],
+  "all_4509_source_results_human_accepted": false,
+  "existing_88_additions_independently_checked_by_this_task": false,
+  "source_timestamp_is_not_match_kickoff_proof": true,
+  "official_fixture_96_ready": false,
+  "real_prematch_model_predictions_created": 0,
+  "betting_authorized": false
+}
