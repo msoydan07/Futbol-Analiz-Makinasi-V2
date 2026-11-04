@@ -1,0 +1,20 @@
+{
+  "schema": "263_match_completion_exception_v1",
+  "status": "REVIEW_REQUIRED_NOT_ENFORCED_BY_MODEL",
+  "fixture_id": "e775098b-7465-52ab-92e6-534adabea6bf",
+  "league": "NED1",
+  "match_date": "2026-10-31",
+  "home": "SC Cambuur",
+  "away": "Go Ahead Eagles",
+  "official_final_score": "4-0",
+  "completion": "ABANDONED_AT_APPROX_MINUTE_81_RESULT_AWARDED_AS_FINAL",
+  "final_score_valid": true,
+  "normal_full_match_exposure": false,
+  "default_recommendation": "EXCLUDE_FROM_FULL_MATCH_GOAL_RATE_AND_SHOT_CORNER_TRAINING_PENDING_POLICY",
+  "training_eligibility_enforced": false,
+  "sources": [
+    "https://eredivisie.nl/nieuws/sc-cambuur-go-ahead-eagles-definitief-gestaakt/",
+    "https://www.knvb.nl/nieuws/organisatie/berichten/72372/cambuur-go-ahead-eagles-definitief-gestaakt"
+  ],
+  "notes": "Do not alter the original result or infer 90-minute counts; a separate accepted input filter must implement the exclusion before use."
+}
