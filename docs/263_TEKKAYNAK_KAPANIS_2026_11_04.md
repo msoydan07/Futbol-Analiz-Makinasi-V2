@@ -1,3 +1,13 @@
+> **04.11.2026 — GÜNCEL DURUM KONTROLÜ / DÖNGÜ KİLİDİ**
+>
+> - Yeni araştırma veri paketi: **4.518 maç**, 4.509'luk sabit SHA snapshot'a 3 Kasım Championship sonuçlarından **9 maç eklendi**. Çalışma [#41854694583](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41854694583) başarılı; çıkarılan ZIP içinde `extended_history.csv` ve `stage_report.json` mevcut. SHA-256 **`1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9`**. Önceki 4.509 satır **bire bir değişmeden korunmuş** ve toplam kimlik sayısı tekil. Kaynaklar: [Football Web Pages](https://www.footballwebpages.co.uk/championship/fixtures-results/november), [Soccerway](https://www.soccerway.com/england/championship/results/), [Cornerflick](https://cornerflick.com/football/leagues/championship/results), [EFL](https://www.efl.com/news/2026/november/04/Sky-Bet-Championship--Birmingham-rise-to-second-as-Pompey-shock-Swansea/).
+> - 9 yeni satır **STAGED_CROSSCHECKED_NOT_HUMAN_ACCEPTED**. Olası olmayan kaynak verisi yazılmadı; futbol-data sağlayıcısının bilinmeyen `source_row` numarası, ilk yarı / şut / korner istatistikleri boş. Bu paket **`data/quad_accepted_263` değildir**, ücretli/bahis/resmî pilot onayı yoktur.
+> - İlk gerçek ve değişmez erken karşılaşma gölge kaydı: `forward_quad_shadow_263/2026-11-06/1d6b6f16fef8bac971c184c4.json` (Gaziantep FK–Kasımpaşa, resmî fikstür kapısı doğrulanmış, dört model mevcut, 4 Kasım KO öncesi). **EARLY_SHADOW_UNVERIFIED** statüsü değişmez; resmî pilot kaydı yapılmaz.
+> - **Eksik ve kullanıcı yerine uydurulamayacak durum:** açık ve gerçek `HUMAN_VERIFIED_SOURCE_ACCEPTANCE` belgesi yok; yeni veri için dürüst kaynak incelemesi/onayı ve maçın T−60 resmî kayıt koşulları sağlanana dek `forward_quad_263/` boş kalır. 4 Kasım akşamında oynanacak maç sonuçları henüz mevcut değildir; gelecekten veri eklenmez.
+> - Yalnız bu veri açığı giderildi; B/C2/C3/M4, 880 geçmiş maç, DEV kalibrasyonu ve üretim kodları **yeniden test edilmedi / değiştirilmedi**. Önceki 16-test kabulü ve as-of güvenliği yeşildir. **Başka yeni model/modül ekleme yok.**
+>
+---
+
 # Futbol Maç Analiz Makinası 2.6.3 — 4 Kasım 2026 tek kaynak durum defteri
 
 ## Hedef (değişmedi)
