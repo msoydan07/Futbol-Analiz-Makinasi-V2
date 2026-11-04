@@ -110,6 +110,8 @@ jobs:
             # If kickoff passed or another job changed the request, do not push a late forecast.
             if [ "$FORWARD_OUTCOME" = success ]; then
               python experiments/263/quad_prematch_bridge_263.py verify-baseline --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
+              python experiments/263/odds_provider_oddspapi_263.py --verify-precommit \
+                --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
             fi
             git push origin "HEAD:$GITHUB_REF_NAME"
           fi

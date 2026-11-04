@@ -31,6 +31,10 @@ def nowaware(t):
     if t is None:t=datetime.now(timezone.utc)
     if t.tzinfo is None:raise QuoteBlocked("AWARE_UTC_CLOCK_REQUIRED")
     return t.astimezone(timezone.utc)
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self,req,fp,code,msg,headers,newurl):
+        return None
+
 def _get(endpoint,key,params):
     if not key:raise QuoteBlocked("NO_ODDSPAPI_KEY_CONFIGURED")
     query=urllib.parse.urlencode({**params,"apiKey":key})
@@ -38,7 +42,7 @@ def _get(endpoint,key,params):
     url=API+"/"+endpoint+"?"+query
     req=urllib.request.Request(url,headers={"Accept":"application/json"})
     try:
-        with urllib.request.urlopen(req,timeout=15) as res:
+        with urllib.request.build_opener(_NoRedirect()).open(req,timeout=15) as res:
             if res.geturl().split("?")[0] != API+"/"+endpoint:
                 raise QuoteBlocked("API_REDIRECT_OR_HOST_MISMATCH")
             raw=res.read(3_000_001)
@@ -243,12 +247,60 @@ def batch(report_file,dev_lock,*,key=None,now=None,
         "direct_iddaa_site_independently_verified":False,
         "betting_authorized":False,
         "items":outputs}
+def verify_precommit(report_file,*,now=None,
+                     observation_dir="experiments/263/market_quotes_locked",
+                     decision_dir="experiments/263/quad_priced_decisions"):
+    """Git push safety. Reject stale/missing/cross-linked provider records before KO."""
+    now=nowaware(now)
+    report=json.loads(Path(report_file).read_text(encoding="utf-8"))
+    if report.get("schema")!="quad_named_match_batch_report_v1":
+        raise QuoteBlocked("BAD_FORECAST_BATCH_REPORT")
+    checked=0
+    for item in report["outcomes"]:
+        if item.get("status")!="REGISTERED_FOUR_MODELS_EXPERIMENTAL":continue
+        fp=Path(item["path"])
+        f=json.loads(fp.read_text(encoding="utf-8"))
+        sealed_payload(f,"quad_forward_263_v1")
+        day=f["fixture"]["match_local_date"];stem=fp.stem
+        observation=Path(observation_dir)/day/(stem+".json")
+        decided=Path(decision_dir)/day/(stem+".json")
+        if observation.exists()!=decided.exists():
+            raise QuoteBlocked("SINGLE_SIDED_PROVIDER_RECORD_CANNOT_PUSH")
+        if not observation.exists():continue
+        obs=json.loads(observation.read_text(encoding="utf-8"))
+        sealed_payload(obs,OBSERVATION_SCHEMA)
+        d=json.loads(decided.read_text(encoding="utf-8"))
+        saved=d.pop("payload_sha256",None)
+        if hashlib.sha256(canonical_bytes(d)).hexdigest()!=saved:
+            raise QuoteBlocked("PROVIDER_DECISION_HASH_INVALID")
+        if obs.get("evidence_scope")!="AGGREGATOR_API_NOT_DIRECT_BOOKMAKER_VERIFIED":
+            raise QuoteBlocked("PROVIDER_SCOPE_CHANGED")
+        if (obs["forecast_payload_sha256"]!=f["payload_sha256"]
+            or d["forecast_sha256"]!=f["payload_sha256"]
+            or d["quote_sha256"]!=obs["payload_sha256"]):
+            raise QuoteBlocked("PROVIDER_DECISION_SOURCE_CHAIN_BROKEN")
+        observed=read_aware(obs["analysis_at_utc"])
+        kickoff=read_aware(f["fixture"]["kickoff_utc"])
+        if not read_aware(f["created_at_utc"])<=observed<=now<kickoff:
+            raise QuoteBlocked("PROVIDER_PRECOMMIT_NOT_PREMATCH")
+        if (now-observed).total_seconds()>600:
+            raise QuoteBlocked("PROVIDER_PRECOMMIT_ODDS_NOW_STALE")
+        checked+=1
+    return checked
+
 def main():
     p=argparse.ArgumentParser()
     p.add_argument("--report",required=True)
     p.add_argument("--dev-lock",default="experiments/263/forward_dev_calibration_lock_263.json")
-    p.add_argument("--attempt-report",required=True)
+    p.add_argument("--attempt-report")
+    p.add_argument("--verify-precommit",action="store_true")
     args=p.parse_args()
+    if args.verify_precommit:
+        print(json.dumps({"provider_precommit_checked":
+            verify_precommit(args.report)}))
+        return
+    if not args.attempt_report:
+        raise SystemExit("ATTEMPT_REPORT_REQUIRED")
     value=batch(args.report,args.dev_lock,key=os.environ.get("ODDSPAPI_API_KEY"))
     target=Path(args.attempt_report)
     target.parent.mkdir(parents=True,exist_ok=True)

@@ -105,4 +105,41 @@ class ApiSourceValidation(unittest.TestCase):
         o=fetch_for_forecast(f,"PRIVATE_SYNTHETIC_API_KEY",now=NOW,getter=fake)
         self.assertNotIn("PRIVATE_SYNTHETIC_API_KEY",str(o))
         self.assertEqual(o["source_domain"],"iddaa.com")
+    def test_precommit_late_or_single_sided_provider_blocked(self):
+        import json,tempfile
+        from pathlib import Path
+        from odds_provider_oddspapi_263 import verify_precommit
+        f,b,l,fx,cat,book=make()
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            forecast_file=root/"forward_quad_263"/"2026-11-06"/("a"*24+".json")
+            forecast_file.parent.mkdir(parents=True)
+            forecast_file.write_text(json.dumps(f))
+            report=root/"report.json"
+            report.write_text(json.dumps({"schema":"quad_named_match_batch_report_v1",
+                "outcomes":[{"status":"REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+                            "path":str(forecast_file)}]}))
+            ob=root/"quotes";de=root/"decisions"
+            self.assertEqual(verify_precommit(report,now=NOW,
+                observation_dir=ob,decision_dir=de),0)
+            obs=build_observation(f,fx,book,cat,NOW)
+            from four_model_value_policy_263 import decide
+            d=decide(f,b,l,obs,now=NOW)
+            qpath=ob/"2026-11-06"/("a"*24+".json")
+            qpath.parent.mkdir(parents=True)
+            qpath.write_text(json.dumps(obs))
+            with self.assertRaisesRegex(QuoteBlocked,"SINGLE_SIDED"):
+                verify_precommit(report,now=NOW,observation_dir=ob,decision_dir=de)
+            dpath=de/"2026-11-06"/("a"*24+".json")
+            dpath.parent.mkdir(parents=True)
+            dpath.write_text(json.dumps(d))
+            self.assertEqual(verify_precommit(report,now=NOW,
+                observation_dir=ob,decision_dir=de),1)
+            later=NOW+timedelta(minutes=11)
+            with self.assertRaisesRegex(QuoteBlocked,"NOW_STALE"):
+                verify_precommit(report,now=later,observation_dir=ob,decision_dir=de)
+            after=NOW+timedelta(hours=1)
+            with self.assertRaisesRegex(QuoteBlocked,"NOT_PREMATCH"):
+                verify_precommit(report,now=after,observation_dir=ob,decision_dir=de)
+
 if __name__=="__main__":unittest.main()
