@@ -1,6 +1,6 @@
 {
   "schema": "263_match_completion_exception_v1",
-  "status": "REVIEW_REQUIRED_NOT_ENFORCED_BY_MODEL",
+  "status": "ENFORCED_EXPERIMENTAL_FULL_MATCH_TRAINING_AND_BASELINES_ONLY",
   "fixture_id": "e775098b-7465-52ab-92e6-534adabea6bf",
   "league": "NED1",
   "match_date": "2026-10-31",
@@ -11,10 +11,10 @@
   "final_score_valid": true,
   "normal_full_match_exposure": false,
   "default_recommendation": "EXCLUDE_FROM_FULL_MATCH_GOAL_RATE_AND_SHOT_CORNER_TRAINING_PENDING_POLICY",
-  "training_eligibility_enforced": false,
+  "training_eligibility_enforced": true,
   "sources": [
     "https://eredivisie.nl/nieuws/sc-cambuur-go-ahead-eagles-definitief-gestaakt/",
     "https://www.knvb.nl/nieuws/organisatie/berichten/72372/cambuur-go-ahead-eagles-definitief-gestaakt"
   ],
-  "notes": "Do not alter the original result or infer 90-minute counts; a separate accepted input filter must implement the exclusion before use."
+  "notes": "Official awarded 4-0 remains in source CSV. This separate exclusion policy is applied to experimental 90-minute model training and market baselines, not source acceptance or production, and is SHA-linked in future forecasts."
 }
