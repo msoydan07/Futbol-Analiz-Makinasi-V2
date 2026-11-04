@@ -13,6 +13,7 @@ from forward_c3 import canonical_bytes,read_aware
 from market_fifth_baseline_263 import OBSERVATION_SCHEMA,fixture_key,sealed_payload
 from classification_odds_263 import GROUPS,odds_evidence
 from four_model_value_policy_263 import decide,render
+from morning_quote_policy_263 import read_for_forecast
 
 API="https://api.oddspapi.io/v4"
 BOOK="iddaa"
@@ -224,7 +225,7 @@ def batch(report_file,dev_lock,*,key=None,now=None,
         try:
             obs=fetch_for_forecast(f,key,now=now)
             b=json.loads(basefile.read_text(encoding="utf-8"))
-            result=decide(f,b,lock,obs,now=now)
+            result=decide(f,b,lock,obs,morning_snapshot=read_for_forecast(f),now=now)
             quote_dest=Path(observation_dir)/day/(stem+".json")
             dec_dest=Path(decision_dir)/day/(stem+".json")
             if quote_dest.exists() or dec_dest.exists():raise QuoteBlocked("PROVIDER_RECORD_ALREADY_PRESENT")

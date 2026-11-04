@@ -10,6 +10,7 @@ from forward_calibration_bridge_263 import _digest,MARKETS,CAL_SCHEMA
 from forward_c3 import read_aware
 from market_fifth_baseline_263 import OBSERVATION_SCHEMA,sealed_payload,fixture_key
 from market_quote_intake_263 import ACCEPTED_DOMAINS
+from morning_quote_policy_263 import extract as extract_morning
 
 SCHEMA="263_four_model_value_decision_research_v1"
 MODELS=("B","C2","C3","M4")
@@ -70,7 +71,7 @@ def _odds(obs,f,now):
     return prices,("ODDSPAPI_AGGREGATOR_SOURCED_NOT_DIRECT_BOOKMAKER_VERIFIED" if is_provider
                    else "HUMAN_ATTESTED_NOT_NETWORK_REVERIFIED"),obs["payload_sha256"]
 
-def decide(f,base,lock,observation=None,*,now=None):
+def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
     now=now or datetime.now(timezone.utc)
     if now.tzinfo is None:raise ValueError("AWARE_CLOCK_REQUIRED")
     now=now.astimezone(timezone.utc)
@@ -86,7 +87,13 @@ def decide(f,base,lock,observation=None,*,now=None):
     # Its legacy M4-only preliminary pick is intentionally not reused.
     connect_verified_baseline(f,lock,base)
     if read_aware(base["created_at_utc"])>now:raise ValueError("BASELINE_FUTURE")
-    prices,price_status,quote_sha=_odds(observation,f,now)
+    fresh,price_status,quote_sha=_odds(observation,f,now)
+    morning=extract_morning(morning_snapshot,f,now) if morning_snapshot is not None else {}
+    morning_sha=morning_snapshot["payload_sha256"] if morning_snapshot is not None else None
+    # Same market: newer real price always wins, even when its EV falls.
+    # Missing newer groups inherit old morning prices but stay conditional.
+    prices={**morning,**{k:{**v,"age_class":"CURRENT_T60","snapshot_sha256":quote_sha}
+                         for k,v in fresh.items()}}
     raw={};scores={}
     for name in MODELS:
         m=f["model_predictions"][name]
@@ -131,6 +138,9 @@ def decide(f,base,lock,observation=None,*,now=None):
              "calibrated_probability":q,"observed_odds":price["odds"] if price else None,
              "EV":ev,"no_vig_advantage_pp":100*edge if edge is not None else None,
              "quote_source":price["source"] if price else None,
+             "price_age_class":price.get("age_class") if price else None,
+             "price_checked_at_utc":price.get("checked") if price else None,
+             "price_snapshot_sha256":price.get("snapshot_sha256") if price else None,
              "qualification_reasons":reason}
         out.append(row)
         if not reason:
@@ -140,16 +150,24 @@ def decide(f,base,lock,observation=None,*,now=None):
     main=qualified[0] if qualified else None
     alt=next((x for x in qualified[1:] if x["family"]!=main["family"]),None) if main else None
     leader=max(("MS1","MSX","MS2"),key=lambda x:median([p[x] for p in raw.values()])) if raw else None
-    result={"schema":SCHEMA,"status":"RESEARCH_VALUE_CANDIDATE_NOT_APPROVED" if main else "RESEARCH_PAS",
+    main_old=bool(main and main["price_age_class"]=="MORNING_ARCHIVE_NOT_CURRENT")
+    stage=("RESEARCH_CONDITIONAL_MORNING_PRICE_NOT_CURRENT" if main_old else
+           "RESEARCH_VALUE_CANDIDATE_NOT_APPROVED" if main else "RESEARCH_PAS")
+    result={"schema":SCHEMA,"status":stage,
       "created_at_utc":now.isoformat(),"fixture":f["fixture"],
       "forecast_sha256":f["payload_sha256"],"baseline_sha256":base["payload_sha256"],
       "dev_lock_sha256":lock["payload_sha256"],"quote_sha256":quote_sha,
+      "morning_quote_sha256":morning_sha,
+      "morning_quote_status":"MORNING_ARCHIVE_NOT_CURRENT" if morning else "NO_MORNING_ARCHIVE",
+      "main_value_conditional":main_old,"main_price_current":bool(main and not main_old),
+      "morning_and_fresh_mixed_by_market":bool(morning and fresh),
       "quote_status":price_status,"quote_reverified_by_code":False,
       "model_1x2":{k:{s:v[s] for s in ("MS1","MSX","MS2")} for k,v in raw.items()},
       "descriptive_most_likely_1x2_by_model_median":leader,"model_top_scores":scores,
       "high_probability_alerts_not_bets":alerts,"all_market_diagnostics":out,
       "main_candidate":main,"alternative_candidate":alt,
-      "PAS_reasons":[] if main else ([price_status] if not prices else ["NO_QUALIFIED_VALUE_CANDIDATE"]),
+      "PAS_reasons":[] if main else (["NO_MORNING_OR_CURRENT_ODDS"] if not prices else ["NO_QUALIFIED_VALUE_CANDIDATE"]),
+      "old_price_EV_is_historical_scenario_only":True,
       "no_arbitrary_1_5_over_penalty":True,
       "same_goal_family_never_separate_alternative":True,
       "frozen_dev_only_calibration":True,"B_C2_C3_M4_not_blended":True,
@@ -163,6 +181,9 @@ def render(result):
            "**Resmî bahis onayı değildir.**",
            "En olası 1X2 (model medyanı, karar olasılığı değil): "+str(result["descriptive_most_likely_1x2_by_model_median"]),
            "Oran kanıtı: "+result["quote_status"],
+           "Sabah arşivi: "+result.get("morning_quote_status","NO_MORNING_ARCHIVE"),
+           "Tercih durumu: "+("SABAH FİYATIYLA KOŞULLU — güncel fiyat doğrulanmadı"
+               if result.get("main_value_conditional") else "GÜNCEL FİYAT VEYA PAS"),
            "| Model | MS1 | MSX | MS2 |","|---|---:|---:|---:|"]
     for m in MODELS:
         p=result["model_1x2"].get(m)
@@ -171,7 +192,9 @@ def render(result):
     lines.append("Alternatif (ayrı aile): "+(result["alternative_candidate"]["market"] if result["alternative_candidate"] else "YOK"))
     if result["main_candidate"]:
         m=result["main_candidate"]
-        lines.append(f"Olasılık %{m['calibrated_probability']*100:.1f} — Oran {m['observed_odds']} — EV %{m['EV']*100:+.1f} — Marjsız avantaj {m['no_vig_advantage_pp']:+.1f} puan")
+        lines.append(f"Olasılık %{m['calibrated_probability']*100:.1f} — Oran {m['observed_odds']} ({m['price_age_class']}, {m['price_checked_at_utc']}) — EV %{m['EV']*100:+.1f} — Marjsız avantaj {m['no_vig_advantage_pp']:+.1f} puan")
+        if result.get("main_value_conditional"):
+            lines.append("Bu EV yalnızca SABAH fiyatıyla senaryo değeridir; maç saatinde aynı fiyatın alınabildiği doğrulanmadı.")
     lines.append("PAS nedeni: "+", ".join(result["PAS_reasons"]))
     lines.append("1.5 Üst özel cezaya uğramaz; bütün pazarlar aynı kalibrasyon ve fiyat kontrollerinden geçer.")
     lines.append("Fiyat kaynağı insan gözlemidir, kod internetten bağımsız doğrulamaz.")

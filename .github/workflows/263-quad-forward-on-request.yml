@@ -73,6 +73,15 @@ jobs:
           python experiments/263/quad_prematch_bridge_263.py baseline \
             --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json" \
             --history data/quad_accepted_263/extended_history.csv
+      - name: Optional conditional morning quote join with original 4-model forecast
+        if: steps.requests.outputs.has_requests == 'true' && steps.forward.outcome == 'success'
+        env:
+          PYTHONPATH: experiments/263
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/morning_quote_policy_263.py conditional \
+            --forecast-report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
       - name: Optional iddaa API book-odds observation and decision (never faked)
         if: steps.requests.outputs.has_requests == 'true' && steps.forward.outcome == 'success'
         continue-on-error: true
@@ -97,7 +106,7 @@ jobs:
           if [ "$FORWARD_OUTCOME" = success ]; then
             python experiments/263/quad_prematch_bridge_263.py verify-baseline --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
             git add -A -- forward_quad_263 experiments/263/quad_research_links experiments/263/quad_batch_reports
-            for dir in experiments/263/api_odds_attempts experiments/263/market_quotes_locked experiments/263/quad_priced_decisions; do
+            for dir in experiments/263/api_odds_attempts experiments/263/market_quotes_locked experiments/263/quad_priced_decisions experiments/263/quad_conditional_morning_decisions; do
               if [ -d "$dir" ]; then git add -A -- "$dir"; fi
             done
           else
@@ -124,6 +133,7 @@ jobs:
           path: |
             forward_quad_263/*/*.json
             experiments/263/quad_research_links/*/*/*.json
+            experiments/263/quad_conditional_morning_decisions/*/*.json
             experiments/263/api_odds_attempts/*.json
             experiments/263/market_quotes_locked/*/*.json
             experiments/263/quad_priced_decisions/*/*.json

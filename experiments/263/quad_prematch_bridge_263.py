@@ -11,6 +11,7 @@ from forward_empirical_baseline_263 import produce
 from four_model_value_policy_263 import decide,render
 from market_fifth_baseline_263 import sealed_payload,OBSERVATION_SCHEMA
 from market_quote_intake_263 import REQUEST_SCHEMA
+from morning_quote_policy_263 import read_for_forecast
 
 FORECAST_RE=re.compile(r"forward_quad_263/(\d{4}-\d{2}-\d{2})/([a-f0-9]{24})\.json")
 QUOTE_RE=re.compile(r"experiments/263/market_quotes_locked/(\d{4}-\d{2}-\d{2})/([a-f0-9]{24})\.json")
@@ -84,7 +85,7 @@ def link_priced(report,devlock,root,bases,out,now):
         baseline_file=Path(bases)/day/ident/"baseline.json"
         if not baseline_file.is_file():raise ValueError("MISSING_LOCKED_ASOF_BASELINE")
         b=read(baseline_file)
-        d=decide(f,b,lock,observation=q,now=now)
+        d=decide(f,b,lock,observation=q,morning_snapshot=read_for_forecast(f),now=now)
         if d["quote_sha256"]!=q["payload_sha256"]:raise ValueError("ODDS_DECISION_SHA_LINK_MISMATCH")
         dest=Path(out)/day/(ident+".json")
         if dest.exists():raise ValueError("PRICE_DECISION_ALREADY_WRITTEN")
