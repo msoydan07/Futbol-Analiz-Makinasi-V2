@@ -26,7 +26,7 @@ jobs:
         run: python -m unittest -v experiments/263/test_chrono_goal_decision_263.py
       - name: Reuse proven 4413 source exactly by SHA
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           mkdir -p /tmp/263_batch
