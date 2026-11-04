@@ -16,7 +16,7 @@ def fixture():
     mk={"1X2":{"H":.72,"D":.17,"A":.11},
         "BTTS_YES":.58,"BTTS_NO":.42,
         "OVER_1.5":.82,"UNDER_1.5":.18,"OVER_2.5":.53,"UNDER_2.5":.47,
-        "OVER_3.5":.24,"UNDER_3.5":.76}
+        "OVER_3.5":.16,"UNDER_3.5":.84}
     f["model_predictions"]={m:{"status":"AVAILABLE","goals":{"markets":copy.deepcopy(mk),"top_scores":{"1-0":.15}}}
        for m in ("B","C2","C3","M4")}
     seal(f)
@@ -34,7 +34,7 @@ def fixture():
     return f,b,lock
 def odds(f,groups=None,observed="2026-11-06T16:02:00+00:00"):
     groups=groups if groups is not None else {
-       "MS":{"MS1":1.85,"MSX":3.1,"MS2":5.4},
+       "MS":{"MS1":1.99,"MSX":3.1,"MS2":5.4},
        "GOALS_3.5":{"UNDER_3.5":1.65,"OVER_3.5":2.45},
        "GOALS_1.5":{"OVER_1.5":1.1,"UNDER_1.5":6.5}}
     key=fixture_key(f["fixture"])
