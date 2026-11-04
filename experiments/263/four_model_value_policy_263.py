@@ -151,6 +151,7 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
     alt=next((x for x in qualified[1:] if x["family"]!=main["family"]),None) if main else None
     leader=max(("MS1","MSX","MS2"),key=lambda x:median([p[x] for p in raw.values()])) if raw else None
     main_old=bool(main and main["price_age_class"]=="MORNING_ARCHIVE_NOT_CURRENT")
+    alt_old=bool(alt and alt["price_age_class"]=="MORNING_ARCHIVE_NOT_CURRENT")
     stage=("RESEARCH_CONDITIONAL_MORNING_PRICE_NOT_CURRENT" if main_old else
            "RESEARCH_VALUE_CANDIDATE_NOT_APPROVED" if main else "RESEARCH_PAS")
     result={"schema":SCHEMA,"status":stage,
@@ -160,6 +161,9 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
       "morning_quote_sha256":morning_sha,
       "morning_quote_status":"MORNING_ARCHIVE_NOT_CURRENT" if morning else "NO_MORNING_ARCHIVE",
       "main_value_conditional":main_old,"main_price_current":bool(main and not main_old),
+      "alternative_value_conditional":alt_old,
+      "alternative_price_current":bool(alt and not alt_old),
+      "any_selected_value_conditional":main_old or alt_old,
       "morning_and_fresh_mixed_by_market":bool(morning and fresh),
       "quote_status":price_status,"quote_reverified_by_code":False,
       "model_1x2":{k:{s:v[s] for s in ("MS1","MSX","MS2")} for k,v in raw.items()},
@@ -182,14 +186,22 @@ def render(result):
            "En olası 1X2 (model medyanı, karar olasılığı değil): "+str(result["descriptive_most_likely_1x2_by_model_median"]),
            "Oran kanıtı: "+result["quote_status"],
            "Sabah arşivi: "+result.get("morning_quote_status","NO_MORNING_ARCHIVE"),
-           "Tercih durumu: "+("SABAH FİYATIYLA KOŞULLU — güncel fiyat doğrulanmadı"
+           "Ana tercih fiyat durumu: "+("SABAH FİYATIYLA KOŞULLU — güncel fiyat doğrulanmadı"
                if result.get("main_value_conditional") else "GÜNCEL FİYAT VEYA PAS"),
+           "Alternatif fiyat durumu: "+("SABAH FİYATIYLA KOŞULLU — güncel fiyat doğrulanmadı"
+               if result.get("alternative_value_conditional") else
+               "GÜNCEL FİYAT" if result.get("alternative_price_current") else "YOK"),
            "| Model | MS1 | MSX | MS2 |","|---|---:|---:|---:|"]
     for m in MODELS:
         p=result["model_1x2"].get(m)
         lines.append("| "+m+" | "+(" | ".join(f"%{p[k]*100:.1f}" for k in ("MS1","MSX","MS2")) if p else "— | — | —")+" |")
     lines.append("Ana tercih (deneysel): "+(result["main_candidate"]["market"] if result["main_candidate"] else "PAS"))
     lines.append("Alternatif (ayrı aile): "+(result["alternative_candidate"]["market"] if result["alternative_candidate"] else "YOK"))
+    if result["alternative_candidate"]:
+        a=result["alternative_candidate"]
+        lines.append(f"Alternatif olasılık %{a['calibrated_probability']*100:.1f} — Oran {a['observed_odds']} ({a['price_age_class']}, {a['price_checked_at_utc']}) — EV %{a['EV']*100:+.1f}")
+        if result.get("alternative_value_conditional"):
+            lines.append("Alternatif EV yalnızca SABAH fiyatındaki varsayımsal değerdir; güncel fiyatı doğrulanmadı.")
     if result["main_candidate"]:
         m=result["main_candidate"]
         lines.append(f"Olasılık %{m['calibrated_probability']*100:.1f} — Oran {m['observed_odds']} ({m['price_age_class']}, {m['price_checked_at_utc']}) — EV %{m['EV']*100:+.1f} — Marjsız avantaj {m['no_vig_advantage_pp']:+.1f} puan")

@@ -174,4 +174,34 @@ class MorningOddsAcceptance(unittest.TestCase):
     with self.assertRaisesRegex(ValueError,"LOCAL_DATE_NOT_MATCHING_KICKOFF"):
         self.snap()
 
+
+ def test_fresh_primary_morning_alternative_marked_independently(self):
+    m=self.snap()
+    live=odds(self.f,groups={"MS":{"MS1":1.99,"MSX":3.1,"MS2":5.4}})
+    from four_model_value_policy_263 import render
+    result=decide(self.f,self.b,self.lock,live,morning_snapshot=m,now=NOW)
+    self.assertEqual(result["main_candidate"]["market"],"MS1")
+    self.assertEqual(result["alternative_candidate"]["market"],"UNDER_3.5")
+    self.assertTrue(result["main_price_current"])
+    self.assertFalse(result["main_value_conditional"])
+    self.assertTrue(result["alternative_value_conditional"])
+    self.assertTrue(result["any_selected_value_conditional"])
+    self.assertEqual(result["alternative_candidate"]["price_age_class"],
+                     "MORNING_ARCHIVE_NOT_CURRENT")
+    report=render(result)
+    self.assertIn("Alternatif fiyat durumu: SABAH FİYATIYLA KOŞULLU",report)
+    self.assertIn("Alternatif EV yalnızca SABAH fiyatındaki varsayımsal",report)
+    self.assertIn("Alternatif olasılık",report)
+
+ def test_morning_primary_live_alternative_marked_independently(self):
+    m=self.snap()
+    live=odds(self.f,groups={"GOALS_3.5":{"UNDER_3.5":1.65,"OVER_3.5":2.45}})
+    result=decide(self.f,self.b,self.lock,live,morning_snapshot=m,now=NOW)
+    self.assertEqual(result["main_candidate"]["market"],"MS1")
+    self.assertEqual(result["alternative_candidate"]["market"],"UNDER_3.5")
+    self.assertTrue(result["main_value_conditional"])
+    self.assertTrue(result["alternative_price_current"])
+    self.assertFalse(result["alternative_value_conditional"])
+    self.assertTrue(result["any_selected_value_conditional"])
+
 if __name__=="__main__":unittest.main()
