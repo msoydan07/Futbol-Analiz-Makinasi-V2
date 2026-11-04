@@ -1,3 +1,14 @@
+> **4 Kasım 2026 — SON GELİŞTİRME DURUMU / 1.5, 2.5, 3.5 MAÇ SONU ÖLÇÜMÜ**
+>
+> - **Olasılık ve değer karar katmanı:** B/C2/C3/M4 + 1.5/2.5/3.5 oran çiftleri + ana/alternatif/PAS için daha önce 23/23 kabul testi yeşildi ([41864815416](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41864815416)).
+> - **T−60 bağlama:** Dört-model gerçek KO-öncesi tahmin + SHA mühürlü geçmiş lig bazı + ilk oransız PAS; insan tarafından gerçekten kaynak kontrolü yapılan oran gelirse ayrıca yeni fiyatlı karar. Bağlantı 7/7 yeşil ([41876512990](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41876512990)). Henüz gerçek B/C2/C3/M4 maçı işlenmedi.
+> - **Maç sonucu kapsamı iki farklı yolda tamam:** Piyasa referansı sonuç eşleştirmesi artık 1.5/2.5/3.5 hepsini ölçüyor, 18/18 yeşil ([41896865857](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41896865857)). Ana `evaluate_quad.py` ileri pilot değerlendiricisi de BTTS ve üç gol çizgisini ayrı Brier, logloss ve kalibrasyonla ölçüyor, **7/7 hedefli test** yeşil ([41897370653](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41897370653)).
+> - **M4 dondurulmuş eski testleri tekrarlanmadı:** `.github/workflows/263-m4-quad-batch.yml` için yapılan ilk düzenlemede YAML biçim hatası oluştu (iş gerçekleşmedi, [41897367660](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41897367660)). Aynı dosya düzeltildi; son çalışma **başarılı**, kaynak/model değişmeyince ağır 4.413 maç refit adımını **atladı** ([41897531443](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41897531443)).
+> - **Kaynak veriler / kayıtlar değişmez:** İnsan tarafından sınırlı araştırma kullanımı onaylanan 4.518 maçlık SHA snapshot, UEFA 3–4 Kasım M0/M0+Elo kilitli tahminleri ve orijinal B/C2/C3/M4 matematik kodu korunuyor. 100-match resmî pilot ilerlemesi hâlâ **0**.
+> - **Açık tek ana entegrasyon kısıtı:** T−60 anında bahis oranları GitHub tarafından otomatik bağımsız doğrulanmıyor; güvenilir kaynaktan gerçek karşı oranlar manuel gözlemle alınabilir, yoksa EV hesaplanmaz, karar PAS. **Bir gerçek lig maçı** üzerinden tam uçtan uca kaynak+oran+KO-öncesi GitHub commit doğrulaması yapılmadan canlı üretim hazır iddiası yok.
+>
+---
+
 > **4 Kasım 2026 / DÖRT MODEL ANA–ALTERNATİF–PAS UYGULAMA KAYDI**
 >
 > - Kullanıcı isteği üzerine aynı gün önceki sohbet kararı yeniden incelendi. Dört modelin ayrı olasılıkları, kendi lig tabanına göre güvenilir DEV kalibrasyonu, en az 3 modelin desteklediği pazar, güncel tam karşı oranlar, EV >=%5 / no-vig avantaj >=3 puan, ana / farklı aile alternatifi / PAS, 1.5 Üst keyfî cezalandırmama esas alındı.
