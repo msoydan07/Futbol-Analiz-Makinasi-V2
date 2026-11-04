@@ -1,3 +1,12 @@
+> **5 KASIM 2026 — ANA/ALTERNATİF ORAN TARİHİ AYRIMI**
+>
+> - Sabah oranı (örn. 1,90) ve T−60 güncel oranı (örn. 1,60) birleştirilirken her pazarın kaynağı ve UTC fiyat zamanı korunuyor. Son denetimde, **ana seçim güncelken alternatif sabah fiyatına dayanıyorsa** alternatifin koşullu olduğu başlıkta ve ayrıntılı raporda yeterince görünmüyordu. `four_model_value_policy_263.py` içinde bu ayrım ayrı `alternative_value_conditional`, `alternative_price_current` ve `any_selected_value_conditional` alanlarıyla düzeltildi; raporda alternatifin oranı/gözlem zamanı ve eski fiyat senaryosu bilgisi eklendi. Ters durumda (ana sabah / alternatif güncel) de ayrı statüler korunuyor.
+> - **Karar modeline dokunulmadı:** EV sıralaması, destek sayısı, 1.5 Üst ve kalibrasyon kuralları, fiyat geçmişi ve pilot kayıtları aynı. İlk ve sonradan değişmez tahmin SHA'sı korunuyor.
+> - **GitHub hedefli çalışma #41917570451: 37/37 test başarılı.** Özellikle iki yeni çapraz ana/alternatif kaynak testi geçti. İlgili küçük fiyat/karar regresyonları #41917570529 ve #41917570617 da başarılı. [37 testin CI bağlantısı](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41917570451).
+> - **Sınır:** Bunlar sentetik fiyatlarla kayıt/politika testleri. Henüz `morning_quotes_locked/` klasöründe kaynaktan gerçek olarak gözlenmiş oran yok; 6 Kasım sabah görev çıktısı ve GitHub kayıt kanıtı olmadan otomatik ücretsiz oran toplama başarıldı sayılmaz.
+>
+---
+
 > **5 KASIM 2026 — SABAH ORANI İÇİN GERÇEK 215 TAKIM KİMLİK BAĞI, BAŞARILI**
 >
 > - Kullanıcının ücretsiz sabah oran taramasından dönen takım adları (Maçkolik veya federasyon adı) artık `morning_quote_policy_263.canonical_fixture` içinde SHA-korumalı `experiments/263/evidence/identity_index_263.json` ile karşılaştırılır. 2026–27 on lig üyeliğinde **benzersiz tam alias veya UUID eşleşmesi** olursa sabah kaydı aynı takımın gerçek UUID'sine bağlanır; yanlış lig, şüpheli resmî fikstür URL alan adı, TSİ tarih–UTC başlama uyumsuzluğu veya belirsiz ad **BLOCKED** olur. Dönüştürülen ID ile kullanıcının girdiği takım adı ayrı ayrı kaynak izinde tutulur. Bu tek başına fikstürün güncel resmî sitede gerçekten açık olduğunu kanıtlamaz; doğrudan kaynak incelemesi ayrıca gerekir.
