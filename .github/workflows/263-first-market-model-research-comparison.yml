@@ -1,0 +1,38 @@
+name: 263 FIRST genuine four-model vs secondary odds read-only audit
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/secondary_price_vs_quad_263.py'
+      - 'experiments/263/test_secondary_price_vs_quad_263.py'
+      - 'data/staged_263/2026_11_04_gaziantep_kasimpasa_secondary_betano_odds.json'
+      - '.github/workflows/263-first-market-model-research-comparison.yml'
+permissions:
+  contents: read
+jobs:
+  price-vs-existing-preko-forecast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One isolated secondary-only probability math QA
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_secondary_price_vs_quad_263.py
+      - name: Compare real pre-KO forecast vs DISPLAYED old secondary bookmaker quote
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python experiments/263/secondary_price_vs_quad_263.py \
+            --forecast forward_quad_shadow_263/2026-11-06/1d6b6f16fef8bac971c184c4.json \
+            --secondary-quote data/staged_263/2026_11_04_gaziantep_kasimpasa_secondary_betano_odds.json \
+            --report /tmp/263-first-early-quad-vs-secondary-betano.json
+      - name: Preserve complete computed score table, NOT a live quote lock
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-first-model-market-SECONDARY-RESEARCH-NOT-S2
+          path: /tmp/263-first-early-quad-vs-secondary-betano.json
+          if-no-files-found: error

@@ -1,0 +1,36 @@
+{
+  "schema": "263_secondary_market_price_research_v1",
+  "fixture": {
+    "league": "TUR1",
+    "home": "Gaziantep FK",
+    "away": "Kasımpaşa",
+    "kickoff_utc": "2026-11-06T17:00:00+00:00"
+  },
+  "source_url": "https://oddsfilter.com/event/1001584462-gaziantep-fk-kas-mpasa",
+  "source_provider": "OddsFilter (aggregator; not bookmaker)",
+  "bookmaker_as_listed": "Betano",
+  "quote_source_tier": "SECONDARY_AGGREGATOR_UNVERIFIED",
+  "first_page_checked_date_utc": "2026-11-04",
+  "price_1x2_capture_time_claim_utc": "2026-11-02T16:52:00+00:00",
+  "price_ou25_capture_time_claim_utc": null,
+  "price_btts_capture_time_claim_utc": null,
+  "direct_bookmaker_confirmation": false,
+  "single_synchronized_market_observation_proven": false,
+  "eligible_for_live_quote_lock": false,
+  "eligible_for_S1_S2": false,
+  "price_markets": {
+    "MS": {
+      "MS1": 2.5,
+      "MSX": 3.3,
+      "MS2": 2.72
+    },
+    "GOALS_2.5": {
+      "UNDER_2.5": 1.95,
+      "OVER_2.5": 1.91
+    },
+    "KG": {
+      "BTTS_YES": 1.67,
+      "BTTS_NO": 2.12
+    }
+  }
+}
