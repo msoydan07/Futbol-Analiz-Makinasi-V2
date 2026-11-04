@@ -1,0 +1,53 @@
+name: 263 880 match 4 model goals PAS ONE historical batch
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/chrono_goal_decision_263.py'
+      - 'experiments/263/test_chrono_goal_decision_263.py'
+      - '.github/workflows/263-chrono-goal-decision-one-batch.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  one-shot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Frozen numerical libraries
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: New predeclared PAS and goal market contracts
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_chrono_goal_decision_263.py
+      - name: Reuse proven 4413 source exactly by SHA
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/263_batch
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D /tmp/263_batch
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  /tmp/263_batch/historical_results.csv' | sha256sum -c -
+      - name: ONE chronological 880 match four-model goal markets and PAS comparison
+        env:
+          PYTHONPATH: .:experiments/263
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+        run: |
+          python experiments/263/chrono_goal_decision_263.py \
+            --source /tmp/263_batch/historical_results.csv \
+            --report /tmp/263_batch/first_goal_pas_report.json \
+            --predictions /tmp/263_batch/first_goal_market_asof_predictions.csv
+      - name: Preserve full single report and reconstructed predictions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-880-four-model-goals-PAS-RESEARCH-ONLY
+          if-no-files-found: warn
+          path: |
+            /tmp/263_batch/first_goal_pas_report.json
+            /tmp/263_batch/first_goal_market_asof_predictions.csv
