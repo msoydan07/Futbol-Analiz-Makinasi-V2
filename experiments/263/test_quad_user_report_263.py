@@ -70,7 +70,7 @@ class UserReportAcceptance(unittest.TestCase):
                 "path":"forward_quad_263/"+day+"/"+stem+".json",
                 "payload_sha256":f["payload_sha256"]},fp
 
-    def make_batch(self,which=("fresh","none","morning","none"),missing_fourth=True):
+    def make_batch(self,which=("fresh","none","morning","none"),missing_fourth=False):
         outcomes=[];files=[]
         for i,stage in enumerate(which,1):
             r,p=self.entry(i,stage,missing=(missing_fourth and i==4))
@@ -96,10 +96,10 @@ class UserReportAcceptance(unittest.TestCase):
         for p,content in details.items():
             self.assertIn("B / C2 / C3 / M4",content)
             self.assertIn("En olası 1X2",content)
-            self.assertIn("İlk 11",content.lower().replace("ilk 11","İlk 11") if False else content)
+            self.assertIn("ilk 11",content.lower())
             self.assertIn("BU DÖRTLÜ KAYITLA DOĞRULANAMADI",content)
             self.assertIn("Ana tercih / alternatif / PAS",content)
-        self.assertTrue(any("Hesaplanamadı: UNAVAILABLE_NO_DATA" in v for v in details.values()))
+        self.assertTrue(all("B / C2 / C3 / M4" in v for v in details.values()))
         self.assertEqual([p.read_bytes() for p in files],original)
 
     def test_complete_current_price_displays_ev_and_source_time(self):
@@ -110,7 +110,7 @@ class UserReportAcceptance(unittest.TestCase):
         self.assertIn("EV",current)
         self.assertIn("nesine.com",current)
         self.assertIn("Ana tercih:",current)
-        self.assertIn("Dört",current)
+        self.assertIn("B / C2 / C3 / M4",current)
 
     def test_no_price_keeps_probabilities_and_pas(self):
         self.make_batch()
@@ -126,7 +126,7 @@ class UserReportAcceptance(unittest.TestCase):
         _,details=generate(self.root,self.report)
         conditional=details["matches/2026-11-06/"+("%024x"%3)+".md"]
         self.assertIn("sabah / KOŞULLU",conditional)
-        self.assertIn("SABAH",conditional) if False else self.assertIn("KOŞULLU",conditional)
+        self.assertIn("KOŞULLU",conditional)
         self.assertIn("T−60'da da alınabildiği doğrulanmadı",conditional)
         self.assertNotIn("oran 1,60",conditional)
 
@@ -179,5 +179,11 @@ class UserReportAcceptance(unittest.TestCase):
         self.assertEqual(files,{})
         self.assertIn("ÜRETİLEMEDİ",summary)
         self.assertIn("Tahminli: 0",summary)
+
+
+    def test_model_unavailable_is_rejected_by_original_four_model_decision(self):
+        # Never bypass the existing M4 lock to create a fake three-model decision.
+        with self.assertRaisesRegex(ValueError,"M4_UNAVAILABLE_NO_SILENT_FALLBACK"):
+            self.entry(99,"none",missing=True)
 
 if __name__=="__main__":unittest.main()
