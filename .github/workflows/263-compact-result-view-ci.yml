@@ -1,0 +1,36 @@
+name: 263 sade son derece okunur TEK sonuc ekrani (yalniz gosterim)
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/compact_result_view_263.py'
+      - 'experiments/263/test_compact_result_view_263.py'
+      - '.github/workflows/263-compact-result-view-ci.yml'
+permissions:
+  contents: read
+jobs:
+  result-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One test of UI contract and original sealed example only
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_compact_result_view_263.py
+      - name: Produce clear short report from existing SHA; no model refit
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python experiments/263/compact_result_view_263.py \
+            --forecast forward_quad_shadow_263/2026-11-06/1d6b6f16fef8bac971c184c4.json \
+            --secondary-quote data/staged_263/2026_11_04_gaziantep_kasimpasa_secondary_betano_odds.json \
+            --out /tmp/263_tek_bakista_mac_analizi.md
+      - name: Keep the single-page result as reviewable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-tek-bakis-sonuc-yalniz-gosterim
+          path: /tmp/263_tek_bakista_mac_analizi.md
