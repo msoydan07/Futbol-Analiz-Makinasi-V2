@@ -39,10 +39,10 @@ def connect_verified_baseline(forecast, calibration_lock, baseline_record):
     if not created<=asof<ko:
         raise ValueError("BASELINE_TIMESTAMP_LOOKAHEAD")
     local_date=forecast["fixture"]["match_local_date"]
-    if baseline_record["last_result_date"]!=forecast.get("data",{}).get("league_latest_result_date"):
-        raise ValueError("BASELINE_HISTORY_CUTOFF_MISMATCH")
     if baseline_record["last_result_date"]>=local_date:
         raise ValueError("BASELINE_RESULT_LEAKAGE")
+    if baseline_record["last_result_date"]!=forecast.get("data",{}).get("league_latest_result_date"):
+        raise ValueError("BASELINE_HISTORY_CUTOFF_MISMATCH")
     values=baseline_record.get("markets")
     if not isinstance(values,dict) or set(values)!=set(MARKETS):
         raise ValueError("BASELINE_MARKET_COVERAGE")
