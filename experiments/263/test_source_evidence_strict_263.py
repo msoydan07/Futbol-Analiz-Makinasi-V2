@@ -13,7 +13,7 @@ class SourceSpecificEvidenceTests(unittest.TestCase):
             fid="synthetic-id-"+lg
             self.data["evidence"].append({
                 "league":lg,"fixture_id":fid,"match_date":"2026-10-31",
-                "score":"2-1","source_url":"https://www."+host+"/matches/2026/result-"+lg.lower(),
+                "score":"2-1","source_url":"https://www."+host+"/matches/2026/fixture-result-"+lg.lower(),
                 "source_tier":"OFFICIAL_LEAGUE_MATCH_PAGE",
                 "human_approved":False,
                 "observed_source_text_summary":"Synthetic 2-1 test page result for "+lg})

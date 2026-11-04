@@ -77,11 +77,13 @@ def audit(*, source_rows: dict, evidence: dict) -> dict:
         if (u.scheme != "https" or hostname != SOURCES[lg]
                 or u.username or u.password or u.query or u.fragment):
             raise ValueError("SOURCE_DOMAIN_OR_PROTOCOL_MISMATCH")
-        path = u.path.rstrip("/").split("/")[-1].lower()
-        if (path in BANNED_GENERIC_LAST_PART or len(path) < 12
+        pieces = [p.lower() for p in u.path.split("/") if p]
+        if (not pieces or any(p in BANNED_GENERIC_LAST_PART for p in pieces)
+                or len(u.path.strip("/")) < 18
                 or not any(c.isdigit() for c in u.path)):
-            # Liga / result reports should identify a concrete competition
-            # round/date/year/match or news story, not generic score landing.
+            # Match IDs are often only 1-3 digits at the END of an otherwise
+            # fully specific official path (Liga Portugal /match/.../10/4).
+            # Do not reject those; generic /results or /fixtures stay rejected.
             raise ValueError("GENERIC_SOURCE_PAGE_IS_NOT_MATCH_EVIDENCE")
         if not isinstance(e.get("observed_source_text_summary"),str) or len(e["observed_source_text_summary"]) < 22:
             raise ValueError("SPECIFIC_PAGE_OBSERVATION_MISSING")
