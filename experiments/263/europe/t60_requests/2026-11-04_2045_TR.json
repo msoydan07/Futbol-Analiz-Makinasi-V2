@@ -1,0 +1,20 @@
+{
+  "schema": "263_UEFA_T60_SHADOW_LOCK_REQUEST_V1",
+  "slot_key": "2026-11-04_2045_TR",
+  "fixture_review": {
+    "status": "ASSISTANT_WEB_OFFICIAL_PAGE_REVIEWED",
+    "reviewed_at_utc": "2026-11-04T16:48:15.156Z",
+    "official_urls": {
+      "2049620": "https://www.uefa.com/uefachampionsleague/match/2049620--fenerbahce-vs-liverpool/"
+    }
+  },
+  "lineups": {
+    "2049620": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    }
+  }
+}
