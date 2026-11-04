@@ -1,0 +1,52 @@
+{
+  "immutable_records": [
+    {
+      "payload_sha256": "dd9008aab5734a8ccfa6d8097291e9465184e59a6f688d941e467720530b3d86",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049616.json",
+      "uefa_match_id": 2049616
+    },
+    {
+      "payload_sha256": "0f4ebbc0d53746e83e387c8df7f0faa43fbd26f53c88f54fc65bc69f5b5ab05a",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049617.json",
+      "uefa_match_id": 2049617
+    },
+    {
+      "payload_sha256": "2cc79f2bc171318a4bccecfd181fc09cb593b36e74de87233388cd6132a66762",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049618.json",
+      "uefa_match_id": 2049618
+    },
+    {
+      "payload_sha256": "7ea418e0d8a39d1582c1b125f1d085a8807633f29b4567bffad1bca6b93958d1",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049619.json",
+      "uefa_match_id": 2049619
+    },
+    {
+      "payload_sha256": "21315f31352fcaa1fd3dd1729222786319f2462cc514922e0863d709f1302a3f",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049623.json",
+      "uefa_match_id": 2049623
+    }
+  ],
+  "kickoff_utc": "2026-11-04T20:00:00+00:00",
+  "lock_created_at_utc": "2026-11-04T18:58:52.195810+00:00",
+  "matches": 5,
+  "no_main_model_or_parameters_changed": true,
+  "official_XI_not_a_model_multiplier": true,
+  "payload_sha256": "6ac8c6ef8658317fc894cab4154b65bef80da71b7e2c59c224cc7fd95e2cd49b",
+  "registration_is_experimental_shadow_not_100_pilot": true,
+  "schema": "263_UEFA_T60_SIX_SLOT_BATCH_LOCK_REPORT_V1",
+  "slot_key": "2026-11-04_2300_TR",
+  "source_digest_elo": "87dab7bef505e1a7c026abc48e7f53cbfc20134c12d9b7bbf8c7dcf1919500df",
+  "source_digest_goal_csvs": {
+    "BEL1": "e929132f74b8d7e79720045dcadcd1a480d2bcc71ae987d11b5fb8717bf94fb1",
+    "ENG1": "c429b75f681dc7aaec5641a23320402409530b4b01a9f147bb7e386fe508159b",
+    "ESP1": "a382f00d78d85eae814e8b06a4a0d5ba0dd70905156f20b02f8c0e6c28b7c7d6",
+    "FRA1": "18fed04746c2f4d764e02a331d5e94b0ca6c71c102ee82ae95423e4de410f4c0",
+    "GER1": "490b69c06ec2890be818372c7ea3bd5413b7fe6539185890d9eaeb6b59a6f22b",
+    "ITA1": "4138a4f01e96312a7a5dc07450c7a520c3861a479620fe3d102f12d42a6678ba",
+    "NED1": "5f5cdffe5f8c413ae73bd1988b259d453a05ba6884e2a2b6060a17fa71867ed1",
+    "POR1": "eed51b09af8112e9f2e35d062f67dd07e5ae73ac267cd0235237f30eeabacae8",
+    "TUR1": "2abfcfb6c19b1c25fbbc6084104bd365a371e2b1136117539a1793eab7b2ef7c"
+  },
+  "status": "PREMATCH_SHADOW_LOCK_BATCH_READY",
+  "utc_pre_kickoff": true
+}
