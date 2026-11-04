@@ -79,7 +79,7 @@ def audit(*, source_rows: dict, evidence: dict) -> dict:
             raise ValueError("SOURCE_DOMAIN_OR_PROTOCOL_MISMATCH")
         pieces = [p.lower() for p in u.path.split("/") if p]
         if (not pieces or any(p in BANNED_GENERIC_LAST_PART for p in pieces)
-                or len(u.path.strip("/")) < 18
+                or len(u.path.strip("/")) < 12
                 or not any(c.isdigit() for c in u.path)):
             # Match IDs are often only 1-3 digits at the END of an otherwise
             # fully specific official path (Liga Portugal /match/.../10/4).
