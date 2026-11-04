@@ -1,0 +1,25 @@
+name: 263 forward pilot goal-lines synthetic result acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/evaluate_quad.py'
+      - 'experiments/263/test_evaluate_quad_goal_markets_263.py'
+      - '.github/workflows/263-forward-goals-evaluation-ci.yml'
+permissions:
+  contents: read
+jobs:
+  one-small-market-result-eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned numerical imports
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Seven goal-line forward score checks only, no archived re-fitting
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_evaluate_quad_goal_markets_263.py

@@ -79,7 +79,9 @@ def collect(records_dir,actual_csv,now=None):
             market=preds[m]['goals']['markets']
             model_scores[m]=_metrics(market['1X2'],actual['result'],('H','D','A'))
             market_scores[m]={'BTTS':_binary(market['BTTS_YES'],h>0 and a>0),
-                              'OVER_2.5':_binary(market['OVER_2.5'],h+a>2)}
+                              'OVER_1.5':_binary(market['OVER_1.5'],h+a>=2),
+                              'OVER_2.5':_binary(market['OVER_2.5'],h+a>=3),
+                              'OVER_3.5':_binary(market['OVER_3.5'],h+a>=4)}
         complete.append({'key':key,'date':item['match_local_date'],'league':item['league'],
                          'scores':model_scores,'markets':market_scores,'sha':digest})
     return complete,{'registered':len(files),'finished_matched':len(complete),'coverage':coverage,
@@ -132,7 +134,7 @@ def report(records_dir,actual_csv,now=None):
         result['model_scores'][m]={'n':n,'logloss':_avg(avail,m),
                                    'brier':_avg(avail,m,'brier'),
                                    'top1_accuracy':_avg(avail,m,'is_correct')}
-        result['markets'][m]={market:_binary_summary(rows,m,market) for market in ('BTTS','OVER_2.5')}
+        result['markets'][m]={market:_binary_summary(rows,m,market) for market in ('BTTS','OVER_1.5','OVER_2.5','OVER_3.5')}
     common=[r for r in rows if all(m in r['scores'] for m in MODELS)]
     result['four_way_common']={'n':len(common),'scores':{
         m:{'logloss':_avg(common,m),'brier':_avg(common,m,'brier')} for m in MODELS}}
