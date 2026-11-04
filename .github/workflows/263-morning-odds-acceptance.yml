@@ -1,0 +1,24 @@
+name: 263 morning archive and T60 fresh priority one acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/morning_quote_policy_263.py'
+      - 'experiments/263/test_morning_quote_policy_263.py'
+      - '.github/workflows/263-morning-odds-acceptance.yml'
+permissions:
+  contents: read
+jobs:
+  one-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Only new AM/T60 and existing decision/link tests
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_morning_quote_policy_263.py experiments/263/test_four_model_value_policy_263.py experiments/263/test_quad_prematch_bridge_263.py
