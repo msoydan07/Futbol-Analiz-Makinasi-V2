@@ -1,0 +1,35 @@
+name: 263 November 3 ENG2 one-shot verified research stage
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'data/staged_263/2026_11_03_eng2_9_sources.json'
+      - 'experiments/263/append_checked_eng2_nov3_263.py'
+      - '.github/workflows/263-eng2-nov3-reviewed-stage.yml'
+permissions:
+  actions: read
+  contents: read
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact existing 4509 source artifact; no fresh download guesses
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p pinned_4509
+          gh run download 41802358251 --repo "$GITHUB_REPOSITORY" -n weekend-263-ten-league-source-evidence -D pinned_4509
+          echo '69d687965500a260cc965a1482c23c1e07f11ebcabb1adaa9441dc6a17334a14  pinned_4509/extended_history.csv' | sha256sum -c -
+      - name: Single data-stage acceptance — 88 plus 8 unchanged, nine appended
+        run: |
+          python experiments/263/append_checked_eng2_nov3_263.py \
+            --history pinned_4509/extended_history.csv --output stage_4518_2026_11_04
+      - name: Export evidence not human approval
+        uses: actions/upload-artifact@v4
+        with:
+          name: football-263-4518-score-checked-research-stage
+          if-no-files-found: error
+          path: stage_4518_2026_11_04/*

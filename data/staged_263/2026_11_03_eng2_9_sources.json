@@ -1,0 +1,77 @@
+{
+  "schema": "263_nov3_eng2_manual_independent_score_reference_v1",
+  "status": "WEB_CROSSCHECKED_RESEARCH_STAGE_NOT_HUMAN_ACCEPTED",
+  "date": "2026-11-03",
+  "league": "ENG2",
+  "sources": [
+    {
+      "url": "https://www.soccerway.com/england/championship/results/",
+      "kind": "independent_results"
+    },
+    {
+      "url": "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+      "kind": "independent_results"
+    },
+    {
+      "url": "https://cornerflick.com/football/leagues/championship/results",
+      "kind": "independent_results"
+    }
+  ],
+  "matches": [
+    {
+      "home": "Birmingham City",
+      "away": "Millwall",
+      "hg": 3,
+      "ag": 0
+    },
+    {
+      "home": "Blackburn Rovers",
+      "away": "Stoke City",
+      "hg": 1,
+      "ag": 2
+    },
+    {
+      "home": "Charlton Athletic",
+      "away": "Bolton Wanderers",
+      "hg": 0,
+      "ag": 1
+    },
+    {
+      "home": "Derby County",
+      "away": "Norwich City",
+      "hg": 0,
+      "ag": 4
+    },
+    {
+      "home": "Portsmouth",
+      "away": "Swansea City",
+      "hg": 3,
+      "ag": 1
+    },
+    {
+      "home": "Preston North End",
+      "away": "Sheffield United",
+      "hg": 2,
+      "ag": 3
+    },
+    {
+      "home": "Queens Park Rangers",
+      "away": "Burnley",
+      "hg": 1,
+      "ag": 1
+    },
+    {
+      "home": "Watford",
+      "away": "Lincoln City",
+      "hg": 1,
+      "ag": 0
+    },
+    {
+      "home": "West Bromwich Albion",
+      "away": "Southampton",
+      "hg": 1,
+      "ag": 1
+    }
+  ],
+  "notes": "Full-time score/date and home-away comparison only. No inferred player statistics, no provider source_row, no claim of human acceptance."
+}
