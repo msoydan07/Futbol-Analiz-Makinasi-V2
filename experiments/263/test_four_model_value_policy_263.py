@@ -88,9 +88,10 @@ class TestAgreedResult(unittest.TestCase):
         self.assertEqual(d["main_candidate"]["family"],"GOALS")
         self.assertIsNone(d["alternative_candidate"])
     def test_stale_or_invalid_quote(self):
-        q=odds(self.f,observed="2026-11-06T15:50:00+00:00")
-        q["source_review"]["reviewed_at_utc"]="2026-11-06T15:49:00+00:00";seal(q)
-        self.assertEqual(decide(self.f,self.b,self.lock,q,now=NOW)["status"],"RESEARCH_PAS")
+        q=odds(self.f,observed="2026-11-06T16:00:00+00:00")
+        q["source_review"]["reviewed_at_utc"]="2026-11-06T16:00:00+00:00";seal(q)
+        later=datetime(2026,11,6,16,11,tzinfo=timezone.utc)
+        self.assertEqual(decide(self.f,self.b,self.lock,q,now=later)["status"],"RESEARCH_PAS")
         q=odds(self.f);q["quotes"]["MS"]["source"]="fake.com";seal(q)
         with self.assertRaisesRegex(ValueError,"ODDS_GROUP_SOURCE_MISMATCH"):
             decide(self.f,self.b,self.lock,q,now=NOW)
