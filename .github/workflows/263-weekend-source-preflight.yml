@@ -1,0 +1,58 @@
+name: 263 10-lig 6 Kasim guncel veri tek-kaynak preflight
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/weekend_source_preflight_263.py'
+      - 'experiments/263/test_weekend_source_preflight_263.py'
+      - '.github/workflows/263-weekend-source-preflight.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  ten-league-source-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing numerical dependencies only
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Frozen original 4413-match file from its pinned audit artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m4_weekend_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_weekend_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_weekend_base/historical_results.csv' | sha256sum -c -
+      - name: Focused weekend source and cutoff tests (no rerun of old models)
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_weekend_source_preflight_263.py
+      - name: ONE download of all 10 sources and immutable 4501 reconciliation
+        id: live_sources
+        env:
+          PYTHONPATH: experiments/263
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/weekend_source_preflight_263.py \
+            --base m4_weekend_base/historical_results.csv \
+            --output weekend_source_preflight_263 | tee /tmp/weekend_source_preflight_stdout.log
+      - name: Preserve raw preflight and source receipts, NOT human approval
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekend-263-ten-league-source-evidence
+          if-no-files-found: warn
+          path: |
+            weekend_source_preflight_263/*
+      - name: Explain stage only, don't unlock pilot
+        if: steps.live_sources.outcome == 'success'
+        run: |
+          echo 'Machine-integrity preflight passed; source results NOT independently human-verified.'
+          echo 'Do NOT copy source_acceptance or claim B/C2/C3/M4 is live-ready.'
