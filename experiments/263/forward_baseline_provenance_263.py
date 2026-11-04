@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 import math
 from forward_calibration_bridge_263 import _digest, connect, MARKETS
 
-SCHEMA="263_asof_market_baseline_v1"
+SCHEMA="263_asof_market_baseline_v2"
 def _time(value):
     d=datetime.fromisoformat(value.replace("Z","+00:00"))
     if d.tzinfo is None:raise ValueError("NAIVE_BASELINE_TIMESTAMP")
@@ -36,10 +36,14 @@ def connect_verified_baseline(forecast, calibration_lock, baseline_record):
     asof=_time(forecast["created_at_utc"])
     ko=_time(forecast["fixture"]["kickoff_utc"])
     created=_time(baseline_record["created_at_utc"])
-    if not created<=asof<ko:
-        raise ValueError("BASELINE_TIMESTAMP_LOOKAHEAD")
+    if baseline_record.get("forecast_created_at_utc")!=forecast["created_at_utc"]:
+        raise ValueError("BASELINE_FORECAST_TIME_MISMATCH")
+    # Retroactively stamped pre-forecast records are not proof of as-of.
+    # This baseline is only accepted if created promptly before kickoff.
+    if not asof<=created<ko or (created-asof).total_seconds()>600:
+        raise ValueError("BASELINE_TIMESTAMP_LOOKAHEAD_OR_STALE")
     local_date=forecast["fixture"]["match_local_date"]
-    if baseline_record["last_result_date"]>=local_date:
+    if baseline_record["last_result_date"]>=min(local_date,asof.date().isoformat()):
         raise ValueError("BASELINE_RESULT_LEAKAGE")
     if baseline_record["last_result_date"]!=forecast.get("data",{}).get("league_latest_result_date"):
         raise ValueError("BASELINE_HISTORY_CUTOFF_MISMATCH")

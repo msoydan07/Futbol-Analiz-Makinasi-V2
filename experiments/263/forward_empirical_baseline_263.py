@@ -29,8 +29,11 @@ def produce(forecast, history_path, *, now=None):
         raise ValueError("HISTORY_SHA_MISMATCH")
     asof=_time(forecast["created_at_utc"])
     ko=_time(forecast["fixture"]["kickoff_utc"])
-    if asof>=ko or now.astimezone(timezone.utc)<asof:
-        raise ValueError("FORECAST_TIME_INVALID")
+    now=now.astimezone(timezone.utc)
+    # Record actual calculation time, not the forecast's earlier timestamp.
+    # Require immediate (<=10 minutes) prematch computation.
+    if not asof<=now<ko or (now-asof).total_seconds()>600:
+        raise ValueError("BASELINE_NOT_CALCULATED_PRE_KICKOFF")
     local_date=forecast["fixture"]["match_local_date"]
     league=forecast["fixture"]["league"]
     rows=[]
@@ -44,6 +47,9 @@ def produce(forecast, history_path, *, now=None):
             if r.get("league")!=league:continue
             day=r["match_date"]
             if day>=local_date:raise ValueError("FUTURE_LEAGUE_RESULTS_IN_SNAPSHOT")
+            # Dates alone cannot prove result availability earlier the same day.
+            if day>=asof.date().isoformat():
+                raise ValueError("RESULT_NOT_PRIOR_TO_FORECAST_DATE")
             h=int(r["home_goals"]);a=int(r["away_goals"])
             if h<0 or a<0 or r["result"]!=("H" if h>a else "D" if h==a else "A"):
                 raise ValueError("INVALID_HISTORICAL_RESULT")
@@ -80,7 +86,8 @@ def produce(forecast, history_path, *, now=None):
         "league":league,"method":"PAST_RESULTS_LEAGUE_MARKET_RATE",
         "source_snapshot_sha256":data["snapshot_sha256"],
         "historical_match_count":n,"last_result_date":latest,
-        "created_at_utc":forecast["created_at_utc"],
+        "forecast_created_at_utc":forecast["created_at_utc"],
+        "created_at_utc":now.isoformat(),
         "markets":values}
     record["payload_sha256"]=_digest(record)
     return record

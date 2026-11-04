@@ -19,7 +19,8 @@ def baseline(f):
     b={"schema":base.SCHEMA,"forecast_sha256":f["payload_sha256"],
        "league":"TUR1","method":"PAST_RESULTS_LEAGUE_MARKET_RATE",
        "source_snapshot_sha256":"f"*64,"historical_match_count":587,
-       "last_result_date":"2026-11-05","created_at_utc":"2026-11-06T15:59:00Z",
+       "last_result_date":"2026-11-05","forecast_created_at_utc":f["created_at_utc"],
+       "created_at_utc":"2026-11-06T16:00:00Z",
        "markets":{k:.4 for k in base.MARKETS}}
     b["payload_sha256"]=base._digest(b);return b
 def reseal(b):
@@ -33,9 +34,21 @@ class TestBaseline(unittest.TestCase):
     def test_tampered(self):
         f=forecast();b=baseline(f);b["markets"]["MS1"]=.99
         with self.assertRaisesRegex(ValueError,"HASH"):base.connect_verified_baseline(f,fixtures.lock(),b)
-    def test_after_prediction_is_rejected(self):
-        f=forecast();b=baseline(f);b["created_at_utc"]="2026-11-06T16:01:00Z";reseal(b)
+    def test_post_kickoff_is_rejected(self):
+        f=forecast();b=baseline(f);b["created_at_utc"]="2026-11-06T17:00:00Z";reseal(b)
         with self.assertRaisesRegex(ValueError,"LOOKAHEAD"):base.connect_verified_baseline(f,fixtures.lock(),b)
+    def test_backdated_is_rejected(self):
+        f=forecast();b=baseline(f);b["created_at_utc"]="2026-11-06T15:59:00Z";reseal(b)
+        with self.assertRaisesRegex(ValueError,"LOOKAHEAD"):base.connect_verified_baseline(f,fixtures.lock(),b)
+    def test_delayed_creation_is_rejected(self):
+        f=forecast();b=baseline(f);b["created_at_utc"]="2026-11-06T16:11:00Z";reseal(b)
+        with self.assertRaisesRegex(ValueError,"LOOKAHEAD"):base.connect_verified_baseline(f,fixtures.lock(),b)
+    def test_real_later_pre_kickoff_creation_is_allowed(self):
+        f=forecast();b=baseline(f);b["created_at_utc"]="2026-11-06T16:02:00Z";reseal(b)
+        self.assertEqual(base.connect_verified_baseline(f,fixtures.lock(),b)["pilot_count_increment"],0)
+    def test_wrong_forecast_recorded_time_rejected(self):
+        f=forecast();b=baseline(f);b["forecast_created_at_utc"]="2026-11-06T15:59:00Z";reseal(b)
+        with self.assertRaisesRegex(ValueError,"FORECAST_TIME_MISMATCH"):base.connect_verified_baseline(f,fixtures.lock(),b)
     def test_future_results_rejected(self):
         f=forecast();b=baseline(f);b["last_result_date"]="2026-11-06";reseal(b)
         with self.assertRaisesRegex(ValueError,"LEAKAGE"):base.connect_verified_baseline(f,fixtures.lock(),b)

@@ -32,6 +32,29 @@ class TestRealShape(unittest.TestCase):
         self.assertEqual(out["pilot_count_increment"],0)
         self.assertEqual(b["historical_match_count"],150)
         self.assertAlmostEqual(sum(b["markets"][m] for m in ("MS1","MSX","MS2")),1)
+    def test_true_calculation_time_recorded(self):
+        from datetime import datetime, timezone
+        t=datetime(2026,11,6,16,2,tzinfo=timezone.utc)
+        b=produce(self.f,self.path,now=t)
+        self.assertEqual(b["created_at_utc"],t.isoformat())
+        self.assertEqual(b["forecast_created_at_utc"],self.f["created_at_utc"])
+        self.assertFalse(connect_verified_baseline(self.f,lock(),b)["betting_authorized"])
+
+    def test_after_kickoff_and_late_reconstruction_blocked(self):
+        from datetime import datetime, timezone
+        for t in (datetime(2026,11,6,17,0,tzinfo=timezone.utc),
+                  datetime(2026,11,6,16,11,tzinfo=timezone.utc)):
+            with self.subTest(at=t.isoformat()):
+                with self.assertRaisesRegex(ValueError,"BASELINE_NOT_CALCULATED_PRE_KICKOFF"):
+                    produce(self.f,self.path,now=t)
+
+    def test_result_on_forecast_day_without_time_proof_blocked(self):
+        from datetime import datetime, timezone
+        self.f["created_at_utc"]="2026-11-05T16:00:00+00:00"
+        self.f["payload_sha256"]=_digest({k:v for k,v in self.f.items() if k!="payload_sha256"})
+        with self.assertRaisesRegex(ValueError,"RESULT_NOT_PRIOR_TO_FORECAST_DATE"):
+            produce(self.f,self.path,now=datetime(2026,11,5,16,2,tzinfo=timezone.utc))
+
     def test_future_results_block(self):
         with self.path.open("a") as f:f.write("new,TUR1,2026-11-06,1,0,H\n")
         self.f["data"]["snapshot_sha256"]=hashlib.sha256(self.path.read_bytes()).hexdigest()
