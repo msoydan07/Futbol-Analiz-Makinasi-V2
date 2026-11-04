@@ -8,6 +8,8 @@ import argparse
 import json
 import re
 from pathlib import Path
+from zoneinfo import ZoneInfo
+from forward_c3 import read_aware
 from classification_odds_263 import canonical_markets
 from market_fifth_baseline_263 import sealed_payload
 
@@ -97,11 +99,13 @@ def market_row(key,d):
 
 def details(row,f,d,stage):
     fx=f["fixture"];data=f["data"]
+    tr=read_aware(fx["kickoff_utc"]).astimezone(ZoneInfo("Europe/Istanbul"))
     lines=[
        "# Tek maç analizi — "+label(row,f),"",
        "**2.6.3 DENEYSEL / MAÇ ÖNCESİ — resmî bahis veya kesin sonuç tavsiyesi değildir.**","",
-       "Lig: "+clean(fx["league"])+" · Türkiye tarihi: "+clean(fx["match_local_date"]),
-       "Başlama UTC: "+clean(fx["kickoff_utc"])+" · Tahmin kaydı UTC: "+clean(f["created_at_utc"]),
+       "Lig: "+clean(fx["league"])+" · Lig yerel tarihi: "+clean(fx["match_local_date"]),
+       "Türkiye başlama: "+tr.strftime("%d.%m.%Y %H:%M")+" (TSİ) · Başlama UTC: "+clean(fx["kickoff_utc"]),
+       "Tahmin kaydı UTC: "+clean(f["created_at_utc"]),
        "Resmî fikstür kaynağı: "+clean(fx.get("official_source","DOĞRULANAMADI")),
        "Fikstür kontrol UTC: "+clean(fx.get("source_checked_at_utc","DOĞRULANAMADI")),"",
        "## A. Gerçek kaydedilmiş veriler",

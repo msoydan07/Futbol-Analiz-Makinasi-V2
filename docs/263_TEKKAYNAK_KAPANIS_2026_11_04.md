@@ -1,3 +1,14 @@
+
+> **5 KASIM 2026 — KULLANICI ONAYLI TOPLU / TEK MAÇ RAPORU ENTEGRASYONU**
+>
+> - Kullanıcının beğendiği 5-maç toplu tablo ve ayrıntılı tek maç tarzı, yalnız gerçek kayıtlı B/C2/C3/M4 tahminlerine ve SHA-korumalı kararlarına dayanan yeni experiments/263/quad_user_report_263.py ile hayata geçirildi.
+> - Başarılı T−60 GitHub iş akışında fiyat denemesi ve sabah koşullu fiyat birleşiminden sonra quad_user_report_263.py write çalışır; ardından tek toplu ve maç başına Markdown raporlarını experiments/263/quad_human_reports/<RUN_SHA>/summary.md ve .../matches/<lig-yerel-tarih>/<fixture-id>.md yollarına ekler. git pull --rebase sonrasında verify içeriğin değişmediğini denetler. Yalnız rapor başarılıysa dört-model tahmin commit'i ile birlikte gönderilir; ayrı sentetik maç kaydı eklenmedi.
+> - Toplu raporda her maçın 1X2 en olası yönü, fiyatlı ana/alternatif tercihleri, PAS veya bloke nedeni gösterilir. Ayrıntılı rapor: dört modelin ayrı yüzdeleri, λ ve en olası skorları, kalibre olasılık, fiyat kaynağı/zamanı/EV, güncel-sabah koşullu ayrımı, veri eksikleri ve SHA kanıtı. Gerçek kaynak kaydında olmayan xG/ilk 11/sakatlık ve simülasyon/test sayıları uydurulmaz. **Dört modelden biri geçerli karar vermeye yetmiyorsa M4 kuralı gevşetilmez; başarısızlık başarı olarak sunulmaz.**
+> - Yabancı lig maçlarında lig yerel tarihi ile Türkiye saatinin değişebileceği dikkate alınarak rapor başlama saati **TSİ** ve **UTC** birlikte verilir.
+> - Bu **rapor ve CI entegrasyonu** henüz gerçek yeni maçın GitHub'da T−60 dört-model kayıt üretip bu rapora bağlandığını ispatlamaz. İlk pilot böyle bir uçtan uca test olacak. 6 Kasım sabah fiyat arşivinde gerçek fiyat olması da ayrıca doğrulanacaktır.
+>
+---
+
 > **5 KASIM 2026 — ANA/ALTERNATİF ORAN TARİHİ AYRIMI**
 >
 > - Sabah oranı (örn. 1,90) ve T−60 güncel oranı (örn. 1,60) birleştirilirken her pazarın kaynağı ve UTC fiyat zamanı korunuyor. Son denetimde, **ana seçim güncelken alternatif sabah fiyatına dayanıyorsa** alternatifin koşullu olduğu başlıkta ve ayrıntılı raporda yeterince görünmüyordu. `four_model_value_policy_263.py` içinde bu ayrım ayrı `alternative_value_conditional`, `alternative_price_current` ve `any_selected_value_conditional` alanlarıyla düzeltildi; raporda alternatifin oranı/gözlem zamanı ve eski fiyat senaryosu bilgisi eklendi. Ters durumda (ana sabah / alternatif güncel) de ayrı statüler korunuyor.

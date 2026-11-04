@@ -203,4 +203,13 @@ class UserReportAcceptance(unittest.TestCase):
         self.assertLess(wf.index("quad_user_report_263.py verify"),
                         wf.index('git push origin "HEAD:$GITHUB_REF_NAME"'))
 
+
+    def test_local_league_date_and_turkey_kickoff_are_separate(self):
+        self.make_batch()
+        _,details=generate(self.root,self.report)
+        first=details["matches/2026-11-06/"+("%024x"%1)+".md"]
+        self.assertIn("Lig yerel tarihi: 2026-11-06",first)
+        self.assertIn("Türkiye başlama:",first)
+        self.assertIn("(TSİ)",first)
+
 if __name__=="__main__":unittest.main()
