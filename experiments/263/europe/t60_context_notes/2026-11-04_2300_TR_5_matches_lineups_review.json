@@ -1,0 +1,288 @@
+{
+  "schema": "263_UEFA_PREKICKOFF_FIVE_MATCH_LINEUP_SOURCE_REVIEW_ADDENDUM_V1",
+  "created_at_utc": "2026-11-04T19:18:10+00:00",
+  "kickoff_utc": "2026-11-04T20:00:00+00:00",
+  "original_github_workflow_run_id": "41892364562",
+  "status": "PREKICKOFF_CONTEXT_ONLY_MIXED_MEDIA_LINEUPS_NOT_ALL_CONFIRMED",
+  "source_policy": "Published 11-player lists are not necessarily UEFA-primary confirmed; conflicts remain UNVERIFIED.",
+  "original_model_predictions_modified": false,
+  "models_recomputed": false,
+  "model_status": "UNAPPROVED_M0_VS_EXPERIMENTAL_M0_ELO_NOT_DOMESTIC_FOUR_MODEL",
+  "missing_bookmaker_odds_means_EV_null": true,
+  "betting_authorized": false,
+  "official_pilot_increment": 0,
+  "matches": [
+    {
+      "uefa_match_id": 2049616,
+      "home": "Borussia Dortmund",
+      "away": "Real Betis",
+      "original_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049616.json",
+      "original_sha256": "dd9008aab5734a8ccfa6d8097291e9465184e59a6f688d941e467720530b3d86",
+      "locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "model_sources": [
+        "M0_UNAPPROVED_REFERENCE",
+        "M0_ELO_EXPERIMENTAL_SHADOW"
+      ],
+      "m0_summary": {
+        "home": 0.5278758768665106,
+        "draw": 0.25303751047845674,
+        "away": 0.2190866126550327,
+        "over_2p5": 0.45363189271775584,
+        "btts_yes": 0.47548494113800704,
+        "mode_score": "1-0"
+      },
+      "elo_summary": {
+        "home": 0.5698077459054576,
+        "draw": 0.24074934366316156,
+        "away": 0.18944291043138095,
+        "over_2p5": 0.4663626906580004,
+        "btts_yes": 0.4683973203684989,
+        "mode_score": "1-0"
+      },
+      "news_lineup": {
+        "status": "THIRD_PARTY_LINEUPS_PUBLISHED_NOT_PRIMARY_UEFA_CONFIRMED",
+        "home": [
+          "Gregor Kobel",
+          "Julian Ryerson",
+          "Daniel Svensson",
+          "Nico Schlotterbeck",
+          "Waldemar Anton",
+          "Joane Gadou",
+          "Joey Veerman",
+          "Felix Nmecha",
+          "Serhou Guirassy",
+          "Jobe Bellingham",
+          "Carney Chukwuemeka"
+        ],
+        "away": [
+          "Álvaro Vallés",
+          "Héctor Bellerín",
+          "Fran García",
+          "Marc Roca",
+          "Marc Bartra",
+          "Souza",
+          "Antony",
+          "Pablo Fornals",
+          "Troy Parrott",
+          "Isco",
+          "Abde Ezzalzouli"
+        ],
+        "sources": [
+          "https://as.com/resultados/futbol/champions/2026_2027/directo/regular_a_4_6a92d4a865cb436/alineaciones/",
+          "https://cadenaser.com/resultados/futbol/champions/2026_2027/directo/regular_a_4_6a92d4a865cb436/alineaciones/"
+        ],
+        "note": "AS and Cadena SER show the same 22 starters, but this may be shared data; Bundesliga live page still marked lineup prediction. Do not label as primary UEFA-verified."
+      },
+      "official_xi_not_in_original_prediction": true,
+      "forecast_modified": false,
+      "synchronized_odds_status": "NOT_VERIFIED",
+      "EV": null,
+      "primary_value_pick": "PAS_NO_INDEPENDENT_COMPLETE_ODDS",
+      "alternative_value_pick": null
+    },
+    {
+      "uefa_match_id": 2049617,
+      "home": "Porto",
+      "away": "Napoli",
+      "original_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049617.json",
+      "original_sha256": "0f4ebbc0d53746e83e387c8df7f0faa43fbd26f53c88f54fc65bc69f5b5ab05a",
+      "locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "model_sources": [
+        "M0_UNAPPROVED_REFERENCE",
+        "M0_ELO_EXPERIMENTAL_SHADOW"
+      ],
+      "m0_summary": {
+        "home": 0.7232245513890871,
+        "draw": 0.1660521290915085,
+        "away": 0.11072331951940431,
+        "over_2p5": 0.6322738644030328,
+        "btts_yes": 0.5169802065867496,
+        "mode_score": "2-0"
+      },
+      "elo_summary": {
+        "home": 0.7571747336868527,
+        "draw": 0.15034859152571295,
+        "away": 0.09247667478743435,
+        "over_2p5": 0.6521568242640928,
+        "btts_yes": 0.504206255268467,
+        "mode_score": "2-0"
+      },
+      "news_lineup": {
+        "status": "ITALIAN_LIVE_MATCH_PAGE_EXPLICIT_STARTERS_NOT_PRIMARY_UEFA_CONFIRMED",
+        "home": [
+          "Diogo Costa",
+          "Alberto Costa",
+          "Jan Bednarek",
+          "Jakub Kiwior",
+          "Zaidu Sanusi",
+          "Victor Froholdt",
+          "Pablo Rosario",
+          "Gabriel Veiga",
+          "Borja Sainz",
+          "André Silva",
+          "Pepê"
+        ],
+        "away": [
+          "Alex Meret",
+          "Sam Beukema",
+          "Amir Rrahmani",
+          "Rafa Marín",
+          "Antonio Vergara",
+          "Billy Gilmour",
+          "Frank Anguissa",
+          "Scott McTominay",
+          "Lorenzo Lucca",
+          "Matteo Politano",
+          "Noa Lang"
+        ],
+        "sources": [
+          "https://www.corrieredellosport.it/live/partita/porto-napoli-2685441",
+          "https://www.corrieredellosport.it/formazione/calcio/serie-a/2026/11/04-2685441/porto-napoli"
+        ],
+        "note": "Corriere live page explicitly labels starters ('Titolari'); this differs from an earlier news report claiming De Bruyne/Højlund started. The live lineup is listed as third-party, not UEFA-primary authenticated."
+      },
+      "official_xi_not_in_original_prediction": true,
+      "forecast_modified": false,
+      "synchronized_odds_status": "NOT_VERIFIED",
+      "EV": null,
+      "primary_value_pick": "PAS_NO_INDEPENDENT_COMPLETE_ODDS",
+      "alternative_value_pick": null
+    },
+    {
+      "uefa_match_id": 2049618,
+      "home": "PSV Eindhoven",
+      "away": "Club Brugge",
+      "original_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049618.json",
+      "original_sha256": "2cc79f2bc171318a4bccecfd181fc09cb593b36e74de87233388cd6132a66762",
+      "locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "model_sources": [
+        "M0_UNAPPROVED_REFERENCE",
+        "M0_ELO_EXPERIMENTAL_SHADOW"
+      ],
+      "m0_summary": {
+        "home": 0.5408543770689161,
+        "draw": 0.2128335084577282,
+        "away": 0.24631211447335563,
+        "over_2p5": 0.6571492155379816,
+        "btts_yes": 0.6414475494850952,
+        "mode_score": "2-1"
+      },
+      "elo_summary": {
+        "home": 0.4699260251009002,
+        "draw": 0.22467348981906302,
+        "away": 0.30540048508003687,
+        "over_2p5": 0.6465207019738324,
+        "btts_yes": 0.6500010770960122,
+        "mode_score": "1-1"
+      },
+      "news_lineup": {
+        "status": "CONFLICTING_THIRD_PARTY_LINEUPS_NO_SAFE_OFFICIAL_XI",
+        "home": null,
+        "away": null,
+        "sources": [
+          "https://www.365scores.com/en-us/football/match/uefa-champions-league-572/club-brugge-psv-eindhoven-725-1169-572",
+          "https://as.com/resultados/futbol/champions/2026_2027/directo/regular_a_4_6a92d4a865cb925/alineaciones/",
+          "https://www.uefa.com/uefachampionsleague/match/2049618--psv-vs-club-brugge/lineups/"
+        ],
+        "note": "365Scores' PSV eleven has Ruben van Bommel and Sven Mijnans; AS displayed a different set. Do not certify a player list from conflicting sources."
+      },
+      "official_xi_not_in_original_prediction": true,
+      "forecast_modified": false,
+      "synchronized_odds_status": "NOT_VERIFIED",
+      "EV": null,
+      "primary_value_pick": "PAS_NO_INDEPENDENT_COMPLETE_ODDS",
+      "alternative_value_pick": null
+    },
+    {
+      "uefa_match_id": 2049619,
+      "home": "Leipzig",
+      "away": "Manchester City",
+      "original_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049619.json",
+      "original_sha256": "7ea418e0d8a39d1582c1b125f1d085a8807633f29b4567bffad1bca6b93958d1",
+      "locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "model_sources": [
+        "M0_UNAPPROVED_REFERENCE",
+        "M0_ELO_EXPERIMENTAL_SHADOW"
+      ],
+      "m0_summary": {
+        "home": 0.6138598738003899,
+        "draw": 0.20624601370909498,
+        "away": 0.1798941124905152,
+        "over_2p5": 0.5973795893059548,
+        "btts_yes": 0.560251247807569,
+        "mode_score": "2-1"
+      },
+      "elo_summary": {
+        "home": 0.42500199135454464,
+        "draw": 0.24521556399186756,
+        "away": 0.32978244465358775,
+        "over_2p5": 0.5586976349316364,
+        "btts_yes": 0.5868297797625988,
+        "mode_score": "1-1"
+      },
+      "news_lineup": {
+        "status": "CONFLICTING_THIRD_PARTY_LINEUPS_NO_SAFE_OFFICIAL_XI",
+        "home": null,
+        "away": null,
+        "sources": [
+          "https://elpais.com/deportes/resultados/futbol/champions/2026_2027/directo/regular-a-4-6a92d4a865cba58/alineaciones/",
+          "https://www.theguardian.com/football/live/2026/nov/04/champions-league-slavia-prague-v-arsenal-rb-leipzig-v-manchester-city-and-more-live",
+          "https://www.uefa.com/uefachampionsleague/match/2049619--leipzig-vs-man-city/lineups/"
+        ],
+        "note": "The Guardian team-news includes Phil Foden and Nico O'Reilly; EL PAÍS provider lists Jeremy Doku instead and different defenders/midfield. Do not promote either to UEFA official confirmed XI."
+      },
+      "official_xi_not_in_original_prediction": true,
+      "forecast_modified": false,
+      "synchronized_odds_status": "NOT_VERIFIED",
+      "EV": null,
+      "primary_value_pick": "PAS_NO_INDEPENDENT_COMPLETE_ODDS",
+      "alternative_value_pick": null
+    },
+    {
+      "uefa_match_id": 2049623,
+      "home": "Lens",
+      "away": "Como",
+      "original_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049623.json",
+      "original_sha256": "21315f31352fcaa1fd3dd1729222786319f2462cc514922e0863d709f1302a3f",
+      "locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "model_sources": [
+        "M0_UNAPPROVED_REFERENCE",
+        "M0_ELO_EXPERIMENTAL_SHADOW"
+      ],
+      "m0_summary": {
+        "home": 0.417329027880219,
+        "draw": 0.23011971317419555,
+        "away": 0.35255125894558553,
+        "over_2p5": 0.6377155114013735,
+        "btts_yes": 0.6494343203482937,
+        "mode_score": "1-1"
+      },
+      "elo_summary": {
+        "home": 0.35362128378393326,
+        "draw": 0.2301748905223036,
+        "away": 0.41620382569376313,
+        "over_2p5": 0.6376670917890194,
+        "btts_yes": 0.649473042057379,
+        "mode_score": "1-1"
+      },
+      "news_lineup": {
+        "status": "CONFLICTING_THIRD_PARTY_LINEUPS_NO_SAFE_OFFICIAL_XI",
+        "home": null,
+        "away": null,
+        "sources": [
+          "https://elpais.com/deportes/resultados/futbol/champions/2026_2027/directo/regular-a-4-6a92d4a865cb731/alineaciones/",
+          "https://ofstats.com/matches/lineup/lens-como-2026-11-04",
+          "https://www.livescore.com/en/news/football/ligue-1/champions-league-lens-vs-como-probable-line-ups-where-to-watch-on-tv-football-italia/",
+          "https://www.uefa.com/uefachampionsleague/match/2049623--lens-vs-como/lineups/"
+        ],
+        "note": "AS/EL PAÍS show Florian Sotoca and Kyllian Antonio among Lens starters; OFStats shows Ruben Aguilar and Franjo Ivanović. Football Italia expressly calls its list 'probable'. No firm confirmed XI."
+      },
+      "official_xi_not_in_original_prediction": true,
+      "forecast_modified": false,
+      "synchronized_odds_status": "NOT_VERIFIED",
+      "EV": null,
+      "primary_value_pick": "PAS_NO_INDEPENDENT_COMPLETE_ODDS",
+      "alternative_value_pick": null
+    }
+  ]
+}
