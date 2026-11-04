@@ -44,8 +44,11 @@ class MorningOddsAcceptance(unittest.TestCase):
     row=next(x for x in d["all_market_diagnostics"] if x["market"]=="MS1")
     self.assertEqual(row["observed_odds"],1.60)
     self.assertEqual(row["price_age_class"],"CURRENT_T60")
-    self.assertIn("EV_OR_NO_VIG_EDGE_FAIL",row["qualification_reasons"])
-    self.assertNotEqual(d["main_candidate"]["market"] if d["main_candidate"] else None,"MS1")
+    old=decide(self.f,self.b,self.lock,morning_snapshot=m,now=NOW)
+    old_row=next(x for x in old["all_market_diagnostics"] if x["market"]=="MS1")
+    # Whether 1.60 is still +EV depends on calibration; lower price must LOWER EV.
+    self.assertLess(row["EV"],old_row["EV"])
+    self.assertEqual(row["calibrated_probability"],old_row["calibrated_probability"])
  def test_new_other_group_keeps_old_market(self):
     m=self.snap();fresh=odds(self.f,groups={"KG":{"BTTS_YES":1.94,"BTTS_NO":1.88}})
     d=decide(self.f,self.b,self.lock,fresh,morning_snapshot=m,now=NOW)

@@ -1,0 +1,92 @@
+name: 263 store morning observed bookmaker prices - append only
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/morning_quote_requests/*.json'
+permissions:
+  contents: write
+concurrency:
+  group: 263-morning-market-append-only
+  cancel-in-progress: false
+jobs:
+  archive-real-morning-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Only new observed source request JSON, never edits
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff-tree --no-commit-id --name-status -r HEAD -- experiments/263/morning_quote_requests/ > /tmp/morning_diff.tsv
+          if grep -Ev '^A[[:space:]]+experiments/263/morning_quote_requests/[A-Za-z0-9_-]+\.json$' /tmp/morning_diff.tsv | grep -q .; then
+            echo 'Only ADD of actual morning price request allowed'; exit 1
+          fi
+          grep -E '^A[[:space:]]+experiments/263/morning_quote_requests/[A-Za-z0-9_-]+\.json$' /tmp/morning_diff.tsv | cut -f2 > /tmp/morning_manifest
+          test -s /tmp/morning_manifest
+      - name: Validate and lock human observed prices (not scraper)
+        id: morning
+        continue-on-error: true
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python experiments/263/morning_quote_policy_263.py ingest --manifest /tmp/morning_manifest --report "experiments/263/morning_batch_reports/$GITHUB_SHA.json"
+      - name: Commit sealed morning quotes or honest blocked evidence
+        if: always()
+        env:
+          MORNING_RESULT: ${{ steps.morning.outcome }}
+          PYTHONPATH: experiments/263
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if [ "$MORNING_RESULT" = success ]; then
+            git add -A -- experiments/263/morning_quotes_locked experiments/263/morning_batch_reports
+          else
+            if [ -d experiments/263/morning_batch_reports ]; then git add -A -- experiments/263/morning_batch_reports; fi
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m 'Archive early-market human observation or blocked receipt'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            if [ "$MORNING_RESULT" = success ]; then
+              python - <<'PY'
+import json,os,hashlib
+from datetime import datetime,timezone
+from pathlib import Path
+from market_fifth_baseline_263 import sealed_payload
+from morning_quote_policy_263 import SCHEMA
+batch=json.loads((Path("experiments/263/morning_batch_reports")/(os.environ["GITHUB_SHA"]+".json")).read_text())
+for item in batch["items"]:
+    if item["status"]!="ARCHIVED_MORNING_SOURCE_SNAPSHOT":continue
+    snap=json.loads(Path(item["path"]).read_text())
+    sealed_payload(snap,SCHEMA)
+    original=Path(snap["source_review"]["original_request_path"])
+    if hashlib.sha256(original.read_bytes()).hexdigest()!=snap["source_review"]["original_request_sha256"]:
+        raise SystemExit("MORNING_SOURCE_REQUEST_CHANGED")
+    if datetime.now(timezone.utc)>=datetime.fromisoformat(snap["fixture"]["kickoff_utc"]):
+        raise SystemExit("MORNING_PRICE_COMMIT_AFTER_KICKOFF")
+PY
+            fi
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: morning-source-snapshots
+          if-no-files-found: ignore
+          path: |
+            experiments/263/morning_batch_reports/*.json
+            experiments/263/morning_quotes_locked/*/*.json
+      - name: Fail when no source was really accepted
+        if: always()
+        env:
+          MORNING_RESULT: ${{ steps.morning.outcome }}
+        run: test "$MORNING_RESULT" = success

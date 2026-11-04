@@ -97,8 +97,11 @@ def record_request(relative,root,output,now):
 def read_for_forecast(f,root="experiments/263/morning_quotes_locked"):
     fx=f["fixture"]
     spec={k:fx[k] for k in ("league","home_id","away_id","match_local_date","kickoff_utc")}
-    spec["official_fixture_url"]=fx["official_source"]
-    file=Path(root)/fx["match_local_date"]/(identity(spec)+".json")
+    # A forecast may omit the display-only official_source (legacy test records).
+    # The immutable key never uses a URL, only team IDs, league and exact UTC KO.
+    stem=sha([fx["league"],fx["home_id"],fx["away_id"],
+             read_aware(fx["kickoff_utc"]).isoformat()])[:24]
+    file=Path(root)/fx["match_local_date"]/(stem+".json")
     return json.loads(file.read_text(encoding="utf-8")) if file.is_file() else None
 def extract(snap,f,now):
     if snap is None:return {}
