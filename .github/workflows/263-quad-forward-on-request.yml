@@ -94,18 +94,32 @@ jobs:
           python experiments/263/odds_provider_oddspapi_263.py \
             --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json" \
             --attempt-report "experiments/263/api_odds_attempts/$GITHUB_SHA.json"
+      - name: Generate trusted readable 1..12 match and detailed single-match reports
+        id: human_report
+        if: steps.requests.outputs.has_requests == 'true' && steps.forward.outcome == 'success'
+        env:
+          PYTHONPATH: experiments/263
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/quad_user_report_263.py write \
+            --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
       - name: Commit new pilot predictions or honest blocked report
         if: steps.requests.outputs.has_requests == 'true' && always()
         env:
           FORWARD_OUTCOME: ${{ steps.forward.outcome }}
+          HUMAN_REPORT_OUTCOME: ${{ steps.human_report.outcome }}
+          PYTHONPATH: experiments/263
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           if [ "$FORWARD_OUTCOME" = success ]; then
+            test "$HUMAN_REPORT_OUTCOME" = success || { echo 'Readable reports missing; no GitHub forecast commit'; exit 1; }
             python experiments/263/quad_prematch_bridge_263.py verify-baseline --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
             git add -A -- forward_quad_263 experiments/263/quad_research_links experiments/263/quad_batch_reports
+            git add -A -- experiments/263/quad_human_reports
             for dir in experiments/263/api_odds_attempts experiments/263/market_quotes_locked experiments/263/quad_priced_decisions experiments/263/quad_conditional_morning_decisions; do
               if [ -d "$dir" ]; then git add -A -- "$dir"; fi
             done
@@ -123,6 +137,8 @@ jobs:
                 --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
               python experiments/263/morning_quote_policy_263.py verify-conditional \
                 --forecast-report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
+              python experiments/263/quad_user_report_263.py verify \
+                --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
             fi
             git push origin "HEAD:$GITHUB_REF_NAME"
           fi
@@ -140,6 +156,8 @@ jobs:
             experiments/263/market_quotes_locked/*/*.json
             experiments/263/quad_priced_decisions/*/*.json
             experiments/263/quad_batch_reports/*.json
+            experiments/263/quad_human_reports/*/summary.md
+            experiments/263/quad_human_reports/*/matches/*/*.md
       - name: Reject zero registered predictions
         if: steps.requests.outputs.has_requests == 'true' && always()
         env:

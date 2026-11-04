@@ -186,4 +186,21 @@ class UserReportAcceptance(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"M4_UNAVAILABLE_NO_SILENT_FALLBACK"):
             self.entry(99,"none",missing=True)
 
+
+    def test_real_forecast_workflow_writes_then_verifies_user_reports(self):
+        wf=Path(".github/workflows/263-quad-forward-on-request.yml").read_text(encoding="utf-8")
+        self.assertIn("quad_user_report_263.py write",wf)
+        self.assertIn("quad_user_report_263.py verify",wf)
+        self.assertIn("HUMAN_REPORT_OUTCOME",wf)
+        self.assertIn("experiments/263/quad_human_reports/*/summary.md",wf)
+        self.assertIn("experiments/263/quad_human_reports/*/matches/*/*.md",wf)
+        self.assertLess(wf.index("quad_prematch_bridge_263.py baseline"),
+                        wf.index("quad_user_report_263.py write"))
+        self.assertLess(wf.index("quad_user_report_263.py write"),
+                        wf.index("git add -A -- experiments/263/quad_human_reports"))
+        self.assertLess(wf.index('git pull --rebase origin "$GITHUB_REF_NAME"'),
+                        wf.index("quad_user_report_263.py verify"))
+        self.assertLess(wf.index("quad_user_report_263.py verify"),
+                        wf.index('git push origin "HEAD:$GITHUB_REF_NAME"'))
+
 if __name__=="__main__":unittest.main()
