@@ -1,0 +1,47 @@
+name: 263 freeze existing DEV calibration once
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/freeze_forward_dev_calibration_263.py'
+      - '.github/workflows/263-freeze-dev-calibration-ci.yml'
+permissions:
+  contents: write
+  actions: read
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Retrieve previously calculated artifacts ONLY
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/oldstage /tmp/oldpred
+          gh run download 41836896944 --repo "$GITHUB_REPOSITORY" -n 263-stage2-C3-M4-PAS-calibration-REUSE-RESEARCH -D /tmp/oldstage
+          gh run download 41836437930 --repo "$GITHUB_REPOSITORY" -n 263-880-four-model-goals-PAS-RESEARCH-ONLY -D /tmp/oldpred
+          test -s /tmp/oldstage/stage2_model_coverage_decision_research.json
+          test -s /tmp/oldpred/first_goal_market_asof_predictions.csv
+      - name: Create immutable DEV-only calibration lock
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python experiments/263/freeze_forward_dev_calibration_263.py \
+            --stage2 /tmp/oldstage/stage2_model_coverage_decision_research.json \
+            --predictions /tmp/oldpred/first_goal_market_asof_predictions.csv \
+            --output experiments/263/forward_dev_calibration_lock_263.json
+          python -m unittest discover -s experiments/263 -p 'test_forward_calibration_bridge_263.py' -v
+      - name: Commit once only if new lock validated
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/263/forward_dev_calibration_lock_263.json
+          git commit -m 'Pin real Aug-Sep DEV calibration SHA from prior stage2 artifacts'
+          git push origin "HEAD:$GITHUB_REF_NAME"
