@@ -1,0 +1,58 @@
+{
+  "schema": "263_UEFA_PREKO_INDEPENDENT_LINEUP_CONTEXT_OVERLAY_V1",
+  "status": "INDEPENDENT_MEDIA_LINEUPS_CORROBORATED_OFFICIAL_UEFA_PAGE_SQUAD_ONLY",
+  "record_type": "POST_LOCK_PRE_KICKOFF_CONTEXT_ADDENDUM",
+  "event": "UEFA_CL_2026-11-04_FENERBAHCE_LIVERPOOL_2049620",
+  "reviewed_at_utc": "2026-11-04T17:11:06+00:00",
+  "kickoff_utc": "2026-11-04T17:45:00+00:00",
+  "lock_created_at_utc": "2026-11-04T16:48:42.264035+00:00",
+  "locked_forecast_payload_sha256": "5470275c5022bf180e643fdfbbcfcbca96a33c2bac0386f84292a30e239f098c",
+  "locked_forecast_path": "experiments/263/europe/t60_locked/2026-11-04_2045_TR/2049620.json",
+  "source_urls": [
+    "https://www.theguardian.com/football/live/2026/nov/04/fenerbahce-v-liverpool-champions-league-live",
+    "https://www.diken.com.tr/fenerbahce-liverpool-karsilasmasinin-ilk-11leri/",
+    "https://www.sporx.com/fenerbahce-liverpool-maci-kadrolar-6106330",
+    "https://www.uefa.com/uefachampionsleague/match/2049620--fenerbahce-vs-liverpool/lineups/"
+  ],
+  "source_confidence_note": "Three published independent lineup lists agree player-for-player. The UEFA webpage surfaced the official squad list, not an explicitly parsed starting XI. Therefore this is independent newsroom corroboration, NOT independent primary-UEFA official XI attestation. Earlier immutable prediction captured NOT_CONFIRMED status and must remain unchanged.",
+  "home_starting_xi": [
+    "Ederson",
+    "Nélson Semedo",
+    "Milan Škriniar",
+    "Kojo Oppong",
+    "Archie Brown",
+    "Mattéo Guendouzi",
+    "N’Golo Kanté",
+    "İsmail Yüksek",
+    "Mason Greenwood",
+    "Romelu Lukaku",
+    "İrfan Can Kahveci"
+  ],
+  "away_starting_xi": [
+    "Alisson Becker",
+    "Joe Gomez",
+    "Jérémy Jacquet",
+    "Virgil van Dijk",
+    "Kostas Tsimikas",
+    "Alexis Mac Allister",
+    "Trey Nyoni",
+    "Víctor Muñoz",
+    "Dominik Szoboszlai",
+    "Rio Ngumoha",
+    "Bradley Barcola"
+  ],
+  "match_context": {
+    "home_injured": [
+      "Nathan Aké",
+      "Marco Asensio"
+    ],
+    "awarded_impact_model_multiplier": false
+  },
+  "model_prediction_modified": false,
+  "new_model_fitting_performed": false,
+  "not_a_four_model_B_C2_C3_M4_prediction": true,
+  "odds_source_status": "NO_SYNCHRONIZED_VERIFIED_BOOKMAKER_MARKET_OBSERVED_FOR_THIS_RECORD",
+  "EV": null,
+  "official_pilot_count_increment": 0,
+  "safety": "This addendum MUST NOT retroactively change the locked 19:48 local pre-kickoff predictions."
+}
