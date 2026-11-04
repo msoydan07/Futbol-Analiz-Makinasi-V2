@@ -36,21 +36,37 @@ def _variants(registry, team_id, requested):
  return out[:4]
 
 
-def run(league,home,away,lookup_override=None,registry_path="data/match_registry.json"):
- """Maçkolik spelling -> registry IDs -> SAME IDs in independently parsed official match.
+def run(league,home,away,lookup_override=None,registry_path="experiments/263/evidence/identity_index_263.json"):
+ """Maçkolik spelling -> pinned read-only registry -> live official match.
 
- Does not build a fixture list or treat Maçkolik as official fixture evidence.
- The existing official adapter must really fetch and parse the corresponding match.
+ Production-like default uses the EXISTING 215-club SHA-protected identity cache.
+ Explicit old registry_path overrides remain supported for compatibility/tests.
+ This cache verifies team identity, never future match existence.
  """
  if league not in LOOKUPS:
   return {"status":"REJECTED","reason":"unsupported_league"}
  try:
   from team_name_resolver import resolve as resolve_team_name
   reg=Registry(registry_path)
+  from pathlib import Path
+  if not Path(registry_path).is_file():
+   return {"status":"REVIEW_REQUIRED","reason":"canonical_registry_file_missing"}
+  if reg.data.get("index_type")=="CANONICAL_REGISTRY_READ_ONLY_IDENTITY_CACHE_V1":
+   # Already-used 2.6.3 identity/membership validator. Fail CLOSED on a
+   # corrupted index rather than silently creating an empty Registry().
+   gate_module=importlib.import_module("experiments.263.mackolik_identity_gate_263")
+   gate_module._validate_identity_source(reg.data)
+   members=gate_module._memberships(reg.data,"2026-2027").get(league,set())
+   if not members:
+    return {"status":"REVIEW_REQUIRED","reason":"current_season_league_membership_missing"}
+  else:
+   members=None
   home_id=resolve_team_name(reg,league,home)
   away_id=resolve_team_name(reg,league,away)
   if home_id==away_id:
    return {"status":"REVIEW_REQUIRED","reason":"identical_club_ids"}
+  if members is not None and (home_id not in members or away_id not in members):
+   return {"status":"REVIEW_REQUIRED","reason":"team_not_in_current_league_identity_cache"}
   # If a current-season historical membership registry exists, avoid linking a
   # club from another league. A stored prior fixture is NOT future fixture proof.
   registered=[v for v in reg.data.get("fixtures",{}).values()
