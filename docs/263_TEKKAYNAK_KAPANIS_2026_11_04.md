@@ -1,3 +1,13 @@
+> **4 Kasım 2026 — SAHİP ONAYI / NİHAİ KAYIT (önceki durum notlarının yerine geçer)**
+>
+> - Kullanıcının açık **“4518 ONAYLIYORUM”** mesajı, **2026-11-04T15:43:42+00:00** onay zamanı ve `msoydan07` inceleyici kimliğiyle `data/staged_263/owner_approval_4518.json` dosyasına kaydedildi.
+> - **Tek koşuluk kabul başarıyla tamamlandı:** [GitHub Actions #41860849189](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41860849189). `data/quad_accepted_263/extended_history.csv` ve `data/quad_accepted_263/source_acceptance.json` GitHub üzerinde mevcut. Kabul edilen dosya SHA-256: `1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9`; 4.518 satır, 42 kaynak bağlantısı. Eski 4.413 satır değişmedi.
+> - Onay kapsamı: **sahibin kanıt raporunu ve açıklanmış sınırlamaları kabul ettiği deneysel araştırma kullanımı**. 4.518 sonucun tamamının bağımsız doğrulandığı iddia edilmez; `source_acceptance.json` bu sınırı **false** olarak açıkça işaretler. Otomatik insan onayı veya kaynak kontrolü icat edilmedi.
+> - **Henüz pilot tahmin yok**: `forward_quad_263/` oluşturulmadı. Sonraki adım yalnız kullanıcı tarafından isimlendirilen maç için gerçek resmî fikstür ve KO-öncesi doğrulama, mühürlü dört-model kayıt; gelecekte geçmişe dönük kayıt üretmek yasaktır. İlk 11 eksik diye ön analiz durdurulmaz.
+> - Mühendislik karşılaştırmaları, M4 ayar kilidi ve resmî 100 maç pilotu **değişmedi**. Aynı başarılı kabul testini tekrar çalıştırma.
+>
+---
+
 > **04.11.2026 — GÜNCEL DURUM KONTROLÜ / DÖNGÜ KİLİDİ**
 >
 > - Yeni araştırma veri paketi: **4.518 maç**, 4.509'luk sabit SHA snapshot'a 3 Kasım Championship sonuçlarından **9 maç eklendi**. Çalışma [#41854694583](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41854694583) başarılı; çıkarılan ZIP içinde `extended_history.csv` ve `stage_report.json` mevcut. SHA-256 **`1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9`**. Önceki 4.509 satır **bire bir değişmeden korunmuş** ve toplam kimlik sayısı tekil. Kaynaklar: [Football Web Pages](https://www.footballwebpages.co.uk/championship/fixtures-results/november), [Soccerway](https://www.soccerway.com/england/championship/results/), [Cornerflick](https://cornerflick.com/football/leagues/championship/results), [EFL](https://www.efl.com/news/2026/november/04/Sky-Bet-Championship--Birmingham-rise-to-second-as-Pompey-shock-Swansea/).
