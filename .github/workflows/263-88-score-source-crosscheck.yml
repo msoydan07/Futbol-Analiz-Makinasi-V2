@@ -1,0 +1,41 @@
+name: 263 88 older matches 10-league score references one-shot QA
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'data/staged_263/2026_10_30_11_01_previous_88_web_score_refs.json'
+      - 'experiments/263/audit_previous_88_source_refs_263.py'
+      - '.github/workflows/263-88-score-source-crosscheck.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  older-88-scores:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch fixed baseline and already-generated Nov 4 preflight, NO re-scrape
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/frozen_4413 /tmp/weekend_4509
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D /tmp/frozen_4413
+          gh run download 41802358251 --repo "$GITHUB_REPOSITORY" -n weekend-263-ten-league-source-evidence -D /tmp/weekend_4509
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  /tmp/frozen_4413/historical_results.csv' | sha256sum -c -
+          echo '279cb00096da270f6987ae9e518fbe7248c17c993c34508499a971cae76ca4e8  data/staged_263/extended_history.csv' | sha256sum -c -
+          echo '69d687965500a260cc965a1482c23c1e07f11ebcabb1adaa9441dc6a17334a14  /tmp/weekend_4509/extended_history.csv' | sha256sum -c -
+      - name: Compare EXACT prior 88 source-round values with SHA-sealed immutable rows
+        run: |
+          python experiments/263/audit_previous_88_source_refs_263.py \
+            --baseline /tmp/frozen_4413/historical_results.csv \
+            --latest /tmp/weekend_4509/extended_history.csv \
+            --out /tmp/previous_88_score_corroboration.json
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: previous-88-263-score-source-crosscheck
+          if-no-files-found: warn
+          path: /tmp/previous_88_score_corroboration.json
