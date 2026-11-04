@@ -57,23 +57,23 @@ jobs:
             git commit -m 'Archive early-market human observation or blocked receipt'
             git pull --rebase origin "$GITHUB_REF_NAME"
             if [ "$MORNING_RESULT" = success ]; then
-              python - <<'PY'
-              import json,os,hashlib
-              from datetime import datetime,timezone
-              from pathlib import Path
-              from market_fifth_baseline_263 import sealed_payload
-              from morning_quote_policy_263 import SCHEMA
-              batch=json.loads((Path("experiments/263/morning_batch_reports")/(os.environ["GITHUB_SHA"]+".json")).read_text())
-              for item in batch["items"]:
-                  if item["status"]!="ARCHIVED_MORNING_SOURCE_SNAPSHOT":continue
-                  snap=json.loads(Path(item["path"]).read_text())
-                  sealed_payload(snap,SCHEMA)
-                  original=Path(snap["source_review"]["original_request_path"])
-                  if hashlib.sha256(original.read_bytes()).hexdigest()!=snap["source_review"]["original_request_sha256"]:
-                      raise SystemExit("MORNING_SOURCE_REQUEST_CHANGED")
-                  if datetime.now(timezone.utc)>=datetime.fromisoformat(snap["fixture"]["kickoff_utc"]):
-                      raise SystemExit("MORNING_PRICE_COMMIT_AFTER_KICKOFF")
-              PY
+          python - <<'PY'
+          import json,os,hashlib
+          from datetime import datetime,timezone
+          from pathlib import Path
+          from market_fifth_baseline_263 import sealed_payload
+          from morning_quote_policy_263 import SCHEMA
+          batch=json.loads((Path("experiments/263/morning_batch_reports")/(os.environ["GITHUB_SHA"]+".json")).read_text())
+          for item in batch["items"]:
+              if item["status"]!="ARCHIVED_MORNING_SOURCE_SNAPSHOT":continue
+              snap=json.loads(Path(item["path"]).read_text())
+              sealed_payload(snap,SCHEMA)
+              original=Path(snap["source_review"]["original_request_path"])
+              if hashlib.sha256(original.read_bytes()).hexdigest()!=snap["source_review"]["original_request_sha256"]:
+                  raise SystemExit("MORNING_SOURCE_REQUEST_CHANGED")
+              if datetime.now(timezone.utc)>=datetime.fromisoformat(snap["fixture"]["kickoff_utc"]):
+                  raise SystemExit("MORNING_PRICE_COMMIT_AFTER_KICKOFF")
+          PY
             fi
             git push origin "HEAD:$GITHUB_REF_NAME"
           fi
