@@ -24,7 +24,7 @@ from forward_quad import SCHEMA as FORECAST_SCHEMA
 REQUEST_SCHEMA = "263_manual_market_quote_request_v1"
 BATCH_SCHEMA = "263_manual_market_quote_batch_report_v1"
 ACCEPTED_DOMAINS = frozenset(("iddaa.com", "nesine.com", "bilyoner.com", "mackolik.com"))
-ALLOWED_GROUPS = ("MS", "KG", "GOALS_2.5")
+ALLOWED_GROUPS = ("MS", "KG", "GOALS_1.5", "GOALS_2.5", "GOALS_3.5")
 REQUEST_RE = re.compile(r"^experiments/263/market_quote_requests/[A-Za-z0-9_-]+\.json$")
 FORECAST_RE = re.compile(r"^forward_quad_263/(2026-11-0[678])/([0-9a-f]{24})\.json$")
 MAX_BATCH = 12
