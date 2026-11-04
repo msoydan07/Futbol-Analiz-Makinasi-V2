@@ -87,8 +87,6 @@ def ingest_one(relative_path: str, *, root: Path, output_dir: Path, now: datetim
     observed, reviewed = read_aware(req["observed_at_utc"]), read_aware(req["reviewed_at_utc"])
     if not reviewed <= observed <= now:
         raise ValueError("OBSERVATION_TIMES_IN_FUTURE_OR_REVERSED")
-    if (now - observed).total_seconds() > 600:
-        raise ValueError("SOURCE_ODDS_STALE_MORE_THAN_10_MINUTES")
     forecast = json.loads(_inside(req["forecast_path"], root).read_text(encoding="utf-8"))
     sha = sealed_payload(forecast, FORECAST_SCHEMA)
     fx = forecast["fixture"]
@@ -98,6 +96,8 @@ def ingest_one(relative_path: str, *, root: Path, output_dir: Path, now: datetim
     if (fx.get("fixture_verification") != "VERIFIED_BY_LIVE_OFFICIAL_GATE"
             or not fixture_checked <= created <= reviewed <= observed <= now < ko):
         raise ValueError("NOT_AUTHENTIC_PREGAME_SEQUENCE")
+    if (now - observed).total_seconds() > 600:
+        raise ValueError("SOURCE_ODDS_STALE_MORE_THAN_10_MINUTES")
     if fx["match_local_date"] != match.group(1):
         raise ValueError("FORECAST_PATH_LOCAL_DATE_MISMATCH")
     if set(forecast.get("model_predictions", {})) != {"B", "C2", "C3", "M4"}:
@@ -149,9 +149,7 @@ def ingest_one(relative_path: str, *, root: Path, output_dir: Path, now: datetim
         "true_webpage_price_not_proven_by_code": True,
         "betting_authorized": False,
     }
-    payload["payload_sha256"] = hashlib.sha256(
-        canonical_bytes(payload | {})[:-0] if False else canonical_bytes(payload)
-    ).hexdigest()
+    payload["payload_sha256"] = hashlib.sha256(canonical_bytes(payload)).hexdigest()
     destination = output_dir / fx["match_local_date"] / (match.group(2) + ".json")
     destination.parent.mkdir(parents=True, exist_ok=True)
     # An attempt to replace a stored quote for the same match is rejected.
