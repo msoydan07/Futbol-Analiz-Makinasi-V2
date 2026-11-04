@@ -1,0 +1,169 @@
+{
+  "calibration": {
+    "C3": {
+      "BTTS_NO": {
+        "available": true,
+        "development_brier_skill": 0.000504,
+        "n": 580,
+        "unshrunk_weight": 0.509491,
+        "weight": 0.5083407177
+      },
+      "BTTS_YES": {
+        "available": true,
+        "development_brier_skill": 0.000504,
+        "n": 580,
+        "unshrunk_weight": 0.509491,
+        "weight": 0.5083407177
+      },
+      "MS1": {
+        "available": true,
+        "development_brier_skill": 0.113743,
+        "n": 580,
+        "unshrunk_weight": 1,
+        "weight": 0.9393939394
+      },
+      "MS2": {
+        "available": true,
+        "development_brier_skill": 0.112613,
+        "n": 580,
+        "unshrunk_weight": 1,
+        "weight": 0.9393939394
+      },
+      "MSX": {
+        "available": true,
+        "development_brier_skill": 0.008551,
+        "n": 580,
+        "unshrunk_weight": 0.899416,
+        "weight": 0.8510017242
+      },
+      "OVER_1.5": {
+        "available": true,
+        "development_brier_skill": -0.006775,
+        "n": 580,
+        "unshrunk_weight": 0.408433,
+        "weight": 0.4195319013
+      },
+      "OVER_2.5": {
+        "available": true,
+        "development_brier_skill": -0.018284,
+        "n": 580,
+        "unshrunk_weight": 0.285277,
+        "weight": 0.3113038451
+      },
+      "OVER_3.5": {
+        "available": true,
+        "development_brier_skill": 0.009684,
+        "n": 580,
+        "unshrunk_weight": 0.627987,
+        "weight": 0.6124733282
+      },
+      "UNDER_1.5": {
+        "available": true,
+        "development_brier_skill": -0.006775,
+        "n": 580,
+        "unshrunk_weight": 0.408433,
+        "weight": 0.4195319013
+      },
+      "UNDER_2.5": {
+        "available": true,
+        "development_brier_skill": -0.018284,
+        "n": 580,
+        "unshrunk_weight": 0.285277,
+        "weight": 0.3113038451
+      },
+      "UNDER_3.5": {
+        "available": true,
+        "development_brier_skill": 0.009684,
+        "n": 580,
+        "unshrunk_weight": 0.627987,
+        "weight": 0.6124733282
+      }
+    },
+    "M4": {
+      "BTTS_NO": {
+        "available": true,
+        "development_brier_skill": -0.000707,
+        "n": 587,
+        "unshrunk_weight": 0.489931,
+        "weight": 0.4911384479
+      },
+      "BTTS_YES": {
+        "available": true,
+        "development_brier_skill": -0.000707,
+        "n": 587,
+        "unshrunk_weight": 0.489931,
+        "weight": 0.4911384479
+      },
+      "MS1": {
+        "available": true,
+        "development_brier_skill": 0.11461,
+        "n": 587,
+        "unshrunk_weight": 1,
+        "weight": 0.940029985
+      },
+      "MS2": {
+        "available": true,
+        "development_brier_skill": 0.106275,
+        "n": 587,
+        "unshrunk_weight": 0.987925,
+        "weight": 0.9294034513
+      },
+      "MSX": {
+        "available": true,
+        "development_brier_skill": 0.003732,
+        "n": 587,
+        "unshrunk_weight": 0.623537,
+        "weight": 0.6087201506
+      },
+      "OVER_1.5": {
+        "available": true,
+        "development_brier_skill": -0.008437,
+        "n": 587,
+        "unshrunk_weight": 0.411935,
+        "weight": 0.4224972246
+      },
+      "OVER_2.5": {
+        "available": true,
+        "development_brier_skill": -0.023676,
+        "n": 587,
+        "unshrunk_weight": 0.297308,
+        "weight": 0.3216190153
+      },
+      "OVER_3.5": {
+        "available": true,
+        "development_brier_skill": 0.001681,
+        "n": 587,
+        "unshrunk_weight": 0.514676,
+        "weight": 0.5129156628
+      },
+      "UNDER_1.5": {
+        "available": true,
+        "development_brier_skill": -0.008437,
+        "n": 587,
+        "unshrunk_weight": 0.411935,
+        "weight": 0.4224972246
+      },
+      "UNDER_2.5": {
+        "available": true,
+        "development_brier_skill": -0.023676,
+        "n": 587,
+        "unshrunk_weight": 0.297308,
+        "weight": 0.3216190153
+      },
+      "UNDER_3.5": {
+        "available": true,
+        "development_brier_skill": 0.001681,
+        "n": 587,
+        "unshrunk_weight": 0.514676,
+        "weight": 0.5129156628
+      }
+    }
+  },
+  "development_period": "2026-08-01/2026-09-30",
+  "evaluation_period_not_used_for_weights": "2026-10-01/2026-10-29",
+  "official_approval": false,
+  "payload_sha256": "8ebed4a8b2d795935217826012e3ea5d2211d3d8503b29318266f10a2d09ceb5",
+  "schema": "263_forward_dev_calibration_lock_v1",
+  "source_predictions_sha256": "dc674e2d05641eca27a8655eacfe6457e4140fb2adbdb0d9002b45e38cca1b3d",
+  "source_stage2_sha256": "f01dfe8c10fdda1d9958b7f592f5cfd72a61f48f14f9b35e8342188acda26e00"
+}
