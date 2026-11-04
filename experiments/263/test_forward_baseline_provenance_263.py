@@ -11,6 +11,8 @@ def forecast():
     x["fixture"]["league"]="TUR1"
     x["fixture"]["match_local_date"]="2026-11-06"
     x["data"]["snapshot_sha256"]="f"*64
+    x["data"]["snapshot_acceptance"]="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED"
+    x["data"]["league_latest_result_date"]="2026-11-05"
     x["payload_sha256"]=base._digest({k:v for k,v in x.items() if k!="payload_sha256"})
     return x
 def baseline(f):
