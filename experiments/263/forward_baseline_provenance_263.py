@@ -21,6 +21,8 @@ def connect_verified_baseline(forecast, calibration_lock, baseline_record):
         raise ValueError("BASELINE_HASH_MISMATCH")
     if baseline_record.get("forecast_sha256")!=forecast.get("payload_sha256"):
         raise ValueError("BASELINE_WRONG_FORECAST")
+    if forecast.get("data",{}).get("snapshot_acceptance")!="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED":
+        raise ValueError("UPSTREAM_SOURCE_NOT_HUMAN_ACCEPTED")
     if baseline_record.get("league")!=forecast.get("fixture",{}).get("league"):
         raise ValueError("BASELINE_WRONG_LEAGUE")
     if baseline_record.get("method")!="PAST_RESULTS_LEAGUE_MARKET_RATE":
@@ -37,6 +39,8 @@ def connect_verified_baseline(forecast, calibration_lock, baseline_record):
     if not created<=asof<ko:
         raise ValueError("BASELINE_TIMESTAMP_LOOKAHEAD")
     local_date=forecast["fixture"]["match_local_date"]
+    if baseline_record["last_result_date"]!=forecast.get("data",{}).get("league_latest_result_date"):
+        raise ValueError("BASELINE_HISTORY_CUTOFF_MISMATCH")
     if baseline_record["last_result_date"]>=local_date:
         raise ValueError("BASELINE_RESULT_LEAKAGE")
     values=baseline_record.get("markets")
