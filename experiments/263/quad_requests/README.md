@@ -9,15 +9,21 @@ var olan experiments/263/season_refresh_263.py ile toplu hazırlanır; 10 ligin 
 kimliği, tarih, kaynak ve önceki satır bütünlüğü doğrulanmadan kabul edilmez.
 Dondurulmuş arşivin kendisi güncellenmez.
 
-Bu deney dalında aşağıdaki yollar **yalnız gerçek doğrulama tamamlandıktan sonra** oluşturulur:
-- data/quad_accepted_263/extended_history.csv — önceki 4.413 satırı değiştirmeyen güncel veri dosyası
-- data/quad_accepted_263/source_acceptance.json — forward_quad.py içindeki verify_snapshot
-  kuralına göre status=HUMAN_VERIFIED_SOURCE_ACCEPTANCE, gerçek reviewer, gerçek
-  reviewed_at_utc, snapshot_sha256, baseline_sha256, kaynakların source_links listesi
+Bu deney dalında ilgili kaynaklar **4 Kasım 2026 tarihinde gerçekten oluşturulmuş ve testle kabul edilmiştir**:
+- data/quad_accepted_263/extended_history.csv — 4.518 maçlık sabit SHA
+  1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9;
+  eski 4.413 satır yerinde korunmuştur.
+- data/quad_accepted_263/source_acceptance.json — gerçek kullanıcının açık sınırlı
+  araştırma onayını, 4 Kasım UTC zamanını ve 42 kaynak bağlantısını içerir.
+  Bu **bütün 4.518 maçın resmî kaynaklarda bağımsız doğrulandığı anlamına gelmez**.
+- 3 Kasım tarihli 9 ENG2 maçı sonuç kaynaklarıyla karşılaştırıldı; ilk yarı,
+  şut/korner alanları bulunmayan 9 kaydın boş alanları uydurulmadı.
+- İlk 6–8 Kasım için ligin veri güncelliği ayrı `weekend_source_readiness_263.py`
+  kontrolündedir. Bu denetim maç günü kaynak yenilemesini, resmî fikstürü,
+  ilk 11'i, güncel bookmaker oranını veya pilot tahminini **otomatik onaylamaz**.
 
-Onay kodu bir kişinin gerçek futbol kaynağını kontrol ettiğini iddia etmek için
-kendiliğinden doldurulamaz. Kaynak/onay yoksa yeni pilot **BLOCKED** kalır; ESKİ
-veriye sessiz geri dönüş yok. 3 Kasım Salı güncellemesi henüz doğrulanmadı.
+Kaynak onayı 7 günden eskiyse veya SHA değişirse ileri kayıt reddedilir.
+Bu durumda eski veriye sessiz dönüş veya sahte insan onayı YOK.
 
 ## Gerçek kullanıcı maç isteği
 Kullanıcı maç adını söyledikten ve kabul edilmiş veri hazırlandıktan sonra yalnızca

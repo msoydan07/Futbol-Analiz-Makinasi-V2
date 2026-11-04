@@ -1,0 +1,27 @@
+name: 263 4518 ten-league preflight once for Nov 6-8
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/weekend_source_readiness_263.py'
+      - 'experiments/263/test_weekend_source_readiness_263.py'
+      - '.github/workflows/263-weekend-4518-preflight.yml'
+permissions:
+  contents: read
+jobs:
+  one-bounded-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: No numerical fitting, only accepted 4518 file
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python -m unittest -v experiments/263/test_weekend_source_readiness_263.py
+          python experiments/263/weekend_source_readiness_263.py --out experiments/263/ten_league_preflight_2026_11_06_08.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-4518-ten-league-preflight
+          path: experiments/263/ten_league_preflight_2026_11_06_08.json
+          if-no-files-found: error
