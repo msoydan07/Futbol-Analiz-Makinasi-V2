@@ -1,3 +1,11 @@
+> **5 KASIM 2026 — SABAH ORANI İÇİN GERÇEK 215 TAKIM KİMLİK BAĞI, BAŞARILI**
+>
+> - Kullanıcının ücretsiz sabah oran taramasından dönen takım adları (Maçkolik veya federasyon adı) artık `morning_quote_policy_263.canonical_fixture` içinde SHA-korumalı `experiments/263/evidence/identity_index_263.json` ile karşılaştırılır. 2026–27 on lig üyeliğinde **benzersiz tam alias veya UUID eşleşmesi** olursa sabah kaydı aynı takımın gerçek UUID'sine bağlanır; yanlış lig, şüpheli resmî fikstür URL alan adı, TSİ tarih–UTC başlama uyumsuzluğu veya belirsiz ad **BLOCKED** olur. Dönüştürülen ID ile kullanıcının girdiği takım adı ayrı ayrı kaynak izinde tutulur. Bu tek başına fikstürün güncel resmî sitede gerçekten açık olduğunu kanıtlamaz; doğrudan kaynak incelemesi ayrıca gerekir.
+> - Yeni GitHub CI koşusu [41916715552](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41916715552): **35/35 sentetik ve önceki hedefli testler yeşil**, 5 yeni alias/lig/link koruma senaryosu ve değişmeyen karar bağlantı testleri. Commit [e180af7](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/commit/e180af784ca468dc44a9ab530a56ba9cec2c959d). M4 ağır yeniden eğitim yapılmadı, kilitli geçmiş tahminler korunuyor.
+> - **Gerçek fiyat henüz yok:** 6 Kasım sabahı görevinden önce `morning_quotes_locked/` klasöründe doğrulanmış yeni fiyat bulunmuyor. Piyasa karşılaştırma sitelerinde gösterilen 1xBet vb. fiyatlar iddaa/Nesine olarak etiketlenip saklanmayacak; kaynak ve aynı zamandaki karşı fiyatlar birebir doğrulanmadıkça gerçek arşiv ve EV sayacı 0 kalır. Programlanmış görev 09.00 TSİ civarı başlayacak; başarı ancak onun gerçek çıktısı ve GitHub commit'iyle değerlendirilecek.
+>
+---
+
 > **5 KASIM 2026 — SABAH ARŞİVİ / T−60 KOŞULLU KARAR SON KAYIT DENETİMİ**
 >
 > - Sabah fiyat arşivi ile T−60 dört-model kararının bağını **GitHub push öncesinde** tekrar doğrulayan `verify_conditional_precommit` kontrolü `experiments/263/morning_quote_policy_263.py` içine eklendi. İlgili GitHub Actions iş akışı, mevcut `git pull --rebase` ve SHA+KO önce kontrolünden sonra, `git push` öncesinde `verify-conditional` çalıştırır.
