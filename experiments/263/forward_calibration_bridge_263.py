@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 from forward_decision_candidate_263 import MARKETS, decide
 def canonical_bytes(payload):
-    return json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(\",\",\":\"),allow_nan=False).encode(\"utf-8\")
+    return json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(",",":"),allow_nan=False).encode("utf-8")
 
 CAL_SCHEMA="263_forward_dev_calibration_lock_v1"
 REPORT_SCHEMA="263_reuse_first_880_asof_C3_M4_calibration_research_v1"
