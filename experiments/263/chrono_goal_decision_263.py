@@ -30,7 +30,7 @@ def base(past):
  if len(past)<60:return None
  return {m:sum(outcome(r,m) for r in past)/len(past) for m in MARKETS}
 def probs(goals):
- mk=goals["markets"];ms=mk["1X2"]
+ mk=goals["markets"];ms=mk["1X2"] if "1X2" in mk else {"H":mk["MS1"],"D":mk["MSX"],"A":mk["MS2"]}
  p={"MS1":ms["H"],"MSX":ms["D"],"MS2":ms["A"]}
  p.update({m:mk[m] for m in MARKETS if m not in p})
  if abs(p["MS1"]+p["MSX"]+p["MS2"]-1)>1e-6:raise ValueError("MS_NOT_NORMALIZED")
