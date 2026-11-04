@@ -108,7 +108,11 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
     source_status,source_sha=verify_snapshot(history_path,rows,now,base,source_audit,shadow_evidence=shadow_evidence)
     future_rows=[r for r in rows if r['match_date']>local_date and r['league']==league]
     if future_rows:raise ValueError('source_contains_same_day_or_future_results')
-    league_rows=[r for r in rows if r['league']==league]
+    # The official awarded score remains in the source snapshot, but its
+    # shortened exposure must NOT train models forecasting a full 90 minutes.
+    from full_match_eligibility_263 import full_match_rows
+    league_rows,excluded_partial,eligibility_sha=full_match_rows(
+        [r for r in rows if r['league']==league])
     if not league_rows:raise ValueError('missing_league_history')
     latest=max(r['match_date'] for r in league_rows)
     if (datetime.fromisoformat(local_date).date()-datetime.fromisoformat(latest).date()).days>MAX_DATA_AGE_DAYS:
@@ -159,6 +163,8 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
                   'human_source_acceptance':shadow_evidence is None,
                   'research_shadow_unverified_source':shadow_evidence is not None,
                   'league_history_rows':len(past),'league_latest_result_date':latest,
+                  'training_excluded_partial_match_ids':excluded_partial,
+                  'full_match_policy_sha256':eligibility_sha,
                   'cutoff_rule':'strictly_before_local_kickoff_date'},
           'code':{'B_C2_C3':'FROZEN_EXISTING_MODEL_FUNCTIONS',
                   'frozen_batch_sha256':sha256_file(Path(__file__).with_name('exp_263_batch.py')),
