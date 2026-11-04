@@ -24,7 +24,7 @@ jobs:
         run: python -m unittest -v experiments/263/test_overline_fairness_263.py
       - name: Reuse existing 4509-data SHA-locked artifact
         env:
-          GH_TOKEN: \${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
