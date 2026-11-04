@@ -1,3 +1,12 @@
+> **4 Kasım 2026 / DÖRT MODEL ANA–ALTERNATİF–PAS UYGULAMA KAYDI**
+>
+> - Kullanıcı isteği üzerine aynı gün önceki sohbet kararı yeniden incelendi. Dört modelin ayrı olasılıkları, kendi lig tabanına göre güvenilir DEV kalibrasyonu, en az 3 modelin desteklediği pazar, güncel tam karşı oranlar, EV >=%5 / no-vig avantaj >=3 puan, ana / farklı aile alternatifi / PAS, 1.5 Üst keyfî cezalandırmama esas alındı.
+> - **Deneysel karar politikası kodlandı:** experiments/263/four_model_value_policy_263.py; oran girişi GOALS_1.5 ve GOALS_3.5 ile genişletildi. Geliştirme Brier-skill negatif olan 1.5 Üst, yüksek ihtimal uyarısında görünebilir; henüz güvenilir değer adayı ilan edilmez. Gelecek gerçek başarı bunu değiştirebilir; M4 otomatik terfi etmedi.
+> - Toplu kabul: [.github/workflows/263-four-model-value-one-batch.yml](../.github/workflows/263-four-model-value-one-batch.yml); **sonuç kesinleşmeden tam başarılı deme**. GitHub CI sırasındaki test/konfigürasyon adımlarını gereksiz tekrarlama.
+> - **Açık kalan gerçek bağlantılar:** kullanıcının adlandırdığı T−60 gerçek resmî maçta SHA mühürlü forecast + aynı maçın as-of lig baseline kaydı; canlı bahis sitesinin gerçek fiyatları veya doğrudan insan gözlemi (bu kod otomatik fiyat toplamaz); dört-model araştırma kararının aynı KO öncesi güvenli kayıtla bağlanması ve maç sonrası sonuç ölçümü. Kötü veya doğrulanamayan oran = EV yok / PAS. Onaylı 4.518 veri ve 4.413 arşiv **değişmedi**.
+>
+---
+
 > **4 Kasım 2026 — SAHİP ONAYI / NİHAİ KAYIT (önceki durum notlarının yerine geçer)**
 >
 > - Kullanıcının açık **“4518 ONAYLIYORUM”** mesajı, **2026-11-04T15:43:42+00:00** onay zamanı ve `msoydan07` inceleyici kimliğiyle `data/staged_263/owner_approval_4518.json` dosyasına kaydedildi.
