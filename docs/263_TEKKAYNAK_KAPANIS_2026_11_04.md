@@ -1,3 +1,12 @@
+> **5 KASIM 2026 — SABAH ARŞİVİ / T−60 KOŞULLU KARAR SON KAYIT DENETİMİ**
+>
+> - Sabah fiyat arşivi ile T−60 dört-model kararının bağını **GitHub push öncesinde** tekrar doğrulayan `verify_conditional_precommit` kontrolü `experiments/263/morning_quote_policy_263.py` içine eklendi. İlgili GitHub Actions iş akışı, mevcut `git pull --rebase` ve SHA+KO önce kontrolünden sonra, `git push` öncesinde `verify-conditional` çalıştırır.
+> - Kaynağın sabah gözlem orijinal dosyası ve SHA'sı, maç kimliği/tarih/başlama UTC saati, SHA-mühürlü asıl dört-model tahmin, SHA-mühürlü koşullu karar, kaynakla aynı fiyat sınıfı, rapor Markdown metni ve T−60 koşulundaki maçın başlamamış olması kontrol edilir. Sabah fiyatı yoksa önceki oransız PAS kayıt yolu durdurulmaz. Var olan sabah fiyatı için koşullu karar dosyası yoksa ya da değiştirilmişse GitHub'a gönderim engellenir. Bu işlemler orijinal tahmin dosyasını değiştirmez.
+> - **Tek odaklı CI kabulü başarılı:** [GitHub Actions #41915287242](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41915287242) — **30/30 sentetik test**; sadece 6 yeni precommit senaryosu eklendi, eski arşivin M4 model fit'i yeniden yapılmadı. Kod kaydı: `8964742665e70d3f40d11782c40472c73abb776d`. Bu testler canlı ücretsiz bookmaker oranı alındığını göstermez.
+> - **Gerçek iş hâlâ açılmadı:** `experiments/263/morning_quotes_locked/` altında henüz gerçek gözlenmiş fiyat kaydı yok; zamanlanmış cuma/cumartesi/pazar sabah taraması ilk kaynak denemesidir. Gerçek fiyat görülmeden otomatik çalışıyor iddiası, gerçek pilot tahmin başarısı veya ROI değerlendirmesi yapılmaz.
+>
+---
+
 > **4 KASIM 2026 — SABAH ORANI / T−60 GÜNCEL ÖNCELİĞİ KULLANICI KARARI VE UYGULAMA**
 >
 > - Sabah oranı ve T−60 son kontrolü ayrı zamanlarda yapılacak. Siteden gerçek fiyat kaynağı, gözlem UTC saati ve aynı maç/aynı marketin tam karşı fiyatları doğrulanarak önceden ayrı SHA-mühürlü kayıt oluşturulabilir. Motor artık sabah fiyatı **1,90**, T−60 güncel fiyat **1,60** olduğunda **1,60'ı kullanır**, sabah 1,90'ı daha avantajlı olduğu için saklayıp hesapta tutmaz. Güncel fiyat hiç bulunamazsa eski 1,90 ile ancak **RESEARCH_CONDITIONAL_MORNING_PRICE_NOT_CURRENT** şeklinde açıklamalı ana/alternatif aday gösterebilir. Güncel alınabilir fiyat ve gerçek EV olduğu iddia edilmez; fiyat hiç yoksa PAS. En az 3 model desteği, kalibrasyon becerisi, EV+marjsız pazar avantajı ve 1.5 Üst kalibrasyon koruması değişmedi.
