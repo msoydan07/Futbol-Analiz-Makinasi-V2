@@ -47,15 +47,22 @@ def produce(forecast, history_path, *, now=None):
             h=int(r["home_goals"]);a=int(r["away_goals"])
             if h<0 or a<0 or r["result"]!=("H" if h>a else "D" if h==a else "A"):
                 raise ValueError("INVALID_HISTORICAL_RESULT")
-            rows.append((day,h,a))
+            rows.append(r)
+    from full_match_eligibility_263 import full_match_rows
+    rows,excluded_partial,eligibility_sha=full_match_rows(rows)
+    if data.get("training_excluded_partial_match_ids",[])!=excluded_partial:
+        raise ValueError("BASELINE_TRAINING_EXCLUSION_MISMATCH")
+    if (excluded_partial or data.get("full_match_policy_sha256") is not None) and data.get("full_match_policy_sha256")!=eligibility_sha:
+        raise ValueError("BASELINE_EXCLUSION_POLICY_HASH_MISMATCH")
     if len(rows)<120:raise ValueError("INSUFFICIENT_LEAGUE_HISTORY")
-    latest=max(x[0] for x in rows)
+    latest=max(x["match_date"] for x in rows)
     if latest!=data.get("league_latest_result_date"):
         raise ValueError("HISTORY_CUTOFF_MISMATCH")
     if len(rows)!=data.get("league_history_rows"):
         raise ValueError("HISTORY_COUNT_MISMATCH")
     counts=Counter()
-    for _,h,a in rows:
+    for row in rows:
+        h=int(row["home_goals"]);a=int(row["away_goals"])
         counts["MS1"]+=h>a
         counts["MSX"]+=h==a
         counts["MS2"]+=h<a
