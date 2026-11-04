@@ -1,0 +1,79 @@
+"""Deterministic per-league pre-kickoff empirical baseline from accepted history.
+
+Consumes only completed results strictly before the fixture's local date.
+It is a historical market frequency, NOT odds, EV or a calibrated prediction.
+"""
+from __future__ import annotations
+import csv
+import hashlib
+import json
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
+from forward_calibration_bridge_263 import MARKETS, _digest
+from forward_baseline_provenance_263 import SCHEMA, _time
+
+def produce(forecast, history_path, *, now=None):
+    now=now or datetime.now(timezone.utc)
+    if now.tzinfo is None:raise ValueError("AWARE_TIME_REQUIRED")
+    if forecast.get("schema")!="quad_forward_263_v1":
+        raise ValueError("INVALID_FORECAST_SCHEMA")
+    if _digest({k:v for k,v in forecast.items() if k!="payload_sha256"})!=forecast.get("payload_sha256"):
+        raise ValueError("FORECAST_HASH_MISMATCH")
+    if forecast.get("status")!="EXPERIMENTAL_PREMATCH_FOUR_MODEL_NO_BETTING":
+        raise ValueError("SHADOW_NOT_ACCEPTED")
+    data=forecast["data"]
+    if data.get("snapshot_acceptance")!="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED" or data.get("human_source_acceptance") is not True or data.get("research_shadow_unverified_source") is not False:
+        raise ValueError("UPDATED_SOURCE_NOT_HUMAN_ACCEPTED")
+    if hashlib.sha256(Path(history_path).read_bytes()).hexdigest()!=data.get("snapshot_sha256"):
+        raise ValueError("HISTORY_SHA_MISMATCH")
+    asof=_time(forecast["created_at_utc"])
+    ko=_time(forecast["fixture"]["kickoff_utc"])
+    if asof>=ko or now.astimezone(timezone.utc)<asof:
+        raise ValueError("FORECAST_TIME_INVALID")
+    local_date=forecast["fixture"]["match_local_date"]
+    league=forecast["fixture"]["league"]
+    rows=[]
+    ids=set()
+    with Path(history_path).open(encoding="utf-8-sig",newline="") as f:
+        reader=csv.DictReader(f)
+        for r in reader:
+            if not r.get("fixture_id") or r["fixture_id"] in ids:
+                raise ValueError("DUPLICATE_OR_MISSING_FIXTURE_ID")
+            ids.add(r["fixture_id"])
+            if r.get("league")!=league:continue
+            day=r["match_date"]
+            if day>=local_date:raise ValueError("FUTURE_LEAGUE_RESULTS_IN_SNAPSHOT")
+            h=int(r["home_goals"]);a=int(r["away_goals"])
+            if h<0 or a<0 or r["result"]!=("H" if h>a else "D" if h==a else "A"):
+                raise ValueError("INVALID_HISTORICAL_RESULT")
+            rows.append((day,h,a))
+    if len(rows)<120:raise ValueError("INSUFFICIENT_LEAGUE_HISTORY")
+    latest=max(x[0] for x in rows)
+    if latest!=data.get("league_latest_result_date"):
+        raise ValueError("HISTORY_CUTOFF_MISMATCH")
+    if len(rows)!=data.get("league_history_rows"):
+        raise ValueError("HISTORY_COUNT_MISMATCH")
+    counts=Counter()
+    for _,h,a in rows:
+        counts["MS1"]+=h>a
+        counts["MSX"]+=h==a
+        counts["MS2"]+=h<a
+        for line in (1.5,2.5,3.5):
+            key=f"{line:g}"
+            counts["OVER_"+key]+=h+a>line
+            counts["UNDER_"+key]+=h+a<line
+        counts["BTTS_YES"]+=h>0 and a>0
+        counts["BTTS_NO"]+=h==0 or a==0
+    n=len(rows)
+    # Empirical league rates with one pseudocount per binary side,
+    # and one pseudocount per outcome for the three-way result.
+    values={m:((counts[m]+1)/(n+3) if m.startswith("MS") else (counts[m]+1)/(n+2)) for m in MARKETS}
+    record={"schema":SCHEMA,"forecast_sha256":forecast["payload_sha256"],
+        "league":league,"method":"PAST_RESULTS_LEAGUE_MARKET_RATE",
+        "source_snapshot_sha256":data["snapshot_sha256"],
+        "historical_match_count":n,"last_result_date":latest,
+        "created_at_utc":forecast["created_at_utc"],
+        "markets":values}
+    record["payload_sha256"]=_digest(record)
+    return record
