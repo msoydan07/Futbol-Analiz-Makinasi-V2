@@ -1,3 +1,13 @@
+> **4 Kasım 2026 / 6–8 KASIM GERÇEK VERİ ÖN KONTROLÜ — YEŞİL**
+>
+> - Kabul edilmiş **4.518 maçlık SHA'lı dosya**, 10 lig için gerçek kaynak dosyası olarak okundu; 6, 7 ve 8 Kasım'ın her biri için tarihsel örneklem eşiği ve **10 günlük azami veri yaşı** uygun. [GitHub veri ön kontrolü #41905205159](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41905205159): **5/5 test başarılı**, (10/10) lig ve (30/30) lig-gün penceresi mekanik veri yönünden hazır. [JSON denetim artifact'ı](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41905205159#artifacts).
+> - Eski Hollanda tatil edilmiş maç skor kaynağında korunuyor ama **1 satır 90 dakika model eğitiminde hariç**; böylece NED1 405 kaynak / 404 eğitim satırı. ENG2 717 kaynak / 717 sonuç satırı; 3 Kasım tarihli 9 kaydın `source_row`, korner ve başka bazı ek alanları boş, uydurulmadı. Hiçbir ligde sonuç URL alanı boş değil.
+> - **Sınırlama:** Bu denetim gelecekteki **resmî fikstürü, kadroyu, maç günü alınacak fiyatı veya 4.518 skorun tamamını bağımsız yeniden doğrulamaz**. 5 Kasım ve daha sonra tamamlanan maç sonuçları varsa gerçek T−60 anında yeni kaynak kontrolü şarttır. Bu yalnız veri ön hazırlığıdır; resmî 96/100 ileri pilot kayıt sayısı hâlâ **0**.
+> - **Canlı oran araştırması:** [iddaa program sayfası](https://www.iddaa.com/program/canli) taranabiliyor ama otomatik güvenilir tam karşı fiyatların alındığı kanıtlanmadı. [The Odds API](https://the-odds-api.com/liveapi/guides/v4/) etkin bir anahtar isteyen bağımsız piyasa veri servisidir; [bookmaker listesi](https://the-odds-api.com/sports-odds-data/bookmaker-apis.html) aynı iddaa/Nesine oranlarını garanti etmez. **Bu nedenle ücretli/yeni sağlayıcı otomatik eklenmedi**, mevcut yerli kaynak önceliği korundu. Maçta kaynaktan gerçekten kontrol edilen tam fiyatlar yoksa EV yok ve ana değer kararı **PAS**.
+> - GitHub ileri tahmin workflow'u, eş zamanlı değişiklik olursa `git pull --rebase` sonrası **yeniden KO-öncesi SHA ve zaman denetimi** yapacak. Bunun gerçek yarışta başarıyla sınandığı henüz iddia edilmez. Fenerbahçe–Liverpool ve diğer UEFA kilitli iki-model dosyaları değiştirilmedi; eski 880 maç yeniden hesaplanmadı.
+>
+---
+
 > **4 Kasım 2026 — SON GELİŞTİRME DURUMU / 1.5, 2.5, 3.5 MAÇ SONU ÖLÇÜMÜ**
 >
 > - **Olasılık ve değer karar katmanı:** B/C2/C3/M4 + 1.5/2.5/3.5 oran çiftleri + ana/alternatif/PAS için daha önce 23/23 kabul testi yeşildi ([41864815416](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/41864815416)).

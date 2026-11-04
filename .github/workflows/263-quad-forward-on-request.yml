@@ -90,6 +90,9 @@ jobs:
           fi
           if ! git diff --cached --quiet; then
             git commit -m 'Record four-model forecast plus baseline/PAS or blocked evidence'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            # Recheck genuine KO-before-commit window AFTER any branch synchronization.
+            # If kickoff passed or another job changed the request, do not push a late forecast.
             if [ "$FORWARD_OUTCOME" = success ]; then
               python experiments/263/quad_prematch_bridge_263.py verify-baseline --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
             fi
