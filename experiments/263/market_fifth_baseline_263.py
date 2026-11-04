@@ -23,9 +23,15 @@ from market_benchmark_263 import compare
 
 SCHEMA = "263_fifth_market_baseline_postmatch_v1"
 OBSERVATION_SCHEMA = "263_manual_market_snapshot_v1"
-GROUP_ORDER = ("MS", "KG", "GOALS_2.5")
+GROUP_ORDER = ("MS", "KG", "GOALS_1.5", "GOALS_2.5", "GOALS_3.5")
 MODELS = ("B", "C2", "C3", "M4")
-POSITIVE = {"KG": "BTTS_YES", "GOALS_2.5": "OVER_2.5"}
+POSITIVE = {
+    "KG": "BTTS_YES",
+    "GOALS_1.5": "OVER_1.5",
+    "GOALS_2.5": "OVER_2.5",
+    "GOALS_3.5": "OVER_3.5",
+}
+GOAL_TOTAL_MINIMUM = {"GOALS_1.5": 2, "GOALS_2.5": 3, "GOALS_3.5": 4}
 
 
 def sealed_payload(data: dict, expected_schema: str) -> str:
@@ -72,7 +78,10 @@ def _result_side(result: dict, group: str) -> str:
         return "MS1" if a > b else "MSX" if a == b else "MS2"
     if group == "KG":
         return "BTTS_YES" if a > 0 and b > 0 else "BTTS_NO"
-    return "OVER_2.5" if a + b >= 3 else "UNDER_2.5"
+    if group not in GOAL_TOTAL_MINIMUM:
+        raise ValueError("UNSUPPORTED_GOALS_GROUP")
+    line = group.removeprefix("GOALS_")
+    return ("OVER_" if a + b >= GOAL_TOTAL_MINIMUM[group] else "UNDER_") + line
 
 
 def _same_source_quote(q: dict, obs: dict) -> None:

@@ -8,7 +8,7 @@ from classification_odds_263 import poisson_market
 from forward_c3 import canonical_bytes
 from forward_quad import SCHEMA
 from market_fifth_baseline_263 import (
-    OBSERVATION_SCHEMA, evaluate_pair, sealed_payload, summarize, _score
+    OBSERVATION_SCHEMA, evaluate_pair, sealed_payload, summarize, _score, _result_side
 )
 
 KO = datetime(2026, 11, 6, 17, 0, tzinfo=timezone.utc)
@@ -77,7 +77,9 @@ class FifthMarketBaselineChecks(unittest.TestCase):
     def test_missing_markets_are_not_fabricated(self):
         p=calc()
         self.assertEqual(p["groups"]["KG"]["status"],"NO_SNAPSHOT_FOR_THIS_MARKET")
+        self.assertEqual(p["groups"]["GOALS_1.5"]["status"],"NO_SNAPSHOT_FOR_THIS_MARKET")
         self.assertEqual(p["groups"]["GOALS_2.5"]["status"],"NO_SNAPSHOT_FOR_THIS_MARKET")
+        self.assertEqual(p["groups"]["GOALS_3.5"]["status"],"NO_SNAPSHOT_FOR_THIS_MARKET")
         self.assertEqual(summarize([p])["markets"]["KG"]["quotes_complete_n"],0)
 
     def test_same_match_paired_scores_and_unavailable_model(self):
@@ -154,6 +156,60 @@ class FifthMarketBaselineChecks(unittest.TestCase):
 
     def test_binary_brier_matches_existing_method(self):
         self.assertAlmostEqual(_score({"BTTS_YES":.7,"BTTS_NO":.3},"KG","BTTS_YES")["brier"],.09)
+
+    def test_postmatch_all_three_goal_lines_scored_with_opposites(self):
+        f,o,r=inputs()
+        o.pop("payload_sha256")
+        for group,prices in {
+            "GOALS_1.5":{"OVER_1.5":1.25,"UNDER_1.5":4.0},
+            "GOALS_2.5":{"OVER_2.5":1.85,"UNDER_2.5":2.0},
+            "GOALS_3.5":{"OVER_3.5":3.20,"UNDER_3.5":1.42},
+        }.items():
+            q=deepcopy(o["quotes"]["MS"])
+            q["market_group"]=group
+            q["decimal_odds"]=prices
+            o["quotes"][group]=q
+        o=seal(o)
+        pair=calc(f,o,r)
+        expected={"GOALS_1.5":"OVER_1.5",
+                  "GOALS_2.5":"OVER_2.5",
+                  "GOALS_3.5":"UNDER_3.5"}
+        for group,selection in expected.items():
+            got=pair["groups"][group]
+            self.assertEqual(got["status"],"DESCRIPTIVE_MATCHED_PAIR_NOT_LIVE_VERIFIED")
+            self.assertEqual(got["actual_selection"],selection)
+            self.assertEqual(set(got["scores"]),{"MARKET","B","C2","C3","M4"})
+            self.assertAlmostEqual(sum(got["no_vig"].values()),1)
+            self.assertGreaterEqual(got["scores"]["MARKET"]["brier"],0)
+            self.assertLessEqual(got["scores"]["MARKET"]["brier"],1)
+        overview=summarize([pair])
+        self.assertEqual(set(overview["markets"]),{"MS","KG","GOALS_1.5","GOALS_2.5","GOALS_3.5"})
+        for group in expected:
+            self.assertEqual(overview["markets"][group]["quotes_complete_n"],1)
+
+    def test_goals_threshold_boundaries_not_conflated(self):
+        scored={"home_goals":2,"away_goals":0}
+        self.assertEqual(_result_side(scored,"GOALS_1.5"),"OVER_1.5")
+        self.assertEqual(_result_side(scored,"GOALS_2.5"),"UNDER_2.5")
+        self.assertEqual(_result_side(scored,"GOALS_3.5"),"UNDER_3.5")
+        scored={"home_goals":3,"away_goals":1}
+        self.assertEqual(_result_side(scored,"GOALS_1.5"),"OVER_1.5")
+        self.assertEqual(_result_side(scored,"GOALS_2.5"),"OVER_2.5")
+        self.assertEqual(_result_side(scored,"GOALS_3.5"),"OVER_3.5")
+        scored={"home_goals":0,"away_goals":1}
+        self.assertEqual(_result_side(scored,"GOALS_1.5"),"UNDER_1.5")
+
+    def test_stale_new_goal_quote_does_not_enter_postmatch_scores(self):
+        f,o,r=inputs()
+        o.pop("payload_sha256")
+        q=deepcopy(o["quotes"]["MS"])
+        q["market_group"]="GOALS_3.5"
+        q["decimal_odds"]={"OVER_3.5":3.20,"UNDER_3.5":1.42}
+        q["checked_at_utc"]=(ANALYSIS-timedelta(minutes=11)).isoformat()
+        o["quotes"]["GOALS_3.5"]=q
+        pair=calc(f,seal(o),r)
+        self.assertEqual(pair["groups"]["GOALS_3.5"]["status"],"NO_COMPLETE_FRESH_QUOTE")
+        self.assertEqual(summarize([pair])["markets"]["GOALS_3.5"]["quotes_complete_n"],0)
 
     def test_no_model_modified_by_paired_scoring(self):
         f,o,r=inputs()
