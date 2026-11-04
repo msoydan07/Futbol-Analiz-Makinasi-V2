@@ -4,13 +4,19 @@ from datetime import datetime,timezone
 from pathlib import Path
 from test_four_model_value_policy_263 import fixture,odds,seal
 from four_model_value_policy_263 import decide
-from morning_quote_policy_263 import REQUEST,record_request,extract,identity,conditional,read_for_forecast,verify_conditional_precommit
+from morning_quote_policy_263 import REQUEST,record_request,extract,identity,conditional,read_for_forecast,verify_conditional_precommit,canonical_fixture
 NOW=datetime(2026,11,6,16,3,tzinfo=timezone.utc)
 AM=datetime(2026,11,6,7,0,tzinfo=timezone.utc)
 class MorningOddsAcceptance(unittest.TestCase):
  def setUp(self):
     self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
     self.root=Path(self.tmp.name);self.f,self.b,self.lock=fixture()
+    # Real signed registry UUIDs, synthetic prices and fixture times.
+    self.f["fixture"].update(home_id="da9ddb8a-aabc-5492-a4b5-b52eaed65165",
+                             away_id="41b9043e-2819-52dc-963f-a5756b6e88c3")
+    seal(self.f)
+    self.b["forecast_sha256"]=self.f["payload_sha256"]
+    seal(self.b)
     fx=self.f["fixture"]
     self.fx={k:fx[k] for k in ("league","home_id","away_id","match_local_date","kickoff_utc")}
     self.fx["official_fixture_url"]=fx.get("official_source","https://www.tff.org/synthetic-fixture")
@@ -128,5 +134,44 @@ class MorningOddsAcceptance(unittest.TestCase):
     push=wf.rindex('git push origin "HEAD:$GITHUB_REF_NAME"')
     self.assertLess(rebased,verification)
     self.assertLess(verification,push)
+
+
+ def test_known_display_names_are_resolved_to_registry_uuid(self):
+    self.source["fixture"]["home_id"]="GAZİANTEP FUTBOL KULÜBÜ A.Ş."
+    self.source["fixture"]["away_id"]="KASIMPAŞA A.Ş."
+    self.path.write_text(json.dumps(self.source))
+    row=record_request(self.relative,self.root,self.root/"morning",AM)
+    snap=json.loads(Path(row["path"]).read_text())
+    self.assertEqual(snap["fixture"]["home_id"],self.f["fixture"]["home_id"])
+    self.assertEqual(snap["fixture"]["away_id"],self.f["fixture"]["away_id"])
+    self.assertEqual(snap["source_review"]["entered_home"],"GAZİANTEP FUTBOL KULÜBÜ A.Ş.")
+    self.assertEqual(snap["source_review"]["identity_status"],
+                     "SIGNED_CANONICAL_MEMBERSHIP_EXACT_MATCH")
+    self.assertEqual(extract(snap,self.f,NOW)["MS1"]["odds"],1.9)
+
+ def test_unknown_club_name_fails_closed_not_silent_nonmatch(self):
+    self.source["fixture"]["home_id"]="Gaziantep Flying Elephants"
+    self.path.write_text(json.dumps(self.source))
+    with self.assertRaisesRegex(ValueError,"IDENTITY_UNRESOLVED"):
+        self.snap()
+
+ def test_wrong_league_membership_fails_closed(self):
+    self.source["fixture"]["league"]="ENG1"
+    self.source["fixture"]["official_fixture_url"]="https://www.premierleague.com/en/matches/fake"
+    self.path.write_text(json.dumps(self.source))
+    with self.assertRaisesRegex(ValueError,"IDENTITY_UNRESOLVED"):
+        self.snap()
+
+ def test_nonofficial_fixture_url_fails_closed(self):
+    self.source["fixture"]["official_fixture_url"]="https://fictional-results.example/match/123"
+    self.path.write_text(json.dumps(self.source))
+    with self.assertRaisesRegex(ValueError,"NOT_OFFICIAL_LEAGUE_FIXTURE_HOST"):
+        self.snap()
+
+ def test_wrong_turkey_local_date_fails_closed(self):
+    self.source["fixture"]["match_local_date"]="2026-11-07"
+    self.path.write_text(json.dumps(self.source))
+    with self.assertRaisesRegex(ValueError,"LOCAL_DATE_NOT_MATCHING_KICKOFF"):
+        self.snap()
 
 if __name__=="__main__":unittest.main()

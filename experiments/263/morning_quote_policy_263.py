@@ -36,6 +36,45 @@ def identity(fx):
     if official.scheme!="https" or not official.hostname or official.username or official.password:
         raise ValueError("MORNING_OFFICIAL_FIXTURE_LINK_REQUIRED")
     return sha([fx["league"],fx["home_id"],fx["away_id"],ko.isoformat()])[:24]
+
+def canonical_fixture(fx):
+    """Pin display names to the signed 215-team registry; never fuzzy-match."""
+    identity(fx)
+    from mackolik_identity_gate_263 import (
+        LEAGUE_ZONE, _official, _memberships, _validate_identity_source, key)
+    if fx["league"] not in LEAGUE_ZONE:
+        raise ValueError("MORNING_LEAGUE_NOT_IN_SCOPE")
+    if not _official(fx["official_fixture_url"],fx["league"]):
+        raise ValueError("MORNING_NOT_OFFICIAL_LEAGUE_FIXTURE_HOST")
+    ko=read_aware(fx["kickoff_utc"])
+    if ko.astimezone(TR).date().isoformat()!=fx["match_local_date"]:
+        raise ValueError("MORNING_LOCAL_DATE_NOT_MATCHING_KICKOFF")
+    registry_path=Path(__file__).with_name("evidence")/"identity_index_263.json"
+    registry=json.loads(registry_path.read_text(encoding="utf-8"))
+    _validate_identity_source(registry)
+    members=_memberships(registry,"2026-2027").get(fx["league"],set())
+    if not members:raise ValueError("MORNING_LEAGUE_MEMBERSHIP_NOT_VERIFIED")
+    resolved={}
+    for field in ("home_id","away_id"):
+        name=fx[field]
+        if name in members:
+            resolved[field]=name
+            continue
+        candidates=set()
+        token=key(name)
+        if not token:raise ValueError("MORNING_TEAM_NAME_EMPTY")
+        for alias,club_id in registry["aliases"].items():
+            if club_id in members and key(alias)==token:candidates.add(club_id)
+        for club_id in members:
+            if key(registry["teams"][club_id]["name"])==token:
+                candidates.add(club_id)
+        if len(candidates)!=1:
+            raise ValueError("MORNING_TEAM_IDENTITY_UNRESOLVED_OR_AMBIGUOUS_"+field)
+        resolved[field]=next(iter(candidates))
+    if resolved["home_id"]==resolved["away_id"]:
+        raise ValueError("MORNING_BOTH_SIDES_RESOLVED_TO_ONE_TEAM")
+    return {**fx,**resolved,"kickoff_utc":ko.isoformat()}
+
 def record_request(relative,root,output,now):
     now=read_aware(now.isoformat())
     if not REQUEST_RE.fullmatch(relative):raise ValueError("MORNING_REQUEST_PATH_INVALID")
@@ -47,7 +86,8 @@ def record_request(relative,root,output,now):
           "observed_at_utc","visible_source_note","market_prices"}
     if not isinstance(req,dict) or set(req)!=keys or req["schema"]!=REQUEST:
         raise ValueError("MORNING_REQUEST_SCHEMA_INVALID")
-    fx=req["fixture"];stem=identity(fx)
+    raw_fixture=req["fixture"]
+    fx=canonical_fixture(raw_fixture);stem=identity(fx)
     observed=read_aware(req["observed_at_utc"]);reviewed=read_aware(req["reviewed_at_utc"])
     ko=read_aware(fx["kickoff_utc"])
     if not reviewed<=observed<=now<ko or now-observed>timedelta(minutes=30):
@@ -84,6 +124,9 @@ def record_request(relative,root,output,now):
           "source_domain":source,"source_review":{"method":"MANUAL_PUBLIC_PAGE",
               "reviewer":req["reviewer"].strip(),"reviewed_at_utc":reviewed.isoformat(),
               "visible_source_note":req["visible_source_note"].strip(),
+              "entered_home":raw_fixture["home_id"],
+              "entered_away":raw_fixture["away_id"],
+              "identity_status":"SIGNED_CANONICAL_MEMBERSHIP_EXACT_MATCH",
               "original_request_path":relative,
               "original_request_sha256":hashlib.sha256(rp.read_bytes()).hexdigest()},
           "quotes":quotes,"not_current_at_T60":True,"research_only":True,
