@@ -73,6 +73,18 @@ jobs:
           python experiments/263/quad_prematch_bridge_263.py baseline \
             --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json" \
             --history data/quad_accepted_263/extended_history.csv
+      - name: Optional iddaa API book-odds observation and decision (never faked)
+        if: steps.requests.outputs.has_requests == 'true' && steps.forward.outcome == 'success'
+        continue-on-error: true
+        env:
+          PYTHONPATH: experiments/263
+          ODDSPAPI_API_KEY: ${{ secrets.ODDSPAPI_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/odds_provider_oddspapi_263.py \
+            --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json" \
+            --attempt-report "experiments/263/api_odds_attempts/$GITHUB_SHA.json"
       - name: Commit new pilot predictions or honest blocked report
         if: steps.requests.outputs.has_requests == 'true' && always()
         env:
@@ -85,6 +97,9 @@ jobs:
           if [ "$FORWARD_OUTCOME" = success ]; then
             python experiments/263/quad_prematch_bridge_263.py verify-baseline --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
             git add -A -- forward_quad_263 experiments/263/quad_research_links experiments/263/quad_batch_reports
+            for dir in experiments/263/api_odds_attempts experiments/263/market_quotes_locked experiments/263/quad_priced_decisions; do
+              if [ -d "$dir" ]; then git add -A -- "$dir"; fi
+            done
           else
             if [ -d experiments/263/quad_batch_reports ]; then git add -A -- experiments/263/quad_batch_reports; fi
           fi
@@ -107,6 +122,9 @@ jobs:
           path: |
             forward_quad_263/*/*.json
             experiments/263/quad_research_links/*/*/*.json
+            experiments/263/api_odds_attempts/*.json
+            experiments/263/market_quotes_locked/*/*.json
+            experiments/263/quad_priced_decisions/*/*.json
             experiments/263/quad_batch_reports/*.json
       - name: Reject zero registered predictions
         if: steps.requests.outputs.has_requests == 'true' && always()

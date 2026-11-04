@@ -21,14 +21,26 @@ def median(x):
 def _odds(obs,f,now):
     if obs is None:return {},"NO_VERIFIED_ODDS",None
     sealed_payload(obs,OBSERVATION_SCHEMA)
-    if obs.get("evidence_scope")!="HUMAN_ATTESTED_NOT_EXTERNALLY_REVERIFIED":
-        raise ValueError("HUMAN_ODDS_ATTESTATION_REQUIRED")
+    scope=obs.get("evidence_scope")
+    is_provider=scope=="AGGREGATOR_API_NOT_DIRECT_BOOKMAKER_VERIFIED"
+    if not is_provider and scope!="HUMAN_ATTESTED_NOT_EXTERNALLY_REVERIFIED":
+        raise ValueError("ODDS_EVIDENCE_SCOPE_INVALID")
     if obs.get("forecast_payload_sha256")!=f["payload_sha256"] or obs.get("fixture_key")!=fixture_key(f["fixture"]):
         raise ValueError("ODDS_WRONG_FORECAST_OR_FIXTURE")
     domain=obs.get("source_domain")
     if domain not in ACCEPTED_DOMAINS:raise ValueError("ODDS_SOURCE_UNTRUSTED")
     rev=obs.get("source_review")
-    if not isinstance(rev,dict) or rev.get("method")!="MANUAL_PUBLIC_PAGE" or not rev.get("reviewer") or not rev.get("visible_source_note"):
+    if not isinstance(rev,dict) or not rev.get("reviewer") or not rev.get("visible_source_note"):
+        raise ValueError("ODDS_SOURCE_OBSERVATION_MISSING")
+    if is_provider:
+        if (domain!="iddaa.com" or rev.get("method")!="ODDSPAPI_REST_RESPONSE"
+            or rev.get("provider")!="oddspapi.io"
+            or not isinstance(rev.get("provider_odds_sha256"),str)
+            or len(rev["provider_odds_sha256"])!=64
+            or not isinstance(rev.get("provider_fixture_id"),str)
+            or not rev["provider_fixture_id"].startswith("id")):
+            raise ValueError("ODDSPAPI_AGGREGATOR_PROVENANCE_INVALID")
+    elif rev.get("method")!="MANUAL_PUBLIC_PAGE":
         raise ValueError("ODDS_HUMAN_OBSERVATION_MISSING")
     checked=read_aware(obs["analysis_at_utc"]);reviewed=read_aware(rev["reviewed_at_utc"])
     ko=read_aware(f["fixture"]["kickoff_utc"]);created=read_aware(f["created_at_utc"])
@@ -44,14 +56,19 @@ def _odds(obs,f,now):
         parsed=urlparse(str(quote.get("source_url","")))
         if parsed.scheme!="https" or (parsed.hostname or "").lower().removeprefix("www.")!=domain or quote.get("source")!=domain:
             raise ValueError("ODDS_GROUP_SOURCE_MISMATCH")
+        if quote.get("verification")!=("PROVIDER_API_OBSERVED" if is_provider else "INDEPENDENTLY_CHECKED"):
+            raise ValueError("ODDS_PROVENANCE_QUOTE_VERIFICATION_MISMATCH")
         p={key:odds_evidence(key,quote,obs["fixture_key"],ko.isoformat(),now.isoformat())
            for key in GROUPS[group]}
-        if any(x["status"]!="COMPLETE_PREMATCH_QUOTES_SOURCE_FLAGGED_AS_CHECKED" for x in p.values()):
+        expected=("COMPLETE_PREMATCH_QUOTES_PROVIDER_API_OBSERVED" if is_provider
+                  else "COMPLETE_PREMATCH_QUOTES_SOURCE_FLAGGED_AS_CHECKED")
+        if any(x["status"]!=expected for x in p.values()):
             raise ValueError("ODDS_INCOMPLETE_OR_WRONG_MARGIN_"+group)
         for key,x in p.items():
             if key in MARKETS:prices[key]={"odds":x["decimal_odds"],"fair":x["no_vig"],"source":domain,
                                           "url":quote["source_url"],"checked":x["checked_at_utc"]}
-    return prices,"HUMAN_ATTESTED_NOT_NETWORK_REVERIFIED",obs["payload_sha256"]
+    return prices,("ODDSPAPI_AGGREGATOR_SOURCED_NOT_DIRECT_BOOKMAKER_VERIFIED" if is_provider
+                   else "HUMAN_ATTESTED_NOT_NETWORK_REVERIFIED"),obs["payload_sha256"]
 
 def decide(f,base,lock,observation=None,*,now=None):
     now=now or datetime.now(timezone.utc)

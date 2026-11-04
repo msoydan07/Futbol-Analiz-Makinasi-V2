@@ -95,7 +95,7 @@ def odds_evidence(selection,quote,fixture_key,kickoff,now):
         return {**fallback,'status':'DOUBLE_CHANCE_COUNTERMARKET_NOT_COMPARABLE'}
     expected_group=GROUP.get(selection,'DOUBLE_CHANCE')
     if quote.get('market_group')!=expected_group:raise DecisionError('WRONG_MARKET_LINE')
-    if quote.get('verification')!='INDEPENDENTLY_CHECKED' or quote.get('stage')!='PREMATCH':
+    if quote.get('verification') not in ('INDEPENDENTLY_CHECKED','PROVIDER_API_OBSERVED') or quote.get('stage')!='PREMATCH':
         return {**fallback,'status':'SOURCE_OR_PRICE_NOT_CONFIRMED'}
     source=quote.get('source');source_url=quote.get('source_url')
     if not isinstance(source,str) or not source.strip() or not isinstance(source_url,str) or not source_url.startswith('https://'):
@@ -120,7 +120,10 @@ def odds_evidence(selection,quote,fixture_key,kickoff,now):
     inverse={k:1/x for k,x in odds.items()}
     margin=sum(inverse.values())-1
     if not -.001<=margin<=.5:return {**partial,'status':'BAD_BOOKMAKER_MARGIN'}
-    return {**partial,'status':'COMPLETE_PREMATCH_QUOTES_SOURCE_FLAGGED_AS_CHECKED',
+    status=('COMPLETE_PREMATCH_QUOTES_PROVIDER_API_OBSERVED'
+            if quote.get('verification')=='PROVIDER_API_OBSERVED'
+            else 'COMPLETE_PREMATCH_QUOTES_SOURCE_FLAGGED_AS_CHECKED')
+    return {**partial,'status':status,
             'no_vig':inverse[selection]/sum(inverse.values()),
             'market_margin':margin,'normalization':'proportional_no_vig'}
 
