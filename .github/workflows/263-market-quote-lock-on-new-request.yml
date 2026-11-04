@@ -45,19 +45,29 @@ jobs:
           python experiments/263/market_quote_intake_263.py \
             --manifest /tmp/new_manual_market_quotes.txt \
             --report "experiments/263/market_quote_batch_reports/${GITHUB_SHA}.json"
+          python experiments/263/quad_prematch_bridge_263.py priced \
+            --report "experiments/263/market_quote_batch_reports/${GITHUB_SHA}.json"
       - name: Push append-only quote snapshots and blocked evidence
         if: always()
+        env:
+          QUOTE_OUTCOME: ${{ steps.quotes.outcome }}
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          for folder in experiments/263/market_quotes_locked experiments/263/market_quote_batch_reports; do
-            if [ -d "$folder" ]; then git add -A -- "$folder"; fi
-          done
+          if [ "$QUOTE_OUTCOME" = success ]; then
+            python experiments/263/quad_prematch_bridge_263.py verify-priced --report "experiments/263/market_quote_batch_reports/${GITHUB_SHA}.json"
+            git add -A -- experiments/263/market_quotes_locked experiments/263/quad_priced_decisions experiments/263/market_quote_batch_reports
+          else
+            if [ -d experiments/263/market_quote_batch_reports ]; then git add -A -- experiments/263/market_quote_batch_reports; fi
+          fi
           if ! git diff --cached --quiet; then
-            git commit -m 'Record pre-KO manually attested odds or blocked evidence'
+            git commit -m 'Record paired prematch bookmaker odds and value decision or blocked report'
             git pull --rebase origin "$GITHUB_REF_NAME"
+            if [ "$QUOTE_OUTCOME" = success ]; then
+              python experiments/263/quad_prematch_bridge_263.py verify-priced --report "experiments/263/market_quote_batch_reports/${GITHUB_SHA}.json"
+            fi
             git push origin "HEAD:$GITHUB_REF_NAME"
           fi
       - name: Reject batch with zero validated price snapshots

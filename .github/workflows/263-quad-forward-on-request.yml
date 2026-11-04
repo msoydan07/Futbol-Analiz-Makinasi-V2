@@ -4,9 +4,6 @@ on:
     branches: [experiment/263-toplu-karsilastirma]
     paths:
       - 'experiments/263/quad_requests/*.json'
-      - 'experiments/263/run_quad_requested_batch.py'
-      - 'experiments/263/test_quad_request_intake.py'
-      - '.github/workflows/263-quad-forward-on-request.yml'
 permissions:
   contents: write
   actions: read
@@ -73,18 +70,29 @@ jobs:
             --source-acceptance data/quad_accepted_263/source_acceptance.json \
             --records forward_quad_263 \
             --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
+          python experiments/263/quad_prematch_bridge_263.py baseline \
+            --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json" \
+            --history data/quad_accepted_263/extended_history.csv
       - name: Commit new pilot predictions or honest blocked report
         if: steps.requests.outputs.has_requests == 'true' && always()
+        env:
+          FORWARD_OUTCOME: ${{ steps.forward.outcome }}
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          for folder in forward_quad_263 experiments/263/quad_batch_reports; do
-            if [ -d "$folder" ]; then git add -A -- "$folder"; fi
-          done
+          if [ "$FORWARD_OUTCOME" = success ]; then
+            python experiments/263/quad_prematch_bridge_263.py verify-baseline --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
+            git add -A -- forward_quad_263 experiments/263/quad_research_links experiments/263/quad_batch_reports
+          else
+            if [ -d experiments/263/quad_batch_reports ]; then git add -A -- experiments/263/quad_batch_reports; fi
+          fi
           if ! git diff --cached --quiet; then
-            git commit -m 'Store four-model sealed predictions or blocked batch audit'
+            git commit -m 'Record four-model forecast plus baseline/PAS or blocked evidence'
+            if [ "$FORWARD_OUTCOME" = success ]; then
+              python experiments/263/quad_prematch_bridge_263.py verify-baseline --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
+            fi
             git push origin "HEAD:$GITHUB_REF_NAME"
           fi
       - name: Preserve batch evidence
@@ -95,6 +103,7 @@ jobs:
           if-no-files-found: warn
           path: |
             forward_quad_263/*/*.json
+            experiments/263/quad_research_links/*/*/*.json
             experiments/263/quad_batch_reports/*.json
       - name: Reject zero registered predictions
         if: steps.requests.outputs.has_requests == 'true' && always()
