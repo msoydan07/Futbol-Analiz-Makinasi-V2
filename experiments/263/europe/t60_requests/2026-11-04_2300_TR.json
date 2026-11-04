@@ -1,0 +1,52 @@
+{
+  "schema": "263_UEFA_T60_SHADOW_LOCK_REQUEST_V1",
+  "slot_key": "2026-11-04_2300_TR",
+  "fixture_review": {
+    "status": "ASSISTANT_WEB_OFFICIAL_PAGE_REVIEWED",
+    "reviewed_at_utc": "2026-11-04T18:58:01Z",
+    "official_urls": {
+      "2049616": "https://www.uefa.com/uefachampionsleague/match/2049616--b-dortmund-vs-real-betis/",
+      "2049617": "https://www.uefa.com/uefachampionsleague/match/2049617--porto-vs-napoli/",
+      "2049618": "https://www.uefa.com/uefachampionsleague/match/2049618--psv-vs-club-brugge/",
+      "2049619": "https://www.uefa.com/uefachampionsleague/match/2049619--leipzig-vs-man-city/",
+      "2049623": "https://www.uefa.com/uefachampionsleague/match/2049623--lens-vs-como/"
+    }
+  },
+  "lineups": {
+    "2049616": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2049617": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2049618": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2049619": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2049623": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    }
+  }
+}
