@@ -1,0 +1,71 @@
+name: 263 manuel oran - pre-KO append only
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/market_quote_requests/*.json'
+permissions:
+  contents: write
+concurrency:
+  group: quad-263-manual-market-lock
+  cancel-in-progress: false
+jobs:
+  manual-quote-prekickoff-register:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fixed numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Reject edits/deletes; accept ONLY newly added JSON quote requests
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff-tree --no-commit-id --name-status -r HEAD -- experiments/263/market_quote_requests/ > /tmp/market_quote_delta.tsv
+          if grep -Ev '^A[[:space:]]+experiments/263/market_quote_requests/[A-Za-z0-9_-]+\.json$' /tmp/market_quote_delta.tsv | grep -q .; then
+            echo 'Only genuinely NEW manual market quote request files are allowed'
+            exit 1
+          fi
+          grep -E '^A[[:space:]]+experiments/263/market_quote_requests/[A-Za-z0-9_-]+\.json$' /tmp/market_quote_delta.tsv | cut -f2 > /tmp/new_manual_market_quotes.txt || true
+          test -s /tmp/new_manual_market_quotes.txt
+          test "$(wc -l < /tmp/new_manual_market_quotes.txt)" -le 12
+      - name: Validate and locally lock manual observations before KO
+        id: quotes
+        env:
+          PYTHONPATH: experiments/263
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/market_quote_intake_263.py \
+            --manifest /tmp/new_manual_market_quotes.txt \
+            --report "experiments/263/market_quote_batch_reports/${GITHUB_SHA}.json"
+      - name: Push append-only quote snapshots and blocked evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for folder in experiments/263/market_quotes_locked experiments/263/market_quote_batch_reports; do
+            if [ -d "$folder" ]; then git add -A -- "$folder"; fi
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record pre-KO manually attested odds or blocked evidence'
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
+      - name: Reject batch with zero validated price snapshots
+        if: always()
+        env:
+          QUOTE_OUTCOME: ${{ steps.quotes.outcome }}
+        run: |
+          test "$QUOTE_OUTCOME" = 'success' || {
+            echo 'No authenticated quote lock; read the blocked report, never backdate'
+            exit 1
+          }
