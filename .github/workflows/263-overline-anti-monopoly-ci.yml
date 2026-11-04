@@ -1,0 +1,48 @@
+name: 263 anti-1.5 Over monopoly read-only one shot
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/overline_fairness_263.py'
+      - 'experiments/263/test_overline_fairness_263.py'
+      - '.github/workflows/263-overline-anti-monopoly-ci.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  anti-overline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only new nested-market tests
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_overline_fairness_263.py
+      - name: Reuse existing 4509-data SHA-locked artifact
+        env:
+          GH_TOKEN: \${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/over15
+          gh run download 41802358251 --repo "$GITHUB_REPOSITORY" -n weekend-263-ten-league-source-evidence -D /tmp/over15
+          echo '69d687965500a260cc965a1482c23c1e07f11ebcabb1adaa9441dc6a17334a14  /tmp/over15/extended_history.csv' | sha256sum -c -
+      - name: Read existing sealed real early pre-KO four-model record, no new model fits
+        run: |
+          python experiments/263/overline_fairness_263.py \
+            --history /tmp/over15/extended_history.csv \
+            --forecast forward_quad_shadow_263/2026-11-06/1d6b6f16fef8bac971c184c4.json \
+            --json-out /tmp/over15_report.json \
+            --md-out /tmp/over15_report.md
+      - name: Preserve experimental research evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-1_5-2_5-ANTI-MONOPOLY-NOT-S1-S2
+          path: |
+            /tmp/over15_report.json
+            /tmp/over15_report.md
+          if-no-files-found: error
