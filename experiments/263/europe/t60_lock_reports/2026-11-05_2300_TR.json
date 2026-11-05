@@ -1,0 +1,42 @@
+{
+  "immutable_records": [
+    {
+      "payload_sha256": "1be38f18fe2f3411a418b3b6fc85dfacd4156fd14b4be8d7877a8b9154ac8fee",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-05_2300_TR/2050114.json",
+      "uefa_match_id": 2050114
+    },
+    {
+      "payload_sha256": "13683820526b4994c8bb7ccd63a8fd609698924b31e097f92f4fcf4fe3bfcd7e",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-05_2300_TR/2050111.json",
+      "uefa_match_id": 2050111
+    },
+    {
+      "payload_sha256": "ea31b138556cf9fa8a3db0326bc86764f692ed0a47ea6d132d1a966e1f28c605",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-05_2300_TR/2050123.json",
+      "uefa_match_id": 2050123
+    }
+  ],
+  "kickoff_utc": "2026-11-05T20:00:00+00:00",
+  "lock_created_at_utc": "2026-11-05T18:59:45.653603+00:00",
+  "matches": 3,
+  "no_main_model_or_parameters_changed": true,
+  "official_XI_not_a_model_multiplier": true,
+  "payload_sha256": "76e451fa4a29a414971be2be22b44ec8bb95696430b147c987a813904d0340b2",
+  "registration_is_experimental_shadow_not_100_pilot": true,
+  "schema": "263_UEFA_T60_SIX_SLOT_BATCH_LOCK_REPORT_V1",
+  "slot_key": "2026-11-05_2300_TR",
+  "source_digest_elo": "6af780a8786053be5be8607925b22472fcbac243d1278c985234b87d9e6361eb",
+  "source_digest_goal_csvs": {
+    "BEL1": "1bd9d7c20d6962edf8fdc87a0c8d3b6c4df6b0dac427a350881db7a17a7fa291",
+    "ENG1": "c429b75f681dc7aaec5641a23320402409530b4b01a9f147bb7e386fe508159b",
+    "ESP1": "a382f00d78d85eae814e8b06a4a0d5ba0dd70905156f20b02f8c0e6c28b7c7d6",
+    "FRA1": "18fed04746c2f4d764e02a331d5e94b0ca6c71c102ee82ae95423e4de410f4c0",
+    "GER1": "490b69c06ec2890be818372c7ea3bd5413b7fe6539185890d9eaeb6b59a6f22b",
+    "ITA1": "4138a4f01e96312a7a5dc07450c7a520c3861a479620fe3d102f12d42a6678ba",
+    "NED1": "5f5cdffe5f8c413ae73bd1988b259d453a05ba6884e2a2b6060a17fa71867ed1",
+    "POR1": "eed51b09af8112e9f2e35d062f67dd07e5ae73ac267cd0235237f30eeabacae8",
+    "TUR1": "2abfcfb6c19b1c25fbbc6084104bd365a371e2b1136117539a1793eab7b2ef7c"
+  },
+  "status": "PREMATCH_SHADOW_LOCK_BATCH_READY",
+  "utc_pre_kickoff": true
+}
