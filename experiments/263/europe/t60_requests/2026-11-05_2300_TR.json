@@ -1,0 +1,36 @@
+{
+  "schema": "263_UEFA_T60_SHADOW_LOCK_REQUEST_V1",
+  "slot_key": "2026-11-05_2300_TR",
+  "fixture_review": {
+    "status": "ASSISTANT_WEB_OFFICIAL_PAGE_REVIEWED",
+    "reviewed_at_utc": "2026-11-05T18:59:13.977Z",
+    "official_urls": {
+      "2050111": "https://www.uefa.com/uefaeuropaleague/match/2050111--leverkusen-vs-marseille/",
+      "2050114": "https://www.uefa.com/uefaeuropaleague/match/2050114--az-alkmaar-vs-juventus/",
+      "2050123": "https://www.uefa.com/uefaeuropaleague/match/2050123--celta-vs-union-sg/"
+    }
+  },
+  "lineups": {
+    "2050111": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2050114": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2050123": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    }
+  }
+}
