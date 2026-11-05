@@ -1,0 +1,28 @@
+{
+  "schema": "263_UEFA_T60_SHADOW_LOCK_REQUEST_V1",
+  "slot_key": "2026-11-05_2045_TR",
+  "fixture_review": {
+    "status": "ASSISTANT_WEB_OFFICIAL_PAGE_REVIEWED",
+    "reviewed_at_utc": "2026-11-05T16:31:17+00:00",
+    "official_urls": {
+      "2050115": "https://www.uefa.com/uefaeuropaleague/match/2050115--real-sociedad-vs-lyon/",
+      "2050121": "https://www.uefa.com/uefaeuropaleague/match/2050121--crystal-palace-vs-hoffenheim/"
+    }
+  },
+  "lineups": {
+    "2050115": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    },
+    "2050121": {
+      "status": "NOT_CONFIRMED",
+      "observed_at_utc": null,
+      "source_url": null,
+      "home_starting_xi": null,
+      "away_starting_xi": null
+    }
+  }
+}
