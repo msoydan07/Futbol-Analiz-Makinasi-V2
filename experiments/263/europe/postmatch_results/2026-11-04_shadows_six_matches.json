@@ -1,0 +1,287 @@
+{
+  "schema": "263_UEFA_NOV04_SIX_LOCKED_SHADOW_POSTMATCH_EVALUATION_V1",
+  "matchday": "2026-11-04",
+  "uefa_results_source": "https://www.uefa.com/uefachampionsleague/news/02a8-2174c9e9019d-f909a77bd77a-1000--2026-27-champions-league-all-the-league-phase-fixtures-a/",
+  "source_review": "ASSISTANT_WEB_PRIMARY_UEFA_SCORE_TABLE",
+  "model_scope": "EUROPE_SHADOW_M0_AND_M0_ELO_ONLY_NOT_LOCAL_QUAD",
+  "n": 6,
+  "counters": {
+    "M0": {
+      "MS": 3,
+      "OVER_2_5": 5,
+      "BTTS": 5,
+      "MS_BRIER": 0.581136
+    },
+    "M0_ELO": {
+      "MS": 3,
+      "OVER_2_5": 5,
+      "BTTS": 5,
+      "MS_BRIER": 0.533328
+    }
+  },
+  "prediction_files_immutable": true,
+  "prices_verified": false,
+  "official_value_bet_selections": 0,
+  "not_100_match_pilot": true,
+  "stop_rule": "SIX_MATCHES_INSUFFICIENT_TO_PROMOTE_OR_REWEIGHT_ELO",
+  "results": [
+    {
+      "uefa_match_id": 2049620,
+      "home": "Fenerbahçe",
+      "away": "Liverpool",
+      "final_score": {
+        "home": 3,
+        "away": 2
+      },
+      "observed_result": {
+        "MS": "home",
+        "OVER_2_5": true,
+        "BTTS": true
+      },
+      "original_prediction_path": "experiments/263/europe/t60_locked/2026-11-04_2045_TR/2049620.json",
+      "original_prediction_sha256": "5470275c5022bf180e643fdfbbcfcbca96a33c2bac0386f84292a30e239f098c",
+      "original_prediction_locked_at_utc": "2026-11-04T16:48:42.264035+00:00",
+      "models": {
+        "M0": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.4914356201895172,
+          "MS_direction_correct": true,
+          "OVER_2_5_probability": 0.697849091937965,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.6873053465874278,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.3913390495945689
+        },
+        "M0_ELO": {
+          "MS_top_choice": "away",
+          "MS_top_probability": 0.5306951041343305,
+          "MS_direction_correct": false,
+          "OVER_2_5_probability": 0.7031406383689554,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.6825893822385322,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.8683600796806512
+        }
+      }
+    },
+    {
+      "uefa_match_id": 2049616,
+      "home": "Borussia Dortmund",
+      "away": "Real Betis",
+      "final_score": {
+        "home": 2,
+        "away": 1
+      },
+      "observed_result": {
+        "MS": "home",
+        "OVER_2_5": true,
+        "BTTS": true
+      },
+      "original_prediction_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049616.json",
+      "original_prediction_sha256": "dd9008aab5734a8ccfa6d8097291e9465184e59a6f688d941e467720530b3d86",
+      "original_prediction_locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "models": {
+        "M0": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.5278758768665106,
+          "MS_direction_correct": true,
+          "OVER_2_5_probability": 0.45363189271775584,
+          "OVER_2_5_most_likely": false,
+          "OVER_2_5_direction_correct": false,
+          "BTTS_probability": 0.47548494113800704,
+          "BTTS_most_likely": false,
+          "BTTS_direction_correct": false,
+          "MS_multiclass_brier": 0.3349281131983577
+        },
+        "M0_ELO": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.5698077459054576,
+          "MS_direction_correct": true,
+          "OVER_2_5_probability": 0.4663626906580004,
+          "OVER_2_5_most_likely": false,
+          "OVER_2_5_direction_correct": false,
+          "BTTS_probability": 0.4683973203684989,
+          "BTTS_most_likely": false,
+          "BTTS_direction_correct": false,
+          "MS_multiclass_brier": 0.27891423826989864
+        }
+      }
+    },
+    {
+      "uefa_match_id": 2049617,
+      "home": "Porto",
+      "away": "Napoli",
+      "final_score": {
+        "home": 4,
+        "away": 1
+      },
+      "observed_result": {
+        "MS": "home",
+        "OVER_2_5": true,
+        "BTTS": true
+      },
+      "original_prediction_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049617.json",
+      "original_prediction_sha256": "0f4ebbc0d53746e83e387c8df7f0faa43fbd26f53c88f54fc65bc69f5b5ab05a",
+      "original_prediction_locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "models": {
+        "M0": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.7232245513890871,
+          "MS_direction_correct": true,
+          "OVER_2_5_probability": 0.6322738644030328,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.5169802065867496,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.11643761201499116
+        },
+        "M0_ELO": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.7571747336868527,
+          "MS_direction_correct": true,
+          "OVER_2_5_probability": 0.6521568242640928,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.504206255268467,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.09012074431355747
+        }
+      }
+    },
+    {
+      "uefa_match_id": 2049618,
+      "home": "PSV Eindhoven",
+      "away": "Club Brugge",
+      "final_score": {
+        "home": 1,
+        "away": 2
+      },
+      "observed_result": {
+        "MS": "away",
+        "OVER_2_5": true,
+        "BTTS": true
+      },
+      "original_prediction_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049618.json",
+      "original_prediction_sha256": "2cc79f2bc171318a4bccecfd181fc09cb593b36e74de87233388cd6132a66762",
+      "original_prediction_locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "models": {
+        "M0": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.5408543770689161,
+          "MS_direction_correct": false,
+          "OVER_2_5_probability": 0.6571492155379816,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.6414475494850952,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.9058669883066552
+        },
+        "M0_ELO": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.4699260251009002,
+          "MS_direction_correct": false,
+          "OVER_2_5_probability": 0.6465207019738324,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.6500010770960122,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.7537771322216565
+        }
+      }
+    },
+    {
+      "uefa_match_id": 2049619,
+      "home": "Leipzig",
+      "away": "Manchester City",
+      "final_score": {
+        "home": 2,
+        "away": 3
+      },
+      "observed_result": {
+        "MS": "away",
+        "OVER_2_5": true,
+        "BTTS": true
+      },
+      "original_prediction_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049619.json",
+      "original_prediction_sha256": "7ea418e0d8a39d1582c1b125f1d085a8807633f29b4567bffad1bca6b93958d1",
+      "original_prediction_locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "models": {
+        "M0": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.6138598738003899,
+          "MS_direction_correct": false,
+          "OVER_2_5_probability": 0.5973795893059548,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.560251247807569,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 1.0919350295608425
+        },
+        "M0_ELO": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.42500199135454464,
+          "MS_direction_correct": false,
+          "OVER_2_5_probability": 0.5586976349316364,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.5868297797625988,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.6899489369736993
+        }
+      }
+    },
+    {
+      "uefa_match_id": 2049623,
+      "home": "Lens",
+      "away": "Como",
+      "final_score": {
+        "home": 1,
+        "away": 9
+      },
+      "observed_result": {
+        "MS": "away",
+        "OVER_2_5": true,
+        "BTTS": true
+      },
+      "original_prediction_path": "experiments/263/europe/t60_locked/2026-11-04_2300_TR/2049623.json",
+      "original_prediction_sha256": "21315f31352fcaa1fd3dd1729222786319f2462cc514922e0863d709f1302a3f",
+      "original_prediction_locked_at_utc": "2026-11-04T18:58:52.195810+00:00",
+      "models": {
+        "M0": {
+          "MS_top_choice": "home",
+          "MS_top_probability": 0.417329027880219,
+          "MS_direction_correct": false,
+          "OVER_2_5_probability": 0.6377155114013735,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.6494343203482937,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.6463084721957689
+        },
+        "M0_ELO": {
+          "MS_top_choice": "away",
+          "MS_top_probability": 0.41620382569376313,
+          "MS_direction_correct": true,
+          "OVER_2_5_probability": 0.6376670917890194,
+          "OVER_2_5_most_likely": true,
+          "OVER_2_5_direction_correct": true,
+          "BTTS_probability": 0.649473042057379,
+          "BTTS_most_likely": true,
+          "BTTS_direction_correct": true,
+          "MS_multiclass_brier": 0.5188464657065497
+        }
+      }
+    }
+  ]
+}
