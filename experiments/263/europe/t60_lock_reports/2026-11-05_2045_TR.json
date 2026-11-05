@@ -1,0 +1,37 @@
+{
+  "immutable_records": [
+    {
+      "payload_sha256": "a6d46f89561397e4a5e1a11739cb44e7c9b286051f26a98ae68257bc46e9b365",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-05_2045_TR/2050121.json",
+      "uefa_match_id": 2050121
+    },
+    {
+      "payload_sha256": "e3146c354e04f9a4c787b4560406752e08908b63e3c29fe37f06579e7d4549cc",
+      "relative_path": "experiments/263/europe/t60_locked/2026-11-05_2045_TR/2050115.json",
+      "uefa_match_id": 2050115
+    }
+  ],
+  "kickoff_utc": "2026-11-05T17:45:00+00:00",
+  "lock_created_at_utc": "2026-11-05T16:32:09.474560+00:00",
+  "matches": 2,
+  "no_main_model_or_parameters_changed": true,
+  "official_XI_not_a_model_multiplier": true,
+  "payload_sha256": "ad682c1f73f04326647f85877a093af2e02589664f969e329f5115ae2476d94a",
+  "registration_is_experimental_shadow_not_100_pilot": true,
+  "schema": "263_UEFA_T60_SIX_SLOT_BATCH_LOCK_REPORT_V1",
+  "slot_key": "2026-11-05_2045_TR",
+  "source_digest_elo": "6af780a8786053be5be8607925b22472fcbac243d1278c985234b87d9e6361eb",
+  "source_digest_goal_csvs": {
+    "BEL1": "5f5dff27e635eaeab9a69e8d21137d69f6a64c319536a92d7a628511328d36cf",
+    "ENG1": "c429b75f681dc7aaec5641a23320402409530b4b01a9f147bb7e386fe508159b",
+    "ESP1": "a382f00d78d85eae814e8b06a4a0d5ba0dd70905156f20b02f8c0e6c28b7c7d6",
+    "FRA1": "18fed04746c2f4d764e02a331d5e94b0ca6c71c102ee82ae95423e4de410f4c0",
+    "GER1": "490b69c06ec2890be818372c7ea3bd5413b7fe6539185890d9eaeb6b59a6f22b",
+    "ITA1": "4138a4f01e96312a7a5dc07450c7a520c3861a479620fe3d102f12d42a6678ba",
+    "NED1": "5f5cdffe5f8c413ae73bd1988b259d453a05ba6884e2a2b6060a17fa71867ed1",
+    "POR1": "eed51b09af8112e9f2e35d062f67dd07e5ae73ac267cd0235237f30eeabacae8",
+    "TUR1": "2abfcfb6c19b1c25fbbc6084104bd365a371e2b1136117539a1793eab7b2ef7c"
+  },
+  "status": "PREMATCH_SHADOW_LOCK_BATCH_READY",
+  "utc_pre_kickoff": true
+}

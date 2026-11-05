@@ -1,0 +1,213 @@
+{
+  "away": "Hoffenheim",
+  "away_id": "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383",
+  "competition": "UEFA_EL",
+  "first_elevens": {
+    "away_starting_xi": null,
+    "home_starting_xi": null,
+    "source_ci_verified": false,
+    "status": "FIRST_XI_NOT_CONFIRMED_NON_BLOCKING"
+  },
+  "home": "Crystal Palace",
+  "home_id": "f4766b24-4533-540f-ab07-af3be2f16914",
+  "hypothesis": "First prospective independent comparison of M0 and unapproved M0+Elo",
+  "kickoff_utc": "2026-11-05T17:45:00+00:00",
+  "lock_created_at_utc": "2026-11-05T16:32:09.474560+00:00",
+  "minutes_before_kickoff": 72.84,
+  "model_parameters_predeclared": {
+    "Elo_normalization": 400,
+    "UEFA_train_away_goal_mean": 1.3289473684210527,
+    "UEFA_train_home_goal_mean": 1.7763157894736843,
+    "exploratory_Elo_beta": 0.5254760017675575,
+    "smoothing_k": 5.0
+  },
+  "models": {
+    "M0_ELO_EXPERIMENTAL_SHADOW": {
+      "1x2": {
+        "away": 0.32658363755436187,
+        "draw": 0.21238267371527447,
+        "home": 0.4610336887303637
+      },
+      "betting_pick_authorized": false,
+      "both_teams_score_no": 0.29067201131314524,
+      "both_teams_score_yes": 0.7093279886868548,
+      "expected_away_goals": 1.6940981524137766,
+      "expected_home_goals": 2.0327419429449085,
+      "market_ev": null,
+      "max_1x2_probability_label": "HOME",
+      "most_likely_exact_score": {
+        "away": 1,
+        "home": 2
+      },
+      "over_2p5": 0.7190811333290531,
+      "under_2p5": 0.2809188666709469
+    },
+    "M0_UNAPPROVED_REFERENCE": {
+      "1x2": {
+        "away": 0.4054989789230104,
+        "draw": 0.21555398513170632,
+        "home": 0.3789470359452833
+      },
+      "betting_pick_authorized": false,
+      "both_teams_score_no": 0.28833493930654575,
+      "both_teams_score_yes": 0.7116650606934543,
+      "expected_away_goals": 1.8892630003741115,
+      "expected_home_goals": 1.8227554179566563,
+      "market_ev": null,
+      "max_1x2_probability_label": "AWAY",
+      "most_likely_exact_score": {
+        "away": 1,
+        "home": 1
+      },
+      "over_2p5": 0.7165951819610927,
+      "under_2p5": 0.28340481803890727
+    }
+  },
+  "official_match_url": "https://www.uefa.com/uefaeuropaleague/match/2050121--crystal-palace-vs-hoffenheim/",
+  "payload_sha256": "a6d46f89561397e4a5e1a11739cb44e7c9b286051f26a98ae68257bc46e9b365",
+  "pre_match_context": {
+    "away": {
+      "away_games": 4,
+      "canonical_team_id": "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383",
+      "current_season_games_before_UEFA_match": 8,
+      "elo_last_rated_match": "2026-10-31",
+      "home_games": 4,
+      "last_domestic_result": "2026-10-31",
+      "last_five_points": 6,
+      "league": "GER1",
+      "rd": 68.6882758137793,
+      "recent_opponent_ppg": 0.993,
+      "source_elo_as_of": "2026-11-05"
+    },
+    "home": {
+      "away_games": 5,
+      "canonical_team_id": "f4766b24-4533-540f-ab07-af3be2f16914",
+      "current_season_games_before_UEFA_match": 9,
+      "elo_last_rated_match": "2026-10-31",
+      "home_games": 4,
+      "last_domestic_result": "2026-10-31",
+      "last_five_points": 4,
+      "league": "ENG1",
+      "rd": 67.5350420467407,
+      "recent_opponent_ppg": 1.487,
+      "source_elo_as_of": "2026-11-05"
+    }
+  },
+  "safety": {
+    "Elo_weight_not_approved": true,
+    "lineups_recorded_as_context_only_not_goal_multiplier": true,
+    "main_branch_not_modified": true,
+    "mathematical_probability_not_betting_advice": true,
+    "no_post_match_results_accessed": true,
+    "odds_EV_not_calculated": true,
+    "pilot_increment": 0,
+    "source_claim_not_actual_independent_UEFA_GitHub_fetch": true
+  },
+  "schema": "263_UEFA_T60_TWO_SHADOW_IMMUTABLE_RECORD_V1",
+  "season": "2026-2027",
+  "source_data": {
+    "domestic": {
+      "BEL1": {
+        "completed_matches": 90,
+        "fetched_utc": "2026-11-05T16:31:58.941972+00:00",
+        "last_completed_result": "2026-11-04",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "5f5dff27e635eaeab9a69e8d21137d69f6a64c319536a92d7a628511328d36cf",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/B1.csv"
+      },
+      "ENG1": {
+        "completed_matches": 90,
+        "fetched_utc": "2026-11-05T16:32:00.283317+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "c429b75f681dc7aaec5641a23320402409530b4b01a9f147bb7e386fe508159b",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/E0.csv"
+      },
+      "ESP1": {
+        "completed_matches": 109,
+        "fetched_utc": "2026-11-05T16:32:01.590422+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "a382f00d78d85eae814e8b06a4a0d5ba0dd70905156f20b02f8c0e6c28b7c7d6",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/SP1.csv"
+      },
+      "FRA1": {
+        "completed_matches": 81,
+        "fetched_utc": "2026-11-05T16:32:02.766814+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "18fed04746c2f4d764e02a331d5e94b0ca6c71c102ee82ae95423e4de410f4c0",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/F1.csv"
+      },
+      "GER1": {
+        "completed_matches": 72,
+        "fetched_utc": "2026-11-05T16:32:03.880407+00:00",
+        "last_completed_result": "2026-11-01",
+        "new_completed_since_first_snapshot": 0,
+        "sha256": "490b69c06ec2890be818372c7ea3bd5413b7fe6539185890d9eaeb6b59a6f22b",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/D1.csv"
+      },
+      "ITA1": {
+        "completed_matches": 100,
+        "fetched_utc": "2026-11-05T16:32:05.068452+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 2,
+        "sha256": "4138a4f01e96312a7a5dc07450c7a520c3861a479620fe3d102f12d42a6678ba",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/I1.csv"
+      },
+      "NED1": {
+        "completed_matches": 99,
+        "fetched_utc": "2026-11-05T16:32:06.330495+00:00",
+        "last_completed_result": "2026-11-01",
+        "new_completed_since_first_snapshot": 0,
+        "sha256": "5f5cdffe5f8c413ae73bd1988b259d453a05ba6884e2a2b6060a17fa71867ed1",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/N1.csv"
+      },
+      "POR1": {
+        "completed_matches": 90,
+        "fetched_utc": "2026-11-05T16:32:07.554235+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 2,
+        "sha256": "eed51b09af8112e9f2e35d062f67dd07e5ae73ac267cd0235237f30eeabacae8",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/P1.csv"
+      },
+      "TUR1": {
+        "completed_matches": 90,
+        "fetched_utc": "2026-11-05T16:32:08.766748+00:00",
+        "last_completed_result": "2026-11-02",
+        "new_completed_since_first_snapshot": 1,
+        "sha256": "2abfcfb6c19b1c25fbbc6084104bd365a371e2b1136117539a1793eab7b2ef7c",
+        "source_identity_unverified_independent_federation": true,
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/T1.csv"
+      }
+    },
+    "elo": {
+      "board_ratings_not_certified_as_UEFA_club_ids": true,
+      "last_modified_claim": "Thu, 05 Nov 2026 16:32:09 GMT",
+      "observed_utc": "2026-11-05T16:32:09.473565+00:00",
+      "source_sha256": "6af780a8786053be5be8607925b22472fcbac243d1278c985234b87d9e6361eb",
+      "source_url": "https://public-api.beyondelo.com/v1/datasets/club-ratings.csv"
+    },
+    "fixture_review_url": "https://www.uefa.com/uefaeuropaleague/match/2050121--crystal-palace-vs-hoffenheim/",
+    "fixture_review_utc": "2026-11-05T16:31:17+00:00",
+    "historic_m0_experiment_sha256": "03c1b1fea46bcf941ad1271a0fe6fb0d536df8dcff9d2182a30bca91b7cdff17",
+    "source_review_status": "WEB_REVIEW_CLAIM_NOT_REFETCHED_BY_GITHUB_CI",
+    "stage4_accepted_sha256": "56e3210d425aeaa6b2a7bfc9d3244a0ae644b7a55b6c133308406a4647cb4c97",
+    "stage5_accepted_sha256": "6b4aa434357fdd9b75d0f6c0f3e730b48dec6e7dec1cf6266c7d328d1ce45c5c"
+  },
+  "status": "PREKICKOFF_EXPERIMENTAL_SHADOW_LOCK_NOT_PILOT",
+  "trigger": {
+    "github_actions_run_id": "42065377038",
+    "github_trigger_commit_sha": "52cf8ad00ab9c8473b600339518c409a45ea9ce4",
+    "request_sha256": "7b77db9f12d8234f4e28a76af96ea2d31acf8eb7a33d8c33755a78aaad16be2a"
+  },
+  "uefa_match_id": 2050121
+}
