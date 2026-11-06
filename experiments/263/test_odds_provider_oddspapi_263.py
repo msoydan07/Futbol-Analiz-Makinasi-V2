@@ -4,17 +4,23 @@ from datetime import datetime,timezone,timedelta
 from unittest.mock import patch
 from test_four_model_value_policy_263 import fixture,seal
 from odds_provider_oddspapi_263 import (match_fixture,normalize_market_catalog,
-  build_observation,fetch_for_forecast,QuoteBlocked)
+  build_observation,fetch_for_forecast,QuoteBlocked,cleanname,
+  expected_verified_team_names)
 from four_model_value_policy_263 import decide
 from classification_odds_263 import odds_evidence
 NOW=datetime(2026,11,6,16,3,tzinfo=timezone.utc)
 def make():
     f,b,lock=fixture()
+    # Real SHA-verified 2026/27 TUR1 UUIDs, but wholly synthetic bookmaker prices.
+    f["fixture"]["home_id"]="da9ddb8a-aabc-5492-a4b5-b52eaed65165"  # Gaziantep
+    f["fixture"]["away_id"]="41b9043e-2819-52dc-963f-a5756b6e88c3"  # Kasimpasa
+    seal(f)
+    b["forecast_sha256"]=f["payload_sha256"];seal(b)
     fx=f["fixture"]
     fixture_provider={"fixtureId":"id123456789","sportId":10,"statusId":0,"hasOdds":True,
-      "startTime":fx["kickoff_utc"],"participant1Name":fx["home_id"],
-      "participant2Name":fx["away_id"],"participant1ShortName":fx["home_id"],
-      "participant2ShortName":fx["away_id"]}
+      "startTime":fx["kickoff_utc"],"participant1Name":"Gaziantep FK",
+      "participant2Name":"Kasımpaşa","participant1ShortName":"Gaziantep",
+      "participant2ShortName":"Kasimpasa"}
     catalog=[]
     for mid,name,handicap,names in [(101,"Full Time Result",0,["1","X","2"]),
          (104,"Both Teams To Score",0,["Yes","No"]),
@@ -51,6 +57,40 @@ class ApiSourceValidation(unittest.TestCase):
         self.assertFalse(val["betting_authorized"])
         self.assertFalse(val["quote_reverified_by_code"])
         self.assertNotEqual(obs["source_review"]["method"],"MANUAL_PUBLIC_PAGE")
+    def test_real_uuid_matches_locked_aliases_not_uuid_string(self):
+        f,b,l,fixture_doc,*_=make()
+        ids=expected_verified_team_names(f)
+        self.assertIn("gaziantep",ids[0])
+        self.assertIn("kasimpasa",ids[1])
+        self.assertEqual(cleanname("Kasımpaşa"),"kasimpasa")
+        self.assertEqual(cleanname("İSTANBUL"),"istanbul")
+        self.assertEqual(match_fixture(f,[fixture_doc],NOW)["fixtureId"],"id123456789")
+        fake=copy.deepcopy(fixture_doc)
+        fake["participant1Name"]=f["fixture"]["home_id"]
+        fake["participant1ShortName"]=f["fixture"]["home_id"]
+        fake["participant2Name"]=f["fixture"]["away_id"]
+        fake["participant2ShortName"]=f["fixture"]["away_id"]
+        with self.assertRaisesRegex(QuoteBlocked,"NO_UNIQUE"):
+            match_fixture(f,[fake],NOW)
+    def test_unknown_uuid_and_wrong_league_fail_closed(self):
+        f,b,l,fixture_doc,*_=make()
+        unknown=copy.deepcopy(f)
+        unknown["fixture"]["home_id"]="00000000-0000-0000-0000-000000000001"
+        with self.assertRaisesRegex(QuoteBlocked,"IDENTITY_INDEX_UNAVAILABLE_OR_INVALID"):
+            match_fixture(unknown,[fixture_doc],NOW)
+        wrong=copy.deepcopy(f)
+        wrong["fixture"]["league"]="ENG1"
+        with self.assertRaisesRegex(QuoteBlocked,"FORECAST_TEAMS_NOT_IN_VERIFIED_LEAGUE"):
+            match_fixture(wrong,[fixture_doc],NOW)
+    def test_fixture_request_filters_requested_restricted_bookmaker(self):
+        f,b,l,fixture_doc,catalog,odds=make()
+        calls=[]
+        def fake(endpoint,key,params):
+            calls.append((endpoint,dict(params)))
+            return {"fixtures":[fixture_doc],"markets":catalog,"odds":odds}[endpoint]
+        fetch_for_forecast(f,"SYNTHETIC_TEST_ONLY",now=NOW,getter=fake)
+        self.assertEqual(calls[0][0],"fixtures")
+        self.assertEqual(calls[0][1]["bookmakers"],"iddaa")
     def test_restricted_no_key_stops_without_network(self):
         f,*_=make()
         with self.assertRaisesRegex(QuoteBlocked,"NO_ODDSPAPI_KEY"):

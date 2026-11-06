@@ -25,9 +25,54 @@ GOAL_LINES={"GOALS_1.5":1.5,"GOALS_2.5":2.5,"GOALS_3.5":3.5}
 class QuoteBlocked(ValueError):pass
 
 def cleanname(s):
+    """Exact Unicode/punctuation normalization; preserve Turkish dotless I."""
     if not isinstance(s,str):return ""
-    return re.sub(r"[^a-z0-9]+","",unicodedata.normalize("NFKD",s.casefold())
-                  .encode("ascii","ignore").decode())
+    s=s.strip().replace("İ","I").replace("ı","i").casefold()
+    s="".join(c for c in unicodedata.normalize("NFKD",s)
+              if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]+","",s)
+
+IDENTITY_INDEX=Path("experiments/263/evidence/identity_index_263.json")
+UUID_PATTERN=re.compile(r"[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}")
+
+def expected_verified_team_names(forecast,registry_path=IDENTITY_INDEX):
+    """Resolve the forecast UUIDs to SHA-verified names; no fuzzy matching.
+
+    Forecast team IDs cannot be compared with human-readable provider names.
+    The read-only identity cache is only team evidence, never fixture proof.
+    """
+    fx=forecast.get("fixture",{})
+    home_id,away_id=fx.get("home_id"),fx.get("away_id")
+    if not (isinstance(home_id,str) and isinstance(away_id,str)
+            and UUID_PATTERN.fullmatch(home_id) and UUID_PATTERN.fullmatch(away_id)
+            and home_id!=away_id):
+        raise QuoteBlocked("FORECAST_CANONICAL_TEAM_UUID_REQUIRED")
+    try:
+        from mackolik_identity_gate_263 import _validate_identity_source,_memberships
+        cache=json.loads(Path(registry_path).read_text(encoding="utf-8"))
+        _validate_identity_source(cache)
+        if cache.get("index_type")!="CANONICAL_REGISTRY_READ_ONLY_IDENTITY_CACHE_V1":
+            raise ValueError("unexpected_identity_index_schema")
+        match_date=datetime.fromisoformat(fx["match_local_date"]).date()
+        season_start=match_date.year if match_date.month>=7 else match_date.year-1
+        season=f"{season_start}-{season_start+1}"
+        members=_memberships(cache,season).get(fx["league"],set())
+        if home_id not in members or away_id not in members:
+            raise QuoteBlocked("FORECAST_TEAMS_NOT_IN_VERIFIED_LEAGUE_SEASON")
+        teams=cache["teams"];aliases=cache["aliases"]
+        def names(team_id):
+            club=teams[team_id]
+            values={club["name"],club["key"]}
+            values.update(alias for alias,owner in aliases.items() if owner==team_id)
+            return {cleanname(n) for n in values if cleanname(n)}
+        home,away=names(home_id),names(away_id)
+        if not home or not away or home & away:
+            raise QuoteBlocked("VERIFIED_TEAM_ALIAS_COLLISION_OR_EMPTY")
+        return home,away
+    except QuoteBlocked:raise
+    except (OSError,KeyError,ValueError,TypeError,ImportError) as exc:
+        raise QuoteBlocked("VERIFIED_TEAM_IDENTITY_INDEX_UNAVAILABLE_OR_INVALID") from exc
+
 def nowaware(t):
     if t is None:t=datetime.now(timezone.utc)
     if t.tzinfo is None:raise QuoteBlocked("AWARE_UTC_CLOCK_REQUIRED")
@@ -61,7 +106,7 @@ def match_fixture(forecast,fixtures,now):
     if not isinstance(fixtures,list):raise QuoteBlocked("ODDSPAPI_FIXTURE_LIST_INVALID")
     fx=forecast["fixture"]
     ko=read_aware(fx["kickoff_utc"])
-    expected=(cleanname(fx["home_id"]),cleanname(fx["away_id"]))
+    expected=expected_verified_team_names(forecast)
     if not all(expected):raise QuoteBlocked("UNRECOGNIZED_OFFICIAL_TEAM_ID")
     possible=[]
     for x in fixtures:
@@ -74,7 +119,7 @@ def match_fixture(forecast,fixtures,now):
         # No fuzzy or swapped teams: ambiguous fixtures are blocked, not guessed.
         h={cleanname(x.get("participant1Name")),cleanname(x.get("participant1ShortName"))}
         a={cleanname(x.get("participant2Name")),cleanname(x.get("participant2ShortName"))}
-        if expected[0] in h and expected[1] in a:
+        if expected[0].intersection(h) and expected[1].intersection(a):
             possible.append(x)
     if len(possible)!=1:raise QuoteBlocked("NO_UNIQUE_EXACT_KICKOFF_TEAM_FIXTURE_MATCH")
     return possible[0]
@@ -196,7 +241,7 @@ def fetch_for_forecast(f,key,*,now=None,getter=_get):
     if now>=ko:raise QuoteBlocked("FIXTURE_ALREADY_STARTED")
     frm=(ko-timedelta(minutes=30)).isoformat().replace("+00:00","Z")
     to=(ko+timedelta(minutes=30)).isoformat().replace("+00:00","Z")
-    fixtures=getter("fixtures",key,{"sportId":10,"from":frm,"to":to,"statusId":0,"hasOdds":"true"})
+    fixtures=getter("fixtures",key,{"sportId":10,"from":frm,"to":to,"statusId":0,"hasOdds":"true","bookmakers":BOOK})
     fixture=match_fixture(f,fixtures,now)
     catalog=getter("markets",key,{"language":"en"})
     odds=getter("odds",key,{"fixtureId":fixture["fixtureId"],"bookmakers":"iddaa","language":"en","verbosity":3})
