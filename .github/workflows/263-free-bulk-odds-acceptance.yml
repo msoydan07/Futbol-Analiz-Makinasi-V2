@@ -1,0 +1,23 @@
+name: 263 free bulk EU odds research - ONE offline contract acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/free_bulk_odds_263.py'
+      - 'experiments/263/test_free_bulk_odds_263.py'
+      - '.github/workflows/263-free-bulk-odds-acceptance.yml'
+permissions:
+  contents: read
+jobs:
+  source-interface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One synthetic 10-league full batch, quota and integrity regression
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_free_bulk_odds_263.py
