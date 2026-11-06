@@ -118,8 +118,9 @@ def decision_panel(row,f,d,stage):
     main_label=("**"+pick(main)+"** · deneysel değer adayı, resmî S2 onayı yok"
                 if main else "**PAS** · değerli ana seçim doğrulanamadı")
     alt_label=(pick(alt)+" · deneysel, resmî onay yok" if alt else "YOK")
-    reason=(", ".join(d.get("PAS_reasons",[])) or "Fiyat/kalibrasyon/EV koşulları henüz doğrulanmadı")
-            if not main else "Sadece karar dosyasındaki fiyat ve koşullar; resmî bahis onayı değil"
+    reason=((", ".join(d.get("PAS_reasons",[])) or
+             "Fiyat/kalibrasyon/EV koşulları henüz doğrulanmadı")
+            if not main else "Sadece karar dosyasındaki fiyat ve koşullar; resmî bahis onayı değil")
     if reason=="NO_MORNING_OR_CURRENT_ODDS":
         reason="Güncel veya geçerli sabah oranı doğrulanamadı; EV/değer seçimi üretilemez"
     elif reason=="NO_QUALIFIED_VALUE_CANDIDATE":
