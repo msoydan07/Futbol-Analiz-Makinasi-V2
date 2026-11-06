@@ -93,7 +93,17 @@ class UserReportAcceptance(unittest.TestCase):
         self.assertIn("PAS",summary)
         self.assertIn("KOŞULLU",summary)
         self.assertIn("ÜRETİLEMEDİ",summary)
+        # User-approved persistent presentation: batch decision screen comes first.
+        self.assertTrue(summary.startswith(
+            "# Futbol Maç Analiz Makinası 2.6.3 — TOPLU MAÇ KARAR EKRANI"))
+        self.assertIn("| Maç | S1 · yüksek olasılık | S2 · ana karar | Alternatif |",summary)
         for p,content in details.items():
+            # Single-match screen is decision-first, not the old model table.
+            self.assertTrue(content.startswith(
+                "# Futbol Maç Analiz Makinası 2.6.3 — TEKLİ MAÇ KARAR EKRANI"))
+            self.assertLess(content.index("## 1. MAKİNENİN ANA KARARI"),
+                            content.index("## B. B / C2 / C3 / M4 ayrı tahminleri"))
+            self.assertIn("S2 PAS, açıklayıcı futbol tahmininin olmadığı anlamına gelmez",content)
             self.assertIn("B / C2 / C3 / M4",content)
             self.assertIn("En olası 1X2",content)
             self.assertIn("ilk 11",content.lower())
