@@ -3,7 +3,7 @@ import json,re,sys,urllib.request,unicodedata
 from datetime import datetime,timedelta,timezone
 from html.parser import HTMLParser
 from zoneinfo import ZoneInfo
-URL="https://en.legaseriea.it/serie-a/news/the-referees-for-the-10th-round-x4878"
+URL="https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a"
 class Text(HTMLParser):
  def __init__(self):super().__init__();self.parts=[];self.skip=0
  def handle_starttag(self,tag,attrs):
@@ -25,14 +25,13 @@ def lookup(home,away,now=None,html=None):
    with urllib.request.urlopen(req,timeout=20) as r:html=r.read().decode("utf-8","replace")
  except Exception as e:return {"status":"NOT_VERIFIED","reason":"official_source_unavailable","detail":str(e)[:120]}
  p=Text();p.feed(html);lines=[" ".join(x.split()) for x in "".join(p.parts).splitlines() if x.strip()]
- pattern=re.compile(r"^(.+?)\s+[–—-]\s+(.+?)\s+(?:(\d{2}/\d{2})\s+)?h\.\s*(\d{1,2})\.(\d{2})$",re.I)
+ pattern=re.compile(r"^(.+?)\s+[–—-]\s+(.+?)\s+(?:Lunedì|Martedì|Mercoledì|Giovedì|Venerdì|Sabato|Domenica)\s+(\d{1,2}/\d{1,2})\s+h\.\s*(\d{1,2})\.(\d{2})$",re.I)
  hits=[]
  for line in lines:
   m=pattern.match(line)
   if not m:continue
   h,a,day,hh,mm=m.groups()
   if norm(h)!=norm(home) or norm(a)!=norm(away):continue
-  if not day:return {"status":"NOT_VERIFIED","reason":"date_missing_in_official_row","source_url":URL}
   try:local=datetime.strptime(day+"/2026 "+hh+":"+mm,"%d/%m/%Y %H:%M").replace(tzinfo=ZoneInfo("Europe/Rome"))
   except ValueError:continue
   hits.append(local.astimezone(timezone.utc))

@@ -27,6 +27,10 @@ jobs:
         env:
           PYTHONPATH: experiments/263
         run: python -m unittest -v experiments/263/test_quad_request_intake.py
+      - name: Official FR/IT 22-45 fixture-source regression
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_2245_official_fixture_sources_263.py
       - name: Identify NEW user-named requests only
         id: requests
         shell: bash

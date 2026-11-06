@@ -1,0 +1,15 @@
+{
+  "schema": "quad_named_match_batch_request_v1",
+  "matches": [
+    {
+      "league": "ITA1",
+      "home": "Venezia",
+      "away": "Udinese"
+    },
+    {
+      "league": "FRA1",
+      "home": "Toulouse",
+      "away": "Strasbourg"
+    }
+  ]
+}
