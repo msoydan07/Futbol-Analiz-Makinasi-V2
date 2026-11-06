@@ -1,0 +1,10 @@
+{
+  "schema": "quad_named_match_batch_request_v1",
+  "matches": [
+    {
+      "league": "TUR1",
+      "home": "Gaziantep FK",
+      "away": "Kasimpasa"
+    }
+  ]
+}
