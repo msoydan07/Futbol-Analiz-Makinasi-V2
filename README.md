@@ -1,5 +1,7 @@
 # Futbol Maç Analiz Makinası V2
 
+> **PINNACLE T−60 BAĞLANTISI (6 Kasım 2026):** Gerçek ücretsiz API erişimi onaylandı; [aynı-job dört model/piyasa karşılaştırma sözleşmesi](docs/263_PINNACLE_OTOMATIK_ES_ZAMANLI_KARSILASTIRMA.md). Yalnız yeni kullanıcı maç isteklerinde, bir lig için bir h2h sorgusu; geçmiş SHA kayıtları ve S2/PAS değişmez.
+
 > **PINNACLE BAĞIMSIZ PİYASA REFERANSI (06.11.2026):** [Güvenlik, ücretsiz API denemesi ve B/C2/C3/M4 karşılaştırma sözleşmesi](docs/263_PINNACLE_BAGIMSIZ_PIYASA_KIYASI.md). Sadece araştırma/kanıt sonrası; model, S1/S2 ve eski SHA kayıtları değişmez.
 
 > **2.6.3 TEKLİ/TOPLU KARAR EKRANI — KALICI SUNUM STANDARDI (06.11.2026):** [docs/263_KARAR_EKRANI_KALICI_STANDART.md](docs/263_KARAR_EKRANI_KALICI_STANDART.md). Önce ana değer kararı / PAS, alternatif ve S1–S2 ayrımı; sonra teknik model tabloları. Yeni sohbetlerde ve yeni tahmin raporlarında bu standart esas alınır. Geçmiş SHA kilitli kayıtlar değişmez.
