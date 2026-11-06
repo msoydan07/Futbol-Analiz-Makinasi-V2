@@ -1,0 +1,30 @@
+{
+  "accepted_snapshot_required": true,
+  "betting_authorized": false,
+  "created_at_utc": "2026-11-06T18:43:49.553194+00:00",
+  "outcomes": [
+    {
+      "reason": "LIVE_OFFICIAL_FIXTURE_NOT_VERIFIED:not_registered_official_domain",
+      "requested": {
+        "away": "PEC Zwolle",
+        "home": "Willem II",
+        "league": "NED1"
+      },
+      "status": "BLOCKED_NO_PREDICTION"
+    }
+  ],
+  "pilot_goal": 96,
+  "production_modified": false,
+  "requests": [
+    {
+      "path": "experiments/263/quad_requests/20261106_willem_ii_pec_zwolle_2200.json",
+      "sha256": "1634d8ae84eb75980474863dbf1d7942747469627b7e7cb184636552df1a8b2a"
+    }
+  ],
+  "schema": "quad_named_match_batch_report_v1",
+  "statuses": {
+    "ALREADY_RECORDED_NOT_OVERWRITTEN": 0,
+    "BLOCKED_NO_PREDICTION": 1,
+    "REGISTERED_FOUR_MODELS_EXPERIMENTAL": 0
+  }
+}
