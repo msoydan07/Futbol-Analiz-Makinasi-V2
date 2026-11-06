@@ -97,6 +97,71 @@ def market_row(key,d):
     verdict="Değer adayı" if not reasons else "PAS / "+clean(", ".join(reasons))
     return "| "+name(key)+" | "+pct(median)+" | "+pct(d.get("calibrated_probability"))+" | "+odds+" | "+ev+" | "+age+" ("+when+") | "+verdict+" |"
 
+def decision_panel(row,f,d,stage):
+    """Versioned user-first decision screen; read only from already sealed evidence.
+
+    S1 research alerts, S2 priced value decisions and descriptive MS forecasts
+    are deliberately separate. No official A/B/C or S1/S2 is invented here.
+    """
+    fx=f["fixture"]
+    tr=read_aware(fx["kickoff_utc"]).astimezone(ZoneInfo("Europe/Istanbul"))
+    main=d.get("main_candidate");alt=d.get("alternative_candidate")
+    approved=d.get("S1_S2_official_approved") is True
+    alerts=d.get("high_probability_alerts_not_bets",[])
+    s1_candidates=", ".join(name(x["market"])+" "+pct(x["descriptive_raw_median"])
+        for x in alerts if isinstance(x,dict) and x.get("market") in NAMES
+        and isinstance(x.get("descriptive_raw_median"),(float,int)))
+    s1=("ONAYSIZ — araştırma uyarısı: "+s1_candidates if s1_candidates else
+        "ONAYSIZ — onaylı yüksek olasılık filtresi kaydı yok")
+    if approved:
+        s1="Resmî S1 kararı bu karar dosyasında ayrıca belirtilmedi — "+s1
+    main_label=("**"+pick(main)+"** · deneysel değer adayı, resmî S2 onayı yok"
+                if main else "**PAS** · değerli ana seçim doğrulanamadı")
+    alt_label=(pick(alt)+" · deneysel, resmî onay yok" if alt else "YOK")
+    reason=(", ".join(d.get("PAS_reasons",[])) or "Fiyat/kalibrasyon/EV koşulları henüz doğrulanmadı")
+            if not main else "Sadece karar dosyasındaki fiyat ve koşullar; resmî bahis onayı değil"
+    if reason=="NO_MORNING_OR_CURRENT_ODDS":
+        reason="Güncel veya geçerli sabah oranı doğrulanamadı; EV/değer seçimi üretilemez"
+    elif reason=="NO_QUALIFIED_VALUE_CANDIDATE":
+        reason="Doğrulanan fiyat ve/veya kalibrasyon/değer koşulları yeterli değil"
+    m4=f.get("model_predictions",{}).get("M4",{})
+    m4_ms="HESAPLANAMADI";m4_score="HESAPLANAMADI"
+    if m4.get("status")=="AVAILABLE":
+        mp=canonical_markets(m4["goals"]["markets"])
+        best=max(("MS1","MSX","MS2"),key=lambda k:mp[k])
+        m4_ms=name(best)+" "+pct(mp[best])
+        m4_score=top_score(m4)
+    representative=name(d.get("descriptive_most_likely_1x2_by_model_median"))
+    return [
+        "# Futbol Maç Analiz Makinası 2.6.3 — TEKLİ MAÇ KARAR EKRANI","",
+        "**"+label(row,f)+"** · "+tr.strftime("%d.%m.%Y %H:%M")+" TSİ · "+
+        clean(fx["league"]),"",
+        "**DENEYSEL, maç öncesi kayıt. Resmî bahis veya onaylı S1/S2 kararı değil.**","",
+        "## 1. MAKİNENİN ANA KARARI — S2 / matematiksel değer","",
+        main_label,"",
+        "**Alternatif tercih:** "+alt_label,"",
+        "**Karar gerekçesi:** "+clean(reason),"",
+        "| Kontrol | Sonuç |","|---|---|",
+        "| S1 · yüksek olasılık | "+clean(s1)+" |",
+        "| S2 · matematiksel değer | "+
+            ("Deneysel değer adayı var; resmî S2 onayı yok" if main else "PAS — değerli seçim doğrulanmadı")+" |",
+        "| A/B/C tercih sınıfı | ONAYSIZ — bu kayıt §12.2 resmî sınıfı üretmedi |",
+        "| En olası MS (4 model medyanı, açıklayıcı) | "+representative+" |",
+        "| M4 en olası MS | "+m4_ms+" |",
+        "| M4 en olası tek skor | "+m4_score+" |",
+        "| Veri güveni | KISMİ — kaynak kabulü tüm maçların bağımsız teyidi değildir |",
+        "| İlk 11 / xG / sakatlık / hava / Elo | Bu dörtlü matematik kaydında etkileri doğrulanmadı |",
+        "| İlk yarı / maç sonu korner | Bu dört-model karar dosyasında hesaplanmadı |",
+        "| Oran / EV kanıtı | "+clean(d.get("quote_status","DOĞRULANAMADI"))+"; "+
+          clean(stage)+" |",
+        "| Tahmin kilidi | "+clean(f["created_at_utc"])+" · SHA "+
+          clean(f["payload_sha256"][:16])+"… |","",
+        "**Önemli:** S2 PAS, açıklayıcı futbol tahmininin olmadığı anlamına gelmez. "+
+        "S1 araştırma uyarısı resmî GEÇTİ veya bahis tavsiyesi değildir.","",
+        "---","",
+        "## 2. AYRINTILI MATEMATİK, VERİ VE KAYNAK RAPORU",""
+    ]
+
 def details(row,f,d,stage):
     fx=f["fixture"];data=f["data"]
     tr=read_aware(fx["kickoff_utc"]).astimezone(ZoneInfo("Europe/Istanbul"))
@@ -158,7 +223,7 @@ def details(row,f,d,stage):
         "- Sabah oranı SHA: "+clean(d.get("morning_quote_sha256") or "YOK"),
         "- Kaynak karar sınıfı: "+stage,
         "- Bu dosyada kaç simülasyon veya kaç başarı testi yapıldığına dair doğrudan kanıt yoksa sayı eklenmez.",""]
-    return "\n".join(lines)
+    return "\n".join(decision_panel(row,f,d,stage)+lines[1:])
 
 def generate(root,report_path):
     root=Path(root).resolve();report_path=Path(report_path).resolve()
@@ -177,7 +242,7 @@ def generate(root,report_path):
             if not isinstance(req,dict):req={}
             title=clean(req.get("home","?"))+" – "+clean(req.get("away","?"))
             reason=clean(row.get("reason",row.get("status","DOĞRULANAMADI")))
-            rows.append("| "+title+" | — | **ÜRETİLEMEDİ** | — | "+reason+" |")
+            rows.append("| "+title+" | ONAYSIZ | **ÜRETİLEMEDİ** | YOK | — | "+reason+" |")
             continue
         rel=row.get("path")
         match=FORECAST_PATH.fullmatch(rel) if isinstance(rel,str) else None
@@ -195,17 +260,24 @@ def generate(root,report_path):
         price_count=sum(x.get("observed_odds") is not None for x in diag)
         summary="{}; oranlı pazar {}; {}".format(stage,price_count,clean(d.get("status","—")))
         alt=pick(d["alternative_candidate"]) if d.get("alternative_candidate") else "YOK"
-        rows.append("| "+label(row,f)+" | "+name(d.get("descriptive_most_likely_1x2_by_model_median"))+
-                    " | **"+pick(d.get("main_candidate"))+"** | "+alt+" | "+summary+" |")
+        alerts=d.get("high_probability_alerts_not_bets",[])
+        s1="ONAYSIZ" + (" (araştırma uyarısı mevcut)" if alerts else "")
+        main_text=("**"+pick(d["main_candidate"])+" (deneysel)**" if d.get("main_candidate") else "**PAS**")
+        note=("Güncel fiyat doğrulanamadı" if d.get("quote_status")=="NO_VERIFIED_ODDS"
+              else clean(", ".join(d.get("PAS_reasons",[])) or d.get("status","—")))
+        rows.append("| "+label(row,f)+" | "+s1+" | "+main_text+
+                    " | "+alt+" | "+name(d.get("descriptive_most_likely_1x2_by_model_median"))+
+                    " | "+note+"; "+summary+" |")
         files["matches/"+day+"/"+stem+".md"]=details(row,f,d,stage)
     summary="\n".join([
-      "# Futbol Maç Analiz Makinası 2.6.3 — Toplu maç raporu","",
+      "# Futbol Maç Analiz Makinası 2.6.3 — TOPLU MAÇ KARAR EKRANI","",
+      "**Önce karar, sonra teknik ayrıntı. S1 yüksek olasılık ile S2 değerli seçim ayrı alanlardır.**","",
       "**DENEYSEL.** Bütün yüzdeler ve oranlar SHA-kayıtlı kaynaklardan okunur; örnek veri üretilmez.",
       "İstenen: {} · Tahminli: {} · PAS: {} · Koşullu seçimli: {} · Analizi engellenen: {}".format(
           len(outcomes),registered,pas,conditional,blocked),
       "Kaynak kayıt: "+clean(report_path.relative_to(root)),"",
-      "| Maç | En olası MS sonucu | Ana tercih | Alternatif | Durum / açıklama |",
-      "|---|---|---|---|---|",*rows,"",
+      "| Maç | S1 · yüksek olasılık | S2 · ana karar | Alternatif | En olası MS (açıklayıcı) | Durum / gerekçe |",
+      "|---|---|---|---|---|---|",*rows,"",
       "Her maçın dört modeli, kalibre edilmiş pazar yüzdeleri, fiyat kanıtı, veri eksikleri ve karar gerekçesi matches/ altında ayrıca gösterilir.",
       "**PAS:** Analiz var ama fiyat veya yeterli değer yok. **ÜRETİLEMEDİ:** Gerçek tahmin kaydı oluşmadı.",
       "Sabah fiyatı kullanılırsa KOŞULLU ibaresi zorunludur; güncel oran farklıysa güncel olan önceliklidir.",""])
