@@ -30,6 +30,14 @@ Sistem gizli anahtarı kendiliğinden oluşturmaz, erişim satın almaz veya bir
 3. Mevcut intake işlemi fiyatları doğruluk/yaş/maç öncesi kilit kurallarından geçirir. Fiyatlar **insan gözlemi**, bağımsız kodla bookmaker teyidi değildir; kanıt sınıfı açık kalır.
 4. Güncel kaynak bulunamazsa sabah fiyatı yalnız **KOŞULLU**, ikisi de yoksa **S2 PAS**. S1 açıklayıcı olasılık uyarısı, model tahmini ve SHA kaydı korunur.
 
+## Kod kabul kanıtı — 6 Kasım 2026
+
+- Onarılan kaynak: `experiments/263/odds_provider_oddspapi_263.py` (takım UUID → doğrulanmış alias; Türkçe harfler; iddaa-only sorgu).
+- Denetim: [GitHub Actions 42264052140](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42264052140).
+- **37/37 sentetik ve kural testleri başarılı.** Testler kaynak kimliği, doğru/yanlış maç, hatalı lig, geçersiz/eski fiyat, tek taraflı oran ve güvenli PAS davranışını kapsar.
+- **Gerçek OddsPapi API başarısı hâlâ doğrulanmadı;** erişim anahtarı/yetkisi bulunmadığı için canlı oran entegrasyonu hazır ilan edilemez.
+- `forward_quad_263/2026-11-06/1d6b6f16fef8bac971c184c4.json` ve 6 Kasım karar dosyaları **değiştirilmedi**.
+
 ## Denetim ve yapılmayacaklar
 - Bu belgenin ve kodun kabulü **gerçek API erişimi var** demek değildir.
 - Dinamik sitelere erişimi garanti edemeyen scraper, eski aggregator ekran görüntüsü, farklı zamanlı bookmaker oranlarını birleştirme veya maç başladıktan sonra oranı geçmişe dönük tahmine yapıştırma YOK.
