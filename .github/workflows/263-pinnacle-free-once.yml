@@ -1,19 +1,13 @@
-name: 263 Pinnacle FREE API single research trial - MANUAL ONLY
+name: 263 Pinnacle free REAL API one-shot probe
 on:
   push:
     branches: [experiment/263-toplu-karsilastirma]
     paths:
       - 'experiments/263/pinnacle_trial_requests/*.json'
-  workflow_dispatch:
-    inputs:
-      day_turkey:
-        description: 'YYYY-MM-DD Turkish local date; leave blank for today'
-        required: false
-        type: string
 permissions:
   contents: read
 jobs:
-  one-real-market-intake:
+  real-research:
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
@@ -23,118 +17,49 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Resolve a unique one-shot request on experiment branch
-        shell: bash
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          INPUT_DAY: ${{ inputs.day_turkey }}
-        run: |
-          set -euo pipefail
-          if [ "${EVENT_NAME}" = "push" ]; then
-            git diff-tree --no-commit-id --name-status -r HEAD -- experiments/263/pinnacle_trial_requests/ > /tmp/pinnacle_delta
-            if grep -Ev '^A[[:space:]]+experiments/263/pinnacle_trial_requests/[A-Za-z0-9_-]+\.json
-        env:
-          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
-          TEST_DAY: ${{ inputs.day_turkey }}
-        run: |
-          set -euo pipefail
-          if [ -z "${THE_ODDS_API_KEY}" ]; then
-            echo "NO_FREE_THE_ODDS_API_KEY_CONFIGURED; no API calls attempted"
-            exit 2
-          fi
-          mkdir -p pinnacle_trial
-          TEST_DAY="$(cat /tmp/pinnacle_day)"
-          if [ -n "${TEST_DAY}" ]; then
-            python experiments/263/free_bulk_odds_263.py --pinnacle-only --day-turkey "${TEST_DAY}" --out pinnacle_trial/market.json
-          else
-            python experiments/263/free_bulk_odds_263.py --pinnacle-only --out pinnacle_trial/market.json
-          fi
-      - name: Verify one actual complete Pinnacle 1X2 market exists
+      - name: Validate one new request
         shell: bash
         run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          b=json.loads(Path("pinnacle_trial/market.json").read_text(encoding="utf-8"))
-          n=sum(1 for league in b["leagues"].values() for event in league
-                for bookmaker in event["bookmakers"] if bookmaker["bookmaker_key"]=="pinnacle"
-                for market in bookmaker["markets"] if market["market"]=="h2h"
-                and set(market["prices"])=={"H","D","A"})
-          print("ACTUAL_PINNACLE_1X2_PRICE_RECORDS:",n)
-          print("BLOCKED_LEAGUES:",b["blocked"])
-          if n<1:raise SystemExit("NO_REAL_PINNACLE_MARKET_ACCEPTED")
-          PY
-      - if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pinnacle-external-market-research-not-a-bet
-          path: pinnacle_trial/market.json
-          if-no-files-found: ignore
-          retention-days: 7
- /tmp/pinnacle_delta | grep -q .; then
-              echo "ONLY_NEW_PINNACLE_ONE_SHOT_REQUEST"; exit 2
-            fi
-            mapfile -t candidates < <(grep -E '^A[[:space:]]+experiments/263/pinnacle_trial_requests/[A-Za-z0-9_-]+\.json
-        env:
-          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
-          TEST_DAY: ${{ inputs.day_turkey }}
-        run: |
           set -euo pipefail
-          if [ -z "${THE_ODDS_API_KEY}" ]; then
-            echo "NO_FREE_THE_ODDS_API_KEY_CONFIGURED; no API calls attempted"
-            exit 2
+          git diff-tree --no-commit-id --name-status -r HEAD -- experiments/263/pinnacle_trial_requests/ > /tmp/pinnacle_delta.tsv
+          if grep -Ev '^A[[:space:]]+experiments/263/pinnacle_trial_requests/[A-Za-z0-9_-]+\.json$' /tmp/pinnacle_delta.tsv | grep -q .; then
+            echo "ONE_NEW_REQUEST_ONLY"; exit 2
           fi
-          mkdir -p pinnacle_trial
-          if [ -n "${TEST_DAY}" ]; then
-            python experiments/263/free_bulk_odds_263.py --pinnacle-only --day-turkey "${TEST_DAY}" --out pinnacle_trial/market.json
-          else
-            python experiments/263/free_bulk_odds_263.py --pinnacle-only --out pinnacle_trial/market.json
+          grep -E '^A[[:space:]]+experiments/263/pinnacle_trial_requests/[A-Za-z0-9_-]+\.json$' /tmp/pinnacle_delta.tsv | cut -f2 > /tmp/pinnacle_paths
+          if [ "$(wc -l < /tmp/pinnacle_paths)" -ne 1 ]; then
+            echo "ONE_REQUEST_REQUIRED"; exit 2
           fi
-      - if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pinnacle-external-market-research-not-a-bet
-          path: pinnacle_trial/market.json
-          if-no-files-found: ignore
-          retention-days: 7
- /tmp/pinnacle_delta | cut -f2)
-            if [ "${#candidates[@]}" != "1" ]; then echo "ONE_REQUEST_REQUIRED"; exit 2; fi
-            python - "${candidates[0]}" <<'PY'
+          python - "$(cat /tmp/pinnacle_paths)" <<'PY'
           import json,sys
-          from datetime import date,datetime
+          from datetime import datetime,date,timedelta
           from zoneinfo import ZoneInfo
-          f=json.load(open(sys.argv[1],encoding="utf-8"))
-          if set(f)!={"schema","day_turkey"} or f["schema"]!="263_pinnacle_once_request_v1":
-              raise SystemExit("INVALID_REQUEST_SCHEMA")
-          d=date.fromisoformat(f["day_turkey"])
-          if d!=datetime.now(ZoneInfo("Europe/Istanbul")).date():
-              raise SystemExit("ONE_SHOT_ONLY_TODAY_NOT_PAST_OR_FUTURE")
+          with open(sys.argv[1],encoding="utf-8") as source:
+              v=json.load(source)
+          if set(v)!={"schema","day_turkey"} or v["schema"]!="263_pinnacle_once_request_v1":
+              raise SystemExit("INVALID_ONE_SHOT_REQUEST")
+          d=date.fromisoformat(v["day_turkey"])
+          today=datetime.now(ZoneInfo("Europe/Istanbul")).date()
+          if d not in (today,today+timedelta(days=1)):
+              raise SystemExit("DATE_NOT_TODAY_OR_TOMORROW")
           with open("/tmp/pinnacle_day","w") as out:out.write(d.isoformat())
           PY
-          else
-            printf "%s" "${INPUT_DAY}" > /tmp/pinnacle_day
-          fi
-      - name: Read-only single 10-league Pinnacle coverage check (maximum 20 credits)
+      - name: Read-only Pinnacle 1X2 probe at most 3 calls
         shell: bash
         env:
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
-          TEST_DAY: ${{ inputs.day_turkey }}
         run: |
           set -euo pipefail
-          if [ -z "${THE_ODDS_API_KEY}" ]; then
-            echo "NO_FREE_THE_ODDS_API_KEY_CONFIGURED; no API calls attempted"
-            exit 2
+          if [ -z "$THE_ODDS_API_KEY" ]; then
+            echo "NO_FREE_THE_ODDS_API_KEY_CONFIGURED"; exit 2
           fi
           mkdir -p pinnacle_trial
-          if [ -n "${TEST_DAY}" ]; then
-            python experiments/263/free_bulk_odds_263.py --pinnacle-only --day-turkey "${TEST_DAY}" --out pinnacle_trial/market.json
-          else
-            python experiments/263/free_bulk_odds_263.py --pinnacle-only --out pinnacle_trial/market.json
-          fi
+          python experiments/263/pinnacle_real_access_probe_263.py \
+            --day-turkey "$(cat /tmp/pinnacle_day)" \
+            --output pinnacle_trial/market.json
       - if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pinnacle-external-market-research-not-a-bet
+          name: pinnacle-one-shot-research-not-betting
           path: pinnacle_trial/market.json
           if-no-files-found: ignore
           retention-days: 7

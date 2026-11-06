@@ -1,0 +1,23 @@
+name: 263 Pinnacle real access probe offline acceptance
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/pinnacle_real_access_probe_263.py'
+      - 'experiments/263/test_pinnacle_real_access_probe_263.py'
+      - '.github/workflows/263-pinnacle-real-access-probe-ci.yml'
+permissions:
+  contents: read
+jobs:
+  offline-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One offline test suite; consumes zero live API credits
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_pinnacle_real_access_probe_263.py
