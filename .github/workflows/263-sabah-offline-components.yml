@@ -1,4 +1,4 @@
-name: "263 sabah bileşenleri - tek offline test"
+name: "263 sabah entegre bileşenler - tek offline kabul"
 on:
   push:
     branches: [experiment/263-toplu-karsilastirma]
@@ -9,29 +9,50 @@ on:
       - 'experiments/263/test_sabah_pinnacle_credit_guard_263.py'
       - 'experiments/263/sabah_fixture_rotation_263.py'
       - 'experiments/263/test_sabah_fixture_rotation_263.py'
+      - 'experiments/263/sabah_batch_263.py'
+      - 'experiments/263/sabah_mobile_screens_263.py'
+      - 'experiments/263/sabah_pinnacle_capture_263.py'
+      - 'experiments/263/test_sabah_workflow_263.py'
       - '.github/workflows/263-sabah-offline-components.yml'
+      - '.github/workflows/263-sabah-live-batch.yml'
+      - '.github/workflows/263-pinnacle-free-once.yml'
+      - '.github/workflows/263-quad-forward-on-request.yml'
 permissions:
   contents: read
 jobs:
-  offline:
+  accept-offline:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Verify untouched fixed 96-candidate input
+      - name: Fixed required numerical packages (not an engine change)
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Static preflight: old free-credit paths cannot query The Odds API
         run: |
           test "$(git hash-object experiments/263/local_leagues/2026-11-06_09_10_league_date_only_candidates.json)" = "803378e8ef0f1f285a3393a7231567eea8f25e80"
-      - name: Offline component tests - no API calls
-        env:
-          PYTHONPATH: experiments/263
+          ! grep -q 'THE_ODDS_API_KEY:.*secrets' .github/workflows/263-quad-forward-on-request.yml
+          ! grep -q 'secrets.THE_ODDS_API_KEY' .github/workflows/263-pinnacle-free-once.yml
+          grep -q 'group: quad-263-append-only' .github/workflows/263-sabah-live-batch.yml
+      - name: Syntax check of new modules (no key or live calls)
         run: |
-          python -m unittest -v experiments/263/test_sabah_postmatch_263.py experiments/263/test_sabah_pinnacle_credit_guard_263.py experiments/263/test_sabah_fixture_rotation_263.py
-      - name: Render real date-only preparation (not official kickoff)
+          python -m py_compile experiments/263/sabah_batch_263.py experiments/263/sabah_mobile_screens_263.py experiments/263/sabah_pinnacle_capture_263.py
+      - name: One integrated synthetic test batch - no live odds or fixture calls
         env:
-          PYTHONPATH: experiments/263
+          PYTHONPATH: .:experiments/263
         run: |
-          python experiments/263/sabah_fixture_rotation_263.py --candidates experiments/263/local_leagues/2026-11-06_09_10_league_date_only_candidates.json --day 2026-11-07 --out /tmp/263-prep-nov7.md
+          python -m unittest -v \
+            experiments/263/test_sabah_postmatch_263.py \
+            experiments/263/test_sabah_pinnacle_credit_guard_263.py \
+            experiments/263/test_sabah_fixture_rotation_263.py \
+            experiments/263/test_sabah_workflow_263.py
+      - name: Render pinned 44-candidate preparation without claiming kickoff verification
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python experiments/263/sabah_fixture_rotation_263.py \
+            --candidates experiments/263/local_leagues/2026-11-06_09_10_league_date_only_candidates.json \
+            --day 2026-11-07 --out /tmp/263-prep-nov7.md
           grep -q '44 sabit kohort adayı' /tmp/263-prep-nov7.md
