@@ -7,6 +7,8 @@ on:
       - 'experiments/263/test_sabah_postmatch_263.py'
       - 'experiments/263/sabah_pinnacle_credit_guard_263.py'
       - 'experiments/263/test_sabah_pinnacle_credit_guard_263.py'
+      - 'experiments/263/sabah_fixture_rotation_263.py'
+      - 'experiments/263/test_sabah_fixture_rotation_263.py'
       - '.github/workflows/263-sabah-offline-components.yml'
 permissions:
   contents: read
@@ -19,8 +21,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Offline tests only - no API calls
+      - name: Verify untouched fixed 96-candidate input
+        run: |
+          test "$(git hash-object experiments/263/local_leagues/2026-11-06_09_10_league_date_only_candidates.json)" = "803378e8ef0f1f285a3393a7231567eea8f25e80"
+      - name: Offline component tests - no API calls
         env:
           PYTHONPATH: experiments/263
         run: |
-          python -m unittest -v experiments/263/test_sabah_postmatch_263.py experiments/263/test_sabah_pinnacle_credit_guard_263.py
+          python -m unittest -v experiments/263/test_sabah_postmatch_263.py experiments/263/test_sabah_pinnacle_credit_guard_263.py experiments/263/test_sabah_fixture_rotation_263.py
+      - name: Render real date-only preparation (not official kickoff)
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python experiments/263/sabah_fixture_rotation_263.py --candidates experiments/263/local_leagues/2026-11-06_09_10_league_date_only_candidates.json --day 2026-11-07 --out /tmp/263-prep-nov7.md
+          grep -q '44 sabit kohort adayı' /tmp/263-prep-nov7.md
