@@ -169,7 +169,7 @@ def day_window(day):
     end=datetime.combine(day.fromordinal(day.toordinal()+1),time.min,tzinfo=TR).astimezone(timezone.utc)
     return start.strftime("%Y-%m-%dT%H:%M:%SZ"),end.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-def collect(day,now,key,getter=fetch,*,bookmaker_filter=None):
+def collect(day,now,key,getter=fetch,*,bookmaker_filter=None,leagues=None,markets=None):
     """One call per league, two markets each; safe free-budget cap. No repeats."""
     if not key:raise QuoteUnavailable("NO_FREE_THE_ODDS_API_KEY_CONFIGURED")
     if not isinstance(day,date) or now.tzinfo is None:
@@ -178,18 +178,27 @@ def collect(day,now,key,getter=fetch,*,bookmaker_filter=None):
     if day<now.astimezone(TR).date():raise QuoteUnavailable("NO_HISTORICAL_RECONSTRUCTION")
     if bookmaker_filter not in (None,"pinnacle"):
         raise QuoteUnavailable("UNSUPPORTED_BOOKMAKER_FILTER")
+    requested_leagues=tuple(SPORTS) if leagues is None else tuple(leagues)
+    requested_markets=MARKETS if markets is None else tuple(markets)
+    if (not requested_leagues or len(set(requested_leagues))!=len(requested_leagues)
+        or any(x not in SPORTS for x in requested_leagues)):
+        raise QuoteUnavailable("INVALID_OR_DUPLICATED_LEAGUE_SELECTION")
+    if (not requested_markets or len(set(requested_markets))!=len(requested_markets)
+        or any(x not in MARKETS for x in requested_markets)):
+        raise QuoteUnavailable("INVALID_OR_DUPLICATED_MARKETS")
     lo,hi=day_window(day)
-    params={"markets":",".join(MARKETS),
+    params={"markets":",".join(requested_markets),
             "oddsFormat":"decimal","commenceTimeFrom":lo,"commenceTimeTo":hi}
     if bookmaker_filter=="pinnacle":
         params["bookmakers"]="pinnacle"
     else:
         params["regions"]=REGION
-    if len(SPORTS)*len(MARKETS)>MAX_RUN_CREDITS:
+    if len(requested_leagues)*len(requested_markets)>MAX_RUN_CREDITS:
         raise QuoteUnavailable("CONFIGURED_FREE_RUN_BUDGET_EXCEEDED")
     results={};blocked={};remaining=None
-    for league,sport in SPORTS.items():
-        if remaining is not None and remaining < len(MARKETS):
+    for league in requested_leagues:
+        sport=SPORTS[league]
+        if remaining is not None and remaining < len(requested_markets):
             blocked[league]="FREE_QUOTA_GUARD";continue
         try:
             data,remaining=getter(sport,params,key)
@@ -204,7 +213,7 @@ def collect(day,now,key,getter=fetch,*,bookmaker_filter=None):
             blocked[league]=str(exc)
             # Never spend remaining free credits retrying blocked access.
             if str(exc) in ("ODDS_API_HTTP_401","ODDS_API_HTTP_403","ODDS_API_HTTP_429"):
-                for other in SPORTS:
+                for other in requested_leagues:
                     if other not in results and other not in blocked:
                         blocked[other]="ACCESS_OR_QUOTA_NOT_RETRIED"
                 break
@@ -212,10 +221,11 @@ def collect(day,now,key,getter=fetch,*,bookmaker_filter=None):
         "provider":"The Odds API (the-odds-api.com)","source_scope":"FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY",
         "region":REGION if bookmaker_filter is None else None,
         "bookmaker_filter":bookmaker_filter,
-        "markets_requested":list(MARKETS),
+        "markets_requested":list(requested_markets),
+        "leagues_requested":list(requested_leagues),
         "bookmaker_odds_not_iddaa":True,"independently_verified_fixture":False,
         "S1_S2_official_approved":False,"betting_authorized":False,
-        "forecast_or_decision_modified":False,"max_one_run_credit_cost":MAX_RUN_CREDITS,
+        "forecast_or_decision_modified":False,"max_one_run_credit_cost":len(requested_leagues)*len(requested_markets),
         "reported_remaining_credits":remaining,"leagues":results,"blocked":blocked}
     out["payload_sha256"]=hashlib.sha256(canonical(out)).hexdigest()
     return out

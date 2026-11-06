@@ -5,7 +5,9 @@ on:
     paths:
       - 'experiments/263/free_bulk_odds_263.py'
       - 'experiments/263/pinnacle_market_benchmark_263.py'
+      - 'experiments/263/pinnacle_forward_join_263.py'
       - 'experiments/263/test_pinnacle_market_benchmark_263.py'
+      - 'experiments/263/test_pinnacle_forward_join_263.py'
       - '.github/workflows/263-pinnacle-benchmark-acceptance.yml'
 permissions:
   contents: read
@@ -26,4 +28,5 @@ jobs:
         run: |
           python -m unittest -v \
             experiments/263/test_free_bulk_odds_263.py \
-            experiments/263/test_pinnacle_market_benchmark_263.py
+            experiments/263/test_pinnacle_market_benchmark_263.py \
+            experiments/263/test_pinnacle_forward_join_263.py

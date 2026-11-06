@@ -94,6 +94,18 @@ jobs:
           python experiments/263/odds_provider_oddspapi_263.py \
             --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json" \
             --attempt-report "experiments/263/api_odds_attempts/$GITHUB_SHA.json"
+      - name: Pinnacle independent same-job T-60 price reference (one h2h call per league)
+        if: steps.requests.outputs.has_requests == 'true' && steps.forward.outcome == 'success'
+        continue-on-error: true
+        env:
+          PYTHONPATH: .:experiments/263
+          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/pinnacle_forward_join_263.py \
+            --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json" \
+            --audit-out "experiments/263/pinnacle_samejob_runs/$GITHUB_SHA.json"
       - name: Generate trusted readable 1..12 match and detailed single-match reports
         id: human_report
         if: steps.requests.outputs.has_requests == 'true' && steps.forward.outcome == 'success'
@@ -120,6 +132,9 @@ jobs:
             python experiments/263/quad_prematch_bridge_263.py verify-baseline --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
             git add -A -- forward_quad_263 experiments/263/quad_research_links experiments/263/quad_batch_reports
             git add -A -- experiments/263/quad_human_reports
+            for dir in experiments/263/pinnacle_samejob_runs experiments/263/pinnacle_samejob_bulk experiments/263/pinnacle_samejob_comparisons; do
+              if [ -d "$dir" ]; then git add -A -- "$dir"; fi
+            done
             for dir in experiments/263/api_odds_attempts experiments/263/market_quotes_locked experiments/263/quad_priced_decisions experiments/263/quad_conditional_morning_decisions; do
               if [ -d "$dir" ]; then git add -A -- "$dir"; fi
             done
@@ -156,6 +171,9 @@ jobs:
             experiments/263/market_quotes_locked/*/*.json
             experiments/263/quad_priced_decisions/*/*.json
             experiments/263/quad_batch_reports/*.json
+            experiments/263/pinnacle_samejob_runs/*.json
+            experiments/263/pinnacle_samejob_bulk/*.json
+            experiments/263/pinnacle_samejob_comparisons/*/*.json
             experiments/263/quad_human_reports/*/summary.md
             experiments/263/quad_human_reports/*/matches/*/*.md
       - name: Reject zero registered predictions
