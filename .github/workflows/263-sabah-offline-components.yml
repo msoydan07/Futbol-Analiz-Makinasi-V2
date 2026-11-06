@@ -1,0 +1,26 @@
+name: "263 sabah bileşenleri - tek offline test"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_postmatch_263.py'
+      - 'experiments/263/test_sabah_postmatch_263.py'
+      - 'experiments/263/sabah_pinnacle_credit_guard_263.py'
+      - 'experiments/263/test_sabah_pinnacle_credit_guard_263.py'
+      - '.github/workflows/263-sabah-offline-components.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline tests only - no API calls
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python -m unittest -v experiments/263/test_sabah_postmatch_263.py experiments/263/test_sabah_pinnacle_credit_guard_263.py
