@@ -1,0 +1,10 @@
+{
+  "schema": "quad_named_match_batch_request_v1",
+  "matches": [
+    {
+      "league": "NED1",
+      "home": "Willem II",
+      "away": "PEC Zwolle"
+    }
+  ]
+}
