@@ -1,0 +1,39 @@
+{
+  "accepted_snapshot_required": true,
+  "betting_authorized": false,
+  "created_at_utc": "2026-11-06T19:08:58.557831+00:00",
+  "outcomes": [
+    {
+      "reason": "LIVE_OFFICIAL_FIXTURE_NOT_VERIFIED:official_match_not_confirmed",
+      "requested": {
+        "away": "Udinese",
+        "home": "Venezia",
+        "league": "ITA1"
+      },
+      "status": "BLOCKED_NO_PREDICTION"
+    },
+    {
+      "reason": "LIVE_OFFICIAL_FIXTURE_NOT_VERIFIED:official_match_not_confirmed",
+      "requested": {
+        "away": "Strasbourg",
+        "home": "Toulouse",
+        "league": "FRA1"
+      },
+      "status": "BLOCKED_NO_PREDICTION"
+    }
+  ],
+  "pilot_goal": 96,
+  "production_modified": false,
+  "requests": [
+    {
+      "path": "experiments/263/quad_requests/20261106_2245_venezia_udinese_toulouse_strasbourg.json",
+      "sha256": "8777713c4a1859b83812716b88c68eb9f9d5e634a96589fd5dbb82cfab52fb62"
+    }
+  ],
+  "schema": "quad_named_match_batch_report_v1",
+  "statuses": {
+    "ALREADY_RECORDED_NOT_OVERWRITTEN": 0,
+    "BLOCKED_NO_PREDICTION": 2,
+    "REGISTERED_FOUR_MODELS_EXPERIMENTAL": 0
+  }
+}
