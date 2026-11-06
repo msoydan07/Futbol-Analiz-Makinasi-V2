@@ -1,5 +1,7 @@
 # Futbol Maç Analiz Makinası V2
 
+> **2.6.3 TEKLİ/TOPLU KARAR EKRANI — KALICI SUNUM STANDARDI (06.11.2026):** [docs/263_KARAR_EKRANI_KALICI_STANDART.md](docs/263_KARAR_EKRANI_KALICI_STANDART.md). Önce ana değer kararı / PAS, alternatif ve S1–S2 ayrımı; sonra teknik model tabloları. Yeni sohbetlerde ve yeni tahmin raporlarında bu standart esas alınır. Geçmiş SHA kilitli kayıtlar değişmez.
+
 Temel analiz şartnamesi: **2.6.2 (değişmeyecek)**. Bu depo temiz kod altyapısıdır; eski depo korunur.
 
 ## Kapsam
