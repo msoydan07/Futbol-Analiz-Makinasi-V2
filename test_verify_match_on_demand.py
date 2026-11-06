@@ -62,4 +62,22 @@ class TestNamedMatchWithoutBulkFixture(unittest.TestCase):
    self.assertEqual(verified["analysis_gate"],"READY_FOR_DATA_AUDIT")
    self.assertEqual(verify_named_match(**dict(args,source_url="https://example.com"),source_checked=True)["status"],"REJECTED")
 
+
+class TestOfficialDutchFederation(unittest.TestCase):
+ def test_real_knvb_domain_allowed_and_forged_domain_rejected(self):
+  with tempfile.TemporaryDirectory() as folder:
+   reg=Registry(Path(folder)/"registry.json")
+   reg.register_team("willem-ii","Willem II")
+   reg.register_team("zwolle","PEC Zwolle")
+   reg.save()
+   now=datetime(2026,11,6,18,40,tzinfo=timezone.utc)
+   kwargs=dict(league="NED1",home="Willem II",away="PEC Zwolle",
+     kickoff_iso="2026-11-06T19:00:00+00:00",
+     retrieved_at_iso=now.isoformat(),now=now,source_checked=True,
+     registry_path=str(Path(folder)/"registry.json"))
+   ok=verify_requested_fixture(source_url="https://www.knvb.nl/competities/eredivisie/programma",**kwargs)
+   self.assertEqual(ok["status"],"VERIFIED")
+   bad=verify_requested_fixture(source_url="https://www.knvb.nl.evil.example/competities/eredivisie/programma",**kwargs)
+   self.assertEqual(bad["reason"],"not_registered_official_domain")
+
 if __name__=="__main__":unittest.main()
