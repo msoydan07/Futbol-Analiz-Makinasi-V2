@@ -30,7 +30,7 @@ jobs:
           python-version: '3.11'
       - name: Fixed required numerical packages (not an engine change)
         run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
-      - name: Static preflight: old free-credit paths cannot query The Odds API
+      - name: "Static preflight: old free-credit paths cannot query The Odds API"
         run: |
           test "$(git hash-object experiments/263/local_leagues/2026-11-06_09_10_league_date_only_candidates.json)" = "803378e8ef0f1f285a3393a7231567eea8f25e80"
           ! grep -q 'THE_ODDS_API_KEY:.*secrets' .github/workflows/263-quad-forward-on-request.yml

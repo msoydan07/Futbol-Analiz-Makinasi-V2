@@ -162,6 +162,10 @@ jobs:
               echo "SAME_DAY_LEAGUE_ALREADY_RESERVED_OR_SNAPSHOTTED: $league"
               continue
             fi
+            if ! python experiments/263/sabah_pinnacle_capture_263.py eligible --report "$REPORT" | grep -Fxq "$league"; then
+              echo "FORECAST_NO_LONGER_WITHIN_SAME_TIME_WINDOW: $league"
+              continue
+            fi
             python experiments/263/sabah_pinnacle_capture_263.py reserve --league "$league" --day "$DAY"
             git add -- "$reservation"
             git commit -m "Reserve Pinnacle daily h2h credit for $league $DAY BEFORE request"

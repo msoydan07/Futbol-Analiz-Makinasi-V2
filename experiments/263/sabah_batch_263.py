@@ -6,7 +6,7 @@ The original B/C2/C3/M4 calculation and DEV lock are not modified.
 """
 from __future__ import annotations
 import argparse,hashlib,json,re
-from datetime import datetime,timezone
+from datetime import datetime,timezone,timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from forward_c3 import canonical_bytes,read_aware,valid_gate
@@ -142,7 +142,8 @@ def precommit(report,root=".",now=None):
   f=json.loads(file.read_text(encoding="utf-8"));sealed_payload(f,"quad_forward_263_v1")
   if (f["payload_sha256"]!=r["forecast_sha256"]
    or f["fixture"].get("fixture_verification")!="VERIFIED_BY_LIVE_OFFICIAL_GATE"
-   or not read_aware(f["created_at_utc"])<=now<read_aware(f["fixture"]["kickoff_utc"])):
+   or not (read_aware(f["created_at_utc"])<=now and
+            now+timedelta(minutes=2)<read_aware(f["fixture"]["kickoff_utc"]))):
    raise Blocked("FORECAST_NOT_PREKICKOFF_AT_COMMIT")
  return True
 
