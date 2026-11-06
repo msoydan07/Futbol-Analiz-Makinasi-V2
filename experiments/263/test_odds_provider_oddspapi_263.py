@@ -76,7 +76,7 @@ class ApiSourceValidation(unittest.TestCase):
         f,b,l,fixture_doc,*_=make()
         unknown=copy.deepcopy(f)
         unknown["fixture"]["home_id"]="00000000-0000-0000-0000-000000000001"
-        with self.assertRaisesRegex(QuoteBlocked,"IDENTITY_INDEX_UNAVAILABLE_OR_INVALID"):
+        with self.assertRaisesRegex(QuoteBlocked,"FORECAST_TEAMS_NOT_IN_VERIFIED_LEAGUE_SEASON"):
             match_fixture(unknown,[fixture_doc],NOW)
         wrong=copy.deepcopy(f)
         wrong["fixture"]["league"]="ENG1"
