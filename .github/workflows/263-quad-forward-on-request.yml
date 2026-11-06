@@ -59,7 +59,7 @@ jobs:
         if: steps.requests.outputs.has_requests == 'true'
         continue-on-error: true
         env:
-          PYTHONPATH: experiments/263
+          PYTHONPATH: .:experiments/263
         shell: bash
         run: |
           set -euo pipefail
