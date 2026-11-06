@@ -1,0 +1,77 @@
+{
+  "S1_S2_official_approved": false,
+  "betting_authorized": false,
+  "blocked": {},
+  "bookmaker_filter": "pinnacle",
+  "bookmaker_odds_not_iddaa": true,
+  "checked_at_utc": "2026-11-06T19:11:55.951088+00:00",
+  "day_turkey": "2026-11-06",
+  "forecast_or_decision_modified": false,
+  "independently_verified_fixture": false,
+  "leagues": {
+    "FRA1": [
+      {
+        "away_team": "Strasbourg",
+        "bookmakers": [
+          {
+            "bookmaker_key": "pinnacle",
+            "markets": [
+              {
+                "market": "h2h",
+                "prices": {
+                  "A": 3.32,
+                  "D": 3.66,
+                  "H": 2.22
+                },
+                "source_last_update_utc": "2026-11-06T19:11:55+00:00"
+              }
+            ]
+          }
+        ],
+        "home_team": "Toulouse",
+        "kickoff_utc": "2026-11-06T19:45:00+00:00",
+        "provider_event_id": "5e7d141f719835de18877ed95bedcb32",
+        "sport": "soccer_france_ligue_one"
+      }
+    ],
+    "ITA1": [
+      {
+        "away_team": "Udinese",
+        "bookmakers": [
+          {
+            "bookmaker_key": "pinnacle",
+            "markets": [
+              {
+                "market": "h2h",
+                "prices": {
+                  "A": 3.2,
+                  "D": 3.44,
+                  "H": 2.37
+                },
+                "source_last_update_utc": "2026-11-06T19:11:38+00:00"
+              }
+            ]
+          }
+        ],
+        "home_team": "Venezia",
+        "kickoff_utc": "2026-11-06T19:45:00+00:00",
+        "provider_event_id": "fa069801a5c9b49143447a1a1d173fd1",
+        "sport": "soccer_italy_serie_a"
+      }
+    ]
+  },
+  "leagues_requested": [
+    "FRA1",
+    "ITA1"
+  ],
+  "markets_requested": [
+    "h2h"
+  ],
+  "max_one_run_credit_cost": 2,
+  "payload_sha256": "ce906ac318aaa2023aa16b03d23e1f9b61093c5a996b0a6db7cfce9d4028d0d3",
+  "provider": "The Odds API (the-odds-api.com)",
+  "region": null,
+  "reported_remaining_credits": 497,
+  "schema": "263_free_bulk_external_odds_research_v1",
+  "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+}

@@ -1,0 +1,44 @@
+{
+  "betting_authorized": false,
+  "items": [
+    {
+      "comparison_path": "experiments/263/pinnacle_samejob_comparisons/2026-11-06/3cd1e224f932b9351e6820a0.json",
+      "comparison_sha256": "58f43857fff91b745d71686634c55ee8c5de70489c8872245c01ffd2bb2c8272",
+      "forecast_path": "forward_quad_263/2026-11-06/3cd1e224f932b9351e6820a0.json",
+      "forecast_sha256": "69d5903390f8c56b104c8045acc5c5d6f2d43eaf8847011ec055ae35f678a9cb",
+      "kickoff_utc": "2026-11-06T19:45:00+00:00",
+      "league": "ITA1",
+      "reason": null,
+      "status": "PINNACLE_READ_ONLY_COMPARISON_STORED"
+    },
+    {
+      "comparison_path": "experiments/263/pinnacle_samejob_comparisons/2026-11-06/b3bebd5fc0d3f2f56212bce5.json",
+      "comparison_sha256": "5f942fa98889392163d42a5c158cc58a60be9bd440e962c8dde7b91f543e1e66",
+      "forecast_path": "forward_quad_263/2026-11-06/b3bebd5fc0d3f2f56212bce5.json",
+      "forecast_sha256": "be375b7dba9cc26582d04ad5cf4f05acc8a3ad16be59ff72df36947e979190cc",
+      "kickoff_utc": "2026-11-06T19:45:00+00:00",
+      "league": "FRA1",
+      "reason": null,
+      "status": "PINNACLE_READ_ONLY_COMPARISON_STORED"
+    }
+  ],
+  "max_requested_credits": 2,
+  "observed_at_utc": "2026-11-06T19:11:55.951088+00:00",
+  "official_S1_S2_modified": false,
+  "original_predictions_modified": false,
+  "payload_sha256": "4f4f27d53a52b3489e44c8489d668388a5fc806791e68b6b184d58ed92a39431",
+  "provider": "Pinnacle via The Odds API (not direct site verified)",
+  "schema": "263_pinnacle_same_job_research_v1",
+  "snapshots": [
+    {
+      "blocked": {},
+      "leagues": [
+        "FRA1",
+        "ITA1"
+      ],
+      "path": "experiments/263/pinnacle_samejob_bulk/91a4cb7ab091d64c5dacbbd0534476b56d15a6b0_2026-11-06.json",
+      "sha256": "ce906ac318aaa2023aa16b03d23e1f9b61093c5a996b0a6db7cfce9d4028d0d3"
+    }
+  ],
+  "status": "READ_ONLY_PINNACLE_RESEARCH_AUDITED"
+}

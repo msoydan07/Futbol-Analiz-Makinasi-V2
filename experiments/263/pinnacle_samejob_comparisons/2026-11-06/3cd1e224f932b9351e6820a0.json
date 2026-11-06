@@ -1,0 +1,86 @@
+{
+  "accuracy_not_yet_established": true,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "bookmaker_last_update_utc": "2026-11-06T19:11:38+00:00",
+  "bookmaker_verified_directly": false,
+  "changes_forecast_or_decision": false,
+  "forecast_recorded_at_utc": "2026-11-06T19:11:50.958830+00:00",
+  "forecast_sha256": "69d5903390f8c56b104c8045acc5c5d6f2d43eaf8847011ec055ae35f678a9cb",
+  "independent_benchmark": true,
+  "kickoff_utc": "2026-11-06T19:45:00+00:00",
+  "league": "ITA1",
+  "market": "MS_1X2",
+  "match": "Venezia – Udinese",
+  "models": {
+    "B": {
+      "probabilities": {
+        "A": 0.5545492548665191,
+        "D": 0.2232907072864042,
+        "H": 0.22216003784707655
+      },
+      "vs_pinnacle_pp": {
+        "A": 24.9712,
+        "D": -6.0278,
+        "H": -18.9434
+      }
+    },
+    "C2": {
+      "probabilities": {
+        "A": 0.5270119635789731,
+        "D": 0.21701536655016884,
+        "H": 0.25597266987085826
+      },
+      "vs_pinnacle_pp": {
+        "A": 22.2175,
+        "D": -6.6554,
+        "H": -15.5621
+      }
+    },
+    "C3": {
+      "probabilities": {
+        "A": 0.4601360131026443,
+        "D": 0.2663571522452185,
+        "H": 0.27350683465213704
+      },
+      "vs_pinnacle_pp": {
+        "A": 15.5299,
+        "D": -1.7212,
+        "H": -13.8087
+      }
+    },
+    "M4": {
+      "probabilities": {
+        "A": 0.535602412019804,
+        "D": 0.24977294088110633,
+        "H": 0.21462464709908985
+      },
+      "vs_pinnacle_pp": {
+        "A": 23.0766,
+        "D": -3.3796,
+        "H": -19.6969
+      }
+    }
+  },
+  "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+  "odds": {
+    "A": 3.2,
+    "D": 3.44,
+    "H": 2.37
+  },
+  "official_S1_S2_approved": false,
+  "official_pilot_count_increment": 0,
+  "overround_pp": 2.5139,
+  "payload_sha256": "58f43857fff91b745d71686634c55ee8c5de70489c8872245c01ffd2bb2c8272",
+  "pinnacle_no_vig_probabilities": {
+    "A": 0.3048368280936855,
+    "D": 0.28356914241273073,
+    "H": 0.41159402949358376
+  },
+  "price_observed_at_utc": "2026-11-06T19:11:55.951088+00:00",
+  "provider": "The Odds API (the-odds-api.com)",
+  "schema": "263_pinnacle_readonly_benchmark_v1",
+  "source_bulk_sha256": "ce906ac318aaa2023aa16b03d23e1f9b61093c5a996b0a6db7cfce9d4028d0d3",
+  "source_event_id": "fa069801a5c9b49143447a1a1d173fd1",
+  "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+}

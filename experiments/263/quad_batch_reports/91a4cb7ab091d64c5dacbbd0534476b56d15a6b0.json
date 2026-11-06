@@ -1,0 +1,61 @@
+{
+  "accepted_snapshot_required": true,
+  "betting_authorized": false,
+  "created_at_utc": "2026-11-06T19:11:50.958830+00:00",
+  "outcomes": [
+    {
+      "fixture": {
+        "away_id": "916d48f9-b161-5b71-bc0b-8bfb74f12ce4",
+        "fixture_verification": "VERIFIED_BY_LIVE_OFFICIAL_GATE",
+        "home_id": "0f2d081e-241d-5c0f-95fc-f2d55f40d51a",
+        "kickoff_utc": "2026-11-06T19:45:00+00:00",
+        "league": "ITA1",
+        "match_local_date": "2026-11-06",
+        "official_source": "https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a",
+        "source_checked_at_utc": "2026-11-06T19:11:50.994483+00:00"
+      },
+      "path": "forward_quad_263/2026-11-06/3cd1e224f932b9351e6820a0.json",
+      "payload_sha256": "69d5903390f8c56b104c8045acc5c5d6f2d43eaf8847011ec055ae35f678a9cb",
+      "requested": {
+        "away": "Udinese",
+        "home": "Venezia",
+        "league": "ITA1"
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "fixture": {
+        "away_id": "9b4b87e9-b145-5869-8913-ef8712e21dad",
+        "fixture_verification": "VERIFIED_BY_LIVE_OFFICIAL_GATE",
+        "home_id": "558d465a-c00b-5294-a04a-17dbfb07e96a",
+        "kickoff_utc": "2026-11-06T19:45:00+00:00",
+        "league": "FRA1",
+        "match_local_date": "2026-11-06",
+        "official_source": "https://ligue1.com/fr/articles/l1_article_5839-",
+        "source_checked_at_utc": "2026-11-06T19:11:53.045083+00:00"
+      },
+      "path": "forward_quad_263/2026-11-06/b3bebd5fc0d3f2f56212bce5.json",
+      "payload_sha256": "be375b7dba9cc26582d04ad5cf4f05acc8a3ad16be59ff72df36947e979190cc",
+      "requested": {
+        "away": "Strasbourg",
+        "home": "Toulouse",
+        "league": "FRA1"
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    }
+  ],
+  "pilot_goal": 96,
+  "production_modified": false,
+  "requests": [
+    {
+      "path": "experiments/263/quad_requests/20261106_2245_official_news_source_fixed.json",
+      "sha256": "8777713c4a1859b83812716b88c68eb9f9d5e634a96589fd5dbb82cfab52fb62"
+    }
+  ],
+  "schema": "quad_named_match_batch_report_v1",
+  "statuses": {
+    "ALREADY_RECORDED_NOT_OVERWRITTEN": 0,
+    "BLOCKED_NO_PREDICTION": 0,
+    "REGISTERED_FOUR_MODELS_EXPERIMENTAL": 2
+  }
+}

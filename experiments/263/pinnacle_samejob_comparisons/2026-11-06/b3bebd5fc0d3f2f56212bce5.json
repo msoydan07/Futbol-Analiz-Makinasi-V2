@@ -1,0 +1,86 @@
+{
+  "accuracy_not_yet_established": true,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "bookmaker_last_update_utc": "2026-11-06T19:11:55+00:00",
+  "bookmaker_verified_directly": false,
+  "changes_forecast_or_decision": false,
+  "forecast_recorded_at_utc": "2026-11-06T19:11:50.958830+00:00",
+  "forecast_sha256": "be375b7dba9cc26582d04ad5cf4f05acc8a3ad16be59ff72df36947e979190cc",
+  "independent_benchmark": true,
+  "kickoff_utc": "2026-11-06T19:45:00+00:00",
+  "league": "FRA1",
+  "market": "MS_1X2",
+  "match": "Toulouse – Strasbourg",
+  "models": {
+    "B": {
+      "probabilities": {
+        "A": 0.4285393249159479,
+        "D": 0.22817166239874312,
+        "H": 0.34328901268530904
+      },
+      "vs_pinnacle_pp": {
+        "A": 13.4646,
+        "D": -3.842,
+        "H": -9.6227
+      }
+    },
+    "C2": {
+      "probabilities": {
+        "A": 0.38391119204651336,
+        "D": 0.23503811512046757,
+        "H": 0.3810506928330191
+      },
+      "vs_pinnacle_pp": {
+        "A": 9.0018,
+        "D": -3.1553,
+        "H": -5.8465
+      }
+    },
+    "C3": {
+      "probabilities": {
+        "A": 0.34127026421192214,
+        "D": 0.23804017581219641,
+        "H": 0.4206895599758815
+      },
+      "vs_pinnacle_pp": {
+        "A": 4.7377,
+        "D": -2.8551,
+        "H": -1.8826
+      }
+    },
+    "M4": {
+      "probabilities": {
+        "A": 0.37839732398674103,
+        "D": 0.233371444543516,
+        "H": 0.38823123146974303
+      },
+      "vs_pinnacle_pp": {
+        "A": 8.4504,
+        "D": -3.322,
+        "H": -5.1284
+      }
+    }
+  },
+  "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+  "odds": {
+    "A": 3.32,
+    "D": 3.66,
+    "H": 2.22
+  },
+  "official_S1_S2_approved": false,
+  "official_pilot_count_increment": 0,
+  "overround_pp": 2.4879,
+  "payload_sha256": "5f942fa98889392163d42a5c158cc58a60be9bd440e962c8dde7b91f543e1e66",
+  "pinnacle_no_vig_probabilities": {
+    "A": 0.29389296410434484,
+    "D": 0.2665914319197882,
+    "H": 0.43951560397586703
+  },
+  "price_observed_at_utc": "2026-11-06T19:11:55.951088+00:00",
+  "provider": "The Odds API (the-odds-api.com)",
+  "schema": "263_pinnacle_readonly_benchmark_v1",
+  "source_bulk_sha256": "ce906ac318aaa2023aa16b03d23e1f9b61093c5a996b0a6db7cfce9d4028d0d3",
+  "source_event_id": "5e7d141f719835de18877ed95bedcb32",
+  "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+}

@@ -1,0 +1,25 @@
+{
+  "created_at_utc": "2026-11-06T19:11:54.498724+00:00",
+  "forecast_created_at_utc": "2026-11-06T19:11:50.958830+00:00",
+  "forecast_sha256": "be375b7dba9cc26582d04ad5cf4f05acc8a3ad16be59ff72df36947e979190cc",
+  "historical_match_count": 387,
+  "last_result_date": "2026-11-02",
+  "league": "FRA1",
+  "markets": {
+    "BTTS_NO": 0.4730077120822622,
+    "BTTS_YES": 0.5269922879177378,
+    "MS1": 0.4641025641025641,
+    "MS2": 0.2923076923076923,
+    "MSX": 0.24358974358974358,
+    "OVER_1.5": 0.7403598971722365,
+    "OVER_2.5": 0.5398457583547558,
+    "OVER_3.5": 0.3341902313624679,
+    "UNDER_1.5": 0.2596401028277635,
+    "UNDER_2.5": 0.4601542416452442,
+    "UNDER_3.5": 0.6658097686375322
+  },
+  "method": "PAST_RESULTS_LEAGUE_MARKET_RATE",
+  "payload_sha256": "e2e24dc312a96e6bd07560d537d5649f123b004daff170d9bdaffa3cd4734f8a",
+  "schema": "263_asof_market_baseline_v2",
+  "source_snapshot_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9"
+}

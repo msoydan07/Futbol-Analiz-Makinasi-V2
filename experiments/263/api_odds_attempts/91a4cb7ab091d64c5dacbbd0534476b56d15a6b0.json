@@ -1,0 +1,21 @@
+{
+  "betting_authorized": false,
+  "bookmaker_requested": "iddaa",
+  "direct_iddaa_site_independently_verified": false,
+  "items": [
+    {
+      "path": "forward_quad_263/2026-11-06/3cd1e224f932b9351e6820a0.json",
+      "reason": "NO_ODDSPAPI_KEY_CONFIGURED",
+      "status": "API_ODDS_UNAVAILABLE_RETAIN_NO_ODDS_PAS"
+    },
+    {
+      "path": "forward_quad_263/2026-11-06/b3bebd5fc0d3f2f56212bce5.json",
+      "reason": "NO_ODDSPAPI_KEY_CONFIGURED",
+      "status": "API_ODDS_UNAVAILABLE_RETAIN_NO_ODDS_PAS"
+    }
+  ],
+  "provider": "OddsPapi",
+  "restricted_feed_requires_approved_key": true,
+  "runtime_utc": "2026-11-06T19:11:55.464333+00:00",
+  "schema": "263_oddspapi_iddaa_attempt_v1"
+}
