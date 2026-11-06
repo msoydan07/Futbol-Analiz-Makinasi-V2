@@ -1,0 +1,41 @@
+{
+  "accepted_snapshot_required": true,
+  "betting_authorized": false,
+  "created_at_utc": "2026-11-06T16:18:53.869042+00:00",
+  "outcomes": [
+    {
+      "fixture": {
+        "away_id": "41b9043e-2819-52dc-963f-a5756b6e88c3",
+        "fixture_verification": "VERIFIED_BY_LIVE_OFFICIAL_GATE",
+        "home_id": "da9ddb8a-aabc-5492-a4b5-b52eaed65165",
+        "kickoff_utc": "2026-11-06T17:00:00+00:00",
+        "league": "TUR1",
+        "match_local_date": "2026-11-06",
+        "official_source": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "source_checked_at_utc": "2026-11-06T16:18:53.908107+00:00"
+      },
+      "path": "forward_quad_263/2026-11-06/1d6b6f16fef8bac971c184c4.json",
+      "payload_sha256": "7b93dd66386bb2bad76d4719aec4cb5a6cf1c12d0fc2e39c8c822af41e3199e0",
+      "requested": {
+        "away": "Kasimpasa",
+        "home": "Gaziantep FK",
+        "league": "TUR1"
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    }
+  ],
+  "pilot_goal": 96,
+  "production_modified": false,
+  "requests": [
+    {
+      "path": "experiments/263/quad_requests/20261106_gaziantep_kasimpasa_import_fix.json",
+      "sha256": "9205249ef13832fd5d378bf08b3f9b79f6501e8714f863713ddb6becb47894dc"
+    }
+  ],
+  "schema": "quad_named_match_batch_report_v1",
+  "statuses": {
+    "ALREADY_RECORDED_NOT_OVERWRITTEN": 0,
+    "BLOCKED_NO_PREDICTION": 0,
+    "REGISTERED_FOUR_MODELS_EXPERIMENTAL": 1
+  }
+}
