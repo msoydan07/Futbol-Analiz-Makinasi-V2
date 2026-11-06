@@ -1,0 +1,41 @@
+{
+  "accepted_snapshot_required": true,
+  "betting_authorized": false,
+  "created_at_utc": "2026-11-06T18:45:41.833312+00:00",
+  "outcomes": [
+    {
+      "fixture": {
+        "away_id": "f145f45f-b104-56cf-bdf6-37023cd0a8ca",
+        "fixture_verification": "VERIFIED_BY_LIVE_OFFICIAL_GATE",
+        "home_id": "3e87bbfa-e7b8-5245-8953-b8f6078166af",
+        "kickoff_utc": "2026-11-06T19:00:00+00:00",
+        "league": "NED1",
+        "match_local_date": "2026-11-06",
+        "official_source": "https://www.knvb.nl/competities/eredivisie/programma",
+        "source_checked_at_utc": "2026-11-06T18:45:41.865528+00:00"
+      },
+      "path": "forward_quad_263/2026-11-06/90debab20dde0a252464c894.json",
+      "payload_sha256": "3d84bf5b4d5877a69ea484ae914addf158b794ae9fa6891539b685aaad10a61e",
+      "requested": {
+        "away": "PEC Zwolle",
+        "home": "Willem II",
+        "league": "NED1"
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    }
+  ],
+  "pilot_goal": 96,
+  "production_modified": false,
+  "requests": [
+    {
+      "path": "experiments/263/quad_requests/20261106_willem_pec_knvb_gate_fixed.json",
+      "sha256": "1634d8ae84eb75980474863dbf1d7942747469627b7e7cb184636552df1a8b2a"
+    }
+  ],
+  "schema": "quad_named_match_batch_report_v1",
+  "statuses": {
+    "ALREADY_RECORDED_NOT_OVERWRITTEN": 0,
+    "BLOCKED_NO_PREDICTION": 0,
+    "REGISTERED_FOUR_MODELS_EXPERIMENTAL": 1
+  }
+}
