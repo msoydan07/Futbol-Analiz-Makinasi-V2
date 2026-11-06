@@ -61,6 +61,7 @@ def keys_in(*dirs):
 
 def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
         lookup=None,predictor=None,baseline_fn=None,decision_fn=None,dev_lock_path='experiments/263/forward_dev_calibration_lock_263.json'):
+ fixed_clock=now is not None
  now=now or datetime.now(timezone.utc)
  if now.tzinfo is None:raise Blocked("AWARE_TIME_REQUIRED")
  now=now.astimezone(timezone.utc)
@@ -83,27 +84,28 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
  if count>LIMIT[cohort]:raise Blocked("COHORT_LIMIT_EXCEEDED")
  outcomes=[]
  for request in rows:
+  observed_now=now if fixed_clock else datetime.now(timezone.utc)
   item={**request,"status":"BLOCKED_NO_FORECAST"}
   try:
    if count>=LIMIT[cohort]:raise Blocked("COHORT_LIMIT_REACHED")
    gate=lookup(request["league"],request["home"],request["away"])
    if not isinstance(gate,dict) or gate.get("status")!="VERIFIED":
     raise Blocked("OFFICIAL_GATE_FAILED:"+str(gate.get("reason") if isinstance(gate,dict) else "INVALID"))
-   league,home,away,ko,checked,_=valid_gate(gate,now)
+   league,home,away,ko,checked,_=valid_gate(gate,observed_now)
    if ko.astimezone(TR).date().isoformat()!=day:raise Blocked("OFFICIAL_DATE_NOT_TURKEY_TODAY")
    key=(league,home,away,ko.isoformat())
    if key in seen:item["status"]="ALREADY_SEALED_UNCHANGED";outcomes.append(item);continue
-   path,forecast=predictor(gate,history,out_dir,lock_path,now=now,
+   path,forecast=predictor(gate,history,out_dir,lock_path,now=observed_now,
                            base=baseline,source_audit=acceptance)
    sealed_payload(forecast,"quad_forward_263_v1")
-   if not read_aware(forecast["created_at_utc"])<=now<ko:raise Blocked("POSTKICKOFF_FORBIDDEN")
+   if not read_aware(forecast["created_at_utc"])<=observed_now<ko:raise Blocked("POSTKICKOFF_FORBIDDEN")
    count+=1;seen.add(key)
    item.update(status="REGISTERED_FOUR_MODELS_EXPERIMENTAL",
                forecast_path=path.as_posix(),forecast_sha256=forecast["payload_sha256"],
                kickoff_utc=ko.isoformat())
    try:
-    b=baseline_fn(forecast,history,now=now)
-    d=decision_fn(forecast,b,lock,observation=None,now=now)
+    b=baseline_fn(forecast,history,now=observed_now)
+    d=decision_fn(forecast,b,lock,observation=None,now=observed_now)
     if d["quote_sha256"] is not None or d["main_candidate"] is not None or d["status"]!="RESEARCH_PAS":
      raise Blocked("NO_PRICE_MUST_BE_PAS")
     prefix=root/"experiments/263/sabah_research"/cohort/day/path.stem
@@ -111,7 +113,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     item["decision_status"]=d["status"];item["decision_sha256"]=d["payload_sha256"]
    except (ValueError,OSError,KeyError,TypeError) as exc:
     item["decision_status"]="UNAVAILABLE_MODEL_ONLY";item["decision_error"]=str(exc)[:140]
-   rotation=rotation_from_official_inputs(gate,[],now)
+   rotation=rotation_from_official_inputs(gate,[],observed_now)
    item["rotation"]={k:v["rotation_label"] for k,v in rotation["teams"].items()}
   except (ValueError,OSError,KeyError,TypeError,AssertionError) as exc:
    item["reason"]=str(exc)[:200]

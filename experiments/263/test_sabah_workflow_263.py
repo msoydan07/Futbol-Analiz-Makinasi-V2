@@ -72,7 +72,7 @@ class Acceptance(unittest.TestCase):
   r=self.create()
   self.assertEqual(r["new_forecasts"],1)
   self.assertTrue(r["outcomes"][0]["forecast_path"].startswith("forward_morning_263/"))
-  self.assertTrue(precommit(r))
+  self.assertTrue(precommit(r,now=NOW))
   self.assertFalse(Path("forward_quad_263").exists())
  def test_mobile_same_locked_SHA(self):
   r=self.create();summary,details=build(".",r)
