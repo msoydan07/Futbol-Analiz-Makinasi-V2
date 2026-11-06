@@ -67,8 +67,10 @@ def fetch(sport,params,key):
     """Only a fixed API host and known 10-league sport keys. Never log API key."""
     if sport not in SPORTS.values():raise QuoteUnavailable("UNSUPPORTED_SPORT")
     if not key:raise QuoteUnavailable("NO_FREE_THE_ODDS_API_KEY_CONFIGURED")
-    allowed={"regions","markets","oddsFormat","commenceTimeFrom","commenceTimeTo"}
-    if set(params)!=allowed:raise QuoteUnavailable("UNSAFE_API_PARAMETERS")
+    common={"markets","oddsFormat","commenceTimeFrom","commenceTimeTo"}
+    if not ((set(params)==common|{"regions"} and params.get("regions")=="eu")
+            or (set(params)==common|{"bookmakers"} and params.get("bookmakers")=="pinnacle")):
+        raise QuoteUnavailable("UNSAFE_API_PARAMETERS")
     url=API+"/sports/"+sport+"/odds?"+urllib.parse.urlencode({**params,"apiKey":key})
     try:
         with urllib.request.build_opener(_NoRedirect()).open(
@@ -131,7 +133,7 @@ def _market(m,home,away):
     return {"market":m["key"],"prices":values,
             "source_last_update_utc":m.get("last_update")}
 
-def normalize_event(event,sport,day,now):
+def normalize_event(event,sport,day,now,*,bookmaker_filter=None):
     if not isinstance(event,dict) or event.get("sport_key")!=sport:
         return None
     home,away=event.get("home_team"),event.get("away_team")
@@ -145,6 +147,7 @@ def normalize_event(event,sport,day,now):
         if not isinstance(book,dict):continue
         name=book.get("key")
         if not isinstance(name,str) or not name or len(name)>90:continue
+        if bookmaker_filter is not None and name!=bookmaker_filter:continue
         markets=[]
         for group in book.get("markets",[]):
             found=_market(group,home,away)
@@ -166,16 +169,22 @@ def day_window(day):
     end=datetime.combine(day.fromordinal(day.toordinal()+1),time.min,tzinfo=TR).astimezone(timezone.utc)
     return start.strftime("%Y-%m-%dT%H:%M:%SZ"),end.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-def collect(day,now,key,getter=fetch):
+def collect(day,now,key,getter=fetch,*,bookmaker_filter=None):
     """One call per league, two markets each; safe free-budget cap. No repeats."""
     if not key:raise QuoteUnavailable("NO_FREE_THE_ODDS_API_KEY_CONFIGURED")
     if not isinstance(day,date) or now.tzinfo is None:
         raise QuoteUnavailable("DATE_OR_CLOCK_INVALID")
     now=now.astimezone(timezone.utc)
     if day<now.astimezone(TR).date():raise QuoteUnavailable("NO_HISTORICAL_RECONSTRUCTION")
+    if bookmaker_filter not in (None,"pinnacle"):
+        raise QuoteUnavailable("UNSUPPORTED_BOOKMAKER_FILTER")
     lo,hi=day_window(day)
-    params={"regions":REGION,"markets":",".join(MARKETS),
+    params={"markets":",".join(MARKETS),
             "oddsFormat":"decimal","commenceTimeFrom":lo,"commenceTimeTo":hi}
+    if bookmaker_filter=="pinnacle":
+        params["bookmakers"]="pinnacle"
+    else:
+        params["regions"]=REGION
     if len(SPORTS)*len(MARKETS)>MAX_RUN_CREDITS:
         raise QuoteUnavailable("CONFIGURED_FREE_RUN_BUDGET_EXCEEDED")
     results={};blocked={};remaining=None
@@ -188,14 +197,22 @@ def collect(day,now,key,getter=fetch):
                 raise QuoteUnavailable("ODDS_API_NOT_EVENTS_LIST")
             matches=[]
             for event in data:
-                row=normalize_event(event,sport,day,now)
+                row=normalize_event(event,sport,day,now,bookmaker_filter=bookmaker_filter)
                 if row:matches.append(row)
             results[league]=matches
         except QuoteUnavailable as exc:
             blocked[league]=str(exc)
+            # Never spend remaining free credits retrying blocked access.
+            if str(exc) in ("ODDS_API_HTTP_401","ODDS_API_HTTP_403","ODDS_API_HTTP_429"):
+                for other in SPORTS:
+                    if other not in results and other not in blocked:
+                        blocked[other]="ACCESS_OR_QUOTA_NOT_RETRIED"
+                break
     out={"schema":SCHEMA,"day_turkey":day.isoformat(),"checked_at_utc":now.isoformat(),
         "provider":"The Odds API (the-odds-api.com)","source_scope":"FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY",
-        "region":REGION,"markets_requested":list(MARKETS),
+        "region":REGION if bookmaker_filter is None else None,
+        "bookmaker_filter":bookmaker_filter,
+        "markets_requested":list(MARKETS),
         "bookmaker_odds_not_iddaa":True,"independently_verified_fixture":False,
         "S1_S2_official_approved":False,"betting_authorized":False,
         "forecast_or_decision_modified":False,"max_one_run_credit_cost":MAX_RUN_CREDITS,
@@ -207,10 +224,13 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument("--day-turkey",help="YYYY-MM-DD; defaults to current Turkish date")
     parser.add_argument("--out",required=True)
+    parser.add_argument("--pinnacle-only",action="store_true",
+        help="Research only: bookmaker=pinnacle, no automatic substitution")
     args=parser.parse_args()
     now=datetime.now(timezone.utc)
     day=date.fromisoformat(args.day_turkey) if args.day_turkey else now.astimezone(TR).date()
-    result=collect(day,now,os.environ.get("THE_ODDS_API_KEY"))
+    result=collect(day,now,os.environ.get("THE_ODDS_API_KEY"),
+                   bookmaker_filter="pinnacle" if args.pinnacle_only else None)
     target=Path(args.out)
     target.parent.mkdir(parents=True,exist_ok=True)
     with target.open("x",encoding="utf-8") as fp:

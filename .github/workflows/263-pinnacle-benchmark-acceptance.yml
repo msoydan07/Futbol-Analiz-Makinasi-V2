@@ -1,0 +1,29 @@
+name: 263 Pinnacle independent T-minus-60 market benchmark - one contract batch
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/free_bulk_odds_263.py'
+      - 'experiments/263/pinnacle_market_benchmark_263.py'
+      - 'experiments/263/test_pinnacle_market_benchmark_263.py'
+      - '.github/workflows/263-pinnacle-benchmark-acceptance.yml'
+permissions:
+  contents: read
+jobs:
+  same-match-independent-market-benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Numerical dependencies for existing locked record schema
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: One acceptance batch existing ten-league collector plus Pinnacle pairing
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python -m unittest -v \
+            experiments/263/test_free_bulk_odds_263.py \
+            experiments/263/test_pinnacle_market_benchmark_263.py

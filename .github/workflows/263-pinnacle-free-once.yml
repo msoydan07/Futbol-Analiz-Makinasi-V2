@@ -1,0 +1,43 @@
+name: 263 Pinnacle FREE API single research trial - MANUAL ONLY
+on:
+  workflow_dispatch:
+    inputs:
+      day_turkey:
+        description: 'YYYY-MM-DD Turkish local date; leave blank for today'
+        required: false
+        type: string
+permissions:
+  contents: read
+jobs:
+  one-real-market-intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read-only single 10-league Pinnacle coverage check (maximum 20 credits)
+        shell: bash
+        env:
+          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+          TEST_DAY: ${{ inputs.day_turkey }}
+        run: |
+          set -euo pipefail
+          if [ -z "${THE_ODDS_API_KEY}" ]; then
+            echo "NO_FREE_THE_ODDS_API_KEY_CONFIGURED; no API calls attempted"
+            exit 2
+          fi
+          mkdir -p pinnacle_trial
+          if [ -n "${TEST_DAY}" ]; then
+            python experiments/263/free_bulk_odds_263.py --pinnacle-only --day-turkey "${TEST_DAY}" --out pinnacle_trial/market.json
+          else
+            python experiments/263/free_bulk_odds_263.py --pinnacle-only --out pinnacle_trial/market.json
+          fi
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pinnacle-external-market-research-not-a-bet
+          path: pinnacle_trial/market.json
+          if-no-files-found: ignore
+          retention-days: 7
