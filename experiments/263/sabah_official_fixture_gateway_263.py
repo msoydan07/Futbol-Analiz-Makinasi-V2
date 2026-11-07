@@ -114,7 +114,8 @@ class OfficialFixtureGateway:
                         raise OfficialGatewayError("EFL_COMPETITION_REDIRECT_OUTSIDE_OFFICIAL")
                     if not isinstance(alt_html,str) or not 50<=len(alt_html)<=2_000_000:
                         raise OfficialGatewayError("EFL_COMPETITION_HTML_UNUSABLE")
-                    alternative=parse_official_events("ENG2",alt_html,parser="jsonld")
+                    alternative=[e for e in parse_official_events("ENG2",alt_html,parser="jsonld")
+                                 if e.get("kickoff_utc")]
                     if alternative:
                         entry.update(effective_url=alt_url,events=alternative,
                                      html=alt_html,parser="jsonld",
