@@ -32,3 +32,11 @@ Her maçın hemen ALT satırında, aynı genişlikte yatay dört kısa kutucuk:
 
 ## Tek cümlelik yeni sohbet başlangıcı
 **“Ortak, bugün maçları getir ve Futbol Maç Analiz Makinası 2.6.3’ün GitHub'daki `docs/263_KALICI_MOBIL_ORAN_KG_UST_GORUNUMU_2026_11_07.md` dosyasındaki ONAYLI mobil PDF ekranını kullan: maç + MS yönü, BİZİM %, PİYASA %, FARK; alt satır KG Var, 1,5/2,5/3,5 Üst. Oran sayılarını gösterme.”**
+
+## 7 Kasım — Gerçek new100 kod bağlantısı
+
+- **Gerçek çalışan PDF üretici:** `experiments/263/sabah_mobile_approved_pdf_263.py`. SHA doğrulanmış new100 resmî maç raporunu, mühürlü karar dosyalarını ve `sabah_pinnacle_new100_bridge_263.py` ile **aynen yeniden üretilebilen** Pinnacle araştırma raporunu okur. Dört model çalıştırmaz, bahis seçimi yapmaz, yeni oran çekmez, mühür değiştirmez.
+- `toplu.pdf`: MS yönü | Bizim kalibre % | Piyasa marjsız % | Fark (yp) + alt satır KG Var, 1,5/2,5/3,5 Üst medyanı. Eksik piyasa veya kalibrasyon varsa '—', **oran sayıları gösterilmez**. 44 maçın taşmadan sayfalara bölünmesi CI ile sınanır.
+- `tekli/<24-haneli-fixture-ID>.pdf`: Aynı MS/KG/Üst ekranı + ayrı B/C2/C3/M4 olasılıkları + PAS + tahmin/karar SHA ve kaynak bilgisi; aynı kayıt kullanılır, yeni hesapla yüzdeler değiştirilmez.
+- GitHub Actions `.github/workflows/263-sabah-new100-on-request.yml` kullanıcı talepli aynı sabah **gerçek pilot mührü ve fiyat araştırması tamamlandıktan sonra**, PDF'leri yalnız **artifact** olarak üretir. `new100-approved-compact-mobile-PDF-batch-and-single` adlı artifact indirilip açılır; mevcut append-only JSON ve Markdown mühürlü kayıtlara el sürülmez. PDF aşaması başarısızsa pilotun kendisi sanki başarısız olmuş veya tahmin silinmiş gibi gösterilmez; GitHub logundan ayrı raporlanır.
+- Bu PDF ekranlarının canlı ilk uygulaması **henüz gerçek new100 maç koşusunda gözlenmedi**. Sentetik CI geçmesi canlı otomatik kayıt veya fiyat sorgusu kanıtı değildir. 10 ligin tamamının günlük otomatik adaydan kullanıcı onaylı pilot manifestine geçişi ve ENG2 kapsam açığı devam ediyor.
