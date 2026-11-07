@@ -1,0 +1,53 @@
+name: "263 all 44 named matches - live official model read-only nonpilot"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_44_nonpilot_full_model_263.py'
+      - '.github/workflows/263-sabah-44-nonpilot-full-model.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  all44:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned B C2 C3 M4 library versions
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Download SHA-pinned historical training archive, zero bookmaker
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+          echo '1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9  data/quad_accepted_263/extended_history.csv' | sha256sum -c -
+      - name: Analyze all 44 pinned names, no pilot/odds, keep blocked rows
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/sabah_44_nonpilot_full_model_263.py \
+            --out /tmp/263_all44_real_shadow_report.json \
+            --mobile /tmp/263_all44_real_shadow_mobile.md
+          git diff --quiet
+          git diff --cached --quiet
+          echo 'NO_GITHUB_PILOT_WRITES_NO_BOOKMAKER'
+      - name: Archive all 44 names and model diagnostics, even if no predictions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nov7-all44-named-model-shadows-not-betting-not-pilot
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            /tmp/263_all44_real_shadow_report.json
+            /tmp/263_all44_real_shadow_mobile.md
