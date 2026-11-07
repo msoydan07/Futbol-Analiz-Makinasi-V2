@@ -215,7 +215,7 @@ jobs:
             --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
           git add -- "$PRICE_REPORT" "$PRICE_MOBILE"
           test "$(git diff --cached --name-only | wc -l)" -eq 2
-          if git diff --cached --name-only | grep -Ev '^experiments/263/pinnacle_new100_research/new100_[0-9]+[.](json|md)'; then
+          if git diff --cached --name-only | grep -Evx '^experiments/263/pinnacle_new100_research/new100_[0-9]+[.](json|md)'; then
             echo 'PRICING_STAGE_OUTSIDE_RESEARCH_DENIED'; exit 1
           fi
           git commit -m "Publish independent Pinnacle and calibrated new100 research or PAS"
