@@ -63,6 +63,16 @@ jobs:
           git diff --quiet
           git diff --cached --quiet
           echo 'NO_MODEL_NO_BETTING_NO_PILOT_NO_ODDS_NO_GITHUB_COMMIT'
+      - name: Diagnose three official HTML shapes read-only; never Pinnacle
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/sabah_three_official_source_probe_263.py \
+            --out /tmp/263-three-official-HTML-source-diagnosis.json
+          git diff --quiet
+          git diff --cached --quiet
       - name: Upload exact source-mapped readiness report, not an approved pilot
         if: always()
         uses: actions/upload-artifact@v4
@@ -74,3 +84,4 @@ jobs:
             /tmp/263-ten-league-official-preflight.json
             /tmp/263-ten-league-official-preflight.md
             /tmp/263-ten-league-CANDIDATES-NOT-SEALED.json
+            /tmp/263-three-official-HTML-source-diagnosis.json
