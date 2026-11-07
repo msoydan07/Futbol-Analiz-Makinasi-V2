@@ -3,16 +3,29 @@
 All odds here are SYNTHETIC and never call The Odds API.
 """
 import copy,hashlib,json,tempfile,unittest
-from datetime import datetime,timezone,timedelta
+from datetime import date,datetime,timezone,timedelta
 from pathlib import Path
-from free_bulk_odds_263 import canonical
+from free_bulk_odds_263 import canonical,collect,SPORTS
 from sabah_batch_263 import sha
 from sabah_pinnacle_credit_guard_263 import reserve
 from pinnacle_market_benchmark_263 import compare
 from sabah_pinnacle_new100_bridge_263 import (
     plan,prequery,render,mobile,validate_snapshot,PriceBridgeBlocked,digest)
 from sabah_pinnacle_capture_263 import SNAP
-from test_pinnacle_market_benchmark_263 import bulk,NOW
+from test_pinnacle_market_benchmark_263 import sample
+
+# Istanbul 10:02:00, fixture at 20:00 Istanbul: the price is the
+# MORNING price, not an artificial T-60 price.
+NOW=datetime(2026,11,6,7,2,0,tzinfo=timezone.utc)
+MORNING_CREATED=datetime(2026,11,6,7,0,0,tzinfo=timezone.utc)
+
+def bulk(now=NOW):
+    def getter(sport,params,key):
+        if sport==SPORTS["TUR1"]:
+            return [sample(last="2026-11-06T07:01:00Z")],480
+        return [],480
+    return collect(date(2026,11,6),now,"SYNTHETIC_NOT_REAL",getter,
+                   bookmaker_filter="pinnacle",leagues=("TUR1",),markets=("h2h",))
 
 ORIGINAL=Path("forward_quad_263/2026-11-06/1d6b6f16fef8bac971c184c4.json")
 NAME="1d6b6f16fef8bac971c184c4"
@@ -26,6 +39,9 @@ class New100PinnacleBridgeTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name)
         self.f=json.loads(ORIGINAL.read_text(encoding="utf-8"))
+        self.f["created_at_utc"]=MORNING_CREATED.isoformat()
+        self.f["fixture"]["source_checked_at_utc"]=MORNING_CREATED.isoformat()
+        seal(self.f)
         self.rel="forward_morning_263/2026-11-06/"+NAME+".json"
         target=self.root/self.rel;target.parent.mkdir(parents=True)
         target.write_text(json.dumps(self.f),encoding="utf-8")
@@ -73,16 +89,22 @@ class New100PinnacleBridgeTests(unittest.TestCase):
         path.parent.mkdir(parents=True,exist_ok=True)
         path.write_text(json.dumps(snap),encoding="utf-8")
         return path
-    def test_one_league_not_per_match_and_T_minus_60(self):
+    def test_one_league_not_per_match_and_morning_hours_before_kickoff(self):
         x=plan(self.report,self.receipt,self.root,self.ledger,NOW)
         self.assertEqual(x["leagues"],["TUR1"])
         self.assertEqual(x["max_external_calls"],1)
         self.assertEqual(x["eligible_forecasts_by_league"]["TUR1"],[self.rel])
         self.assertFalse(x["betting_authorized"])
-    def test_outside_20_to_90_minute_window_does_not_spend(self):
-        x=plan(self.report,self.receipt,self.root,self.ledger,datetime(2026,11,6,16,48,tzinfo=timezone.utc))
-        self.assertEqual(x["leagues"],[])
-        self.assertEqual(x["max_external_calls"],0)
+        self.assertEqual(x["quote_phase"],"MORNING_ANALYSIS_TIME_NOT_T_MINUS_60")
+        self.assertGreater((datetime.fromisoformat(self.f["fixture"]["kickoff_utc"])-NOW).total_seconds(),8*3600)
+        self.assertEqual(prequery(self.report,self.receipt,self.root,"TUR1",NOW)["league"],"TUR1")
+    def test_outside_turkey_morning_window_does_not_spend(self):
+        with self.assertRaisesRegex(PriceBridgeBlocked,"ONLY_SAME_MORNING"):
+            plan(self.report,self.receipt,self.root,self.ledger,
+                 datetime(2026,11,6,16,48,tzinfo=timezone.utc))
+        with self.assertRaisesRegex(PriceBridgeBlocked,"ONLY_SAME_MORNING"):
+            prequery(self.report,self.receipt,self.root,"TUR1",
+                     datetime(2026,11,6,16,48,tzinfo=timezone.utc))
     def test_same_time_forecast_older_than_10min_denied(self):
         later=NOW+timedelta(minutes=11)
         x=plan(self.report,self.receipt,self.root,self.ledger,later)
@@ -103,12 +125,14 @@ class New100PinnacleBridgeTests(unittest.TestCase):
         self.assertEqual(x["matches_compared"],0)
         self.assertEqual(x["items"][0]["reason"],"NO_DAILY_PINNACLE_SNAPSHOT")
         self.assertEqual(before,(self.root/self.rel).read_bytes())
-        self.assertIn("MS piyasa kıyası",mobile(x))
+        self.assertIn("SABAH MS piyasa kıyası",mobile(x))
+        self.assertIn("maç saatinde yeniden sorgulanmaz",mobile(x))
     def test_valid_synthetic_pinnacle_compares_calibrated_and_4_models(self):
         self.snapshot()
         original=(self.root/self.rel).read_bytes()
         report=render(self.report,self.receipt,self.root,self.snapshots)
         self.assertEqual(report["matches_compared"],1)
+        self.assertEqual(report["quote_phase"],"MORNING_ANALYSIS_TIME_NOT_T_MINUS_60")
         row=report["items"][0]
         self.assertEqual(row["status"],"READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED")
         self.assertEqual(set(row["comparison"]["models"]),{"B","C2","C3","M4"})

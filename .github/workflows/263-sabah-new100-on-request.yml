@@ -1,4 +1,4 @@
-name: "263 new100 named pilot plus optional one-shot Pinnacle T60 research"
+name: "263 new100 SABAH B C2 C3 M4 ve tek seferlik Pinnacle oran kilidi"
 on:
   push:
     branches: [experiment/263-toplu-karsilastirma]
@@ -156,7 +156,7 @@ jobs:
               subprocess.check_call(["git","cat-file","-e","origin/"+os.environ["GITHUB_REF_NAME"]+":"+row["forecast_path"]])
           print("NEW100_REMOTE_SHA_FILES_PROVEN",len(receipt["records"]))
           PY
-      - name: Optional same-job Pinnacle h2h, Git-reserved one/day league credit (no bets)
+      - name: Same-morning Pinnacle h2h, Git-reserved one/day league credit (no bets)
         if: steps.intake.outputs.kind == 'real_named_request'
         shell: bash
         env:
@@ -171,13 +171,14 @@ jobs:
           SNAPSHOTS=experiments/263/pinnacle_daily_snapshots
           BRIDGE=experiments/263/sabah_pinnacle_new100_bridge_263.py
           PRICE_REPORT="experiments/263/pinnacle_new100_research/new100_${GITHUB_RUN_ID}.json"
+          echo 'SABAH_MODELS_AND_PINNACLE_SAME_BATCH_NO_T_MINUS_60'
           PRICE_MOBILE="experiments/263/pinnacle_new100_research/new100_${GITHUB_RUN_ID}.md"
           python "$BRIDGE" plan --report "$REPORT" --receipt "$RECEIPT" \
             --ledger "$LEDGER" --out /tmp/pinnacle_new100_plan.json
           if [ -z "${THE_ODDS_API_KEY:-}" ]; then
             echo "NO_THE_ODDS_API_SECRET_NO_CREDIT_RESERVED"
           else
-            python -c 'import json; print("\n".join(json.load(open("/tmp/pinnacle_new100_plan.json",encoding="utf-8"))["leagues"]))' > /tmp/pinnacle_new100_t60_leagues.txt
+            python -c 'import json; print("\n".join(json.load(open("/tmp/pinnacle_new100_plan.json",encoding="utf-8"))["leagues"]))' > /tmp/pinnacle_new100_morning_leagues.txt
             while IFS= read -r league; do
               if [ -z "$league" ]; then continue; fi
               day="$(TZ=Europe/Istanbul date +%Y-%m-%d)"
@@ -207,7 +208,7 @@ jobs:
               git push origin "HEAD:$GITHUB_REF_NAME"
               git fetch origin "$GITHUB_REF_NAME"
               git cat-file -e "origin/$GITHUB_REF_NAME:$snapshot"
-            done < /tmp/pinnacle_new100_t60_leagues.txt
+            done < /tmp/pinnacle_new100_morning_leagues.txt
           fi
           python "$BRIDGE" render --report "$REPORT" --receipt "$RECEIPT" \
             --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
@@ -227,7 +228,7 @@ jobs:
           for file in "$PRICE_REPORT" "$PRICE_MOBILE"; do
             git cat-file -e "origin/$GITHUB_REF_NAME:$file"
           done
-          echo "PINNACLE_RESEARCH_SEPARATE_SHA_MOBILE_VERIFIED_NO_BET"
+          echo "SABAH_FORECAST_AND_ITS_PINNACLE_QUOTE_SHA_SAVED_SAME_RUN_NO_T60_NO_BET"
       - name: Preserve price-eligibility evidence without any API key
         if: always()
         uses: actions/upload-artifact@v4

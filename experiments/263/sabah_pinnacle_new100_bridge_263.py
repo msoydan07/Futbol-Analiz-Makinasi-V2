@@ -1,6 +1,6 @@
 """NEW100 sealed B/C2/C3/M4 -> Pinnacle research sidecar (no wager).
 
-A new100 pilot forecast is committed FIRST. For a live T-60 query, the
+A new100 pilot forecast is committed FIRST. For SAME-MORNING prices, the
 GitHub workflow must then commit + push ONE per-day per-league reservation
 BEFORE a single The Odds API bookmaker=pinnacle h2h call.
 Any absent/mismatched/stale quote stays PAS and consumes no extra credit.
@@ -80,8 +80,11 @@ def plan(report,receipt,root,ledger,now=None):
     now=now.astimezone(timezone.utc)
     root=Path(root)
     registered=validate_inputs(report,receipt,root)
-    if now.astimezone(TR).date().isoformat()!=report["day_turkey"]:
+    local=now.astimezone(TR)
+    if local.date().isoformat()!=report["day_turkey"]:
         raise PriceBridgeBlocked("NO_HISTORICAL_OR_NEXT_DAY_PRICE_REQUEST")
+    if not 5<=local.hour<13:
+        raise PriceBridgeBlocked("ONLY_SAME_MORNING_ANALYSIS_05_TO_12_59_TURKEY")
     eligible={}
     blocked=[]
     for row,f in registered:
@@ -91,7 +94,7 @@ def plan(report,receipt,root,ledger,now=None):
         age=(now-created).total_seconds()
         status=None
         if not 0<=age<=600:status="FORECAST_NOT_WITHIN_SAME_10_MINUTES"
-        elif not 20<=minutes<=90:status="OUTSIDE_T_MINUS_90_TO_T_MINUS_20"
+        elif minutes<=2:status="KICKOFF_ALREADY_TOO_CLOSE_OR_PAST"
         else:
             if check_existing(ledger,league,now) is not None:
                 status="DAILY_LEAGUE_PINNACLE_CREDIT_ALREADY_RESERVED"
@@ -101,6 +104,9 @@ def plan(report,receipt,root,ledger,now=None):
     return {"schema":"263_NEW100_PINNACLE_DAY_LEAGUE_PLAN_V1",
             "observed_at_utc":now.isoformat(),"day_turkey":report["day_turkey"],
             "cohort":"new100","reserve_only_after_forecast_committed":True,
+            "quote_phase":"MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+            "morning_window_turkey":"05:00-12:59",
+            "quote_max_age_from_forecast_seconds":600,
             "one_h2h_credit_max_per_league":True,"leagues":sorted(eligible),
             "eligible_forecasts_by_league":eligible,"skipped":blocked,
             "max_external_calls":len(eligible),"bookmaker":"pinnacle",
@@ -108,22 +114,26 @@ def plan(report,receipt,root,ledger,now=None):
             "betting_authorized":False,"forecasts_unchanged":True}
 
 def prequery(report,receipt,root,league,now=None):
-    """Recheck T-60 AFTER reservation was persistently pushed, before API call."""
+    """Recheck same-morning live quote eligibility after pushed reservation."""
     now=now or datetime.now(timezone.utc)
     if now.tzinfo is None:raise PriceBridgeBlocked("AWARE_CLOCK_REQUIRED")
     now=now.astimezone(timezone.utc)
-    if now.astimezone(TR).date().isoformat()!=report.get("day_turkey"):
+    local=now.astimezone(TR)
+    if local.date().isoformat()!=report.get("day_turkey"):
         raise PriceBridgeBlocked("WRONG_TURKEY_DAY_FOR_NETWORK_CALL")
+    if not 5<=local.hour<13:
+        raise PriceBridgeBlocked("ONLY_SAME_MORNING_ANALYSIS_05_TO_12_59_TURKEY")
     eligible=[]
     for row,f in validate_inputs(report,receipt,Path(root)):
         if f["fixture"]["league"]!=league:continue
         ko=utc(f["fixture"]["kickoff_utc"]);created=utc(f["created_at_utc"])
-        if 0<=(now-created).total_seconds()<=600 and 20<=(ko-now).total_seconds()/60<=90:
+        if 0<=(now-created).total_seconds()<=600 and (ko-now).total_seconds()>120:
             eligible.append(f["payload_sha256"])
-    if not eligible:raise PriceBridgeBlocked("LEAGUE_HAS_NO_FRESH_T_MINUS_90_20_FORECAST")
+    if not eligible:raise PriceBridgeBlocked("LEAGUE_HAS_NO_SAME_MORNING_PREKICKOFF_FORECAST")
     return {"league":league,"eligible_forecast_sha256":eligible,
             "call_allowed_only_after_persisted_one_time_reservation":True,
-            "as_of_utc":now.isoformat(),"bookmaker":"pinnacle","market":"h2h"}
+            "as_of_utc":now.isoformat(),"bookmaker":"pinnacle","market":"h2h",
+            "quote_phase":"MORNING_ANALYSIS_TIME_NOT_T_MINUS_60"}
 
 def validate_snapshot(obj,league,day):
     if (obj.get("schema")!=SNAP or obj.get("league")!=league
@@ -186,7 +196,8 @@ def render(report,receipt,root,snapshots):
                 "status":"NO_VALID_SAME_TIME_PINNACLE_REFERENCE",
                 "reason":"NO_DAILY_PINNACLE_SNAPSHOT",
                 "odds_status":"NO_VERIFIED_CURRENT_ODDS",
-                "research_only":True,"betting_authorized":False}
+                "research_only":True,"betting_authorized":False,
+                "quote_phase":"MORNING_ANALYSIS_TIME_NOT_T_MINUS_60"}
         p=snapshots/day/(league+".json")
         if p.is_file():
             snap=validate_snapshot(read(p),league,day)
@@ -211,6 +222,8 @@ def render(report,receipt,root,snapshots):
         items.append(result)
     data={"schema":SCHEMA,"day_turkey":day,"cohort":"new100",
           "provider":"The Odds API","bookmaker":"pinnacle","market":"h2h",
+          "quote_phase":"MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+          "price_is_sealed_as_morning_observation_not_t60":True,
           "official_S1_S2_approved":False,"betting_authorized":False,
           "no_pilot_count_change":True,"forecast_or_decision_modified":False,
           "not_a_market_based_bet_selection":True,
@@ -220,7 +233,7 @@ def render(report,receipt,root,snapshots):
     return seal(data)
 
 def mobile(data):
-    lines=["# 2.6.3 | Pinnacle MS piyasa kıyası | "+data["day_turkey"],"",
+    lines=["# 2.6.3 | Pinnacle SABAH MS piyasa kıyası | "+data["day_turkey"],"",
         "Kaynak: The Odds API üzerinde Pinnacle; doğrudan Pinnacle sitesinden bağımsız doğrulanmadı.",
         "**Bu rapor bahis önerisi DEĞİL.** Eski mühürlü tahmin/karar değişmedi.","",
         "| Lig | Tahmin SHA | Karşılaştırma | 1 / X / 2 marjsız | Kalibre 1/X/2 farkı |",
@@ -239,8 +252,8 @@ def mobile(data):
                      row["status"]+" | "+fair+" | "+diff+" |")
     lines+=["",str(data["matches_compared"])+"/"+str(data["matches_total"])+
             " maçta aynı-zaman koşullu Pinnacle kıyası var.",
-            "Fiyat ile tahmin 10 dakikadan uzaksa veya 20–90 dakika T-60 aralığı sağlanmadıysa piyasa kıyası yok.",
-            "KG ve gol çizgilerinde Pinnacle oranı çekilmedi; yalnız MS h2h.",
+            "Sadece sabah 05:00–12:59 TSİ alınan fiyatlar; tahmin-fiyat arası 10 dakikayı aşarsa kıyas yok.",
+            "Pinnacle sabah fiyatı maç saatinde yeniden sorgulanmaz. KG ve gol çizgilerinde oran alınmadı; yalnız MS h2h.",
             "EV yüzdesi yalnız açıklayıcı senaryo, sistemin ana/alternatif bahis seçimi değildir.",
             "Orijinal karar **RESEARCH_PAS** ve yeni100 pilot sayacı değişmez."]
     return "\n".join(lines)+"\n"

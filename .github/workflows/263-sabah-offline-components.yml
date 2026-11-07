@@ -65,6 +65,9 @@ jobs:
           grep -q 'origin/$GITHUB_REF_NAME:$target' .github/workflows/263-sabah-new100-on-request.yml
           grep -q 'sabah_pinnacle_capture_263.py reserve' .github/workflows/263-sabah-new100-on-request.yml
           grep -q 'sabah_pinnacle_capture_263.py capture' .github/workflows/263-sabah-new100-on-request.yml
+          grep -q 'SABAH_MODELS_AND_PINNACLE_SAME_BATCH_NO_T_MINUS_60' .github/workflows/263-sabah-new100-on-request.yml
+          grep -q 'MORNING_ANALYSIS_TIME_NOT_T_MINUS_60' experiments/263/sabah_pinnacle_new100_bridge_263.py
+          ! grep -q '20<=minutes<=90' experiments/263/sabah_pinnacle_new100_bridge_263.py
           ! grep -q 'secrets.THE_ODDS_API_KEY' .github/workflows/263-pinnacle-free-once.yml
           ! grep -q 'THE_ODDS_API_KEY' .github/workflows/263-sabah-live-batch.yml
       - name: Parse live new100 workflow YAML and require one executable per step
