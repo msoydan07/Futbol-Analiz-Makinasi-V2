@@ -46,6 +46,17 @@ def signature(league,url,fetcher=_default_fetch):
             match=re.search(re.escape(term),html,re.IGNORECASE)
             if match:
                 excerpts.append({"term":term,"sample":html[max(0,match.start()-175):match.end()+300]})
+        # Small raw blocks strictly for official HTML parser development.
+        detail=""
+        if league=="BEL1":
+            q=re.search(r'<article[^>]+MkFootballMatchCard[^>]+aria-label="[^"]+"',html,re.I)
+            if q:detail=html[q.start():q.start()+4400]
+        elif league=="POR1":
+            q=re.search(r'(?:Sexta-feira, 6 de novembro|Domingo, 8 de novembro)',html,re.I)
+            if q:detail=html[max(0,q.start()-200):q.start()+4200]
+        elif league=="ENG2":
+            q=re.search(r'(?:Wrexham|Bristol City|Championship)',html,re.I)
+            if q:detail=html[max(0,q.start()-200):q.start()+1500]
         visible=" ".join("".join(m.visible).split())
         found=parse_official_events(league,html,parser="jsonld")
         result.update(status="FETCHED_OFFICIAL_HTML",
@@ -59,7 +70,8 @@ def signature(league,url,fetcher=_default_fetch):
                       visible_sample=visible[:900],
                       image_alts=imgs.alt[:40],
                       title_sample=html[:350],
-                      response_lacks_usable_timed_structure=len(found)==0)
+                      response_lacks_usable_timed_structure=len(found)==0,
+                      official_parser_detail=detail)
     except (OSError,ValueError,TypeError,TimeoutError,UnicodeError) as e:
         result["reason"]=type(e).__name__+":"+str(e)[:120]
     return result
