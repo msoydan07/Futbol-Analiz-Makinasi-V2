@@ -19,7 +19,7 @@ SOURCES = {
     'ENG1': ('https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november', 'premierleague.com', 'epl_nov26_confirmed'),
     'ENG2': ('https://www.efl.com/matches/', 'efl.com', 'jsonld'),
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
-    'ESP1': ('https://www.laliga.com/laliga-easports/resultados', 'laliga.com', 'jsonld'),
+    'ESP1': ('https://www.laliga.com/iframes/external-consumer-broadcast', 'laliga.com', 'laliga_broadcast_nov2026'),
     'ITA1': ('https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a', 'legaseriea.it', 'seriea_j11_2026'),
     'FRA1': ('https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1', 'ligue1.com', 'lfp_week10_2026'),
     'NED1': ('https://www.knvb.nl/competities/eredivisie/programma', 'knvb.nl', 'knvb'),
@@ -121,17 +121,43 @@ def _jsonld_events(markup):
 
 
 def _dfl_events(markup):
+    """Bundesliga official live table: date/day composite cell, UTC-time cell."""
     result=[]
+    if not any('Kick-off (UTC)' in ' '.join(row) and 'Home Team' in ' '.join(row)
+               for row in markup.rows[:4]):return []
     for row in markup.rows:
-        # DFL: Matchday | Day | Date | Kick-off(CET) | Kick-off(UTC) | Home | Away | ...
-        if len(row)<7:continue
-        date=row[2];utctime=row[4];h=row[5];a=row[6]
-        if not re.fullmatch(r'\d{2}-[A-Za-z]{3}-20\d\d',date):continue
+        if len(row)<6:continue
+        if len(row)>=7 and re.fullmatch(r'\d{2}-[A-Za-z]{3}-20\d\d',row[2]):
+            date=row[2];utctime=row[4];h=row[5];a=row[6]
+        else:
+            dm=re.fullmatch(r'(?:Fri|Sat|Sun|Mon|Tue|Wed|Thu)\s*\|\s*(\d{2}-[A-Za-z]{3}-20\d\d)',row[1],re.I)
+            if not dm:continue
+            date=dm.group(1);utctime=row[3];h=row[4];a=row[5]
         if not re.fullmatch(r'(?:[01]\d|2[0-3]):[0-5]\d',utctime):continue
         try:dt=datetime.strptime(date+' '+utctime,'%d-%b-%Y %H:%M').replace(tzinfo=timezone.utc)
         except ValueError:continue
         result.append(_event(h,a,dt.date().isoformat(),dt.isoformat(),'dfl'))
     return result
+
+
+def _laliga_broadcast_nov2026(markup):
+    """Official LA LIGA EA SPORTS broadcast table for 2026/27 round 12."""
+    lines=[' '.join(s.split()) for s in ''.join(markup.visible).splitlines() if s.strip()]
+    if not any('Jornada 12 | 2026/2027' in x for x in lines):return []
+    events=[]
+    day=re.compile(r'^(?:VIE|SAB|DOM) (0[678])\.11\.2026$',re.I)
+    time=re.compile(r'^(?:[01]\d|2[0-3]):[0-5]\d$')
+    for i,x in enumerate(lines):
+        m=day.fullmatch(x)
+        if not m or i+4>=len(lines):continue
+        if not time.fullmatch(lines[i+1]) or lines[i+3].upper()!='VS':continue
+        home=lines[i+2];away=lines[i+4]
+        if not home or not away or home==away:continue
+        hr,mn=map(int,lines[i+1].split(':'))
+        dt=datetime(2026,11,int(m.group(1)),hr,mn,tzinfo=ZoneInfo('Europe/Madrid'))
+        events.append(_event(home,away,dt.date().isoformat(),
+                             dt.astimezone(timezone.utc).isoformat(),'laliga_broadcast_nov2026'))
+    return events
 
 
 def _knvb_events(markup):
@@ -340,7 +366,8 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     funcs={'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,
            'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026,
            'seriea_j11_2026':_seriea_j11_2026,'tff_j11_2026':_tff_j11_2026,
-           'epl_nov26_confirmed':_epl_nov26_confirmed}
+           'epl_nov26_confirmed':_epl_nov26_confirmed,
+           'laliga_broadcast_nov2026':_laliga_broadcast_nov2026}
     if kind not in funcs:raise OfficialPageError('unsupported_parser')
     events=funcs[kind](m)
     # JSON-LD may supplement a site-specific parser, but never infer a fixture
