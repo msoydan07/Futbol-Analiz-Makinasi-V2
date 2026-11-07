@@ -18,7 +18,9 @@ def page(rows=None):
     rows=rows if rows is not None else [
         card(1),
         card(2,"OH Leuven","KV Mechelen","2026-11-07T17:15:00Z")]
-    body={"props":{"pageProps":{"data":{"page":{"grids":[{"areas":[{"modules":[
+    module={"data":{"matches":rows}}
+    page={"grids":[{"areas":[{"modules":[module]}]}]}
+    body={"props":{"pageProps":{"data":{"page":page}}}}
         {"data":{"matches":rows}}]}]}]}}}}}}
     return '<html><script id="__NEXT_DATA__" type="application/json">'+json.dumps(body)+'</script></html>'
 
