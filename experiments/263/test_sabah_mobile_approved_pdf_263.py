@@ -76,6 +76,29 @@ class ApprovedMobilePDF(unittest.TestCase):
         files[2].write_text(json.dumps(bad))
         with self.assertRaisesRegex(MobileBlocked,"PRICE_REPORT_NOT_REPRODUCIBLE"):
             run(*files,self.root,self.day,self.root/"tampered")
+    def test_forty_four_matches_paginate_and_remain_compact(self):
+        _,r=self.data(True)
+        rows=[]
+        for n in range(44):
+            x=dict(r)
+            x["home"]="Very Long Official Home Club Name With District "+str(n)
+            x["away"]="Very Long Official Away Club Name With District "+str(n)
+            rows.append(x)
+        p=batch_pdf(self.root/"44.pdf",self.day,rows)
+        pdf=PdfReader(str(p))
+        self.assertEqual(len(pdf.pages),5)
+        self.assertEqual(sum(page.extract_text().count("FARK (yp)") for page in pdf.pages),44)
+        self.assertTrue(all(float(page.mediabox.width)==420 for page in pdf.pages))
+    def test_unavailable_models_are_not_filled_from_other_models(self):
+        _,r=self.data(False)
+        r["models"]={"B":{"status":"UNAVAILABLE"},"C2":{"status":"UNAVAILABLE"},
+                     "C3":{"status":"UNAVAILABLE"},"M4":{"status":"UNAVAILABLE"}}
+        r["goals"]=[None,None,None,None]
+        pdf=single_pdf(self.root/"not_available.pdf",self.day,r)
+        body=PdfReader(str(pdf)).pages[0].extract_text()
+        self.assertIn("DORT MODEL",body)
+        self.assertIn("—",body)
+        self.assertIn("PAS",body)
     def test_raw_odds_values_are_not_rendered(self):
         price,r=self.data(True)
         path=single_pdf(self.root/"only.pdf",self.day,r)
