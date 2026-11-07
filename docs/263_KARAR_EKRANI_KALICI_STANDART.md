@@ -1,3 +1,5 @@
+> **GÜNCEL KULLANICI GÖRÜNÜMÜ — 7 Kasım 2026:** Kullanıcı daha sonra mobil, dikey PDF ve `Bizim % | Piyasa % | Fark` (oran sayısı yok) + alt satır `KG Var | 1,5 Üst | 2,5 Üst | 3,5 Üst` ekranını nihai ana tablo olarak ONAYLADI. **Sunum önceliğinde yeni belge esastır:** [263_KALICI_MOBIL_ORAN_KG_UST_GORUNUMU_2026_11_07.md](263_KALICI_MOBIL_ORAN_KG_UST_GORUNUMU_2026_11_07.md). Bu eski karar ekranı sözleşmesinin S1/S2, model doğruluk, PAS ve mühürlemeye dair veri güvenliği kuralları aynen geçerlidir; yalnız eski ilk ekran sırasının yerini güncel mobil görünüm aldı.
+
 # Futbol Maç Analiz Makinası 2.6.3 — KALICI KARAR EKRANI STANDARDI
 
 **Durum:** 6 Kasım 2026'da kullanıcı tarafından açıkça tercih edilen nihai kullanıcıya sunum düzeni. **Yeni sohbette de aynen uygulanacak.**
