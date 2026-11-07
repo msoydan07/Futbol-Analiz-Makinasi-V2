@@ -1,0 +1,74 @@
+name: "263 ten-league morning official fixture preflight - read-only ZERO ODDS"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_preflight_requests/*.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ten-league-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Only exact same-Turkey-day requested run, no hardcoded fixtures
+        id: requested
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,subprocess,re
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          if os.environ.get("GITHUB_EVENT_NAME")=="workflow_dispatch":
+              day=datetime.now(ZoneInfo("Europe/Istanbul")).date().isoformat()
+          else:
+              rows=subprocess.check_output(["git","diff-tree","--no-commit-id",
+                                            "--name-status","-r","HEAD","--",
+                                            "experiments/263/sabah_preflight_requests/"],text=True).splitlines()
+              if len(rows)!=1:raise SystemExit("ONE_FRESH_PREFLIGHT_REQUEST_ONLY")
+              status,path=rows[0].split("\t",1)
+              if status!="A" or not re.fullmatch(r"experiments/263/sabah_preflight_requests/[A-Za-z0-9_-]+\.json",path):
+                  raise SystemExit("NOT_AN_ADDED_PREFLIGHT_JSON")
+              x=json.load(open(path,encoding="utf-8"))
+              if set(x)!={"schema","day_turkey"} or x["schema"]!="263_TEN_LEAGUE_PREFLIGHT_REQUEST_V1":
+                  raise SystemExit("PREFLIGHT_REQUEST_SCHEMA_INVALID")
+              day=x["day_turkey"]
+          if day!=datetime.now(ZoneInfo("Europe/Istanbul")).date().isoformat():
+              raise SystemExit("CURRENT_TURKEY_DAY_ONLY_NO_BACKDATED_REQUEST")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:
+              f.write("day="+day+"\n")
+          print("OFFICIAL_SAME_DAY_ONLY_ALL_TEN",day)
+          PY
+      - name: One live official-page fetch per league; do not use Pinnacle API
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+          DAY: ${{ steps.requested.outputs.day }}
+        run: |
+          set -euo pipefail
+          python experiments/263/sabah_10league_manifest_preflight_263.py \
+            --day "$DAY" --out /tmp/263-ten-league-official-preflight.json \
+            --mobile /tmp/263-ten-league-official-preflight.md \
+            --candidate-manifest /tmp/263-ten-league-CANDIDATES-NOT-SEALED.json
+          git diff --quiet
+          git diff --cached --quiet
+          echo 'NO_MODEL_NO_BETTING_NO_PILOT_NO_ODDS_NO_GITHUB_COMMIT'
+      - name: Upload exact source-mapped readiness report, not an approved pilot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ten-league-source-preflight-readonly-no-api-credits
+          retention-days: 10
+          if-no-files-found: ignore
+          path: |
+            /tmp/263-ten-league-official-preflight.json
+            /tmp/263-ten-league-official-preflight.md
+            /tmp/263-ten-league-CANDIDATES-NOT-SEALED.json
