@@ -1,0 +1,21 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-07",
+  "matches": [
+    {
+      "league": "ESP1",
+      "home": "Valencia",
+      "away": "Real Madrid"
+    },
+    {
+      "league": "ENG1",
+      "home": "Arsenal",
+      "away": "Hull City"
+    },
+    {
+      "league": "TUR1",
+      "home": "Samsunspor",
+      "away": "Konyaspor"
+    }
+  ]
+}
