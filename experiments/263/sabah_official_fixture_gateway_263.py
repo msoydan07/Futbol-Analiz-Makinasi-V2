@@ -83,6 +83,25 @@ class OfficialFixtureGateway:
                          effective_url=effective,events=events,html=html,
                          html_sha256=hashlib.sha256(html.encode("utf-8")).hexdigest(),
                          parser=SOURCES[league][2])
+            # The EFL match centre is JavaScript-rendered. As an explicitly
+            # PARTIAL fallback, read only official TV-selected fixtures with
+            # independently printed team names/date/KO; never infer all games.
+            if league=="ENG2" and not events and 2026<=now.year<=2027:
+                from sabah_eng2_official_tv_263 import SOURCE_URL as EFL_TV_URL,PARSER as EFL_TV_PARSER
+                try:
+                    tv_url,tv_html=self.fetcher(EFL_TV_URL,"ENG2")
+                    if not is_approved_url(tv_url,"ENG2"):
+                        raise OfficialGatewayError("EFL_TV_REDIRECT_OUTSIDE_OFFICIAL")
+                    tv=parse_official_events("ENG2",tv_html,parser=EFL_TV_PARSER)
+                    if tv:
+                        entry.update(effective_url=tv_url,events=tv,html=tv_html,
+                                     parser=EFL_TV_PARSER,
+                                     html_sha256=hashlib.sha256(tv_html.encode("utf-8")).hexdigest(),
+                                     efl_source_coverage="PARTIAL_TV_SELECTION_ONLY")
+                    else:
+                        entry["efl_fallback_status"]="OFFICIAL_TV_SOURCE_UNUSABLE"
+                except (OSError,ValueError,TypeError,TimeoutError) as exc:
+                    entry["efl_fallback_status"]=type(exc).__name__+":"+str(exc)[:70]
             # Current calendar is Nuxt JS; when it yields zero timed events,
             # the official 2026-27 Betclic J11 article has nine exact
             # announced match/time lines embedded in escaped public HTML.

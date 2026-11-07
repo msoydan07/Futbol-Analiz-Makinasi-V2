@@ -361,8 +361,11 @@ def _epl_nov26_confirmed(markup):
 def parse_official_events(league: str, html: str, parser: str|None=None) -> list[dict]:
     if league not in SOURCES:raise OfficialPageError('unsupported_league')
     if not isinstance(html,str) or len(html)>MAX_BYTES:raise OfficialPageError('invalid_official_response')
-    m=_Markup();m.feed(html)
     kind=parser or SOURCES[league][2]
+    if kind=="efl_2026_27_official_tv_selection":
+        from sabah_eng2_official_tv_263 import parse_efl_tv
+        return parse_efl_tv(html)
+    m=_Markup();m.feed(html)
     from sabah_portugal_official_news_263 import PARSER as POR_NEWS_PARSER,parse_news
     from sabah_belgium_official_nextjs_263 import PARSER as BEL_NEWS_PARSER,parse_proleague
     funcs={BEL_NEWS_PARSER:lambda _m:parse_proleague(html),
