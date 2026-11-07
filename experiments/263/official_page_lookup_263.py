@@ -363,7 +363,9 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     if not isinstance(html,str) or len(html)>MAX_BYTES:raise OfficialPageError('invalid_official_response')
     m=_Markup();m.feed(html)
     kind=parser or SOURCES[league][2]
-    funcs={'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,
+    from sabah_portugal_official_news_263 import PARSER as POR_NEWS_PARSER,parse_news
+    funcs={POR_NEWS_PARSER:lambda _m:parse_news(html),
+           'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,
            'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026,
            'seriea_j11_2026':_seriea_j11_2026,'tff_j11_2026':_tff_j11_2026,
            'epl_nov26_confirmed':_epl_nov26_confirmed,
@@ -409,7 +411,7 @@ def _default_fetch(url,league):
 
 
 def official_page_lookup(league, home, away, *, now=None, fetcher=None,
-                         source_url=None, html=None, same_team=None):
+                         source_url=None, html=None, same_team=None,parser=None):
     """Search one authorized official page ONLY, not a cached fixture list.
 
     same_team(observed_name, requested_name) resolves BOTH to identical canonical
@@ -429,7 +431,7 @@ def official_page_lookup(league, home, away, *, now=None, fetcher=None,
         if html is None:
             redirected,html=fetcher(url) if fetcher else _default_fetch(url,league)
             if not is_approved_url(redirected,league):raise OfficialPageError('redirect_outside_official_domain')
-        events=parse_official_events(league,html)
+        events=parse_official_events(league,html,parser=parser)
     except (OfficialPageError,ValueError,UnicodeError,OSError,TimeoutError) as exc:
         return {'status':'NOT_VERIFIED','reason':'official_source_parse_or_fetch_error','detail':str(exc)[:160]}
     matched=[]
