@@ -49,9 +49,20 @@ def verify(report_path,mobile_dir,*,root=".",now=None):
         if not re.fullmatch(r"forward_acceptance_263/\d{4}-\d{2}-\d{2}/[a-f0-9]{24}\.json",rel):
             raise AcceptanceBlocked("WRONG_ACCEPTANCE_RECORD_FOLDER")
         f=load_row(root,row)
-        if (set(f.get("model_predictions",{}))!=set(MODELS)
-            or any(f["model_predictions"][model].get("status")!="AVAILABLE" for model in MODELS)):
-            raise AcceptanceBlocked("ALL_FOUR_MODELS_MUST_BE_AVAILABLE")
+        if set(f.get("model_predictions",{}))!=set(MODELS):
+            raise AcceptanceBlocked("ALL_FOUR_MODELS_MUST_BE_ATTEMPTED")
+        statuses={k:f["model_predictions"][k].get("status") for k in MODELS}
+        available=[m for m in MODELS if statuses[m]=="AVAILABLE"]
+        # M4/C3 remain mandatory; B and C2 are diagnostics and can be
+        # honestly absent for insufficient context. Never impute their %. 
+        if len(available)<3 or any(statuses[x]!="AVAILABLE" for x in ("C3","M4")):
+            raise AcceptanceBlocked("CORE_C3_M4_AND_THREE_MODELS_REQUIRED")
+        if statuses["B"] not in ("AVAILABLE","UNAVAILABLE_INSUFFICIENT_CONTEXT"):
+            raise AcceptanceBlocked("UNKNOWN_B_ABSENCE_STATUS")
+        if statuses["C2"] not in ("AVAILABLE","UNAVAILABLE"):
+            raise AcceptanceBlocked("UNKNOWN_C2_ABSENCE_STATUS")
+        if statuses["C2"]=="UNAVAILABLE" and not f["model_predictions"]["C2"].get("reason"):
+            raise AcceptanceBlocked("MISSING_C2_FAILURE_REASON")
         if f["fixture"]["match_local_date"]!=report["day_turkey"]:
             raise AcceptanceBlocked("FIXTURE_DATE_MISMATCH")
         if f["data"].get("snapshot_acceptance")!="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED":
@@ -84,12 +95,14 @@ def verify(report_path,mobile_dir,*,root=".",now=None):
                          "baseline_sha256":baseline["payload_sha256"],
                          "decision_sha256":d["payload_sha256"],
                          "mobile_match_sha256":digest_file(page),
-                         "kickoff_utc":f["fixture"]["kickoff_utc"]})
+                         "kickoff_utc":f["fixture"]["kickoff_utc"],
+                         "model_statuses":statuses,"model_available_count":len(available)})
     return {"schema":SCHEMA,"cohort":"acceptance3","day_turkey":report["day_turkey"],
             "checked_at_utc":now.astimezone(timezone.utc).isoformat(),
             "batch_report_sha256":report["payload_sha256"],
             "mobile_summary_sha256":digest_file(mobile/"summary.md"),
-            "accepted_count":len(evidence),"models_available":list(MODELS),
+            "accepted_count":len(evidence),"models_attempted":list(MODELS),
+            "c3_m4_mandatory":True,"minimum_models_available_per_match":3,
             "all_predictions_generated_pre_kickoff":True,
             "all_mobile_pages_exactly_reproducible":True,
             "all_decisions":"RESEARCH_PAS",
@@ -110,7 +123,8 @@ def main():
         prior=json.loads(target.read_text(encoding="utf-8"))
         # Times are recorded at the FIRST acceptance check; compare invariant fields.
         for key in ("schema","cohort","day_turkey","batch_report_sha256",
-                    "mobile_summary_sha256","accepted_count","models_available",
+                    "mobile_summary_sha256","accepted_count","models_attempted",
+                    "c3_m4_mandatory","minimum_models_available_per_match",
                     "all_predictions_generated_pre_kickoff","all_mobile_pages_exactly_reproducible",
                     "all_decisions","pilot_96_or_new100_modified","bookmaker_api_calls",
                     "betting_authorized","records"):
@@ -120,5 +134,5 @@ def main():
     with target.open("x",encoding="utf-8") as f:
         json.dump(out,f,ensure_ascii=False,indent=2,sort_keys=True,allow_nan=False)
         f.write("\n")
-    print("ACCEPTANCE_PASS",out["accepted_count"],"ALL_FOUR_MODELS_PAS_MOBILE_MATCH")
+    print("ACCEPTANCE_PASS",out["accepted_count"],"NO_IMPUTED_MODEL_PAS_MOBILE_MATCH")
 if __name__=="__main__":main()

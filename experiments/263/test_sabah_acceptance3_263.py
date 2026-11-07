@@ -31,6 +31,10 @@ def fake_predict(g,history,out_dir,lock,now=None,base=None,source_audit=None):
                   "fixture_verification":"VERIFIED_BY_LIVE_OFFICIAL_GATE"},
        "data":{"snapshot_acceptance":"APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED"},
        "model_predictions":{m:{"status":"AVAILABLE","goals":{"markets":raw}} for m in ("B","C2","C3","M4")}}
+    # One diagnostic-only B model has insufficient historical context,
+    # exactly as in the live Arsenal / Hull test. No imputation.
+    if g["league"]=="ENG1":
+        x["model_predictions"]["B"]={"status":"UNAVAILABLE_INSUFFICIENT_CONTEXT"}
     x["payload_sha256"]=sha(x);save_new(p,x)
     return p,x
 def baseline(f,path,now=None):
@@ -81,6 +85,15 @@ class Acceptance3Tests(unittest.TestCase):
         self.assertEqual(e["bookmaker_api_calls"],0)
         self.assertFalse(Path("forward_morning_263").exists())
         self.assertFalse(Path("forward_quad_263").exists())
+    def test_B_context_unavailable_is_labelled_not_imputed(self):
+        r,report,mobile=self.bundle()
+        receipt=verify(report,mobile,now=NOW+timedelta(minutes=1))
+        bstatus={x["league"]:x["model_statuses"]["B"] for x in receipt["records"]}
+        self.assertEqual(bstatus["ENG1"],"UNAVAILABLE_INSUFFICIENT_CONTEXT")
+        self.assertEqual([x["model_available_count"] for x in receipt["records"]],[4,3,4])
+        pages=[p.read_text(encoding="utf-8") for p in (mobile/"matches").glob("*.md")]
+        self.assertTrue(any("UNAVAILABLE_INSUFFICIENT_CONTEXT" in page for page in pages))
+        self.assertIn("3/4 model", (mobile/"summary.md").read_text(encoding="utf-8"))
     def test_all_three_duplicate_entries_are_not_added_twice(self):
         r,report,mobile=self.bundle()
         again=self.make()

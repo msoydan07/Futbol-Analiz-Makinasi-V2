@@ -92,7 +92,7 @@ jobs:
             --report "$REPORT" --mobile /tmp/acceptance3_quick.md
           python experiments/263/sabah_mobile_screens_263.py \
             --report "$REPORT" --output-dir "$MOBILE"
-      - name: Verify THREE full 4-model source SHA decision PAS and exactly matching mobile pages before Git commit
+      - name: Verify three real matches, honest B context failures, PAS and matching phone views before Git commit
         shell: bash
         env:
           PYTHONPATH: .:experiments/263

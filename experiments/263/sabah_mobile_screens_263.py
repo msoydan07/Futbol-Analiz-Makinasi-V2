@@ -71,14 +71,19 @@ def single(row,f,d):
          "## 2. B / C2 / C3 / M4",
          "","| Model | MS 1 | MS X | MS 2 | KG Var | 2,5 Üst |",
          "|---|---:|---:|---:|---:|---:|"]
+ missing_models=[]
  for name in MODELS:
   m=f["model_predictions"].get(name,{})
   if m.get("status")!="AVAILABLE":
    lines.append("| "+name+" | — | — | — | — | — |")
+   missing_models.append("- **"+name+": "+safe(m.get("status","UNAVAILABLE"))+"** "+
+                         safe(m.get("reason","")).strip())
    continue
   z=canonical_markets(m["goals"]["markets"])
   vals=[name]+[fmt(z[k]) for k in ("MS1","MSX","MS2","BTTS_YES","OVER_2.5")]
   lines.append("| "+" | ".join(vals)+" |")
+ if missing_models:
+  lines+=["","**Eksik model verisi (başka modelden tamamlanmadı):**",*missing_models]
  lines+=["","## 3. Kanıt","",
          "- Tahmin SHA-256: "+f["payload_sha256"],
          "- Kilit UTC: "+f["created_at_utc"],
@@ -105,8 +110,10 @@ def build(root,report):
      key,p=max(relevant,key=lambda a:a[1])
      calibrated=key.replace("MS","MS ")+": "+fmt(p)
    ko=read_aware(f["fixture"]["kickoff_utc"]).astimezone(TR)
+   available_count=sum(f["model_predictions"][m].get("status")=="AVAILABLE" for m in MODELS)
    rows.append("| "+ko.strftime("%H:%M")+" | "+safe(row["home"])+" – "+safe(row["away"])+
-               " | "+calibrated+" | PAS/ONAYSIZ | "+safe(row.get("decision_status","MODEL_ONLY"))+" |")
+               " | "+calibrated+" | PAS/ONAYSIZ | "+
+               str(available_count)+"/4 model · "+safe(row.get("decision_status","MODEL_ONLY"))+" |")
   else:
    rows.append("| — | "+safe(row["home"])+" – "+safe(row["away"])+
                " | — | — | "+row["status"]+" |")
