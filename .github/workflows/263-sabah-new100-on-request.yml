@@ -215,21 +215,7 @@ jobs:
             --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
           git add -- "$PRICE_REPORT" "$PRICE_MOBILE"
           test "$(git diff --cached --name-only | wc -l)" -eq 2
-          if git diff --cached --name-status |
-            grep -Ev '^A[[:space:]]+experiments/263/pinnacle_new100_research/new100_[0-9]+\.(json|md)
-        uses: actions/upload-artifact@v4
-        with:
-          name: new100-pilot-and-optional-pinnacle-research
-          retention-days: 14
-          if-no-files-found: ignore
-          path: |
-            /tmp/new100_intake.json
-            experiments/263/sabah_batch_reports/new100_*.json
-            experiments/263/sabah_new100_receipts/new100_*.json
-            experiments/263/sabah_mobile_reports/new100_*/**/*.md
-            experiments/263/pinnacle_new100_research/new100_*.json
-            experiments/263/pinnacle_new100_research/new100_*.md
-; then
+          if git diff --cached --name-only | grep -Ev '^experiments/263/pinnacle_new100_research/new100_[0-9]+[.](json|md)'; then
             echo 'PRICING_STAGE_OUTSIDE_RESEARCH_DENIED'; exit 1
           fi
           git commit -m "Publish independent Pinnacle and calibrated new100 research or PAS"
@@ -256,7 +242,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: new100-append-only-batch-or-readiness-probe-no-odds
+          name: new100-pilot-and-optional-pinnacle-research
           retention-days: 14
           if-no-files-found: ignore
           path: |

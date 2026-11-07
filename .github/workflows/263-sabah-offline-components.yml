@@ -67,6 +67,25 @@ jobs:
           grep -q 'sabah_pinnacle_capture_263.py capture' .github/workflows/263-sabah-new100-on-request.yml
           ! grep -q 'secrets.THE_ODDS_API_KEY' .github/workflows/263-pinnacle-free-once.yml
           ! grep -q 'THE_ODDS_API_KEY' .github/workflows/263-sabah-live-batch.yml
+      - name: Parse live new100 workflow YAML and require one executable per step
+        run: |
+          python -m pip install --disable-pip-version-check PyYAML==6.0.3
+          python - <<'PY'
+          import yaml
+          from pathlib import Path
+          path=Path(".github/workflows/263-sabah-new100-on-request.yml")
+          workflow=yaml.safe_load(path.read_text(encoding="utf-8"))
+          steps=workflow["jobs"]["append-only-new100"]["steps"]
+          assert len(steps)>=11, "NEW100_STEPS_MISSING"
+          for step in steps:
+              assert isinstance(step,dict)
+              assert ("run" in step)!=("uses" in step), "INVALID_STEP_RUN_USES_COLLISION"
+              assert isinstance(step.get("run",step.get("uses")),str)
+          assert any("reserve" in step.get("run","") for step in steps)
+          assert any("prequery" in step.get("run","") for step in steps)
+          assert any("capture" in step.get("run","") for step in steps)
+          print("NEW100_WORKFLOW_YAML_VALID",len(steps))
+          PY
       - name: Syntax check of new modules (no key or live calls)
         run: |
           python -m py_compile experiments/263/sabah_batch_263.py experiments/263/sabah_mobile_screens_263.py experiments/263/sabah_pinnacle_capture_263.py experiments/263/sabah_official_fixture_gateway_263.py experiments/263/sabah_official_coverage_probe_263.py experiments/263/sabah_named_source_acceptance_263.py experiments/263/sabah_acceptance_commit_guard_263.py experiments/263/sabah_new100_commit_guard_263.py experiments/263/sabah_new100_request_intake_263.py experiments/263/sabah_postmatch_new100_263.py experiments/263/sabah_pinnacle_new100_bridge_263.py experiments/263/pinnacle_market_benchmark_263.py
