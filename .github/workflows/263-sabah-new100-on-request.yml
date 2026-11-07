@@ -1,4 +1,4 @@
-name: "263 new100 user-named live pilot - sealed GitHub/mobile, no odds"
+name: "263 new100 named pilot plus optional one-shot Pinnacle T60 research"
 on:
   push:
     branches: [experiment/263-toplu-karsilastirma]
@@ -156,7 +156,103 @@ jobs:
               subprocess.check_call(["git","cat-file","-e","origin/"+os.environ["GITHUB_REF_NAME"]+":"+row["forecast_path"]])
           print("NEW100_REMOTE_SHA_FILES_PROVEN",len(receipt["records"]))
           PY
-      - name: Upload only diagnostic evidence; NO Pinnacle secret or bookmaker API
+      - name: Optional same-job Pinnacle h2h, Git-reserved one/day league credit (no bets)
+        if: steps.intake.outputs.kind == 'real_named_request'
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+          REPORT: ${{ steps.intake.outputs.report }}
+          RECEIPT: ${{ steps.intake.outputs.receipt }}
+          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          LEDGER=experiments/263/pinnacle_daily_reservations
+          SNAPSHOTS=experiments/263/pinnacle_daily_snapshots
+          BRIDGE=experiments/263/sabah_pinnacle_new100_bridge_263.py
+          PRICE_REPORT="experiments/263/pinnacle_new100_research/new100_${GITHUB_RUN_ID}.json"
+          PRICE_MOBILE="experiments/263/pinnacle_new100_research/new100_${GITHUB_RUN_ID}.md"
+          python "$BRIDGE" plan --report "$REPORT" --receipt "$RECEIPT" \
+            --ledger "$LEDGER" --out /tmp/pinnacle_new100_plan.json
+          if [ -z "${THE_ODDS_API_KEY:-}" ]; then
+            echo "NO_THE_ODDS_API_SECRET_NO_CREDIT_RESERVED"
+          else
+            python -c 'import json; print("\n".join(json.load(open("/tmp/pinnacle_new100_plan.json",encoding="utf-8"))["leagues"]))' > /tmp/pinnacle_new100_t60_leagues.txt
+            while IFS= read -r league; do
+              if [ -z "$league" ]; then continue; fi
+              day="$(TZ=Europe/Istanbul date +%Y-%m-%d)"
+              target="$LEDGER/$day/${league}_pinnacle_h2h.json"
+              snapshot="$SNAPSHOTS/$day/${league}.json"
+              test ! -e "$target"
+              test ! -e "$snapshot"
+              python experiments/263/sabah_pinnacle_capture_263.py reserve \
+                --ledger "$LEDGER" --league "$league" --day "$day"
+              git config user.name 'github-actions[bot]'
+              git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+              git add -- "$target"
+              test "$(git diff --cached --name-status)" = "$(printf 'A\t%s' "$target")"
+              git commit -m "Reserve one-shot Pinnacle h2h credit $league $day"
+              git pull --rebase origin "$GITHUB_REF_NAME"
+              git push origin "HEAD:$GITHUB_REF_NAME"
+              git fetch origin "$GITHUB_REF_NAME"
+              git cat-file -e "origin/$GITHUB_REF_NAME:$target"
+              python "$BRIDGE" prequery --report "$REPORT" --receipt "$RECEIPT" \
+                --league "$league" --out "/tmp/pinnacle_prequery_${league}.json"
+              python experiments/263/sabah_pinnacle_capture_263.py capture \
+                --ledger "$LEDGER" --league "$league" --day "$day" --out "$snapshot"
+              git add -- "$snapshot"
+              test "$(git diff --cached --name-status)" = "$(printf 'A\t%s' "$snapshot")"
+              git commit -m "Preserve one Pinnacle h2h response $league $day, no retry"
+              git pull --rebase origin "$GITHUB_REF_NAME"
+              git push origin "HEAD:$GITHUB_REF_NAME"
+              git fetch origin "$GITHUB_REF_NAME"
+              git cat-file -e "origin/$GITHUB_REF_NAME:$snapshot"
+            done < /tmp/pinnacle_new100_t60_leagues.txt
+          fi
+          python "$BRIDGE" render --report "$REPORT" --receipt "$RECEIPT" \
+            --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
+          python "$BRIDGE" verify --report "$REPORT" --receipt "$RECEIPT" \
+            --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
+          git add -- "$PRICE_REPORT" "$PRICE_MOBILE"
+          test "$(git diff --cached --name-only | wc -l)" -eq 2
+          if git diff --cached --name-status |
+            grep -Ev '^A[[:space:]]+experiments/263/pinnacle_new100_research/new100_[0-9]+\.(json|md)
+        uses: actions/upload-artifact@v4
+        with:
+          name: new100-pilot-and-optional-pinnacle-research
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            /tmp/new100_intake.json
+            experiments/263/sabah_batch_reports/new100_*.json
+            experiments/263/sabah_new100_receipts/new100_*.json
+            experiments/263/sabah_mobile_reports/new100_*/**/*.md
+            experiments/263/pinnacle_new100_research/new100_*.json
+            experiments/263/pinnacle_new100_research/new100_*.md
+; then
+            echo 'PRICING_STAGE_OUTSIDE_RESEARCH_DENIED'; exit 1
+          fi
+          git commit -m "Publish independent Pinnacle and calibrated new100 research or PAS"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          python "$BRIDGE" verify --report "$REPORT" --receipt "$RECEIPT" \
+            --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          git fetch origin "$GITHUB_REF_NAME"
+          for file in "$PRICE_REPORT" "$PRICE_MOBILE"; do
+            git cat-file -e "origin/$GITHUB_REF_NAME:$file"
+          done
+          echo "PINNACLE_RESEARCH_SEPARATE_SHA_MOBILE_VERIFIED_NO_BET"
+      - name: Preserve price-eligibility evidence without any API key
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: new100-pinnacle-plan-not-a-betting-instruction
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            /tmp/pinnacle_new100_plan.json
+            /tmp/pinnacle_prequery_*.json
+      - name: Upload new100 and optional independent Pinnacle research evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:

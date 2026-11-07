@@ -93,10 +93,14 @@ def compare(forecast,bulk):
         return not_available("IMPLAUSIBLE_OR_NONPOSITIVE_BOOKMAKER_MARGIN",forecast,bulk)
     fair={k:implied[k]/gross for k in ("H","D","A")}
     model_rows={}
+    unavailable_models={}
+    if set(forecast.get("model_predictions",{}))!=set(MODELS):
+        return not_available("FOUR_MODELS_NOT_ATTEMPTED",forecast,bulk)
     for name in MODELS:
-        model=forecast.get("model_predictions",{}).get(name,{})
+        model=forecast["model_predictions"][name]
         if model.get("status")!="AVAILABLE":
-            return not_available("FOUR_ORIGINAL_MODELS_NOT_AVAILABLE",forecast,bulk)
+            unavailable_models[name]={"status":model.get("status"),"reason":model.get("reason")}
+            continue
         ps=model.get("goals",{}).get("markets",{}).get("1X2",{})
         if set(ps)!={"H","D","A"} or any(
             not isinstance(ps[k],(int,float)) or isinstance(ps[k],bool)
@@ -107,6 +111,10 @@ def compare(forecast,bulk):
         model_rows[name]={
             "probabilities":{k:ps[k] for k in ("H","D","A")},
             "vs_pinnacle_pp":{k:round(100*(ps[k]-fair[k]),4) for k in ("H","D","A")}}
+    # A missing B/C2 is reported, never imputed. C3/M4 + >=3 actual models
+    # is the same eligibility rule as new100's already-proven receipt gate.
+    if len(model_rows)<3 or any(model not in model_rows for model in ("C3","M4")):
+        return not_available("C3_M4_AND_THREE_AVAILABLE_MODELS_REQUIRED",forecast,bulk)
     result={"schema":SCHEMA,"status":"READ_ONLY_SAME_TIME_BENCHMARK",
         "market":"MS_1X2","no_vig_method":"PROPORTIONAL_NOT_TRUE_PROBABILITY",
         "provider":"The Odds API (the-odds-api.com)",
@@ -120,6 +128,7 @@ def compare(forecast,bulk):
         "odds":{k:odds[k] for k in ("H","D","A")},
         "overround_pp":round(100*(gross-1),4),
         "pinnacle_no_vig_probabilities":fair,"models":model_rows,
+        "model_missing_not_imputed":unavailable_models,"available_model_count":len(model_rows),
         "forecast_sha256":forecast["payload_sha256"],
         "source_bulk_sha256":bulk["payload_sha256"],
         "independent_benchmark":True,"official_S1_S2_approved":False,
