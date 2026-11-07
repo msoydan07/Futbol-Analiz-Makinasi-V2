@@ -242,10 +242,14 @@ def _tff_j11_2026(markup):
     lines=[' '.join(s.split()) for s in ''.join(markup.visible).splitlines() if s.strip()]
     def heading(value,division,week):
         return division in value.casefold() and bool(re.search(r'\b'+str(week)+r'\s*\.\s*hafta\b',value.casefold()))
-    start=next((i for i,s in enumerate(lines) if heading(s,'trendyol süper lig',11)),None)
+    start=next((i for i,s in enumerate(lines)
+                if heading(s,'trendyol süper lig',11)
+                and 'müsabakaları' not in s.casefold()),None)
     if start is None:return []
     end=next((i for i in range(start+1,len(lines))
-              if heading(lines[i],'trendyol 1. lig',14)),len(lines))
+              if 'trendyol 1. lig' in lines[i].casefold()
+              and len(lines[i])<100),None)
+    if end is None:return []
     segment=lines[start:end]
     dates=[(i,re.fullmatch(r'(0[678])\.11\.2026',s)) for i,s in enumerate(segment)
            if re.fullmatch(r'(0[678])\.11\.2026',s)]
@@ -291,7 +295,8 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     events=funcs[kind](m)
     # JSON-LD may supplement a site-specific parser, but never infer a fixture
     # from non-structured free text beyond the explicitly defined source format.
-    if kind!='jsonld':events+=_jsonld_events(m)
+    if kind not in ('jsonld','tff_j11_2026','seriea_j11_2026'):
+        events+=_jsonld_events(m)
     unique={}
     for e in events:
         if not e['home'] or not e['away']:continue

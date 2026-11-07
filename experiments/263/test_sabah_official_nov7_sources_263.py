@@ -57,6 +57,13 @@ class StrictOfficialWeekTests(unittest.TestCase):
     self.assertEqual(e[0]['home'],'SAMSUNSPOR A.Ş.')
  def test_tff_missing_week_heading_no_fabrication(self):
     self.assertEqual(parse_official_events('TUR1',TFF.replace('11.Hafta','12.Hafta')),[])
+ def test_tff_heading_split_cannot_leak_championship(self):
+    split=TFF.replace('<h2>Trendyol 1. Lig - 14.Hafta</h2>',
+                      '<h2>Trendyol 1. Lig</h2><h3>14.Hafta</h3>')
+    self.assertEqual(len(parse_official_events('TUR1',split)),2)
+ def test_tff_missing_lower_division_boundary_fail_closed(self):
+    bad=TFF.replace('Trendyol 1. Lig - 14.Hafta','Other competition')
+    self.assertEqual(parse_official_events('TUR1',bad),[])
  def test_tff_no_identity_when_away_unknown(self):
     r=official_page_lookup('TUR1','EYÜPSPOR','UNKNOWN',now=NOW,html=TFF,same_team=same)
     self.assertNotEqual(r['status'],'VERIFIED_OFFICIAL_FIXTURE')
