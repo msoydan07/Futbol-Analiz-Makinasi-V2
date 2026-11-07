@@ -12,7 +12,7 @@ from collections import Counter
 from datetime import datetime,timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
-from sabah_batch_263 import named
+from sabah_fixture_rotation_263 import validate_legacy_candidates
 from sabah_official_fixture_gateway_263 import OfficialFixtureGateway
 from official_page_lookup_263 import official_page_lookup
 
@@ -23,7 +23,13 @@ def inspect(day,source,*,gateway=None,now=None):
     if now.tzinfo is None:raise ValueError("AWARE_TIME_REQUIRED")
     if day!=now.astimezone(TR).date().isoformat():
         raise ValueError("SOURCE_PROBE_ONLY_CURRENT_TURKEY_DATE")
-    matches=named("legacy96",day,source)
+    raw=Path(source).read_bytes()
+    blob=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\0"+raw).hexdigest()
+    if blob!="803378e8ef0f1f285a3393a7231567eea8f25e80":
+        raise ValueError("PINNED_96_SOURCE_CHANGED")
+    data=json.loads(raw)
+    matches=[{"league":r["league"],"home":r["home"],"away":r["away"]}
+             for r in validate_legacy_candidates(data) if r["date"]==day]
     gateway=gateway or OfficialFixtureGateway(clock=lambda:now)
     statuses=Counter();rows=[]
     # _get is cached by league: at most one HTTP page per league.
