@@ -40,6 +40,10 @@ def signature(league,url,fetcher=_default_fetch):
     try:
         final,html=fetcher(url,league)
         if not is_approved_url(final,league):raise ValueError("OFFICIAL_REDIRECT_UNTRUSTED")
+        # Public official HTML used only to inspect exact BEL1 card time fields.
+        # Diagnostic artifact, never fixture acceptance or a bookmaker quote.
+        if league=="BEL1" and url==CANDIDATES["BEL1"][0]:
+            Path("/tmp/263-proleague-official-raw.html").write_text(html,encoding="utf-8")
         m=_Markup();m.feed(html);imgs=Images();imgs.feed(html)
         excerpts=[]
         for term in PHRASES[league]:
