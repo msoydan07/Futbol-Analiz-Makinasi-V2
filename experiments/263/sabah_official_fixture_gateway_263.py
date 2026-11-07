@@ -18,6 +18,15 @@ from sabah_fixture_rotation_263 import COMPETITIONS
 
 SCHEMA="SABAH_RESMI_FIKSTUR_KAYNAK_TARAMA_V1"
 CACHE_SECONDS=600
+# Reviewed, competition-specific fixture display variants. Each right-hand
+# value is a pinned canonical team name, NOT a fuzzy substring guess.
+NOV7_ALIASES={
+    'GER1':{'Mainz 05':'1. FSV Mainz 05','Bayern München':'FC Bayern München'},
+    'ESP1':{'Racing Santander':'R. Racing Club','Espanyol':'RCD Espanyol de Barcelona',
+            'Deportivo La Coruña':'RC Deportivo','Athletic Bilbao':'Athletic Club'},
+    'TUR1':{'Göztepe':'GÖZTEPE A.Ş.','Başakşehir':'İSTANBUL BAŞAKŞEHİR FK'},
+}
+NOV7_TFF_DETAIL='https://www.tff.org/Default.aspx?macId=317878&pageId=29'
 class OfficialGatewayError(ValueError): pass
 
 class OfficialFixtureGateway:
@@ -37,7 +46,8 @@ class OfficialFixtureGateway:
             identity._validate_identity_source(registry.data)
             memberships=identity._memberships(registry.data,"2026-2027")
             def resolve_id(league,name):
-                club=canonical(registry,league,name)
+                named=NOV7_ALIASES.get(league,{}).get(name,name)
+                club=canonical(registry,league,named)
                 if club not in memberships.get(league,set()):
                     raise ValueError("NOT_IN_CURRENT_LEAGUE_IDENTITY_REGISTRY")
                 return club
@@ -86,7 +96,10 @@ class OfficialFixtureGateway:
     def lookup(self,league,home,away):
         """Call the existing official + canonical identity gate, never bypass it."""
         entry=self._get(league)
-        evidence={"league":league,"requested_home":home,"requested_away":away,
+        requested_home,requested_away=home,away
+        home=NOV7_ALIASES.get(league,{}).get(home,home)
+        away=NOV7_ALIASES.get(league,{}).get(away,away)
+        evidence={"league":league,"requested_home":requested_home,"requested_away":requested_away,
                   "page_fetch_status":entry["status"],
                   "page_url":entry["effective_url"] or entry["source_url"],
                   "page_sha256":entry["html_sha256"],
@@ -114,6 +127,44 @@ class OfficialFixtureGateway:
                     self.match_checks.append(evidence)
                     return gate
                 evidence["page_gate_rejected"]=gate.get("reason") if isinstance(gate,dict) else "INVALID_GATE"
+        # One specific published TFF match-detail page is needed because the
+        # round list omitted its entry. No inference from team name alone.
+        if league=='TUR1' and self._same('TUR1',home,'GÖZTEPE A.Ş.') and self._same('TUR1',away,'İSTANBUL BAŞAKŞEHİR FK'):
+            try:
+                effective,html=self.fetcher(NOV7_TFF_DETAIL,'TUR1')
+                if not is_approved_url(effective,'TUR1'):raise OfficialGatewayError('TFF_DETAIL_REDIRECT_UNTRUSTED')
+                from official_page_lookup_263 import _Markup
+                m=_Markup();m.feed(html)
+                lines=[' '.join(s.split()) for s in ''.join(m.visible).splitlines() if s.strip()]
+                whole=' '.join(lines)
+                if not any('GÖZTEPE A.Ş. İSTANBUL BAŞAKŞEHİR FK - Maç Detayları TFF' in s for s in lines[:5]):
+                    raise OfficialGatewayError('TFF_MATCH_IDENTITY_WRONG')
+                if not any('SÜPER L' in s.upper() for s in lines):
+                    raise OfficialGatewayError('TFF_COMPETITION_WRONG')
+                import re
+                dates=re.findall(r'\b7\.11\.2026\s*-\s*(\d\d:\d\d)\b',whole)
+                if len(set(dates))!=1:raise OfficialGatewayError('TFF_MATCH_KICKOFF_AMBIGUOUS')
+                clock=dates[0]
+                local=datetime.fromisoformat('2026-11-07T'+clock+':00').replace(tzinfo=ZoneInfo('Europe/Istanbul'))
+                if local.astimezone(timezone.utc)<=self.now():raise OfficialGatewayError('MATCH_ALREADY_STARTED')
+                obs={'status':'VERIFIED_OFFICIAL_FIXTURE',
+                     'home':'GÖZTEPE A.Ş.','away':'İSTANBUL BAŞAKŞEHİR FK',
+                     'match_date':'2026-11-07',
+                     'kickoff_utc':local.astimezone(timezone.utc).isoformat(),
+                     'source_url':effective,
+                     'retrieved_at_utc':self.now().isoformat(),
+                     'source_parser':'tff_detail_exact_macid_317878',
+                     'source_origin':'FETCHED_OFFICIAL_PAGE_BATCH_CACHE'}
+                result=self.gate_runner('TUR1',home,away,lookup_override=lambda a,b:obs)
+                if isinstance(result,dict) and result.get('status')=='VERIFIED':
+                    evidence['selected_lookup']='TFF_ONE_MATCH_OFFICIAL_DETAIL'
+                    evidence['tff_detail_sha256']=hashlib.sha256(html.encode('utf-8')).hexdigest()
+                    evidence['page_url']=effective
+                    self.match_checks.append(evidence)
+                    return result
+                evidence['tff_detail_rejection']=result.get('reason') if isinstance(result,dict) else 'INVALID_GATE'
+            except (OSError,ValueError,TypeError) as err:
+                evidence['tff_detail_rejection']=str(err)[:120]
         # The older September 2026 French TV bulletin conflicts with the
         # newer November official matchweek briefing on Saturday kickoffs.
         # Never silently recover FRA1 from its now-stale fallback adapter.
