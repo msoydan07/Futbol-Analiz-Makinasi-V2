@@ -7,7 +7,7 @@ of one ADDED file in sabah_requests is needed. The live named official gate
 still validates each match afresh, so preflight is NOT a pilot seal.
 """
 from __future__ import annotations
-import argparse,json,hashlib
+import argparse,json,hashlib,re,tempfile
 from datetime import datetime,timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -99,14 +99,21 @@ def prepare(preflight,chosen_ids,*,command_authorized=False,now=None):
 def save_request(path,request):
     path=Path(path)
     parts=path.parts
-    if len(parts)!=4 or parts[:3]!=("experiments","263","sabah_requests") or path.suffix!=".json":
+    if (len(parts)!=4 or parts[:3]!=("experiments","263","sabah_requests")
+        or not re.fullmatch(r"[A-Za-z0-9_-]+[.]json",path.name)):
         raise BridgeBlocked("ONLY_USER_NAMED_REQUEST_CHANNEL")
-    # A preparatory local file; separate intentional Git commit triggers live model workflow.
+    # Validate outside the live Git-push trigger directory.
+    if not isinstance(request,dict) or not isinstance(request.get("day_turkey"),str):
+        raise BridgeBlocked("INVALID_REQUEST_BODY")
+    content=json.dumps(request,ensure_ascii=False,sort_keys=True,indent=2)+"\n"
+    with tempfile.TemporaryDirectory(prefix="new100-validation-") as sandbox:
+        temporary=Path(sandbox)/"candidate.json"
+        temporary.write_text(content,encoding="utf-8")
+        named("new100",request["day_turkey"],temporary)
+    # Exclusive write: existing and malformed request files cannot be replaced.
     path.parent.mkdir(parents=True,exist_ok=True)
-    with path.open("x",encoding="utf-8") as f:
-        json.dump(request,f,ensure_ascii=False,sort_keys=True,indent=2)
-        f.write("\n")
-    named("new100",request["day_turkey"],path)
+    with path.open("x",encoding="utf-8") as out:
+        out.write(content)
     return path
 
 def main():
