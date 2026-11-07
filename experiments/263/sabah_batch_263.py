@@ -138,6 +138,23 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
      for k,v in rotation["teams"].items()}
    item["rotation_applied_to_model_probabilities"]=False
   except (ValueError,OSError,KeyError,TypeError,AssertionError) as exc:
+   # A forecast written before a sidecar/rotation failure is NOT a completed
+   # acceptance record. Clean newly created files and fail closed.
+   if item.get("status")=="REGISTERED_FOUR_MODELS_EXPERIMENTAL":
+    rel=item.get("forecast_path","")
+    if isinstance(rel,str) and rel.startswith(DIRS[cohort]+"/"):
+     (root/rel).unlink(missing_ok=True)
+     stem=Path(rel).stem
+     side=root/"experiments/263/sabah_research"/cohort/day/stem
+     (side/"baseline.json").unlink(missing_ok=True)
+     (side/"decision.json").unlink(missing_ok=True)
+    if count>0:count-=1
+    seen.discard(key)
+    for field in ("forecast_path","forecast_sha256","kickoff_utc",
+                  "decision_status","decision_sha256","rotation",
+                  "rotation_evidence","rotation_applied_to_model_probabilities"):
+     item.pop(field,None)
+   item["status"]="BLOCKED_NO_FORECAST"
    item["reason"]=str(exc)[:200]
   outcomes.append(item)
  result={"schema":SCHEMA,"cohort":cohort,"day_turkey":day,

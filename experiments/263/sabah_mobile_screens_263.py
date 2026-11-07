@@ -66,7 +66,7 @@ def single(row,f,d):
   lines+=["**Kalibre MS yönü:** karar kanıtı yok","**S2:** PAS / doğrulanmış oran yok",
           "**S1:** ONAYSIZ"]
  lines+=["","**Pinnacle:** Fiyat görüntüleme ayrı arşivde; aynı-anlı doğrulama yoksa piyasa yüzdesi gösterilmez.","",
-         "**Rotasyon:** "+", ".join(safe(k)+"="+safe(v) for k,v in row.get("rotation",{}).items()),
+         "**Rotasyon:** "+", ".join(safe(k)+"="+safe(v) for k,v in sorted(row.get("rotation",{}).items())),
          " (niteliksel; model yüzdesini değiştirmez)","",
          "## 2. B / C2 / C3 / M4",
          "","| Model | MS 1 | MS X | MS 2 | KG Var | 2,5 Üst |",
