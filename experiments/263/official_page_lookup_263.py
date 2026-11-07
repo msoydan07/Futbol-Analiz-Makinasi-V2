@@ -372,7 +372,7 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     events=funcs[kind](m)
     # JSON-LD may supplement a site-specific parser, but never infer a fixture
     # from non-structured free text beyond the explicitly defined source format.
-    if kind not in ('jsonld','tff_j11_2026','seriea_j11_2026','epl_nov26_confirmed'):
+    if kind not in ('jsonld','tff_j11_2026','seriea_j11_2026','epl_nov26_confirmed',POR_NEWS_PARSER):
         events+=_jsonld_events(m)
     unique={}
     for e in events:

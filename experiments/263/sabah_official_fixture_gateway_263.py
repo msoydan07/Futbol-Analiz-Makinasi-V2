@@ -81,7 +81,30 @@ class OfficialFixtureGateway:
             events=parse_official_events(league,html)
             entry.update(status="FETCHED_OFFICIAL_PAGE",reason=None,
                          effective_url=effective,events=events,html=html,
-                         html_sha256=hashlib.sha256(html.encode("utf-8")).hexdigest())
+                         html_sha256=hashlib.sha256(html.encode("utf-8")).hexdigest(),
+                         parser=SOURCES[league][2])
+            # Current calendar is Nuxt JS; when it yields zero timed events,
+            # the official 2026-27 Betclic J11 article has nine exact
+            # announced match/time lines embedded in escaped public HTML.
+            # This time-scoped fallback is never used for future seasons.
+            if (league=="POR1" and not events and
+                now.astimezone(ZoneInfo("Europe/Istanbul")).date().isoformat()
+                    in ("2026-11-06","2026-11-07","2026-11-08")):
+                from sabah_portugal_official_news_263 import SOURCE_URL,PARSER
+                try:
+                    alt_url,alt_html=self.fetcher(SOURCE_URL,"POR1")
+                    if not is_approved_url(alt_url,"POR1"):
+                        raise OfficialGatewayError("PORTUGAL_ALT_REDIRECT_BLOCKED")
+                    alternative=parse_official_events("POR1",alt_html,parser=PARSER)
+                    if len(alternative)!=9:
+                        entry["portugal_fallback_status"]="NO_COMPLETE_OFFICIAL_NINE_MATCHES"
+                    else:
+                        entry.update(effective_url=alt_url,events=alternative,
+                                     html=alt_html,parser=PARSER,
+                                     html_sha256=hashlib.sha256(alt_html.encode("utf-8")).hexdigest(),
+                                     portugal_fallback_status="OFFICIAL_NEWS_NINE_TIMED_FIXTURES")
+                except (OSError,ValueError,TypeError,TimeoutError) as exc:
+                    entry["portugal_fallback_status"]=type(exc).__name__
         except (OSError,ValueError,TypeError,TimeoutError) as exc:
             entry["reason"]=type(exc).__name__+":"+str(exc)[:90]
         self.cache[league]=entry
@@ -103,7 +126,7 @@ class OfficialFixtureGateway:
                   "page_fetch_status":entry["status"],
                   "page_url":entry["effective_url"] or entry["source_url"],
                   "page_sha256":entry["html_sha256"],
-                  "source_parser":SOURCES[league][2],
+                  "source_parser":entry.get("parser",SOURCES[league][2]),
                   "candidate_events_seen":len(entry["events"]),
                   "page_fetch_failure":entry["reason"],
                   "selected_lookup":"NONE"}
@@ -112,7 +135,8 @@ class OfficialFixtureGateway:
             observation=official_page_lookup(
                 league,home,away,now=self.now(),
                 source_url=entry["effective_url"],html=entry["html"],
-                same_team=lambda x,y:self._same(league,x,y))
+                same_team=lambda x,y:self._same(league,x,y),
+                parser=entry.get("parser"))
             evidence["page_observation_status"]=observation.get("status")
             evidence["page_observation_reason"]=observation.get("reason")
             # An official annual Premier League list with provisional kickoff
