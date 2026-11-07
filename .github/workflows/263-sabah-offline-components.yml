@@ -13,6 +13,9 @@ on:
       - 'experiments/263/sabah_mobile_screens_263.py'
       - 'experiments/263/sabah_pinnacle_capture_263.py'
       - 'experiments/263/test_sabah_workflow_263.py'
+      - 'experiments/263/sabah_official_fixture_gateway_263.py'
+      - 'experiments/263/test_sabah_official_fixture_gateway_263.py'
+      - 'experiments/263/sabah_official_coverage_probe_263.py'
       - '.github/workflows/263-sabah-offline-components.yml'
       - '.github/workflows/263-sabah-live-batch.yml'
       - '.github/workflows/263-pinnacle-free-once.yml'
@@ -38,7 +41,7 @@ jobs:
           grep -q 'group: quad-263-append-only' .github/workflows/263-sabah-live-batch.yml
       - name: Syntax check of new modules (no key or live calls)
         run: |
-          python -m py_compile experiments/263/sabah_batch_263.py experiments/263/sabah_mobile_screens_263.py experiments/263/sabah_pinnacle_capture_263.py
+          python -m py_compile experiments/263/sabah_batch_263.py experiments/263/sabah_mobile_screens_263.py experiments/263/sabah_pinnacle_capture_263.py experiments/263/sabah_official_fixture_gateway_263.py experiments/263/sabah_official_coverage_probe_263.py
       - name: One integrated synthetic test batch - no live odds or fixture calls
         env:
           PYTHONPATH: .:experiments/263
@@ -47,7 +50,8 @@ jobs:
             experiments/263/test_sabah_postmatch_263.py \
             experiments/263/test_sabah_pinnacle_credit_guard_263.py \
             experiments/263/test_sabah_fixture_rotation_263.py \
-            experiments/263/test_sabah_workflow_263.py
+            experiments/263/test_sabah_workflow_263.py \
+            experiments/263/test_sabah_official_fixture_gateway_263.py
       - name: Render pinned 44-candidate preparation without claiming kickoff verification
         env:
           PYTHONPATH: .:experiments/263

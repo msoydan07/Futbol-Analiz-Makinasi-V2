@@ -1,0 +1,40 @@
+name: "263 resmî fikstür canlı kaynak kapsama tanısı - tahmin üretmez"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_official_fixture_gateway_263.py'
+      - 'experiments/263/sabah_official_coverage_probe_263.py'
+      - '.github/workflows/263-sabah-official-page-live-check.yml'
+permissions:
+  contents: read
+jobs:
+  official-page-readonly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read only one official candidate page per league for today's immutable pilot
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          day="$(TZ=Europe/Istanbul date +%Y-%m-%d)"
+          case "$day" in
+            2026-11-06|2026-11-07|2026-11-08) ;;
+            *) echo "OUTSIDE_FROZEN_96_WINDOW_NO_EXTERNAL_FETCH"; exit 0;;
+          esac
+          python experiments/263/sabah_official_coverage_probe_263.py \
+            --day "$day" --out /tmp/263-official-coverage.json
+      - name: Keep read-only source diagnosis evidence, not fixture predictions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-page-live-coverage-not-forecast
+          retention-days: 7
+          if-no-files-found: ignore
+          path: /tmp/263-official-coverage.json

@@ -70,8 +70,11 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
  rows=named(cohort,day,src);root=Path(root)
  for path in (history,baseline,acceptance,lock_path,dev_lock_path):
   if not Path(path).is_file():raise Blocked("REQUIRED_HISTORY_OR_LOCK_MISSING")
+ gateway=None
  if lookup is None:
-  from analyze_named_match_gate import run as lookup
+  from sabah_official_fixture_gateway_263 import OfficialFixtureGateway
+  gateway=OfficialFixtureGateway()
+  lookup=gateway.lookup
  if predictor is None:
   from forward_quad import predict_quad_from_verified_gate as predictor
  if baseline_fn is None:
@@ -89,6 +92,9 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
   try:
    if count>=LIMIT[cohort]:raise Blocked("COHORT_LIMIT_REACHED")
    gate=lookup(request["league"],request["home"],request["away"])
+   if gateway is not None:
+    item["official_source_evidence"]=gateway.latest_match_evidence(
+        request["league"],request["home"],request["away"])
    if not isinstance(gate,dict) or gate.get("status")!="VERIFIED":
     raise Blocked("OFFICIAL_GATE_FAILED:"+str(gate.get("reason") if isinstance(gate,dict) else "INVALID"))
    league,home,away,ko,checked,_=valid_gate(gate,observed_now)
@@ -113,8 +119,16 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     item["decision_status"]=d["status"];item["decision_sha256"]=d["payload_sha256"]
    except (ValueError,OSError,KeyError,TypeError) as exc:
     item["decision_status"]="UNAVAILABLE_MODEL_ONLY";item["decision_error"]=str(exc)[:140]
-   rotation=rotation_from_official_inputs(gate,[],observed_now)
+   adjacent=gateway.adjacent_for(gate) if gateway is not None else []
+   rotation=rotation_from_official_inputs(gate,adjacent,observed_now)
    item["rotation"]={k:v["rotation_label"] for k,v in rotation["teams"].items()}
+   item["rotation_evidence"]={
+     k:{"past_7_days":v["past_7_days"],"next_10_days":v["next_10_days"],
+        "last_rest_hours":v["last_rest_hours"],
+        "next_match_gap_hours":v["next_match_gap_hours"],
+        "reason":v["reason"]}
+     for k,v in rotation["teams"].items()}
+   item["rotation_applied_to_model_probabilities"]=False
   except (ValueError,OSError,KeyError,TypeError,AssertionError) as exc:
    item["reason"]=str(exc)[:200]
   outcomes.append(item)
@@ -123,7 +137,8 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
          "new_forecasts":sum(x["status"]=="REGISTERED_FOUR_MODELS_EXPERIMENTAL" for x in outcomes),
          "blocked":sum(x["status"]=="BLOCKED_NO_FORECAST" for x in outcomes),
          "already_sealed":sum(x["status"]=="ALREADY_SEALED_UNCHANGED" for x in outcomes),
-         "outcomes":outcomes,"odds_api_calls":0,
+         "outcomes":outcomes,"official_source_page_coverage":gateway.coverage() if gateway is not None else None,
+         "odds_api_calls":0,
          "official_S1_S2_approved":False,"betting_authorized":False}
  result["payload_sha256"]=sha(result)
  return result
