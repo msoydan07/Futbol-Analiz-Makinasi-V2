@@ -1,0 +1,30 @@
+name: "263 missing 26 official HTML diagnostic read-only"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_44_official_html_diag_263.py'
+      - '.github/workflows/263-sabah-44-official-html-diag.yml'
+permissions:
+  contents: read
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One source-only HTML inspection, no models and no bookmaker
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python experiments/263/sabah_44_official_html_diag_263.py
+      - name: Archive diagnostic only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: missing26-real-official-html-parser-diagnostic
+          if-no-files-found: ignore
+          retention-days: 7
+          path: /tmp/263_official_26_html_diag.json
