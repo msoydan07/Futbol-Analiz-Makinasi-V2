@@ -229,6 +229,35 @@ jobs:
             git cat-file -e "origin/$GITHUB_REF_NAME:$file"
           done
           echo "SABAH_FORECAST_AND_ITS_PINNACLE_QUOTE_SHA_SAVED_SAME_RUN_NO_T60_NO_BET"
+      - name: Produce approved compact and single-match mobile PDFs from SHA-validated frozen data
+        if: steps.intake.outputs.kind == 'real_named_request'
+        continue-on-error: true
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+          REPORT: ${{ steps.intake.outputs.report }}
+          RECEIPT: ${{ steps.intake.outputs.receipt }}
+          DAY: ${{ steps.intake.outputs.day }}
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check reportlab==4.4.5
+          PRICE_REPORT="experiments/263/pinnacle_new100_research/new100_${GITHUB_RUN_ID}.json"
+          test -f "$PRICE_REPORT"
+          python experiments/263/sabah_mobile_approved_pdf_263.py \
+            --report "$REPORT" --receipt "$RECEIPT" \
+            --price "$PRICE_REPORT" --day "$DAY" \
+            --out "/tmp/new100_approved_mobile_${GITHUB_RUN_ID}"
+          git diff --quiet
+          git diff --cached --quiet
+          echo "PDF_IS_READ_ONLY_FROZEN_SHA_RESEARCH_VIEW_NO_ADDITIONAL_QUOTE"
+      - name: Upload approved mobile PDFs without altering forecast or credit receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: new100-approved-compact-mobile-PDF-batch-and-single
+          retention-days: 14
+          if-no-files-found: ignore
+          path: /tmp/new100_approved_mobile_*/**/*.pdf
       - name: Preserve price-eligibility evidence without any API key
         if: always()
         uses: actions/upload-artifact@v4
