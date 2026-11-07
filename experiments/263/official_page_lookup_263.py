@@ -20,10 +20,10 @@ SOURCES = {
     'ENG2': ('https://www.efl.com/matches/', 'efl.com', 'jsonld'),
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
     'ESP1': ('https://www.laliga.com/laliga-easports/resultados', 'laliga.com', 'jsonld'),
-    'ITA1': ('https://en.legaseriea.it/serie-a/fixtures-results', 'legaseriea.it', 'jsonld'),
+    'ITA1': ('https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a', 'legaseriea.it', 'seriea_j11_2026'),
     'FRA1': ('https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1', 'ligue1.com', 'lfp_week10_2026'),
     'NED1': ('https://www.knvb.nl/competities/eredivisie/programma', 'knvb.nl', 'knvb'),
-    'TUR1': ('https://www.tff.org/', 'tff.org', 'jsonld'),
+    'TUR1': ('https://www.tff.org/default.aspx?ftxtID=2966&pageID=600', 'tff.org', 'tff_j11_2026'),
     'POR1': ('https://www.ligaportugal.pt/calendar', 'ligaportugal.pt', 'jsonld'),
     'BEL1': ('https://www.proleague.be/', 'proleague.be', 'jsonld'),
 }
@@ -215,12 +215,78 @@ def _lfp_week10_2026(markup):
     return events
 
 
+
+def _seriea_j11_2026(markup):
+    """Exact round-11 Italian official appointments; never infer year/weekday."""
+    lines=[' '.join(s.split()) for s in ''.join(markup.visible).splitlines() if s.strip()]
+    whole=' '.join(lines).casefold()
+    if not ('designazioni arbitrali' in whole and 'novembre' in whole and '2026' in whole and '11' in whole):
+        return []
+    pat=re.compile(r"^([A-ZÀ-Ü][A-ZÀ-Ü0-9 .’'-]{2,}?)\s+[–-]\s+([A-ZÀ-Ü][A-ZÀ-Ü0-9 .’'-]{2,}?)\s+(Venerdì|Sabato|Domenica)\s+([678])/11\s+h\.\s*(\d{1,2})[.:](\d{2})\b",re.I)
+    weekday={6:'venerdì',7:'sabato',8:'domenica'}
+    events=[]
+    for line in lines:
+        m=pat.match(line)
+        if not m or m.group(3).casefold()!=weekday[int(m.group(4))]:continue
+        try:
+            dt=datetime(2026,11,int(m.group(4)),int(m.group(5)),int(m.group(6)),
+                        tzinfo=ZoneInfo('Europe/Rome'))
+        except ValueError:continue
+        events.append(_event(m.group(1),m.group(2),dt.date().isoformat(),
+                             dt.astimezone(timezone.utc).isoformat(),'seriea_j11_2026'))
+    return events
+
+
+def _tff_j11_2026(markup):
+    """Exact TFF Super Lig week-11 rows, excluding all lower-division rows."""
+    lines=[' '.join(s.split()) for s in ''.join(markup.visible).splitlines() if s.strip()]
+    def heading(value,division,week):
+        return division in value.casefold() and bool(re.search(r'\b'+str(week)+r'\s*\.\s*hafta\b',value.casefold()))
+    start=next((i for i,s in enumerate(lines) if heading(s,'trendyol süper lig',11)),None)
+    if start is None:return []
+    end=next((i for i in range(start+1,len(lines))
+              if heading(lines[i],'trendyol 1. lig',14)),len(lines))
+    segment=lines[start:end]
+    dates=[(i,re.fullmatch(r'(0[678])\.11\.2026',s)) for i,s in enumerate(segment)
+           if re.fullmatch(r'(0[678])\.11\.2026',s)]
+    events=[]
+    clock=re.compile(r'(?:[01]?\d|2[0-3]):[0-5]\d')
+    for number,(i,day) in enumerate(dates):
+        stop=dates[number+1][0] if number+1<len(dates) else len(segment)
+        block=segment[i+1:stop]
+        stamps=[(j,s) for j,s in enumerate(block) if clock.fullmatch(s)]
+        if len(stamps)!=1:continue
+        t,hm=stamps[0]
+        following=block[t+1:]
+        details=next((j for j,s in enumerate(following) if s.casefold()=='detaylar'),None)
+        referees=next((j for j,s in enumerate(following) if re.match(r'^\(H\)\s',s,re.I)),len(following))
+        if details is None or referees==len(following) or referees<=details:continue
+        def teamlike(s):
+            return (len(s)>=3 and not re.fullmatch(r'[-–]|\d+-\d+',s)
+                    and not re.match(r'^\([A-Z]\)\s',s)
+                    and s.casefold() not in ('detaylar','image'))
+        home=[s for j,s in enumerate(following[:details]) if teamlike(s)]
+        candidates=[s for s in following[details+1:referees] if teamlike(s)]
+        if len(home)!=1 or len(candidates)<2:continue
+        away=candidates[-1]
+        if away==home[0] or any(x in away.casefold() for x in ('stadyum',' stadi',' stadium')):
+            continue
+        h,m=map(int,hm.split(':'))
+        try:local=datetime(2026,11,int(day.group(1)),h,m,tzinfo=ZoneInfo('Europe/Istanbul'))
+        except ValueError:continue
+        events.append(_event(home[0],away,local.date().isoformat(),
+                             local.astimezone(timezone.utc).isoformat(),'tff_j11_2026'))
+    return events
+
+
 def parse_official_events(league: str, html: str, parser: str|None=None) -> list[dict]:
     if league not in SOURCES:raise OfficialPageError('unsupported_league')
     if not isinstance(html,str) or len(html)>MAX_BYTES:raise OfficialPageError('invalid_official_response')
     m=_Markup();m.feed(html)
     kind=parser or SOURCES[league][2]
-    funcs={'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026}
+    funcs={'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,
+           'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026,
+           'seriea_j11_2026':_seriea_j11_2026,'tff_j11_2026':_tff_j11_2026}
     if kind not in funcs:raise OfficialPageError('unsupported_parser')
     events=funcs[kind](m)
     # JSON-LD may supplement a site-specific parser, but never infer a fixture
@@ -252,7 +318,12 @@ def _default_fetch(url,league):
             raise OfficialPageError('non_html_official_content')
         data=res.read(MAX_BYTES+1)
     if len(data)>MAX_BYTES:raise OfficialPageError('official_page_too_large')
-    return end_url,data.decode('utf-8','replace')
+    try:
+        html=data.decode('utf-8')
+    except UnicodeDecodeError:
+        if league!='TUR1':raise OfficialPageError('non_utf8_official_response')
+        html=data.decode('windows-1254','replace')
+    return end_url,html
 
 
 def official_page_lookup(league, home, away, *, now=None, fetcher=None,

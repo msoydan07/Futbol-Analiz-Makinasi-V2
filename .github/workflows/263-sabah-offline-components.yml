@@ -18,6 +18,7 @@ on:
       - 'experiments/263/sabah_official_coverage_probe_263.py'
       - 'experiments/263/official_page_lookup_263.py'
       - 'experiments/263/test_sabah_lfp_recent_263.py'
+      - 'experiments/263/test_sabah_official_nov7_sources_263.py'
       - '.github/workflows/263-sabah-offline-components.yml'
       - '.github/workflows/263-sabah-live-batch.yml'
       - '.github/workflows/263-pinnacle-free-once.yml'
@@ -54,7 +55,8 @@ jobs:
             experiments/263/test_sabah_fixture_rotation_263.py \
             experiments/263/test_sabah_workflow_263.py \
             experiments/263/test_sabah_official_fixture_gateway_263.py \
-            experiments/263/test_sabah_lfp_recent_263.py
+            experiments/263/test_sabah_lfp_recent_263.py \
+            experiments/263/test_sabah_official_nov7_sources_263.py
       - name: Render pinned 44-candidate preparation without claiming kickoff verification
         env:
           PYTHONPATH: .:experiments/263
