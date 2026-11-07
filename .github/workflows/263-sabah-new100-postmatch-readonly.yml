@@ -1,0 +1,48 @@
+name: "263 new100 postmatch score - sealed only, no model refit"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_postmatch_new100_263.py'
+      - 'experiments/263/test_sabah_postmatch_new100_263.py'
+      - 'experiments/263/sabah_postmatch_inputs/*/*.json'
+      - '.github/workflows/263-sabah-new100-postmatch-readonly.yml'
+permissions:
+  contents: read
+jobs:
+  score-readonly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned requirements for existing frozen evaluation functions
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Synthetic source-tamper and MS KG UST line acceptance
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_sabah_postmatch_new100_263.py
+      - name: Score only existing NEW100 sealed forecasts and human-attested official results
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/sabah_postmatch_new100_263.py \
+            --out /tmp/263-new100-research-postmatch.json \
+            --mobile /tmp/263-new100-mobile-postmatch.md
+      - name: Upload read-only outcome evidence; no forecast or result editing
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: new100-research-postmatch-human-attested-not-network-verified
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            /tmp/263-new100-research-postmatch.json
+            /tmp/263-new100-mobile-postmatch.md

@@ -28,6 +28,9 @@ on:
       - 'experiments/263/test_sabah_new100_commit_guard_263.py'
       - 'experiments/263/sabah_new100_request_intake_263.py'
       - 'experiments/263/test_sabah_new100_intake_263.py'
+      - 'experiments/263/sabah_postmatch_new100_263.py'
+      - 'experiments/263/test_sabah_postmatch_new100_263.py'
+      - '.github/workflows/263-sabah-new100-postmatch-readonly.yml'
       - '.github/workflows/263-sabah-new100-on-request.yml'
       - '.github/workflows/263-sabah-acceptance-on-request.yml'
       - '.github/workflows/263-sabah-offline-components.yml'
@@ -57,7 +60,7 @@ jobs:
           ! grep -q 'THE_ODDS_API_KEY' .github/workflows/263-sabah-live-batch.yml
       - name: Syntax check of new modules (no key or live calls)
         run: |
-          python -m py_compile experiments/263/sabah_batch_263.py experiments/263/sabah_mobile_screens_263.py experiments/263/sabah_pinnacle_capture_263.py experiments/263/sabah_official_fixture_gateway_263.py experiments/263/sabah_official_coverage_probe_263.py experiments/263/sabah_named_source_acceptance_263.py experiments/263/sabah_acceptance_commit_guard_263.py experiments/263/sabah_new100_commit_guard_263.py experiments/263/sabah_new100_request_intake_263.py
+          python -m py_compile experiments/263/sabah_batch_263.py experiments/263/sabah_mobile_screens_263.py experiments/263/sabah_pinnacle_capture_263.py experiments/263/sabah_official_fixture_gateway_263.py experiments/263/sabah_official_coverage_probe_263.py experiments/263/sabah_named_source_acceptance_263.py experiments/263/sabah_acceptance_commit_guard_263.py experiments/263/sabah_new100_commit_guard_263.py experiments/263/sabah_new100_request_intake_263.py experiments/263/sabah_postmatch_new100_263.py
       - name: One integrated synthetic test batch - no live odds or fixture calls
         env:
           PYTHONPATH: .:experiments/263
@@ -74,7 +77,8 @@ jobs:
             experiments/263/test_sabah_named_source_acceptance_263.py \
             experiments/263/test_sabah_acceptance3_263.py \
             experiments/263/test_sabah_new100_commit_guard_263.py \
-            experiments/263/test_sabah_new100_intake_263.py
+            experiments/263/test_sabah_new100_intake_263.py \
+            experiments/263/test_sabah_postmatch_new100_263.py
       - name: Render pinned 44-candidate preparation without claiming kickoff verification
         env:
           PYTHONPATH: .:experiments/263
