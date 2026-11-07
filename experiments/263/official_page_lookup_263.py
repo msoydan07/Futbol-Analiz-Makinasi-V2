@@ -16,7 +16,7 @@ from zoneinfo import ZoneInfo
 VERSION = '263_official_page_lookup_v1_experimental'
 # Current official schedule surfaces. These are source CANDIDATES, not guaranteed APIs.
 SOURCES = {
-    'ENG1': ('https://www.premierleague.com/en/news/4675097/all-380-fixtures-for-season-2026-27', 'premierleague.com', 'epl'),
+    'ENG1': ('https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november', 'premierleague.com', 'epl_nov26_confirmed'),
     'ENG2': ('https://www.efl.com/matches/', 'efl.com', 'jsonld'),
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
     'ESP1': ('https://www.laliga.com/laliga-easports/resultados', 'laliga.com', 'jsonld'),
@@ -290,6 +290,164 @@ def _tff_j11_2026(markup):
         events.append(_event(home[0],away,local.date().isoformat(),
                              local.astimezone(timezone.utc).isoformat(),'tff_j11_2026'))
     return events
+
+
+
+def _epl_nov26_confirmed(markup):
+    """Only 2026 November PL broadcast amendments with stated GMT default.
+
+    If the news release or its explicit default-time rule is unavailable,
+    read the fixture as DATE ONLY using the provisional annual parser.
+    """
+    lines=[' '.join(s.split()) for s in ''.join(markup.visible).splitlines() if s.strip()]
+    text=' '.join(lines).casefold()
+    if not ('fixture amendments for premier league matches in november' in text
+            and 'november 2026' in text
+            and 'all fixtures are gmt and are 15:00 kick-offs unless otherwise stated' in text):
+        return _premier_events(markup)
+    heading=re.compile(r'^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday) (\d{1,2}) November(?: 2026)?
+    if league not in SOURCES:raise OfficialPageError('unsupported_league')
+    if not isinstance(html,str) or len(html)>MAX_BYTES:raise OfficialPageError('invalid_official_response')
+    m=_Markup();m.feed(html)
+    kind=parser or SOURCES[league][2]
+    funcs={'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,
+           'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026,
+           'seriea_j11_2026':_seriea_j11_2026,'tff_j11_2026':_tff_j11_2026,
+           'epl_nov26_confirmed':_epl_nov26_confirmed}
+    if kind not in funcs:raise OfficialPageError('unsupported_parser')
+    events=funcs[kind](m)
+    # JSON-LD may supplement a site-specific parser, but never infer a fixture
+    # from non-structured free text beyond the explicitly defined source format.
+    if kind not in ('jsonld','tff_j11_2026','seriea_j11_2026','epl_nov26_confirmed'):
+        events+=_jsonld_events(m)
+    unique={}
+    for e in events:
+        if not e['home'] or not e['away']:continue
+        key=(e['home'],e['away'],e['match_date'],e['kickoff_utc'])
+        unique[key]=e
+    return list(unique.values())
+
+
+class _OfficialRedirect(urllib.request.HTTPRedirectHandler):
+    def __init__(self,league):self.league=league
+    def redirect_request(self,req,fp,code,msg,headers,newurl):
+        if not is_approved_url(newurl,self.league):
+            raise OfficialPageError('redirect_outside_official_domain')
+        return super().redirect_request(req,fp,code,msg,headers,newurl)
+
+
+def _default_fetch(url,league):
+    req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (fixture verification)', 'Accept':'text/html'})
+    opener=urllib.request.build_opener(_OfficialRedirect(league))
+    with opener.open(req,timeout=15) as res:
+        end_url=res.geturl()
+        ctype=res.headers.get('Content-Type','')
+        if 'html' not in ctype and 'text/plain' not in ctype:
+            raise OfficialPageError('non_html_official_content')
+        data=res.read(MAX_BYTES+1)
+    if len(data)>MAX_BYTES:raise OfficialPageError('official_page_too_large')
+    try:
+        html=data.decode('utf-8')
+    except UnicodeDecodeError:
+        if league!='TUR1':raise OfficialPageError('non_utf8_official_response')
+        html=data.decode('windows-1254','replace')
+    return end_url,html
+
+
+def official_page_lookup(league, home, away, *, now=None, fetcher=None,
+                         source_url=None, html=None, same_team=None):
+    """Search one authorized official page ONLY, not a cached fixture list.
+
+    same_team(observed_name, requested_name) resolves BOTH to identical canonical
+    IDs. It is mandatory: a normalization or approximate name guess is unsafe.
+    """
+    if league not in SOURCES:return {'status':'REJECTED','reason':'unsupported_league'}
+    if not isinstance(home,str) or not isinstance(away,str) or not home.strip() or not away.strip():
+        return {'status':'REJECTED','reason':'named_match_required'}
+    now=now or datetime.now(timezone.utc)
+    if now.tzinfo is None:return {'status':'REJECTED','reason':'timezone_required'}
+    now=now.astimezone(timezone.utc)
+    if not callable(same_team):return {'status':'REJECTED','reason':'canonical_team_matcher_required'}
+    url=source_url or SOURCES[league][0]
+    if not is_approved_url(url,league):return {'status':'REJECTED','reason':'unapproved_official_url'}
+    supplied_html = html is not None
+    try:
+        if html is None:
+            redirected,html=fetcher(url) if fetcher else _default_fetch(url,league)
+            if not is_approved_url(redirected,league):raise OfficialPageError('redirect_outside_official_domain')
+        events=parse_official_events(league,html)
+    except (OfficialPageError,ValueError,UnicodeError,OSError,TimeoutError) as exc:
+        return {'status':'NOT_VERIFIED','reason':'official_source_parse_or_fetch_error','detail':str(exc)[:160]}
+    matched=[]
+    for event in events:
+        try:
+            if same_team(event['home'],home) and same_team(event['away'],away):matched.append(event)
+        except (KeyError,ValueError,TypeError):pass
+    if not matched:
+        return {'status':'NOT_VERIFIED','reason':'requested_fixture_not_observed_on_this_page',
+                'source_url':url,'events_parsed':len(events), 'does_not_prove_no_fixture':True}
+    # No silent choice where duplicate or conflicting kickoff/date observations exist.
+    if len(matched)!=1:return {'status':'REVIEW_REQUIRED','reason':'ambiguous_or_conflicting_official_observations','count':len(matched)}
+    m=matched[0]
+    # Premier League annual fixture release is explicitly subject to amendment;
+    # a displayed time is NOT treated as independently re-confirmed match-day time.
+    annual_release = m['format']=='epl'
+    if m['kickoff_utc'] and not annual_release:
+        try:kick=datetime.fromisoformat(m['kickoff_utc']).astimezone(timezone.utc)
+        except ValueError:return {'status':'NOT_VERIFIED','reason':'invalid_kickoff'}
+        if not now<=kick<=now+timedelta(days=7):return {'status':'OUTSIDE_WINDOW','reason':'kickoff_outside_7_days'}
+        status='VERIFIED_OFFICIAL_FIXTURE'; kick_utc=kick.isoformat()
+    else:
+        # Calendar date without a confirmed time is *not* a guessed kickoff.
+        from datetime import date
+        day=date.fromisoformat(m['match_date'])
+        if not now.astimezone(ZoneInfo(TIMEZONES[league])).date()<=day<=\
+           (now+timedelta(days=7)).astimezone(ZoneInfo(TIMEZONES[league])).date():
+            return {'status':'OUTSIDE_WINDOW','reason':'date_outside_7_days'}
+        status='VERIFIED_OFFICIAL_FIXTURE_DATE_ONLY';kick_utc=None
+    return {'status':status,'home':m['home'],'away':m['away'], 'match_date':m['match_date'],
+            'kickoff_utc':kick_utc,'source_url':url,'retrieved_at_utc':now.isoformat(),
+            'source_parser':m['format'],'source_origin':'INJECTED_HTML_TEST_ONLY' if supplied_html else 'FETCHED_OFFICIAL_PAGE',
+            'provisional_schedule_notice':annual_release,
+            'listed_time_unreconfirmed':bool(annual_release and m['kickoff_utc'])}
+
+
+def coverage_inventory():
+    # A configured URL/structured parser is NOT a proven operational adapter.
+    return {lg:{'source_url':u,'format':fmt,
+                'coverage_status':'PARSER_IMPLEMENTED_NOT_LIVE_CONFIRMED' if fmt in ('dfl','knvb','epl','lfp_week10_2026')
+                else 'JSONLD_DISCOVERY_ONLY_NOT_GUARANTEED',
+                'all_fixtures_covered':False}
+            for lg,(u,host,fmt) in SOURCES.items()}
+,re.I)
+    fixture=re.compile(r"^(?:(\d{1,2}:\d{2})\s+)?(.+?)\s+v\s+(.+?)(?:\s+\([^()]*\))?\*?$",re.I)
+    # Exact club shortenings that are already in the official PL source.
+    aliases={'leeds':'Leeds United','spurs':'Tottenham Hotspur',
+             'newcastle':'Newcastle United',"nott'm forest":'Nottingham Forest',
+             'man city':'Manchester City','man utd':'Manchester United',
+             'bournemouth':'AFC Bournemouth','brighton':'Brighton & Hove Albion',
+             'coventry':'Coventry City','palace':'Crystal Palace'}
+    records=[];day=None
+    for line in lines:
+        h=heading.fullmatch(line)
+        if h:
+            day=int(h.group(2))
+            try:date=datetime(2026,11,day).date()
+            except ValueError:day=None
+            continue
+        if day is None:continue
+        m=fixture.fullmatch(line)
+        if not m:continue
+        clock=m.group(1) or '15:00'
+        h=m.group(2).strip();a=m.group(3).strip().rstrip('*').strip()
+        h=aliases.get(h.casefold(),h)
+        a=aliases.get(a.casefold(),a)
+        if h==a:continue
+        hour,minute=map(int,clock.split(':'))
+        try:ko=datetime(2026,11,day,hour,minute,tzinfo=timezone.utc)
+        except ValueError:continue
+        records.append(_event(h,a,ko.date().isoformat(),ko.isoformat(),'epl_nov26_confirmed'))
+    return records
 
 
 def parse_official_events(league: str, html: str, parser: str|None=None) -> list[dict]:
