@@ -10,7 +10,7 @@ ITA='''<h1>Le designazioni arbitrali dell'11ª</h1><p>04/11/2026</p>
 <p>PARMA – BOLOGNA Sabato 7/11 h. 18.00</p>
 <p>ROMA – SASSUOLO Sabato 7/11 h. 20.45</p>'''
 
-TFF='''<h2>Trendyol Süper Lig Adnan Süvari Sezonu - 11.Hafta</h2>
+TFF='''<h2>Trendyol Süper Lig Adnan Süvari Sezonu - 11.Hafta</h2><div>Tarih</div><div>Ev Sahibi Takım</div><div>Misafir Takım</div>
 <div>07.11.2026</div><div>Cumartesi</div><div>13:30</div>
 <div>EYÜPSPOR</div><div>-</div><div>Detaylar</div>
 <div>ESENYURT NECMİ KADIOĞLU STADI</div><div>KOCAELİSPOR</div>
@@ -19,7 +19,7 @@ TFF='''<h2>Trendyol Süper Lig Adnan Süvari Sezonu - 11.Hafta</h2>
 <div>SAMSUNSPOR A.Ş.</div><div>-</div><div>Detaylar</div>
 <div>SAMSUN YENİ 19 MAYIS</div><div>TÜMOSAN KONYASPOR</div>
 <div>(H) AYŞE HAKEM</div>
-<h2>Trendyol 1. Lig - 14.Hafta</h2>
+<h2>Trendyol 1. Lig - 14.Hafta</h2><div>Tarih</div><div>Ev Sahibi Takım</div><div>Misafir Takım</div>
 <div>07.11.2026</div><div>19:00</div><div>ALT LİG TAKIMI</div>
 <div>-</div><div>Detaylar</div><div>ALT LİG STADI</div>
 <div>RAKİP</div><div>(H) HAKEM</div>'''

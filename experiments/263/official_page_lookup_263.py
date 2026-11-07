@@ -243,16 +243,25 @@ def _tff_j11_2026(markup):
     def heading(value,division,week):
         return division in value.casefold() and bool(re.search(r'\b'+str(week)+r'\s*\.\s*hafta\b',value.casefold()))
     start=next((i for i,s in enumerate(lines)
-                if heading(s,'trendyol süper lig',11)
-                and 'müsabakaları' not in s.casefold()),None)
+                if heading(s,'trendyol süper lig',11)),None)
     if start is None:return []
-    end=next((i for i in range(start+1,len(lines))
-              if 'trendyol 1. lig' in lines[i].casefold()
-              and len(lines[i])<100),None)
-    if end is None:return []
-    segment=lines[start:end]
+    # TFF's DIV header is often split across HTML nodes. Its explicit
+    # "Tarih / Ev Sahibi / Misafir" table header repeats before each
+    # lower division, making the SECOND "Tarih" a robust league boundary.
+    headers=[i for i in range(start+1,len(lines)) if lines[i].casefold()=='tarih']
+    if len(headers)<2:return []
+    first,second=headers[:2]
+    if not any('trendyol 1. lig' in line.casefold() for line in lines[first+1:second]):
+        return []
+    heading_names=' '.join(lines[first+1:min(first+12,second)]).casefold()
+    if not ('ev sahibi' in heading_names and 'misafir' in heading_names):
+        return []
+    segment=lines[first:second]
     dates=[(i,re.fullmatch(r'(0[678])\.11\.2026',s)) for i,s in enumerate(segment)
            if re.fullmatch(r'(0[678])\.11\.2026',s)]
+    # The complete top flight round has nine fixtures; never accept a leak
+    # across competition tables, but partial official HTML remains usable.
+    if len(dates)>9:return []
     events=[]
     clock=re.compile(r'(?:[01]?\d|2[0-3]):[0-5]\d')
     for number,(i,day) in enumerate(dates):
