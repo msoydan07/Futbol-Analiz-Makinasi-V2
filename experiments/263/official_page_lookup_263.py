@@ -25,7 +25,7 @@ SOURCES = {
     'NED1': ('https://www.knvb.nl/competities/eredivisie/programma', 'knvb.nl', 'knvb'),
     'TUR1': ('https://www.tff.org/default.aspx?ftxtID=2966&pageID=600', 'tff.org', 'tff_j11_2026'),
     'POR1': ('https://www.ligaportugal.pt/calendar', 'ligaportugal.pt', 'jsonld'),
-    'BEL1': ('https://www.proleague.be/', 'proleague.be', 'jsonld'),
+    'BEL1': ('https://www.proleague.be/jpl-kalender!', 'proleague.be', 'belgium_proleague_nextjs_jpl'),
 }
 TIMEZONES = {'ENG1':'Europe/London','ENG2':'Europe/London','GER1':'Europe/Berlin',
  'ESP1':'Europe/Madrid','ITA1':'Europe/Rome','FRA1':'Europe/Paris',
@@ -364,7 +364,9 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     m=_Markup();m.feed(html)
     kind=parser or SOURCES[league][2]
     from sabah_portugal_official_news_263 import PARSER as POR_NEWS_PARSER,parse_news
-    funcs={POR_NEWS_PARSER:lambda _m:parse_news(html),
+    from sabah_belgium_official_nextjs_263 import PARSER as BEL_NEWS_PARSER,parse_proleague
+    funcs={BEL_NEWS_PARSER:lambda _m:parse_proleague(html),
+           POR_NEWS_PARSER:lambda _m:parse_news(html),
            'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,
            'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026,
            'seriea_j11_2026':_seriea_j11_2026,'tff_j11_2026':_tff_j11_2026,
@@ -374,7 +376,7 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     events=funcs[kind](m)
     # JSON-LD may supplement a site-specific parser, but never infer a fixture
     # from non-structured free text beyond the explicitly defined source format.
-    if kind not in ('jsonld','tff_j11_2026','seriea_j11_2026','epl_nov26_confirmed',POR_NEWS_PARSER):
+    if kind not in ('jsonld','tff_j11_2026','seriea_j11_2026','epl_nov26_confirmed',POR_NEWS_PARSER,BEL_NEWS_PARSER):
         events+=_jsonld_events(m)
     unique={}
     for e in events:

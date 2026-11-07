@@ -39,6 +39,8 @@ on:
       - 'experiments/263/test_sabah_10league_manifest_preflight_263.py'
       - 'experiments/263/sabah_portugal_official_news_263.py'
       - 'experiments/263/test_sabah_portugal_official_news_263.py'
+      - 'experiments/263/sabah_belgium_official_nextjs_263.py'
+      - 'experiments/263/test_sabah_belgium_official_nextjs_263.py'
       - 'experiments/263/official_page_lookup_263.py'
       - 'experiments/263/sabah_official_fixture_gateway_263.py'
       - '.github/workflows/263-sabah-10lig-fixture-preflight.yml'
@@ -105,7 +107,7 @@ jobs:
           PY
       - name: Syntax check of new modules (no key or live calls)
         run: |
-          python -m py_compile experiments/263/sabah_batch_263.py experiments/263/sabah_mobile_screens_263.py experiments/263/sabah_pinnacle_capture_263.py experiments/263/sabah_official_fixture_gateway_263.py experiments/263/sabah_official_coverage_probe_263.py experiments/263/sabah_named_source_acceptance_263.py experiments/263/sabah_acceptance_commit_guard_263.py experiments/263/sabah_new100_commit_guard_263.py experiments/263/sabah_new100_request_intake_263.py experiments/263/sabah_postmatch_new100_263.py experiments/263/sabah_10league_manifest_preflight_263.py experiments/263/sabah_portugal_official_news_263.py experiments/263/official_page_lookup_263.py experiments/263/sabah_official_fixture_gateway_263.py experiments/263/sabah_pinnacle_new100_bridge_263.py experiments/263/pinnacle_market_benchmark_263.py
+          python -m py_compile experiments/263/sabah_batch_263.py experiments/263/sabah_mobile_screens_263.py experiments/263/sabah_pinnacle_capture_263.py experiments/263/sabah_official_fixture_gateway_263.py experiments/263/sabah_official_coverage_probe_263.py experiments/263/sabah_named_source_acceptance_263.py experiments/263/sabah_acceptance_commit_guard_263.py experiments/263/sabah_new100_commit_guard_263.py experiments/263/sabah_new100_request_intake_263.py experiments/263/sabah_postmatch_new100_263.py experiments/263/sabah_10league_manifest_preflight_263.py experiments/263/sabah_portugal_official_news_263.py experiments/263/sabah_belgium_official_nextjs_263.py experiments/263/official_page_lookup_263.py experiments/263/sabah_official_fixture_gateway_263.py experiments/263/sabah_pinnacle_new100_bridge_263.py experiments/263/pinnacle_market_benchmark_263.py
       - name: One integrated synthetic test batch - no live odds or fixture calls
         env:
           PYTHONPATH: .:experiments/263
@@ -129,7 +131,8 @@ jobs:
             experiments/263/test_pinnacle_market_benchmark_263.py \
             experiments/263/test_sabah_pinnacle_new100_bridge_263.py \
             experiments/263/test_sabah_10league_manifest_preflight_263.py \
-            experiments/263/test_sabah_portugal_official_news_263.py
+            experiments/263/test_sabah_portugal_official_news_263.py \
+            experiments/263/test_sabah_belgium_official_nextjs_263.py
       - name: Render pinned 44-candidate preparation without claiming kickoff verification
         env:
           PYTHONPATH: .:experiments/263
