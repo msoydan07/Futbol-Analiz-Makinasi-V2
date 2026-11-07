@@ -64,6 +64,25 @@ class ManualBridgeTests(unittest.TestCase):
         self.assertEqual(len(r["candidates"]),1)
         with self.assertRaisesRegex(BridgeBlocked,"OUTSIDE_USER_ANALYSIS_WINDOW"):
             review(self.raw,now=datetime(2026,11,8,12,0,tzinfo=timezone.utc))
+    def test_invalid_request_does_not_leave_trigger_file(self):
+        import os
+        original=os.getcwd()
+        with tempfile.TemporaryDirectory() as d:
+            try:
+                os.chdir(d)
+                path=Path("experiments/263/sabah_requests/invalid.json")
+                bad={"schema":"SABAH_TOPLU_V1","day_turkey":DAY,
+                     "matches":[{"league":"ENG1","home":"Same","away":"Same"}]}
+                with self.assertRaises(Exception):
+                    save_request(path,bad)
+                self.assertFalse(path.exists())
+            finally:
+                os.chdir(original)
+    def test_invalid_trigger_filename_rejected(self):
+        data=review(self.raw,now=self.now)
+        out=prepare(self.raw,self.choices(data),command_authorized=True,now=self.now)
+        with self.assertRaisesRegex(BridgeBlocked,"ONLY_USER_NAMED_REQUEST_CHANNEL"):
+            save_request("experiments/263/sabah_requests/bad.name.json",out)
     def test_never_writes_live_request_in_review_or_unauthorized_mode(self):
         x=review(self.raw,now=self.now)
         self.assertEqual(x["odds_api_calls"],0)
