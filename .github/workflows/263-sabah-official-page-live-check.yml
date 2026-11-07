@@ -5,6 +5,7 @@ on:
     paths:
       - 'experiments/263/sabah_official_fixture_gateway_263.py'
       - 'experiments/263/sabah_official_coverage_probe_263.py'
+      - 'experiments/263/official_page_lookup_263.py'
       - '.github/workflows/263-sabah-official-page-live-check.yml'
 permissions:
   contents: read

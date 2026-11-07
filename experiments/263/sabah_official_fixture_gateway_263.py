@@ -114,8 +114,16 @@ class OfficialFixtureGateway:
                     self.match_checks.append(evidence)
                     return gate
                 evidence["page_gate_rejected"]=gate.get("reason") if isinstance(gate,dict) else "INVALID_GATE"
-        # The old official league-specific adapter remains an independent
-        # fallback: never accept the cached page's date-only observation.
+        # The older September 2026 French TV bulletin conflicts with the
+        # newer November official matchweek briefing on Saturday kickoffs.
+        # Never silently recover FRA1 from its now-stale fallback adapter.
+        if league=="FRA1":
+            evidence["selected_lookup"]="BLOCKED_OLD_FRENCH_SCHEDULE"
+            self.match_checks.append(evidence)
+            return {"status":"NOT_VERIFIED",
+                    "reason":"NEWER_FRA1_OFFICIAL_MATCHWEEK_PAGE_REQUIRED"}
+        # Other old official league-specific adapters remain a verified
+        # fallback where the cached page does not expose the match/time.
         gate=self.gate_runner(league,home,away)
         if isinstance(gate,dict) and gate.get("status")=="VERIFIED":
             evidence["selected_lookup"]="EXISTING_LIVE_NAMED_MATCH_GATE"

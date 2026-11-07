@@ -21,7 +21,7 @@ SOURCES = {
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
     'ESP1': ('https://www.laliga.com/laliga-easports/resultados', 'laliga.com', 'jsonld'),
     'ITA1': ('https://en.legaseriea.it/serie-a/fixtures-results', 'legaseriea.it', 'jsonld'),
-    'FRA1': ('https://ligue1.com/matches', 'ligue1.com', 'jsonld'),
+    'FRA1': ('https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1', 'ligue1.com', 'lfp_week10_2026'),
     'NED1': ('https://www.knvb.nl/competities/eredivisie/programma', 'knvb.nl', 'knvb'),
     'TUR1': ('https://www.tff.org/', 'tff.org', 'jsonld'),
     'POR1': ('https://www.ligaportugal.pt/calendar', 'ligaportugal.pt', 'jsonld'),
@@ -183,12 +183,44 @@ def _premier_events(markup):
     return result
 
 
+
+def _lfp_week10_2026(markup):
+    """Strict 5-Nov-2026 official J10 preview, never a season-long fixture feed."""
+    lines=[' '.join(x.split()) for x in ''.join(markup.visible).splitlines() if x.strip()]
+    if not any('MPP : Les infos de la J10' in x for x in lines):return []
+    if not any('05/11/2026' in x for x in lines):return []
+    heading=re.compile(r'^(vendredi|samedi|dimanche)\s+(\d{1,2})\s+novembre$',re.I)
+    pair=re.compile(r'^(.+?)\s+[-–]\s+(.+?),\s*(vendredi|samedi|dimanche)\s+\((\d{1,2})h([0-5]\d)\)',re.I)
+    ranks=re.compile(r'\s+\(\d{1,2}(?:e|er)\)$',re.I)
+    days={'vendredi':6,'samedi':7,'dimanche':8}
+    current=None;events=[]
+    for line in lines:
+        m=heading.fullmatch(line)
+        if m:
+            weekday=m.group(1).lower();d=int(m.group(2))
+            current=(weekday,d) if days.get(weekday)==d else None
+            continue
+        if current is None:continue
+        hit=pair.match(line)
+        if not hit or hit.group(3).lower()!=current[0]:continue
+        home=ranks.sub('',hit.group(1)).strip()
+        away=ranks.sub('',hit.group(2)).strip()
+        if not home or not away or home==away:continue
+        try:
+            local=datetime(2026,11,current[1],int(hit.group(4)),int(hit.group(5)),tzinfo=ZoneInfo('Europe/Paris'))
+        except ValueError:continue
+        events.append(_event(home,away,local.date().isoformat(),
+                             local.astimezone(timezone.utc).isoformat(),
+                             'lfp_week10_2026'))
+    return events
+
+
 def parse_official_events(league: str, html: str, parser: str|None=None) -> list[dict]:
     if league not in SOURCES:raise OfficialPageError('unsupported_league')
     if not isinstance(html,str) or len(html)>MAX_BYTES:raise OfficialPageError('invalid_official_response')
     m=_Markup();m.feed(html)
     kind=parser or SOURCES[league][2]
-    funcs={'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,'jsonld':_jsonld_events}
+    funcs={'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026}
     if kind not in funcs:raise OfficialPageError('unsupported_parser')
     events=funcs[kind](m)
     # JSON-LD may supplement a site-specific parser, but never infer a fixture
@@ -284,7 +316,7 @@ def official_page_lookup(league, home, away, *, now=None, fetcher=None,
 def coverage_inventory():
     # A configured URL/structured parser is NOT a proven operational adapter.
     return {lg:{'source_url':u,'format':fmt,
-                'coverage_status':'PARSER_IMPLEMENTED_NOT_LIVE_CONFIRMED' if fmt in ('dfl','knvb','epl')
+                'coverage_status':'PARSER_IMPLEMENTED_NOT_LIVE_CONFIRMED' if fmt in ('dfl','knvb','epl','lfp_week10_2026')
                 else 'JSONLD_DISCOVERY_ONLY_NOT_GUARANTEED',
                 'all_fixtures_covered':False}
             for lg,(u,host,fmt) in SOURCES.items()}
