@@ -4,6 +4,7 @@ import argparse,json,re
 from datetime import datetime,timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from sabah_manual_window_263 import in_manual_window
 from sabah_batch_263 import named,Blocked
 
 TR=ZoneInfo("Europe/Istanbul")
@@ -16,7 +17,7 @@ def inspect(path,now=None):
     now=now or datetime.now(timezone.utc)
     if now.tzinfo is None:raise IntakeBlocked("AWARE_CLOCK_REQUIRED")
     now=now.astimezone(TR)
-    if not 5<=now.hour<13:raise IntakeBlocked("TURKEY_MORNING_WINDOW_CLOSED")
+    if not in_manual_window(now):raise IntakeBlocked("TURKEY_MORNING_WINDOW_CLOSED")
     if not isinstance(path,str) or not (re.fullmatch(REAL,path) or re.fullmatch(PROBE,path)):
         raise IntakeBlocked("ONLY_NEW_ADD_NAMED_OR_PROBE_PATH")
     input_path=Path(path)

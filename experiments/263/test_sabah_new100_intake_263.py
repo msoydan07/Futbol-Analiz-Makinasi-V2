@@ -56,6 +56,14 @@ class IntakeTests(unittest.TestCase):
         with self.assertRaises(IntakeBlocked):
             inspect("experiments/263/sabah_readiness_probes/probe.json",
                     now=datetime(2026,11,7,12,0,tzinfo=timezone.utc))
+    def test_user_controlled_14_00_and_14_59_intake_allowed_15_00_blocked(self):
+        self.request()
+        path="experiments/263/sabah_requests/user_choice.json"
+        for minute in (0,59):
+            x=inspect(path,now=datetime(2026,11,7,11,minute,tzinfo=timezone.utc))
+            self.assertEqual(x["kind"],"real_named_request")
+        with self.assertRaisesRegex(IntakeBlocked,"TURKEY_MORNING_WINDOW_CLOSED"):
+            inspect(path,now=datetime(2026,11,7,12,0,tzinfo=timezone.utc))
     def test_duplicate_named_match_denied(self):
         dup=[{"league":"ENG1","home":"A","away":"B"}]*2
         with self.assertRaises(ValueError):self.request(dup)

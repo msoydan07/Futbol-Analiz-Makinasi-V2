@@ -105,6 +105,27 @@ class New100PinnacleBridgeTests(unittest.TestCase):
         with self.assertRaisesRegex(PriceBridgeBlocked,"ONLY_SAME_MORNING"):
             prequery(self.report,self.receipt,self.root,"TUR1",
                      datetime(2026,11,6,16,48,tzinfo=timezone.utc))
+    def test_14_59_same_day_quote_allowed_and_15_00_blocked(self):
+        observed=datetime(2026,11,6,11,59,0,tzinfo=timezone.utc)
+        created=observed-timedelta(minutes=2)
+        self.f["created_at_utc"]=created.isoformat()
+        self.f["fixture"]["source_checked_at_utc"]=created.isoformat()
+        self.f=seal(self.f)
+        (self.root/self.rel).write_text(json.dumps(self.f),encoding="utf-8")
+        self.report["outcomes"][0]["forecast_sha256"]=self.f["payload_sha256"]
+        self.report=seal(self.report)
+        self.receipt["records"][0]["forecast_sha256"]=self.f["payload_sha256"]
+        self.receipt["batch_report_sha256"]=self.report["payload_sha256"]
+        self.receipt=seal(self.receipt)
+        x=plan(self.report,self.receipt,self.root,self.ledger,observed)
+        self.assertEqual(x["leagues"],["TUR1"])
+        self.assertEqual(x["morning_window_turkey"],"05:00-14:59")
+        self.assertEqual(prequery(self.report,self.receipt,self.root,"TUR1",observed)["league"],"TUR1")
+        too_late=datetime(2026,11,6,12,0,0,tzinfo=timezone.utc)
+        with self.assertRaisesRegex(PriceBridgeBlocked,"ONLY_SAME_MORNING"):
+            plan(self.report,self.receipt,self.root,self.ledger,too_late)
+        with self.assertRaisesRegex(PriceBridgeBlocked,"ONLY_SAME_MORNING"):
+            prequery(self.report,self.receipt,self.root,"TUR1",too_late)
     def test_same_time_forecast_older_than_10min_denied(self):
         later=NOW+timedelta(minutes=11)
         x=plan(self.report,self.receipt,self.root,self.ledger,later)

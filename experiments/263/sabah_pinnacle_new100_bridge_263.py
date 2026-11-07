@@ -12,6 +12,7 @@ import argparse,hashlib,json,math,re
 from datetime import datetime,timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from sabah_manual_window_263 import in_manual_window
 from free_bulk_odds_263 import canonical,utc
 from market_fifth_baseline_263 import sealed_payload
 from pinnacle_market_benchmark_263 import compare,BenchmarkBlocked
@@ -83,8 +84,8 @@ def plan(report,receipt,root,ledger,now=None):
     local=now.astimezone(TR)
     if local.date().isoformat()!=report["day_turkey"]:
         raise PriceBridgeBlocked("NO_HISTORICAL_OR_NEXT_DAY_PRICE_REQUEST")
-    if not 5<=local.hour<13:
-        raise PriceBridgeBlocked("ONLY_SAME_MORNING_ANALYSIS_05_TO_12_59_TURKEY")
+    if not in_manual_window(now):
+        raise PriceBridgeBlocked("ONLY_SAME_MORNING_ANALYSIS_05_TO_14_59_TURKEY")
     eligible={}
     blocked=[]
     for row,f in registered:
@@ -105,7 +106,7 @@ def plan(report,receipt,root,ledger,now=None):
             "observed_at_utc":now.isoformat(),"day_turkey":report["day_turkey"],
             "cohort":"new100","reserve_only_after_forecast_committed":True,
             "quote_phase":"MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
-            "morning_window_turkey":"05:00-12:59",
+            "morning_window_turkey":"05:00-14:59",
             "quote_max_age_from_forecast_seconds":600,
             "one_h2h_credit_max_per_league":True,"leagues":sorted(eligible),
             "eligible_forecasts_by_league":eligible,"skipped":blocked,
@@ -121,8 +122,8 @@ def prequery(report,receipt,root,league,now=None):
     local=now.astimezone(TR)
     if local.date().isoformat()!=report.get("day_turkey"):
         raise PriceBridgeBlocked("WRONG_TURKEY_DAY_FOR_NETWORK_CALL")
-    if not 5<=local.hour<13:
-        raise PriceBridgeBlocked("ONLY_SAME_MORNING_ANALYSIS_05_TO_12_59_TURKEY")
+    if not in_manual_window(now):
+        raise PriceBridgeBlocked("ONLY_SAME_MORNING_ANALYSIS_05_TO_14_59_TURKEY")
     eligible=[]
     for row,f in validate_inputs(report,receipt,Path(root)):
         if f["fixture"]["league"]!=league:continue
@@ -252,7 +253,7 @@ def mobile(data):
                      row["status"]+" | "+fair+" | "+diff+" |")
     lines+=["",str(data["matches_compared"])+"/"+str(data["matches_total"])+
             " maçta aynı-zaman koşullu Pinnacle kıyası var.",
-            "Sadece sabah 05:00–12:59 TSİ alınan fiyatlar; tahmin-fiyat arası 10 dakikayı aşarsa kıyas yok.",
+            "Sadece sabah 05:00–14:59 TSİ alınan fiyatlar; tahmin-fiyat arası 10 dakikayı aşarsa kıyas yok.",
             "Pinnacle sabah fiyatı maç saatinde yeniden sorgulanmaz. KG ve gol çizgilerinde oran alınmadı; yalnız MS h2h.",
             "EV yüzdesi yalnız açıklayıcı senaryo, sistemin ana/alternatif bahis seçimi değildir.",
             "Orijinal karar **RESEARCH_PAS** ve yeni100 pilot sayacı değişmez."]

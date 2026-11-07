@@ -84,6 +84,20 @@ class Acceptance(unittest.TestCase):
   next_result=self.create()
   self.assertEqual(next_result["already_sealed"],1)
   self.assertEqual(next_result["new_forecasts"],0)
+ def test_14_59_real_forecast_still_preko_and_15_00_denied(self):
+  now=datetime(2026,11,7,11,59,0,tzinfo=timezone.utc)
+  def current_source(l,h,a):
+   obs=gate(l,h,a)
+   obs["retrieved_at_utc"]=now.isoformat()
+   return obs
+  result=run("new100","2026-11-07",self.manifest,
+     "history.csv","base.csv","acceptance.json","lock.json",
+     now=now,lookup=current_source,predictor=fake_predict,
+     baseline_fn=fake_baseline,decision_fn=fake_decision,dev_lock_path="lock.json")
+  self.assertEqual(result["new_forecasts"],1)
+  self.assertTrue(precommit(result,now=now))
+  with self.assertRaisesRegex(Blocked,"NOT_SAME_TURKEY_MORNING"):
+   self.create(datetime(2026,11,7,12,0,tzinfo=timezone.utc))
  def test_reject_future_and_past_day(self):
   with self.assertRaises(Blocked):self.create(NOW-timedelta(days=1))
  def test_ko_precommit_fails(self):

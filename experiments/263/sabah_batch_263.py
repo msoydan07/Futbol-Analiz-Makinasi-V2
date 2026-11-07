@@ -9,6 +9,7 @@ import argparse,hashlib,json,re
 from datetime import datetime,timezone,timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from sabah_manual_window_263 import in_manual_window
 from forward_c3 import canonical_bytes,read_aware,valid_gate
 from market_fifth_baseline_263 import sealed_payload
 from sabah_fixture_rotation_263 import validate_legacy_candidates,rotation_from_official_inputs
@@ -67,7 +68,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
  if now.tzinfo is None:raise Blocked("AWARE_TIME_REQUIRED")
  now=now.astimezone(timezone.utc)
  tr=now.astimezone(TR)
- if tr.date().isoformat()!=day or not 5<=tr.hour<13:raise Blocked("NOT_SAME_TURKEY_MORNING")
+ if tr.date().isoformat()!=day or not in_manual_window(now):raise Blocked("NOT_SAME_TURKEY_MORNING")
  rows=named(cohort,day,src);root=Path(root)
  for path in (history,baseline,acceptance,lock_path,dev_lock_path):
   if not Path(path).is_file():raise Blocked("REQUIRED_HISTORY_OR_LOCK_MISSING")
