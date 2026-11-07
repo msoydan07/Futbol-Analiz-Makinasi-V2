@@ -21,7 +21,6 @@ def page(rows=None):
     module={"data":{"matches":rows}}
     page={"grids":[{"areas":[{"modules":[module]}]}]}
     body={"props":{"pageProps":{"data":{"page":page}}}}
-        {"data":{"matches":rows}}]}]}]}}}}}}
     return '<html><script id="__NEXT_DATA__" type="application/json">'+json.dumps(body)+'</script></html>'
 
 class BelgianNextTests(unittest.TestCase):
