@@ -86,7 +86,7 @@ class ApprovedMobilePDF(unittest.TestCase):
             rows.append(x)
         p=batch_pdf(self.root/"44.pdf",self.day,rows)
         pdf=PdfReader(str(p))
-        self.assertEqual(len(pdf.pages),5)
+        self.assertEqual(len(pdf.pages),6)
         self.assertEqual(sum(page.extract_text().count("FARK (yp)") for page in pdf.pages),44)
         self.assertTrue(all(float(page.mediabox.width)==420 for page in pdf.pages))
     def test_unavailable_models_are_not_filled_from_other_models(self):
