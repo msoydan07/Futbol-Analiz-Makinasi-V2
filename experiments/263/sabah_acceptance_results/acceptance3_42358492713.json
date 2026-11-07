@@ -1,0 +1,77 @@
+{
+  "accepted_count": 3,
+  "all_decisions": "RESEARCH_PAS",
+  "all_mobile_pages_exactly_reproducible": true,
+  "all_predictions_generated_pre_kickoff": true,
+  "batch_report_sha256": "7a51022da71ed19bdc2427c0ed269f7ab38e6ccdf977adcebcc26d762aef0ed5",
+  "betting_authorized": false,
+  "bookmaker_api_calls": 0,
+  "c3_m4_mandatory": true,
+  "checked_at_utc": "2026-11-07T09:09:27.673007+00:00",
+  "cohort": "acceptance3",
+  "day_turkey": "2026-11-07",
+  "minimum_models_available_per_match": 3,
+  "mobile_summary_sha256": "a3ba18a024ecf68195396386e1faabbddc046e5b756e8e830817584b41077909",
+  "models_attempted": [
+    "B",
+    "C2",
+    "C3",
+    "M4"
+  ],
+  "pilot_96_or_new100_modified": false,
+  "records": [
+    {
+      "baseline_sha256": "4575f92161208a48100fbd468e8a63239121122917855140e86656401d84e53a",
+      "decision_sha256": "e6c490cc952d56e344c68210703e96d3a6e10ecc5a98e769e55f219d9e815ac4",
+      "fixture": "Valencia - Real Madrid",
+      "forecast_path": "forward_acceptance_263/2026-11-07/b7fc2db793df14715edee615.json",
+      "forecast_sha256": "dfd031f65f1776a4b2e991eb6792c45db9008007b81d633514a62eec6983a590",
+      "kickoff_utc": "2026-11-07T20:00:00+00:00",
+      "league": "ESP1",
+      "mobile_match_sha256": "a2b503a073e5ba1a09b9e6ae85cbad3d3a62a597dfda95457e4069d5ce394516",
+      "model_available_count": 4,
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "baseline_sha256": "f28c6c0ddeeee03e4d5012ba8183f06cf64fdce7fb32d50fa36bacdbeccb23a0",
+      "decision_sha256": "c13c274da33071bc766af09b63c10922f7cafd31f8c0921d99eb809fd6981f1b",
+      "fixture": "Arsenal - Hull City",
+      "forecast_path": "forward_acceptance_263/2026-11-07/ffdea2ac0f8f1c80ccbac76c.json",
+      "forecast_sha256": "b90be0cbc86c8932c514652e70c078882f6a7062be00e9a57618c9712895ccbd",
+      "kickoff_utc": "2026-11-07T15:00:00+00:00",
+      "league": "ENG1",
+      "mobile_match_sha256": "1caea5b96d0c33f0ec17f71e37dd648ebd4aecbdbe6628776bd341049f253a7c",
+      "model_available_count": 3,
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "baseline_sha256": "46628ae75dc2821cee3cb5c9d57c0b1af3fc26460d65018d814680d19d025df2",
+      "decision_sha256": "1cccc227ecffa4e7fcf2fed5f9285bff0be5eddc824d868b5cf6fb0b402559d2",
+      "fixture": "Samsunspor - Konyaspor",
+      "forecast_path": "forward_acceptance_263/2026-11-07/5b643f0abf6a49abff90b1ac.json",
+      "forecast_sha256": "6dc07753dfdc4f1f7ca0fc86b572b0e7e0200e699e46103b56d3d739afbf6138",
+      "kickoff_utc": "2026-11-07T13:00:00+00:00",
+      "league": "TUR1",
+      "mobile_match_sha256": "eb5bdccaf07996646dc6148f36715926ee7fa4f3b359f604c1f6794c3e44afff",
+      "model_available_count": 4,
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_REAL_MORNING_BATCH_COMMIT_ACCEPTANCE_V1",
+  "source_review_is_limited_human_attestation": true
+}

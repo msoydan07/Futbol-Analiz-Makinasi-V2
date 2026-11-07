@@ -1,0 +1,183 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "acceptance3",
+  "created_at_utc": "2026-11-07T09:09:23.885513+00:00",
+  "day_turkey": "2026-11-07",
+  "input_count": 3,
+  "new_forecasts": 3,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "ENG1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "9b8190f1a9153d5af0235cc76a511e6764beb0c19832168d1059aea0dfea0e70",
+      "parsed_events": 30,
+      "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "ESP1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "b4be48b752ac19c9d358e79170a59b3d5df6d8581e2741eddb4adfecff3d2dbf",
+      "parsed_events": 10,
+      "source_url": "https://www.laliga.com/laliga-easports/resultados",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "TUR1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "9ca3f8d0a3cbb3d7fb65bc9aa425bfef278d59475cc94e58b6bc205d2bf9af10",
+      "parsed_events": 9,
+      "source_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "Real Madrid",
+      "decision_sha256": "e6c490cc952d56e344c68210703e96d3a6e10ecc5a98e769e55f219d9e815ac4",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_acceptance_263/2026-11-07/b7fc2db793df14715edee615.json",
+      "forecast_sha256": "dfd031f65f1776a4b2e991eb6792c45db9008007b81d633514a62eec6983a590",
+      "home": "Valencia",
+      "kickoff_utc": "2026-11-07T20:00:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "b4be48b752ac19c9d358e79170a59b3d5df6d8581e2741eddb4adfecff3d2dbf",
+        "page_url": "https://www.laliga.com/laliga-easports/resultados",
+        "requested_away": "Real Madrid",
+        "requested_home": "Valencia",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "jsonld"
+      },
+      "rotation": {
+        "5f2c15a6-2ae6-5d02-be4e-2f0aad8a6329": "VERI_YETERSIZ",
+        "62cb11a9-ee81-5d52-99f0-d04607fd248c": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "5f2c15a6-2ae6-5d02-be4e-2f0aad8a6329": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "62cb11a9-ee81-5d52-99f0-d04607fd248c": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Hull City",
+      "decision_sha256": "c13c274da33071bc766af09b63c10922f7cafd31f8c0921d99eb809fd6981f1b",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_acceptance_263/2026-11-07/ffdea2ac0f8f1c80ccbac76c.json",
+      "forecast_sha256": "b90be0cbc86c8932c514652e70c078882f6a7062be00e9a57618c9712895ccbd",
+      "home": "Arsenal",
+      "kickoff_utc": "2026-11-07T15:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9b8190f1a9153d5af0235cc76a511e6764beb0c19832168d1059aea0dfea0e70",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Hull City",
+        "requested_home": "Arsenal",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "5b218a5c-83ce-5c00-879b-1a8d5b70c572": "VERI_YETERSIZ",
+        "beb4f31c-567e-5df8-8305-557d179cdbba": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "5b218a5c-83ce-5c00-879b-1a8d5b70c572": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "beb4f31c-567e-5df8-8305-557d179cdbba": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Konyaspor",
+      "decision_sha256": "1cccc227ecffa4e7fcf2fed5f9285bff0be5eddc824d868b5cf6fb0b402559d2",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_acceptance_263/2026-11-07/5b643f0abf6a49abff90b1ac.json",
+      "forecast_sha256": "6dc07753dfdc4f1f7ca0fc86b572b0e7e0200e699e46103b56d3d739afbf6138",
+      "home": "Samsunspor",
+      "kickoff_utc": "2026-11-07T13:00:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9ca3f8d0a3cbb3d7fb65bc9aa425bfef278d59475cc94e58b6bc205d2bf9af10",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "Konyaspor",
+        "requested_home": "Samsunspor",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "bb38e922-20db-5aef-a48a-af74e163b6f3": "VERI_YETERSIZ",
+        "f06aca12-75d2-5b48-aa34-8d0336e953e7": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "bb38e922-20db-5aef-a48a-af74e163b6f3": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f06aca12-75d2-5b48-aa34-8d0336e953e7": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    }
+  ],
+  "payload_sha256": "7a51022da71ed19bdc2427c0ed269f7ab38e6ccdf977adcebcc26d762aef0ed5",
+  "schema": "SABAH_TOPLU_KAYIT_V1"
+}
