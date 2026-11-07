@@ -40,6 +40,14 @@ class Preflight(unittest.TestCase):
     def test_current_day_only_no_backdating(self):
         with self.assertRaises(IntakeBlocked):inspect("2026-11-07",gateway=self.g,now=NOW)
         with self.assertRaises(IntakeBlocked):inspect("2026-11-09",gateway=self.g,now=NOW)
+    def test_EFL_fallback_failure_remains_an_explicit_source_blocker(self):
+        self.g.sources["ENG2"]["efl_fallback_status"]="OFFICIAL_TV_SOURCE_UNUSABLE"
+        r=inspect(DAY,gateway=self.g,now=NOW)
+        line=next(x for x in r["source_coverage"] if x["league"]=="ENG2")
+        self.assertEqual(line["fallback_status"],"OFFICIAL_TV_SOURCE_UNUSABLE")
+        self.assertIn("OFFICIAL_TV_SOURCE_UNUSABLE",mobile(r))
+        self.assertEqual(line["same_day_canonical_timed_candidates"],0)
+
     def test_missing_official_source_is_not_zero_games(self):
         r=inspect(DAY,gateway=self.g,now=NOW)
         x=next(v for v in r["source_coverage"] if v["league"]=="ENG2")

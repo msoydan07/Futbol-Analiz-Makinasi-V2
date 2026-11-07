@@ -75,6 +75,11 @@ def inspect(day,*,gateway=None,now=None):
             "official_source_url":source.get("effective_url") or source.get("source_url"),
             "official_html_sha256":source.get("html_sha256"),
             "source_event_count":len(events),
+            "used_official_parser":source.get("parser"),
+            "fallback_status":(
+                source.get("efl_fallback_status") or source.get("efl_source_coverage")
+                or source.get("portugal_fallback_status")
+                or ("BELGIUM_OFFICIAL_NEXTJS" if league=="BEL1" and events else None)),
             "same_day_canonical_timed_candidates":len(league_candidates),
             "rejected":dict(rejects),
             "coverage_claim":"PARTIAL_OFFICIAL_SOURCE_OBSERVATION_NOT_COMPLETE_LEAGUE",
@@ -110,8 +115,9 @@ def mobile(result):
            "| Lig | Kaynak | Zamanlı kanonik aday | Durum |",
            "|---|---|---:|---|"]
     for r in result["source_coverage"]:
+        explanation=r["blocker"]+((" / "+str(r["fallback_status"])) if r.get("fallback_status") else "")
         lines.append("| "+r["league"]+" | "+str(r["source_status"])+" | "+
-                     str(r["same_day_canonical_timed_candidates"])+" | "+r["blocker"]+" |")
+                     str(r["same_day_canonical_timed_candidates"])+" | "+explanation+" |")
     lines+=["","Toplam görülen kanonik, kaynak zamanlı aday: **"+
             str(result["candidate_count"])+"**",
             "Sessizce atlanan lig: **0/10**; kaynağı eksik olanlar tabloda engel olarak görünüyor.",
