@@ -15,8 +15,9 @@ from sabah_fixture_rotation_263 import validate_legacy_candidates,rotation_from_
 TR=ZoneInfo("Europe/Istanbul")
 SCHEMA="SABAH_TOPLU_KAYIT_V1"
 REQUEST="SABAH_TOPLU_V1"
-DIRS={"legacy96":"forward_quad_263","new100":"forward_morning_263"}
-LIMIT={"legacy96":96,"new100":100}
+DIRS={"legacy96":"forward_quad_263","new100":"forward_morning_263",
+      "acceptance3":"forward_acceptance_263"}
+LIMIT={"legacy96":96,"new100":100,"acceptance3":3}
 LEAGUES={"ENG1","ENG2","GER1","ESP1","ITA1","FRA1","NED1","TUR1","POR1","BEL1"}
 PINNED96="803378e8ef0f1f285a3393a7231567eea8f25e80"
 class Blocked(ValueError):pass
@@ -38,7 +39,7 @@ def named(cohort,day,src):
  if (not isinstance(data,dict) or set(data)!={"schema","day_turkey","matches"}
   or data["schema"]!=REQUEST or data["day_turkey"]!=day):raise Blocked("MORNING_MANIFEST_INVALID")
  rows=data["matches"]
- if not isinstance(rows,list) or not 1<=len(rows)<=100:raise Blocked("MORNING_COUNT_INVALID")
+ if not isinstance(rows,list) or not 1<=len(rows)<=LIMIT[cohort]:raise Blocked("MORNING_COUNT_INVALID")
  seen=set()
  for r in rows:
   if (not isinstance(r,dict) or set(r)!={"league","home","away"}
@@ -73,7 +74,11 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
  gateway=None
  if lookup is None:
   from sabah_official_fixture_gateway_263 import OfficialFixtureGateway
-  gateway=OfficialFixtureGateway()
+  if cohort=="acceptance3":
+   from sabah_named_source_acceptance_263 import named_only_runner
+   gateway=OfficialFixtureGateway(gate_runner=named_only_runner)
+  else:
+   gateway=OfficialFixtureGateway()
   lookup=gateway.lookup
  if predictor is None:
   from forward_quad import predict_quad_from_verified_gate as predictor
@@ -83,14 +88,14 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
   from four_model_value_policy_263 import decide as decision_fn
  lock=json.loads(Path(dev_lock_path).read_text(encoding="utf-8"))
  out_dir=root/DIRS[cohort];count=len(list(out_dir.glob("*/*.json")))
- seen=keys_in(root/"forward_quad_263",root/"forward_morning_263")
+ seen=keys_in(root/"forward_quad_263",root/"forward_morning_263",
+              root/"forward_acceptance_263")
  if count>LIMIT[cohort]:raise Blocked("COHORT_LIMIT_EXCEEDED")
  outcomes=[]
  for request in rows:
   observed_now=now if fixed_clock else datetime.now(timezone.utc)
   item={**request,"status":"BLOCKED_NO_FORECAST"}
   try:
-   if count>=LIMIT[cohort]:raise Blocked("COHORT_LIMIT_REACHED")
    gate=lookup(request["league"],request["home"],request["away"])
    if gateway is not None:
     item["official_source_evidence"]=gateway.latest_match_evidence(
@@ -101,6 +106,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
    if ko.astimezone(TR).date().isoformat()!=day:raise Blocked("OFFICIAL_DATE_NOT_TURKEY_TODAY")
    key=(league,home,away,ko.isoformat())
    if key in seen:item["status"]="ALREADY_SEALED_UNCHANGED";outcomes.append(item);continue
+   if count>=LIMIT[cohort]:raise Blocked("COHORT_LIMIT_REACHED")
    path,forecast=predictor(gate,history,out_dir,lock_path,now=observed_now,
                            base=baseline,source_audit=acceptance)
    sealed_payload(forecast,"quad_forward_263_v1")
@@ -118,6 +124,8 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     save_new(prefix/"baseline.json",b);save_new(prefix/"decision.json",d)
     item["decision_status"]=d["status"];item["decision_sha256"]=d["payload_sha256"]
    except (ValueError,OSError,KeyError,TypeError) as exc:
+    if cohort=="acceptance3":
+     raise Blocked("ACCEPTANCE_DECISION_MUST_NOT_FAIL:"+type(exc).__name__)
     item["decision_status"]="UNAVAILABLE_MODEL_ONLY";item["decision_error"]=str(exc)[:140]
    adjacent=gateway.adjacent_for(gate) if gateway is not None else []
    rotation=rotation_from_official_inputs(gate,adjacent,observed_now)
@@ -152,7 +160,7 @@ def precommit(report,root=".",now=None):
  for r in report["outcomes"]:
   if r["status"]!="REGISTERED_FOUR_MODELS_EXPERIMENTAL":continue
   rel=r["forecast_path"]
-  if not re.fullmatch(r"(forward_quad_263|forward_morning_263)/\d{4}-\d{2}-\d{2}/[0-9a-f]{24}\.json",rel):
+  if not re.fullmatch(r"(forward_quad_263|forward_morning_263|forward_acceptance_263)/\d{4}-\d{2}-\d{2}/[0-9a-f]{24}\.json",rel):
    raise Blocked("UNSAFE_FORWARD_PATH")
   file=(root/rel).resolve()
   if not file.is_relative_to(root):raise Blocked("PATH_ESCAPES_REPO")

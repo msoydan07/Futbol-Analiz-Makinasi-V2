@@ -26,7 +26,7 @@ def safe(s):return str(s).replace("\n"," ").replace("\r"," ").replace("|","/").r
 def read(p):return json.loads(Path(p).read_text(encoding="utf-8"))
 def load_row(root,row):
  rel=row["forecast_path"]
- if not re.fullmatch(r"(forward_quad_263|forward_morning_263)/\d{4}-\d{2}-\d{2}/[a-f0-9]{24}\.json",rel):
+ if not re.fullmatch(r"(forward_quad_263|forward_morning_263|forward_acceptance_263)/\d{4}-\d{2}-\d{2}/[a-f0-9]{24}\.json",rel):
   raise ScreenError("FORECAST_PATH_UNSAFE")
  root=Path(root).resolve();p=(root/rel).resolve()
  if not p.is_relative_to(root) or not p.is_file():raise ScreenError("FORECAST_MISSING")
