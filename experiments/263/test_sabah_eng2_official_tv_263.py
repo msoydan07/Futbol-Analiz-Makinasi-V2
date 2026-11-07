@@ -58,6 +58,52 @@ class OfficialEFLTVSelection(unittest.TestCase):
         self.assertEqual(len(gw._get("ENG2")["events"]),3)
         self.assertEqual(gw._get("ENG2").get("efl_source_coverage"),"PARTIAL_TV_SELECTION_ONLY")
         self.assertEqual(calls,[SOURCES["ENG2"][0],SOURCE_URL])
+    def test_competition_jsonld_fallback_after_empty_tv_requires_explicit_timed_event(self):
+        import json
+        second="https://www.efl.com/competitions/efl-championship/"
+        future=datetime(2026,11,8,8,0,tzinfo=timezone.utc)
+        payload={"@type":"SportsEvent","homeTeam":{"name":"Wrexham"},
+                 "awayTeam":{"name":"Wolverhampton Wanderers"},
+                 "startDate":"2026-11-08T15:00:00+00:00"}
+        fixture='<html><script type="application/ld+json">'+json.dumps(payload)+'</script></html>'
+        calls=[]
+        def fetch(url,league):
+            calls.append(url)
+            if url==SOURCES["ENG2"][0]:return url,"<html>Loading...</html>"
+            if url==SOURCE_URL:return url,"<html>Sky Sports Championship</html>"
+            if url==second:return url,fixture
+            raise AssertionError("UNEXPECTED_OFFICIAL_REQUEST")
+        def gate(league,home,away,lookup_override=None):
+            result=lookup_override(home,away)
+            self.assertEqual(result["status"],"VERIFIED_OFFICIAL_FIXTURE")
+            return {"status":"VERIFIED","home_id":"H","away_id":"A",
+                    "kickoff_utc":result["kickoff_utc"]}
+        gw=OfficialFixtureGateway(fetcher=fetch,gate_runner=gate,
+                 resolve_id=lambda league,club:club,clock=lambda:future)
+        out=gw.lookup("ENG2","Wrexham","Wolverhampton Wanderers")
+        self.assertEqual(out["status"],"VERIFIED")
+        source=gw._get("ENG2")
+        self.assertEqual(source["parser"],"jsonld")
+        self.assertEqual(source["efl_source_coverage"],
+                         "OFFICIAL_COMPETITION_JSONLD_PARTIAL_UNVERIFIED_COVERAGE")
+        self.assertEqual(calls,[SOURCES["ENG2"][0],SOURCE_URL,second])
+    def test_competition_page_date_only_never_promoted(self):
+        import json
+        second="https://www.efl.com/competitions/efl-championship/"
+        event={"@type":"SportsEvent","homeTeam":{"name":"Wrexham"},
+               "awayTeam":{"name":"Wolverhampton Wanderers"},
+               "startDate":"2026-11-08"}
+        def fetch(url,league):
+            if url==SOURCES["ENG2"][0]:return url,"<html>Loading...</html>"
+            if url==SOURCE_URL:return url,"<html>Sky Sports Championship</html>"
+            if url==second:
+                return url,'<html><script type="application/ld+json">'+json.dumps(event)+'</script></html>'
+            raise AssertionError("UNEXPECTED")
+        gw=OfficialFixtureGateway(fetcher=fetch,
+                 resolve_id=lambda league,club:club,clock=lambda:datetime(2026,11,8,8,tzinfo=timezone.utc))
+        self.assertEqual(gw._get("ENG2")["events"],[])
+        self.assertEqual(gw._get("ENG2")["efl_competition_fallback_status"],
+                         "NO_EXPLICIT_TIMED_SPORTSEVENT_JSONLD")
     def test_no_magic_fallback_and_untrusted_domain_denied(self):
         r=official_page_lookup("ENG2","Wrexham","Wolverhampton Wanderers",
               now=NOW,source_url="https://efl.com.evil.test/fake",

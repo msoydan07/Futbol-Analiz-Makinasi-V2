@@ -102,6 +102,28 @@ class OfficialFixtureGateway:
                         entry["efl_fallback_status"]="OFFICIAL_TV_SOURCE_UNUSABLE"
                 except (OSError,ValueError,TypeError,TimeoutError) as exc:
                     entry["efl_fallback_status"]=type(exc).__name__+":"+str(exc)[:70]
+            # Additional official competition page: unlike the EFL JS match
+            # centre, this sometimes exposes SportsEvent JSON-LD in rendered HTML.
+            # Only EXPLICIT home/away and timezone-aware startDate can qualify.
+            # Does not make the full-league-coverage claim.
+            if league=="ENG2" and not entry["events"] and 2026<=now.year<=2027:
+                league_url="https://www.efl.com/competitions/efl-championship/"
+                try:
+                    alt_url,alt_html=self.fetcher(league_url,"ENG2")
+                    if not is_approved_url(alt_url,"ENG2"):
+                        raise OfficialGatewayError("EFL_COMPETITION_REDIRECT_OUTSIDE_OFFICIAL")
+                    if not isinstance(alt_html,str) or not 50<=len(alt_html)<=2_000_000:
+                        raise OfficialGatewayError("EFL_COMPETITION_HTML_UNUSABLE")
+                    alternative=parse_official_events("ENG2",alt_html,parser="jsonld")
+                    if alternative:
+                        entry.update(effective_url=alt_url,events=alternative,
+                                     html=alt_html,parser="jsonld",
+                                     html_sha256=hashlib.sha256(alt_html.encode("utf-8")).hexdigest(),
+                                     efl_source_coverage="OFFICIAL_COMPETITION_JSONLD_PARTIAL_UNVERIFIED_COVERAGE")
+                    else:
+                        entry["efl_competition_fallback_status"]="NO_EXPLICIT_TIMED_SPORTSEVENT_JSONLD"
+                except (OSError,ValueError,TypeError,TimeoutError) as exc:
+                    entry["efl_competition_fallback_status"]=type(exc).__name__+":"+str(exc)[:70]
             # Current calendar is Nuxt JS; when it yields zero timed events,
             # the official 2026-27 Betclic J11 article has nine exact
             # announced match/time lines embedded in escaped public HTML.
