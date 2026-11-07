@@ -88,8 +88,9 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
   from four_model_value_policy_263 import decide as decision_fn
  lock=json.loads(Path(dev_lock_path).read_text(encoding="utf-8"))
  out_dir=root/DIRS[cohort];count=len(list(out_dir.glob("*/*.json")))
- seen=keys_in(root/"forward_quad_263",root/"forward_morning_263",
-              root/"forward_acceptance_263")
+ own_keys=keys_in(root/DIRS[cohort])
+ other_keys=keys_in(*(root/p for k,p in DIRS.items() if k!=cohort))
+ seen=own_keys|other_keys
  if count>LIMIT[cohort]:raise Blocked("COHORT_LIMIT_EXCEEDED")
  outcomes=[]
  for request in rows:
@@ -105,16 +106,37 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
    league,home,away,ko,checked,_=valid_gate(gate,observed_now)
    if ko.astimezone(TR).date().isoformat()!=day:raise Blocked("OFFICIAL_DATE_NOT_TURKEY_TODAY")
    key=(league,home,away,ko.isoformat())
-   if key in seen:item["status"]="ALREADY_SEALED_UNCHANGED";outcomes.append(item);continue
+   if key in seen:
+    if key in own_keys:
+     item["status"]="ALREADY_SEALED_UNCHANGED"
+    else:
+     item["reason"]="FIXTURE_SEALED_IN_OTHER_COHORT_NOT_A_NEW_PILOT"
+    outcomes.append(item);continue
    if count>=LIMIT[cohort]:raise Blocked("COHORT_LIMIT_REACHED")
    path,forecast=predictor(gate,history,out_dir,lock_path,now=observed_now,
                            base=baseline,source_audit=acceptance)
    sealed_payload(forecast,"quad_forward_263_v1")
-   if not read_aware(forecast["created_at_utc"])<=observed_now<ko:raise Blocked("POSTKICKOFF_FORBIDDEN")
-   count+=1;seen.add(key)
+   # Mark this just-created local file for fail-closed rollback even if
+   # an as-of timestamp or model-readiness check fails below.
+   count+=1;seen.add(key);own_keys.add(key)
    item.update(status="REGISTERED_FOUR_MODELS_EXPERIMENTAL",
                forecast_path=path.as_posix(),forecast_sha256=forecast["payload_sha256"],
                kickoff_utc=ko.isoformat())
+   if not read_aware(forecast["created_at_utc"])<=observed_now<ko:
+    raise Blocked("POSTKICKOFF_FORBIDDEN")
+   if cohort in ("new100","acceptance3"):
+    models=forecast.get("model_predictions",{})
+    if set(models)!={"B","C2","C3","M4"}:
+     raise Blocked("FOUR_MODELS_NOT_ATTEMPTED")
+    available=sum(models[m].get("status")=="AVAILABLE" for m in models)
+    if available<3 or any(models[m].get("status")!="AVAILABLE" for m in ("C3","M4")):
+     raise Blocked("REQUIRES_C3_M4_AND_THREE_AVAILABLE")
+    if models["B"].get("status") not in ("AVAILABLE","UNAVAILABLE_INSUFFICIENT_CONTEXT"):
+     raise Blocked("B_MODEL_UNRECOGNISED_STATUS")
+    if models["C2"].get("status") not in ("AVAILABLE","UNAVAILABLE"):
+     raise Blocked("C2_MODEL_UNRECOGNISED_STATUS")
+    if models["C2"].get("status")=="UNAVAILABLE" and not models["C2"].get("reason"):
+     raise Blocked("MISSING_C2_UNAVAILABLE_REASON")
    try:
     b=baseline_fn(forecast,history,now=observed_now)
     d=decision_fn(forecast,b,lock,observation=None,now=observed_now)
@@ -124,8 +146,8 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     save_new(prefix/"baseline.json",b);save_new(prefix/"decision.json",d)
     item["decision_status"]=d["status"];item["decision_sha256"]=d["payload_sha256"]
    except (ValueError,OSError,KeyError,TypeError) as exc:
-    if cohort=="acceptance3":
-     raise Blocked("ACCEPTANCE_DECISION_MUST_NOT_FAIL:"+type(exc).__name__)
+    if cohort in ("acceptance3","new100"):
+     raise Blocked("RESEARCH_DECISION_MUST_NOT_FAIL:"+type(exc).__name__)
     item["decision_status"]="UNAVAILABLE_MODEL_ONLY";item["decision_error"]=str(exc)[:140]
    adjacent=gateway.adjacent_for(gate) if gateway is not None else []
    rotation=rotation_from_official_inputs(gate,adjacent,observed_now)
@@ -149,7 +171,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
      (side/"baseline.json").unlink(missing_ok=True)
      (side/"decision.json").unlink(missing_ok=True)
     if count>0:count-=1
-    seen.discard(key)
+    seen.discard(key);own_keys.discard(key)
     for field in ("forecast_path","forecast_sha256","kickoff_utc",
                   "decision_status","decision_sha256","rotation",
                   "rotation_evidence","rotation_applied_to_model_probabilities"):

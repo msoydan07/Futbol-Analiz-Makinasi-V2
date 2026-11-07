@@ -1,0 +1,170 @@
+name: "263 new100 user-named live pilot - sealed GitHub/mobile, no odds"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_requests/*.json'
+      - 'experiments/263/sabah_readiness_probes/*.json'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: quad-263-append-only
+  cancel-in-progress: false
+jobs:
+  append-only-new100:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned numerical packages before importing model intake
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: One NEW named request or explicitly no-op readiness probe ONLY
+        id: intake
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          git diff-tree --no-commit-id --name-status -r "$GITHUB_SHA" \
+            -- experiments/263/sabah_requests/ experiments/263/sabah_readiness_probes/ > /tmp/new100_delta.tsv
+          test "$(wc -l </tmp/new100_delta.tsv)" -eq 1
+          status="$(cut -f1 /tmp/new100_delta.tsv)"
+          filepath="$(cut -f2 /tmp/new100_delta.tsv)"
+          test "$status" = "A"
+          [[ "$filepath" =~ ^experiments/263/(sabah_requests|sabah_readiness_probes)/[A-Za-z0-9_-]+\.json$ ]]
+          python experiments/263/sabah_new100_request_intake_263.py \
+            --path "$filepath" --output /tmp/new100_intake.json
+          export INTAKE=/tmp/new100_intake.json
+          python - <<'PY'
+          import json,os
+          x=json.loads(open(os.environ["INTAKE"],encoding="utf-8").read())
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as f:
+              f.write("kind="+x["kind"]+"\n")
+              f.write("day="+x["day_turkey"]+"\n")
+              f.write("request="+x["source_path"]+"\n")
+              f.write("report=experiments/263/sabah_batch_reports/new100_"+os.environ["GITHUB_RUN_ID"]+".json\n")
+              f.write("mobile=experiments/263/sabah_mobile_reports/new100_"+os.environ["GITHUB_RUN_ID"]+"\n")
+              f.write("receipt=experiments/263/sabah_new100_receipts/new100_"+os.environ["GITHUB_RUN_ID"]+".json\n")
+          PY
+          if grep -q '"kind": "readiness_only"' /tmp/new100_intake.json; then
+            echo 'PUSH_ROUTE_ACCEPTED_ZERO_MATCHES_ZERO_PILOT_ZERO_ODDS'
+          fi
+      - name: Obtain pinned 4,413 historical matches, only for REAL new100 request
+        if: steps.intake.outputs.kind == 'real_named_request'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" \
+            -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+          echo '1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9  data/quad_accepted_263/extended_history.csv' | sha256sum -c -
+      - name: Run actual named user matches through live official gate and original B C2 C3 M4
+        if: steps.intake.outputs.kind == 'real_named_request'
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+          REQUEST: ${{ steps.intake.outputs.request }}
+          REPORT: ${{ steps.intake.outputs.report }}
+          MOBILE: ${{ steps.intake.outputs.mobile }}
+          DAY: ${{ steps.intake.outputs.day }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$(dirname "$REPORT")"
+          python experiments/263/sabah_batch_263.py \
+            --cohort new100 --day "$DAY" --input "$REQUEST" \
+            --history data/quad_accepted_263/extended_history.csv \
+            --baseline m4_quad_base/historical_results.csv \
+            --source-acceptance data/quad_accepted_263/source_acceptance.json \
+            --report "$REPORT" --mobile /tmp/new100_quick_readonly.md
+          python experiments/263/sabah_mobile_screens_263.py \
+            --report "$REPORT" --output-dir "$MOBILE"
+      - name: Accept only NEW pre-KO real records and same-SHA PAS mobile before Git
+        if: steps.intake.outputs.kind == 'real_named_request'
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+          REPORT: ${{ steps.intake.outputs.report }}
+          MOBILE: ${{ steps.intake.outputs.mobile }}
+          RECEIPT: ${{ steps.intake.outputs.receipt }}
+        run: |
+          set -euo pipefail
+          python experiments/263/sabah_new100_commit_guard_263.py \
+            --report "$REPORT" --mobile "$MOBILE" --receipt "$RECEIPT"
+      - name: Append-only Git SHA commit and VERIFY again before push
+        if: steps.intake.outputs.kind == 'real_named_request'
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+          REPORT: ${{ steps.intake.outputs.report }}
+          MOBILE: ${{ steps.intake.outputs.mobile }}
+          RECEIPT: ${{ steps.intake.outputs.receipt }}
+          DAY: ${{ steps.intake.outputs.day }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for file in forward_morning_263 "experiments/263/sabah_research/new100/$DAY" \
+            "$REPORT" "$MOBILE" "$RECEIPT"; do
+            if [ -e "$file" ]; then git add -A -- "$file"; fi
+          done
+          python - <<'PY'
+          import json,os,re,subprocess
+          manifest=json.loads(open(os.environ["RECEIPT"],encoding="utf-8").read())
+          changed=subprocess.check_output(["git","diff","--cached","--name-status"],text=True)
+          rows=[line.split("\t",1) for line in changed.splitlines() if line.strip()]
+          if not rows or any(status!="A" for status,_ in rows):
+              raise SystemExit("APPEND_ONLY_NEW_FILES_REQUIRED")
+          names=[p for _,p in rows]
+          allowable=(
+              r"forward_morning_263/\d{4}-\d{2}-\d{2}/[a-f0-9]{24}\.json",
+              r"experiments/263/sabah_research/new100/\d{4}-\d{2}-\d{2}/[a-f0-9]{24}/(baseline|decision)\.json",
+              r"experiments/263/sabah_batch_reports/new100_\d+\.json",
+              r"experiments/263/sabah_mobile_reports/new100_\d+/(summary\.md|matches/[a-f0-9]{24}\.md)",
+              r"experiments/263/sabah_new100_receipts/new100_\d+\.json")
+          if any(not any(re.fullmatch(expr,p) for expr in allowable) for p in names):
+              raise SystemExit("STAGING_OUTSIDE_NEW100_DENIED")
+          files=[p for p in names if p.startswith("forward_morning_263/")]
+          if len(files)!=manifest["new_count"] or sorted(files)!=sorted(x["forecast_path"] for x in manifest["records"]):
+              raise SystemExit("GIT_STAGED_RECORDS_DIFFER_FROM_SEALED_RECEIPT")
+          print("EXACT_NEW100_APPEND_ONLY_STAGING",len(files))
+          PY
+          python experiments/263/sabah_new100_commit_guard_263.py \
+            --report "$REPORT" --mobile "$MOBILE" --receipt "$RECEIPT" --check-existing
+          git commit -m "Seal only new100 user-named pre-KO forecasts and identical mobile SHA views"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          python experiments/263/sabah_new100_commit_guard_263.py \
+            --report "$REPORT" --mobile "$MOBILE" --receipt "$RECEIPT" --check-existing
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          git fetch origin "$GITHUB_REF_NAME"
+          git merge-base --is-ancestor HEAD "origin/$GITHUB_REF_NAME"
+          for file in "$REPORT" "$MOBILE/summary.md" "$RECEIPT"; do
+            git cat-file -e "origin/$GITHUB_REF_NAME:$file"
+          done
+          python - <<'PY'
+          import json,os,subprocess
+          receipt=json.loads(open(os.environ["RECEIPT"],encoding="utf-8").read())
+          for row in receipt["records"]:
+              subprocess.check_call(["git","cat-file","-e","origin/"+os.environ["GITHUB_REF_NAME"]+":"+row["forecast_path"]])
+          print("NEW100_REMOTE_SHA_FILES_PROVEN",len(receipt["records"]))
+          PY
+      - name: Upload only diagnostic evidence; NO Pinnacle secret or bookmaker API
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: new100-append-only-batch-or-readiness-probe-no-odds
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            /tmp/new100_intake.json
+            experiments/263/sabah_batch_reports/new100_*.json
+            experiments/263/sabah_new100_receipts/new100_*.json
+            experiments/263/sabah_mobile_reports/new100_*/**/*.md
