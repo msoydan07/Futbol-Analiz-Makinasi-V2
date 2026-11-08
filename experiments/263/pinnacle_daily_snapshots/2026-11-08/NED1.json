@@ -1,0 +1,171 @@
+{
+  "api_request_attempts_max": 1,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "day_turkey": "2026-11-08",
+  "forecast_unchanged": true,
+  "league": "NED1",
+  "market": "h2h",
+  "observed_at_utc": "2026-11-08T09:57:06.857323+00:00",
+  "payload_sha256": "d632d8e8b97e3c9fdda2abaca7a72bf95b5ecfe6c0509d464680b0b76b38f9a7",
+  "provider": "The Odds API",
+  "reason": null,
+  "remaining_credits_as_returned": 490,
+  "request_made_or_outcome_unknown": true,
+  "reservation": {
+    "bookmaker": "pinnacle",
+    "day_turkey": "2026-11-08",
+    "league": "NED1",
+    "market": "h2h",
+    "reserved_at_utc": "2026-11-08T09:57:04.606877+00:00",
+    "retry_allowed_same_day": false,
+    "schema": "SABAH_PINNACLE_RESERVATION_V1",
+    "status": "CREDIT_RESERVED_OUTCOME_UNKNOWN"
+  },
+  "retry_automatically": false,
+  "schema": "SABAH_PINNACLE_SNAPSHOT_V1",
+  "source_bulk": {
+    "S1_S2_official_approved": false,
+    "betting_authorized": false,
+    "blocked": {},
+    "bookmaker_filter": "pinnacle",
+    "bookmaker_odds_not_iddaa": true,
+    "checked_at_utc": "2026-11-08T09:57:06.857323+00:00",
+    "day_turkey": "2026-11-08",
+    "forecast_or_decision_modified": false,
+    "independently_verified_fixture": false,
+    "leagues": {
+      "NED1": [
+        {
+          "away_team": "Feyenoord",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.76,
+                    "D": 4.35,
+                    "H": 4.27
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:02+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Heerenveen",
+          "kickoff_utc": "2026-11-08T11:15:00+00:00",
+          "provider_event_id": "019e9d824f3f2251e5b777623d34a9df",
+          "sport": "soccer_netherlands_eredivisie"
+        },
+        {
+          "away_team": "Ajax",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 3.48,
+                    "D": 4.21,
+                    "H": 1.97
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:02+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "FC Twente Enschede",
+          "kickoff_utc": "2026-11-08T13:30:00+00:00",
+          "provider_event_id": "b71f32fbba046e08d4cc26e2a8e1d5a6",
+          "sport": "soccer_netherlands_eredivisie"
+        },
+        {
+          "away_team": "Groningen",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 5.98,
+                    "D": 4.88,
+                    "H": 1.51
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:02+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "AZ Alkmaar",
+          "kickoff_utc": "2026-11-08T15:45:00+00:00",
+          "provider_event_id": "c22d673775e6a4dc0810cc88b0ed75ec",
+          "sport": "soccer_netherlands_eredivisie"
+        },
+        {
+          "away_team": "PSV Eindhoven",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.38,
+                    "D": 6.07,
+                    "H": 6.79
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:02+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "SC Cambuur",
+          "kickoff_utc": "2026-11-08T15:45:00+00:00",
+          "provider_event_id": "547e4e8cf5577a50926272e0e1a7e677",
+          "sport": "soccer_netherlands_eredivisie"
+        },
+        {
+          "away_team": "NEC Nijmegen",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.77,
+                    "D": 4.03,
+                    "H": 2.37
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:02+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "FC Utrecht",
+          "kickoff_utc": "2026-11-08T19:00:00+00:00",
+          "provider_event_id": "bf796f8b2085a46e0be2b6c6ece5c340",
+          "sport": "soccer_netherlands_eredivisie"
+        }
+      ]
+    },
+    "leagues_requested": [
+      "NED1"
+    ],
+    "markets_requested": [
+      "h2h"
+    ],
+    "max_one_run_credit_cost": 1,
+    "payload_sha256": "9f6b11ab67735326ab397b949960f4c32d69c85b8ce6b13b736d25e8a114e20e",
+    "provider": "The Odds API (the-odds-api.com)",
+    "region": null,
+    "reported_remaining_credits": 490,
+    "schema": "263_free_bulk_external_odds_research_v1",
+    "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+  },
+  "status": "OBSERVED_OR_EMPTY"
+}
