@@ -1,0 +1,46 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-08",
+  "matches": [
+    {
+      "league": "GER1",
+      "home": "1. FC Köln",
+      "away": "Bayer Leverkusen"
+    },
+    {
+      "league": "ESP1",
+      "home": "Celta Vigo",
+      "away": "Levante"
+    },
+    {
+      "league": "ESP1",
+      "home": "Atlético Madrid",
+      "away": "Barcelona"
+    },
+    {
+      "league": "NED1",
+      "home": "FC Utrecht",
+      "away": "NEC Nijmegen"
+    },
+    {
+      "league": "POR1",
+      "home": "Vitória Guimarães",
+      "away": "FC Porto"
+    },
+    {
+      "league": "POR1",
+      "home": "Rio Ave",
+      "away": "Braga"
+    },
+    {
+      "league": "BEL1",
+      "home": "Union Saint-Gilloise",
+      "away": "Genk"
+    },
+    {
+      "league": "BEL1",
+      "home": "Sint-Truiden",
+      "away": "Zulte Waregem"
+    }
+  ]
+}
