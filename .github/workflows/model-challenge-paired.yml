@@ -1,0 +1,45 @@
+name: Model challenge - paired league and uncertainty audit
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-paired.yml']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  paired:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Paired audit unit tests
+        run: python -m unittest discover -s research/model_challenge -p 'test_paired_audit.py' -v
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-elo-initial-diagnostics
+          run-id: 42532664152
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/elo
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-poisson-paired-elo-diagnostics
+          run-id: 42533012701
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/poisson
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-xgb-exploratory-diagnostics
+          run-id: 42533506784
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/xgb
+      - name: Summarize paired models, league slices, and 95% date-block intervals
+        run: python research/model_challenge/paired_audit.py --elo "$RUNNER_TEMP/elo/elo_predictions.csv" --poisson "$RUNNER_TEMP/poisson/poisson_predictions.csv" --xgb "$RUNNER_TEMP/xgb/xgb_predictions.csv" --out "$RUNNER_TEMP/report/paired.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-league-paired-diagnostics
+          path: ${{ runner.temp }}/report/
+          retention-days: 30
