@@ -1,0 +1,26 @@
+name: Model challenge - prospective shadow safety
+on:
+  push:
+    branches: [research/model-challenge]
+    paths:
+      - 'research/model_challenge/prospective_seal.py'
+      - 'research/model_challenge/test_prospective_seal.py'
+      - '.github/workflows/model-challenge-prospective.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  immutable-shadow-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run synthetic pre-kickoff and immutable output tests
+        run: python -m unittest discover -s research/model_challenge -p 'test_prospective_seal.py' -v
+      - name: Confirm no generated pilot files
+        run: |
+          test -z "$(git status --porcelain -- forward_morning_263 forward_quad_263)"
+          echo "RESEARCH_TESTS_ONLY_NO_PRODUCTION_WRITES"
