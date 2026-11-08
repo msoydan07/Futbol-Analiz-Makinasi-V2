@@ -1,0 +1,31 @@
+name: Model challenge - first causal Elo benchmark
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-elo.yml']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-pinned-20league-archive
+          run-id: 42532602610
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/source
+      - name: Run Elo on archived pinned matches
+        run: python research/model_challenge/elo_baseline.py --input "$RUNNER_TEMP/source/normalized_matches.csv" --out "$RUNNER_TEMP/baseline/elo_predictions.csv"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-elo-initial-diagnostics
+          path: ${{ runner.temp }}/baseline/
+          retention-days: 30
