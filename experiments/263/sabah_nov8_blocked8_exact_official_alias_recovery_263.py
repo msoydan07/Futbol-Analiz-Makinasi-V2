@@ -35,17 +35,38 @@ TARGETS={
 }
 # Official-site labels from league and club pages, not fuzzy guesses.
 ALIASES={
- "GER1":{"Bayer 04 Leverkusen":"Bayer Leverkusen"},
- "ESP1":{"RC Celta":"Celta Vigo","Celta":"Celta Vigo",
-         "Levante UD":"Levante","Atlético de Madrid":"Atlético Madrid",
-         "FC Barcelona":"Barcelona"},
- "NED1":{"N.E.C.":"NEC Nijmegen","N.E.C. Nijmegen":"NEC Nijmegen"},
- "POR1":{"Vitória SC":"Vitória Guimarães","Rio Ave FC":"Rio Ave",
-         "SC Braga":"Braga"},
- "BEL1":{"Royale Union Saint-Gilloise":"Union Saint-Gilloise",
-         "KRC Genk":"Genk","STVV":"Sint-Truiden",
-         "SV Zulte Waregem":"Zulte Waregem"}
+ "GER1":{"Bayer Leverkusen":"Bayer 04 Leverkusen"},
+ "ESP1":{"Celta Vigo":"Celta","RC Celta":"Celta",
+         "Atlético Madrid":"Atlético de Madrid",
+         "FC Barcelona":"FC Barcelona","Barcelona":"FC Barcelona"},
+ "NED1":{"NEC Nijmegen":"N.E.C. Nijmegen",
+         "N.E.C.":"N.E.C. Nijmegen"},
+ "POR1":{"Vitória Guimarães":"Vitória SC","Braga":"SC Braga"},
+ "BEL1":{"Union Saint-Gilloise":"Royale Union Saint-Gilloise",
+         "Sint-Truiden":"STVV","Zulte Waregem":"SV Zulte Waregem"}
 }
+def registry_name(league,name):
+    return ALIASES.get(league,{}).get(name,name)
+
+def canon_gate(league,home,away,lookup_override=None):
+    # Gate still checks 2026/27 immutable registry, official source and kickoff.
+    # Convert ONLY reviewed exact aliases in the already-verified official
+    # observation and user manifest, never create a fixture from alias alone.
+    if lookup_override is None:
+        return {"status":"NOT_VERIFIED","reason":"OFFICIAL_OBSERVATION_REQUIRED"}
+    def observed(h,a):
+        result=lookup_override(h,a)
+        if not isinstance(result,dict) or result.get("status")!="VERIFIED_OFFICIAL_FIXTURE":
+            return result
+        converted=dict(result)
+        converted["display_home_before_exact_alias"]=result.get("home")
+        converted["display_away_before_exact_alias"]=result.get("away")
+        converted["home"]=registry_name(league,result["home"])
+        converted["away"]=registry_name(league,result["away"])
+        return converted
+    return named_only_runner(league,registry_name(league,home),
+                             registry_name(league,away),lookup_override=observed)
+
 def run():
     now=datetime.now(timezone.utc)
     if now.astimezone(TR).date().isoformat()!=DAY:
@@ -55,11 +76,10 @@ def run():
     rows=[r for r in all42 if (r["league"],r["home"],r["away"]) in TARGETS]
     if len(rows)!=8 or len(set((r["league"],r["home"],r["away"]) for r in rows))!=8:
         raise ValueError("ONLY_ORIGINAL_EIGHT_ALLOWED")
-    gateway=OfficialFixtureGateway(gate_runner=named_only_runner)
+    gateway=OfficialFixtureGateway(gate_runner=canon_gate)
     original=gateway.resolve_id
     def resolve(league,name):
-        safe=ALIASES.get(league,{}).get(name,name)
-        return original(league,safe)
+        return original(league,registry_name(league,name))
     gateway.resolve_id=resolve
     from forward_quad import predict_quad_from_verified_gate
     from forward_empirical_baseline_263 import produce
