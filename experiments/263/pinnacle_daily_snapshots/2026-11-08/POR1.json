@@ -1,0 +1,194 @@
+{
+  "api_request_attempts_max": 1,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "day_turkey": "2026-11-08",
+  "forecast_unchanged": true,
+  "league": "POR1",
+  "market": "h2h",
+  "observed_at_utc": "2026-11-08T09:57:10.990585+00:00",
+  "payload_sha256": "53f10c4283553963c3ccda45e85c9091886fa74a7a0232e0f7a99ac08786aab9",
+  "provider": "The Odds API",
+  "reason": null,
+  "remaining_credits_as_returned": 489,
+  "request_made_or_outcome_unknown": true,
+  "reservation": {
+    "bookmaker": "pinnacle",
+    "day_turkey": "2026-11-08",
+    "league": "POR1",
+    "market": "h2h",
+    "reserved_at_utc": "2026-11-08T09:57:08.699745+00:00",
+    "retry_allowed_same_day": false,
+    "schema": "SABAH_PINNACLE_RESERVATION_V1",
+    "status": "CREDIT_RESERVED_OUTCOME_UNKNOWN"
+  },
+  "retry_automatically": false,
+  "schema": "SABAH_PINNACLE_SNAPSHOT_V1",
+  "source_bulk": {
+    "S1_S2_official_approved": false,
+    "betting_authorized": false,
+    "blocked": {},
+    "bookmaker_filter": "pinnacle",
+    "bookmaker_odds_not_iddaa": true,
+    "checked_at_utc": "2026-11-08T09:57:10.990585+00:00",
+    "day_turkey": "2026-11-08",
+    "forecast_or_decision_modified": false,
+    "independently_verified_fixture": false,
+    "leagues": {
+      "POR1": [
+        {
+          "away_team": "Académico de Viseu",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.49,
+                    "D": 3.24,
+                    "H": 3.12
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:01+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Nacional",
+          "kickoff_utc": "2026-11-08T15:30:00+00:00",
+          "provider_event_id": "9d545e362d9e690aa8e41b4ccf4d4c78",
+          "sport": "soccer_portugal_primeira_liga"
+        },
+        {
+          "away_team": "CS Maritimo",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 3.55,
+                    "D": 3.55,
+                    "H": 2.14
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:01+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Estoril",
+          "kickoff_utc": "2026-11-08T15:30:00+00:00",
+          "provider_event_id": "88fe8a3db780908444b4b21229766ad5",
+          "sport": "soccer_portugal_primeira_liga"
+        },
+        {
+          "away_team": "Gil Vicente",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 3.59,
+                    "D": 3.1,
+                    "H": 2.33
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:01+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Santa Clara",
+          "kickoff_utc": "2026-11-08T15:30:00+00:00",
+          "provider_event_id": "3145127655251c9de0251675640e2101",
+          "sport": "soccer_portugal_primeira_liga"
+        },
+        {
+          "away_team": "FC Porto",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.54,
+                    "D": 4.54,
+                    "H": 6.1
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:01+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Vitória SC",
+          "kickoff_utc": "2026-11-08T18:00:00+00:00",
+          "provider_event_id": "c468a7bc1110c030b62f381e3a480145",
+          "sport": "soccer_portugal_primeira_liga"
+        },
+        {
+          "away_team": "Benfica",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.21,
+                    "D": 7.54,
+                    "H": 11.97
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:01+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "CF Estrela",
+          "kickoff_utc": "2026-11-08T20:30:00+00:00",
+          "provider_event_id": "c02a3d0a40d536e48bb60dffe0e3cd1e",
+          "sport": "soccer_portugal_primeira_liga"
+        },
+        {
+          "away_team": "Braga",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.53,
+                    "D": 4.44,
+                    "H": 6.47
+                  },
+                  "source_last_update_utc": "2026-11-08T09:57:01+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Rio Ave FC",
+          "kickoff_utc": "2026-11-08T20:30:00+00:00",
+          "provider_event_id": "3642cddab8c2e0da43a419cdd01d1db0",
+          "sport": "soccer_portugal_primeira_liga"
+        }
+      ]
+    },
+    "leagues_requested": [
+      "POR1"
+    ],
+    "markets_requested": [
+      "h2h"
+    ],
+    "max_one_run_credit_cost": 1,
+    "payload_sha256": "6d077a324232db673f2923a7f710ff640ceb97264c28bb200695b6fc99d22953",
+    "provider": "The Odds API (the-odds-api.com)",
+    "region": null,
+    "reported_remaining_credits": 489,
+    "schema": "263_free_bulk_external_odds_research_v1",
+    "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+  },
+  "status": "OBSERVED_OR_EMPTY"
+}
