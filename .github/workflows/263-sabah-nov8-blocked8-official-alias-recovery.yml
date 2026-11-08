@@ -1,0 +1,67 @@
+name: "263 Nov 8 eight official alias recovery - read-only shadow"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_nov8_blocked8_exact_official_alias_recovery_263.py'
+      - '.github/workflows/263-sabah-nov8-blocked8-official-alias-recovery.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  blocked8:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned B C2 C3 M4 library versions
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Download SHA-pinned historical training archive, zero bookmaker
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+          echo '1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9  data/quad_accepted_263/extended_history.csv' | sha256sum -c -
+      - name: Verify read-only date, exact eight official aliases and frozen names
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m py_compile experiments/263/sabah_nov8_blocked8_exact_official_alias_recovery_263.py
+          python - <<'PY'
+          from sabah_batch_263 import named
+          from sabah_nov8_blocked8_exact_official_alias_recovery_263 import DAY,FROZEN,TARGETS,ALIASES
+          assert DAY == "2026-11-08"
+          assert len(named("legacy96",DAY,FROZEN)) == 42
+          assert len(TARGETS) == 8
+          assert len(ALIASES)==5
+          print("NOV8_42_IMMUTABLE_MANIFEST_READY_NO_PILOT")
+          PY
+      - name: Try 8 previously blocked names with new exact official alias mapping
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/sabah_nov8_blocked8_exact_official_alias_recovery_263.py \
+            --out /tmp/263_nov8_eight_recovery.json
+          git diff --quiet
+          git diff --cached --quiet
+          echo 'NO_GITHUB_PILOT_WRITES_NO_BOOKMAKER'
+      - name: Archive all 8 attempts and per-source diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nov8-blocked8-official-alias-recovery-readonly
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            /tmp/263_nov8_eight_recovery.json
