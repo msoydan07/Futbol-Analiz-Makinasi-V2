@@ -1,0 +1,22 @@
+name: Model challenge - prospective joint gates
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-joint-gate.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  compare-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate synthetic fixture sealing and same-match M4 comparisons
+        run: python -m unittest discover -s research/model_challenge -p 'test_paired_future_gate.py' -v
+      - name: Assert historical 2.6.3 not written
+        run: |
+          test -z "$(git status --porcelain -- forward_morning_263 forward_quad_263 experiments/263)"
+          echo 'RESEARCH_ONLY_NO_PRODUCTION_MUTATION'
