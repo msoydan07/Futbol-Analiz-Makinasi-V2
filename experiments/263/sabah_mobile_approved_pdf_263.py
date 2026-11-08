@@ -1,8 +1,9 @@
-"""Read-only, user-approved compact MOBILE PDF + single-match PDF from sealed new100.
+"""Read-only, user-approved MONOCHROME MOBILE PDF + single-match PDF from sealed new100.
 
 Uses the same SHA-validated morning batch and verified same-time Pinnacle
 comparison; never fetches a quote, reruns a model, changes PAS or a forecast.
 No displayed decimal odds. PDF is presentation, not an immutable pilot entry.
+The black/white boxed design is the permanent user-approved default.
 """
 from __future__ import annotations
 import argparse,math,statistics,json
@@ -18,16 +19,20 @@ from classification_odds_263 import canonical_markets
 from forward_c3 import read_aware
 from zoneinfo import ZoneInfo
 
-SCHEMA_PDF="263_APPROVED_COMPACT_MOBILE_PDF_V1"
+SCHEMA_PDF="263_APPROVED_COMPACT_MOBILE_PDF_V1"  # stable output schema
 MARKETS=("BTTS_YES","OVER_1.5","OVER_2.5","OVER_3.5")
 MARKET_LABELS=("KG Var","1,5 Ust","2,5 Ust","3,5 Ust")
 MODELS=("B","C2","C3","M4")
 DIRECTIONS=(("MS1","MS 1"),("MSX","MS X"),("MS2","MS 2"))
 TR=ZoneInfo("Europe/Istanbul")
 W,H=420,690
-INK=HexColor("#1c3646");TEAL=HexColor("#1c516b")
-MUTED=HexColor("#617484");PALE=HexColor("#edf3f7")
-EDGE=HexColor("#d7e1e8");WHITE=HexColor("#ffffff")
+# User-approved monochrome boxed result display, 2026-11-08.
+# Keep report/match SHA verification, prices, markets and pilot selection untouched.
+INK=HexColor("#111111");TEAL=HexColor("#111111")
+MUTED=HexColor("#555555");PALE=HexColor("#f2f2f2")
+EDGE=HexColor("#bdbdbd");WHITE=HexColor("#ffffff")
+CARD_ALT=HexColor("#fafafa");CHIP=HexColor("#ededed")
+MONOCHROME_APPROVED_V2=True
 FONT_REG="MobileDejaVu";FONT_BOLD="MobileDejaVuBold"
 class MobileBlocked(ValueError):pass
 
@@ -141,24 +146,30 @@ def foot(c,page,extra=""):
     right(c,W-13,15,str(page),7,color=MUTED)
 
 def match(c,r,y,i):
-    # Each match: a header line and four fixed width goal chips, no horizontal scroll.
-    shade=PALE if i%2 else WHITE
-    c.setFillColor(shade);c.roundRect(10,y-45,W-20,57,4,stroke=0,fill=1)
-    text(c,15,y,""+r["time"],8,True,INK)
+    """Stable high-contrast monochrome card; visual changes only, no new choices."""
+    shade=CARD_ALT if i%2 else WHITE
+    c.setFillColor(shade)
+    c.setStrokeColor(EDGE)
+    c.setLineWidth(.65)
+    c.roundRect(10,y-45,W-20,57,6,stroke=1,fill=1)
+    text(c,17,y,r["time"],8.3,True,INK)
     match_name=cut(r["home"]+" – "+r["away"],178,FONT_BOLD,9.2)
-    text(c,57,y,match_name,9.2,True)
-    right(c,W-13,y,r["direction"],8.4,True)
-    text(c,57,y-13,r["league"],6.7,color=MUTED)
+    text(c,57,y,match_name,9.2,True,INK)
+    right(c,W-17,y,r["direction"],8.4,True,INK)
+    text(c,57,y-13,r["league"],7,color=MUTED)
     text(c,123,y-13,"BIZIM",6.5,color=MUTED)
     text(c,208,y-13,"PIYASA",6.5,color=MUTED)
     text(c,307,y-13,"FARK (yp)",6.5,color=MUTED)
-    text(c,123,y-26,pct(r["model"]),9.4,True)
-    text(c,208,y-26,pct(r["market"]),9.4,True)
-    text(c,307,y-26,difference(r["delta"]),9.4,True,
-         HexColor("#087458") if r["delta"] is not None and r["delta"]>0 else INK)
+    text(c,123,y-26,pct(r["model"]),9.4,True,INK)
+    text(c,208,y-26,pct(r["market"]),9.4,True,INK)
+    text(c,307,y-26,difference(r["delta"]),9.4,True,INK)
     for z,(label,p) in enumerate(zip(MARKET_LABELS,r["goals"])):
         x=15+z*98
-        text(c,x,y-40,label+": "+pct(p),6.7,True,TEAL)
+        c.setFillColor(CHIP)
+        c.setStrokeColor(EDGE)
+        c.setLineWidth(.35)
+        c.roundRect(x,y-43,94,12,3,stroke=1,fill=1)
+        text(c,x+3,y-40,label+": "+pct(p),6.6,True,INK)
 
 def batch_pdf(path,day,rows):
     fonts();p=Path(path);p.parent.mkdir(parents=True,exist_ok=True)
@@ -187,7 +198,7 @@ def single_pdf(path,day,r):
     text(c,13,H-175,"GOL BEKLENTILERI (model medyani)",9,True)
     for j,(name,pct_value) in enumerate(zip(MARKET_LABELS,r["goals"])):
         x=13+j*101
-        c.setFillColor(PALE);c.roundRect(x,H-221,94,35,4,stroke=0,fill=1)
+        c.setFillColor(PALE);c.setStrokeColor(EDGE);c.setLineWidth(.6);c.roundRect(x,H-221,94,35,5,stroke=1,fill=1)
         text(c,x+5,H-198,name,7,color=MUTED)
         text(c,x+5,H-213,pct(pct_value),11,True)
     text(c,13,H-250,"DORT MODEL KARSILASTIRMASI",10,True)
