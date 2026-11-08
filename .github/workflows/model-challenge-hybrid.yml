@@ -1,0 +1,45 @@
+name: Model challenge - frozen equal-weight hybrid
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-hybrid.yml']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  hybrid:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit test fixed hybrid and paired audit
+        run: python -m unittest discover -s research/model_challenge -p 'test_hybrid_fixed.py' -v
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-elo-initial-diagnostics
+          run-id: 42532664152
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/elo
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-poisson-paired-elo-diagnostics
+          run-id: 42533012701
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/poisson
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-xgb-exploratory-diagnostics
+          run-id: 42533506784
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/xgb
+      - name: Compare exactly equal-weight pool without tuning
+        run: python research/model_challenge/hybrid_fixed.py --elo "$RUNNER_TEMP/elo/elo_predictions.csv" --poisson "$RUNNER_TEMP/poisson/poisson_predictions.csv" --xgb "$RUNNER_TEMP/xgb/xgb_predictions.csv" --out "$RUNNER_TEMP/hybrid/hybrid_predictions.csv"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-frozen-hybrid-exploratory
+          path: ${{ runner.temp }}/hybrid/
+          retention-days: 30
