@@ -24,11 +24,9 @@ def join(original,research,*,max_cutoff_gap_minutes=15):
     # The original forecast SHA must be checked against its own historical
     # canonical hash convention, not a new custom re-serialization here.
     from hashlib import sha256
-    import sys
-    sys.path.insert(0,str(Path(__file__).resolve().parents[2]/"experiments"/"263"))
-    from forward_c3 import canonical_bytes
-    expected=sha256(canonical_bytes({k:v for k,v in original.items()
-                                     if k!="payload_sha256"})).hexdigest()
+    canonical=json.dumps({k:v for k,v in original.items() if k!="payload_sha256"},
+        ensure_ascii=False,sort_keys=True,separators=(",",":"),allow_nan=False).encode("utf8")
+    expected=sha256(canonical).hexdigest()
     if original.get("payload_sha256")!=expected:
         raise NotComparable("ORIGINAL_SHA_CHANGED")
     fx=original["fixture"]
