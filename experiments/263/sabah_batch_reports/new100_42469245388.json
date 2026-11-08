@@ -1,0 +1,1806 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 9,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-08T09:56:10.368539+00:00",
+  "day_turkey": "2026-11-08",
+  "input_count": 42,
+  "new_forecasts": 33,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "BEL1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "a424002ed46668201a87e2615b547b22a60496906482edb3a67f057e81b37973",
+      "parsed_events": 9,
+      "source_url": "https://www.proleague.be/jpl-kalender!",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "ENG1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "9b8190f1a9153d5af0235cc76a511e6764beb0c19832168d1059aea0dfea0e70",
+      "parsed_events": 30,
+      "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "ESP1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "e250a0d55a85b093ab93f8e9d04b00f94726e152bfbbcf395aa9bad949e13024",
+      "parsed_events": 10,
+      "source_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "FRA1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "cdb984e02738af3dfbb482aa5ea84caa723e605b9f64d402d4b2596fb94fab14",
+      "parsed_events": 9,
+      "source_url": "https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "GER1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "1f3d278a4c9311345f8ccd67938af0635cf8c15d56d1260bda5a92d75b4f5586",
+      "parsed_events": 9,
+      "source_url": "https://products.bundesliga.com/fixtures",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "ITA1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "bab5cbe3340c5826594bb941a84de7062510cae53e5f67bd1dba38d788146d36",
+      "parsed_events": 10,
+      "source_url": "https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "NED1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "13a31f62d6ed45c38ddaf838356b7d06a5d5dc67decfbed7e661b650be69ccec",
+      "parsed_events": 100,
+      "source_url": "https://www.knvb.nl/competities/eredivisie/programma",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "POR1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "d63c950a2270ae06b5537a417be8bffa134b121285b2f1934636460255e5fdbf",
+      "parsed_events": 9,
+      "source_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "TUR1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "4316aecf442e3c503c0c0e470d0e3b8e247627d2584dfd7f9c690c57f36a2806",
+      "parsed_events": 9,
+      "source_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "Erzurumspor FK",
+      "decision_sha256": "f312333e59fae74c9cbe5785dce9d6f8ae01fc094edd4c89c0f3ee8329d17357",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/ef6d6dbdb8075839cda5abbd.json",
+      "forecast_sha256": "daa0d85a5e4e120e3420d35f4546c2f0d6699843cf3248c8aac9a7caf767d59a",
+      "home": "Çaykur Rizespor",
+      "kickoff_utc": "2026-11-08T10:30:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "4316aecf442e3c503c0c0e470d0e3b8e247627d2584dfd7f9c690c57f36a2806",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "Erzurumspor FK",
+        "requested_home": "Çaykur Rizespor",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "010ec376-a0df-50e7-a57c-f5850f660053": "VERI_YETERSIZ",
+        "08d3f80d-eb65-50ac-9dd4-e49110a61a82": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "010ec376-a0df-50e7-a57c-f5850f660053": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "08d3f80d-eb65-50ac-9dd4-e49110a61a82": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Fenerbahçe",
+      "decision_sha256": "3aaa78ce8c9f093d74a304d7244d14c3c218f961275c900a00552fe3630b6e66",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/f0a7dd75ba79329ab6e1bff1.json",
+      "forecast_sha256": "610fbf97fd6728b071359debd600c9d3614c00b5fc931c1a5ff4ebcb81975f83",
+      "home": "Çorum FK",
+      "kickoff_utc": "2026-11-08T13:00:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "4316aecf442e3c503c0c0e470d0e3b8e247627d2584dfd7f9c690c57f36a2806",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "Fenerbahçe",
+        "requested_home": "Çorum FK",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "95647a3b-0347-5eb9-ae2f-d444d31a7d3b": "VERI_YETERSIZ",
+        "b70be320-82df-539d-9dc1-09f05137f08d": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "95647a3b-0347-5eb9-ae2f-d444d31a7d3b": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b70be320-82df-539d-9dc1-09f05137f08d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Trabzonspor",
+      "decision_sha256": "67162133d63466f93655ef7f25d0417906cdd1347f7c75778931eb55622679b9",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/ff38bbd2c0eb6d200ed46bac.json",
+      "forecast_sha256": "87867c2828ceb2d02152b5533813848c61b94033d46cb57311170a2955220f6c",
+      "home": "Alanyaspor",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "4316aecf442e3c503c0c0e470d0e3b8e247627d2584dfd7f9c690c57f36a2806",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "Trabzonspor",
+        "requested_home": "Alanyaspor",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "17017361-4cc8-5b8f-8787-3b5e7e1260de": "VERI_YETERSIZ",
+        "525fd705-b724-5426-af7b-45dff87b352e": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "17017361-4cc8-5b8f-8787-3b5e7e1260de": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "525fd705-b724-5426-af7b-45dff87b352e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Gençlerbirliği",
+      "decision_sha256": "d1ec288cd1c3f78e1e5fc29440ef92860ca29691fb1a0fbc8d6870e258378d25",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/8730c98b5070ec379d653b5d.json",
+      "forecast_sha256": "f3e5e938f2d2a84fa186f3293582ce803e2db27837899c581d6225be3d6ead81",
+      "home": "Beşiktaş",
+      "kickoff_utc": "2026-11-08T18:00:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "4316aecf442e3c503c0c0e470d0e3b8e247627d2584dfd7f9c690c57f36a2806",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "Gençlerbirliği",
+        "requested_home": "Beşiktaş",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "4e0b2072-7256-59f1-a14a-1be0aa41827c": "VERI_YETERSIZ",
+        "bf0f8601-77e0-528f-ac2a-5d384a7081c5": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "4e0b2072-7256-59f1-a14a-1be0aa41827c": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "bf0f8601-77e0-528f-ac2a-5d384a7081c5": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Brentford",
+      "decision_sha256": "9a534777d6406fa8ba99beedf93878418d1351d5fd1547e7d1a9b673ed083677",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/062917dbc0a41c92022f6c2a.json",
+      "forecast_sha256": "d0378af8f26f8036fbda7b8e19ff0dccdf003b4b281d3ee2cb87dd8827ba4d8d",
+      "home": "Brighton",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9b8190f1a9153d5af0235cc76a511e6764beb0c19832168d1059aea0dfea0e70",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Brentford",
+        "requested_home": "Brighton",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "383619c8-7306-5814-a1c1-f7a2299da9ed": "VERI_YETERSIZ",
+        "b26a259a-4bdf-57f1-8102-85eb5149dc81": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "383619c8-7306-5814-a1c1-f7a2299da9ed": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b26a259a-4bdf-57f1-8102-85eb5149dc81": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Liverpool",
+      "decision_sha256": "814c67ab8a914d3ff015f843d2ce3b02c4c3295ca66c625903226ca7d6ae5f5c",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/d80830efa086daff782010bc.json",
+      "forecast_sha256": "df4d15d73c52008173739ee2abeb6e4cb752948ac1e513f6cef6253a807b1ed6",
+      "home": "Crystal Palace",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9b8190f1a9153d5af0235cc76a511e6764beb0c19832168d1059aea0dfea0e70",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Liverpool",
+        "requested_home": "Crystal Palace",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "ce71ab24-a25e-54ac-9023-c753dc549c88": "VERI_YETERSIZ",
+        "f4766b24-4533-540f-ab07-af3be2f16914": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "ce71ab24-a25e-54ac-9023-c753dc549c88": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f4766b24-4533-540f-ab07-af3be2f16914": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Bournemouth",
+      "decision_sha256": "094bf57393eea1a4fb8e93dcfffc276b1ec490e95bf578ce9c2551004fda0b9e",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/1f43bc78092246351d09075a.json",
+      "forecast_sha256": "7309dcbe1ee8bd930e71ca4a61261e349a75103bd19943b677b760568a84b2ff",
+      "home": "Ipswich Town",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9b8190f1a9153d5af0235cc76a511e6764beb0c19832168d1059aea0dfea0e70",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Bournemouth",
+        "requested_home": "Ipswich Town",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "28ce5115-c798-51cd-8aea-22ac5d6ffef0": "VERI_YETERSIZ",
+        "dbb1abd7-b219-5f87-b63e-04289b4dda45": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "28ce5115-c798-51cd-8aea-22ac5d6ffef0": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "dbb1abd7-b219-5f87-b63e-04289b4dda45": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Chelsea",
+      "decision_sha256": "1efd7c430f26d8d1275ddb3ac423492806d5743f2948820ae1bc5a0ba0085449",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/61d20fc7da7adedec1c36090.json",
+      "forecast_sha256": "b603f9d8df66f5813469d3c8b0518b1f779d001abac2185dd9dec1d6eb34f458",
+      "home": "Sunderland",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9b8190f1a9153d5af0235cc76a511e6764beb0c19832168d1059aea0dfea0e70",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Chelsea",
+        "requested_home": "Sunderland",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "331335be-3469-59aa-8083-32e2637c064e": "VERI_YETERSIZ",
+        "54562038-3366-538d-a2cb-96301351a0ab": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "331335be-3469-59aa-8083-32e2637c064e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "54562038-3366-538d-a2cb-96301351a0ab": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Aston Villa",
+      "decision_sha256": "ebc0499cb9d318092570d34af7e8c1092fb8ee44e6ebd30d05bad18c1eeca585",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/20512b0afcfd6010a2d4ccee.json",
+      "forecast_sha256": "186e634252b23b784b147a7f4085780d01499b9d66cb25eb927a5077c0be2855",
+      "home": "Manchester United",
+      "kickoff_utc": "2026-11-08T16:30:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9b8190f1a9153d5af0235cc76a511e6764beb0c19832168d1059aea0dfea0e70",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Aston Villa",
+        "requested_home": "Manchester United",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "8c661a94-3348-5ee8-88cd-fed3afc9e03d": "VERI_YETERSIZ",
+        "ae84a5fa-13c8-5d19-9151-4624f1159182": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "8c661a94-3348-5ee8-88cd-fed3afc9e03d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ae84a5fa-13c8-5d19-9151-4624f1159182": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Bayer Leverkusen",
+      "home": "1. FC Köln",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "1f3d278a4c9311345f8ccd67938af0635cf8c15d56d1260bda5a92d75b4f5586",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "Bayer Leverkusen",
+        "requested_home": "1. FC Köln",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "dfl"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:team_identity_not_resolved",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "Union Berlin",
+      "decision_sha256": "9ddd9a3e99bd25b3b4ee5fc7d4433ce68f3078f6ae8d178992fcf27c9212a330",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/5cf4c6302ceeb451f0d3c9b9.json",
+      "forecast_sha256": "bc56d94cfc7ae759cb9898111034315a631def6fce980338e9bcd2c88a078df5",
+      "home": "Freiburg",
+      "kickoff_utc": "2026-11-08T16:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "1f3d278a4c9311345f8ccd67938af0635cf8c15d56d1260bda5a92d75b4f5586",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "Union Berlin",
+        "requested_home": "Freiburg",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "deffb017-2cc9-515c-8610-7ebf8c760f22": "VERI_YETERSIZ",
+        "df9a3778-f7f8-585d-a996-e0cda64dcab5": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "deffb017-2cc9-515c-8610-7ebf8c760f22": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "df9a3778-f7f8-585d-a996-e0cda64dcab5": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Schalke 04",
+      "decision_sha256": "75a4d030b058a3a180fb274d7b3f2646be86f5f998ccb37ee7b91d74ca33ba96",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/9745eb15cb504918ad7dfcfd.json",
+      "forecast_sha256": "21232a45211653cdfb54a9fda981ab4eecda0d861879be29256733b4e34afb33",
+      "home": "Hoffenheim",
+      "kickoff_utc": "2026-11-08T18:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "1f3d278a4c9311345f8ccd67938af0635cf8c15d56d1260bda5a92d75b4f5586",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "Schalke 04",
+        "requested_home": "Hoffenheim",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383": "VERI_YETERSIZ",
+        "4d6798e9-6702-53ac-b979-06b67f82ea0e": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "4d6798e9-6702-53ac-b979-06b67f82ea0e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Real Betis",
+      "decision_sha256": "0d54342241e3f4eed639b4160949fb77f8d2b872d6d348cc8005a294d3f1e42c",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/345c15dcae142d444699aea6.json",
+      "forecast_sha256": "a0ab1c1518c83f3237113948cc6113c735a90802f5c99ee71fe6674663bb28e3",
+      "home": "Elche",
+      "kickoff_utc": "2026-11-08T13:00:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "e250a0d55a85b093ab93f8e9d04b00f94726e152bfbbcf395aa9bad949e13024",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Real Betis",
+        "requested_home": "Elche",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_nov2026"
+      },
+      "rotation": {
+        "91862a7d-290b-50c5-9991-71ac9b47b872": "VERI_YETERSIZ",
+        "e353c708-7867-52e9-a755-dc0cb27d016f": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "91862a7d-290b-50c5-9991-71ac9b47b872": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e353c708-7867-52e9-a755-dc0cb27d016f": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Rayo Vallecano",
+      "decision_sha256": "00bcb4b50e43d582e3f88f9aa61b7c18620aab5d51f895b722943be3ab17989c",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/5bf23ee7110c1edbc12cd9c0.json",
+      "forecast_sha256": "eab4d1b74e8613ba7b26c1c0c8486179b451499af5a4fce17712e9c75c428592",
+      "home": "Real Sociedad",
+      "kickoff_utc": "2026-11-08T15:15:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "e250a0d55a85b093ab93f8e9d04b00f94726e152bfbbcf395aa9bad949e13024",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Rayo Vallecano",
+        "requested_home": "Real Sociedad",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_nov2026"
+      },
+      "rotation": {
+        "4d3fba55-3549-5874-b15c-5697f4e8f3f2": "VERI_YETERSIZ",
+        "85146ecc-4e9b-5294-b887-3dfa8fbf4a43": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "4d3fba55-3549-5874-b15c-5697f4e8f3f2": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "85146ecc-4e9b-5294-b887-3dfa8fbf4a43": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Levante",
+      "home": "Celta Vigo",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "e250a0d55a85b093ab93f8e9d04b00f94726e152bfbbcf395aa9bad949e13024",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Levante",
+        "requested_home": "Celta Vigo",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "laliga_broadcast_nov2026"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:team_identity_not_resolved",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "Getafe",
+      "decision_sha256": "fdd2e9f06daebc2586a9109965762b620f3267f7538883c27e6a05ac67b9e40c",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/5d8484eaf40f2d1160c2c53f.json",
+      "forecast_sha256": "46b1204daad0157c3c0252d3189f18e8be556d0c2e90378f18ba0e9d1e0a9fec",
+      "home": "Villarreal",
+      "kickoff_utc": "2026-11-08T17:30:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "e250a0d55a85b093ab93f8e9d04b00f94726e152bfbbcf395aa9bad949e13024",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Getafe",
+        "requested_home": "Villarreal",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_nov2026"
+      },
+      "rotation": {
+        "1b2fb7db-bdb3-53ad-86f5-8c2992ee5293": "VERI_YETERSIZ",
+        "ee32e224-3f69-5103-9630-17f18670bc56": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1b2fb7db-bdb3-53ad-86f5-8c2992ee5293": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ee32e224-3f69-5103-9630-17f18670bc56": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Barcelona",
+      "home": "Atlético Madrid",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "e250a0d55a85b093ab93f8e9d04b00f94726e152bfbbcf395aa9bad949e13024",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Barcelona",
+        "requested_home": "Atlético Madrid",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "laliga_broadcast_nov2026"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:team_identity_not_resolved",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "Lazio",
+      "decision_sha256": "30e943d5810c29eb96406c77b6fb9c5e43f044916effaef1bf987f7572d0f196",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/71da02c75a4c46f2dbdd5722.json",
+      "forecast_sha256": "28472f68eb6418408a9523f88777f97ca0154624428fe1ea5dbf219c8bb1266f",
+      "home": "Napoli",
+      "kickoff_utc": "2026-11-08T11:30:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "bab5cbe3340c5826594bb941a84de7062510cae53e5f67bd1dba38d788146d36",
+        "page_url": "https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a",
+        "requested_away": "Lazio",
+        "requested_home": "Napoli",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j11_2026"
+      },
+      "rotation": {
+        "1404171b-d23a-5f5e-8909-2c7f1af827ff": "VERI_YETERSIZ",
+        "61387963-91dc-5585-b0b3-97130db6a971": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1404171b-d23a-5f5e-8909-2c7f1af827ff": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "61387963-91dc-5585-b0b3-97130db6a971": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Milan",
+      "decision_sha256": "f3e4c1637736771d35f76e2bdca4e52729ace9477968887eae79f6e607e749a3",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/a0699b42cc188fbbd09c4003.json",
+      "forecast_sha256": "94b1c744ebed55aa681770fd6572281c7b9ba9de0013bde1c8f2761c18afe212",
+      "home": "Genoa",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "bab5cbe3340c5826594bb941a84de7062510cae53e5f67bd1dba38d788146d36",
+        "page_url": "https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a",
+        "requested_away": "Milan",
+        "requested_home": "Genoa",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j11_2026"
+      },
+      "rotation": {
+        "8daa5691-08a7-5894-be9e-1a5d3415e989": "VERI_YETERSIZ",
+        "ee015ea4-6edb-583c-9464-e1c1dd42be6a": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "8daa5691-08a7-5894-be9e-1a5d3415e989": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ee015ea4-6edb-583c-9464-e1c1dd42be6a": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Atalanta",
+      "decision_sha256": "379f4457671adced12d8823b56b36444333dd7ee03c5ec9919beb9d2fcba3665",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/184eee19caccf46e525266d2.json",
+      "forecast_sha256": "4cc9fcefebacebc7af620e16399aee6ee0e6ec5ba5feb53e5e479995fbd31c6f",
+      "home": "Monza",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "bab5cbe3340c5826594bb941a84de7062510cae53e5f67bd1dba38d788146d36",
+        "page_url": "https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a",
+        "requested_away": "Atalanta",
+        "requested_home": "Monza",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j11_2026"
+      },
+      "rotation": {
+        "36a81f9b-184f-5b4e-a9b6-15b62c826573": "VERI_YETERSIZ",
+        "f535b10e-40e6-5cf1-b2db-757e21860b7d": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "36a81f9b-184f-5b4e-a9b6-15b62c826573": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f535b10e-40e6-5cf1-b2db-757e21860b7d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Como",
+      "decision_sha256": "97f2359ed2db8f1fdd5a9c5e299b87ee9c69f196d4077dafd51aae45f4c972dc",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/fbe09035935483a595b81d05.json",
+      "forecast_sha256": "0ad0fd848bd72f5159ef6cab03b8d18c0b1b5d28bf365af6a709e296f704fb46",
+      "home": "Inter",
+      "kickoff_utc": "2026-11-08T17:00:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "bab5cbe3340c5826594bb941a84de7062510cae53e5f67bd1dba38d788146d36",
+        "page_url": "https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a",
+        "requested_away": "Como",
+        "requested_home": "Inter",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j11_2026"
+      },
+      "rotation": {
+        "19a74312-3197-557e-bfe6-f90e30a78f09": "VERI_YETERSIZ",
+        "ecfbc8bf-09bd-5417-8c73-b02d3b027116": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "19a74312-3197-557e-bfe6-f90e30a78f09": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ecfbc8bf-09bd-5417-8c73-b02d3b027116": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Juventus",
+      "decision_sha256": "b910c138369f114d4dc433065bdef1df551fc4bc78aeed6d9ba8a2a37f1bafc7",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/607540a2aae30855c0ace7cb.json",
+      "forecast_sha256": "c62acc369a02c54bbe167f244466041ebec9df74f206787cb670c05a15341650",
+      "home": "Fiorentina",
+      "kickoff_utc": "2026-11-08T19:45:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "bab5cbe3340c5826594bb941a84de7062510cae53e5f67bd1dba38d788146d36",
+        "page_url": "https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a",
+        "requested_away": "Juventus",
+        "requested_home": "Fiorentina",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j11_2026"
+      },
+      "rotation": {
+        "78a9204d-45dd-5943-afbf-8529605ac7e8": "VERI_YETERSIZ",
+        "fc9f8209-af3f-542c-83e0-366bf4af6ea1": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "78a9204d-45dd-5943-afbf-8529605ac7e8": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "fc9f8209-af3f-542c-83e0-366bf4af6ea1": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Lille",
+      "decision_sha256": "d2e7b9d471f37849603398a268ba051455ee743c157e833c7b538c0d91c68cee",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/8561878221ef595acd33c383.json",
+      "forecast_sha256": "9ed7c455a56f192e33b82c2e568676b0b49bc8971d0012a8be33f0f0645a76fc",
+      "home": "Rennes",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "cdb984e02738af3dfbb482aa5ea84caa723e605b9f64d402d4b2596fb94fab14",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1",
+        "requested_away": "Lille",
+        "requested_home": "Rennes",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_week10_2026"
+      },
+      "rotation": {
+        "3f7ee66e-ea78-5826-a6ad-55142f1b5c4a": "VERI_YETERSIZ",
+        "9d896e45-c3bb-5fbb-a637-9cbad967075a": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "3f7ee66e-ea78-5826-a6ad-55142f1b5c4a": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "9d896e45-c3bb-5fbb-a637-9cbad967075a": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Lyon",
+      "decision_sha256": "cb90e736b643b2677d443aac695463830e71c64b08332be6969b1cada6ae0892",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/d6860dcd1dd71bb0f877d972.json",
+      "forecast_sha256": "3dff2de14a2f40b402110d2cc8a6cc06aac0f6212667709781bdf53ce8d3ea44",
+      "home": "Brest",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "cdb984e02738af3dfbb482aa5ea84caa723e605b9f64d402d4b2596fb94fab14",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1",
+        "requested_away": "Lyon",
+        "requested_home": "Brest",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_week10_2026"
+      },
+      "rotation": {
+        "5e8c20e5-5593-5891-a8ae-6d5864e44646": "VERI_YETERSIZ",
+        "b8051c2b-f40f-5620-aca4-3ec5711567e1": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "5e8c20e5-5593-5891-a8ae-6d5864e44646": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b8051c2b-f40f-5620-aca4-3ec5711567e1": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Monaco",
+      "decision_sha256": "7760de8e82b93e6ddc90630bec52aef114cce03ba9d4f566be0907245916d832",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/dd5d8b0a80b1f53f4c634b9a.json",
+      "forecast_sha256": "fe20acbc0ae1247a66e44f5bcbe7733a04fa0475a5e42ef4756bbf25fceeedcf",
+      "home": "Le Mans",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "cdb984e02738af3dfbb482aa5ea84caa723e605b9f64d402d4b2596fb94fab14",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1",
+        "requested_away": "Monaco",
+        "requested_home": "Le Mans",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_week10_2026"
+      },
+      "rotation": {
+        "e1d9d0f3-df1e-5be0-b101-84f949df9219": "VERI_YETERSIZ",
+        "ffd2c2e1-5862-519b-843c-d370656e56c9": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "e1d9d0f3-df1e-5be0-b101-84f949df9219": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ffd2c2e1-5862-519b-843c-d370656e56c9": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Nice",
+      "decision_sha256": "4d09530c1e6596dc24c6ab155a50408a9ff2c572d208edf431f93e021247b144",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/371e0fb1f127ad15620af253.json",
+      "forecast_sha256": "7203f98fd9881b295cc67fc50f7b76096ed9435a037c6ae17d98c134b1d7211d",
+      "home": "Angers",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "cdb984e02738af3dfbb482aa5ea84caa723e605b9f64d402d4b2596fb94fab14",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1",
+        "requested_away": "Nice",
+        "requested_home": "Angers",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_week10_2026"
+      },
+      "rotation": {
+        "23f10546-64fe-5ffc-a908-c5b67897859e": "VERI_YETERSIZ",
+        "a23cb5ad-b4b2-5f33-9ab5-ecabbf91996b": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "23f10546-64fe-5ffc-a908-c5b67897859e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "a23cb5ad-b4b2-5f33-9ab5-ecabbf91996b": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Lorient",
+      "decision_sha256": "32c25f133056b229ab790398ce8a8aeefbbcf95e12f85274cee54cf4f577c6f1",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/6af2293efedf63b6193af528.json",
+      "forecast_sha256": "1716d47c497442fc728fb1595fed1c1601efab81f5a08b22acce43b6176ae3aa",
+      "home": "Le Havre",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "cdb984e02738af3dfbb482aa5ea84caa723e605b9f64d402d4b2596fb94fab14",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1",
+        "requested_away": "Lorient",
+        "requested_home": "Le Havre",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_week10_2026"
+      },
+      "rotation": {
+        "5c7c7667-36a2-59aa-b536-59b33ef230b6": "VERI_YETERSIZ",
+        "74ebd71e-0912-536a-831e-e14e473d6163": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "5c7c7667-36a2-59aa-b536-59b33ef230b6": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "74ebd71e-0912-536a-831e-e14e473d6163": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Marseille",
+      "decision_sha256": "cc91f422106201010820fa309b7c1ac7554bf1023fb51232cfc72cc12650701c",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/ef80a8d81345cf02448cfb6e.json",
+      "forecast_sha256": "0ea91fb6bc00588f2681a63f3da70e9f405ef4d83b1bad5cae1c8759ce3f3fb2",
+      "home": "Lens",
+      "kickoff_utc": "2026-11-08T19:45:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "cdb984e02738af3dfbb482aa5ea84caa723e605b9f64d402d4b2596fb94fab14",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1",
+        "requested_away": "Marseille",
+        "requested_home": "Lens",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_week10_2026"
+      },
+      "rotation": {
+        "4179dd45-fbcc-51ac-b48e-df05403a79ff": "VERI_YETERSIZ",
+        "f5fd5f35-351b-5c16-9eb6-09a660f73630": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "4179dd45-fbcc-51ac-b48e-df05403a79ff": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f5fd5f35-351b-5c16-9eb6-09a660f73630": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Feyenoord",
+      "decision_sha256": "b457ee37f9d6818540757adb4f2250e66b2eb5fe34a97b0c0f4a676a3eda784f",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/6e9aa1da977c04f6367a1068.json",
+      "forecast_sha256": "aa0d4ae59adadb547aa9e8bdb094b3c6c329f28ff2a0c863c58f9e1f8634f16b",
+      "home": "Heerenveen",
+      "kickoff_utc": "2026-11-08T11:15:00+00:00",
+      "league": "NED1",
+      "official_source_evidence": {
+        "candidate_events_seen": 100,
+        "league": "NED1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "13a31f62d6ed45c38ddaf838356b7d06a5d5dc67decfbed7e661b650be69ccec",
+        "page_url": "https://www.knvb.nl/competities/eredivisie/programma",
+        "requested_away": "Feyenoord",
+        "requested_home": "Heerenveen",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "knvb"
+      },
+      "rotation": {
+        "1e7810fb-50b1-5185-8a6e-916a58d5a2be": "VERI_YETERSIZ",
+        "5e3a580b-c714-5f24-8d92-b67268dd52b0": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1e7810fb-50b1-5185-8a6e-916a58d5a2be": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "5e3a580b-c714-5f24-8d92-b67268dd52b0": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Ajax",
+      "decision_sha256": "9a4b7b02426cf18068cf18b0b8947e74b07d290ec4e3306340c28038db5b1b99",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/00156b675f1e2d1a941fba4c.json",
+      "forecast_sha256": "07225b563d5aeeee2b43c89031304bbad885e4f3c8f96e7de6321382e402e59c",
+      "home": "FC Twente",
+      "kickoff_utc": "2026-11-08T13:30:00+00:00",
+      "league": "NED1",
+      "official_source_evidence": {
+        "candidate_events_seen": 100,
+        "league": "NED1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "13a31f62d6ed45c38ddaf838356b7d06a5d5dc67decfbed7e661b650be69ccec",
+        "page_url": "https://www.knvb.nl/competities/eredivisie/programma",
+        "requested_away": "Ajax",
+        "requested_home": "FC Twente",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "knvb"
+      },
+      "rotation": {
+        "c08e905b-4f22-5f1e-b6e5-8209b67a7640": "VERI_YETERSIZ",
+        "fc941d55-dc93-5926-8030-6a0bb4e7f90c": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "c08e905b-4f22-5f1e-b6e5-8209b67a7640": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "fc941d55-dc93-5926-8030-6a0bb4e7f90c": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "FC Groningen",
+      "decision_sha256": "3f0b24e6a6a4077ed85ab7f4996e57296729242d76f62af2ee400ff2f775f318",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/b67deb932f786e144178972f.json",
+      "forecast_sha256": "704d7d607bbb6e6d62d5947ee7773de20c6586d7571b64b18b1e6f10aa5cbe3f",
+      "home": "AZ Alkmaar",
+      "kickoff_utc": "2026-11-08T15:45:00+00:00",
+      "league": "NED1",
+      "official_source_evidence": {
+        "candidate_events_seen": 100,
+        "league": "NED1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "13a31f62d6ed45c38ddaf838356b7d06a5d5dc67decfbed7e661b650be69ccec",
+        "page_url": "https://www.knvb.nl/competities/eredivisie/programma",
+        "requested_away": "FC Groningen",
+        "requested_home": "AZ Alkmaar",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "knvb"
+      },
+      "rotation": {
+        "7e830405-8cac-5e47-82bd-a8e8c1441ad6": "VERI_YETERSIZ",
+        "8ea05ba2-ecc7-5bda-8845-1ff0aff34a54": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "7e830405-8cac-5e47-82bd-a8e8c1441ad6": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "8ea05ba2-ecc7-5bda-8845-1ff0aff34a54": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "PSV",
+      "home": "SC Cambuur",
+      "league": "NED1",
+      "official_source_evidence": {
+        "candidate_events_seen": 100,
+        "league": "NED1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "13a31f62d6ed45c38ddaf838356b7d06a5d5dc67decfbed7e661b650be69ccec",
+        "page_url": "https://www.knvb.nl/competities/eredivisie/programma",
+        "requested_away": "PSV",
+        "requested_home": "SC Cambuur",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "knvb"
+      },
+      "reason": "REQUIRES_C3_M4_AND_THREE_AVAILABLE",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "NEC Nijmegen",
+      "home": "FC Utrecht",
+      "league": "NED1",
+      "official_source_evidence": {
+        "candidate_events_seen": 100,
+        "league": "NED1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "13a31f62d6ed45c38ddaf838356b7d06a5d5dc67decfbed7e661b650be69ccec",
+        "page_url": "https://www.knvb.nl/competities/eredivisie/programma",
+        "requested_away": "NEC Nijmegen",
+        "requested_home": "FC Utrecht",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "knvb"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:official_match_not_confirmed",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "Marítimo",
+      "decision_sha256": "f0a0163e0962258aad020b44c089db9cb45e8f2b064450eabc526b2a3cb05431",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/2ab937b233e1028fc8bc56b1.json",
+      "forecast_sha256": "48ad4e1f69f6768e8574cbec47160eef4aa33ada0d2b4ac7b284c1a26a6dc069",
+      "home": "Estoril",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "POR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "POR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "d63c950a2270ae06b5537a417be8bffa134b121285b2f1934636460255e5fdbf",
+        "page_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+        "requested_away": "Marítimo",
+        "requested_home": "Estoril",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "liga_portugal_betclic_news_j11_2026"
+      },
+      "rotation": {
+        "c0de225d-26d1-5bc2-906b-96f007527679": "VERI_YETERSIZ",
+        "d67876ca-188a-550c-94ef-6b377d9f9bc6": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "c0de225d-26d1-5bc2-906b-96f007527679": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "d67876ca-188a-550c-94ef-6b377d9f9bc6": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Gil Vicente",
+      "decision_sha256": "c0afdc8b17a4193f6f2e0f4462a58a90959f4bb8b43c1eed1e42f31a89e23f7b",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/1d8f2f0d822494ec98e960d7.json",
+      "forecast_sha256": "55e67388ea11071d1cddcaa52cad4ad8f50ae4b7258004e8631879a8b33357ff",
+      "home": "Santa Clara",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "POR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "POR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "d63c950a2270ae06b5537a417be8bffa134b121285b2f1934636460255e5fdbf",
+        "page_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+        "requested_away": "Gil Vicente",
+        "requested_home": "Santa Clara",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "liga_portugal_betclic_news_j11_2026"
+      },
+      "rotation": {
+        "06377377-2b44-585e-bb1f-e9511796e72b": "VERI_YETERSIZ",
+        "a7af8b8b-0436-5e96-8799-9ba0bc0e9d0e": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "06377377-2b44-585e-bb1f-e9511796e72b": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "a7af8b8b-0436-5e96-8799-9ba0bc0e9d0e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "FC Porto",
+      "home": "Vitória Guimarães",
+      "league": "POR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "POR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "d63c950a2270ae06b5537a417be8bffa134b121285b2f1934636460255e5fdbf",
+        "page_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+        "requested_away": "FC Porto",
+        "requested_home": "Vitória Guimarães",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "liga_portugal_betclic_news_j11_2026"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:team_identity_not_resolved",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "Benfica",
+      "decision_sha256": "049f15bc8b5d2f1048686833102a41c4bb28cf974460b8ee75679fe7ecfcaab5",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/225cec02e17ca1ff656f4151.json",
+      "forecast_sha256": "6c3559e439b11f44feee8f5a2bcb73aabe1a4671610b61ba58f873162222bce4",
+      "home": "Estrela Amadora",
+      "kickoff_utc": "2026-11-08T20:30:00+00:00",
+      "league": "POR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "POR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "d63c950a2270ae06b5537a417be8bffa134b121285b2f1934636460255e5fdbf",
+        "page_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+        "requested_away": "Benfica",
+        "requested_home": "Estrela Amadora",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "liga_portugal_betclic_news_j11_2026"
+      },
+      "rotation": {
+        "a72a1a95-9489-526d-bc44-ee582fc559c6": "VERI_YETERSIZ",
+        "e4140cf0-7a85-5df2-b4a3-0ea210f032b7": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "a72a1a95-9489-526d-bc44-ee582fc559c6": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e4140cf0-7a85-5df2-b4a3-0ea210f032b7": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Braga",
+      "home": "Rio Ave",
+      "league": "POR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "POR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "d63c950a2270ae06b5537a417be8bffa134b121285b2f1934636460255e5fdbf",
+        "page_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+        "requested_away": "Braga",
+        "requested_home": "Rio Ave",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "liga_portugal_betclic_news_j11_2026"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:team_identity_not_resolved",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "Anderlecht",
+      "decision_sha256": "7718c11e8603acc129bf5eb2e2cbc0f41221066698b0f7ec29d6897049f71bfe",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/fd0c647da755288dcd7b49ce.json",
+      "forecast_sha256": "10ebf789580bafcf826ee6f081ba89341b7d6db30b39af38135f72b59dc0760d",
+      "home": "Club Brugge",
+      "kickoff_utc": "2026-11-08T12:30:00+00:00",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a424002ed46668201a87e2615b547b22a60496906482edb3a67f057e81b37973",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "Anderlecht",
+        "requested_home": "Club Brugge",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "rotation": {
+        "71c1a84d-ff73-51ba-aba8-b2eb179624a5": "VERI_YETERSIZ",
+        "9cdec74d-e405-576f-adbf-c5ef040290e5": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "71c1a84d-ff73-51ba-aba8-b2eb179624a5": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "9cdec74d-e405-576f-adbf-c5ef040290e5": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Kortrijk",
+      "decision_sha256": "8c3aa8e4905fd122b0eaa1fad2facd72bd530fc7561ab89d807ba1846ee299ec",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/d2a5e7c5bf5f7d4f0ecbc3db.json",
+      "forecast_sha256": "0dfe72b4e47d3e55a253883a6871eaf9eefa0e0f528db76c12978cc50f0e6898",
+      "home": "Gent",
+      "kickoff_utc": "2026-11-08T15:00:00+00:00",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a424002ed46668201a87e2615b547b22a60496906482edb3a67f057e81b37973",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "Kortrijk",
+        "requested_home": "Gent",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "rotation": {
+        "0b59ba7c-3cee-5d27-83ea-d10e7ce0339d": "VERI_YETERSIZ",
+        "7cfc4554-ff6a-50f5-9db7-a6bd34d9db9f": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "0b59ba7c-3cee-5d27-83ea-d10e7ce0339d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "7cfc4554-ff6a-50f5-9db7-a6bd34d9db9f": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Genk",
+      "home": "Union Saint-Gilloise",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "a424002ed46668201a87e2615b547b22a60496906482edb3a67f057e81b37973",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "Genk",
+        "requested_home": "Union Saint-Gilloise",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:team_identity_not_resolved",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "Zulte Waregem",
+      "home": "Sint-Truiden",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "a424002ed46668201a87e2615b547b22a60496906482edb3a67f057e81b37973",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "Zulte Waregem",
+        "requested_home": "Sint-Truiden",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:team_identity_not_resolved",
+      "status": "BLOCKED_NO_FORECAST"
+    }
+  ],
+  "payload_sha256": "05e635eeafc0ba5abcc83fdee4d0e2bf9258010a92ae3c0014bba1d384c72d54",
+  "schema": "SABAH_TOPLU_KAYIT_V1"
+}

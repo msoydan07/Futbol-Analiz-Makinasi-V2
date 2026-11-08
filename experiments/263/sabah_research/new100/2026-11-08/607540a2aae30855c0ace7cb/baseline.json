@@ -1,0 +1,25 @@
+{
+  "created_at_utc": "2026-11-08T09:56:17.916867+00:00",
+  "forecast_created_at_utc": "2026-11-08T09:56:17.916867+00:00",
+  "forecast_sha256": "c62acc369a02c54bbe167f244466041ebec9df74f206787cb670c05a15341650",
+  "historical_match_count": 480,
+  "last_result_date": "2026-11-02",
+  "league": "ITA1",
+  "markets": {
+    "BTTS_NO": 0.520746887966805,
+    "BTTS_YES": 0.47925311203319504,
+    "MS1": 0.4057971014492754,
+    "MS2": 0.35403726708074534,
+    "MSX": 0.2401656314699793,
+    "OVER_1.5": 0.7323651452282157,
+    "OVER_2.5": 0.4896265560165975,
+    "OVER_3.5": 0.24688796680497926,
+    "UNDER_1.5": 0.2676348547717842,
+    "UNDER_2.5": 0.5103734439834025,
+    "UNDER_3.5": 0.7531120331950207
+  },
+  "method": "PAST_RESULTS_LEAGUE_MARKET_RATE",
+  "payload_sha256": "298a3448b374d6e127c5dde45d879315439eade5359e3e0b8b90c788e72b84f3",
+  "schema": "263_asof_market_baseline_v2",
+  "source_snapshot_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9"
+}

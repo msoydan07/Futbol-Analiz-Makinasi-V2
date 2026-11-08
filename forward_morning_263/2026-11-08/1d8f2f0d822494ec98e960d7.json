@@ -1,0 +1,207 @@
+{
+  "code": {
+    "B_C2_C3": "FROZEN_EXISTING_MODEL_FUNCTIONS",
+    "frozen_batch_sha256": "1a0c519b6c8f2947de43545fcd0c5d4e8abcc9a4f8b47f8372bee43f53beb96f",
+    "frozen_c2_sha256": "d3d1c2d4875aa52c2c2a3f631516e1425eb02273d1333c7e9eaffb7c8caae0a5",
+    "m4": "m4_venue_opponent_time_poisson_v1",
+    "m4_engine_sha256": "eac755e54086738f40d7f30a514b2c9bb789b2c428ffef4ee70bb2fd2b49bc45",
+    "m4_lock_sha256": "b195e435f8c3ac39afe91da42a63802b50e844304dd2f7c0fb02dc4c7c4e6f2b",
+    "quad_forward_sha256": "c9b05a1c9f8ffcae1657807924f4f14c4753aaf1498c350da6a6fbb7b3be805d"
+  },
+  "created_at_utc": "2026-11-08T09:56:30.985816+00:00",
+  "data": {
+    "cutoff_rule": "strictly_before_local_kickoff_date",
+    "full_match_policy_sha256": "41a82e1bb96909d9fbb7b10d2f397a9250ceb3007cee9b7d6b764ecfb1c43e99",
+    "human_source_acceptance": true,
+    "league_history_rows": 396,
+    "league_latest_result_date": "2026-11-02",
+    "research_shadow_unverified_source": false,
+    "snapshot_acceptance": "APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED",
+    "snapshot_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+    "training_excluded_partial_match_ids": []
+  },
+  "fixture": {
+    "away_id": "06377377-2b44-585e-bb1f-e9511796e72b",
+    "fixture_verification": "VERIFIED_BY_LIVE_OFFICIAL_GATE",
+    "home_id": "a7af8b8b-0436-5e96-8799-9ba0bc0e9d0e",
+    "kickoff_utc": "2026-11-08T15:30:00+00:00",
+    "league": "POR1",
+    "match_local_date": "2026-11-08",
+    "official_source": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+    "source_checked_at_utc": "2026-11-08T09:56:30.985830+00:00"
+  },
+  "m4_learned_settings": {
+    "half_life_days": 360,
+    "ridge_shared": 4,
+    "ridge_venue": 48
+  },
+  "model_predictions": {
+    "B": {
+      "goals": {
+        "distribution": "legacy_truncated_poisson_0_to_10_normalized",
+        "lambda_away": 0.9226044047027652,
+        "lambda_home": 1.1478752683630733,
+        "markets": {
+          "1X2": {
+            "A": 0.29222938367797224,
+            "D": 0.29950918931443415,
+            "H": 0.40826142700759394
+          },
+          "BTTS_NO": 0.5886674799441598,
+          "BTTS_YES": 0.41133252005584026,
+          "OVER_1.5": 0.6127349102020215,
+          "OVER_2.5": 0.34239256988905853,
+          "OVER_3.5": 0.15581312976004608,
+          "UNDER_1.5": 0.38726508979797847,
+          "UNDER_2.5": 0.6576074301109415,
+          "UNDER_3.5": 0.844186870239954
+        },
+        "tail_mass": 4.448295309877892e-08,
+        "top_scores": {
+          "0-0": 0.12612527390917355,
+          "0-1": 0.11636373325294626,
+          "1-0": 0.14477608263585873,
+          "1-1": 0.13357105153545476,
+          "2-0": 0.0830924423540954
+        }
+      },
+      "status": "AVAILABLE"
+    },
+    "C2": {
+      "goals": {
+        "correct_scores": [
+          {
+            "probability": 0.1491663920970815,
+            "score": "1-0"
+          },
+          {
+            "probability": 0.13332463959485952,
+            "score": "1-1"
+          },
+          {
+            "probability": 0.13091984035932042,
+            "score": "0-0"
+          },
+          {
+            "probability": 0.1170159061054642,
+            "score": "0-1"
+          },
+          {
+            "probability": 0.08497800054671466,
+            "score": "2-0"
+          }
+        ],
+        "lambda_away": 0.893798111762925,
+        "lambda_home": 1.139371936962968,
+        "markets": {
+          "12": 0.6977166487454285,
+          "1X": 0.7148332071827634,
+          "1X2": {
+            "A": 0.28516679281723656,
+            "D": 0.30228335125457145,
+            "H": 0.41254985592819193
+          },
+          "AWAY_OVER_0.5": 0.5909010054504124,
+          "AWAY_OVER_1.5": 0.22524909659788003,
+          "AWAY_OVER_2.5": 0.06183960375042871,
+          "BTTS_NO": 0.5981991056043776,
+          "BTTS_YES": 0.4018008943956224,
+          "HOME_OVER_0.5": 0.6799800485858896,
+          "HOME_OVER_1.5": 0.3153582966763996,
+          "HOME_OVER_2.5": 0.10763840081042632,
+          "MS1": 0.41254985592819193,
+          "MS2": 0.28516679281723656,
+          "MSX": 0.30228335125457145,
+          "OVER_0.5": 0.8690801596406795,
+          "OVER_1.5": 0.602897861438134,
+          "OVER_2.5": 0.3323009233349139,
+          "OVER_3.5": 0.14891106005878008,
+          "OVER_4.5": 0.055695365745537184,
+          "UNDER_0.5": 0.13091984035932047,
+          "UNDER_1.5": 0.39710213856186605,
+          "UNDER_2.5": 0.6676990766650861,
+          "UNDER_3.5": 0.8510889399412199,
+          "UNDER_4.5": 0.9443046342544628,
+          "X2": 0.5874501440718081
+        },
+        "model": "INDEPENDENT_POISSON",
+        "probability_sum": 1.0,
+        "truncation_tail": 1.936228954946273e-13
+      },
+      "status": "AVAILABLE"
+    },
+    "C3": {
+      "goals": {
+        "distribution": "legacy_truncated_poisson_0_to_10_normalized",
+        "lambda_away": 0.9348222974919925,
+        "lambda_home": 0.9104650306608739,
+        "markets": {
+          "1X2": {
+            "A": 0.3446380645760115,
+            "D": 0.32390547322480917,
+            "H": 0.33145646219917935
+          },
+          "BTTS_NO": 0.63701279652089,
+          "BTTS_YES": 0.36298720347910995,
+          "OVER_1.5": 0.5505017249800983,
+          "OVER_2.5": 0.28153416517723695,
+          "OVER_3.5": 0.11609335524776422,
+          "UNDER_1.5": 0.4494982750199017,
+          "UNDER_2.5": 0.718465834822763,
+          "UNDER_3.5": 0.8839066447522358
+        },
+        "tail_mass": 8.964914255393808e-09,
+        "top_scores": {
+          "0-0": 0.1579799237048273,
+          "0-1": 0.14768315523535638,
+          "0-2": 0.06902875323899123,
+          "1-0": 0.14383519607971812,
+          "1-1": 0.13446034845945334
+        }
+      },
+      "status": "AVAILABLE"
+    },
+    "M4": {
+      "goals": {
+        "distribution": "independent_poisson",
+        "lambda_away": 0.840723813893361,
+        "lambda_home": 0.9874497416096636,
+        "markets": {
+          "1X2": {
+            "A": 0.29794099946104596,
+            "D": 0.32450156617269693,
+            "H": 0.3775574343662571
+          },
+          "BTTS_NO": 0.6432168533943917,
+          "BTTS_YES": 0.3567831466056083,
+          "OVER_1.5": 0.5454932158928235,
+          "OVER_2.5": 0.2769345552066692,
+          "OVER_3.5": 0.11327727468409009,
+          "UNDER_1.5": 0.4545067841071765,
+          "UNDER_2.5": 0.7230654447933308,
+          "UNDER_3.5": 0.8867227253159099
+        },
+        "tail_mass": 4.1300296516055823e-14,
+        "top_scores": {
+          "0-0": 0.16070682197802283,
+          "0-1": 0.13511005229204476,
+          "1-0": 0.15868990983710884,
+          "1-1": 0.13341438622464777,
+          "2-0": 0.07834915523235697
+        }
+      },
+      "status": "AVAILABLE",
+      "train_rows": 396
+    }
+  },
+  "payload_sha256": "55e67388ea11071d1cddcaa52cad4ad8f50ae4b7258004e8631879a8b33357ff",
+  "pilot_restrictions": [
+    "No odds, EV, bet or production promotion",
+    "No first-half or corner estimates",
+    "C2 missing context is reported, never imputed",
+    "Any machine-stage shadow data is NOT human verified and is NOT part of accepted 96-cohort",
+    "Human-attested updated data is not independently reverified by this code"
+  ],
+  "schema": "quad_forward_263_v1",
+  "status": "EXPERIMENTAL_PREMATCH_FOUR_MODEL_NO_BETTING"
+}

@@ -1,0 +1,588 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "05e635eeafc0ba5abcc83fdee4d0e2bf9258010a92ae3c0014bba1d384c72d54",
+  "betting_authorized": false,
+  "blocked_count": 9,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-08T09:56:34.508529+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-08",
+  "decisions": "RESEARCH_PAS",
+  "existing_same_cohort_count": 0,
+  "input_count": 42,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "75de73579a777bdba97ac6c2f5bd98266ad88b252aade7c889871c6dbfaaf1c1",
+  "new_count": 33,
+  "no_verified_odds": true,
+  "payload_sha256": "66b5b44c0921ceac0ab78be68a24c43fda59aa4982942255ef6dd97ab26e3b50",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "92a1ff9c50166a665ca378aec720032bd7f8b4defed3f7596c2b5c5be9705aca",
+      "decision_sha256": "f312333e59fae74c9cbe5785dce9d6f8ae01fc094edd4c89c0f3ee8329d17357",
+      "fixture": "Çaykur Rizespor - Erzurumspor FK",
+      "forecast_path": "forward_morning_263/2026-11-08/ef6d6dbdb8075839cda5abbd.json",
+      "forecast_sha256": "daa0d85a5e4e120e3420d35f4546c2f0d6699843cf3248c8aac9a7caf767d59a",
+      "kickoff_utc": "2026-11-08T10:30:00+00:00",
+      "league": "TUR1",
+      "mobile_sha256": "120fa27c3dd890737f9b8987ead780440b279e25944f945a3e914734d02fec83",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 3,
+      "baseline_sha256": "7166de0659a65493b51bb55873d853ee3d1a88631edc8cf5aacd530c96808b5a",
+      "decision_sha256": "3aaa78ce8c9f093d74a304d7244d14c3c218f961275c900a00552fe3630b6e66",
+      "fixture": "Çorum FK - Fenerbahçe",
+      "forecast_path": "forward_morning_263/2026-11-08/f0a7dd75ba79329ab6e1bff1.json",
+      "forecast_sha256": "610fbf97fd6728b071359debd600c9d3614c00b5fc931c1a5ff4ebcb81975f83",
+      "kickoff_utc": "2026-11-08T13:00:00+00:00",
+      "league": "TUR1",
+      "mobile_sha256": "939ec9c2be3ff4938331ded01b186689ecebd38bd99e22e3877e2355816d2ed8",
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "0a7a3abebbe88f9180cc3c6a72a33fab667bd42d7676da843be6f8d863844bf9",
+      "decision_sha256": "67162133d63466f93655ef7f25d0417906cdd1347f7c75778931eb55622679b9",
+      "fixture": "Alanyaspor - Trabzonspor",
+      "forecast_path": "forward_morning_263/2026-11-08/ff38bbd2c0eb6d200ed46bac.json",
+      "forecast_sha256": "87867c2828ceb2d02152b5533813848c61b94033d46cb57311170a2955220f6c",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "TUR1",
+      "mobile_sha256": "842dbfeb3fe5dbb2bb40ec4036b7e46d16832a3aaf1ff0eb8c89e5219b6b64ea",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "9512b8790e98e55ce832d9b650b09dc4118b50d1fa91985b2e2500417514fa73",
+      "decision_sha256": "d1ec288cd1c3f78e1e5fc29440ef92860ca29691fb1a0fbc8d6870e258378d25",
+      "fixture": "Beşiktaş - Gençlerbirliği",
+      "forecast_path": "forward_morning_263/2026-11-08/8730c98b5070ec379d653b5d.json",
+      "forecast_sha256": "f3e5e938f2d2a84fa186f3293582ce803e2db27837899c581d6225be3d6ead81",
+      "kickoff_utc": "2026-11-08T18:00:00+00:00",
+      "league": "TUR1",
+      "mobile_sha256": "c0e5c3d80e237a814745ae8a2771f199c66ee848bb026a8e1e1d7c71f62ce1e4",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "de9220e772a94600ced652a05c2ce60b4e8845f107cbb59e00567b94d7522431",
+      "decision_sha256": "9a534777d6406fa8ba99beedf93878418d1351d5fd1547e7d1a9b673ed083677",
+      "fixture": "Brighton - Brentford",
+      "forecast_path": "forward_morning_263/2026-11-08/062917dbc0a41c92022f6c2a.json",
+      "forecast_sha256": "d0378af8f26f8036fbda7b8e19ff0dccdf003b4b281d3ee2cb87dd8827ba4d8d",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "79fc901015d9f63d62c9738527b2cf8d4b21ec12677cedde2d736bcdca0aafaa",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "628668fe0128a39ba237eececb1cd2eff0f5dc289d58c7f05ba41166439e823e",
+      "decision_sha256": "814c67ab8a914d3ff015f843d2ce3b02c4c3295ca66c625903226ca7d6ae5f5c",
+      "fixture": "Crystal Palace - Liverpool",
+      "forecast_path": "forward_morning_263/2026-11-08/d80830efa086daff782010bc.json",
+      "forecast_sha256": "df4d15d73c52008173739ee2abeb6e4cb752948ac1e513f6cef6253a807b1ed6",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "432afda3134f6f7e9e263ae68317e863bc9096e08eedc62d3802a6c69e0c4c46",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 3,
+      "baseline_sha256": "982d48713c1c7acc2f8364cd75ea9a69d40ad29c340ae65c5377173b27b6ce55",
+      "decision_sha256": "094bf57393eea1a4fb8e93dcfffc276b1ec490e95bf578ce9c2551004fda0b9e",
+      "fixture": "Ipswich Town - Bournemouth",
+      "forecast_path": "forward_morning_263/2026-11-08/1f43bc78092246351d09075a.json",
+      "forecast_sha256": "7309dcbe1ee8bd930e71ca4a61261e349a75103bd19943b677b760568a84b2ff",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "81c198a4b70b3a9b652548790e3e1fe96a327414ded8d3d1e002a3df8fcf0ed9",
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "0d58626b7ccf080ae4ed625d76ecfdb4b09b0171838ca0d2ee762c721299dcb4",
+      "decision_sha256": "1efd7c430f26d8d1275ddb3ac423492806d5743f2948820ae1bc5a0ba0085449",
+      "fixture": "Sunderland - Chelsea",
+      "forecast_path": "forward_morning_263/2026-11-08/61d20fc7da7adedec1c36090.json",
+      "forecast_sha256": "b603f9d8df66f5813469d3c8b0518b1f779d001abac2185dd9dec1d6eb34f458",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "edae7065986b5f136d1c7a3e5095fca9bf89d865d05e133bddd5c36e6f8df9c1",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "67bd29e273596bde90935d4d3782a0fb7ea26fc12ce88f7c99645327e04c4862",
+      "decision_sha256": "ebc0499cb9d318092570d34af7e8c1092fb8ee44e6ebd30d05bad18c1eeca585",
+      "fixture": "Manchester United - Aston Villa",
+      "forecast_path": "forward_morning_263/2026-11-08/20512b0afcfd6010a2d4ccee.json",
+      "forecast_sha256": "186e634252b23b784b147a7f4085780d01499b9d66cb25eb927a5077c0be2855",
+      "kickoff_utc": "2026-11-08T16:30:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "aacda19aed118a6856210dd9e39a20006635b369d9ee3a2529ad09934e9e7620",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 3,
+      "baseline_sha256": "5c05e798354c2e2f55d79d182eaa32b50c47e2fa021683135b0469be15ed8ad0",
+      "decision_sha256": "9ddd9a3e99bd25b3b4ee5fc7d4433ce68f3078f6ae8d178992fcf27c9212a330",
+      "fixture": "Freiburg - Union Berlin",
+      "forecast_path": "forward_morning_263/2026-11-08/5cf4c6302ceeb451f0d3c9b9.json",
+      "forecast_sha256": "bc56d94cfc7ae759cb9898111034315a631def6fce980338e9bcd2c88a078df5",
+      "kickoff_utc": "2026-11-08T16:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "6085a3d5ec0d62870eda081950be9f11d87f3ab88e78a7c89153c7b6de50243f",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "UNAVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 3,
+      "baseline_sha256": "512cfa261e8198421292796416970ab82d4065919f54f3240be5ab99f34a9ca8",
+      "decision_sha256": "75a4d030b058a3a180fb274d7b3f2646be86f5f998ccb37ee7b91d74ca33ba96",
+      "fixture": "Hoffenheim - Schalke 04",
+      "forecast_path": "forward_morning_263/2026-11-08/9745eb15cb504918ad7dfcfd.json",
+      "forecast_sha256": "21232a45211653cdfb54a9fda981ab4eecda0d861879be29256733b4e34afb33",
+      "kickoff_utc": "2026-11-08T18:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "8d92dc289c7d3177e686ff02ac490abe2f49e1022338460af97eb37a52576232",
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "31152cff748037bb74962c5309587990a1a3776edbed97f75f6d52b00b4bfa8d",
+      "decision_sha256": "0d54342241e3f4eed639b4160949fb77f8d2b872d6d348cc8005a294d3f1e42c",
+      "fixture": "Elche - Real Betis",
+      "forecast_path": "forward_morning_263/2026-11-08/345c15dcae142d444699aea6.json",
+      "forecast_sha256": "a0ab1c1518c83f3237113948cc6113c735a90802f5c99ee71fe6674663bb28e3",
+      "kickoff_utc": "2026-11-08T13:00:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "87eeac8c128dfe8309c2704b110ee3f4e9e0c326ba5f2219e02c2478d0827bf9",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "3d4f472e2bd822cc611f43dd6689b97f45030cbd6386d5300fdc986a896bb283",
+      "decision_sha256": "00bcb4b50e43d582e3f88f9aa61b7c18620aab5d51f895b722943be3ab17989c",
+      "fixture": "Real Sociedad - Rayo Vallecano",
+      "forecast_path": "forward_morning_263/2026-11-08/5bf23ee7110c1edbc12cd9c0.json",
+      "forecast_sha256": "eab4d1b74e8613ba7b26c1c0c8486179b451499af5a4fce17712e9c75c428592",
+      "kickoff_utc": "2026-11-08T15:15:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "0a3369f1ca56068227cae3348f64831c1fcc4020780db2789ed381f6264bd9df",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "c2a2a1b92642fab2c4e438cd5ddadd0b2ed8af6f93d2e44a1e0d2280c87c34f2",
+      "decision_sha256": "fdd2e9f06daebc2586a9109965762b620f3267f7538883c27e6a05ac67b9e40c",
+      "fixture": "Villarreal - Getafe",
+      "forecast_path": "forward_morning_263/2026-11-08/5d8484eaf40f2d1160c2c53f.json",
+      "forecast_sha256": "46b1204daad0157c3c0252d3189f18e8be556d0c2e90378f18ba0e9d1e0a9fec",
+      "kickoff_utc": "2026-11-08T17:30:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "98902704dd88fc060b5e686df3c8a2ec26ea5466ab5b6892f4125c5d2437d889",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "9027f8b27711fb8c2e02391e9360213b60b7a349c5424d50e11cb316bd726d54",
+      "decision_sha256": "30e943d5810c29eb96406c77b6fb9c5e43f044916effaef1bf987f7572d0f196",
+      "fixture": "Napoli - Lazio",
+      "forecast_path": "forward_morning_263/2026-11-08/71da02c75a4c46f2dbdd5722.json",
+      "forecast_sha256": "28472f68eb6418408a9523f88777f97ca0154624428fe1ea5dbf219c8bb1266f",
+      "kickoff_utc": "2026-11-08T11:30:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "877cf9bc802e8316c8ccde23d8bd528ff2d353f2fdeafca1c0fc3efbb70d9022",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "00e4971b4436ddc848753f864fba63c3b34330410ecaecdbb529d5cc32612dbd",
+      "decision_sha256": "f3e4c1637736771d35f76e2bdca4e52729ace9477968887eae79f6e607e749a3",
+      "fixture": "Genoa - Milan",
+      "forecast_path": "forward_morning_263/2026-11-08/a0699b42cc188fbbd09c4003.json",
+      "forecast_sha256": "94b1c744ebed55aa681770fd6572281c7b9ba9de0013bde1c8f2761c18afe212",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "ba8bfcac3e53339dc1cad095fbd22ff9a684cfdef88f1af77cf278e82c532508",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 3,
+      "baseline_sha256": "c46f87b254e39152357ae0692672682541b7ba64f5ced240468360631a174783",
+      "decision_sha256": "379f4457671adced12d8823b56b36444333dd7ee03c5ec9919beb9d2fcba3665",
+      "fixture": "Monza - Atalanta",
+      "forecast_path": "forward_morning_263/2026-11-08/184eee19caccf46e525266d2.json",
+      "forecast_sha256": "4cc9fcefebacebc7af620e16399aee6ee0e6ec5ba5feb53e5e479995fbd31c6f",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "99f6c7fe7fb07ab6c393a1b7017ab3e1877bbf928808b0b1584ac500593b9017",
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "6ac4f8618408f278be3ad72f8e6164c6309af9539d072825b8318d8861d39965",
+      "decision_sha256": "97f2359ed2db8f1fdd5a9c5e299b87ee9c69f196d4077dafd51aae45f4c972dc",
+      "fixture": "Inter - Como",
+      "forecast_path": "forward_morning_263/2026-11-08/fbe09035935483a595b81d05.json",
+      "forecast_sha256": "0ad0fd848bd72f5159ef6cab03b8d18c0b1b5d28bf365af6a709e296f704fb46",
+      "kickoff_utc": "2026-11-08T17:00:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "5ba615968751ed53b95363abe084f7a1719d89bf625d0c7b2892bf64a40343de",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "298a3448b374d6e127c5dde45d879315439eade5359e3e0b8b90c788e72b84f3",
+      "decision_sha256": "b910c138369f114d4dc433065bdef1df551fc4bc78aeed6d9ba8a2a37f1bafc7",
+      "fixture": "Fiorentina - Juventus",
+      "forecast_path": "forward_morning_263/2026-11-08/607540a2aae30855c0ace7cb.json",
+      "forecast_sha256": "c62acc369a02c54bbe167f244466041ebec9df74f206787cb670c05a15341650",
+      "kickoff_utc": "2026-11-08T19:45:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "678c676330b0fd488648d620507c06a9721770fbb9684c54e0931314e573bc53",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "e12e808971e4b691bb12da09f8bd54d7adb16bfc371d3e79aa244dc7e65b08f6",
+      "decision_sha256": "d2e7b9d471f37849603398a268ba051455ee743c157e833c7b538c0d91c68cee",
+      "fixture": "Rennes - Lille",
+      "forecast_path": "forward_morning_263/2026-11-08/8561878221ef595acd33c383.json",
+      "forecast_sha256": "9ed7c455a56f192e33b82c2e568676b0b49bc8971d0012a8be33f0f0645a76fc",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "f6c501ca69c24432f714d79d5d1bf18da56566d9eb2d676a8ef756dd0814a8c7",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "e148f194bed5c3c4337d2591aa1494db9414340517d72ea1963239b321bbf720",
+      "decision_sha256": "cb90e736b643b2677d443aac695463830e71c64b08332be6969b1cada6ae0892",
+      "fixture": "Brest - Lyon",
+      "forecast_path": "forward_morning_263/2026-11-08/d6860dcd1dd71bb0f877d972.json",
+      "forecast_sha256": "3dff2de14a2f40b402110d2cc8a6cc06aac0f6212667709781bdf53ce8d3ea44",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "2d6db7d63f0ac1c78e473a0577b215bf631164748ce30088c974ca9aadc04c79",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 3,
+      "baseline_sha256": "54ad785f62f6530dde9c92cfb8bcc46813e00490af68c5b9ac98d3a6f68994e3",
+      "decision_sha256": "7760de8e82b93e6ddc90630bec52aef114cce03ba9d4f566be0907245916d832",
+      "fixture": "Le Mans - Monaco",
+      "forecast_path": "forward_morning_263/2026-11-08/dd5d8b0a80b1f53f4c634b9a.json",
+      "forecast_sha256": "fe20acbc0ae1247a66e44f5bcbe7733a04fa0475a5e42ef4756bbf25fceeedcf",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "06d3d741a8ecaab3b9a0035c15ace037bc19783e2e8e739bd8ec9f2284ddf067",
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "b993a45ca214be7f334d10f63972db6f130d3e8bcaa77d196befce8cdce9f41f",
+      "decision_sha256": "4d09530c1e6596dc24c6ab155a50408a9ff2c572d208edf431f93e021247b144",
+      "fixture": "Angers - Nice",
+      "forecast_path": "forward_morning_263/2026-11-08/371e0fb1f127ad15620af253.json",
+      "forecast_sha256": "7203f98fd9881b295cc67fc50f7b76096ed9435a037c6ae17d98c134b1d7211d",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "fcf960bb74162fcb205e28f809e701e663b7e8236fea3a6b50721a439f63ffd6",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "9fe47a37e059ed3ff2168c0d6b3ecb3f907a12f0e94b8764397c96f3ef4f6799",
+      "decision_sha256": "32c25f133056b229ab790398ce8a8aeefbbcf95e12f85274cee54cf4f577c6f1",
+      "fixture": "Le Havre - Lorient",
+      "forecast_path": "forward_morning_263/2026-11-08/6af2293efedf63b6193af528.json",
+      "forecast_sha256": "1716d47c497442fc728fb1595fed1c1601efab81f5a08b22acce43b6176ae3aa",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "9c7b4d2b92eea6a88be641b89e959a13f6e6d777ea3f2951d3d35ffe9e63f67e",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "fdbfc09b572d0da3f55ab58c209c33ac8d45981c0974a8a1ed830e36bcb01125",
+      "decision_sha256": "cc91f422106201010820fa309b7c1ac7554bf1023fb51232cfc72cc12650701c",
+      "fixture": "Lens - Marseille",
+      "forecast_path": "forward_morning_263/2026-11-08/ef80a8d81345cf02448cfb6e.json",
+      "forecast_sha256": "0ea91fb6bc00588f2681a63f3da70e9f405ef4d83b1bad5cae1c8759ce3f3fb2",
+      "kickoff_utc": "2026-11-08T19:45:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "93c75f5aeb66766d73134e5a11a44af8f64f440a92f7afd14f2ea3a09c12eb81",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "8ffde60bd8a9f53f1fe7a57f6232608e4175bf48a4b5fa49994cc963049c02d0",
+      "decision_sha256": "b457ee37f9d6818540757adb4f2250e66b2eb5fe34a97b0c0f4a676a3eda784f",
+      "fixture": "Heerenveen - Feyenoord",
+      "forecast_path": "forward_morning_263/2026-11-08/6e9aa1da977c04f6367a1068.json",
+      "forecast_sha256": "aa0d4ae59adadb547aa9e8bdb094b3c6c329f28ff2a0c863c58f9e1f8634f16b",
+      "kickoff_utc": "2026-11-08T11:15:00+00:00",
+      "league": "NED1",
+      "mobile_sha256": "74f222fe89b38786b9729ba4b3c4e2693145fc9addcd19b3cc572e49ac8e7d02",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "1057733d6bcb796f62901d6385be5d6978006e07bfa5dd8949422759fc4cd2fb",
+      "decision_sha256": "9a4b7b02426cf18068cf18b0b8947e74b07d290ec4e3306340c28038db5b1b99",
+      "fixture": "FC Twente - Ajax",
+      "forecast_path": "forward_morning_263/2026-11-08/00156b675f1e2d1a941fba4c.json",
+      "forecast_sha256": "07225b563d5aeeee2b43c89031304bbad885e4f3c8f96e7de6321382e402e59c",
+      "kickoff_utc": "2026-11-08T13:30:00+00:00",
+      "league": "NED1",
+      "mobile_sha256": "3c4ea84592c9be8f9b8101bc64b4f6aa3a3c866bc18ea0db4953dd2855af0504",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "bc4e3e7d1c1e3c0bb7187028257f08e971518bbf838028761c5855f88ecb0d4e",
+      "decision_sha256": "3f0b24e6a6a4077ed85ab7f4996e57296729242d76f62af2ee400ff2f775f318",
+      "fixture": "AZ Alkmaar - FC Groningen",
+      "forecast_path": "forward_morning_263/2026-11-08/b67deb932f786e144178972f.json",
+      "forecast_sha256": "704d7d607bbb6e6d62d5947ee7773de20c6586d7571b64b18b1e6f10aa5cbe3f",
+      "kickoff_utc": "2026-11-08T15:45:00+00:00",
+      "league": "NED1",
+      "mobile_sha256": "62c7e2381a20d29caa8fb3bb87c71b35fdf6a1d303986a5673a9828fb39dfab9",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "5e000c22c6201beca8b9ea7070fb4fc0deb1c89a9c2f85eda0980b02e4e6457e",
+      "decision_sha256": "f0a0163e0962258aad020b44c089db9cb45e8f2b064450eabc526b2a3cb05431",
+      "fixture": "Estoril - Marítimo",
+      "forecast_path": "forward_morning_263/2026-11-08/2ab937b233e1028fc8bc56b1.json",
+      "forecast_sha256": "48ad4e1f69f6768e8574cbec47160eef4aa33ada0d2b4ac7b284c1a26a6dc069",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "POR1",
+      "mobile_sha256": "78ef724e949f3b9862493d6b963c20979cedc91bc85fbb46e5f26d1befd0d6c8",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "c250ca754a880bc0efa7fb63febf9def127b6cc4917db4d8e5662d373b158824",
+      "decision_sha256": "c0afdc8b17a4193f6f2e0f4462a58a90959f4bb8b43c1eed1e42f31a89e23f7b",
+      "fixture": "Santa Clara - Gil Vicente",
+      "forecast_path": "forward_morning_263/2026-11-08/1d8f2f0d822494ec98e960d7.json",
+      "forecast_sha256": "55e67388ea11071d1cddcaa52cad4ad8f50ae4b7258004e8631879a8b33357ff",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "POR1",
+      "mobile_sha256": "7c87b5e3d0323eed7c8126dfeed3e0dce6dbf0819d8709bd9c3854cbf3617556",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "13876642c9c0fd4cca3333c4bb2ffd57c64c68978a7eb4949ebf4e6a67f7e4b5",
+      "decision_sha256": "049f15bc8b5d2f1048686833102a41c4bb28cf974460b8ee75679fe7ecfcaab5",
+      "fixture": "Estrela Amadora - Benfica",
+      "forecast_path": "forward_morning_263/2026-11-08/225cec02e17ca1ff656f4151.json",
+      "forecast_sha256": "6c3559e439b11f44feee8f5a2bcb73aabe1a4671610b61ba58f873162222bce4",
+      "kickoff_utc": "2026-11-08T20:30:00+00:00",
+      "league": "POR1",
+      "mobile_sha256": "6cf1aaa14e68fb838ac9ed87ef4e03c1be065ba68e934cb9fd5fa1610383b9a6",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "03f5a5f1c0237ecd2e841fd5b0b5fb09fd1ec99b860977f8f105351f9afb55b9",
+      "decision_sha256": "7718c11e8603acc129bf5eb2e2cbc0f41221066698b0f7ec29d6897049f71bfe",
+      "fixture": "Club Brugge - Anderlecht",
+      "forecast_path": "forward_morning_263/2026-11-08/fd0c647da755288dcd7b49ce.json",
+      "forecast_sha256": "10ebf789580bafcf826ee6f081ba89341b7d6db30b39af38135f72b59dc0760d",
+      "kickoff_utc": "2026-11-08T12:30:00+00:00",
+      "league": "BEL1",
+      "mobile_sha256": "00d4675d2078a54df7b2710c4daf857e6f282ffbd97918c19a51189794cf9ad9",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "2dfc50d1261df13a73bec1115b50dafdd391c238f956d0b0ab78f6073303d086",
+      "decision_sha256": "8c3aa8e4905fd122b0eaa1fad2facd72bd530fc7561ab89d807ba1846ee299ec",
+      "fixture": "Gent - Kortrijk",
+      "forecast_path": "forward_morning_263/2026-11-08/d2a5e7c5bf5f7d4f0ecbc3db.json",
+      "forecast_sha256": "0dfe72b4e47d3e55a253883a6871eaf9eefa0e0f528db76c12978cc50f0e6898",
+      "kickoff_utc": "2026-11-08T15:00:00+00:00",
+      "league": "BEL1",
+      "mobile_sha256": "69a54efac85fef9c9c6d29a2647970dbcfaae4358a264ef09fb25756a45c9775",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V1"
+}

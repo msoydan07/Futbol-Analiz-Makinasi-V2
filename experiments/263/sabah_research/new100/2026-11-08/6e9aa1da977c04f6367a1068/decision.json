@@ -1,0 +1,426 @@
+{
+  "B_C2_C3_M4_not_blended": true,
+  "PAS_reasons": [
+    "NO_MORNING_OR_CURRENT_ODDS"
+  ],
+  "S1_S2_official_approved": false,
+  "all_market_diagnostics": [
+    {
+      "EV": null,
+      "anchor_model": "M4",
+      "calibrated_probability": 0.28233777475750255,
+      "dev_brier_skill": 0.11461,
+      "family": "MS",
+      "historical_base": 0.4176904176904177,
+      "market": "MS1",
+      "model_spread_pp": 9.857736816879651,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "UNDER_3_MODEL_SUPPORT",
+        "LOW_CALIBRATED_LIFT",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.28384194529583845,
+      "raw_model_probabilities": {
+        "B": 0.3102764972688309,
+        "C2": 0.21169912910003438,
+        "C3": 0.293981053183515,
+        "M4": 0.2737028374081619
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 0
+    },
+    {
+      "EV": null,
+      "anchor_model": "C3",
+      "calibrated_probability": 0.23301446538280451,
+      "dev_brier_skill": 0.008551,
+      "family": "MS",
+      "historical_base": 0.26535626535626533,
+      "market": "MSX",
+      "model_spread_pp": 2.684797932777766,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "UNDER_3_MODEL_SUPPORT",
+        "LOW_CALIBRATED_LIFT",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.22954608782758573,
+      "raw_model_probabilities": {
+        "B": 0.23854024325614717,
+        "C2": 0.2116922639283695,
+        "C3": 0.22735187705274654,
+        "M4": 0.2317402986024249
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 0
+    },
+    {
+      "EV": null,
+      "anchor_model": "C3",
+      "calibrated_probability": 0.4688662362610566,
+      "dev_brier_skill": 0.112613,
+      "family": "MS",
+      "historical_base": 0.31695331695331697,
+      "market": "MS2",
+      "model_spread_pp": 12.542534749657436,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "LOW_CALIBRATED_LIFT",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.4866119668765758,
+      "raw_model_probabilities": {
+        "B": 0.45118325947502186,
+        "C2": 0.5766086069715962,
+        "C3": 0.4786670697637384,
+        "M4": 0.4945568639894133
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 4
+    },
+    {
+      "EV": null,
+      "anchor_model": null,
+      "calibrated_probability": null,
+      "dev_brier_skill": null,
+      "family": "GOALS",
+      "historical_base": 0.8694581280788177,
+      "market": "OVER_1.5",
+      "model_spread_pp": 2.843239114809726,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "UNDER_3_MODEL_SUPPORT",
+        "NO_POSITIVE_DEV_BRIER_SKILL",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.8198148571299775,
+      "raw_model_probabilities": {
+        "B": 0.8043852274106071,
+        "C2": 0.8291148800835941,
+        "C3": 0.8328176185587044,
+        "M4": 0.8105148341763609
+      },
+      "strict_S1_75pct_3models_10pp_alert": true,
+      "support_count": 0
+    },
+    {
+      "EV": null,
+      "anchor_model": null,
+      "calibrated_probability": null,
+      "dev_brier_skill": null,
+      "family": "GOALS",
+      "historical_base": 0.13054187192118227,
+      "market": "UNDER_1.5",
+      "model_spread_pp": 2.843239114809726,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "NO_POSITIVE_DEV_BRIER_SKILL",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.18018514287002246,
+      "raw_model_probabilities": {
+        "B": 0.19561477258939286,
+        "C2": 0.17088511991640587,
+        "C3": 0.1671823814412956,
+        "M4": 0.18948516582363906
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 4
+    },
+    {
+      "EV": null,
+      "anchor_model": null,
+      "calibrated_probability": null,
+      "dev_brier_skill": null,
+      "family": "GOALS",
+      "historical_base": 0.6403940886699507,
+      "market": "OVER_2.5",
+      "model_spread_pp": 4.442625923337196,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "UNDER_3_MODEL_SUPPORT",
+        "NO_POSITIVE_DEV_BRIER_SKILL",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.6060327222965001,
+      "raw_model_probabilities": {
+        "B": 0.582130963386405,
+        "C2": 0.620602269446504,
+        "C3": 0.626557222619777,
+        "M4": 0.5914631751464962
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 0
+    },
+    {
+      "EV": null,
+      "anchor_model": null,
+      "calibrated_probability": null,
+      "dev_brier_skill": null,
+      "family": "GOALS",
+      "historical_base": 0.35960591133004927,
+      "market": "UNDER_2.5",
+      "model_spread_pp": 4.442625923337196,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "UNDER_3_MODEL_SUPPORT",
+        "NO_POSITIVE_DEV_BRIER_SKILL",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.39396727770349993,
+      "raw_model_probabilities": {
+        "B": 0.417869036613595,
+        "C2": 0.379397730553496,
+        "C3": 0.373442777380223,
+        "M4": 0.40853682485350384
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 2
+    },
+    {
+      "EV": null,
+      "anchor_model": "C3",
+      "calibrated_probability": 0.41567892740597207,
+      "dev_brier_skill": 0.009684,
+      "family": "GOALS",
+      "historical_base": 0.43349753694581283,
+      "market": "OVER_3.5",
+      "model_spread_pp": 4.6294778688008575,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "UNDER_3_MODEL_SUPPORT",
+        "LOW_CALIBRATED_LIFT",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.38280125463387293,
+      "raw_model_probabilities": {
+        "B": 0.35810988397345306,
+        "C2": 0.3980202246911214,
+        "C3": 0.40440466266146163,
+        "M4": 0.36758228457662445
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 0
+    },
+    {
+      "EV": null,
+      "anchor_model": "C3",
+      "calibrated_probability": 0.5843210725940279,
+      "dev_brier_skill": 0.009684,
+      "family": "GOALS",
+      "historical_base": 0.5665024630541872,
+      "market": "UNDER_3.5",
+      "model_spread_pp": 4.6294778688008575,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "LOW_CALIBRATED_LIFT",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.6171987453661271,
+      "raw_model_probabilities": {
+        "B": 0.6418901160265469,
+        "C2": 0.6019797753088786,
+        "C3": 0.5955953373385383,
+        "M4": 0.6324177154233755
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 4
+    },
+    {
+      "EV": null,
+      "anchor_model": "C3",
+      "calibrated_probability": 0.6375510179780831,
+      "dev_brier_skill": 0.000504,
+      "family": "KG",
+      "historical_base": 0.6428571428571429,
+      "market": "BTTS_YES",
+      "model_spread_pp": 3.4668625657577667,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "UNDER_3_MODEL_SUPPORT",
+        "LOW_CALIBRATED_LIFT",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.6012534589156604,
+      "raw_model_probabilities": {
+        "B": 0.6018864427232846,
+        "C2": 0.5977503903796884,
+        "C3": 0.632419016037266,
+        "M4": 0.6006204751080363
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 0
+    },
+    {
+      "EV": null,
+      "anchor_model": "C3",
+      "calibrated_probability": 0.36244898202191694,
+      "dev_brier_skill": 0.000504,
+      "family": "KG",
+      "historical_base": 0.35714285714285715,
+      "market": "BTTS_NO",
+      "model_spread_pp": 3.4668625657577667,
+      "no_vig_advantage_pp": null,
+      "observed_odds": null,
+      "price_age_class": null,
+      "price_checked_at_utc": null,
+      "price_snapshot_sha256": null,
+      "qualification_reasons": [
+        "LOW_CALIBRATED_LIFT",
+        "NO_SYNCHRONIZED_ODDS"
+      ],
+      "quote_source": null,
+      "raw_median_diagnostic_only": 0.39874654108433955,
+      "raw_model_probabilities": {
+        "B": 0.3981135572767154,
+        "C2": 0.40224960962031164,
+        "C3": 0.367580983962734,
+        "M4": 0.3993795248919637
+      },
+      "strict_S1_75pct_3models_10pp_alert": false,
+      "support_count": 3
+    }
+  ],
+  "alternative_candidate": null,
+  "alternative_price_current": false,
+  "alternative_value_conditional": false,
+  "any_selected_value_conditional": false,
+  "baseline_sha256": "8ffde60bd8a9f53f1fe7a57f6232608e4175bf48a4b5fa49994cc963049c02d0",
+  "betting_authorized": false,
+  "created_at_utc": "2026-11-08T09:56:20.360129+00:00",
+  "descriptive_most_likely_1x2_by_model_median": "MS2",
+  "dev_lock_sha256": "8ebed4a8b2d795935217826012e3ea5d2211d3d8503b29318266f10a2d09ceb5",
+  "fixture": {
+    "away_id": "1e7810fb-50b1-5185-8a6e-916a58d5a2be",
+    "fixture_verification": "VERIFIED_BY_LIVE_OFFICIAL_GATE",
+    "home_id": "5e3a580b-c714-5f24-8d92-b67268dd52b0",
+    "kickoff_utc": "2026-11-08T11:15:00+00:00",
+    "league": "NED1",
+    "match_local_date": "2026-11-08",
+    "official_source": "https://www.knvb.nl/competities/eredivisie/programma",
+    "source_checked_at_utc": "2026-11-08T09:56:21.553035+00:00"
+  },
+  "forecast_sha256": "aa0d4ae59adadb547aa9e8bdb094b3c6c329f28ff2a0c863c58f9e1f8634f16b",
+  "frozen_dev_only_calibration": true,
+  "high_probability_alerts_not_bets": [
+    {
+      "descriptive_raw_median": 0.8198148571299775,
+      "market": "OVER_1.5",
+      "not_a_bet": true
+    }
+  ],
+  "main_candidate": null,
+  "main_price_current": false,
+  "main_value_conditional": false,
+  "model_1x2": {
+    "B": {
+      "MS1": 0.3102764972688309,
+      "MS2": 0.45118325947502186,
+      "MSX": 0.23854024325614717
+    },
+    "C2": {
+      "MS1": 0.21169912910003438,
+      "MS2": 0.5766086069715962,
+      "MSX": 0.2116922639283695
+    },
+    "C3": {
+      "MS1": 0.293981053183515,
+      "MS2": 0.4786670697637384,
+      "MSX": 0.22735187705274654
+    },
+    "M4": {
+      "MS1": 0.2737028374081619,
+      "MS2": 0.4945568639894133,
+      "MSX": 0.2317402986024249
+    }
+  },
+  "model_top_scores": {
+    "B": {
+      "0-1": 0.08134698348353701,
+      "0-2": 0.06806014808500833,
+      "1-1": 0.10986066343467904,
+      "1-2": 0.0919165370599727,
+      "2-1": 0.07418446790193775
+    },
+    "C2": {},
+    "C3": {
+      "0-1": 0.07247366795000634,
+      "0-2": 0.06646577987482291,
+      "1-1": 0.10124152216516838,
+      "1-2": 0.09284885002734979,
+      "2-1": 0.07071427526885221
+    },
+    "M4": {
+      "0-1": 0.0833766842505724,
+      "0-2": 0.07458752037067022,
+      "1-1": 0.10646940046651487,
+      "1-2": 0.09524591494047933,
+      "2-1": 0.06797903597144601
+    }
+  },
+  "morning_and_fresh_mixed_by_market": false,
+  "morning_quote_sha256": null,
+  "morning_quote_status": "NO_MORNING_ARCHIVE",
+  "no_arbitrary_1_5_over_penalty": true,
+  "official_pilot_count_increment": 0,
+  "old_price_EV_is_historical_scenario_only": true,
+  "payload_sha256": "b457ee37f9d6818540757adb4f2250e66b2eb5fe34a97b0c0f4a676a3eda784f",
+  "production_modified": false,
+  "quote_reverified_by_code": false,
+  "quote_sha256": null,
+  "quote_status": "NO_VERIFIED_ODDS",
+  "same_goal_family_never_separate_alternative": true,
+  "schema": "263_four_model_value_decision_research_v1",
+  "status": "RESEARCH_PAS"
+}
