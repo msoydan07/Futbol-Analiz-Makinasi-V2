@@ -1,0 +1,28 @@
+name: Model challenge - pinned historical snapshot
+on:
+  push:
+    branches: [research/model-challenge]
+    paths:
+      - '.github/workflows/model-challenge-archive.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Ingest pinned CC0 20-league candidates and report rejects
+        run: python research/model_challenge/ingest_openfootball.py --out "$RUNNER_TEMP/model-challenge-archive"
+      - name: Publish audit plus normalized fixture archive
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-pinned-20league-archive
+          path: ${{ runner.temp }}/model-challenge-archive/
+          retention-days: 30
+          if-no-files-found: warn
