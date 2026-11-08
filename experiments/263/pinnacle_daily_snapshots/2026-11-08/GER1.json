@@ -1,0 +1,125 @@
+{
+  "api_request_attempts_max": 1,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "day_turkey": "2026-11-08",
+  "forecast_unchanged": true,
+  "league": "GER1",
+  "market": "h2h",
+  "observed_at_utc": "2026-11-08T09:56:58.437027+00:00",
+  "payload_sha256": "6983cc14e1fe5a641b1dac0a0365ea126d4ca9fa2d7063e9ea29e33d8237230f",
+  "provider": "The Odds API",
+  "reason": null,
+  "remaining_credits_as_returned": 492,
+  "request_made_or_outcome_unknown": true,
+  "reservation": {
+    "bookmaker": "pinnacle",
+    "day_turkey": "2026-11-08",
+    "league": "GER1",
+    "market": "h2h",
+    "reserved_at_utc": "2026-11-08T09:56:56.174427+00:00",
+    "retry_allowed_same_day": false,
+    "schema": "SABAH_PINNACLE_RESERVATION_V1",
+    "status": "CREDIT_RESERVED_OUTCOME_UNKNOWN"
+  },
+  "retry_automatically": false,
+  "schema": "SABAH_PINNACLE_SNAPSHOT_V1",
+  "source_bulk": {
+    "S1_S2_official_approved": false,
+    "betting_authorized": false,
+    "blocked": {},
+    "bookmaker_filter": "pinnacle",
+    "bookmaker_odds_not_iddaa": true,
+    "checked_at_utc": "2026-11-08T09:56:58.437027+00:00",
+    "day_turkey": "2026-11-08",
+    "forecast_or_decision_modified": false,
+    "independently_verified_fixture": false,
+    "leagues": {
+      "GER1": [
+        {
+          "away_team": "Bayer Leverkusen",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.83,
+                    "D": 4.08,
+                    "H": 4.28
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:43+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "1. FC Köln",
+          "kickoff_utc": "2026-11-08T14:30:00+00:00",
+          "provider_event_id": "c70f9f21f48464daa93973147502e183",
+          "sport": "soccer_germany_bundesliga"
+        },
+        {
+          "away_team": "Union Berlin",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 6.85,
+                    "D": 4.69,
+                    "H": 1.49
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:43+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "SC Freiburg",
+          "kickoff_utc": "2026-11-08T16:30:00+00:00",
+          "provider_event_id": "c1b9696d88719cb8832d794b986cdd68",
+          "sport": "soccer_germany_bundesliga"
+        },
+        {
+          "away_team": "FC Schalke 04",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 5.63,
+                    "D": 4.51,
+                    "H": 1.59
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:43+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "TSG Hoffenheim",
+          "kickoff_utc": "2026-11-08T18:30:00+00:00",
+          "provider_event_id": "8963081c3457212ee238b498bbc33a03",
+          "sport": "soccer_germany_bundesliga"
+        }
+      ]
+    },
+    "leagues_requested": [
+      "GER1"
+    ],
+    "markets_requested": [
+      "h2h"
+    ],
+    "max_one_run_credit_cost": 1,
+    "payload_sha256": "72846755592d09c19f06134b981d0bfd8c3519deb0c9913adf11912ca5463641",
+    "provider": "The Odds API (the-odds-api.com)",
+    "region": null,
+    "reported_remaining_credits": 492,
+    "schema": "263_free_bulk_external_odds_research_v1",
+    "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+  },
+  "status": "OBSERVED_OR_EMPTY"
+}
