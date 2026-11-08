@@ -1,0 +1,35 @@
+name: Model challenge - pinned newer-season independent check
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-nextseason.yml']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pin machine-learning dependencies
+        run: python -m pip install 'numpy==2.2.6' 'xgboost==3.0.5' 'scikit-learn==1.7.2'
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-pinned-20league-archive
+          run-id: 42532602610
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/archive
+      - name: Evaluate frozen params on 2026-27 after earlier seasons
+        run: python research/model_challenge/next_season_test.py --input "$RUNNER_TEMP/archive/normalized_matches.csv" --out "$RUNNER_TEMP/recheck/next_season.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: model-challenge-pinned-2026-27-check
+          path: ${{ runner.temp }}/recheck/
+          retention-days: 30
+          if-no-files-found: warn
