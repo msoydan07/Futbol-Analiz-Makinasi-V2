@@ -1,3 +1,26 @@
+# KESİN VE EN GÜNCEL KULLANICI KARARI — SİYAH-BEYAZ MOBİL SONUÇ EKRANI
+
+**Durum: KULLANICI TARAFINDAN AÇIKÇA ONAYLANDI — önceki renkli V2 kurallarının yerini alır.**
+
+Kullanıcı siyah-beyaz önizleme PDF'sini gördükten sonra “İşte bu ya 😂😂 evet ortak bu şekilde yapalım ve kalıcı hale gelsin” dedi. Bundan sonraki **her ana Makina 2.6.3 maç analizinde**, ayrıca sorulmadan bu görünüm varsayılan olarak uygulanacak. Yalnız kullanıcının yeni açık isteğiyle değiştirilebilir.
+
+## Siyah-beyaz görsel sözleşme (renkli V2 üstünde öncelikli)
+
+- **Sade, keskin kontrast:** beyaz sayfa `#FFFFFF`; ana başlıklar, maç adı, saatler ve belirgin yüzdeler siyah `#111111`; ikincil açıklamalar koyu gri `#555555`; kart içi/istatistik zemini açık gri `#F2F2F2` veya `#F7F7F7`; ayırıcı çizgi ve ince kart kenarı gri `#C9C9C9`.
+- **Renkli vurgu KULLANILMAZ:** lacivert/mavi/yeşil/kırmızı kaldırıldı. Olumlu/olumsuz piyasa farkı **işaret ile** gösterilir (`+6,0` ve `-8,9`); kırmızı/yeşille anlam taşınmaz.
+- **Her maç bağımsız çerçeve:** yuvarlatılmış ince koyu-gri veya gri çerçeve, çevresinde beyaz boşluk; hiçbir maç komşusuyla birleşmez.
+- Okunaklı sade Türkçe uyumlu sans-serif yazı; başlık ve önemli yüzdeler kalın, ikincil metin normal ağırlık.
+- **Eski ve onaylı bilgi yerleşimi AYNEN kalır:** başlıkta “N MAÇ | BİZİM % + PİYASA % + KG + ÜST”; sütunlar `TSİ | Maç | Bizim % | Piyasa % | Fark (yp)`; her maçın altında küçük `1/X/2 oranları + mevcut model sayısı`, sonra dört ayrı yatay açık-gri kutu `KG Var | 1,5 Üst | 2,5 Üst | 3,5 Üst`.
+- **En güçlü 10 maç** ayrı PDF: `TSİ | Maç + Ana tercih | Bizim % | Oran | Gerekli %`, altında aynı dört gol pazarı. Yeterli sayfa ve boşluk kullan, asla içeriği kesme veya tek sayfaya sıkıştırma.
+- **Her maç sonrası aynı standart:** tek maç, toplu maç, pilot sonucu veya günlük PDF raporu için aynı siyah-beyaz kart stilini kullan; kullanıcıdan tekrar renk/tasarım onayı isteme.
+- **Veri güvenliği:** sadece doğrulanmış mevcut model ve fiyat kullanılır; kayıtlı SHA tahminleri değiştirilmez. Oran yoksa çizgi (`—`); üçüncü taraf fiyat doğrudan Pinnacle mühürü gibi gösterilmez. Pilot ve araştırma ayrı etiketlenir.
+
+### Onaylı örnek
+
+`ANA_263_SIYAH_BEYAZ_ONIZLEME.pdf` kullanıcının onay verdiği **siyah-beyaz referans** dosyasıdır. GitHub'da bu doküman tasarımın kalıcı kaydıdır; gerçek otomatik PDF üreticisinin her iş akışına bağlanmış olduğu iddia edilmez.
+
+---
+
 # Makina 2.6.3 — KESİN MOBİL SONUÇ EKRANI (8 Kasım 2026)
 
 ## Onaylı görsel referans
