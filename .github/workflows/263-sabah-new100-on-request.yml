@@ -231,7 +231,9 @@ jobs:
           echo "SABAH_FORECAST_AND_ITS_PINNACLE_QUOTE_SHA_SAVED_SAME_RUN_NO_T60_NO_BET"
       - name: Produce approved compact and single-match mobile PDFs from SHA-validated frozen data
         if: steps.intake.outputs.kind == 'real_named_request'
-        continue-on-error: true
+        # User-approved monochrome boxed PDF is a mandatory delivery output.
+        # Existing SHA/pilot seals remain unchanged if presentation fails.
+        continue-on-error: false
         shell: bash
         env:
           PYTHONPATH: .:experiments/263
