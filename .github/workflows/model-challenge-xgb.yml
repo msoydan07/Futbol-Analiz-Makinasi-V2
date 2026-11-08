@@ -1,0 +1,50 @@
+name: Model challenge - chronological XGBoost
+on:
+  push:
+    branches: [research/model-challenge]
+    paths:
+      - '.github/workflows/model-challenge-xgb.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned ML requirements
+        run: python -m pip install 'numpy==2.2.6' 'xgboost==3.0.5'
+      - name: Offline feature and previous model QA
+        run: python -m unittest discover -s research/model_challenge -p 'test_*.py' -v
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-pinned-20league-archive
+          run-id: 42532602610
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/source
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-elo-initial-diagnostics
+          run-id: 42532664152
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/elo
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-poisson-paired-elo-diagnostics
+          run-id: 42533012701
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/poisson
+      - name: Chronological XGBoost - train, dev tune, holdout score
+        run: python research/model_challenge/xgb_challenger.py --input "$RUNNER_TEMP/source/normalized_matches.csv" --elo "$RUNNER_TEMP/elo/elo_predictions.csv" --poisson "$RUNNER_TEMP/poisson/poisson_predictions.csv" --out "$RUNNER_TEMP/xgb/xgb_predictions.csv"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: model-challenge-xgb-exploratory-diagnostics
+          path: ${{ runner.temp }}/xgb/
+          retention-days: 30
+          if-no-files-found: warn
