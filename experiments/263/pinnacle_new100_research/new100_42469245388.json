@@ -1,0 +1,2855 @@
+{
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "cohort": "new100",
+  "day_turkey": "2026-11-08",
+  "forecast_or_decision_modified": false,
+  "items": [
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "ffde2252a378d59f4e30ebdef2269f45c40c734ddbd92eaee053e941d0b35557",
+      "forecast_path": "forward_morning_263/2026-11-08/ef6d6dbdb8075839cda5abbd.json",
+      "forecast_sha256": "daa0d85a5e4e120e3420d35f4546c2f0d6699843cf3248c8aac9a7caf767d59a",
+      "kickoff_utc": "2026-11-08T10:30:00+00:00",
+      "league": "TUR1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "ffde2252a378d59f4e30ebdef2269f45c40c734ddbd92eaee053e941d0b35557",
+      "forecast_path": "forward_morning_263/2026-11-08/f0a7dd75ba79329ab6e1bff1.json",
+      "forecast_sha256": "610fbf97fd6728b071359debd600c9d3614c00b5fc931c1a5ff4ebcb81975f83",
+      "kickoff_utc": "2026-11-08T13:00:00+00:00",
+      "league": "TUR1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.4909441404519427,
+          "difference_percentage_points": -10.9819,
+          "illustrative_EV_percent": -20.958,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.61,
+          "pinnacle_no_vig": 0.600763264803644,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:57:04+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:11.563308+00:00",
+        "forecast_sha256": "87867c2828ceb2d02152b5533813848c61b94033d46cb57311170a2955220f6c",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T15:30:00+00:00",
+        "league": "TUR1",
+        "market": "MS_1X2",
+        "match": "Alanyaspor – Trabzonspor",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.46102620602966915,
+              "D": 0.2429894966286007,
+              "H": 0.2959842973417301
+            },
+            "vs_pinnacle_pp": {
+              "A": -13.9737,
+              "D": 1.6472,
+              "H": 12.3265
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.4343364338382248,
+              "D": 0.25746918329893836,
+              "H": 0.3081943828628367
+            },
+            "vs_pinnacle_pp": {
+              "A": -16.6427,
+              "D": 3.0952,
+              "H": 13.5475
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.5032146088862942,
+              "D": 0.2503341748314093,
+              "H": 0.2464512162822967
+            },
+            "vs_pinnacle_pp": {
+              "A": -9.7549,
+              "D": 2.3817,
+              "H": 7.3732
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.5181952311460206,
+              "D": 0.24231163344243375,
+              "H": 0.23949313541154563
+            },
+            "vs_pinnacle_pp": {
+              "A": -8.2568,
+              "D": 1.5794,
+              "H": 6.6774
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 1.61,
+          "D": 4.27,
+          "H": 5.6
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 3.3881,
+        "payload_sha256": "94fb1b13afe7f234de7d3afc0dbb9f770b21db9f57885bc75facf53445fb526b",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.600763264803644,
+          "D": 0.22651729656530842,
+          "H": 0.17271943863104766
+        },
+        "price_observed_at_utc": "2026-11-08T09:57:15.086361+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "3c68570a65b9d1cd30f3d6aaebfba63fb67e2c3b6620e75fd5483efe6cfcc754",
+        "source_event_id": "a85eafd97e49ac329956fa1022be891d",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "ffde2252a378d59f4e30ebdef2269f45c40c734ddbd92eaee053e941d0b35557",
+      "forecast_path": "forward_morning_263/2026-11-08/ff38bbd2c0eb6d200ed46bac.json",
+      "forecast_sha256": "87867c2828ceb2d02152b5533813848c61b94033d46cb57311170a2955220f6c",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "TUR1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "67162133d63466f93655ef7f25d0417906cdd1347f7c75778931eb55622679b9",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "ffde2252a378d59f4e30ebdef2269f45c40c734ddbd92eaee053e941d0b35557",
+      "forecast_path": "forward_morning_263/2026-11-08/8730c98b5070ec379d653b5d.json",
+      "forecast_sha256": "f3e5e938f2d2a84fa186f3293582ce803e2db27837899c581d6225be3d6ead81",
+      "kickoff_utc": "2026-11-08T18:00:00+00:00",
+      "league": "TUR1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "86e5eaf176135ad4f6a11ed9da50845b53f6ac50329641a2a6d38510ea1d4c0d",
+      "forecast_path": "forward_morning_263/2026-11-08/062917dbc0a41c92022f6c2a.json",
+      "forecast_sha256": "d0378af8f26f8036fbda7b8e19ff0dccdf003b4b281d3ee2cb87dd8827ba4d8d",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.4483400323138423,
+          "difference_percentage_points": -16.6176,
+          "illustrative_EV_percent": -29.1623,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.58,
+          "pinnacle_no_vig": 0.6145157024714625,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:25+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:12.553352+00:00",
+        "forecast_sha256": "df4d15d73c52008173739ee2abeb6e4cb752948ac1e513f6cef6253a807b1ed6",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T14:00:00+00:00",
+        "league": "ENG1",
+        "market": "MS_1X2",
+        "match": "Crystal Palace – Liverpool",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.508240058952536,
+              "D": 0.2307919352240599,
+              "H": 0.26096800582340435
+            },
+            "vs_pinnacle_pp": {
+              "A": -10.6276,
+              "D": 1.3581,
+              "H": 9.2695
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.6328645162730796,
+              "D": 0.19256522917450677,
+              "H": 0.17457025455241365
+            },
+            "vs_pinnacle_pp": {
+              "A": 1.8349,
+              "D": -2.4646,
+              "H": 0.6297
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.45762392173308825,
+              "D": 0.25309584612623126,
+              "H": 0.28928023214068044
+            },
+            "vs_pinnacle_pp": {
+              "A": -15.6892,
+              "D": 3.5884,
+              "H": 12.1007
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.5198635419175831,
+              "D": 0.23656082871194484,
+              "H": 0.2435756293704721
+            },
+            "vs_pinnacle_pp": {
+              "A": -9.4652,
+              "D": 1.9349,
+              "H": 7.5303
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 1.58,
+          "D": 4.47,
+          "H": 5.77
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.9935,
+        "payload_sha256": "9c6282b78bbab571b8bd613d632c72295c96fb8e29a45235676482c8136c89f5",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.6145157024714625,
+          "D": 0.21721136686910758,
+          "H": 0.16827293065942994
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:45.533992+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "d8d417416d42d042c27d407aac4d0322e6425bb5d0f894df1a0307f408cf9634",
+        "source_event_id": "0cfbab01e152f81e34f9014e02c7eb79",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "86e5eaf176135ad4f6a11ed9da50845b53f6ac50329641a2a6d38510ea1d4c0d",
+      "forecast_path": "forward_morning_263/2026-11-08/d80830efa086daff782010bc.json",
+      "forecast_sha256": "df4d15d73c52008173739ee2abeb6e4cb752948ac1e513f6cef6253a807b1ed6",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "814c67ab8a914d3ff015f843d2ce3b02c4c3295ca66c625903226ca7d6ae5f5c",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.38714614191557933,
+          "difference_percentage_points": -10.7828,
+          "illustrative_EV_percent": -23.7322,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.97,
+          "pinnacle_no_vig": 0.4949739827745738,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 3
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 3,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:25+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:12.717841+00:00",
+        "forecast_sha256": "7309dcbe1ee8bd930e71ca4a61261e349a75103bd19943b677b760568a84b2ff",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T14:00:00+00:00",
+        "league": "ENG1",
+        "market": "MS_1X2",
+        "match": "Ipswich Town – Bournemouth",
+        "model_missing_not_imputed": {
+          "B": {
+            "reason": null,
+            "status": "UNAVAILABLE_INSUFFICIENT_CONTEXT"
+          }
+        },
+        "models": {
+          "C2": {
+            "probabilities": {
+              "A": 0.3420543664416993,
+              "D": 0.2282484334029213,
+              "H": 0.42969720015537943
+            },
+            "vs_pinnacle_pp": {
+              "A": -15.292,
+              "D": -3.1778,
+              "H": 18.4698
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.3924820384063254,
+              "D": 0.22047828963370025,
+              "H": 0.3870396719599744
+            },
+            "vs_pinnacle_pp": {
+              "A": -10.2492,
+              "D": -3.9548,
+              "H": 14.204
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.4179970530815789,
+              "D": 0.21827438400583016,
+              "H": 0.363728562912591
+            },
+            "vs_pinnacle_pp": {
+              "A": -7.6977,
+              "D": -4.1752,
+              "H": 11.8729
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 1.97,
+          "D": 3.75,
+          "H": 3.98
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.5537,
+        "payload_sha256": "6172c4d00908ddd3c3053c4d0dd366aa57a63e9c68f318f9d0e5c74bdf802afd",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.4949739827745738,
+          "D": 0.26002633228424277,
+          "H": 0.2449996849411835
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:45.533992+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "d8d417416d42d042c27d407aac4d0322e6425bb5d0f894df1a0307f408cf9634",
+        "source_event_id": "79ed3df594d7b352ef027128b1ba5d0a",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "86e5eaf176135ad4f6a11ed9da50845b53f6ac50329641a2a6d38510ea1d4c0d",
+      "forecast_path": "forward_morning_263/2026-11-08/1f43bc78092246351d09075a.json",
+      "forecast_sha256": "7309dcbe1ee8bd930e71ca4a61261e349a75103bd19943b677b760568a84b2ff",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "094bf57393eea1a4fb8e93dcfffc276b1ec490e95bf578ce9c2551004fda0b9e",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.40668504582734577,
+          "difference_percentage_points": -6.4534,
+          "illustrative_EV_percent": -15.8162,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 2.07,
+          "pinnacle_no_vig": 0.471218613924445,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:25+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:12.881064+00:00",
+        "forecast_sha256": "b603f9d8df66f5813469d3c8b0518b1f779d001abac2185dd9dec1d6eb34f458",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T14:00:00+00:00",
+        "league": "ENG1",
+        "market": "MS_1X2",
+        "match": "Sunderland – Chelsea",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.4279239682377226,
+              "D": 0.27392552188068575,
+              "H": 0.2981505098815917
+            },
+            "vs_pinnacle_pp": {
+              "A": -4.3295,
+              "D": 0.5952,
+              "H": 3.7342
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.44769990692024564,
+              "D": 0.2829334426096111,
+              "H": 0.26936665047014313
+            },
+            "vs_pinnacle_pp": {
+              "A": -2.3519,
+              "D": 1.496,
+              "H": 0.8558
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.41328151676387803,
+              "D": 0.25779477167205866,
+              "H": 0.32892371156406325
+            },
+            "vs_pinnacle_pp": {
+              "A": -5.7937,
+              "D": -1.0178,
+              "H": 6.8116
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.44671735550702807,
+              "D": 0.2542072929617976,
+              "H": 0.2990753515311743
+            },
+            "vs_pinnacle_pp": {
+              "A": -2.4501,
+              "D": -1.3766,
+              "H": 3.8267
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 2.07,
+          "D": 3.64,
+          "H": 3.74
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.5197,
+        "payload_sha256": "3249f7a1e916f28edc89c702599484109f76a7aa969cc9530d8cd1b1c02d67c7",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.471218613924445,
+          "D": 0.26797322275373653,
+          "H": 0.26080816332181844
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:45.533992+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "d8d417416d42d042c27d407aac4d0322e6425bb5d0f894df1a0307f408cf9634",
+        "source_event_id": "3a4608abdf257d2a0024b944757d9dc9",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "86e5eaf176135ad4f6a11ed9da50845b53f6ac50329641a2a6d38510ea1d4c0d",
+      "forecast_path": "forward_morning_263/2026-11-08/61d20fc7da7adedec1c36090.json",
+      "forecast_sha256": "b603f9d8df66f5813469d3c8b0518b1f779d001abac2185dd9dec1d6eb34f458",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ENG1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "1efd7c430f26d8d1275ddb3ac423492806d5743f2948820ae1bc5a0ba0085449",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "anchor_model": "M4",
+          "calibrated_probability": 0.48240844145878864,
+          "difference_percentage_points": 3.7341,
+          "illustrative_EV_percent": 5.6474,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 2.19,
+          "pinnacle_no_vig": 0.44506758957363274,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 3
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:25+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:13.047005+00:00",
+        "forecast_sha256": "186e634252b23b784b147a7f4085780d01499b9d66cb25eb927a5077c0be2855",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T16:30:00+00:00",
+        "league": "ENG1",
+        "market": "MS_1X2",
+        "match": "Manchester United – Aston Villa",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.28716959767200384,
+              "D": 0.22070112912759565,
+              "H": 0.49212927320040056
+            },
+            "vs_pinnacle_pp": {
+              "A": -1.4594,
+              "D": -3.2467,
+              "H": 4.7062
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.3234599713812337,
+              "D": 0.24217652480442894,
+              "H": 0.43436350381433714
+            },
+            "vs_pinnacle_pp": {
+              "A": 2.1696,
+              "D": -1.0992,
+              "H": -1.0704
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.277274574730586,
+              "D": 0.2328387656599326,
+              "H": 0.4898866596094814
+            },
+            "vs_pinnacle_pp": {
+              "A": -2.449,
+              "D": -2.033,
+              "H": 4.4819
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.2822028801490878,
+              "D": 0.23145313610189455,
+              "H": 0.48634398374901755
+            },
+            "vs_pinnacle_pp": {
+              "A": -1.9561,
+              "D": -2.1715,
+              "H": 4.1276
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 3.23,
+          "D": 3.85,
+          "H": 2.19
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.5959,
+        "payload_sha256": "f244e764269293d360819bb48e10cee227a8eb259f8b2f61a9d0c472e703e2ad",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.3017640932403268,
+          "D": 0.2531683171860404,
+          "H": 0.44506758957363274
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:45.533992+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "d8d417416d42d042c27d407aac4d0322e6425bb5d0f894df1a0307f408cf9634",
+        "source_event_id": "b0a4b5448a7e02d9ad1eaa817599fff0",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "86e5eaf176135ad4f6a11ed9da50845b53f6ac50329641a2a6d38510ea1d4c0d",
+      "forecast_path": "forward_morning_263/2026-11-08/20512b0afcfd6010a2d4ccee.json",
+      "forecast_sha256": "186e634252b23b784b147a7f4085780d01499b9d66cb25eb927a5077c0be2855",
+      "kickoff_utc": "2026-11-08T16:30:00+00:00",
+      "league": "ENG1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "ebc0499cb9d318092570d34af7e8c1092fb8ee44e6ebd30d05bad18c1eeca585",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "6983cc14e1fe5a641b1dac0a0365ea126d4ca9fa2d7063e9ea29e33d8237230f",
+      "forecast_path": "forward_morning_263/2026-11-08/5cf4c6302ceeb451f0d3c9b9.json",
+      "forecast_sha256": "bc56d94cfc7ae759cb9898111034315a631def6fce980338e9bcd2c88a078df5",
+      "kickoff_utc": "2026-11-08T16:30:00+00:00",
+      "league": "GER1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "anchor_model": "M4",
+          "calibrated_probability": 0.5719542072037824,
+          "difference_percentage_points": -3.9679,
+          "illustrative_EV_percent": -9.0593,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.59,
+          "pinnacle_no_vig": 0.6116336937748561,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 3
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 3,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:43+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:14.396997+00:00",
+        "forecast_sha256": "21232a45211653cdfb54a9fda981ab4eecda0d861879be29256733b4e34afb33",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T18:30:00+00:00",
+        "league": "GER1",
+        "market": "MS_1X2",
+        "match": "TSG Hoffenheim – FC Schalke 04",
+        "model_missing_not_imputed": {
+          "B": {
+            "reason": null,
+            "status": "UNAVAILABLE_INSUFFICIENT_CONTEXT"
+          }
+        },
+        "models": {
+          "C2": {
+            "probabilities": {
+              "A": 0.2511345236937839,
+              "D": 0.21807603824279276,
+              "H": 0.5307894380634234
+            },
+            "vs_pinnacle_pp": {
+              "A": 7.84,
+              "D": 0.2445,
+              "H": -8.0844
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.1909688976977467,
+              "D": 0.2541731617776085,
+              "H": 0.554857940524645
+            },
+            "vs_pinnacle_pp": {
+              "A": 1.8234,
+              "D": 3.8542,
+              "H": -5.6776
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.1628001857735853,
+              "D": 0.25722264169576003,
+              "H": 0.5799771725306545
+            },
+            "vs_pinnacle_pp": {
+              "A": -0.9935,
+              "D": 4.1591,
+              "H": -3.1657
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 5.63,
+          "D": 4.51,
+          "H": 1.59
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.828,
+        "payload_sha256": "d37c708ea2726cb0ab0f272b470781e1155ac8c2c397a7a01205c991151216df",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.17273491529343182,
+          "D": 0.21563139093171202,
+          "H": 0.6116336937748561
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:58.437027+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "72846755592d09c19f06134b981d0bfd8c3519deb0c9913adf11912ca5463641",
+        "source_event_id": "8963081c3457212ee238b498bbc33a03",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "6983cc14e1fe5a641b1dac0a0365ea126d4ca9fa2d7063e9ea29e33d8237230f",
+      "forecast_path": "forward_morning_263/2026-11-08/9745eb15cb504918ad7dfcfd.json",
+      "forecast_sha256": "21232a45211653cdfb54a9fda981ab4eecda0d861879be29256733b4e34afb33",
+      "kickoff_utc": "2026-11-08T18:30:00+00:00",
+      "league": "GER1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "75a4d030b058a3a180fb274d7b3f2646be86f5f998ccb37ee7b91d74ca33ba96",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.36680182301797853,
+          "difference_percentage_points": -13.0952,
+          "illustrative_EV_percent": -28.1068,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.96,
+          "pinnacle_no_vig": 0.4977541207432178,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:47+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:14.560720+00:00",
+        "forecast_sha256": "a0ab1c1518c83f3237113948cc6113c735a90802f5c99ee71fe6674663bb28e3",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T13:00:00+00:00",
+        "league": "ESP1",
+        "market": "MS_1X2",
+        "match": "Elche CF – Real Betis",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.3924545660847507,
+              "D": 0.24857373894499807,
+              "H": 0.35897169497025133
+            },
+            "vs_pinnacle_pp": {
+              "A": -10.53,
+              "D": -0.3519,
+              "H": 10.8818
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.5353813641139143,
+              "D": 0.22945524692143854,
+              "H": 0.235163388964647
+            },
+            "vs_pinnacle_pp": {
+              "A": 3.7627,
+              "D": -2.2637,
+              "H": -1.499
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.37289499072318427,
+              "D": 0.2509547144303182,
+              "H": 0.3761502948464976
+            },
+            "vs_pinnacle_pp": {
+              "A": -12.4859,
+              "D": -0.1138,
+              "H": 12.5997
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.3782752232167774,
+              "D": 0.25229091259819536,
+              "H": 0.36943386418502744
+            },
+            "vs_pinnacle_pp": {
+              "A": -11.9479,
+              "D": 0.0198,
+              "H": 11.9281
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 1.96,
+          "D": 3.87,
+          "H": 3.9
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.5012,
+        "payload_sha256": "177168a7d36d841659796edecb86bae0597a36b2810d21a2f323a97902005719",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.4977541207432178,
+          "D": 0.25209252626788287,
+          "H": 0.25015335298889924
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:49.794747+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "8f87837ede7eb02f39e9ca36a6c3499acaa399f798e1480113ddc59eb5c3d4d7",
+        "source_event_id": "c35673eb1e889309d6985c091a43a3f5",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "5e348922927438f9371d94eab70b41e64f2aaca29c982aaa656c6b0a5fcd2514",
+      "forecast_path": "forward_morning_263/2026-11-08/345c15dcae142d444699aea6.json",
+      "forecast_sha256": "a0ab1c1518c83f3237113948cc6113c735a90802f5c99ee71fe6674663bb28e3",
+      "kickoff_utc": "2026-11-08T13:00:00+00:00",
+      "league": "ESP1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "0d54342241e3f4eed639b4160949fb77f8d2b872d6d348cc8005a294d3f1e42c",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "anchor_model": "M4",
+          "calibrated_probability": 0.5160866834550086,
+          "difference_percentage_points": -2.2844,
+          "illustrative_EV_percent": -6.5883,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.81,
+          "pinnacle_no_vig": 0.5389304758152558,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:47+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:15.484212+00:00",
+        "forecast_sha256": "eab4d1b74e8613ba7b26c1c0c8486179b451499af5a4fce17712e9c75c428592",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T15:15:00+00:00",
+        "league": "ESP1",
+        "market": "MS_1X2",
+        "match": "Real Sociedad – Rayo Vallecano",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.23249325366097368,
+              "D": 0.211661306690306,
+              "H": 0.5558454396487204
+            },
+            "vs_pinnacle_pp": {
+              "A": 0.8763,
+              "D": -2.5678,
+              "H": 1.6915
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.2500341609723146,
+              "D": 0.21143472594862184,
+              "H": 0.5385311130790635
+            },
+            "vs_pinnacle_pp": {
+              "A": 2.6304,
+              "D": -2.5904,
+              "H": -0.0399
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.2500777549623639,
+              "D": 0.23175159852798555,
+              "H": 0.5181706465096507
+            },
+            "vs_pinnacle_pp": {
+              "A": 2.6347,
+              "D": -0.5588,
+              "H": -2.076
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.2629301622341052,
+              "D": 0.2187898932973991,
+              "H": 0.5182799444684957
+            },
+            "vs_pinnacle_pp": {
+              "A": 3.92,
+              "D": -1.8549,
+              "H": -2.0651
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 4.36,
+          "D": 4.11,
+          "H": 1.81
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.5153,
+        "payload_sha256": "e9c368f003ebe5f866a3f7cb75723fabbdc05587e1085e551455a173ba27507a",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.2237303122077094,
+          "D": 0.23733921197703478,
+          "H": 0.5389304758152558
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:49.794747+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "8f87837ede7eb02f39e9ca36a6c3499acaa399f798e1480113ddc59eb5c3d4d7",
+        "source_event_id": "339a6465fa5153fd8f31e487cf557cf0",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "5e348922927438f9371d94eab70b41e64f2aaca29c982aaa656c6b0a5fcd2514",
+      "forecast_path": "forward_morning_263/2026-11-08/5bf23ee7110c1edbc12cd9c0.json",
+      "forecast_sha256": "eab4d1b74e8613ba7b26c1c0c8486179b451499af5a4fce17712e9c75c428592",
+      "kickoff_utc": "2026-11-08T15:15:00+00:00",
+      "league": "ESP1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "00bcb4b50e43d582e3f88f9aa61b7c18620aab5d51f895b722943be3ab17989c",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "anchor_model": "M4",
+          "calibrated_probability": 0.6285992435742709,
+          "difference_percentage_points": -1.453,
+          "illustrative_EV_percent": -5.0815,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.51,
+          "pinnacle_no_vig": 0.6431292505763844,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:47+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:15.693403+00:00",
+        "forecast_sha256": "46b1204daad0157c3c0252d3189f18e8be556d0c2e90378f18ba0e9d1e0a9fec",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T17:30:00+00:00",
+        "league": "ESP1",
+        "market": "MS_1X2",
+        "match": "Villarreal – Getafe",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.13147559484343552,
+              "D": 0.21965886348550268,
+              "H": 0.6488655416710618
+            },
+            "vs_pinnacle_pp": {
+              "A": -0.7654,
+              "D": 0.1918,
+              "H": 0.5736
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.09433350550357261,
+              "D": 0.1968913150245702,
+              "H": 0.7087751794718572
+            },
+            "vs_pinnacle_pp": {
+              "A": -4.4796,
+              "D": -2.085,
+              "H": 6.5646
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.14855068229697604,
+              "D": 0.24451328325558916,
+              "H": 0.6069360344474345
+            },
+            "vs_pinnacle_pp": {
+              "A": 0.9421,
+              "D": 2.6772,
+              "H": -3.6193
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.13045709977276704,
+              "D": 0.23157256086217204,
+              "H": 0.6379703393650609
+            },
+            "vs_pinnacle_pp": {
+              "A": -0.8673,
+              "D": 1.3831,
+              "H": -0.5159
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 6.98,
+          "D": 4.46,
+          "H": 1.51
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.9733,
+        "payload_sha256": "dcdd2f32b7011c8fbb87ed75a0839c0d778f78181fc27f11df795d7e541d7e2f",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.13912968028228373,
+          "D": 0.21774106914133193,
+          "H": 0.6431292505763844
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:49.794747+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "8f87837ede7eb02f39e9ca36a6c3499acaa399f798e1480113ddc59eb5c3d4d7",
+        "source_event_id": "81ad04996f63fb60b494d243b13ac586",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "5e348922927438f9371d94eab70b41e64f2aaca29c982aaa656c6b0a5fcd2514",
+      "forecast_path": "forward_morning_263/2026-11-08/5d8484eaf40f2d1160c2c53f.json",
+      "forecast_sha256": "46b1204daad0157c3c0252d3189f18e8be556d0c2e90378f18ba0e9d1e0a9fec",
+      "kickoff_utc": "2026-11-08T17:30:00+00:00",
+      "league": "ESP1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "fdd2e9f06daebc2586a9109965762b620f3267f7538883c27e6a05ac67b9e40c",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.27294242635211946,
+          "difference_percentage_points": 0.688,
+          "illustrative_EV_percent": 0.1699,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 3.67,
+          "pinnacle_no_vig": 0.26606275299881427,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 3
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:47+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:15.894068+00:00",
+        "forecast_sha256": "28472f68eb6418408a9523f88777f97ca0154624428fe1ea5dbf219c8bb1266f",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T11:30:00+00:00",
+        "league": "ITA1",
+        "market": "MS_1X2",
+        "match": "Napoli – Lazio",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.34653895461600337,
+              "D": 0.2966589566665642,
+              "H": 0.3568020887174323
+            },
+            "vs_pinnacle_pp": {
+              "A": 1.7768,
+              "D": 3.0596,
+              "H": -4.8364
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.5163585575694457,
+              "D": 0.2348025545431371,
+              "H": 0.2488388878874171
+            },
+            "vs_pinnacle_pp": {
+              "A": 18.7587,
+              "D": -3.126,
+              "H": -15.6327
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.287628304145864,
+              "D": 0.27868117609235077,
+              "H": 0.4336905197617853
+            },
+            "vs_pinnacle_pp": {
+              "A": -4.1143,
+              "D": 1.2618,
+              "H": 2.8524
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.31295726104311117,
+              "D": 0.2802822208862512,
+              "H": 0.4067605180706376
+            },
+            "vs_pinnacle_pp": {
+              "A": -1.5814,
+              "D": 1.4219,
+              "H": 0.1594
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 2.97,
+          "D": 3.67,
+          "H": 2.41
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.4118,
+        "payload_sha256": "5c484f883a67ed89c100bb94f05229cb0834e4c88c3ebdae42e5470fbff7b329",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.3287711459614977,
+          "D": 0.26606275299881427,
+          "H": 0.4051661010396881
+        },
+        "price_observed_at_utc": "2026-11-08T09:57:02.698132+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "d70334e12bed6a9580f74d98037280976f12ccb7b107444cee04fda8940872bc",
+        "source_event_id": "23bf8ea47358ef82f65aa7398a2b3921",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "fb5be120cc2c0cd4a709db456ab5461c2fb180c7bcb5f38478261e529a1f378d",
+      "forecast_path": "forward_morning_263/2026-11-08/71da02c75a4c46f2dbdd5722.json",
+      "forecast_sha256": "28472f68eb6418408a9523f88777f97ca0154624428fe1ea5dbf219c8bb1266f",
+      "kickoff_utc": "2026-11-08T11:30:00+00:00",
+      "league": "ITA1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "30e943d5810c29eb96406c77b6fb9c5e43f044916effaef1bf987f7572d0f196",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "fb5be120cc2c0cd4a709db456ab5461c2fb180c7bcb5f38478261e529a1f378d",
+      "forecast_path": "forward_morning_263/2026-11-08/a0699b42cc188fbbd09c4003.json",
+      "forecast_sha256": "94b1c744ebed55aa681770fd6572281c7b9ba9de0013bde1c8f2761c18afe212",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ITA1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "fb5be120cc2c0cd4a709db456ab5461c2fb180c7bcb5f38478261e529a1f378d",
+      "forecast_path": "forward_morning_263/2026-11-08/184eee19caccf46e525266d2.json",
+      "forecast_sha256": "4cc9fcefebacebc7af620e16399aee6ee0e6ec5ba5feb53e5e479995fbd31c6f",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "ITA1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "fb5be120cc2c0cd4a709db456ab5461c2fb180c7bcb5f38478261e529a1f378d",
+      "forecast_path": "forward_morning_263/2026-11-08/fbe09035935483a595b81d05.json",
+      "forecast_sha256": "0ad0fd848bd72f5159ef6cab03b8d18c0b1b5d28bf365af6a709e296f704fb46",
+      "kickoff_utc": "2026-11-08T17:00:00+00:00",
+      "league": "ITA1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.5293510666379593,
+          "difference_percentage_points": 8.8146,
+          "illustrative_EV_percent": 16.9866,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 2.21,
+          "pinnacle_no_vig": 0.44120555686366847,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:47+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:17.916867+00:00",
+        "forecast_sha256": "c62acc369a02c54bbe167f244466041ebec9df74f206787cb670c05a15341650",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T19:45:00+00:00",
+        "league": "ITA1",
+        "market": "MS_1X2",
+        "match": "Fiorentina – Juventus",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.48173766131015844,
+              "D": 0.27663223385431845,
+              "H": 0.24163010483552305
+            },
+            "vs_pinnacle_pp": {
+              "A": 4.0532,
+              "D": -0.1164,
+              "H": -3.9368
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.54413661167884,
+              "D": 0.23659282721637245,
+              "H": 0.21927056110478785
+            },
+            "vs_pinnacle_pp": {
+              "A": 10.2931,
+              "D": -4.1203,
+              "H": -6.1728
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.5406616343501238,
+              "D": 0.24532113903751895,
+              "H": 0.2140172266123573
+            },
+            "vs_pinnacle_pp": {
+              "A": 9.9456,
+              "D": -3.2475,
+              "H": -6.6981
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.5083911443830017,
+              "D": 0.2630714132211641,
+              "H": 0.22853744239583437
+            },
+            "vs_pinnacle_pp": {
+              "A": 6.7186,
+              "D": -1.4725,
+              "H": -5.2461
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 2.21,
+          "D": 3.51,
+          "H": 3.47
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.5573,
+        "payload_sha256": "462fb76edec01db990219775da38d859969eb9e9a90988cc08dff42db903d7d7",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.44120555686366847,
+          "D": 0.27779609135860606,
+          "H": 0.2809983517777254
+        },
+        "price_observed_at_utc": "2026-11-08T09:57:02.698132+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "d70334e12bed6a9580f74d98037280976f12ccb7b107444cee04fda8940872bc",
+        "source_event_id": "7f50eb7deaebfbcd45c3f4e7cd3724e4",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "fb5be120cc2c0cd4a709db456ab5461c2fb180c7bcb5f38478261e529a1f378d",
+      "forecast_path": "forward_morning_263/2026-11-08/607540a2aae30855c0ace7cb.json",
+      "forecast_sha256": "c62acc369a02c54bbe167f244466041ebec9df74f206787cb670c05a15341650",
+      "kickoff_utc": "2026-11-08T19:45:00+00:00",
+      "league": "ITA1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "b910c138369f114d4dc433065bdef1df551fc4bc78aeed6d9ba8a2a37f1bafc7",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.3584433992363931,
+          "difference_percentage_points": 4.2617,
+          "illustrative_EV_percent": 10.759,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 3.09,
+          "pinnacle_no_vig": 0.3158263566353803,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 3
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:50+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:18.084070+00:00",
+        "forecast_sha256": "9ed7c455a56f192e33b82c2e568676b0b49bc8971d0012a8be33f0f0645a76fc",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T14:00:00+00:00",
+        "league": "FRA1",
+        "market": "MS_1X2",
+        "match": "Rennes – Lille",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.35469262834418247,
+              "D": 0.2654673197939845,
+              "H": 0.3798400518618329
+            },
+            "vs_pinnacle_pp": {
+              "A": 3.8866,
+              "D": -0.8663,
+              "H": -3.0203
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.2973403888372724,
+              "D": 0.25590108529068434,
+              "H": 0.4467585258720433
+            },
+            "vs_pinnacle_pp": {
+              "A": -1.8486,
+              "D": -1.8229,
+              "H": 3.6715
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.36271021903779055,
+              "D": 0.24603933113332707,
+              "H": 0.39125044982888246
+            },
+            "vs_pinnacle_pp": {
+              "A": 4.6884,
+              "D": -2.8091,
+              "H": -1.8793
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.3563969519144787,
+              "D": 0.25945702776185864,
+              "H": 0.3841460203236628
+            },
+            "vs_pinnacle_pp": {
+              "A": 4.0571,
+              "D": -1.4673,
+              "H": -2.5897
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 3.09,
+          "D": 3.56,
+          "H": 2.38
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.4692,
+        "payload_sha256": "e6d870559102a6af02b73e150e4814ae00a08c06b8dbac5d8d8b7670751c13ac",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.3158263566353803,
+          "D": 0.2741301803380126,
+          "H": 0.4100434630266071
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:54.250639+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "86ac67c773b75c6d6f28a4866bd4cca2caa4a66e2d9cffbc596ce9add5a065bb",
+        "source_event_id": "4288fbe018e6e6fb223e389bcf3e57dd",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "074557c67a1370d1b489386ba565ae255786d8c874d5336086e450474cc62b16",
+      "forecast_path": "forward_morning_263/2026-11-08/8561878221ef595acd33c383.json",
+      "forecast_sha256": "9ed7c455a56f192e33b82c2e568676b0b49bc8971d0012a8be33f0f0645a76fc",
+      "kickoff_utc": "2026-11-08T14:00:00+00:00",
+      "league": "FRA1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "d2e7b9d471f37849603398a268ba051455ee743c157e833c7b538c0d91c68cee",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.421621091115603,
+          "difference_percentage_points": 4.6066,
+          "illustrative_EV_percent": 9.6215,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 2.6,
+          "pinnacle_no_vig": 0.3755548978987866,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:50+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:19.511627+00:00",
+        "forecast_sha256": "3dff2de14a2f40b402110d2cc8a6cc06aac0f6212667709781bdf53ce8d3ea44",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T16:15:00+00:00",
+        "league": "FRA1",
+        "market": "MS_1X2",
+        "match": "Brest – Lyon",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.3459966131095683,
+              "D": 0.2591430958797477,
+              "H": 0.39486029101068404
+            },
+            "vs_pinnacle_pp": {
+              "A": -2.9558,
+              "D": -1.9046,
+              "H": 4.8604
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.31772089445704293,
+              "D": 0.2608687275095291,
+              "H": 0.4214103780334279
+            },
+            "vs_pinnacle_pp": {
+              "A": -5.7834,
+              "D": -1.732,
+              "H": 7.5154
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.42996389103780586,
+              "D": 0.25504637929622676,
+              "H": 0.31498972966596755
+            },
+            "vs_pinnacle_pp": {
+              "A": 5.4409,
+              "D": -2.3142,
+              "H": -3.1267
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.40693953766270574,
+              "D": 0.2587737985905883,
+              "H": 0.3342866637467061
+            },
+            "vs_pinnacle_pp": {
+              "A": 3.1385,
+              "D": -1.9415,
+              "H": -1.197
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 2.6,
+          "D": 3.51,
+          "H": 2.82
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.4126,
+        "payload_sha256": "d43fd6d0c92d6ec05f3d8647bb939733981bd729ec9e2cdb2c853c86b0e39cfb",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.3755548978987866,
+          "D": 0.2781888132583605,
+          "H": 0.3462562888428529
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:54.250639+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "86ac67c773b75c6d6f28a4866bd4cca2caa4a66e2d9cffbc596ce9add5a065bb",
+        "source_event_id": "cc9731ee7796fe0d532f11ca2aa522c9",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "074557c67a1370d1b489386ba565ae255786d8c874d5336086e450474cc62b16",
+      "forecast_path": "forward_morning_263/2026-11-08/d6860dcd1dd71bb0f877d972.json",
+      "forecast_sha256": "3dff2de14a2f40b402110d2cc8a6cc06aac0f6212667709781bdf53ce8d3ea44",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "cb90e736b643b2677d443aac695463830e71c64b08332be6969b1cada6ae0892",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.4543406511267896,
+          "difference_percentage_points": -11.7725,
+          "illustrative_EV_percent": -22.7621,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.7,
+          "pinnacle_no_vig": 0.5720657931419014,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 3
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 3,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:50+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:19.677194+00:00",
+        "forecast_sha256": "fe20acbc0ae1247a66e44f5bcbe7733a04fa0475a5e42ef4756bbf25fceeedcf",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T16:15:00+00:00",
+        "league": "FRA1",
+        "market": "MS_1X2",
+        "match": "Le Mans FC – AS Monaco",
+        "model_missing_not_imputed": {
+          "B": {
+            "reason": null,
+            "status": "UNAVAILABLE_INSUFFICIENT_CONTEXT"
+          }
+        },
+        "models": {
+          "C2": {
+            "probabilities": {
+              "A": 0.40122160108112265,
+              "D": 0.2436929480953849,
+              "H": 0.3550854508234924
+            },
+            "vs_pinnacle_pp": {
+              "A": -17.0844,
+              "D": 0.5332,
+              "H": 16.5512
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.46479439040432824,
+              "D": 0.22532920442159232,
+              "H": 0.30987640517407966
+            },
+            "vs_pinnacle_pp": {
+              "A": -10.7271,
+              "D": -1.3032,
+              "H": 12.0303
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.5039287642222277,
+              "D": 0.21743375777319973,
+              "H": 0.27863747800457256
+            },
+            "vs_pinnacle_pp": {
+              "A": -6.8137,
+              "D": -2.0927,
+              "H": 8.9064
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 1.7,
+          "D": 4.08,
+          "H": 5.13
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.8265,
+        "payload_sha256": "cdb3b46a0907858e6529ecef92be02c3ee39b1ff753036134e7e205d7748aba3",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.5720657931419014,
+          "D": 0.2383607471424589,
+          "H": 0.18957345971563985
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:54.250639+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "86ac67c773b75c6d6f28a4866bd4cca2caa4a66e2d9cffbc596ce9add5a065bb",
+        "source_event_id": "a529e5762f18d97981194ec3668dc3d3",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "074557c67a1370d1b489386ba565ae255786d8c874d5336086e450474cc62b16",
+      "forecast_path": "forward_morning_263/2026-11-08/dd5d8b0a80b1f53f4c634b9a.json",
+      "forecast_sha256": "fe20acbc0ae1247a66e44f5bcbe7733a04fa0475a5e42ef4756bbf25fceeedcf",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "7760de8e82b93e6ddc90630bec52aef114cce03ba9d4f566be0907245916d832",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.3245407195368466,
+          "difference_percentage_points": -14.8905,
+          "illustrative_EV_percent": -33.1446,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 2.06,
+          "pinnacle_no_vig": 0.47344564947429424,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.2772333782508976,
+          "difference_percentage_points": 1.0759,
+          "illustrative_EV_percent": 1.4674,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 3.66,
+          "pinnacle_no_vig": 0.26647487374782675,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:50+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:19.844169+00:00",
+        "forecast_sha256": "7203f98fd9881b295cc67fc50f7b76096ed9435a037c6ae17d98c134b1d7211d",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T16:15:00+00:00",
+        "league": "FRA1",
+        "market": "MS_1X2",
+        "match": "Angers – Nice",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.32647136996722,
+              "D": 0.27237500911744705,
+              "H": 0.401153620915333
+            },
+            "vs_pinnacle_pp": {
+              "A": -14.6974,
+              "D": 0.59,
+              "H": 14.1074
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.3371878714737623,
+              "D": 0.27023749606795466,
+              "H": 0.39257463245828306
+            },
+            "vs_pinnacle_pp": {
+              "A": -13.6258,
+              "D": 0.3763,
+              "H": 13.2495
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.3266202696804416,
+              "D": 0.283123899284647,
+              "H": 0.39025583103491135
+            },
+            "vs_pinnacle_pp": {
+              "A": -14.6825,
+              "D": 1.6649,
+              "H": 13.0176
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.3527302226172944,
+              "D": 0.2845104123408522,
+              "H": 0.3627593650418533
+            },
+            "vs_pinnacle_pp": {
+              "A": -12.0715,
+              "D": 1.8036,
+              "H": 10.268
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 2.06,
+          "D": 3.66,
+          "H": 3.75
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.5328,
+        "payload_sha256": "5d1b35a75e915be6db3dd7e762bdc558a1b3d0b0bc8720a34f4ea02868fe5771",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.47344564947429424,
+          "D": 0.26647487374782675,
+          "H": 0.26007947677787896
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:54.250639+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "86ac67c773b75c6d6f28a4866bd4cca2caa4a66e2d9cffbc596ce9add5a065bb",
+        "source_event_id": "54fae64b1421d836e07a17cad0536c73",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "074557c67a1370d1b489386ba565ae255786d8c874d5336086e450474cc62b16",
+      "forecast_path": "forward_morning_263/2026-11-08/371e0fb1f127ad15620af253.json",
+      "forecast_sha256": "7203f98fd9881b295cc67fc50f7b76096ed9435a037c6ae17d98c134b1d7211d",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "4d09530c1e6596dc24c6ab155a50408a9ff2c572d208edf431f93e021247b144",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.3574951596070546,
+          "difference_percentage_points": -3.138,
+          "illustrative_EV_percent": -10.2687,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 2.51,
+          "pinnacle_no_vig": 0.388875552964576,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.2821708303869295,
+          "difference_percentage_points": -1.9088,
+          "illustrative_EV_percent": -8.5767,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 3.24,
+          "pinnacle_no_vig": 0.3012585302287301,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:50+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:20.016559+00:00",
+        "forecast_sha256": "1716d47c497442fc728fb1595fed1c1601efab81f5a08b22acce43b6176ae3aa",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T16:15:00+00:00",
+        "league": "FRA1",
+        "market": "MS_1X2",
+        "match": "Le Havre – Lorient",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.37020384393455336,
+              "D": 0.30975944484128204,
+              "H": 0.3200367112241647
+            },
+            "vs_pinnacle_pp": {
+              "A": -1.8672,
+              "D": 0.8501,
+              "H": 1.0171
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.4627500657008504,
+              "D": 0.3115507231425958,
+              "H": 0.22569921115655386
+            },
+            "vs_pinnacle_pp": {
+              "A": 7.3875,
+              "D": 1.0292,
+              "H": -8.4167
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.3617008026581786,
+              "D": 0.2889258289348759,
+              "H": 0.34937336840694533
+            },
+            "vs_pinnacle_pp": {
+              "A": -2.7175,
+              "D": -1.2333,
+              "H": 3.9507
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.3940813961918964,
+              "D": 0.3012753037385392,
+              "H": 0.3046433000695642
+            },
+            "vs_pinnacle_pp": {
+              "A": 0.5206,
+              "D": 0.0017,
+              "H": -0.5223
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 2.51,
+          "D": 3.24,
+          "H": 3.15
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 2.4509,
+        "payload_sha256": "ea14bbde070a62f273b0cfe92b66a9d617321bf788f0791632b4f13bec7555ae",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.388875552964576,
+          "D": 0.3012585302287301,
+          "H": 0.30986591680669384
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:54.250639+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "86ac67c773b75c6d6f28a4866bd4cca2caa4a66e2d9cffbc596ce9add5a065bb",
+        "source_event_id": "3e9954446f26494c04c4967db523d375",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "074557c67a1370d1b489386ba565ae255786d8c874d5336086e450474cc62b16",
+      "forecast_path": "forward_morning_263/2026-11-08/6af2293efedf63b6193af528.json",
+      "forecast_sha256": "1716d47c497442fc728fb1595fed1c1601efab81f5a08b22acce43b6176ae3aa",
+      "kickoff_utc": "2026-11-08T16:15:00+00:00",
+      "league": "FRA1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "32c25f133056b229ab790398ce8a8aeefbbcf95e12f85274cee54cf4f577c6f1",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "anchor_model": "M4",
+          "calibrated_probability": 0.5493130834081014,
+          "difference_percentage_points": 13.9962,
+          "illustrative_EV_percent": 30.1872,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 2.37,
+          "pinnacle_no_vig": 0.40935078994553264,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:50+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:20.189218+00:00",
+        "forecast_sha256": "0ea91fb6bc00588f2681a63f3da70e9f405ef4d83b1bad5cae1c8759ce3f3fb2",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T19:45:00+00:00",
+        "league": "FRA1",
+        "market": "MS_1X2",
+        "match": "RC Lens – Marseille",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.2024689318403808,
+              "D": 0.22018051936016814,
+              "H": 0.5773505487994508
+            },
+            "vs_pinnacle_pp": {
+              "A": -12.0918,
+              "D": -4.7082,
+              "H": 16.8
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.2838742805283112,
+              "D": 0.2303522265959384,
+              "H": 0.4857734928757503
+            },
+            "vs_pinnacle_pp": {
+              "A": -3.9513,
+              "D": -3.691,
+              "H": 7.6423
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.25326971845651447,
+              "D": 0.21585650802460177,
+              "H": 0.5308737735188837
+            },
+            "vs_pinnacle_pp": {
+              "A": -7.0117,
+              "D": -5.1406,
+              "H": 12.1523
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.23166762898498644,
+              "D": 0.21358320981955212,
+              "H": 0.5547491611954614
+            },
+            "vs_pinnacle_pp": {
+              "A": -9.1719,
+              "D": -5.3679,
+              "H": 14.5398
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 3.0,
+          "D": 3.63,
+          "H": 2.37
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 3.0756,
+        "payload_sha256": "07a1b044cb26f34027a2833fac13e94634f4cd96b1dd0eee0be257e4fc4e236f",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.3233871240569708,
+          "D": 0.2672620859974965,
+          "H": 0.40935078994553264
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:54.250639+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "86ac67c773b75c6d6f28a4866bd4cca2caa4a66e2d9cffbc596ce9add5a065bb",
+        "source_event_id": "4e917e19b59093a02a0e12bcf9a5ecc4",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "074557c67a1370d1b489386ba565ae255786d8c874d5336086e450474cc62b16",
+      "forecast_path": "forward_morning_263/2026-11-08/ef80a8d81345cf02448cfb6e.json",
+      "forecast_sha256": "0ea91fb6bc00588f2681a63f3da70e9f405ef4d83b1bad5cae1c8759ce3f3fb2",
+      "kickoff_utc": "2026-11-08T19:45:00+00:00",
+      "league": "FRA1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "cc91f422106201010820fa309b7c1ac7554bf1023fb51232cfc72cc12650701c",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.4688662362610566,
+          "difference_percentage_points": -8.1559,
+          "illustrative_EV_percent": -17.4795,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.76,
+          "pinnacle_no_vig": 0.5504256838649072,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:57:02+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:20.360129+00:00",
+        "forecast_sha256": "aa0d4ae59adadb547aa9e8bdb094b3c6c329f28ff2a0c863c58f9e1f8634f16b",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T11:15:00+00:00",
+        "league": "NED1",
+        "market": "MS_1X2",
+        "match": "Heerenveen – Feyenoord",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.45118325947502186,
+              "D": 0.23854024325614717,
+              "H": 0.3102764972688309
+            },
+            "vs_pinnacle_pp": {
+              "A": -9.9242,
+              "D": 1.5839,
+              "H": 8.3403
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.5766086069715962,
+              "D": 0.2116922639283695,
+              "H": 0.21169912910003438
+            },
+            "vs_pinnacle_pp": {
+              "A": 2.6183,
+              "D": -1.1009,
+              "H": -1.5174
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.4786670697637384,
+              "D": 0.22735187705274654,
+              "H": 0.293981053183515
+            },
+            "vs_pinnacle_pp": {
+              "A": -7.1759,
+              "D": 0.4651,
+              "H": 6.7108
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.4945568639894133,
+              "D": 0.2317402986024249,
+              "H": 0.2737028374081619
+            },
+            "vs_pinnacle_pp": {
+              "A": -5.5869,
+              "D": 0.9039,
+              "H": 4.6829
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 1.76,
+          "D": 4.35,
+          "H": 4.27
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 3.2259,
+        "payload_sha256": "8920af5c3c07c663123f20690bbbfddb8afdf3ff6084be405cdc273357081f49",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.5504256838649072,
+          "D": 0.22270096634534178,
+          "H": 0.22687334978975096
+        },
+        "price_observed_at_utc": "2026-11-08T09:57:06.857323+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "9f6b11ab67735326ab397b949960f4c32d69c85b8ce6b13b736d25e8a114e20e",
+        "source_event_id": "019e9d824f3f2251e5b777623d34a9df",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "d632d8e8b97e3c9fdda2abaca7a72bf95b5ecfe6c0509d464680b0b76b38f9a7",
+      "forecast_path": "forward_morning_263/2026-11-08/6e9aa1da977c04f6367a1068.json",
+      "forecast_sha256": "aa0d4ae59adadb547aa9e8bdb094b3c6c329f28ff2a0c863c58f9e1f8634f16b",
+      "kickoff_utc": "2026-11-08T11:15:00+00:00",
+      "league": "NED1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "b457ee37f9d6818540757adb4f2250e66b2eb5fe34a97b0c0f4a676a3eda784f",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "d632d8e8b97e3c9fdda2abaca7a72bf95b5ecfe6c0509d464680b0b76b38f9a7",
+      "forecast_path": "forward_morning_263/2026-11-08/00156b675f1e2d1a941fba4c.json",
+      "forecast_sha256": "07225b563d5aeeee2b43c89031304bbad885e4f3c8f96e7de6321382e402e59c",
+      "kickoff_utc": "2026-11-08T13:30:00+00:00",
+      "league": "NED1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:57:02+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:21.938112+00:00",
+        "forecast_sha256": "704d7d607bbb6e6d62d5947ee7773de20c6586d7571b64b18b1e6f10aa5cbe3f",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T15:45:00+00:00",
+        "league": "NED1",
+        "market": "MS_1X2",
+        "match": "AZ Alkmaar – Groningen",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.32708396357010083,
+              "D": 0.23540535571868904,
+              "H": 0.43751068071121035
+            },
+            "vs_pinnacle_pp": {
+              "A": 16.542,
+              "D": 3.7301,
+              "H": -20.2721
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.35253212514354143,
+              "D": 0.21366635228910752,
+              "H": 0.4338015225673512
+            },
+            "vs_pinnacle_pp": {
+              "A": 19.0868,
+              "D": 1.5562,
+              "H": -20.643
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.30265457885348074,
+              "D": 0.23671273207751184,
+              "H": 0.4606326890690074
+            },
+            "vs_pinnacle_pp": {
+              "A": 14.0991,
+              "D": 3.8608,
+              "H": -17.9599
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.31126092653084514,
+              "D": 0.22986629651804424,
+              "H": 0.4588727769511105
+            },
+            "vs_pinnacle_pp": {
+              "A": 14.9597,
+              "D": 3.1762,
+              "H": -18.1359
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 5.98,
+          "D": 4.88,
+          "H": 1.51
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 3.4394,
+        "payload_sha256": "3e3350df7cf520c6231059860b12afe5c90aeff510aa2d96dd66ae0e475348fe",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.16166385116605603,
+          "D": 0.19810447335512604,
+          "H": 0.640231675478818
+        },
+        "price_observed_at_utc": "2026-11-08T09:57:06.857323+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "9f6b11ab67735326ab397b949960f4c32d69c85b8ce6b13b736d25e8a114e20e",
+        "source_event_id": "c22d673775e6a4dc0810cc88b0ed75ec",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "d632d8e8b97e3c9fdda2abaca7a72bf95b5ecfe6c0509d464680b0b76b38f9a7",
+      "forecast_path": "forward_morning_263/2026-11-08/b67deb932f786e144178972f.json",
+      "forecast_sha256": "704d7d607bbb6e6d62d5947ee7773de20c6586d7571b64b18b1e6f10aa5cbe3f",
+      "kickoff_utc": "2026-11-08T15:45:00+00:00",
+      "league": "NED1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "3f0b24e6a6a4077ed85ab7f4996e57296729242d76f62af2ee400ff2f775f318",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "53f10c4283553963c3ccda45e85c9091886fa74a7a0232e0f7a99ac08786aab9",
+      "forecast_path": "forward_morning_263/2026-11-08/2ab937b233e1028fc8bc56b1.json",
+      "forecast_sha256": "48ad4e1f69f6768e8574cbec47160eef4aa33ada0d2b4ac7b284c1a26a6dc069",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "POR1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "anchor_model": "C3",
+          "calibrated_probability": 0.31410733024576365,
+          "difference_percentage_points": 0.1019,
+          "illustrative_EV_percent": -2.6267,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 3.1,
+          "pinnacle_no_vig": 0.31308881710690317,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:57:01+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:30.985816+00:00",
+        "forecast_sha256": "55e67388ea11071d1cddcaa52cad4ad8f50ae4b7258004e8631879a8b33357ff",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T15:30:00+00:00",
+        "league": "POR1",
+        "market": "MS_1X2",
+        "match": "Santa Clara – Gil Vicente",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.29222938367797224,
+              "D": 0.29950918931443415,
+              "H": 0.40826142700759394
+            },
+            "vs_pinnacle_pp": {
+              "A": 2.1874,
+              "D": -1.358,
+              "H": -0.8295
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.28516679281723656,
+              "D": 0.30228335125457145,
+              "H": 0.41254985592819193
+            },
+            "vs_pinnacle_pp": {
+              "A": 1.4812,
+              "D": -1.0805,
+              "H": -0.4006
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.3446380645760115,
+              "D": 0.32390547322480917,
+              "H": 0.33145646219917935
+            },
+            "vs_pinnacle_pp": {
+              "A": 7.4283,
+              "D": 1.0817,
+              "H": -8.5099
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.29794099946104596,
+              "D": 0.32450156617269693,
+              "H": 0.3775574343662571
+            },
+            "vs_pinnacle_pp": {
+              "A": 2.7586,
+              "D": 1.1413,
+              "H": -3.8999
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 3.59,
+          "D": 3.1,
+          "H": 2.33
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 3.0317,
+        "payload_sha256": "10a0a5f7e7edcfa87e1dab251f21931595d06d1e964a8feb05fd2511b1e59a63",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.2703552459697493,
+          "D": 0.31308881710690317,
+          "H": 0.4165559369233476
+        },
+        "price_observed_at_utc": "2026-11-08T09:57:10.990585+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "6d077a324232db673f2923a7f710ff640ceb97264c28bb200695b6fc99d22953",
+        "source_event_id": "3145127655251c9de0251675640e2101",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "53f10c4283553963c3ccda45e85c9091886fa74a7a0232e0f7a99ac08786aab9",
+      "forecast_path": "forward_morning_263/2026-11-08/1d8f2f0d822494ec98e960d7.json",
+      "forecast_sha256": "55e67388ea11071d1cddcaa52cad4ad8f50ae4b7258004e8631879a8b33357ff",
+      "kickoff_utc": "2026-11-08T15:30:00+00:00",
+      "league": "POR1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "c0afdc8b17a4193f6f2e0f4462a58a90959f4bb8b43c1eed1e42f31a89e23f7b",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "daily_snapshot_sha256": "53f10c4283553963c3ccda45e85c9091886fa74a7a0232e0f7a99ac08786aab9",
+      "forecast_path": "forward_morning_263/2026-11-08/225cec02e17ca1ff656f4151.json",
+      "forecast_sha256": "6c3559e439b11f44feee8f5a2bcb73aabe1a4671610b61ba58f873162222bce4",
+      "kickoff_utc": "2026-11-08T20:30:00+00:00",
+      "league": "POR1",
+      "odds_status": "NO_VERIFIED_CURRENT_ODDS",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": "NO_UNIQUE_EXACT_TEAM_AND_KICKOFF_MATCH",
+      "research_only": true,
+      "status": "NO_VALID_SAME_TIME_PINNACLE_REFERENCE"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "anchor_model": "M4",
+          "calibrated_probability": 0.762632008490199,
+          "difference_percentage_points": 16.485,
+          "illustrative_EV_percent": 23.5464,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.62,
+          "pinnacle_no_vig": 0.5977823509537119,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:27+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:31.390381+00:00",
+        "forecast_sha256": "10ebf789580bafcf826ee6f081ba89341b7d6db30b39af38135f72b59dc0760d",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T12:30:00+00:00",
+        "league": "BEL1",
+        "market": "MS_1X2",
+        "match": "Club Brugge – Anderlecht",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.0578125590221174,
+              "D": 0.09938732791907914,
+              "H": 0.8428001130588035
+            },
+            "vs_pinnacle_pp": {
+              "A": -12.6295,
+              "D": -11.8722,
+              "H": 24.5018
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.06020542142960495,
+              "D": 0.1193207858130507,
+              "H": 0.8204737927573443
+            },
+            "vs_pinnacle_pp": {
+              "A": -12.3902,
+              "D": -9.8789,
+              "H": 22.2691
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.13649811265578035,
+              "D": 0.16808994857446835,
+              "H": 0.6954119387697514
+            },
+            "vs_pinnacle_pp": {
+              "A": -4.761,
+              "D": -5.002,
+              "H": 9.763
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.08647811006880927,
+              "D": 0.12962343094579593,
+              "H": 0.7838984589853947
+            },
+            "vs_pinnacle_pp": {
+              "A": -9.763,
+              "D": -8.8486,
+              "H": 18.6116
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 5.26,
+          "D": 4.44,
+          "H": 1.62
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 3.2623,
+        "payload_sha256": "9b8e289614200060dda795678506c30a4553cc7972347ee19b21038ac1b796ed",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.18410787234696072,
+          "D": 0.2181097766993273,
+          "H": 0.5977823509537119
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:41.165599+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "80180498db285dece15aef2fbdfa0f04f4a78c74c4fbf31cd9e381783a7168fb",
+        "source_event_id": "8a92794bd5f89b8b91b2d8fefdac7b85",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "1a69c26c626fdefa8848f1c5256be502e69194dc01b20507d65ca1670693fd8b",
+      "forecast_path": "forward_morning_263/2026-11-08/fd0c647da755288dcd7b49ce.json",
+      "forecast_sha256": "10ebf789580bafcf826ee6f081ba89341b7d6db30b39af38135f72b59dc0760d",
+      "kickoff_utc": "2026-11-08T12:30:00+00:00",
+      "league": "BEL1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "7718c11e8603acc129bf5eb2e2cbc0f41221066698b0f7ec29d6897049f71bfe",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    },
+    {
+      "betting_authorized": false,
+      "calibrated_MS_research": {
+        "MS1": {
+          "anchor_model": "M4",
+          "calibrated_probability": 0.7762034885413046,
+          "difference_percentage_points": 14.7835,
+          "illustrative_EV_percent": 19.5353,
+          "never_an_approved_bet": true,
+          "pinnacle_decimal_odds": 1.54,
+          "pinnacle_no_vig": 0.6283687372239593,
+          "status": "DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
+          "support_count": 4
+        },
+        "MS2": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        },
+        "MSX": {
+          "calibrated_probability": null,
+          "status": "NO_SUPPORTED_DEV_CALIBRATION"
+        }
+      },
+      "comparison": {
+        "accuracy_not_yet_established": true,
+        "available_model_count": 4,
+        "betting_authorized": false,
+        "bookmaker": "pinnacle",
+        "bookmaker_last_update_utc": "2026-11-08T09:56:27+00:00",
+        "bookmaker_verified_directly": false,
+        "changes_forecast_or_decision": false,
+        "forecast_recorded_at_utc": "2026-11-08T09:56:33.279167+00:00",
+        "forecast_sha256": "0dfe72b4e47d3e55a253883a6871eaf9eefa0e0f528db76c12978cc50f0e6898",
+        "independent_benchmark": true,
+        "kickoff_utc": "2026-11-08T15:00:00+00:00",
+        "league": "BEL1",
+        "market": "MS_1X2",
+        "match": "Gent – KV Kortrijk",
+        "model_missing_not_imputed": {},
+        "models": {
+          "B": {
+            "probabilities": {
+              "A": 0.10286803611464779,
+              "D": 0.2060286960209803,
+              "H": 0.6911032678643722
+            },
+            "vs_pinnacle_pp": {
+              "A": -4.8333,
+              "D": -1.4401,
+              "H": 6.2735
+            }
+          },
+          "C2": {
+            "probabilities": {
+              "A": 0.0638936660411746,
+              "D": 0.15959153751219216,
+              "H": 0.7765147964466336
+            },
+            "vs_pinnacle_pp": {
+              "A": -8.7308,
+              "D": -6.0838,
+              "H": 14.8146
+            }
+          },
+          "C3": {
+            "probabilities": {
+              "A": 0.08605414258521905,
+              "D": 0.17636513163358328,
+              "H": 0.7375807257811976
+            },
+            "vs_pinnacle_pp": {
+              "A": -6.5147,
+              "D": -4.4065,
+              "H": 10.9212
+            }
+          },
+          "M4": {
+            "probabilities": {
+              "A": 0.05053234724104322,
+              "D": 0.15113190957235056,
+              "H": 0.7983357431866063
+            },
+            "vs_pinnacle_pp": {
+              "A": -10.0669,
+              "D": -6.9298,
+              "H": 16.9967
+            }
+          }
+        },
+        "no_vig_method": "PROPORTIONAL_NOT_TRUE_PROBABILITY",
+        "odds": {
+          "A": 6.4,
+          "D": 4.39,
+          "H": 1.54
+        },
+        "official_S1_S2_approved": false,
+        "official_pilot_count_increment": 0,
+        "overround_pp": 3.3391,
+        "payload_sha256": "d342755897dfd35748ad21b872325469e3388b8fa8fcc85461f73ab70da305f3",
+        "pinnacle_no_vig_probabilities": {
+          "A": 0.1512012273945152,
+          "D": 0.22043003538152559,
+          "H": 0.6283687372239593
+        },
+        "price_observed_at_utc": "2026-11-08T09:56:41.165599+00:00",
+        "provider": "The Odds API (the-odds-api.com)",
+        "schema": "263_pinnacle_readonly_benchmark_v1",
+        "source_bulk_sha256": "80180498db285dece15aef2fbdfa0f04f4a78c74c4fbf31cd9e381783a7168fb",
+        "source_event_id": "16029fbb3d6ae79243c5650896bef095",
+        "status": "READ_ONLY_SAME_TIME_BENCHMARK"
+      },
+      "daily_snapshot_sha256": "1a69c26c626fdefa8848f1c5256be502e69194dc01b20507d65ca1670693fd8b",
+      "forecast_path": "forward_morning_263/2026-11-08/d2a5e7c5bf5f7d4f0ecbc3db.json",
+      "forecast_sha256": "0dfe72b4e47d3e55a253883a6871eaf9eefa0e0f528db76c12978cc50f0e6898",
+      "kickoff_utc": "2026-11-08T15:00:00+00:00",
+      "league": "BEL1",
+      "odds_status": "PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED",
+      "original_PAS_decision_sha256": "8c3aa8e4905fd122b0eaa1fad2facd72bd530fc7561ab89d807ba1846ee299ec",
+      "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+      "reason": null,
+      "research_only": true,
+      "status": "READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED"
+    }
+  ],
+  "market": "h2h",
+  "matches_compared": 22,
+  "matches_total": 33,
+  "no_pilot_count_change": true,
+  "not_a_market_based_bet_selection": true,
+  "official_S1_S2_approved": false,
+  "payload_sha256": "982156ae448591c6c1d7dec1529eebece36a2147c77a66f34e487a92dbfa1e6d",
+  "price_is_sealed_as_morning_observation_not_t60": true,
+  "provider": "The Odds API",
+  "quote_phase": "MORNING_ANALYSIS_TIME_NOT_T_MINUS_60",
+  "schema": "263_NEW100_SAMEJOB_PINNACLE_RESEARCH_V1"
+}
