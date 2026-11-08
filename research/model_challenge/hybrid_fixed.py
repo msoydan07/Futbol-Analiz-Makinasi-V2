@@ -28,9 +28,12 @@ def pool(preds):
                    for j in range(3))
     if not all(math.isfinite(x) and 0 < x < 1 for x in result):
         raise ValueError("invalid pooled probability")
-    if abs(sum(result) - 1) > 1e-10:
+    total = sum(result)
+    # XGBoost exports float32 probabilities; a ~1e-8 sum deviation
+    # is expected and must not invalidate correctly paired predictions.
+    if abs(total - 1) > 1e-5:
         raise ValueError("non-normalized pool")
-    return result
+    return tuple(x / total for x in result)
 
 def run(elo_file, poisson_file, xgb_file, out_file):
     paths = {"Elo": elo_file, "Poisson": poisson_file, "XGBoost": xgb_file}
