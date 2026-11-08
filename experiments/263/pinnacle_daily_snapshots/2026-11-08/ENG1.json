@@ -1,0 +1,171 @@
+{
+  "api_request_attempts_max": 1,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "day_turkey": "2026-11-08",
+  "forecast_unchanged": true,
+  "league": "ENG1",
+  "market": "h2h",
+  "observed_at_utc": "2026-11-08T09:56:45.533992+00:00",
+  "payload_sha256": "86e5eaf176135ad4f6a11ed9da50845b53f6ac50329641a2a6d38510ea1d4c0d",
+  "provider": "The Odds API",
+  "reason": null,
+  "remaining_credits_as_returned": 495,
+  "request_made_or_outcome_unknown": true,
+  "reservation": {
+    "bookmaker": "pinnacle",
+    "day_turkey": "2026-11-08",
+    "league": "ENG1",
+    "market": "h2h",
+    "reserved_at_utc": "2026-11-08T09:56:43.133409+00:00",
+    "retry_allowed_same_day": false,
+    "schema": "SABAH_PINNACLE_RESERVATION_V1",
+    "status": "CREDIT_RESERVED_OUTCOME_UNKNOWN"
+  },
+  "retry_automatically": false,
+  "schema": "SABAH_PINNACLE_SNAPSHOT_V1",
+  "source_bulk": {
+    "S1_S2_official_approved": false,
+    "betting_authorized": false,
+    "blocked": {},
+    "bookmaker_filter": "pinnacle",
+    "bookmaker_odds_not_iddaa": true,
+    "checked_at_utc": "2026-11-08T09:56:45.533992+00:00",
+    "day_turkey": "2026-11-08",
+    "forecast_or_decision_modified": false,
+    "independently_verified_fixture": false,
+    "leagues": {
+      "ENG1": [
+        {
+          "away_team": "Bournemouth",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.97,
+                    "D": 3.75,
+                    "H": 3.98
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:25+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Ipswich Town",
+          "kickoff_utc": "2026-11-08T14:00:00+00:00",
+          "provider_event_id": "79ed3df594d7b352ef027128b1ba5d0a",
+          "sport": "soccer_epl"
+        },
+        {
+          "away_team": "Brentford",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 3.94,
+                    "D": 3.94,
+                    "H": 1.93
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:25+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Brighton and Hove Albion",
+          "kickoff_utc": "2026-11-08T14:00:00+00:00",
+          "provider_event_id": "8e3ca98e29be84dd4a882ed05f50fa79",
+          "sport": "soccer_epl"
+        },
+        {
+          "away_team": "Chelsea",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.07,
+                    "D": 3.64,
+                    "H": 3.74
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:25+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Sunderland",
+          "kickoff_utc": "2026-11-08T14:00:00+00:00",
+          "provider_event_id": "3a4608abdf257d2a0024b944757d9dc9",
+          "sport": "soccer_epl"
+        },
+        {
+          "away_team": "Liverpool",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.58,
+                    "D": 4.47,
+                    "H": 5.77
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:25+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Crystal Palace",
+          "kickoff_utc": "2026-11-08T14:00:00+00:00",
+          "provider_event_id": "0cfbab01e152f81e34f9014e02c7eb79",
+          "sport": "soccer_epl"
+        },
+        {
+          "away_team": "Aston Villa",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 3.23,
+                    "D": 3.85,
+                    "H": 2.19
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:25+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Manchester United",
+          "kickoff_utc": "2026-11-08T16:30:00+00:00",
+          "provider_event_id": "b0a4b5448a7e02d9ad1eaa817599fff0",
+          "sport": "soccer_epl"
+        }
+      ]
+    },
+    "leagues_requested": [
+      "ENG1"
+    ],
+    "markets_requested": [
+      "h2h"
+    ],
+    "max_one_run_credit_cost": 1,
+    "payload_sha256": "d8d417416d42d042c27d407aac4d0322e6425bb5d0f894df1a0307f408cf9634",
+    "provider": "The Odds API (the-odds-api.com)",
+    "region": null,
+    "reported_remaining_credits": 495,
+    "schema": "263_free_bulk_external_odds_research_v1",
+    "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+  },
+  "status": "OBSERVED_OR_EMPTY"
+}
