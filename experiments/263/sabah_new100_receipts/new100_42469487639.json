@@ -1,0 +1,146 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "2e3de33b6987c6244322ba4e3e619e9d57ebd7205b69c259c37ad51b7a4c4e9d",
+  "betting_authorized": false,
+  "blocked_count": 1,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-08T10:00:19.280045+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-08",
+  "decisions": "RESEARCH_PAS",
+  "existing_same_cohort_count": 0,
+  "input_count": 8,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "2ed36bcc8acf1d568b7c558046760d2b936711c9730f5a312ffc85246f20da15",
+  "new_count": 7,
+  "no_verified_odds": true,
+  "payload_sha256": "e86f912a9d749c4392e2f75f7099f99b3d3ef38ab01fda3aa984e466045a7b61",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "53ada6b649de64ee225e5e499e94cc1ace0a5f426cd05165c314083c78a67ef7",
+      "decision_sha256": "b2b104170f6a07ed58f9fd82ce56d9921b2fb25a4e445ac4dc128b410f46fcf1",
+      "fixture": "1. FC Köln - Bayer Leverkusen",
+      "forecast_path": "forward_morning_263/2026-11-08/58768b714db316ae74d21f23.json",
+      "forecast_sha256": "ebc667b50db3518d902e8c2b3671f5ec8cd27f7102c19d64207b94ff01e3d978",
+      "kickoff_utc": "2026-11-08T14:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "721d58e01201a342f8d67f44166339b8b3737f60d31cf51cb29152d15c3c3c5e",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "fa9f325b626d89649f42b0211cd66af53982cb5c6fb6af23de8fd50c345832ef",
+      "decision_sha256": "3302bf9a1d71ac063619e82c3d3524eb8142c4fdeda27f310292f129aa443151",
+      "fixture": "Celta Vigo - Levante",
+      "forecast_path": "forward_morning_263/2026-11-08/ef774b1941726bb815e21113.json",
+      "forecast_sha256": "c7dc70d95feb8b8803769b3dfdef1a9b4c19c03779875fdd2177f94dd7e85215",
+      "kickoff_utc": "2026-11-08T17:30:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "8d45eb8fabe42a7204a162a1953fff3a2fad686ab8b1f647c3019137611ce149",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "98e913c42dd8a9eaff06a6eef92c7aa2245ebfe625db0330f7aa5d13bc29e547",
+      "decision_sha256": "32eeb4eae973743db33d88352eefe101d62390b4192a4e6d89cf732618a1e781",
+      "fixture": "Atlético Madrid - Barcelona",
+      "forecast_path": "forward_morning_263/2026-11-08/2694dc278420f92c3170df42.json",
+      "forecast_sha256": "54fc1ae546e4f5cd789a93ae3e0b4876e5ceb365477ecc1828576500af1186b5",
+      "kickoff_utc": "2026-11-08T20:00:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "03776b2e66350445821a5fd63ed33696c53e804bc3206a82bf0d1103062eb7e5",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "6d1bc772e92e228102c856a71fbf211d361914ebad10ccb0d59c71cf91ce2bbd",
+      "decision_sha256": "c54e6e3dfc8a12b0fa4bbf869ec7101251c6138e65ea85ff07dcb1161be7f0d7",
+      "fixture": "Vitória Guimarães - FC Porto",
+      "forecast_path": "forward_morning_263/2026-11-08/c0098d9f20ab47ad61b70758.json",
+      "forecast_sha256": "3427c404431dd775b8ef618ec4855e960f2009f9757f17d27169cd2bb2a3f40f",
+      "kickoff_utc": "2026-11-08T18:00:00+00:00",
+      "league": "POR1",
+      "mobile_sha256": "36fcfe6c64c06bc5bbcc6751267b3aedcc06354d725cf953cf0c4ce0d76174e1",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "504dc7ba9cf4976cad98632e4c61aaa4ab0b4b7b9b6b109bf08cd91bf2b1b822",
+      "decision_sha256": "8326e5bbfc5d578e7e1ab346b6ee1dfdb59f0018fe36bade2645f5e8077e84a6",
+      "fixture": "Rio Ave - Braga",
+      "forecast_path": "forward_morning_263/2026-11-08/7da87704a9ca3502792eb273.json",
+      "forecast_sha256": "9bb66aca22603e1d31abc9885418296d77c349c2d6fb48bca902d411756f92d9",
+      "kickoff_utc": "2026-11-08T20:30:00+00:00",
+      "league": "POR1",
+      "mobile_sha256": "df9f721719152eb8f0e161754059cae23aa49750eb88b3b4295337004d323c22",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "2063d1a9b5db0695465d4be63c0cc26f6f4c84ff5556e14b09520d1b3ccccc5b",
+      "decision_sha256": "252b647583dc743fba2bb37b4792cb873c7b9a1e4f183e694618be78c630ab12",
+      "fixture": "Union Saint-Gilloise - Genk",
+      "forecast_path": "forward_morning_263/2026-11-08/e4238ec0199d302c7f70a1ba.json",
+      "forecast_sha256": "c1a4914f68aa7ad3f0292055247bfdf4d41da9d112f2b1a18cf1aea26d5706f5",
+      "kickoff_utc": "2026-11-08T17:30:00+00:00",
+      "league": "BEL1",
+      "mobile_sha256": "c5b0a52e1318b462aeff4e9153448313f716c22dcda1b8a7b1a22e8e53f76661",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "622d5d60a86651d7c4707cc10029e9b0d2382b46e147950419f1afe466c16a25",
+      "decision_sha256": "294f62a10615495b5291699bd423da288ba24b30d4789f4d4235495d195fb468",
+      "fixture": "Sint-Truiden - Zulte Waregem",
+      "forecast_path": "forward_morning_263/2026-11-08/fe270944ce6cea41af7078fe.json",
+      "forecast_sha256": "9a06245858879d2e18b6329bac87a82ced04375172f2d96956a067061cb321ad",
+      "kickoff_utc": "2026-11-08T18:15:00+00:00",
+      "league": "BEL1",
+      "mobile_sha256": "e0a1eef5225d1a89f07ca47834d94d4fc8846b6bbe21731b3fb6166ac0653870",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V1"
+}

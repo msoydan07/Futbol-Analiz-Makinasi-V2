@@ -1,0 +1,406 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 1,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-08T09:59:56.877790+00:00",
+  "day_turkey": "2026-11-08",
+  "input_count": 8,
+  "new_forecasts": 7,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "BEL1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "a424002ed46668201a87e2615b547b22a60496906482edb3a67f057e81b37973",
+      "parsed_events": 9,
+      "source_url": "https://www.proleague.be/jpl-kalender!",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "ESP1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "1826259ea70b2d1aecebe59432ccd5fde58d53b1547fd3a55ed47e37ee9598d6",
+      "parsed_events": 10,
+      "source_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "GER1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "20cd810856fac543fcc6670fb11ddefb661479a64e7462a05fcc14693bdfd040",
+      "parsed_events": 9,
+      "source_url": "https://products.bundesliga.com/fixtures",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "NED1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "3e829fbee8a7cb24323af10bed315d2d79bb1216c2ed12a91dfe3ddee4e55e28",
+      "parsed_events": 100,
+      "source_url": "https://www.knvb.nl/competities/eredivisie/programma",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    },
+    "POR1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "376d401b8ebc4792dc9538ae5bd27d7cc3b56972bec93a59e2bb87783dd0d706",
+      "parsed_events": 9,
+      "source_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "Bayer Leverkusen",
+      "decision_sha256": "b2b104170f6a07ed58f9fd82ce56d9921b2fb25a4e445ac4dc128b410f46fcf1",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/58768b714db316ae74d21f23.json",
+      "forecast_sha256": "ebc667b50db3518d902e8c2b3671f5ec8cd27f7102c19d64207b94ff01e3d978",
+      "home": "1. FC Köln",
+      "kickoff_utc": "2026-11-08T14:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "20cd810856fac543fcc6670fb11ddefb661479a64e7462a05fcc14693bdfd040",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "Bayer Leverkusen",
+        "requested_home": "1. FC Köln",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "86c2df96-ecbc-5200-93f2-2b56083efbe6": "VERI_YETERSIZ",
+        "bec22b9c-1ac9-5351-b1a1-11ed122fe9f9": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "86c2df96-ecbc-5200-93f2-2b56083efbe6": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "bec22b9c-1ac9-5351-b1a1-11ed122fe9f9": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Levante",
+      "decision_sha256": "3302bf9a1d71ac063619e82c3d3524eb8142c4fdeda27f310292f129aa443151",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/ef774b1941726bb815e21113.json",
+      "forecast_sha256": "c7dc70d95feb8b8803769b3dfdef1a9b4c19c03779875fdd2177f94dd7e85215",
+      "home": "Celta Vigo",
+      "kickoff_utc": "2026-11-08T17:30:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "1826259ea70b2d1aecebe59432ccd5fde58d53b1547fd3a55ed47e37ee9598d6",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Levante",
+        "requested_home": "Celta Vigo",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_nov2026"
+      },
+      "rotation": {
+        "5e616a0f-2d33-5c0d-b116-d11cb33d0580": "VERI_YETERSIZ",
+        "6ad330c9-ad3c-5944-818d-c9a67a993f8e": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "5e616a0f-2d33-5c0d-b116-d11cb33d0580": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "6ad330c9-ad3c-5944-818d-c9a67a993f8e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Barcelona",
+      "decision_sha256": "32eeb4eae973743db33d88352eefe101d62390b4192a4e6d89cf732618a1e781",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/2694dc278420f92c3170df42.json",
+      "forecast_sha256": "54fc1ae546e4f5cd789a93ae3e0b4876e5ceb365477ecc1828576500af1186b5",
+      "home": "Atlético Madrid",
+      "kickoff_utc": "2026-11-08T20:00:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "1826259ea70b2d1aecebe59432ccd5fde58d53b1547fd3a55ed47e37ee9598d6",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Barcelona",
+        "requested_home": "Atlético Madrid",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_nov2026"
+      },
+      "rotation": {
+        "aa66d325-fc60-5b5c-b510-900f1f30c3cc": "VERI_YETERSIZ",
+        "edbec58b-b78d-5be6-8218-ba6ed96c0776": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "aa66d325-fc60-5b5c-b510-900f1f30c3cc": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "edbec58b-b78d-5be6-8218-ba6ed96c0776": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "NEC Nijmegen",
+      "home": "FC Utrecht",
+      "league": "NED1",
+      "official_source_evidence": {
+        "candidate_events_seen": 100,
+        "league": "NED1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "3e829fbee8a7cb24323af10bed315d2d79bb1216c2ed12a91dfe3ddee4e55e28",
+        "page_url": "https://www.knvb.nl/competities/eredivisie/programma",
+        "requested_away": "NEC Nijmegen",
+        "requested_home": "FC Utrecht",
+        "selected_lookup": "BLOCKED_UNVERIFIED",
+        "source_parser": "knvb"
+      },
+      "reason": "OFFICIAL_GATE_FAILED:official_match_not_confirmed",
+      "status": "BLOCKED_NO_FORECAST"
+    },
+    {
+      "away": "FC Porto",
+      "decision_sha256": "c54e6e3dfc8a12b0fa4bbf869ec7101251c6138e65ea85ff07dcb1161be7f0d7",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/c0098d9f20ab47ad61b70758.json",
+      "forecast_sha256": "3427c404431dd775b8ef618ec4855e960f2009f9757f17d27169cd2bb2a3f40f",
+      "home": "Vitória Guimarães",
+      "kickoff_utc": "2026-11-08T18:00:00+00:00",
+      "league": "POR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "POR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "376d401b8ebc4792dc9538ae5bd27d7cc3b56972bec93a59e2bb87783dd0d706",
+        "page_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+        "requested_away": "FC Porto",
+        "requested_home": "Vitória Guimarães",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "liga_portugal_betclic_news_j11_2026"
+      },
+      "rotation": {
+        "7bec194f-4088-51f9-aeef-a9e5c3891f35": "VERI_YETERSIZ",
+        "dc08e23c-a920-5033-aa2f-434d43906eef": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "7bec194f-4088-51f9-aeef-a9e5c3891f35": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "dc08e23c-a920-5033-aa2f-434d43906eef": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Braga",
+      "decision_sha256": "8326e5bbfc5d578e7e1ab346b6ee1dfdb59f0018fe36bade2645f5e8077e84a6",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/7da87704a9ca3502792eb273.json",
+      "forecast_sha256": "9bb66aca22603e1d31abc9885418296d77c349c2d6fb48bca902d411756f92d9",
+      "home": "Rio Ave",
+      "kickoff_utc": "2026-11-08T20:30:00+00:00",
+      "league": "POR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "POR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "376d401b8ebc4792dc9538ae5bd27d7cc3b56972bec93a59e2bb87783dd0d706",
+        "page_url": "https://www.ligaportugal.pt/news/29039/media-kits-jornada-11-da-liga-portugal-betclic",
+        "requested_away": "Braga",
+        "requested_home": "Rio Ave",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "liga_portugal_betclic_news_j11_2026"
+      },
+      "rotation": {
+        "3923a410-d444-5363-b9bc-a703ae65e1f0": "VERI_YETERSIZ",
+        "b7bbe0c6-4bfd-5bc1-b92d-e234fef6fda3": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "3923a410-d444-5363-b9bc-a703ae65e1f0": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b7bbe0c6-4bfd-5bc1-b92d-e234fef6fda3": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Genk",
+      "decision_sha256": "252b647583dc743fba2bb37b4792cb873c7b9a1e4f183e694618be78c630ab12",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/e4238ec0199d302c7f70a1ba.json",
+      "forecast_sha256": "c1a4914f68aa7ad3f0292055247bfdf4d41da9d112f2b1a18cf1aea26d5706f5",
+      "home": "Union Saint-Gilloise",
+      "kickoff_utc": "2026-11-08T17:30:00+00:00",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a424002ed46668201a87e2615b547b22a60496906482edb3a67f057e81b37973",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "Genk",
+        "requested_home": "Union Saint-Gilloise",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "rotation": {
+        "360960ec-271d-510a-9e6f-0b74d0562222": "VERI_YETERSIZ",
+        "7d5aab11-5206-5d08-b7fd-541b218b635c": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "360960ec-271d-510a-9e6f-0b74d0562222": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "7d5aab11-5206-5d08-b7fd-541b218b635c": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    },
+    {
+      "away": "Zulte Waregem",
+      "decision_sha256": "294f62a10615495b5291699bd423da288ba24b30d4789f4d4235495d195fb468",
+      "decision_status": "RESEARCH_PAS",
+      "forecast_path": "forward_morning_263/2026-11-08/fe270944ce6cea41af7078fe.json",
+      "forecast_sha256": "9a06245858879d2e18b6329bac87a82ced04375172f2d96956a067061cb321ad",
+      "home": "Sint-Truiden",
+      "kickoff_utc": "2026-11-08T18:15:00+00:00",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a424002ed46668201a87e2615b547b22a60496906482edb3a67f057e81b37973",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "Zulte Waregem",
+        "requested_home": "Sint-Truiden",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "rotation": {
+        "004ff4be-4bde-5548-bd6e-b84b851b14a3": "VERI_YETERSIZ",
+        "b1ebc57a-ab1a-53a4-8da7-f550b860737e": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "004ff4be-4bde-5548-bd6e-b84b851b14a3": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b1ebc57a-ab1a-53a4-8da7-f550b860737e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL"
+    }
+  ],
+  "payload_sha256": "2e3de33b6987c6244322ba4e3e619e9d57ebd7205b69c259c37ad51b7a4c4e9d",
+  "schema": "SABAH_TOPLU_KAYIT_V1"
+}
