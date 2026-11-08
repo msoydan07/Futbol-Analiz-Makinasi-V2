@@ -1,0 +1,171 @@
+{
+  "api_request_attempts_max": 1,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "day_turkey": "2026-11-08",
+  "forecast_unchanged": true,
+  "league": "ESP1",
+  "market": "h2h",
+  "observed_at_utc": "2026-11-08T09:56:49.794747+00:00",
+  "payload_sha256": "5e348922927438f9371d94eab70b41e64f2aaca29c982aaa656c6b0a5fcd2514",
+  "provider": "The Odds API",
+  "reason": null,
+  "remaining_credits_as_returned": 494,
+  "request_made_or_outcome_unknown": true,
+  "reservation": {
+    "bookmaker": "pinnacle",
+    "day_turkey": "2026-11-08",
+    "league": "ESP1",
+    "market": "h2h",
+    "reserved_at_utc": "2026-11-08T09:56:47.469201+00:00",
+    "retry_allowed_same_day": false,
+    "schema": "SABAH_PINNACLE_RESERVATION_V1",
+    "status": "CREDIT_RESERVED_OUTCOME_UNKNOWN"
+  },
+  "retry_automatically": false,
+  "schema": "SABAH_PINNACLE_SNAPSHOT_V1",
+  "source_bulk": {
+    "S1_S2_official_approved": false,
+    "betting_authorized": false,
+    "blocked": {},
+    "bookmaker_filter": "pinnacle",
+    "bookmaker_odds_not_iddaa": true,
+    "checked_at_utc": "2026-11-08T09:56:49.794747+00:00",
+    "day_turkey": "2026-11-08",
+    "forecast_or_decision_modified": false,
+    "independently_verified_fixture": false,
+    "leagues": {
+      "ESP1": [
+        {
+          "away_team": "Real Betis",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.96,
+                    "D": 3.87,
+                    "H": 3.9
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Elche CF",
+          "kickoff_utc": "2026-11-08T13:00:00+00:00",
+          "provider_event_id": "c35673eb1e889309d6985c091a43a3f5",
+          "sport": "soccer_spain_la_liga"
+        },
+        {
+          "away_team": "Rayo Vallecano",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 4.36,
+                    "D": 4.11,
+                    "H": 1.81
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Real Sociedad",
+          "kickoff_utc": "2026-11-08T15:15:00+00:00",
+          "provider_event_id": "339a6465fa5153fd8f31e487cf557cf0",
+          "sport": "soccer_spain_la_liga"
+        },
+        {
+          "away_team": "Levante",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 4.76,
+                    "D": 3.74,
+                    "H": 1.82
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Celta Vigo",
+          "kickoff_utc": "2026-11-08T17:30:00+00:00",
+          "provider_event_id": "0d2e199bfba0db42871696c10037bad3",
+          "sport": "soccer_spain_la_liga"
+        },
+        {
+          "away_team": "Getafe",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 6.98,
+                    "D": 4.46,
+                    "H": 1.51
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Villarreal",
+          "kickoff_utc": "2026-11-08T17:30:00+00:00",
+          "provider_event_id": "81ad04996f63fb60b494d243b13ac586",
+          "sport": "soccer_spain_la_liga"
+        },
+        {
+          "away_team": "Barcelona",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.02,
+                    "D": 4.37,
+                    "H": 3.31
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Atlético Madrid",
+          "kickoff_utc": "2026-11-08T20:00:00+00:00",
+          "provider_event_id": "dd247b356d8fc53e4b4f9bfcfe09c924",
+          "sport": "soccer_spain_la_liga"
+        }
+      ]
+    },
+    "leagues_requested": [
+      "ESP1"
+    ],
+    "markets_requested": [
+      "h2h"
+    ],
+    "max_one_run_credit_cost": 1,
+    "payload_sha256": "8f87837ede7eb02f39e9ca36a6c3499acaa399f798e1480113ddc59eb5c3d4d7",
+    "provider": "The Odds API (the-odds-api.com)",
+    "region": null,
+    "reported_remaining_credits": 494,
+    "schema": "263_free_bulk_external_odds_research_v1",
+    "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+  },
+  "status": "OBSERVED_OR_EMPTY"
+}
