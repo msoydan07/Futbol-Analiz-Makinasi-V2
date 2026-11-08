@@ -1,0 +1,49 @@
+name: Model challenge - frozen stress audit
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-stress.yml']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-elo-initial-diagnostics
+          run-id: 42532664152
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/elo
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-poisson-paired-elo-diagnostics
+          run-id: 42533012701
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/poisson
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-xgb-exploratory-diagnostics
+          run-id: 42533506784
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/xgb
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-frozen-hybrid-exploratory
+          run-id: 42534159541
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/hybrid
+      - name: Frozen 20-league quarter and leave-one-out audit
+        run: python research/model_challenge/frozen_stress_audit.py --elo "$RUNNER_TEMP/elo/elo_predictions.csv" --poisson "$RUNNER_TEMP/poisson/poisson_predictions.csv" --xgb "$RUNNER_TEMP/xgb/xgb_predictions.csv" --hybrid "$RUNNER_TEMP/hybrid/hybrid_predictions.csv" --out "$RUNNER_TEMP/stress/stress.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-4way-stress-slices
+          path: ${{ runner.temp }}/stress/
+          retention-days: 30
