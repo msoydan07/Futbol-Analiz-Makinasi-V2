@@ -1,4 +1,5 @@
 name: Model challenge - frozen equal-weight hybrid
+# Expected numeric precision: float32 sources normalized within 1e-5.
 on:
   push:
     branches: [research/model-challenge]
