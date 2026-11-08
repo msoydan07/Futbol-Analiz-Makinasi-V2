@@ -1,0 +1,148 @@
+{
+  "api_request_attempts_max": 1,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "day_turkey": "2026-11-08",
+  "forecast_unchanged": true,
+  "league": "BEL1",
+  "market": "h2h",
+  "observed_at_utc": "2026-11-08T09:56:41.165599+00:00",
+  "payload_sha256": "1a69c26c626fdefa8848f1c5256be502e69194dc01b20507d65ca1670693fd8b",
+  "provider": "The Odds API",
+  "reason": null,
+  "remaining_credits_as_returned": 496,
+  "request_made_or_outcome_unknown": true,
+  "reservation": {
+    "bookmaker": "pinnacle",
+    "day_turkey": "2026-11-08",
+    "league": "BEL1",
+    "market": "h2h",
+    "reserved_at_utc": "2026-11-08T09:56:38.774149+00:00",
+    "retry_allowed_same_day": false,
+    "schema": "SABAH_PINNACLE_RESERVATION_V1",
+    "status": "CREDIT_RESERVED_OUTCOME_UNKNOWN"
+  },
+  "retry_automatically": false,
+  "schema": "SABAH_PINNACLE_SNAPSHOT_V1",
+  "source_bulk": {
+    "S1_S2_official_approved": false,
+    "betting_authorized": false,
+    "blocked": {},
+    "bookmaker_filter": "pinnacle",
+    "bookmaker_odds_not_iddaa": true,
+    "checked_at_utc": "2026-11-08T09:56:41.165599+00:00",
+    "day_turkey": "2026-11-08",
+    "forecast_or_decision_modified": false,
+    "independently_verified_fixture": false,
+    "leagues": {
+      "BEL1": [
+        {
+          "away_team": "Anderlecht",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 5.26,
+                    "D": 4.44,
+                    "H": 1.62
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:27+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Club Brugge",
+          "kickoff_utc": "2026-11-08T12:30:00+00:00",
+          "provider_event_id": "8a92794bd5f89b8b91b2d8fefdac7b85",
+          "sport": "soccer_belgium_first_div"
+        },
+        {
+          "away_team": "KV Kortrijk",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 6.4,
+                    "D": 4.39,
+                    "H": 1.54
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:27+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Gent",
+          "kickoff_utc": "2026-11-08T15:00:00+00:00",
+          "provider_event_id": "16029fbb3d6ae79243c5650896bef095",
+          "sport": "soccer_belgium_first_div"
+        },
+        {
+          "away_team": "Genk",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 5.42,
+                    "D": 4.35,
+                    "H": 1.61
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:27+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Union Saint-Gilloise",
+          "kickoff_utc": "2026-11-08T17:30:00+00:00",
+          "provider_event_id": "3eb376e5f313e6d8e7ca8bb6556d0b29",
+          "sport": "soccer_belgium_first_div"
+        },
+        {
+          "away_team": "SV Zulte-Waregem",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 4.13,
+                    "D": 4.19,
+                    "H": 1.81
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:27+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Sint Truiden",
+          "kickoff_utc": "2026-11-08T18:15:00+00:00",
+          "provider_event_id": "fceade9430abcb824182a6aa031880db",
+          "sport": "soccer_belgium_first_div"
+        }
+      ]
+    },
+    "leagues_requested": [
+      "BEL1"
+    ],
+    "markets_requested": [
+      "h2h"
+    ],
+    "max_one_run_credit_cost": 1,
+    "payload_sha256": "80180498db285dece15aef2fbdfa0f04f4a78c74c4fbf31cd9e381783a7168fb",
+    "provider": "The Odds API (the-odds-api.com)",
+    "region": null,
+    "reported_remaining_credits": 496,
+    "schema": "263_free_bulk_external_odds_research_v1",
+    "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+  },
+  "status": "OBSERVED_OR_EMPTY"
+}
