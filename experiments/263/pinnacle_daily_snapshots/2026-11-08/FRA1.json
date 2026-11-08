@@ -1,0 +1,194 @@
+{
+  "api_request_attempts_max": 1,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "day_turkey": "2026-11-08",
+  "forecast_unchanged": true,
+  "league": "FRA1",
+  "market": "h2h",
+  "observed_at_utc": "2026-11-08T09:56:54.250639+00:00",
+  "payload_sha256": "074557c67a1370d1b489386ba565ae255786d8c874d5336086e450474cc62b16",
+  "provider": "The Odds API",
+  "reason": null,
+  "remaining_credits_as_returned": 493,
+  "request_made_or_outcome_unknown": true,
+  "reservation": {
+    "bookmaker": "pinnacle",
+    "day_turkey": "2026-11-08",
+    "league": "FRA1",
+    "market": "h2h",
+    "reserved_at_utc": "2026-11-08T09:56:51.945091+00:00",
+    "retry_allowed_same_day": false,
+    "schema": "SABAH_PINNACLE_RESERVATION_V1",
+    "status": "CREDIT_RESERVED_OUTCOME_UNKNOWN"
+  },
+  "retry_automatically": false,
+  "schema": "SABAH_PINNACLE_SNAPSHOT_V1",
+  "source_bulk": {
+    "S1_S2_official_approved": false,
+    "betting_authorized": false,
+    "blocked": {},
+    "bookmaker_filter": "pinnacle",
+    "bookmaker_odds_not_iddaa": true,
+    "checked_at_utc": "2026-11-08T09:56:54.250639+00:00",
+    "day_turkey": "2026-11-08",
+    "forecast_or_decision_modified": false,
+    "independently_verified_fixture": false,
+    "leagues": {
+      "FRA1": [
+        {
+          "away_team": "Lille",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 3.09,
+                    "D": 3.56,
+                    "H": 2.38
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:50+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Rennes",
+          "kickoff_utc": "2026-11-08T14:00:00+00:00",
+          "provider_event_id": "4288fbe018e6e6fb223e389bcf3e57dd",
+          "sport": "soccer_france_ligue_one"
+        },
+        {
+          "away_team": "AS Monaco",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 1.7,
+                    "D": 4.08,
+                    "H": 5.13
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:50+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Le Mans FC",
+          "kickoff_utc": "2026-11-08T16:15:00+00:00",
+          "provider_event_id": "a529e5762f18d97981194ec3668dc3d3",
+          "sport": "soccer_france_ligue_one"
+        },
+        {
+          "away_team": "Nice",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.06,
+                    "D": 3.66,
+                    "H": 3.75
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:50+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Angers",
+          "kickoff_utc": "2026-11-08T16:15:00+00:00",
+          "provider_event_id": "54fae64b1421d836e07a17cad0536c73",
+          "sport": "soccer_france_ligue_one"
+        },
+        {
+          "away_team": "Lyon",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.6,
+                    "D": 3.51,
+                    "H": 2.82
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:50+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Brest",
+          "kickoff_utc": "2026-11-08T16:15:00+00:00",
+          "provider_event_id": "cc9731ee7796fe0d532f11ca2aa522c9",
+          "sport": "soccer_france_ligue_one"
+        },
+        {
+          "away_team": "Lorient",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.51,
+                    "D": 3.24,
+                    "H": 3.15
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:50+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Le Havre",
+          "kickoff_utc": "2026-11-08T16:15:00+00:00",
+          "provider_event_id": "3e9954446f26494c04c4967db523d375",
+          "sport": "soccer_france_ligue_one"
+        },
+        {
+          "away_team": "Marseille",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 3.0,
+                    "D": 3.63,
+                    "H": 2.37
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:50+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "RC Lens",
+          "kickoff_utc": "2026-11-08T19:45:00+00:00",
+          "provider_event_id": "4e917e19b59093a02a0e12bcf9a5ecc4",
+          "sport": "soccer_france_ligue_one"
+        }
+      ]
+    },
+    "leagues_requested": [
+      "FRA1"
+    ],
+    "markets_requested": [
+      "h2h"
+    ],
+    "max_one_run_credit_cost": 1,
+    "payload_sha256": "86ac67c773b75c6d6f28a4866bd4cca2caa4a66e2d9cffbc596ce9add5a065bb",
+    "provider": "The Odds API (the-odds-api.com)",
+    "region": null,
+    "reported_remaining_credits": 493,
+    "schema": "263_free_bulk_external_odds_research_v1",
+    "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+  },
+  "status": "OBSERVED_OR_EMPTY"
+}
