@@ -1,0 +1,171 @@
+{
+  "api_request_attempts_max": 1,
+  "betting_authorized": false,
+  "bookmaker": "pinnacle",
+  "day_turkey": "2026-11-08",
+  "forecast_unchanged": true,
+  "league": "ITA1",
+  "market": "h2h",
+  "observed_at_utc": "2026-11-08T09:57:02.698132+00:00",
+  "payload_sha256": "fb5be120cc2c0cd4a709db456ab5461c2fb180c7bcb5f38478261e529a1f378d",
+  "provider": "The Odds API",
+  "reason": null,
+  "remaining_credits_as_returned": 491,
+  "request_made_or_outcome_unknown": true,
+  "reservation": {
+    "bookmaker": "pinnacle",
+    "day_turkey": "2026-11-08",
+    "league": "ITA1",
+    "market": "h2h",
+    "reserved_at_utc": "2026-11-08T09:57:00.350572+00:00",
+    "retry_allowed_same_day": false,
+    "schema": "SABAH_PINNACLE_RESERVATION_V1",
+    "status": "CREDIT_RESERVED_OUTCOME_UNKNOWN"
+  },
+  "retry_automatically": false,
+  "schema": "SABAH_PINNACLE_SNAPSHOT_V1",
+  "source_bulk": {
+    "S1_S2_official_approved": false,
+    "betting_authorized": false,
+    "blocked": {},
+    "bookmaker_filter": "pinnacle",
+    "bookmaker_odds_not_iddaa": true,
+    "checked_at_utc": "2026-11-08T09:57:02.698132+00:00",
+    "day_turkey": "2026-11-08",
+    "forecast_or_decision_modified": false,
+    "independently_verified_fixture": false,
+    "leagues": {
+      "ITA1": [
+        {
+          "away_team": "Lazio",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.97,
+                    "D": 3.67,
+                    "H": 2.41
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Napoli",
+          "kickoff_utc": "2026-11-08T11:30:00+00:00",
+          "provider_event_id": "23bf8ea47358ef82f65aa7398a2b3921",
+          "sport": "soccer_italy_serie_a"
+        },
+        {
+          "away_team": "AC Milan",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.01,
+                    "D": 3.41,
+                    "H": 4.25
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Genoa",
+          "kickoff_utc": "2026-11-08T14:00:00+00:00",
+          "provider_event_id": "7a68b099b47ed7724062b661cd9af464",
+          "sport": "soccer_italy_serie_a"
+        },
+        {
+          "away_team": "Atalanta BC",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.03,
+                    "D": 3.95,
+                    "H": 3.56
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Monza",
+          "kickoff_utc": "2026-11-08T14:00:00+00:00",
+          "provider_event_id": "5ea6b7050b00fcc1832f7938794dd755",
+          "sport": "soccer_italy_serie_a"
+        },
+        {
+          "away_team": "Como",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 3.46,
+                    "D": 4.0,
+                    "H": 2.05
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Inter Milan",
+          "kickoff_utc": "2026-11-08T17:00:00+00:00",
+          "provider_event_id": "657fd1ac35832f65fcc6feba93970e10",
+          "sport": "soccer_italy_serie_a"
+        },
+        {
+          "away_team": "Juventus",
+          "bookmakers": [
+            {
+              "bookmaker_key": "pinnacle",
+              "markets": [
+                {
+                  "market": "h2h",
+                  "prices": {
+                    "A": 2.21,
+                    "D": 3.51,
+                    "H": 3.47
+                  },
+                  "source_last_update_utc": "2026-11-08T09:56:47+00:00"
+                }
+              ]
+            }
+          ],
+          "home_team": "Fiorentina",
+          "kickoff_utc": "2026-11-08T19:45:00+00:00",
+          "provider_event_id": "7f50eb7deaebfbcd45c3f4e7cd3724e4",
+          "sport": "soccer_italy_serie_a"
+        }
+      ]
+    },
+    "leagues_requested": [
+      "ITA1"
+    ],
+    "markets_requested": [
+      "h2h"
+    ],
+    "max_one_run_credit_cost": 1,
+    "payload_sha256": "d70334e12bed6a9580f74d98037280976f12ccb7b107444cee04fda8940872bc",
+    "provider": "The Odds API (the-odds-api.com)",
+    "region": null,
+    "reported_remaining_credits": 491,
+    "schema": "263_free_bulk_external_odds_research_v1",
+    "source_scope": "FOREIGN_BOOKMAKER_MARKET_RESEARCH_ONLY"
+  },
+  "status": "OBSERVED_OR_EMPTY"
+}
