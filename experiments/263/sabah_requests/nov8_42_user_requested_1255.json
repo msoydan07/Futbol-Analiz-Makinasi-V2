@@ -1,0 +1,216 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-08",
+  "matches": [
+    {
+      "league": "TUR1",
+      "home": "Çaykur Rizespor",
+      "away": "Erzurumspor FK"
+    },
+    {
+      "league": "TUR1",
+      "home": "Çorum FK",
+      "away": "Fenerbahçe"
+    },
+    {
+      "league": "TUR1",
+      "home": "Alanyaspor",
+      "away": "Trabzonspor"
+    },
+    {
+      "league": "TUR1",
+      "home": "Beşiktaş",
+      "away": "Gençlerbirliği"
+    },
+    {
+      "league": "ENG1",
+      "home": "Brighton",
+      "away": "Brentford"
+    },
+    {
+      "league": "ENG1",
+      "home": "Crystal Palace",
+      "away": "Liverpool"
+    },
+    {
+      "league": "ENG1",
+      "home": "Ipswich Town",
+      "away": "Bournemouth"
+    },
+    {
+      "league": "ENG1",
+      "home": "Sunderland",
+      "away": "Chelsea"
+    },
+    {
+      "league": "ENG1",
+      "home": "Manchester United",
+      "away": "Aston Villa"
+    },
+    {
+      "league": "GER1",
+      "home": "1. FC Köln",
+      "away": "Bayer Leverkusen"
+    },
+    {
+      "league": "GER1",
+      "home": "Freiburg",
+      "away": "Union Berlin"
+    },
+    {
+      "league": "GER1",
+      "home": "Hoffenheim",
+      "away": "Schalke 04"
+    },
+    {
+      "league": "ESP1",
+      "home": "Elche",
+      "away": "Real Betis"
+    },
+    {
+      "league": "ESP1",
+      "home": "Real Sociedad",
+      "away": "Rayo Vallecano"
+    },
+    {
+      "league": "ESP1",
+      "home": "Celta Vigo",
+      "away": "Levante"
+    },
+    {
+      "league": "ESP1",
+      "home": "Villarreal",
+      "away": "Getafe"
+    },
+    {
+      "league": "ESP1",
+      "home": "Atlético Madrid",
+      "away": "Barcelona"
+    },
+    {
+      "league": "ITA1",
+      "home": "Napoli",
+      "away": "Lazio"
+    },
+    {
+      "league": "ITA1",
+      "home": "Genoa",
+      "away": "Milan"
+    },
+    {
+      "league": "ITA1",
+      "home": "Monza",
+      "away": "Atalanta"
+    },
+    {
+      "league": "ITA1",
+      "home": "Inter",
+      "away": "Como"
+    },
+    {
+      "league": "ITA1",
+      "home": "Fiorentina",
+      "away": "Juventus"
+    },
+    {
+      "league": "FRA1",
+      "home": "Rennes",
+      "away": "Lille"
+    },
+    {
+      "league": "FRA1",
+      "home": "Brest",
+      "away": "Lyon"
+    },
+    {
+      "league": "FRA1",
+      "home": "Le Mans",
+      "away": "Monaco"
+    },
+    {
+      "league": "FRA1",
+      "home": "Angers",
+      "away": "Nice"
+    },
+    {
+      "league": "FRA1",
+      "home": "Le Havre",
+      "away": "Lorient"
+    },
+    {
+      "league": "FRA1",
+      "home": "Lens",
+      "away": "Marseille"
+    },
+    {
+      "league": "NED1",
+      "home": "Heerenveen",
+      "away": "Feyenoord"
+    },
+    {
+      "league": "NED1",
+      "home": "FC Twente",
+      "away": "Ajax"
+    },
+    {
+      "league": "NED1",
+      "home": "AZ Alkmaar",
+      "away": "FC Groningen"
+    },
+    {
+      "league": "NED1",
+      "home": "SC Cambuur",
+      "away": "PSV"
+    },
+    {
+      "league": "NED1",
+      "home": "FC Utrecht",
+      "away": "NEC Nijmegen"
+    },
+    {
+      "league": "POR1",
+      "home": "Estoril",
+      "away": "Marítimo"
+    },
+    {
+      "league": "POR1",
+      "home": "Santa Clara",
+      "away": "Gil Vicente"
+    },
+    {
+      "league": "POR1",
+      "home": "Vitória Guimarães",
+      "away": "FC Porto"
+    },
+    {
+      "league": "POR1",
+      "home": "Estrela Amadora",
+      "away": "Benfica"
+    },
+    {
+      "league": "POR1",
+      "home": "Rio Ave",
+      "away": "Braga"
+    },
+    {
+      "league": "BEL1",
+      "home": "Club Brugge",
+      "away": "Anderlecht"
+    },
+    {
+      "league": "BEL1",
+      "home": "Gent",
+      "away": "Kortrijk"
+    },
+    {
+      "league": "BEL1",
+      "home": "Union Saint-Gilloise",
+      "away": "Genk"
+    },
+    {
+      "league": "BEL1",
+      "home": "Sint-Truiden",
+      "away": "Zulte Waregem"
+    }
+  ]
+}
