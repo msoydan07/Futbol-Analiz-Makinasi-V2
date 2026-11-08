@@ -1,6 +1,10 @@
 import unittest
-from xgb_challenger import make_features
+try:
+    from xgb_challenger import make_features
+except ModuleNotFoundError:
+    make_features = None
 
+@unittest.skipIf(make_features is None, 'ML dependencies installed in the dedicated XGBoost workflow')
 class FeatureTests(unittest.TestCase):
  def row(self,day,h,a,hg,ag):
   return dict(date=day,league="ENG1",home=h,away=a,
