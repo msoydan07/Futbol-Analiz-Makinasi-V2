@@ -1,0 +1,35 @@
+name: Model challenge - isolated QA
+on:
+  push:
+    branches: [research/model-challenge]
+    paths:
+      - 'research/model_challenge/**'
+      - '.github/workflows/model-challenge.yml'
+  workflow_dispatch:
+    inputs:
+      ingest_archive:
+        description: 'Fetch pinned CC0 historical records and publish coverage as an Actions artifact'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit tests; offline, no odds and no pilot writes
+        run: python -m unittest discover -s research/model_challenge -p 'test_*.py' -v
+      - name: Fetch CC0 archive (manually requested only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.ingest_archive }}
+        run: python research/model_challenge/ingest_openfootball.py --out "$RUNNER_TEMP/model-challenge-archive"
+      - name: Publish archived QA report (manually requested only)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.ingest_archive }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-openfootball-coverage
+          path: ${{ runner.temp }}/model-challenge-archive/
+          retention-days: 14
