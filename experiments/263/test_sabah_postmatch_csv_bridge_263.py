@@ -3,7 +3,7 @@ import csv,io,json,sys,unittest
 from pathlib import Path
 from datetime import datetime,timezone
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-from sabah_postmatch_csv_bridge_263 import report,ROOT,Aliases,parse_source,CODES
+from sabah_postmatch_csv_bridge_263 import report,ROOT,Aliases,parse_source,CODES,safe_csv_target
 NOW=datetime(2026,11,10,16,tzinfo=timezone.utc)
 def feed(url,score=(2,0),bad=False):
     code=url.split("/")[-1].split(".")[0]
@@ -33,6 +33,13 @@ class Bridge(unittest.TestCase):
         r=report(ROOT,now=NOW,fetcher=lambda url:feed(url,bad=True))
         self.assertEqual(r["source_status"]["ENG1"]["status"],"SOURCE_UNAVAILABLE_OR_REJECTED")
         self.assertFalse(any(z["home"]=="Brighton" for z in r["scored"]))
+    def test_safe_csv_redirect_only_same_exact_source_file(self):
+        src="https://www.football-data.co.uk/mmz4281/2627/E0.csv"
+        self.assertTrue(safe_csv_target(src,src))
+        self.assertTrue(safe_csv_target("https://football-data.co.uk/mmz4281/2627/E0.csv",src))
+        self.assertFalse(safe_csv_target("http://www.football-data.co.uk/mmz4281/2627/E0.csv",src))
+        self.assertFalse(safe_csv_target("https://evil.example/mmz4281/2627/E0.csv",src))
+        self.assertFalse(safe_csv_target("https://www.football-data.co.uk/mmz4281/2627/D1.csv",src))
     def test_bad_date_and_names_never_fuzzy_merge(self):
         aliases=Aliases(ROOT)
         entries=parse_source("Date,HomeTeam,AwayTeam,FTHG,FTAG,FTR\n08/11/2026,Imaginary Club,Brentford,2,0,H\n","ENG1",aliases)

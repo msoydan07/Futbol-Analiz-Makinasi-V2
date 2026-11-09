@@ -11,6 +11,7 @@ from collections import defaultdict
 from datetime import datetime,timedelta,timezone
 from pathlib import Path
 from urllib.error import URLError
+from urllib.parse import urlsplit
 from score_nov8_webreview_263 import score_1x2,binary,avg
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -128,13 +129,19 @@ def parse_source(text,league,aliases):
         records[k].append({"score":(h,a),"row":rowno})
     return records
 
+def safe_csv_target(actual,requested):
+    a,b=urlsplit(actual),urlsplit(requested)
+    return (a.scheme=="https" and a.hostname in ("football-data.co.uk","www.football-data.co.uk")
+            and a.username is None and a.password is None and a.port is None
+            and a.path==b.path and not a.query and not a.fragment)
+
 def fetch_csv(league,fetcher=None):
     url=f"{BASE}/{CODES[league]}.csv"
     if fetcher is None:
         def fetcher(url):
             req=urllib.request.Request(url,headers={"User-Agent":"FutbolAnaliz263-ResultResearch/1.0"})
             with urllib.request.urlopen(req,timeout=18) as x:
-                if x.geturl()!=url:raise Blocked("CSV_REDIRECT_UNAPPROVED")
+                if not safe_csv_target(x.geturl(),url):raise Blocked("CSV_REDIRECT_UNAPPROVED")
                 return x.read(MAX_BYTES+1)
     raw=fetcher(url)
     if not isinstance(raw,bytes) or len(raw)>MAX_BYTES:raise Blocked("SOURCE_SIZE_INVALID")
