@@ -1,0 +1,31 @@
+name: Model challenge - M4 versus XGB paired diagnostics
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-m4-paired-audit.yml']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  paired-evaluation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-m4-xgb-retrospective-pairs
+          run-id: 42565374892
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/pairs
+      - name: Compare M4/XGB only on same 441 fixtures
+        run: python research/model_challenge/m4_xgb_matched_audit.py --input "$RUNNER_TEMP/pairs/m4_xgb_pairs.json" --out "$RUNNER_TEMP/metrics/m4_xgb_matched_summary.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-m4-vs-xgb-441-matched-audit
+          path: ${{ runner.temp }}/metrics
+          retention-days: 30
