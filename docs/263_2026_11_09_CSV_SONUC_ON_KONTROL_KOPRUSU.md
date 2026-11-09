@@ -21,7 +21,17 @@ Bu bağlantının **resmî federasyon sonuç doğrulayıcısı olmadığını** 
 - Böylece **otomatik resmî puanlanan sonuç hâlâ sıfır**, ama dış kaynak skorlarıyla eşleştirme ve makine başarı ölçümü **38 maçta gerçek veriyle yapılabilir duruma** geldi.
 - Güncelleme 1: Kaynak adresinin `www.football-data.co.uk` → `football-data.co.uk` gibi kanonik HTTPS yönlendirmesine, **sadece aynı tam CSV yolu içinde** izin verildi. Başka dosyaya veya alan adına yönlendirme reddedilir.
 
-## GitHub işletimi
-`.github/workflows/263-postmatch-csv-provisional-readonly.yml` GitHub Actions'ta push ve manuel `workflow_dispatch` ile çalışır. **Bu iş akışı deney dalında olduğundan otomatik günlük saat planı henüz kurulmamıştır.** Günlük programlama için GitHub'ın varsayılan dalında uygun dağıtım veya mevcut programlı işin açık bağlantısı gerekir. `main` dalını değişmeden bıraktık.
+## GitHub işletimi — 9 Kasım son kabul
 
-**Son durum:** Günlük işlem zincirindeki resmî skor eksikliği araştırma amaçlı ön kontrolle kısmen kapandı; resmî/onaylı kalıcı skor hattı otomatikleştirilmiş kabul edilmez. Kullanım kararı: M4 ile analiz yapmaya devam.
+- **Günlük kontrol zaten kurulmuş:** ChatGPT otomasyonu `2.6.3 Maç Sonu Kontrolü` etkin; Türkiye saatiyle **her gün 10:00**, ilk planlanan gün **10 Kasım 2026**. GitHub'da yalnız deney dalına, `experiments/263/postmatch_refresh_requests/YYYY-MM-DD.json` biçiminde, günde bir kere salt-okunur sonuç kontrol isteği bırakması tanımlanmış. 9 Kasım isteği depoda zaten mevcut, **yeniden yaratılmaz**.
+- Otomasyonun hedeflediği **gerçek iş akışı**: `.github/workflows/263-postmatch-csv-bridge-readonly.yml`, kaynak kodu: `experiments/263/postmatch_csv_bridge_263.py`. 9 Kasım gerçek koşusu **#42607872712** [GitHub Actions](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42607872712), **6/6 güvenlik testi geçti** ve gerçek ücretsiz lig CSV'leri ile **40 kayıt / 38 geçici skor eşleşmesi / 2 bekleyen** üretti. Ayrı skor köprüsü `263-postmatch-csv-provisional-readonly.yml` de geçmiş bir araştırma denemesi olarak bulundu; bunlar **aynı 38 maçın iki ayrı sonucu gibi toplanmaz**.
+- **9 aktif ligin 9/9 CSV'si çekildi** (kayıtlı `new100` karşılaşmaları olan ligler; 10. lig için mühürlü maç yoksa boş sayılır). CSV + önceden kaydedilmiş web araştırma skoru ile **38 kayıt tutarlı**. Başarı tablosu tanımlayıcıdır; otomatik **resmî lig/federasyon teyidi = 0**, üretilmiş insan attestation dosyası = **0**.
+- **İki istisna açıkça korundu:** `Estoril–Marítimo`: ertelenmiş, skor yok. `Çorum FK–Fenerbahçe`: TFF web araştırmasında skor var ama dış CSV ile güvenli maç kimliği eşleşmedi; otomatik köprü onu puanlamadı. Başka skoru zorlama, geçmiş tahmini yeniden hesaplama yok.
+- Yalnız mevcut GitHub deney dalındaki değişmez SHA mühürleri, B/C2/C3/M4 tahminleri, takım kimlikleri ve ücretsiz haricî sonuçlar kullanılıyor. **Ücretli oran, bahis, yeni pilot veya LITE'a aktarım yok.** Varsayılan `main` dalı değiştirilmedi.
+- Günlük otomasyonun **yarınki ilk planlı çalışması henüz gerçekleşmediği için** gelecekteki çalışmayı şimdiden başarılı diye ilan etmiyoruz. Başarısızlık veya yeni çelişki, günlük denetimde raporlanır; sistemin normal kullanım kararı ertelenmez.
+
+## Nihai mühendislik kullanım kararı
+
+**2.6.3'ün analiz amaçlı kullanım sürümü M4 merkezli olarak sabitlendi.** B/C2/C3 kıyasları korunur. Gerçek sabah analiz→kalıcı SHA→mobil ekran→ücretsiz skor eşleştirme→tanımlayıcı performans raporu zincirinin her bir parçası çalıştırılmış ve mevcut kapsamı kanıtlanmıştır. Resmî sonuç kabulünün ağ üzerinden otomatik tam doğrulanması ise ayrı bir güven düzeyi sorunudur ve **tamamlandı diye sunulmaz**. Bu nedenle tahmin kayıtları ve raporlar dürüst kaynak etiketleriyle kullanılır; bahis avantajı garanti edilmez.
+
+**Yeni pilot zorunluluğu yok.** Günlük kullanım ve veri/performans güncellemeleri devam eder; yeni model geliştirme veya testler ancak belirli bir hipotez ve kazanç beklentisiyle ayrı araştırma kararı olarak ele alınır. 96 adaylık geçmiş çalışmayı tekrar başlatma yok.
