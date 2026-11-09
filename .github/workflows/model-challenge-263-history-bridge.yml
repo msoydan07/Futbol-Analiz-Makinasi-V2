@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/model-challenge-263-history-bridge.yml'
       - 'research/model_challenge/trusted_263_snapshot_bridge.py'
+      - 'research/model_challenge/official_263_fixture_bridge.py'
+      - 'research/model_challenge/test_263_source_bridges.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,6 +19,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Test SHA integrity and synthetic official gate handoff
+        run: python -m unittest discover -s research/model_challenge -p 'test_263_source_bridges.py' -v
       - name: Validate and normalize accepted history
         run: python research/model_challenge/trusted_263_snapshot_bridge.py --out "$RUNNER_TEMP/verified_263_research"
       - name: Inspect archived history and keep production unchanged
