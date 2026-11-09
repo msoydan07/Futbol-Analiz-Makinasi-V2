@@ -12,6 +12,7 @@ record itself is not a human attestation of the final result.
 """
 from __future__ import annotations
 import argparse,csv,hashlib,io,json,urllib.request,sys
+from urllib.parse import urlparse
 from collections import Counter,defaultdict
 from datetime import date
 from pathlib import Path
@@ -26,8 +27,13 @@ def read_football_data(url):
     with urllib.request.urlopen(req,timeout=25) as response:
         payload=response.read(3_000_001)
         effective=response.geturl()
-    if len(payload)>3_000_000 or effective!=url or not url.startswith("https://www.football-data.co.uk/"):
-        raise ValueError("invalid or redirected source")
+    original=urlparse(url);actual=urlparse(effective)
+    allowed={"www.football-data.co.uk","football-data.co.uk"}
+    if (len(payload)>3_000_000 or original.scheme!="https" or
+        actual.scheme!="https" or original.hostname not in allowed or
+        actual.hostname not in allowed or
+        original.path!=actual.path or actual.query or actual.fragment):
+        raise ValueError("invalid source redirect: "+str(effective)[:150])
     text=payload.decode("utf-8-sig")
     rows=list(csv.DictReader(io.StringIO(text)))
     if not rows or not {"Date","HomeTeam","AwayTeam","FTHG","FTAG","FTR"}.issubset(rows[0]):
