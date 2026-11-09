@@ -49,7 +49,7 @@ class PreKickoffTests(unittest.TestCase):
   historical=make_features(rows)
   # A historical match's features should be identical to inference built
   # from only strictly earlier dates, with the same league encoder universe.
-  for item in historical[65:80]:
+  for item in historical[85:100]:
    r,legacy,_,_=item
    before=[z for z in rows if z["date"]<r["date"]]
    a,_=feature_at(before,r["league"],r["home"],r["away"],
