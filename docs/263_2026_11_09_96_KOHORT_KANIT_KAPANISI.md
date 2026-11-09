@@ -40,6 +40,35 @@ GitHub'ın halihazırdaki iki gerçek `new100` batch raporu denetlendi:
 
 **Zaman sırası kod düzeltmesi sonrası tek toplu CI:** postmatch #42599249693 **PASS**; sabah offline bütünleşik bileşen denetimi #42599249981 **PASS**. Bunlar yeni maç tahmin başarısı değildir.
 
+## 3C. 6 Kasım dört kalıcı mührün ilk maç sonu puanlaması
+6 Kasım `forward_quad_263` altında kaydedilmiş **dört ayrı gerçek maç önü SHA** dosyası GitHub'dan okunup takımlar resmî kulüp/lig skorlarıyla eşleştirildi. Bu da **salt-okunur web araştırmasıdır**; `postmatch_inputs` insan teyitli resmî kayda terfi ettirilmemiştir.
+
+| Lig | Maç | Skor | M4'ün ham MS yönü | M4 doğru mu? |
+|---|---|---:|---|---|
+| TUR1 | Gaziantep – Kasımpaşa | 0-2 | MS2 | Evet |
+| ITA1 | Venezia – Udinese | 2-1 | MS2 | Hayır |
+| FRA1 | Toulouse – Strasbourg | 3-1 | MS1 | Evet |
+| NED1 | Willem II – PEC Zwolle | 1-1 | MS2 | Hayır |
+
+| Model | Ham MS yön doğru/4 | Çok sınıflı MS Brier |
+|---|---:|---:|
+| B | 1/4 | 0,783362 |
+| C2 | 1/4 | **0,695070** |
+| C3 | 1/4 | 0,736566 |
+| M4 | **2/4** | 0,777795 |
+
+Bunlar aynı dört maçtan ve maçtan önceki orijinal `model_predictions` olasılıklarından elle/araç yardımıyla hesaplanan tanımlayıcı değerlerdir. M4 yön tercihlerinde 2/4 ile önde olsa da en düşük Brier **C2'de**; yön ve olasılık kalitesi farklı kavramlardır. Dört maçın hiçbiri model değişimi gerektirmez.
+
+Resmî kaynaklar: [TFF Gaziantep–Kasımpaşa](https://www.tff.org/Default.aspx?macId=317874&pageId=29), [Lega Serie A Venezia–Udinese](https://www.legaseriea.it/serie-a/news/venezia-udinese-2026-2027-2-1-cronaca-risultato-gol), [Toulouse FC–Strasbourg](https://www.toulousefc.com/match-center/equipe-professionnelle-20262027-a4qw50gbzq6myjglp6r96l4wk), [KNVB Willem II–PEC Zwolle](https://www.knvb.nl/competities/eredivisie/uitslagen).
+
+## 3D. Üç güne ait bulguyu birleştirirken doğru payda
+Aynı pazarın **ham M4 maç-sonu yönü** açısından karşılaştırılabilen, kendi kayıt kategorilerinde skoru bulunan maçlar:
+- 6 Kasım kalıcı dört SHA: **2/4** doğru; birincil kaynaklardan asistan web kontrolü.
+- 7 Kasım ayrı araştırma belgesi: **19/35** doğru (dört modelin ortak hesaplandığı 35 maç); skorların bir kısmı bağımsız ağdan yeniden doğrulanmadı.
+- 8 Kasım gerçek new100 kalıcı mühürler: **25/39** doğru; 35 birincil, 4 medya çapraz kontrolü; Estoril–Marítimo ertelendi.
+
+Toplam **46/78 (%58,97)** yalnız *farklı kanıt kategorilerini yan yana koyan betimsel* bir ham MS yön sayımıdır. **96 resmî pilot sonucu, tam SHA/sonuç eşleşmeli kohort veya piyasa üstü başarı kanıtı değildir.** Ayrıntılı metrikler kategorilerinde ayrı kalır. Aynı skor iki kere sayılmaz. Kullanım kararı için bu bulgular yeterli bağlamsal kanıt sağlar, ancak sistemin tüm maçları bilebildiği sonucunu vermez.
+
 ## 4. Sonlu takip — pilot tekrarına girmeden
 1. Önceden mühürlü 44 maçın kaynak/sonuç eşleştirmesini güvenilir eldeki kanıt kadarıyla ayrı `verified / human-attested / unknown / postponed` gruplarında kapat; eksiklere geçmişe dönük tahmin veya skor uydurma. 7 Kasım araştırma skoru kendi kategorisinde kalır.
 2. Sadece kullanım için kritik sabah **istek dosyası → resmî fikstür → B/C2/C3/M4 → SHA commit → mobil rapor** zincirini denetle ve eksik bağlantı varsa tek hedefli onarım yap. Eski `263-sabah-live-batch.yml` bilerek fail-closed; mevcut giriş `263-sabah-new100-on-request.yml` üzerinde push ile çalışır. Bu yapı, kullanıcının mesajının kendiliğinden GitHub CI tetiklediği anlamına gelmez.
