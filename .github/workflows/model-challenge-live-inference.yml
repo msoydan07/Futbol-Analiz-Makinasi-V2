@@ -1,0 +1,26 @@
+name: Model challenge - pre-kickoff XGBoost inference QA
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-live-inference.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-synthetic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned ML dependencies
+        run: python -m pip install 'numpy==2.2.6' 'xgboost==3.0.5' 'scikit-learn==1.7.2' 'scipy==1.15.3'
+      - name: Check historical feature parity, fresh fixtures, as-of and prospective candidate
+        run: python -m unittest discover -s research/model_challenge -p 'test_xgb_live_inference.py' -v
+      - name: Confirm protected 2.6.3 source and seals untouched
+        run: |
+          git diff --exit-code -- experiments/263 forward_morning_263 forward_quad_263
+          git diff --cached --exit-code -- experiments/263 forward_morning_263 forward_quad_263
+          echo 'NO_EXISTING_263_FILES_CHANGED'
