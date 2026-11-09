@@ -56,14 +56,14 @@ def single(row,f,d):
   cal=[(key,diag.get(key,{}).get("calibrated_probability")) for key,_ in MS]
   valid=[(k,v) for k,v in cal if isinstance(v,(int,float)) and not isinstance(v,bool) and math.isfinite(v)]
   if valid:
-   key,p=max(valid,key=lambda x:x[1]);lines.append("**Kalibre MS yönü (uygun DEV model):** "+dict(MS)[key]+" · "+fmt(p))
-  else:lines.append("**Kalibre MS yönü:** HESAPLANAMADI (model medyanı kalibrasyon yerine geçmez)")
+   key,p=max(valid,key=lambda x:x[1]);lines.append("**DEV tek-market sinyali (1X2 dağılımı değil):** "+dict(MS)[key]+" · "+fmt(p))
+  else:lines.append("**DEV tek-market sinyali:** HESAPLANAMADI (bağımsız doğrulama yok)")
   lines.append("**S2 ana seçim:** "+("PAS" if not d.get("main_candidate") else "DENEYSEL / RESMÎ ONAYSIZ"))
   lines.append("**S2 alternatif:** "+("YOK" if not d.get("alternative_candidate") else "DENEYSEL / RESMÎ ONAYSIZ"))
   alerts=d.get("high_probability_alerts_not_bets") or []
   lines.append("**S1 yüksek olasılık:** "+("Araştırma uyarısı var, ONAYSIZ" if alerts else "ONAYSIZ / uygun uyarı yok"))
  else:
-  lines+=["**Kalibre MS yönü:** karar kanıtı yok","**S2:** PAS / doğrulanmış oran yok",
+  lines+=["**DEV tek-market sinyali:** karar kanıtı yok","**S2:** PAS / doğrulanmış oran yok",
           "**S1:** ONAYSIZ"]
  lines+=["","**Pinnacle:** Fiyat görüntüleme ayrı arşivde; aynı-anlı doğrulama yoksa piyasa yüzdesi gösterilmez.","",
          "**Rotasyon:** "+", ".join(safe(k)+"="+safe(v) for k,v in sorted(row.get("rotation",{}).items())),
@@ -108,7 +108,7 @@ def build(root,report):
               if x.get("market") in ("MS1","MSX","MS2") and isinstance(x.get("calibrated_probability"),(int,float))]
     if relevant:
      key,p=max(relevant,key=lambda a:a[1])
-     calibrated=key.replace("MS","MS ")+": "+fmt(p)
+     calibrated=key.replace("MS","MS ")+": "+fmt(p)+" (tek pazar)"
    ko=read_aware(f["fixture"]["kickoff_utc"]).astimezone(TR)
    available_count=sum(f["model_predictions"][m].get("status")=="AVAILABLE" for m in MODELS)
    rows.append("| "+ko.strftime("%H:%M")+" | "+safe(row["home"])+" – "+safe(row["away"])+
@@ -123,8 +123,8 @@ def build(root,report):
           str(report["already_sealed"])+" önceden kayıtlı · "+
           str(report["blocked"])+" engelli","",
           "Bu özet, tekli ekranlarla aynı değişmez tahmin SHA'sını kullanır.",
-          "Bahis onayı yok. Oran ve EV yoksa S2 = PAS.","",
-          "| Saat TSİ | Maç | Kalibre yön* | S2 | Kanıt |",
+          "Bahis onayı yok. Oran ve EV yoksa S2 = PAS.","* DEV MS1/MSX/MS2 ayrı pazar kalibrasyonlarıdır; toplamları %100 olmak zorunda değildir, tam 1X2 olasılık vektörü diye yorumlanamaz.","",
+          "| Saat TSİ | Maç | DEV tek-MS* | S2 | Kanıt |",
           "|---|---|---:|---|---|",*rows,"",
           "*İlgili DEV kalibrasyonu varsa görüntülenir; dört modelin ortalaması değildir.*","",
           "Rotasyon ve dört model yüzdeleri her maçın tekli ayrıntı sayfasındadır.",""]

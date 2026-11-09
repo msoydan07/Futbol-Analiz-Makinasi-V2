@@ -1,0 +1,25 @@
+name: "263 phone and PDF DEV single-market honesty acceptance"
+on:
+  push:
+    branches:
+      - experiment/263-toplu-karsilastirma
+    paths:
+      - 'experiments/263/sabah_mobile_screens_263.py'
+      - 'experiments/263/sabah_mobile_approved_pdf_263.py'
+      - 'experiments/263/test_mobile_probabilities_labels_263.py'
+      - '.github/workflows/263-mobile-single-market-clarity.yml'
+permissions:
+  contents: read
+jobs:
+  mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned model parsing and PDF dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab
+      - name: Do not imply independent DEV MS1 X 2 probabilities sum to 100 percent
+        run: python experiments/263/test_mobile_probabilities_labels_263.py
