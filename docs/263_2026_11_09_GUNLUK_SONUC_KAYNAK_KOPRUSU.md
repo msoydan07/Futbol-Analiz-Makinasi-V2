@@ -17,7 +17,16 @@
 4. GitHub `263-postmatch-csv-bridge-readonly.yml` yeni mühür veya dosya güncellemesinde otomatik devreye girer. Çıktı GitHub Actions artefaktıdır; hiçbir tahmin/sonuç/kalibrasyon dosyası overwrite yapılmaz.
 5. İnsan tarafından resmî sayfada skor kontrol edilerek ayrı `sabah_postmatch_inputs` içine düzgün kanıt yazılırsa **mevcut** `263-sabah-new100-postmatch-readonly.yml` otomatik hesaplar. Resmî kanıt dosyası olmadan resmî pilot başarı sayısı arttırılmaz.
 
-## Planlı operasyon için açık gerçek sınır
-GitHub `schedule` olayı varsayılan dalda çalışır. Bu yeni kod deney dalında, `main`e dokunulmadı. Dolayısıyla yalnız yeni mühür push'u veya ilgili kod değişikliğiyle yapılan kontrol, **her ertesi gün kendiliğinden zamanlanmış** sayılmaz. Sabah veya sonuç otomasyonunda zamanlanan ikinci kontrol ayrıca bağlanmalıdır; bu belge veya yeşil test kendi başına zamanlayıcı değildir. Açık teknik iş bu otomatik tekrar çağrısının güvenli biçimde eklenmesidir.
+## 9 Kasım gerçek sistem çıktısı
+- Kaydedilmiş 8 Kasım new100 SHA mührü: **40**.
+- Bağımsız futbol sonuç CSV'si ve daha önce web üzerinden araştırılmış skorların karşılıklı aynı olduğu: **38**. Bu **federasyon teyidi** ve yeni `sabah_postmatch_inputs` resmî kabulü değildir.
+- Bekleyen 2: **Estoril–Marítimo** (web araştırmasında ertelendi) ve **Çorum FK–Fenerbahçe** (dış CSV'de aynı gün/takım kimliğiyle sonuç bulunamadı). Eksik CSV kaydı tahminin yanlış olduğu anlamına gelmez.
+- İki kaynak üzerinden bu 38 maç için ham M4 MS yön isabeti: **24/38**, MS Brier **0,513266**, KG yön **20/38**, 2,5 Alt/Üst yön **20/38**.
+- Başarılı gerçek kaynak/kimlik/sınama koşusu: https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42607309702
+- **6 sentetik + gerçek SHA bağlama testi PASS**, 9 lig CSV'si indirildi (ENG2'nin o gün yeni100 mührü olmadığından kaynak sorgusu yapılmadı), güvenli dış yönlendirme kuralı uygulandı.
+- Her gün yalnız bir defa GitHub'a `experiments/263/postmatch_refresh_requests/YYYY-MM-DD.json` adlı, **model veya odds çalıştırmayan** bir yenileme işareti yazılabilir. Bu işaret salt-okunur sonucu tekrar kontrol etmeye zorlar. 9 Kasım işaretinin giriş/Actions kabulü **gerçekten PASS**: https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42607872712
+- Günlük sonuç izlemesi için ayrıca ChatGPT `2.6.3 Maç Sonu Kontrolü` otomasyonu aktifleştirildi: 10:00 TSİ civarında kaynak kontrolü ve (GitHub yetkisi varsa) bu işareti ekleme, yalnız yeni sonuç/engel varsa bildirim. İzin yoksa başarı ilan etmez. Mevcut Cuma–Pazar analiz otomasyonu değiştirilmedi.
+- GitHub `schedule` varsayılan dalda çalıştığı için, deney dalına doğrudan cron varmış gibi iddia edilmez. Ayrı ChatGPT otomasyonu üzerinden işaretleyici tercih edildi; bu otomasyonun **gelecekteki** GitHub yazma hakkı ilk gerçek ertesi gün çalışmasında ayrıca gözlenebilir.
 
-**Kabul:** Proje kesintisiz yeni pilot beklemez; mevcut kilitli M4 ile analiz yapar. Sonuç sınıfları ayrılır, hatalı kanıtla model seçimi yapılmaz.
+## Son kullanım kararı
+Mevcut M4 ana motoru **değişmedi**; B/C2/C3 yardımcı kalır. Artık günlük yeni maç önü tahminleri yazıldığında ve dış CSV'de güvenli eşleşme bulunduğunda skor ön değerlendirmesi otomatik çalışabilir. **Resmî insan/federasyon kabulü ayrı sonuç hattıdır** ve kaynaksız skorlarla doldurulmaz. Bu gerçek bir operasyonel ilerlemedir; bahis değeri veya %100 kaynak doğruluğu iddiası değildir.
