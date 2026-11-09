@@ -1,0 +1,42 @@
+name: "263 postmatch free CSV research source bridge - SHA read only"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'forward_morning_263/*/*.json'
+      - 'experiments/263/postmatch_csv_bridge_263.py'
+      - 'experiments/263/test_postmatch_csv_bridge_263.py'
+      - 'experiments/263/nov8_webreview_results_263.json'
+      - '.github/workflows/263-postmatch-csv-bridge-readonly.yml'
+permissions:
+  contents: read
+jobs:
+  postmatch-csv-readonly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Six safety and real-seal linked tests - no external API call
+        shell: bash
+        run: python -m unittest -v experiments/263/test_postmatch_csv_bridge_263.py
+      - name: Check today's free 2627 league CSVs and score only supported records
+        shell: bash
+        run: |
+          set -euo pipefail
+          python experiments/263/postmatch_csv_bridge_263.py \
+            --out /tmp/263_csv_postmatch_research.json \
+            --mobile /tmp/263_csv_postmatch_mobile.md
+          head -n 18 /tmp/263_csv_postmatch_mobile.md
+      - name: Keep scores and source proofs in short-lived artifact, never in pilot seals
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-csv-postmatch-provisional-not-official
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            /tmp/263_csv_postmatch_research.json
+            /tmp/263_csv_postmatch_mobile.md
