@@ -1,0 +1,42 @@
+name: Model challenge - KG goals joint calibration and weekend seal audit
+on:
+  push:
+    branches: [research/model-challenge]
+    paths:
+      - '.github/workflows/model-challenge-goals-calibration-weekend.yml'
+      - 'research/model_challenge/joint_score_calibration_263.py'
+      - 'research/model_challenge/audit_weekend_sealed_goals.py'
+      - 'research/model_challenge/test_joint_score_calibration_263.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned scientific dependencies
+        run: python -m pip install 'numpy==2.2.6' 'scipy==1.15.3'
+      - name: Coherent goals and chronological cutoff unit tests
+        run: python -m unittest discover -s research/model_challenge -p 'test_joint_score_calibration_263.py' -v
+      - name: Verify immutable 4518 source history
+        run: python research/model_challenge/trusted_263_snapshot_bridge.py --out "$RUNNER_TEMP/accepted"
+      - name: Joint score calibration DEV and historical evaluation
+        run: python research/model_challenge/joint_score_calibration_263.py --archive "$RUNNER_TEMP/accepted/normalized_263_research.csv" --lock experiments/263/m4_lock.json --out "$RUNNER_TEMP/reports/joint_calibration.json"
+      - name: Audit available 2.6.3 sealed weekend forecasts and actual result records
+        run: python research/model_challenge/audit_weekend_sealed_goals.py --root . --out "$RUNNER_TEMP/reports/weekend_seal_coverage.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: model-challenge-goals-coherent-calibration-weekend-audit
+          path: ${{ runner.temp }}/reports/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Guard unchanged 2.6.3 engine, morning files and original scores
+        run: |
+          git diff --exit-code -- experiments/263 data/quad_accepted_263 forward_morning_263 forward_quad_263
+          git diff --cached --exit-code -- experiments/263 data/quad_accepted_263 forward_morning_263 forward_quad_263
