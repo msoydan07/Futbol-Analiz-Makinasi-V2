@@ -71,6 +71,12 @@ class PreKickoffTests(unittest.TestCase):
    self.assertEqual(candidate["models"]["Elo"]["status"],"PAS")
    self.assertAlmostEqual(sum(candidate["models"]["XGBoost"]["probabilities"].values()),1)
    self.assertGreater(details["training_matches"],1000)
+   from prospective_seal import seal,Rejected
+   sealed,sha=seal(candidate,t,now=NOW)
+   self.assertTrue(sealed.exists())
+   self.assertEqual(json.loads(sealed.read_text())["payload_sha256"],sha)
+   with self.assertRaises(Rejected):
+    seal(candidate,t,now=NOW)
 
  def test_false_claim_without_external_gate_fails(self):
   with tempfile.TemporaryDirectory() as t:
