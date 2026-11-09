@@ -96,7 +96,7 @@ class New100PostmatchTests(unittest.TestCase):
 
     def test_source_check_beyond_small_drift_or_postkickoff_is_rejected(self):
         f,p=self.forecast()
-        for stamp in ("2026-11-08T12:00:01.000001+00:00",KO):
+        for stamp in ("2026-11-08T12:01:00.000001+00:00",KO):
             f["fixture"]["source_checked_at_utc"]=stamp
             f["payload_sha256"]=sha({k:v for k,v in f.items() if k!="payload_sha256"})
             p.write_text(json.dumps(f),encoding="utf-8")

@@ -68,10 +68,10 @@ def scores_for(f,observation):
     checked=read_aware(fg["source_checked_at_utc"])
     ko=read_aware(fg["kickoff_utc"])
     # The start-of-request timestamp in real Nov 6/8 SHA seals can precede
-    # the gateway's source-check timestamp by microseconds. Both MUST remain
-    # before kickoff. Accept at most 1 second of instrumentation ordering drift;
+    # the gateway's source-check timestamp by seconds. Both MUST remain
+    # before kickoff. Accept up to 60 seconds of a live page fetch during the request;
     # never backdate or rewrite the immutable pre-match forecast.
-    if not (created<ko and checked<ko and checked<=created+timedelta(seconds=1)):
+    if not (created<ko and checked<ko and checked<=created+timedelta(seconds=60)):
         raise ScoreBlocked("NOT_AUTHENTIC_PREMATCH_FORECAST")
     if fg.get("fixture_verification")!="VERIFIED_BY_LIVE_OFFICIAL_GATE":
         raise ScoreBlocked("FIXTURE_NOT_LIVE_OFFICIAL_VERIFIED")

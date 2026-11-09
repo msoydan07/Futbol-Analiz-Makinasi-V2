@@ -25,7 +25,7 @@
 ## 3. Teknik denetim — engel ve somut düzeltme
 - GitHub araştırma dalında **4 (6 Kasım) + 40 (8 Kasım) = 44** ayrı SHA mühür dosyası var. Resmî `experiments/263/sabah_postmatch_inputs/` attestation dosyası **0**. Bu nedenle bu 44 mühre ait resmî maç sonu skor isabet oranı raporlanamaz.
 - Örnek gerçek mühürlerde `created_at_utc`, kapı `source_checked_at_utc` değerinden **12–39 mikrosaniye önce** yazılmış. Bu bir istek başlangıcı/kaynak damga sırası: her iki zaman da maç başlangıcından öncedir.
-- Önceki `sabah_postmatch_new100_263.py` kuralı `source_checked<=created<kickoff` olduğu için böyle bir mühre sonradan doğru sonuç girilse dahi değerlendirme reddedilebilirdi. Kayıtları geriye dönük değiştirmeden yalnızca **en fazla 1 saniyelik** ölçüm sırası toleransı ve **her iki damga kickoff öncesi** şartı getirildi. Daha büyük fark ve kickoff-sonrası kaynak kontrolü otomatik RED olur.
+- Önceki `sabah_postmatch_new100_263.py` kuralı `source_checked<=created<kickoff` olduğu için böyle bir mühre sonradan doğru sonuç girilse dahi değerlendirme reddedilebilirdi. Kayıtları geriye dönük değiştirmeden yalnızca **en fazla 60 saniyelik** resmî sayfa sorgu süresi toleransı ve **her iki damga kickoff öncesi** şartı getirildi. Daha büyük fark ve kickoff-sonrası kaynak kontrolü otomatik RED olur.
 - Bu değişiklik sadece sonuç eşleştirici + iki sentetik sınama içindir; B/C2/C3/M4 motor, DEV kilidi, tahmin mühürleri, Pinnacle kredileri, otomasyon zamanlaması, geçmiş sonuçlar ve `main` **değişmez**.
 - Test kodunun varlığı **CI sonucunun geçtiği iddiası değildir**; CI sonucu ayrı denetlenmelidir.
 

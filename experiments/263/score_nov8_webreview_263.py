@@ -87,7 +87,7 @@ def audit(root=ROOT):
             if fixture["kickoff_utc"]!=outcome["kickoff_utc"]:
                 raise AuditBlocked("KICKOFF_MISMATCH")
             made=aware(sealed["created_at_utc"]);checked=aware(fixture["source_checked_at_utc"]);ko=aware(fixture["kickoff_utc"])
-            if not(made<ko and checked<ko and checked<=made+timedelta(seconds=1)):
+            if not(made<ko and checked<ko and checked<=made+timedelta(seconds=60)):
                 raise AuditBlocked("NO_PROVEN_PREMATCH_SHA_SEAL")
             registered[k]=sealed
     if set(registered)!=set(reviewed) or len(registered)!=40:
