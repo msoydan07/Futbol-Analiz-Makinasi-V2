@@ -2,7 +2,7 @@
 import unittest
 try:
  import numpy as np
- from joint_score_calibration_263 import get_predictions,WEIGHTS, asof_empirical
+ from joint_score_calibration_263 import get_predictions,WEIGHTS, asof_empirical, keep_m4_ms
  from goal_market_distribution_challenge import matrix,probs
 except ModuleNotFoundError:
  np=None
@@ -19,6 +19,20 @@ class JointCalibrationTests(unittest.TestCase):
    self.assertTrue(p["OVER_1.5"]>=p["OVER_2.5"]>=p["OVER_3.5"])
    self.assertGreaterEqual(p["BTTS_YES"],0)
    self.assertLessEqual(p["BTTS_YES"],1)
+ def test_m4_ms_outcomes_unchanged_by_joint_projection(self):
+  import numpy as np
+  m4=matrix(1.65,1.25,kind="independent")
+  reference=matrix(1.25,1.55,kind="independent")
+  original=probs(m4)
+  for w in WEIGHTS:
+   projected=keep_m4_ms(m4,reference,w)
+   changed=probs(projected)
+   self.assertAlmostEqual(projected.sum(),1.,places=10)
+   self.assertTrue((projected>=0).all())
+   for market in ("MS_H","MS_D","MS_A"):
+    self.assertAlmostEqual(changed[market],original[market],places=12)
+   self.assertTrue(changed["OVER_1.5"]>=changed["OVER_2.5"]>=changed["OVER_3.5"])
+
  def test_earlier_only_empirical_distribution(self):
   prior=[{"date":"2025-10-04","league":"ENG1",
     "home_goals":"1","away_goals":"1"} for _ in range(110)]
