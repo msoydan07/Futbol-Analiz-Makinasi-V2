@@ -1,0 +1,41 @@
+name: "263 independent skeptical 70 percent calibration audit"
+on:
+  push:
+    branches:
+      - research/263-second-engineer-audit
+    paths:
+      - 'experiments/263/second_engineer_calibration_263.py'
+      - 'experiments/263/test_second_engineer_calibration_263.py'
+      - '.github/workflows/263-second-engineer-calibration.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  independent_calibration:
+    if: github.ref == 'refs/heads/research/263-second-engineer-audit'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pure Python adversarial calibration tests against actual seals
+        run: |
+          python experiments/263/test_score_nov8_webreview_263.py
+          python experiments/263/test_second_engineer_calibration_263.py
+      - name: Independently audit all 40 original seals without retraining models
+        run: |
+          python experiments/263/second_engineer_calibration_263.py \
+            --root . \
+            --out reports/263_second_engineer_70pct_webreview_2026-11-10.json
+      - name: Publish only new research audit on isolated branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/263_second_engineer_70pct_webreview_2026-11-10.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Research: skeptical immutable-forecast 70% calibration audit [skip ci]"
+          git push origin HEAD:research/263-second-engineer-audit
