@@ -86,6 +86,23 @@ class New100PostmatchTests(unittest.TestCase):
         self.assertAlmostEqual(first["model_scores"]["M4"]["brier"],(.62-1)**2+.23**2+.15**2)
         self.assertEqual(out["same_match_M4_comparisons"]["B_minus_M4"]["n"],1)
         self.assertTrue(all(x["schema"]=="quad_forward_263_v1" for x in (fa,fb)))
+    def test_existing_prematch_microsecond_clock_order_is_accepted(self):
+        f,p=self.forecast()
+        f["fixture"]["source_checked_at_utc"]="2026-11-08T12:00:00.000018+00:00"
+        f["payload_sha256"]=sha({k:v for k,v in f.items() if k!="payload_sha256"})
+        p.write_text(json.dumps(f),encoding="utf-8")
+        self.result(f)
+        self.assertEqual(self.eval()["human_attested_official_result_count"],1)
+
+    def test_source_check_beyond_small_drift_or_postkickoff_is_rejected(self):
+        f,p=self.forecast()
+        for stamp in ("2026-11-08T12:00:01.000001+00:00",KO):
+            f["fixture"]["source_checked_at_utc"]=stamp
+            f["payload_sha256"]=sha({k:v for k,v in f.items() if k!="payload_sha256"})
+            p.write_text(json.dumps(f),encoding="utf-8")
+            r,rp=self.result(f)
+            with self.assertRaises(ScoreBlocked):self.eval()
+
     def test_forecast_bytes_immutable_after_evaluation(self):
         f,path=self.forecast();self.result(f)
         raw=path.read_bytes();self.eval()
