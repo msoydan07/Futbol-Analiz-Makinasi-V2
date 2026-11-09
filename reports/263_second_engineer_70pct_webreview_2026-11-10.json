@@ -1,0 +1,1505 @@
+{
+  "schema": "263_SECOND_ENGINEER_70_PERCENT_SKEPTICAL_AUDIT_V1",
+  "decision": "NO_PROOF_70_PERCENT_IS_TRUE_YET_RESEARCH_DESCRIPTIVE_ONLY",
+  "cohort": {
+    "seals": 40,
+    "results_web_reviewed": 39,
+    "postponed_excluded": 1,
+    "source_primary_count": 35,
+    "source_media_crosschecked_count": 4,
+    "distinct_utc_match_days": 1,
+    "per_league": {
+      "BEL1": 4,
+      "ENG1": 5,
+      "ESP1": 5,
+      "FRA1": 6,
+      "GER1": 3,
+      "ITA1": 5,
+      "NED1": 3,
+      "POR1": 4,
+      "TUR1": 4
+    }
+  },
+  "model_availability_in_40_seals": {
+    "B": 35,
+    "C2": 39,
+    "C3": 40,
+    "M4": 40
+  },
+  "research_only_no_network_result_attestation": true,
+  "results_matched_by_league_and_team_names_not_independent_final_canonical_ids": true,
+  "all_available_score_market_probabilities_coherent": true,
+  "by_evidence_class": {
+    "ALL_WEB_REVIEW": {
+      "B": {
+        "markets": {
+          "MS_TOP1": {
+            "n": 34,
+            "brier": 0.231191,
+            "mean_forecast": 0.5159,
+            "observed": 0.6176,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 6,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7056,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.6097,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.2944,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS1": {
+            "n": 34,
+            "brier": 0.195725,
+            "mean_forecast": 0.4312,
+            "observed": 0.4118,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 4,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7027,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.5101,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.2973,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MSX": {
+            "n": 34,
+            "brier": 0.152099,
+            "mean_forecast": 0.2335,
+            "observed": 0.1765,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS2": {
+            "n": 34,
+            "brier": 0.185748,
+            "mean_forecast": 0.3353,
+            "observed": 0.4118,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 2,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7113,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3424,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.2887,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "KG_VAR": {
+            "n": 34,
+            "brier": 0.237444,
+            "mean_forecast": 0.5253,
+            "observed": 0.5294,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.661,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2077,
+                0.9385
+              ],
+              "calibration_gap_observed_minus_predicted": 0.0057,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_1.5": {
+            "n": 34,
+            "brier": 0.157103,
+            "mean_forecast": 0.7625,
+            "observed": 0.8235,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 12,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7139,
+              "observed_rate": 0.8333,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.552,
+                0.953
+              ],
+              "calibration_gap_observed_minus_predicted": 0.1194,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_2.5": {
+            "n": 34,
+            "brier": 0.260184,
+            "mean_forecast": 0.53,
+            "observed": 0.5,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6624,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2077,
+                0.9385
+              ],
+              "calibration_gap_observed_minus_predicted": 0.0042,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_3.5": {
+            "n": 34,
+            "brier": 0.184703,
+            "mean_forecast": 0.3155,
+            "observed": 0.2353,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          }
+        },
+        "MS_multiclass_Brier": 0.533573,
+        "MS_n": 34
+      },
+      "C2": {
+        "markets": {
+          "MS_TOP1": {
+            "n": 38,
+            "brier": 0.219425,
+            "mean_forecast": 0.544,
+            "observed": 0.5526,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6961,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.4385,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.3039,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS1": {
+            "n": 38,
+            "brier": 0.182362,
+            "mean_forecast": 0.412,
+            "observed": 0.3684,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 2,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.713,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3424,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.287,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MSX": {
+            "n": 38,
+            "brier": 0.153853,
+            "mean_forecast": 0.2214,
+            "observed": 0.1842,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS2": {
+            "n": 38,
+            "brier": 0.208195,
+            "mean_forecast": 0.3666,
+            "observed": 0.4474,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 1,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6625,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2065,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.3375,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "KG_VAR": {
+            "n": 38,
+            "brier": 0.225852,
+            "mean_forecast": 0.5414,
+            "observed": 0.5526,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 7,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.697,
+              "observed_rate": 0.5714,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2505,
+                0.8418
+              ],
+              "calibration_gap_observed_minus_predicted": -0.1256,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_1.5": {
+            "n": 38,
+            "brier": 0.160262,
+            "mean_forecast": 0.7857,
+            "observed": 0.8158,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 10,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7169,
+              "observed_rate": 0.7,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3968,
+                0.8922
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0169,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_2.5": {
+            "n": 38,
+            "brier": 0.252027,
+            "mean_forecast": 0.566,
+            "observed": 0.5263,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 9,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6901,
+              "observed_rate": 0.5556,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2667,
+                0.8112
+              ],
+              "calibration_gap_observed_minus_predicted": -0.1346,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_3.5": {
+            "n": 38,
+            "brier": 0.19115,
+            "mean_forecast": 0.3529,
+            "observed": 0.2368,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          }
+        },
+        "MS_multiclass_Brier": 0.54441,
+        "MS_n": 38
+      },
+      "C3": {
+        "markets": {
+          "MS_TOP1": {
+            "n": 39,
+            "brier": 0.23049,
+            "mean_forecast": 0.5102,
+            "observed": 0.641,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 5,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7023,
+              "observed_rate": 0.8,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3755,
+                0.9638
+              ],
+              "calibration_gap_observed_minus_predicted": 0.0977,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS1": {
+            "n": 39,
+            "brier": 0.181546,
+            "mean_forecast": 0.4077,
+            "observed": 0.3846,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7017,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2077,
+                0.9385
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0351,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MSX": {
+            "n": 39,
+            "brier": 0.151662,
+            "mean_forecast": 0.2348,
+            "observed": 0.1795,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS2": {
+            "n": 39,
+            "brier": 0.184114,
+            "mean_forecast": 0.3575,
+            "observed": 0.4359,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 2,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7032,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3424,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.2968,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "KG_VAR": {
+            "n": 39,
+            "brier": 0.246367,
+            "mean_forecast": 0.5422,
+            "observed": 0.5385,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 5,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6834,
+              "observed_rate": 0.6,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2307,
+                0.8824
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0834,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_1.5": {
+            "n": 39,
+            "brier": 0.159505,
+            "mean_forecast": 0.7706,
+            "observed": 0.8205,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 12,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6987,
+              "observed_rate": 0.8333,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.552,
+                0.953
+              ],
+              "calibration_gap_observed_minus_predicted": 0.1347,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_2.5": {
+            "n": 39,
+            "brier": 0.247555,
+            "mean_forecast": 0.5409,
+            "observed": 0.5128,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 5,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6785,
+              "observed_rate": 0.6,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2307,
+                0.8824
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0785,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_3.5": {
+            "n": 39,
+            "brier": 0.174528,
+            "mean_forecast": 0.3253,
+            "observed": 0.2308,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          }
+        },
+        "MS_multiclass_Brier": 0.517322,
+        "MS_n": 39
+      },
+      "M4": {
+        "markets": {
+          "MS_TOP1": {
+            "n": 39,
+            "brier": 0.221258,
+            "mean_forecast": 0.5232,
+            "observed": 0.641,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 4,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6887,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.5101,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.3113,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS1": {
+            "n": 39,
+            "brier": 0.176244,
+            "mean_forecast": 0.4118,
+            "observed": 0.3846,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6992,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.4385,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.3008,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MSX": {
+            "n": 39,
+            "brier": 0.150857,
+            "mean_forecast": 0.2306,
+            "observed": 0.1795,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS2": {
+            "n": 39,
+            "brier": 0.182857,
+            "mean_forecast": 0.3576,
+            "observed": 0.4359,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 1,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6571,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2065,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.3429,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "KG_VAR": {
+            "n": 39,
+            "brier": 0.248164,
+            "mean_forecast": 0.5357,
+            "observed": 0.5385,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 6,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6882,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3,
+                0.9032
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0216,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_1.5": {
+            "n": 39,
+            "brier": 0.165231,
+            "mean_forecast": 0.7711,
+            "observed": 0.8205,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 11,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6994,
+              "observed_rate": 0.8182,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.523,
+                0.9486
+              ],
+              "calibration_gap_observed_minus_predicted": 0.1188,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_2.5": {
+            "n": 39,
+            "brier": 0.262744,
+            "mean_forecast": 0.544,
+            "observed": 0.5128,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 7,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6928,
+              "observed_rate": 0.7143,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3589,
+                0.9178
+              ],
+              "calibration_gap_observed_minus_predicted": 0.0215,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_3.5": {
+            "n": 39,
+            "brier": 0.182749,
+            "mean_forecast": 0.3306,
+            "observed": 0.2308,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          }
+        },
+        "MS_multiclass_Brier": 0.509959,
+        "MS_n": 39
+      }
+    },
+    "PRIMARY_ONLY": {
+      "B": {
+        "markets": {
+          "MS_TOP1": {
+            "n": 30,
+            "brier": 0.243468,
+            "mean_forecast": 0.506,
+            "observed": 0.6,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 4,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7027,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.5101,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.2973,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS1": {
+            "n": 30,
+            "brier": 0.213925,
+            "mean_forecast": 0.4604,
+            "observed": 0.4667,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 4,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7027,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.5101,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.2973,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MSX": {
+            "n": 30,
+            "brier": 0.165074,
+            "mean_forecast": 0.2344,
+            "observed": 0.2,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS2": {
+            "n": 30,
+            "brier": 0.180823,
+            "mean_forecast": 0.3052,
+            "observed": 0.3333,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "KG_VAR": {
+            "n": 30,
+            "brier": 0.229352,
+            "mean_forecast": 0.5332,
+            "observed": 0.5,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.661,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2077,
+                0.9385
+              ],
+              "calibration_gap_observed_minus_predicted": 0.0057,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_1.5": {
+            "n": 30,
+            "brier": 0.146383,
+            "mean_forecast": 0.7664,
+            "observed": 0.8333,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 11,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7182,
+              "observed_rate": 0.8182,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.523,
+                0.9486
+              ],
+              "calibration_gap_observed_minus_predicted": 0.0999,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_2.5": {
+            "n": 30,
+            "brier": 0.252242,
+            "mean_forecast": 0.5347,
+            "observed": 0.4667,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6624,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2077,
+                0.9385
+              ],
+              "calibration_gap_observed_minus_predicted": 0.0042,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_3.5": {
+            "n": 30,
+            "brier": 0.191217,
+            "mean_forecast": 0.3194,
+            "observed": 0.2333,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          }
+        },
+        "MS_multiclass_Brier": 0.559823,
+        "MS_n": 30
+      },
+      "C2": {
+        "markets": {
+          "MS_TOP1": {
+            "n": 34,
+            "brier": 0.22913,
+            "mean_forecast": 0.5369,
+            "observed": 0.5294,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 2,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.713,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3424,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.287,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS1": {
+            "n": 34,
+            "brier": 0.196853,
+            "mean_forecast": 0.4361,
+            "observed": 0.4118,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 2,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.713,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3424,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.287,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MSX": {
+            "n": 34,
+            "brier": 0.165513,
+            "mean_forecast": 0.2215,
+            "observed": 0.2059,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS2": {
+            "n": 34,
+            "brier": 0.206556,
+            "mean_forecast": 0.3424,
+            "observed": 0.3824,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "KG_VAR": {
+            "n": 34,
+            "brier": 0.214124,
+            "mean_forecast": 0.5499,
+            "observed": 0.5294,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 7,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.697,
+              "observed_rate": 0.5714,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2505,
+                0.8418
+              ],
+              "calibration_gap_observed_minus_predicted": -0.1256,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_1.5": {
+            "n": 34,
+            "brier": 0.148663,
+            "mean_forecast": 0.7913,
+            "observed": 0.8235,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 10,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7169,
+              "observed_rate": 0.7,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3968,
+                0.8922
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0169,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_2.5": {
+            "n": 34,
+            "brier": 0.241486,
+            "mean_forecast": 0.572,
+            "observed": 0.5,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 9,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6901,
+              "observed_rate": 0.5556,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2667,
+                0.8112
+              ],
+              "calibration_gap_observed_minus_predicted": -0.1346,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_3.5": {
+            "n": 34,
+            "brier": 0.201171,
+            "mean_forecast": 0.3569,
+            "observed": 0.2353,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          }
+        },
+        "MS_multiclass_Brier": 0.568922,
+        "MS_n": 34
+      },
+      "C3": {
+        "markets": {
+          "MS_TOP1": {
+            "n": 35,
+            "brier": 0.235362,
+            "mean_forecast": 0.5008,
+            "observed": 0.6,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7017,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2077,
+                0.9385
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0351,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS1": {
+            "n": 35,
+            "brier": 0.197652,
+            "mean_forecast": 0.4338,
+            "observed": 0.4286,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7017,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2077,
+                0.9385
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0351,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MSX": {
+            "n": 35,
+            "brier": 0.162677,
+            "mean_forecast": 0.2356,
+            "observed": 0.2,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS2": {
+            "n": 35,
+            "brier": 0.183686,
+            "mean_forecast": 0.3306,
+            "observed": 0.3714,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "KG_VAR": {
+            "n": 35,
+            "brier": 0.23653,
+            "mean_forecast": 0.5533,
+            "observed": 0.5143,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 5,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6834,
+              "observed_rate": 0.6,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.2307,
+                0.8824
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0834,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_1.5": {
+            "n": 35,
+            "brier": 0.150138,
+            "mean_forecast": 0.7764,
+            "observed": 0.8286,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 11,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7003,
+              "observed_rate": 0.8182,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.523,
+                0.9486
+              ],
+              "calibration_gap_observed_minus_predicted": 0.1179,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_2.5": {
+            "n": 35,
+            "brier": 0.23851,
+            "mean_forecast": 0.5477,
+            "observed": 0.4857,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 4,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6852,
+              "observed_rate": 0.5,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.15,
+                0.85
+              ],
+              "calibration_gap_observed_minus_predicted": -0.1852,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_3.5": {
+            "n": 35,
+            "brier": 0.180077,
+            "mean_forecast": 0.3308,
+            "observed": 0.2286,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          }
+        },
+        "MS_multiclass_Brier": 0.544014,
+        "MS_n": 35
+      },
+      "M4": {
+        "markets": {
+          "MS_TOP1": {
+            "n": 35,
+            "brier": 0.233587,
+            "mean_forecast": 0.5136,
+            "observed": 0.6286,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6992,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.4385,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.3008,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS1": {
+            "n": 35,
+            "brier": 0.190917,
+            "mean_forecast": 0.4374,
+            "observed": 0.4286,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 3,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6992,
+              "observed_rate": 1.0,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.4385,
+                1
+              ],
+              "calibration_gap_observed_minus_predicted": 0.3008,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MSX": {
+            "n": 35,
+            "brier": 0.161825,
+            "mean_forecast": 0.2313,
+            "observed": 0.2,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "MS2": {
+            "n": 35,
+            "brier": 0.180788,
+            "mean_forecast": 0.3313,
+            "observed": 0.3714,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "KG_VAR": {
+            "n": 35,
+            "brier": 0.238668,
+            "mean_forecast": 0.5455,
+            "observed": 0.5143,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 6,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6882,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3,
+                0.9032
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0216,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_1.5": {
+            "n": 35,
+            "brier": 0.155246,
+            "mean_forecast": 0.7765,
+            "observed": 0.8286,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 10,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.7034,
+              "observed_rate": 0.8,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.4902,
+                0.9433
+              ],
+              "calibration_gap_observed_minus_predicted": 0.0966,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_2.5": {
+            "n": 35,
+            "brier": 0.254132,
+            "mean_forecast": 0.55,
+            "observed": 0.4857,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 6,
+              "distinct_utc_match_days": 1,
+              "predicted_mean": 0.6929,
+              "observed_rate": 0.6667,
+              "95pct_wilson_independent_binomial_reference_only": [
+                0.3,
+                0.9032
+              ],
+              "calibration_gap_observed_minus_predicted": -0.0262,
+              "evidence_status": "DESCRIPTIVE_ONLY_TOO_FEW_OR_SAME_DAY",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          },
+          "OVER_3.5": {
+            "n": 35,
+            "brier": 0.190289,
+            "mean_forecast": 0.335,
+            "observed": 0.2286,
+            "confidence_65_75": {
+              "range_inclusive_lower_exclusive_upper": [
+                0.65,
+                0.75
+              ],
+              "sample_n": 0,
+              "distinct_utc_match_days": 0,
+              "predicted_mean": null,
+              "observed_rate": null,
+              "95pct_wilson_independent_binomial_reference_only": null,
+              "calibration_gap_observed_minus_predicted": null,
+              "evidence_status": "NO_70_PERCENT_SAMPLES",
+              "note": "Same-day matches share shocks; naive Wilson interval may understate uncertainty. Historical results already viewed."
+            }
+          }
+        },
+        "MS_multiclass_Brier": 0.533531,
+        "MS_n": 35
+      }
+    }
+  },
+  "independent_70_percent_acceptance": false,
+  "historical_896_pair_comparison_is_not_forward_calibration": true,
+  "other_markets_are_correlated_do_not_pool_binomial_observations": true,
+  "one_calendar_day_cannot_establish_reliable_calibration": true,
+  "model_coefficients_or_probabilities_changed": false,
+  "production_M4_updated": false,
+  "recommendation": "Keep frozen M4, B/C2/C3 as recorded; measure each market on new dates using truly verified sealed source-ID outcomes, preserve PAS when unverified. Never derive a correction from this seen cohort."
+}
