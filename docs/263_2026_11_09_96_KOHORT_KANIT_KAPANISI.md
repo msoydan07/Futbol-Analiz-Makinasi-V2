@@ -29,6 +29,17 @@
 - Bu değişiklik sadece sonuç eşleştirici + iki sentetik sınama içindir; B/C2/C3/M4 motor, DEV kilidi, tahmin mühürleri, Pinnacle kredileri, otomasyon zamanlaması, geçmiş sonuçlar ve `main` **değişmez**.
 - Test kodunun varlığı **CI sonucunun geçtiği iddiası değildir**; CI sonucu ayrı denetlenmelidir.
 
+### 3B. 8 Kasım gerçek push → SHA → mobil zincirinin izahı
+GitHub'ın halihazırdaki iki gerçek `new100` batch raporu denetlendi:
+- **Run 42469245388:** 42 isimli girdi → **33 yeni kalıcı mühür**, 9 bloke; kaynak, kararı ve tekli/toplu mobil SHA görünümü aynı isteğin kayıtlarıdır. API oran çağrısı **0**, resmî bahis onayı **0**.
+- **Run 42469487639:** ilk turdan 8 bloke adı yeniden kaynaktan deneme → **7 yeni kalıcı mühür**, 1 bloke. **Toplam 40/42** kalıcı new100 mühür, iki ayrı başarılı kaynak geçişli Git kayıt paketi.
+- 42 araştırma maçından resmî new100'a alınmayan **SC Cambuur–PSV**: C3 çıktısı olmadığı için `REQUIRES_C3_M4_AND_THREE_AVAILABLE` emniyet kapısı; ayrıca araştırma hesabı ayrı dosyada mevcuttur.
+- **FC Utrecht–NEC Nijmegen:** KNVB resmî sayfa kontrolü istenen karşılaşmayı teyit edemedi: `OFFICIAL_GATE_FAILED:official_match_not_confirmed`. Araştırmada hesap olması resmî kimlik kapısından geçtiği anlamına gelmez.
+- **İşletim kararı:** 8 Kasım için gerçek `girdi → resmî doğrulama → dört-model denemesi → git SHA mührü → mobil ekran` zinciri **40 maçta çalışmıştır**. Ancak maç sonu resmî sonuç kaydı hâlâ **0**; 7/10 gün tüm kupaları kapsayan rotasyon veri seti yetersiz; Pinnacle/EV doğrulanmadı. Bütün 40 kararda `RESEARCH_PAS` olmasına şaşırılmamalıdır.
+- Kayıtlar: `experiments/263/sabah_batch_reports/new100_42469245388.json`, `new100_42469487639.json`, eşleşen `sabah_new100_receipts` ve `sabah_mobile_reports` dosyaları. Kayıtlar yeniden hesaplanmadı.
+
+**Zaman sırası kod düzeltmesi sonrası tek toplu CI:** postmatch #42599249693 **PASS**; sabah offline bütünleşik bileşen denetimi #42599249981 **PASS**. Bunlar yeni maç tahmin başarısı değildir.
+
 ## 4. Sonlu takip — pilot tekrarına girmeden
 1. Önceden mühürlü 44 maçın kaynak/sonuç eşleştirmesini güvenilir eldeki kanıt kadarıyla ayrı `verified / human-attested / unknown / postponed` gruplarında kapat; eksiklere geçmişe dönük tahmin veya skor uydurma. 7 Kasım araştırma skoru kendi kategorisinde kalır.
 2. Sadece kullanım için kritik sabah **istek dosyası → resmî fikstür → B/C2/C3/M4 → SHA commit → mobil rapor** zincirini denetle ve eksik bağlantı varsa tek hedefli onarım yap. Eski `263-sabah-live-batch.yml` bilerek fail-closed; mevcut giriş `263-sabah-new100-on-request.yml` üzerinde push ile çalışır. Bu yapı, kullanıcının mesajının kendiliğinden GitHub CI tetiklediği anlamına gelmez.
