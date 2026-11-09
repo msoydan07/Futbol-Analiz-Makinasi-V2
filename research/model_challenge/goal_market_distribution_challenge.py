@@ -27,7 +27,7 @@ sys.path.insert(0,str(ROOT/"experiments"/"263"))
 from m4_integrated import fit_m4,predict_m4,use_lock
 
 SCHEMA="MC_263_GOALMARKET_CHALLENGE_V1"
-N=18
+N=40
 BINARY=("BTTS_YES","OVER_1.5","OVER_2.5","OVER_3.5")
 SCALES=(0.85,0.925,1.0,1.075,1.15)
 RHOS=(-0.15,-0.075,0.0,0.075,0.15)
@@ -55,7 +55,7 @@ def matrix(lh,la,*,kind="independent",scale=1.0,rho=0.0,cov=0.0):
             raise ValueError("covariance outside valid bivariate Poisson support")
         a=pois(lh-cov);b=pois(la-cov);shared=pois(cov)
         p=np.zeros((N+1,N+1),dtype=float)
-        for k in range(N+1):
+        for k in range(min(N+1,16)):
             # x=I+k, y=J+k, I~Pois(lh-c), J~Pois(la-c), k~Pois(c)
             p[k:,k:]+=shared[k]*np.outer(a[:N+1-k],b[:N+1-k])
     else:
