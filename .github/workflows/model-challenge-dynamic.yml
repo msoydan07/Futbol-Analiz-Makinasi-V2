@@ -44,5 +44,10 @@ jobs:
           path: ${{ runner.temp }}/meta/
           retention-days: 30
           if-no-files-found: warn
-      - name: No existing 2.6.3 files mutated
-        run: test -z "$(git status --porcelain -- experiments/263 forward_morning_263 forward_quad_263)"
+      - name: No tracked 2.6.3 changes or non-cache new files
+        run: |
+          git diff --exit-code -- experiments/263 forward_morning_263 forward_quad_263
+          unexpected="$(git ls-files --others --exclude-standard -- experiments/263 forward_morning_263 forward_quad_263 | grep -v -E '(^|/)__pycache__/|\\.pyc
+ || true)"
+          test -z "$unexpected"
+          echo 'RESEARCH_ONLY_NO_263_MUTATION'
