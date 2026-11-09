@@ -49,7 +49,8 @@ def nba_games(payload,year):
         raise SourceError("NBA_SEASON_MISMATCH")
     seen=set();out=[]
     for x in payload["games"]:
-        if x.get("type")!=2 or x.get("home_score") is None or x.get("away_score") is None:
+        if (x.get("type")!=2 or x.get("home_score") is None or x.get("away_score") is None
+            or x.get("phase") in ("NBA Cup Championship","NBA In-Season Tournament Championship")):
             continue
         stamp=datetime.fromisoformat(x["date"].replace("Z","+00:00"))
         if stamp.tzinfo is None:raise SourceError("NBA_DATE_WITHOUT_ZONE")

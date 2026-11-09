@@ -13,8 +13,11 @@ def grade(rows):
     n=len(rows)
     if not n:
         return {"n":0,"correct":0,"accuracy":None,"brier":None,"logloss":None,
-                "margin_mae":None,"total_mae":None,"margin_rmse":None,"total_rmse":None}
+                "margin_mae":None,"total_mae":None,"margin_rmse":None,"total_rmse":None,
+                "over_brier_fixed_line":None,"home_cover_brier_fixed_line":None,
+                "over_correct_fixed_line":None,"cover_correct_fixed_line":None}
     right=brier=loss=mae_m=mae_t=sse_m=sse_t=0.0
+    over_brier=cover_brier=over_correct=cover_correct=0.0
     for g,p in rows:
         y=int(g.margin>0);pr=p.home_win()
         right+=int((pr>=.5)==bool(y))
@@ -22,11 +25,23 @@ def grade(rows):
         loss-=math.log(pr if y else 1-pr)
         mae_m+=abs(p.margin-g.margin);mae_t+=abs(p.total-g.total)
         sse_m+=(p.margin-g.margin)**2;sse_t+=(p.total-g.total)**2
+        # Internal FIXED analysis lines, NOT actual sportsbook lines.
+        total_line=224.5 if g.league=="NBA" else 164.5
+        spread=-4.5
+        oy=int(g.total>total_line);cy=int(g.margin+spread>0)
+        op=p.over(total_line);cp=p.cover(spread)
+        over_brier+=(op-oy)**2;cover_brier+=(cp-cy)**2
+        over_correct+=int((op>=.5)==bool(oy))
+        cover_correct+=int((cp>=.5)==bool(cy))
     return {"n":n,"correct":int(right),"accuracy":round(right/n,5),
             "brier":round(brier/n,6),"logloss":round(loss/n,6),
             "margin_mae":round(mae_m/n,4),"total_mae":round(mae_t/n,4),
             "margin_rmse":round(math.sqrt(sse_m/n),4),
-            "total_rmse":round(math.sqrt(sse_t/n),4)}
+            "total_rmse":round(math.sqrt(sse_t/n),4),
+            "over_brier_fixed_line":round(over_brier/n,6),
+            "home_cover_brier_fixed_line":round(cover_brier/n,6),
+            "over_correct_fixed_line":int(over_correct),
+            "cover_correct_fixed_line":int(cover_correct)}
 def choose_dev(d):
     base=d["BASE"]
     if base["n"]<150:raise ValueError("INSUFFICIENT_DEVELOPMENT_DATA")
@@ -83,6 +98,9 @@ def mobile(x):
             f"Arşivde {info['historical_game_count']} maç; ayrılmış sonraki sezon N={g['n']}.",
             f"MS doğru: {g['correct']}/{g['n']} = %{100*g['accuracy']:.2f}; Brier: {g['brier']}; logloss: {g['logloss']}",
             f"Fark MAE: {g['margin_mae']} sayı · Toplam sayı MAE: {g['total_mae']} sayı.",
+            f"Sabit deneysel toplam sayı çizgisi {224.5 if league=='NBA' else 164.5}: Üst/Alt Brier {g['over_brier_fixed_line']}, yön {g['over_correct_fixed_line']}/{g['n']}.",
+            f"Sabit -4.5 ev handikap çizgisi: handikap Brier {g['home_cover_brier_fixed_line']}, yön {g['cover_correct_fixed_line']}/{g['n']}.",
+            "Bu iki sabit çizgi gerçekte açılmış piyasa oranı değildir.",
             f"Basit BASE kıyası: Brier {b['brier']}, fark MAE {b['margin_mae']}, toplam MAE {b['total_mae']}.",
             f"2026-27 geriye dönük tekrar: N={current['n']} (GERÇEK ileri SHA kaydı değildir).",""])
     if x["source_errors"]:lines+=["### Kaynağı sınanamayan ligler",str(x["source_errors"])]

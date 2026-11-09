@@ -17,6 +17,12 @@ class Tests(unittest.TestCase):
         self.assertEqual(len(g),1)
         self.assertEqual(g[0].day,"2024-11-03")
         self.assertEqual(g[0].margin,5)
+    def test_nba_cup_final_excluded_from_regular_season(self):
+        game=lambda n,phase:{"id":str(n),"type":2,"phase":phase,
+          "date":"2024-12-19T00:00:00+00:00","home":"NY","away":"BOS",
+          "home_score":111,"away_score":99}
+        rs=nba_games({"season":2025,"games":[game(1,"Final"),game(2,"NBA Cup Championship")]},2025)
+        self.assertEqual([g.game_id for g in rs],["1"])
     def test_euroleague_gzip_parsing_regular_season_only(self):
         stream=io.StringIO()
         w=csv.writer(stream);w.writerow(["season","game_id","date","phase","home","away","home_score","away_score","neutral"])

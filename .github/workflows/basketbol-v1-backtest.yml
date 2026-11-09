@@ -25,6 +25,12 @@ jobs:
         run: |
           set -euo pipefail
           python basketbol_v1/benchmark.py --fail-if-empty --out /tmp/basketbol-v1.json --mobile /tmp/basketbol-v1.md
+      - name: Future-date forecast scenario smoke, NOT an official fixture
+        run: |
+          set -euo pipefail
+          DAY="$(TZ=Europe/Istanbul date -d '+3 days' +%Y-%m-%d)"
+          python basketbol_v1/predict.py --league NBA --day "$DAY" --home DEN --away LAL \
+            --total-line 224.5 --home-handicap -4.5 --out /tmp/basketbol-v1-example.json
       - name: Research artifact only, no historical prediction rewrite
         if: always()
         uses: actions/upload-artifact@v4
@@ -35,3 +41,4 @@ jobs:
           path: |
             /tmp/basketbol-v1.json
             /tmp/basketbol-v1.md
+            /tmp/basketbol-v1-example.json

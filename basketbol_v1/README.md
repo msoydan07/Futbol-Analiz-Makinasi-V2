@@ -23,3 +23,6 @@ Yeni GitHub deposu oluşturma aksiyonu bağlayıcıda bulunmadığından, geçic
 
 ## EuroCup ikinci veri kaynağı
 V1.1'de EuroCup (EC) için api-live.euroleague.net kamuya açık v2 sezon oyunları uç noktası eklendi; yalnız RS, played=true, sayısal final skor, mevsim kodu, eksiksiz sayfalama ve kimlik teyidi alanları kabul edilir. Bu harici API'nin ağ üzerinden çalışma kanıtı Actions sonucuna bağlıdır. Veri lisansı EuroLeague ile aynıdır. Bu kaynak, ülke ligi olan BSL/ACB/BBL'yi desteklendi diye saymaz.
+
+## NBA Kupa finali ve üç pazar ölçümü
+NBA kaynaklarının type=2 koduna rağmen, NBA Cup Championship / NBA In-Season Tournament Championship maçları normal sezon testinden **çıkarılır**. Üçüncü şahıs bahis oranı olmayan sabit örnek çizgilerle (NBA 224,5, Avrupa 164,5 sayı; ev handikapı -4,5) Alt/Üst ve handikap olasılıklarının yön isabeti ve Brier'ı ayrıca raporlanır. Bunlar mevcut gerçek piyasa çizgisi değildir. Örnek gelecek maç CLI denemesi daima HYPOTHETICAL / fikstür teyitsiz olarak etiketlenir.
