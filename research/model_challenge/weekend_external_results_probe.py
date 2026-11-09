@@ -21,7 +21,8 @@ ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
 from identity import Registry,normalize
 from collect_team_candidates import LEAGUES,BASE
-from experiments.263.official_page_lookup_263 import TIMEZONES
+import importlib
+TIMEZONES=importlib.import_module('experiments.263.official_page_lookup_263').TIMEZONES
 from audit_weekend_sealed_goals import digest
 
 SCHEMA="MC_NOVEMBER_EXTERNAL_SCORE_CANDIDATE_DIAGNOSTIC_V1"
