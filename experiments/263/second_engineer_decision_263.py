@@ -19,13 +19,18 @@ def analyse(root):
             "raw_m4_joint_sum_wrong":0,"different_dev_anchor_models":0}
     worst={"distance_to_one":0,"example_path":None,"ms_sum":None,
            "choice_anchor_models":None}
+    original_paths={}
+    for fname in ("new100_42469245388.json","new100_42469487639.json"):
+        batch=json.loads((root/"experiments/263/sabah_batch_reports"/fname).read_text(encoding="utf-8"))
+        for row in batch["outcomes"]:
+            if row.get("status")!="REGISTERED_FOUR_MODELS_EXPERIMENTAL":continue
+            key=(row["league"],row["home"],row["away"])
+            if key in original_paths:raise EvidenceBlocked("DUPLICATE_DECISION_SOURCE_ID")
+            original_paths[key]=Path(row["forecast_path"]).stem
+    if set(original_paths)!=set(sealed):
+        raise EvidenceBlocked("DECISION_ARCHIVE_NOT_EXACTLY_LINKED_TO_REGISTERED_SEALS")
     for key,forecast in sorted(sealed.items()):
-        stem=next(p.stem for p in (root/"forward_morning_263"/DAY).glob("*.json")
-                  if p.stem==next((row["forecast_path"].rsplit("/",1)[-1][:-5] for
-                    fname in ("new100_42469245388.json","new100_42469487639.json")
-                    for row in json.loads((root/"experiments/263/sabah_batch_reports"/fname).read_text(encoding="utf-8"))["outcomes"]
-                    if row.get("status")=="REGISTERED_FOUR_MODELS_EXPERIMENTAL"
-                    and (row["league"],row["home"],row["away"])==key),None))
+        stem=original_paths[key]
         dpath=root/"experiments/263/sabah_research/new100"/DAY/stem/"decision.json"
         d=json.loads(dpath.read_text(encoding="utf-8"))
         if (hash_payload(d)!=d.get("payload_sha256") or
@@ -69,10 +74,13 @@ def main():
     p.add_argument("--out",required=True)
     args=p.parse_args()
     out=Path(args.out)
-    if out.exists():raise EvidenceBlocked("APPEND_ONLY_REPORT_EXISTS")
     data=analyse(args.root)
     out.parent.mkdir(parents=True,exist_ok=True)
-    out.write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False)+"\n",encoding="utf-8")
+    if out.exists():
+        if json.loads(out.read_text(encoding="utf-8"))!=data:
+            raise EvidenceBlocked("EXISTING_DEV_MS_AUDIT_DIFFERS_FROM_RECOMPUTED_SEALS")
+    else:
+        out.write_text(json.dumps(data,ensure_ascii=False,indent=2,allow_nan=False)+"\n",encoding="utf-8")
     print(json.dumps({"status":data["status"],"counts":data["counts"],
                       "largest_inconsistency":data["largest_inconsistency"]},ensure_ascii=False))
 

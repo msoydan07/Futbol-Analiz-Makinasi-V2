@@ -247,8 +247,11 @@ def main():
     args=parser.parse_args()
     result=audit(args.root)
     p=Path(args.out);p.parent.mkdir(parents=True,exist_ok=True)
-    if p.exists():raise EvidenceBlocked("APPEND_ONLY_RESEARCH_REPORT_EXISTS")
-    p.write_text(json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False)+"\n",encoding="utf-8")
+    if p.exists():
+        if read(p)!=result:
+            raise EvidenceBlocked("EXISTING_RESEARCH_AUDIT_DIFFERS_FROM_IMMUTABLE_RECOMPUTATION")
+    else:
+        p.write_text(json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False)+"\n",encoding="utf-8")
     print(json.dumps({"status":result["decision"],"cohort":result["cohort"],
         "m4_top1_70band":result["by_evidence_class"]["PRIMARY_ONLY"]["M4"]["markets"]["MS_TOP1"]["confidence_65_75"],
         "m4_over25_70band":result["by_evidence_class"]["PRIMARY_ONLY"]["M4"]["markets"]["OVER_2.5"]["confidence_65_75"]},
