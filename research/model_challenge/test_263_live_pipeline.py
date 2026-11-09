@@ -10,12 +10,16 @@ from datetime import datetime,timezone,timedelta
 from pathlib import Path
 from trusted_263_snapshot_bridge import build
 from official_263_fixture_bridge import convert_observation
-from xgb_live_inference import inference
+try:
+ from xgb_live_inference import inference
+except ModuleNotFoundError:
+ inference=None
 from prospective_seal import seal,Rejected
 
 ROOT=Path(__file__).resolve().parents[2]
 FIXED=datetime(2026,11,9,10,0,tzinfo=timezone.utc)
 
+@unittest.skipIf(inference is None, "ML deps installed only in dedicated CI")
 class ResearchIntegration(unittest.TestCase):
  def test_asof_xgb_from_4518_snapshot_and_synthetic_official_gate(self):
   with tempfile.TemporaryDirectory() as folder:
