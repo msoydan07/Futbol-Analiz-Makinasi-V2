@@ -29,6 +29,8 @@ def transform(csv_bytes,acceptance,*,asof):
     asof=dt(asof.isoformat())
     if reviewed>asof:raise ValueError("source reviewed in future")
     rawsha=hashlib.sha256(csv_bytes).hexdigest()
+    if rawsha!=acceptance.get("snapshot_sha256"):
+        raise ValueError("accepted snapshot SHA does not match exact historical bytes")
     rows=list(csv.DictReader(io.StringIO(csv_bytes.decode("utf-8-sig"))))
     required={"fixture_id","league","season","match_date",
               "home_id","away_id","home_goals","away_goals","result"}
