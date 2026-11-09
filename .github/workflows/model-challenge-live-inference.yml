@@ -2,7 +2,10 @@ name: Model challenge - pre-kickoff XGBoost inference QA
 on:
   push:
     branches: [research/model-challenge]
-    paths: ['.github/workflows/model-challenge-live-inference.yml']
+    paths:
+      - '.github/workflows/model-challenge-live-inference.yml'
+      - 'research/model_challenge/xgb_live_inference.py'
+      - 'research/model_challenge/test_xgb_live_inference.py'
   workflow_dispatch:
 permissions:
   contents: read
