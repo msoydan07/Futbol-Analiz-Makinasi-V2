@@ -92,7 +92,8 @@ def audit(source,lock_path,out_path):
             xx=xp[k]
             xgp={label:float(xx[LABEL[label]]) for label in LABELS}
             half={label:(mp[label]+xgp[label])/2 for label in LABELS}
-            y=hist[allrows.index(r)]["result"]  # label from scored file AFTER inference
+            gh,ga=int(r["home_goals"]),int(r["away_goals"])
+            y="H" if gh>ga else "A" if ga>gh else "D"  # scoring only after both predictions
             result={"league":league,"date":day,"key":list(k),"result":y}
             for name,p in (("M4",mp),("XGBoost",xgp),("Fixed50",half)):
                 ll,bs,acc=losses(p,y)
