@@ -11,13 +11,14 @@ QUARANTINED, never silently completed with misleading data. A source
 record itself is not a human attestation of the final result.
 """
 from __future__ import annotations
-import argparse,csv,hashlib,io,json,urllib.request
+import argparse,csv,hashlib,io,json,urllib.request,sys
 from collections import Counter,defaultdict
 from datetime import date
 from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
 from identity import Registry
 from collect_team_candidates import LEAGUES,BASE
-from research.model_challenge.xgb_live_inference import load_history
+from xgb_live_inference import load_history
 
 SCHEMA="MC_2627_SOURCE_IDENTITY_AUDIT_V1"
 def read_football_data(url):
