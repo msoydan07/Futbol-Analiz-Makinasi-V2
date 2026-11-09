@@ -142,7 +142,7 @@ def header(c,day,title):
 
 def foot(c,page,extra=""):
     c.setStrokeColor(EDGE);c.line(13,27,W-13,27)
-    text(c,13,15,"MS: kalibre | KG/Ust: model medyani | Fiyat yoksa piyasa —",6.2,color=MUTED)
+    text(c,13,15,"MS: ayri DEV tek-pazar (1X2 dagilimi degil) | Fiyat yoksa —",6.2,color=MUTED)
     right(c,W-13,15,str(page),7,color=MUTED)
 
 def match(c,r,y,i):
@@ -157,7 +157,7 @@ def match(c,r,y,i):
     text(c,57,y,match_name,9.2,True,INK)
     right(c,W-17,y,r["direction"],8.4,True,INK)
     text(c,57,y-13,r["league"],7,color=MUTED)
-    text(c,123,y-13,"BIZIM",6.5,color=MUTED)
+    text(c,123,y-13,"BIZIM (TEK MS)",6.5,color=MUTED)
     text(c,208,y-13,"PIYASA",6.5,color=MUTED)
     text(c,307,y-13,"FARK (yp)",6.5,color=MUTED)
     text(c,123,y-26,pct(r["model"]),9.4,True,INK)
@@ -193,7 +193,7 @@ def single_pdf(path,day,r):
     header(c,day,"TEKLI MAC ANALIZI")
     text(c,13,H-76,cut(r["home"]+" – "+r["away"],W-28,FONT_BOLD,14),14,True)
     text(c,13,H-92,r["league"]+" | "+r["time"]+" TSİ | "+r["direction"],9,color=MUTED)
-    for x,label,value in ((13,"BIZIM",pct(r["model"])),(150,"PIYASA",pct(r["market"])),(290,"FARK (yp)",difference(r["delta"]))):
+    for x,label,value in ((13,"BIZIM (TEK MS)",pct(r["model"])),(150,"PIYASA",pct(r["market"])),(290,"FARK (yp)",difference(r["delta"]))):
         text(c,x,H-125,label,8,color=MUTED);text(c,x,H-146,value,15,True,TEAL)
     text(c,13,H-175,"GOL BEKLENTILERI (model medyani)",9,True)
     for j,(name,pct_value) in enumerate(zip(MARKET_LABELS,r["goals"])):
