@@ -4,6 +4,7 @@ on:
     branches: [experiment/263-toplu-karsilastirma]
     paths:
       - 'forward_morning_263/*/*.json'
+      - 'experiments/263/postmatch_refresh_requests/*.json'
       - 'experiments/263/postmatch_csv_bridge_263.py'
       - 'experiments/263/test_postmatch_csv_bridge_263.py'
       - 'experiments/263/nov8_webreview_results_263.json'
