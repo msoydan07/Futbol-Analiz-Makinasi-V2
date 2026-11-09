@@ -42,7 +42,7 @@ TRAIN_WARMUP=40
 MIN_TRAIN=1000
 MIN_LEAGUE_MATCHES=40
 MAX_SOURCE_STALENESS_DAYS=21
-MAX_FEATURES=27
+MAX_FEATURES=25
 
 def sha(raw):
     return hashlib.sha256(raw).hexdigest()
@@ -111,6 +111,7 @@ def inference(history_path,manifest_path,now=None):
     now=dt(now.isoformat())
     manifest=json.loads(Path(manifest_path).read_text(encoding="utf8"))
     allowed={"schema","fixture_id","league","home_name","away_name",
+             "home_id","away_id",
              "kickoff_utc","official_fixture_url","source_verified_at_utc",
              "history_asof_utc","fixture_verified_by"}
     if set(manifest)!=allowed or manifest["schema"]!="MC_VERIFIED_FIXTURE_INPUT_V1":
@@ -128,6 +129,10 @@ def inference(history_path,manifest_path,now=None):
     if created-checked>timedelta(hours=12) or kickoff-created<timedelta(minutes=2):
         raise ValueError("stale fixture evidence or kickoff too close")
     day=kickoff.date()
+    if any(not isinstance(manifest[k],str) or not manifest[k].strip() for k in ("home_name","away_name","home_id","away_id")):
+        raise ValueError("missing verified team identities")
+    if manifest["home_name"]==manifest["away_name"] or manifest["home_id"]==manifest["away_id"]:
+        raise ValueError("invalid fixture participants")
     # UTC date is deliberately conservative for matches around midnight.
     # Production should use a fully source-verified local match date.
     if kickoff.hour<3:
@@ -137,6 +142,8 @@ def inference(history_path,manifest_path,now=None):
     rows,hsha=load_history(history_path,day)
     if not rows:
         raise ValueError("empty historical archive")
+    if any(date.fromisoformat(r["date"])>=history_asof.date() for r in rows):
+        raise ValueError("played results are later than verified history cutoff")
     # The source must have current league results, not merely a recent manifest date.
     league_dates=[date.fromisoformat(r["date"]) for r in rows
                   if r["league"]==manifest["league"]]
@@ -147,7 +154,7 @@ def inference(history_path,manifest_path,now=None):
         raise ValueError("insufficient model training matches")
     x,detail=feature_at(rows,manifest["league"],manifest["home_name"],
                         manifest["away_name"],day)
-    if x.shape!=(27,) or not np.isfinite(x).all():
+    if x.shape!=(MAX_FEATURES,) or not np.isfinite(x).all():
         raise ValueError("feature shape/finiteness mismatch")
     model=fit(train,PARAMS)
     p=model.predict_proba(x.reshape(1,-1))[0]
@@ -155,7 +162,9 @@ def inference(history_path,manifest_path,now=None):
     if not np.isfinite(p).all() or not np.all((p>0)&(p<1)):
         raise ValueError("invalid XGBoost output")
     probabilities={k:float(p[i]) for k,i in LABEL.items()}
-    this_code=sha(Path(__file__).read_bytes())
+    parts=[Path(__file__),Path(__file__).with_name("xgb_challenger.py"),
+           Path(__file__).with_name("next_season_test.py")]
+    this_code=sha(b"".join(part.read_bytes() for part in parts))
     models={key:{"status":"PAS","probabilities":None} for key in
             ("Elo","Poisson","XGBoost","EqualWeightHybrid")}
     models["XGBoost"]={"status":"AVAILABLE","probabilities":probabilities}
@@ -167,8 +176,8 @@ def inference(history_path,manifest_path,now=None):
       "history_sha":hsha}
     candidate={"schema":"MC_PROSPECTIVE_SHADOW_INPUT_V1",
       "fixture":{"fixture_id":manifest["fixture_id"],"league":manifest["league"],
-                 "home_id":club_id(manifest["home_name"]),
-                 "away_id":club_id(manifest["away_name"]),
+                 "home_id":manifest["home_id"],
+                 "away_id":manifest["away_id"],
                  "kickoff_utc":manifest["kickoff_utc"]},
       "source":source,"models":models,"created_at_utc":now.isoformat()}
     validate(candidate,now)
