@@ -1,0 +1,37 @@
+name: Model challenge - 263 ten league M4 versus XGBoost retrospective
+on:
+  push:
+    branches: [research/model-challenge]
+    paths:
+      - '.github/workflows/model-challenge-263-paired-eval.yml'
+      - 'research/model_challenge/ten_league_263_paired_eval.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned ML packages
+        run: python -m pip install 'numpy==2.2.6' 'scipy==1.15.3' 'xgboost==3.0.5' 'scikit-learn==1.7.2'
+      - name: Validate accepted-source SHA and create ten-league research representation
+        run: python research/model_challenge/trusted_263_snapshot_bridge.py --out "$RUNNER_TEMP/accepted"
+      - name: Frozen same-match M4 / XGBoost comparison
+        run: python research/model_challenge/ten_league_263_paired_eval.py --source "$RUNNER_TEMP/accepted/normalized_263_research.csv" --lock experiments/263/m4_lock.json --out "$RUNNER_TEMP/report/paired_263.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: model-challenge-263-tenleague-m4-xgb-paired
+          path: ${{ runner.temp }}/report/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Immutable production files
+        run: |
+          git diff --exit-code -- data/quad_accepted_263 experiments/263 forward_morning_263 forward_quad_263
+          git diff --cached --exit-code -- data/quad_accepted_263 experiments/263 forward_morning_263 forward_quad_263
