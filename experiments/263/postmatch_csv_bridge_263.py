@@ -6,6 +6,7 @@ sabah_postmatch_inputs, forecasts, model calibration or betting decisions.
 """
 from __future__ import annotations
 import argparse,csv,hashlib,io,json,re,unicodedata,urllib.request
+from urllib.parse import urlsplit
 from collections import defaultdict
 from datetime import datetime,timezone,timedelta
 from pathlib import Path
@@ -123,7 +124,13 @@ def sources_for(root,names,leagues,fetcher):
             if fetcher is None:
                 request=urllib.request.Request(url,headers={"User-Agent":"FutbolAnaliz263-Postmatch/1.0"})
                 with urllib.request.urlopen(request,timeout=15) as res:
-                    if res.geturl()!=url:raise Blocked("UNEXPECTED_REDIRECT")
+                    resolved=urlsplit(res.geturl())
+                    original=urlsplit(url)
+                    if not (resolved.scheme=="https" and
+                            resolved.hostname in ("football-data.co.uk","www.football-data.co.uk") and
+                            resolved.path==original.path and not resolved.query and
+                            not resolved.username and not resolved.password and not resolved.port):
+                        raise Blocked("UNEXPECTED_CSV_REDIRECT_HOST_OR_PATH")
                     data=res.read(MAX_BYTES+1)
             else:data=fetcher(url)
             if len(data)>MAX_BYTES:raise Blocked("EXTERNAL_CSV_TOO_LARGE")
