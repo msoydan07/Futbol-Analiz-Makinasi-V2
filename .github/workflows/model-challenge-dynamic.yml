@@ -1,0 +1,48 @@
+name: Model challenge - dynamic M4 XGBoost selection
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-dynamic.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  dynamic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install scientific Python
+        run: python -m pip install 'numpy==2.2.6' 'scipy==1.15.3' 'xgboost==3.0.5' 'scikit-learn==1.7.2'
+      - name: Gate safety unit tests
+        run: python -m unittest discover -s research/model_challenge -p 'test_meta_gate.py' -v
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-pinned-20league-archive
+          run-id: 42532602610
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/archive
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-m4-xgb-retrospective-pairs
+          run-id: 42565374892
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/test
+      - name: Generate as-of paired training observations before 2026-07
+        run: python research/model_challenge/build_meta_oof.py --archive "$RUNNER_TEMP/archive/normalized_matches.csv" --lock experiments/263/m4_lock.json --out "$RUNNER_TEMP/meta/oof_train.json"
+      - name: Evaluate dynamic selection against pure M4 pure XGBoost and fixed blend
+        run: python research/model_challenge/evaluate_meta_gate.py --train "$RUNNER_TEMP/meta/oof_train.json" --eval "$RUNNER_TEMP/test/m4_xgb_pairs.json" --out "$RUNNER_TEMP/meta/evaluation.json"
+      - name: Publish reproducible research outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-dynamic-gate-diagnostics
+          path: ${{ runner.temp }}/meta/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: No existing 2.6.3 files mutated
+        run: test -z "$(git status --porcelain -- experiments/263 forward_morning_263 forward_quad_263)"
