@@ -1,0 +1,36 @@
+name: "263 Nov8 sealed vs web-reviewed final scores - research only"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - "experiments/263/nov8_webreview_results_263.json"
+      - "experiments/263/score_nov8_webreview_263.py"
+      - "experiments/263/test_score_nov8_webreview_263.py"
+      - ".github/workflows/263-nov8-webreview-score-readonly.yml"
+permissions:
+  contents: read
+jobs:
+  historical-usage-scoring:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate exactly 40 genuine SHA seals and research source separation
+        run: python -m unittest -v experiments/263/test_score_nov8_webreview_263.py
+      - name: Evaluate already played games without refit, score fabrication or new100 postmatch attestation
+        run: |
+          python experiments/263/score_nov8_webreview_263.py \
+            --out /tmp/263_nov8_web_review.json \
+            --mobile /tmp/263_nov8_web_review_mobile.md
+          cat /tmp/263_nov8_web_review_mobile.md | head -n 26
+      - name: Preserve research-only score output
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-nov8-web-review-not-official-attestation
+          retention-days: 30
+          path: |
+            /tmp/263_nov8_web_review.json
+            /tmp/263_nov8_web_review_mobile.md
