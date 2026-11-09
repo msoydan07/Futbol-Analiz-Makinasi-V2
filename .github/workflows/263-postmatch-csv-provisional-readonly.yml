@@ -1,0 +1,39 @@
+name: "263 postmatch FREE external-CSV bridge (provisional, read-only)"
+on:
+  workflow_dispatch:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/sabah_postmatch_csv_bridge_263.py'
+      - 'experiments/263/test_sabah_postmatch_csv_bridge_263.py'
+      - 'forward_morning_263/**/*.json'
+      - 'experiments/263/sabah_batch_reports/new100_*.json'
+      - '.github/workflows/263-postmatch-csv-provisional-readonly.yml'
+permissions:
+  contents: read
+jobs:
+  source-bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original SHA and source-corruption acceptance tests (no network)
+        run: python -m unittest -v experiments/263/test_sabah_postmatch_csv_bridge_263.py
+      - name: Fetch external CSV once per active league, compare read-only
+        run: |
+          python experiments/263/sabah_postmatch_csv_bridge_263.py \
+            --out /tmp/263-postmatch-csv-provisional.json \
+            --mobile /tmp/263-postmatch-csv-provisional.md
+      - name: Research results only (not official, no result attestations)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-new100-csv-provisional-not-official-postmatch
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            /tmp/263-postmatch-csv-provisional.json
+            /tmp/263-postmatch-csv-provisional.md
