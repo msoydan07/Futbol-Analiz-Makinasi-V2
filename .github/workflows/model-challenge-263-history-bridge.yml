@@ -1,0 +1,30 @@
+name: Model challenge - accepted 263 research history bridge
+on:
+  push:
+    branches: [research/model-challenge]
+    paths:
+      - '.github/workflows/model-challenge-263-history-bridge.yml'
+      - 'research/model_challenge/trusted_263_snapshot_bridge.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate and normalize accepted history
+        run: python research/model_challenge/trusted_263_snapshot_bridge.py --out "$RUNNER_TEMP/verified_263_research"
+      - name: Inspect archived history and keep production unchanged
+        run: |
+          test -s "$RUNNER_TEMP/verified_263_research/normalized_263_research.csv"
+          git diff --exit-code -- data/quad_accepted_263 experiments/263 forward_morning_263
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-challenge-263-canonical-research-snapshot
+          path: ${{ runner.temp }}/verified_263_research/
+          retention-days: 30
