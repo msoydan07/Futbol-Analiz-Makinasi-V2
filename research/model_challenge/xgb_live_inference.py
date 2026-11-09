@@ -192,12 +192,17 @@ def main():
     parser.add_argument("--history",required=True)
     parser.add_argument("--fixture",required=True)
     parser.add_argument("--out",required=True)
+    parser.add_argument("--seal-root",required=True,
+        help="Research-only immutable SHA seal location")
     a=parser.parse_args()
     candidate,info=inference(a.history,a.fixture)
     out=Path(a.out);out.parent.mkdir(parents=True,exist_ok=True)
     with out.open("x",encoding="utf8") as f:
         f.write(json.dumps(candidate,indent=2,ensure_ascii=False,allow_nan=False)+"\n")
-    print(json.dumps({"result":"CANDIDATE_GENERATED_NOT_SEALED",
-                      "candidate_path":str(out),"info":info},ensure_ascii=False))
+    from prospective_seal import seal
+    sealed_path,locked_sha=seal(candidate,a.seal_root)
+    print(json.dumps({"result":"RESEARCH_ONLY_PREDICTION_SHA_SEALED",
+                      "candidate_path":str(out),"sealed_path":str(sealed_path),
+                      "payload_sha256":locked_sha,"info":info},ensure_ascii=False))
 
 if __name__=="__main__":main()
