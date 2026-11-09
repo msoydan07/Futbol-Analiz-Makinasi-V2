@@ -91,6 +91,30 @@ def score(rows,weight):
     return metrics(get_predictions(rows,weight),
                    [actual(x["h"],x["a"]) for x in rows])
 
+def keep_m4_ms(m4,reference,weight):
+    """Joint score correction without changing 1-X-2 at all.
+
+    Project the convex scoreline mix onto the 3 outcome-mass constraints:
+    H (home>away), D (equal), A (home<away). This moves probability
+    WITHIN each MS outcome while leaving each original M4 mass intact.
+    """
+    mixed=(1-weight)*m4+weight*reference
+    i=np.arange(m4.shape[0])[:,None]
+    j=np.arange(m4.shape[1])[None,:]
+    corrected=np.zeros_like(mixed)
+    for mask in (i>j,i==j,i<j):
+        target=float(m4[mask].sum())
+        actual=float(mixed[mask].sum())
+        if not 0<actual<=1 or not 0<target<=1:
+            raise ValueError("invalid 1X2 outcome mass")
+        corrected[mask]=mixed[mask]*(target/actual)
+    if abs(corrected.sum()-1)>1e-9:
+        raise ValueError("invalid joint score correction mass")
+    return corrected
+
+def preserved_ms_predictions(rows,weight):
+    return [probs(keep_m4_ms(r["m4"],r["ref"],weight)) for r in rows]
+
 def bs_diff(rows,weight,market):
     if not rows:return None
     m4=get_predictions(rows,0)
@@ -135,6 +159,15 @@ def run(archive,lock_path,out_path):
     chosen=picked["weight"]
     baseline_test=score(test,0)
     candidate_test=score(test,chosen)
+    # New post-hoc exploratory variant; exact 1X2 preservation is verified
+    # algebraically and compared with same locked parameter, never tuned
+    # against the October/November outcomes.
+    preserved_dev=metrics(preserved_ms_predictions(dev,chosen),
+        [actual(x["h"],x["a"]) for x in dev])
+    preserved_test=metrics(preserved_ms_predictions(test,chosen),
+        [actual(x["h"],x["a"]) for x in test])
+    if abs(preserved_test["MS"]["brier"]-baseline_test["MS"]["brier"])>1e-10:
+        raise ValueError("preserved MS altered original MS probabilities")
     byweek=defaultdict(list)
     for k,r in enumerate(test):byweek[r["week"]].append(k)
     diffs={market:bs_diff(test,chosen,market) for market in BINARY}
@@ -168,6 +201,10 @@ def run(archive,lock_path,out_path):
        "selected_dev_weight":chosen,
        "metrics_original_m4":baseline_test,
        "metrics_candidate_joint_calibration":candidate_test,
+       "exploratory_ms_preserved_variant":{"weight_taken_from_prior_dev_joint_mix":chosen,
+           "dev":preserved_dev,"evaluation":preserved_test,
+           "post_hoc_idea_after_first_eval":True,
+           "cannot_claim_unseen_holdout":True},
        "paired_brier_differences":intervals,
        "original_m4_diagnostic":diagnostic([{"lambda_h":x["lh"],
               "lambda_a":x["la"],"h":x["h"],"a":x["a"]} for x in test]),
@@ -181,7 +218,8 @@ def run(archive,lock_path,out_path):
     out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
     print(json.dumps({"dev":len(dev),"eval":len(test),"unpaired":len(fail),
        "weight":chosen,
-       "markets":{m:{"original":baseline_test[m]["brier"],
+       "preserve_ms_candidate":{m:preserved_test[m]["brier"] for m in (*BINARY,"MS")},
+      "markets":{m:{"original":baseline_test[m]["brier"],
           "candidate":candidate_test[m]["brier"],
           "delta":intervals[m]} for m in (*BINARY,"MS")}},indent=2))
     return report
