@@ -239,5 +239,5 @@ def main():
     r=evaluate()
     Path(args.out).write_text(json.dumps(r,sort_keys=True,ensure_ascii=False,indent=2,allow_nan=False)+"\n",encoding="utf-8")
     Path(args.mobile).write_text(mobile(r),encoding="utf-8")
-    print(json.dumps({k:r[k] for k in ("registered","provisional_scored","pending","status_counts","sources")},ensure_ascii=False))
+    print(json.dumps({**{k:r[k] for k in ("registered","provisional_scored","pending","status_counts","sources")},"unresolved":r["pending_rows"]},ensure_ascii=False))
 if __name__=="__main__":main()
