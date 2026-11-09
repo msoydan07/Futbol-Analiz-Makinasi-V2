@@ -2,7 +2,9 @@ name: Model challenge - current scored results mapping audit
 on:
   push:
     branches: [research/model-challenge]
-    paths: ['.github/workflows/model-challenge-current-results.yml']
+    paths:
+      - '.github/workflows/model-challenge-current-results.yml'
+      - 'research/model_challenge/current_results_bridge.py'
   workflow_dispatch:
 permissions:
   actions: read
