@@ -161,6 +161,30 @@ def sample(history,lock):
                 "h":h,"a":a})
     return outputs,failures
 
+def diagnostic(records):
+    """Descriptive mean-goal and probability-bin audit; no model tuning."""
+    truth=[actual(x["h"],x["a"]) for x in records]
+    predictions0=predictions(records,{"kind":"independent","scale":1.0})
+    if predictions0 is None:raise ValueError("missing diagnostic probabilities")
+    result={"n":len(records),
+       "mean_home_lambda":float(np.mean([r["lambda_h"] for r in records])),
+       "mean_away_lambda":float(np.mean([r["lambda_a"] for r in records])),
+       "mean_observed_home_goals":float(np.mean([r["h"] for r in records])),
+       "mean_observed_away_goals":float(np.mean([r["a"] for r in records])),
+       "market_bins":{}}
+    for market in BINARY:
+        bs=[]
+        for i in range(5):
+            matched=[(p[market],y[market]) for p,y in zip(predictions0,truth)
+                if i*.2<=p[market]<(i+1)*.2 or i==4 and i*.2<=p[market]<=1.]
+            if matched:
+                bs.append({"bin":[round(.2*i,1),round(.2*(i+1),1)],
+                    "n":len(matched),
+                    "mean_model":float(np.mean([z[0] for z in matched])),
+                    "observed":float(np.mean([z[1] for z in matched]))})
+        result["market_bins"][market]=bs
+    return result
+
 def run(archive,lock_path,dest):
     archive=Path(archive)
     content=archive.read_bytes()
@@ -210,6 +234,7 @@ def run(archive,lock_path,dest):
        "development_n":len(dev),"evaluation_n":len(test),
        "unpaired":len(failed),"failure_reasons":dict(Counter(x["reason"] for x in failed)),
        "selection":selection,"evaluation":evaluation,
+       "m4_diagnostic":{"development":diagnostic(dev),"evaluation":diagnostic(test)},
        "proper_score_target":"mean Brier of BTTS and 1.5/2.5/3.5 overs, same fixtures",
        "dev_ms_guardrail_brier_worsening_max":0.003,
        "original_m4_engine_unchanged":True,
@@ -225,7 +250,8 @@ def run(archive,lock_path,dest):
                           "BTTS":value.get("metrics",{}).get("BTTS_YES",{}).get("brier"),
                           "OVER_2.5":value.get("metrics",{}).get("OVER_2.5",{}).get("brier")}
                      for family,value in evaluation.items()},
-      "selected":{k:v.get("parameter") for k,v in selection.items()}},
+      "selected":{k:v.get("parameter") for k,v in selection.items()},
+      "goal_expectations":{period:{field:report["m4_diagnostic"][period][field] for field in ("mean_home_lambda","mean_away_lambda","mean_observed_home_goals","mean_observed_away_goals")} for period in ("development","evaluation")}},
       ensure_ascii=False,indent=2))
     return report
 
