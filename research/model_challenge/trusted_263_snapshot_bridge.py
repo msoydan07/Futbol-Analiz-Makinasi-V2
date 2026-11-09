@@ -63,6 +63,7 @@ def transform(csv_bytes,acceptance,*,asof):
         "history_count":len(out),"league_counts":dict(sorted(leagues.items())),
         "latest_result_date":max(r["date"] for r in out),
         "owner_accepted_manifest_snapshot_sha":acceptance["snapshot_sha256"],
+        "accepted_at_utc":reviewed.isoformat(),
         "accepted_for_limited_research":True,
         "independent_result_verification":False,
         "time_cutoff":asof.isoformat(),
