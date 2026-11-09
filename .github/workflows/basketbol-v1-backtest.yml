@@ -19,7 +19,9 @@ jobs:
           python-version: '3.11'
       - name: Chronological leakage and probability offline acceptance
         run: python -m unittest -v basketbol_v1/test_engine.py
-      - name: Fetch genuine past NBA and EuroLeague finals and score holdout
+      - name: Offline pregame anti-backdating test
+        run: python -m unittest -v basketbol_v1/test_predict.py
+      - name: Fetch genuine past NBA, EuroLeague and EuroCup finals and score holdout
         run: |
           set -euo pipefail
           python basketbol_v1/benchmark.py --fail-if-empty --out /tmp/basketbol-v1.json --mobile /tmp/basketbol-v1.md

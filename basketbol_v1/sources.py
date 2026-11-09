@@ -31,7 +31,7 @@ class Game:
     def total(self):return self.home_score+self.away_score
 
 def check(g):
-    if g.league not in ("NBA","EL") or type(g.season)!=int or not 2000<=g.season<=2100:
+    if g.league not in ("NBA","EL","EC") or type(g.season)!=int or not 2000<=g.season<=2100:
         raise SourceError("INVALID_LEAGUE_SEASON")
     if not isinstance(g.game_id,str) or not 1<=len(g.game_id)<=75:
         raise SourceError("INVALID_GAME_ID")
@@ -92,14 +92,44 @@ def _get(url,host):
     with urllib.request.urlopen(req,timeout=25) as resp:
         end=urlsplit(resp.geturl());orig=urlsplit(url)
         if (end.scheme!="https" or end.hostname!=host or end.port is not None
-            or end.username or end.password or end.path!=orig.path or end.query or end.fragment):
+            or end.username or end.password or end.path!=orig.path or end.query!=orig.query or end.fragment):
             raise SourceError("UNAPPROVED_SOURCE_REDIRECT")
         raw=resp.read(MAX_BYTES+1)
     if len(raw)>MAX_BYTES:raise SourceError("SOURCE_TOO_LARGE")
     return raw
 
+def eurocup_games(payload,year):
+    """EuroCup v2 public official schedule/results; parsed only for PLAYED RS games."""
+    if not isinstance(payload,dict) or not isinstance(payload.get("data"),list):
+        raise SourceError("EC_API_ENVELOPE_INVALID")
+    data=payload["data"]
+    total=payload.get("total")
+    if type(total)!=int or total!=len(data):
+        raise SourceError("EC_API_PAGINATION_INCOMPLETE_OR_INVALID")
+    seen=set();out=[]
+    for x in data:
+        if not isinstance(x,dict):raise SourceError("EC_GAME_ROW_INVALID")
+        if x.get("season",{}).get("code")!=f"U{year}":
+            raise SourceError("EC_SEASON_INCORRECT")
+        if x.get("played") is not True or x.get("phaseType",{}).get("code")!="RS":
+            continue
+        local=x.get("local",{});road=x.get("road",{})
+        if local.get("score") is None or road.get("score") is None:
+            raise SourceError("EC_PLAYED_BUT_NO_SCORE")
+        gamecode=str(x.get("gameCode") or "")
+        if not gamecode or gamecode in seen:raise SourceError("EC_DUPLICATE_OR_NO_GAMECODE")
+        seen.add(gamecode)
+        when=x.get("localDate")
+        if not isinstance(when,str) or not re.match(r"^20\d\d-\d\d-\d\dT",when):
+            raise SourceError("EC_KICKOFF_DATE_MISSING")
+        g=Game("EC",year,when[:10],gamecode,
+               local["club"]["code"],road["club"]["code"],
+               local["score"],road["score"],x.get("isNeutralVenue",False))
+        out.append(check(g))
+    return sorted(out,key=lambda x:(x.day,x.game_id))
+
 def download(league):
-    if league not in ("NBA","EL"):raise SourceError("UNSUPPORTED_LEAGUE")
+    if league not in ("NBA","EL","EC"):raise SourceError("UNSUPPORTED_LEAGUE")
     years=NBA_YEARS if league=="NBA" else EL_YEARS
     games=[];manifest=[]
     for year in years:
@@ -107,10 +137,14 @@ def download(league):
             url=f"{NBA_ROOT}/season_{year}.json"
             raw=_get(url,"raw.githubusercontent.com")
             data=nba_games(json.loads(raw.decode("utf-8")),year)
-        else:
+        elif league=="EL":
             url=f"{EL_ROOT}/games-{year}.csv.gz"
             raw=_get(url,"675hoops.com")
             data=euroleague_games(raw,year)
+        else:
+            url=f"https://api-live.euroleague.net/v2/competitions/U/seasons/U{year}/games?limit=500&offset=0"
+            raw=_get(url,"api-live.euroleague.net")
+            data=eurocup_games(json.loads(raw.decode("utf-8")),year)
         if year!=years[-1] and len(data)<150:raise SourceError(f"INSUFFICIENT_ARCHIVE:{league}:{year}:{len(data)}")
         if not data:raise SourceError(f"EMPTY_YEAR:{league}:{year}")
         manifest.append({"year":year,"url":url,"sha256":hashlib.sha256(raw).hexdigest(),

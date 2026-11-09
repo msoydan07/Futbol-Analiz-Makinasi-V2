@@ -20,3 +20,6 @@ Python 3.11+, ek üçüncü parti bağımlılığı yok.
 GitHub Actions: .github/workflows/basketbol-v1-backtest.yml. Ücretli veri ve oran API'si yok; bahis/EV/ROI üretilmez. Diğer Avrupa ligleri (EuroCup, Türkiye BSL, İspanya ACB, Almanya BBL, İtalya LBA, Fransa LNB, Yunanistan, FIBA BCL) veri araştırma adaylarıdır, bu sürümde desteklenmiş veya test edilmiş **değildir**.
 
 Yeni GitHub deposu oluşturma aksiyonu bağlayıcıda bulunmadığından, geçici bağımsız araştırma dalı basketbol-v1-bagimsiz-arastirma kullanılıyor. Ana dal ve futbol deney dalı değişmedi. Daha sonra ayrı repoya taşınabilir.
+
+## EuroCup ikinci veri kaynağı
+V1.1'de EuroCup (EC) için api-live.euroleague.net kamuya açık v2 sezon oyunları uç noktası eklendi; yalnız RS, played=true, sayısal final skor, mevsim kodu, eksiksiz sayfalama ve kimlik teyidi alanları kabul edilir. Bu harici API'nin ağ üzerinden çalışma kanıtı Actions sonucuna bağlıdır. Veri lisansı EuroLeague ile aynıdır. Bu kaynak, ülke ligi olan BSL/ACB/BBL'yi desteklendi diye saymaz.

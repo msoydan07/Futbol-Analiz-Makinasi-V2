@@ -2,7 +2,7 @@
 import csv,gzip,io,sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-from sources import Game,SourceError,nba_games,euroleague_games,check
+from sources import Game,SourceError,nba_games,euroleague_games,eurocup_games,check
 from engine import Ratings,replay,before_game
 from benchmark import grade,choose_dev
 class Tests(unittest.TestCase):
@@ -26,6 +26,16 @@ class Tests(unittest.TestCase):
         self.assertEqual(len(g),1);self.assertEqual(g[0].home,"OLY")
         with self.assertRaises(SourceError):
             euroleague_games(gzip.compress(b"nonCSV"),2025)
+    def test_eurocup_results_only_played_unchanged_regular_season(self):
+        row={"season":{"code":"U2025"},"gameCode":1,"played":True,
+             "phaseType":{"code":"RS"},"localDate":"2025-10-10T18:00:00",
+             "local":{"club":{"code":"ULM"},"score":92},
+             "road":{"club":{"code":"BDK"},"score":84},"isNeutralVenue":False}
+        x=eurocup_games({"data":[row,{**row,"played":False,"gameCode":2}],"total":2},2025)
+        self.assertEqual(len(x),1)
+        self.assertEqual(x[0].total,176)
+        with self.assertRaises(SourceError):
+            eurocup_games({"data":[row],"total":25},2025)
     def test_same_day_cannot_peek_other_results(self):
         a=Game("NBA",2025,"2024-11-01","1","AA","BB",140,80)
         b=Game("NBA",2025,"2024-11-01","2","CC","DD",80,140)

@@ -7,7 +7,8 @@ from pathlib import Path
 from engine import VARIANTS,replay,before_game
 from sources import download,SourceError
 SPLIT={"NBA":{"development":2025,"heldout":2026,"current_replay":2027},
-       "EL":{"development":2024,"heldout":2025,"current_replay":2026}}
+       "EL":{"development":2024,"heldout":2025,"current_replay":2026},
+       "EC":{"development":2024,"heldout":2025,"current_replay":2026}}
 def grade(rows):
     n=len(rows)
     if not n:
@@ -53,7 +54,7 @@ def league_benchmark(games,league,manifest):
             "locked_holdout_selected":metrics["heldout"][choice],
             "current_season_replay_selected":metrics["current_replay"][choice],
             "is_actual_live_forward_pilot":False,"betting_roi_tested":False}
-def run(leagues=("NBA","EL")):
+def run(leagues=("NBA","EL","EC")):
     successful={};errors={}
     for league in leagues:
         try:
@@ -65,7 +66,7 @@ def run(leagues=("NBA","EL")):
             "generated_at_utc":datetime.now(timezone.utc).isoformat(),
             "league_results":successful,"source_errors":errors,
             "paid_data_cost_tl":0,"real_money_bets":0,
-            "other_league_candidates_not_claimed_as_integrated":["EuroCup","TUR_BSL","ESP_ACB","GER_BBL","ITA_LBA","FRA_LNB","GRE_BSL","FIBA_BCL"],
+            "other_league_candidates_not_claimed_as_integrated":["TUR_BSL","ESP_ACB","GER_BBL","ITA_LBA","FRA_LNB","GRE_BSL","FIBA_BCL"],
             "limitations":["Historical replay only, not true out-of-sample live SHA predictions",
                 "Scores and margin only; actual possessions, injury/lineup and rest are NOT in this version",
                 "Third-party raw score feeds are not independently official-score-network verified",

@@ -6,7 +6,8 @@ from dataclasses import dataclass
 
 VARIANTS=("BASE","ELO","FORM","HYBRID")
 PRIOR={"NBA":{"points":112.0,"home":2.2,"sd_margin":15.0,"sd_total":20.0},
-       "EL":{"points":82.0,"home":3.2,"sd_margin":12.0,"sd_total":16.0}}
+       "EL":{"points":82.0,"home":3.2,"sd_margin":12.0,"sd_total":16.0},
+       "EC":{"points":82.0,"home":3.0,"sd_margin":12.0,"sd_total":16.0}}
 def phi(x):return (1+math.erf(x/math.sqrt(2)))/2
 def clipped(p):return min(1-1e-8,max(1e-8,p))
 
