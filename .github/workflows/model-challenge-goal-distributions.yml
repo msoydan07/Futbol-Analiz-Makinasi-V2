@@ -1,0 +1,40 @@
+name: Model challenge - goal and BTTS distribution research
+on:
+  push:
+    branches: [research/model-challenge]
+    paths:
+      - '.github/workflows/model-challenge-goal-distributions.yml'
+      - 'research/model_challenge/goal_market_distribution_challenge.py'
+      - 'research/model_challenge/test_goal_market_distribution_challenge.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  goals-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned scientific dependencies
+        run: python -m pip install 'numpy==2.2.6' 'scipy==1.15.3'
+      - name: Mathematical invariants and synthetic safety tests
+        run: python -m unittest discover -s research/model_challenge -p 'test_goal_market_distribution_challenge.py' -v
+      - name: Verify 4518 owner-accepted canonical scores
+        run: python research/model_challenge/trusted_263_snapshot_bridge.py --out "$RUNNER_TEMP/accepted"
+      - name: Compare M4 original against locked DEV-only candidates
+        run: python research/model_challenge/goal_market_distribution_challenge.py --archive "$RUNNER_TEMP/accepted/normalized_263_research.csv" --lock experiments/263/m4_lock.json --out "$RUNNER_TEMP/results/goal_market_experiment.json"
+      - name: Publish complete diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: goalmarket-263-poisson-dc-bivar-locked-results
+          path: ${{ runner.temp }}/results/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Protect production and original pilot
+        run: |
+          git diff --exit-code -- experiments/263 data/quad_accepted_263 forward_morning_263 forward_quad_263
+          git diff --cached --exit-code -- experiments/263 data/quad_accepted_263 forward_morning_263 forward_quad_263
