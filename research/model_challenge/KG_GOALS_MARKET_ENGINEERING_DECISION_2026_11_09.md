@@ -68,6 +68,22 @@ Findings:
   sealed evaluation and uncertainty assessment. This test does not
   establish superiority, betting edge, or profitability.
 
+## Ek kök-neden kontrolü — beklenen gollerin sapması
+Aynı dondurulmuş deneyin yalnızca betimsel teşhisi:
+- Ağustos–Eylül (587 maç): ortalama toplam lambda **2.8346**,
+  gerçekleşen ortalama toplam gol **3.0562**.
+  Ev lambdası 1.5454, gerçek 1.6593; deplasman lambdası 1.2892,
+  gerçek 1.3969.
+- Ekim–3 Kasım (397 maç): toplam lambda **2.9010**,
+  gerçek toplam gol **3.1335**.
+  Ev lambdası 1.5959, gerçek 1.7179; deplasman lambdası 1.3050,
+  gerçek 1.4156.
+
+Bu örneklerde toplam gol beklentisi gerçekleşen ortalama gollerden
+yaklaşık **%7–8 düşük**. Ancak bütün lambdaları büyütmek bu
+testte KG pazarını kötüleştirdi, yani tek başına çözüm değildir.
+Bu betimsel fark maç bazlı kalibrasyon üstünlüğünü kanıtlamaz.
+
 ## Decision — NOT PROMOTED
 **Keep existing M4 unchanged for goals and BTTS.**
 Research diagnostics suggest that a model-level global goal-rate
@@ -90,6 +106,6 @@ Next distinct diagnostic (without modifying the incumbent):
 ## Reproducibility
 - Script: `research/model_challenge/goal_market_distribution_challenge.py`
 - Invariants: `research/model_challenge/test_goal_market_distribution_challenge.py`
-- Run: https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42574098418
+- Run: https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42574373913
 - Artifact: `goalmarket-263-poisson-dc-bivar-locked-results`
 - Production 2.6.3 code, morning sealed predictions, source history unchanged.
