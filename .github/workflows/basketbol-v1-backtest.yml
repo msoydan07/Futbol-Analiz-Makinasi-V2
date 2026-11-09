@@ -31,6 +31,10 @@ jobs:
           DAY="$(TZ=Europe/Istanbul date -d '+3 days' +%Y-%m-%d)"
           python basketbol_v1/predict.py --league NBA --day "$DAY" --home DEN --away LAL \
             --total-line 224.5 --home-handicap -4.5 --out /tmp/basketbol-v1-example.json
+      - name: Package portable basketball-only source code
+        if: always()
+        run: |
+          zip -r -q /tmp/basketbol-v1-source.zip basketbol_v1 .github/workflows/basketbol-v1-backtest.yml
       - name: Research artifact only, no historical prediction rewrite
         if: always()
         uses: actions/upload-artifact@v4
@@ -42,3 +46,4 @@ jobs:
             /tmp/basketbol-v1.json
             /tmp/basketbol-v1.md
             /tmp/basketbol-v1-example.json
+            /tmp/basketbol-v1-source.zip
