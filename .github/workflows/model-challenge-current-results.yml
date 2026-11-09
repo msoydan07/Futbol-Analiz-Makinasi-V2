@@ -1,0 +1,47 @@
+name: Model challenge - current scored results mapping audit
+on:
+  push:
+    branches: [research/model-challenge]
+    paths: ['.github/workflows/model-challenge-current-results.yml']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned ML requirements for shared source schema
+        run: python -m pip install 'numpy==2.2.6' 'xgboost==3.0.5' 'scikit-learn==1.7.2' 'scipy==1.15.3'
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-challenge-pinned-20league-archive
+          run-id: 42532602610
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ runner.temp }}/archive
+      - name: Audit ten fresh 2026/27 scored sources and exact identity mapping
+        run: python research/model_challenge/current_results_bridge.py --archive "$RUNNER_TEMP/archive/normalized_matches.csv" --cutoff 2026-11-09 --out "$RUNNER_TEMP/fresh_audit"
+      - name: Report acceptance and first blockers
+        run: |
+          python - <<'PY'
+          import json,os
+          p=os.path.join(os.environ["RUNNER_TEMP"],"fresh_audit","source_audit.json")
+          v=json.load(open(p))
+          for x in v["sources"]:
+              print(x["league"],x["status"],x.get("mapped",0),"issues",x.get("issues",0),
+                    x.get("reason",""),x.get("issue_examples",[])[:2])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: model-challenge-2026-27-current-source-identity-audit
+          path: ${{ runner.temp }}/fresh_audit/
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Protect existing 2.6.3
+        run: git diff --exit-code -- experiments/263 forward_morning_263 forward_quad_263
