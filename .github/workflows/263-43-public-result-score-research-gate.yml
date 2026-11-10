@@ -1,0 +1,32 @@
+name: "263 43 primary public results research acceptance"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'data/results_only_263/43_primary_public_score_review_20261110.json'
+      - 'experiments/263/audit_43_primary_public_scores_263.py'
+      - 'experiments/263/test_audit_43_primary_public_scores_263.py'
+      - '.github/workflows/263-43-public-result-score-research-gate.yml'
+permissions:
+  contents: read
+jobs:
+  completed43-score-identity-and-primary-source-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Confirm 43 score links preserve old 4518 and sealed 4617 result files
+        run: python -m unittest -v experiments/263/test_audit_43_primary_public_scores_263.py
+      - name: Print explicit non-API-attested result review evidence
+        run: python experiments/263/audit_43_primary_public_scores_263.py > /tmp/263_primary43_score_research_report.json
+      - name: Archive evidence review result without a model or score update
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: primary43-score-source-review-manifest-not-provider-id-attestation
+          path: /tmp/263_primary43_score_research_report.json
+          retention-days: 30
+          if-no-files-found: warn
