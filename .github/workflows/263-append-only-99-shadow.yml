@@ -1,0 +1,42 @@
+name: "263 safe append-only shadow preserves 4518 originals and quarantines 9 ENG2 edits"
+on:
+  push:
+    branches: [research/263-staged99-evidence-join-20261110]
+    paths:
+      - 'research/opponent_goals/append_only_shadow_4518_plus99_263.py'
+      - 'research/opponent_goals/test_append_only_shadow_4518_plus99_263.py'
+      - '.github/workflows/263-append-only-99-shadow.yml'
+permissions:
+  contents: write
+jobs:
+  research_append_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Frozen ledger tests
+        run: python research/opponent_goals/test_append_only_shadow_4518_plus99_263.py
+      - name: Reconcile existing GitHub stage and generate only ephemeral shadow CSV
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin +refs/heads/experiment/263-toplu-karsilastirma:refs/remotes/origin/experiment/263-toplu-karsilastirma --quiet
+          staged="$(mktemp)" ; shadow="$(mktemp)"
+          trap 'rm -f "$staged" "$shadow"' EXIT
+          git show origin/experiment/263-toplu-karsilastirma:data/staged_263/extended_history.csv > "$staged"
+          python research/opponent_goals/append_only_shadow_4518_plus99_263.py \
+            --root . --staged "$staged" --shadow "$shadow" \
+            --out research/opponent_goals/reports/append_only_4518_plus99_provisional_manifest_20261110.json
+      - name: Preserve only integrity fingerprint and 9 ENG2 metadata in research
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/opponent_goals/reports/append_only_4518_plus99_provisional_manifest_20261110.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Research: 99-row append-only candidate preserving all original 4518; quarantine old 9 edits [skip ci]"
+          git push origin HEAD:research/263-staged99-evidence-join-20261110
