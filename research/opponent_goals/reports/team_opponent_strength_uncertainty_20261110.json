@@ -1,0 +1,282 @@
+{
+  "besiktas_home_only_reference": {
+    "intervals_overlap": true,
+    "similar_opponent_2_5_Over_k": 7,
+    "similar_opponent_2_5_Over_n": 11,
+    "team_50_to_150_ahead_2_5_Over_k": 8,
+    "team_50_to_150_ahead_2_5_Over_n": 10
+  },
+  "cell_coverage": {
+    "n_8plus": 477,
+    "n_total": 1280,
+    "n_under_5": 609,
+    "percent_8plus": 37.27,
+    "percent_under_5": 47.58
+  },
+  "decision": "DO_NOT_PROMOTE_OPPONENT_STRENGTH_STYLE_COEFFICIENT",
+  "limitations": [
+    "Historic outcome frequencies are NOT pre-match probabilities or tactical press/low-block labels",
+    "Wilson assumes independent binomial observations: team games across league/seasons correlated, CI may be too narrow",
+    "Grouping by past Elo plus home/away divides team history into tiny cells; don't turn 8/10 into an 80% future forecast",
+    "Retrospective report reuses previously studied data and neither calibrates nor improves M4 by itself",
+    "No new xG, pressing or lineup source identified for all 10 current-season leagues",
+    "No original 4518 file, forecasts, model parameters, odds or official postmatch attestation modified"
+  ],
+  "original_m4_and_seals_changed": false,
+  "probability_recalibration_authorized": false,
+  "schema": "263_GOALS_OPPONENT_STRENGTH_SAMPLE_UNCERTAINTY_V1",
+  "source_history_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "source_report_sha256": "ce3f9f63efbfcd3870687c6a52d09abd9b04052be2ef43db77603763e50044f2",
+  "team_and_strength_category_intervals": {
+    "AWAY": {
+      "opponent_150_plus": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": null,
+          "empirical_rate": null,
+          "evidence": "NO_MATCHES_CANNOT_ESTIMATE",
+          "n": 0,
+          "successes": null
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": null,
+          "empirical_rate": null,
+          "evidence": "NO_MATCHES_CANNOT_ESTIMATE",
+          "n": 0,
+          "successes": null
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": null,
+        "descriptive_average_goals_scored": null,
+        "historic_shot_share": null,
+        "n": 0
+      },
+      "opponent_50_to_150": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": [
+            0.2065,
+            1.0
+          ],
+          "empirical_rate": 1.0,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 1,
+          "successes": 1
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": [
+            0.2065,
+            1.0
+          ],
+          "empirical_rate": 1.0,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 1,
+          "successes": 1
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": 1.0,
+        "descriptive_average_goals_scored": 2.0,
+        "historic_shot_share": 0.6087,
+        "n": 1
+      },
+      "similar_under_50": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": [
+            0.2127,
+            0.7199
+          ],
+          "empirical_rate": 0.4545,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 11,
+          "successes": 5
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": [
+            0.2127,
+            0.7199
+          ],
+          "empirical_rate": 0.4545,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 11,
+          "successes": 5
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": 1.4545,
+        "descriptive_average_goals_scored": 1.5455,
+        "historic_shot_share": 0.5173,
+        "n": 11
+      },
+      "team_150_plus": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": null,
+          "empirical_rate": null,
+          "evidence": "NO_MATCHES_CANNOT_ESTIMATE",
+          "n": 0,
+          "successes": null
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": null,
+          "empirical_rate": null,
+          "evidence": "NO_MATCHES_CANNOT_ESTIMATE",
+          "n": 0,
+          "successes": null
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": null,
+        "descriptive_average_goals_scored": null,
+        "historic_shot_share": null,
+        "n": 0
+      },
+      "team_50_to_150": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": [
+            0.2366,
+            0.7634
+          ],
+          "empirical_rate": 0.5,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 10,
+          "successes": 5
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": [
+            0.2366,
+            0.7634
+          ],
+          "empirical_rate": 0.5,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 10,
+          "successes": 5
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": 1.2,
+        "descriptive_average_goals_scored": 1.6,
+        "historic_shot_share": 0.5579,
+        "n": 10
+      }
+    },
+    "HOME": {
+      "opponent_150_plus": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": null,
+          "empirical_rate": null,
+          "evidence": "NO_MATCHES_CANNOT_ESTIMATE",
+          "n": 0,
+          "successes": null
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": null,
+          "empirical_rate": null,
+          "evidence": "NO_MATCHES_CANNOT_ESTIMATE",
+          "n": 0,
+          "successes": null
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": null,
+        "descriptive_average_goals_scored": null,
+        "historic_shot_share": null,
+        "n": 0
+      },
+      "opponent_50_to_150": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": null,
+          "empirical_rate": null,
+          "evidence": "NO_MATCHES_CANNOT_ESTIMATE",
+          "n": 0,
+          "successes": null
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": null,
+          "empirical_rate": null,
+          "evidence": "NO_MATCHES_CANNOT_ESTIMATE",
+          "n": 0,
+          "successes": null
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": null,
+        "descriptive_average_goals_scored": null,
+        "historic_shot_share": null,
+        "n": 0
+      },
+      "similar_under_50": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": [
+            0.3538,
+            0.8483
+          ],
+          "empirical_rate": 0.6364,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 11,
+          "successes": 7
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": [
+            0.3538,
+            0.8483
+          ],
+          "empirical_rate": 0.6364,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 11,
+          "successes": 7
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": 1.0909,
+        "descriptive_average_goals_scored": 1.8182,
+        "historic_shot_share": 0.5989,
+        "n": 11
+      },
+      "team_150_plus": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": [
+            0.0,
+            0.7935
+          ],
+          "empirical_rate": 0.0,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 1,
+          "successes": 0
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": [
+            0.0,
+            0.7935
+          ],
+          "empirical_rate": 0.0,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 1,
+          "successes": 0
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": 0.0,
+        "descriptive_average_goals_scored": 0.0,
+        "historic_shot_share": 0.625,
+        "n": 1
+      },
+      "team_50_to_150": {
+        "KG_VAR": {
+          "95pct_Wilson_independent_reference_only": [
+            0.3968,
+            0.8922
+          ],
+          "empirical_rate": 0.7,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 10,
+          "successes": 7
+        },
+        "OVER_2_5": {
+          "95pct_Wilson_independent_reference_only": [
+            0.4902,
+            0.9433
+          ],
+          "empirical_rate": 0.8,
+          "evidence": "INSUFFICIENT_FOR_PROSPECTIVE_TACTICAL_CLAIM",
+          "n": 10,
+          "successes": 8
+        },
+        "can_infer_pressing_formation_or_matchup_style": false,
+        "descriptive_average_goals_allowed": 1.1,
+        "descriptive_average_goals_scored": 2.4,
+        "historic_shot_share": 0.6992,
+        "n": 10
+      }
+    }
+  }
+}
