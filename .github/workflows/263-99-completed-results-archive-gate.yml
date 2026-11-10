@@ -1,0 +1,34 @@
+name: "263 99 completed results permanent archive gate (old 4518 preserved)"
+on:
+  push:
+    branches:
+      - experiment/263-toplu-karsilastirma
+    paths:
+      - 'data/quad_accepted_263/completed_99_results_only_20261110.json'
+      - 'experiments/263/verify_completed99_results_archive.py'
+      - 'experiments/263/test_verify_completed99_results_archive.py'
+      - '.github/workflows/263-99-completed-results-archive-gate.yml'
+permissions:
+  contents: read
+jobs:
+  completed99-score-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify real 99 completed scores and protect original 4518 bytes
+        run: python -m unittest -v experiments/263/test_verify_completed99_results_archive.py
+      - name: Generate separate 4617 score-only snapshot, not M4 training
+        run: python experiments/263/verify_completed99_results_archive.py --out /tmp/263_4617_results_only_unpromoted.csv > /tmp/263_99_archive_acceptance.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-99-finished-results-and-4617-safe-score-only-snapshot
+          path: |
+            /tmp/263_99_archive_acceptance.json
+            /tmp/263_4617_results_only_unpromoted.csv
+          retention-days: 30
+          if-no-files-found: warn
