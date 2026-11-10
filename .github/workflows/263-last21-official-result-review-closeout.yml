@@ -1,0 +1,32 @@
+name: "263 finished 99 archived scores and 21 remaining official public review gates"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'data/results_only_263/21_official_public_web_alternate_score_reviews_20261110.json'
+      - 'experiments/263/close_99_results_source_audit_263.py'
+      - 'experiments/263/test_close_99_results_source_audit_263.py'
+      - '.github/workflows/263-last21-official-result-review-closeout.yml'
+permissions:
+  contents: read
+jobs:
+  exact-99-score-archive-and-43-source-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Protect immutable 4518 history and 4617 research scores, 43 URL proofs
+        run: python -m unittest -v experiments/263/test_close_99_results_source_audit_263.py
+      - name: Write 99 archive and 43-source evidence closure receipt
+        run: python experiments/263/close_99_results_source_audit_263.py > /tmp/263_nov10_completed99_43_reviews_with_limits.json
+      - name: Archive the receipt with explicit human vs machine proof labels
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-99-scores-43-official-web-sources-22-browser-21-alternate-reviews
+          path: /tmp/263_nov10_completed99_43_reviews_with_limits.json
+          retention-days: 30
+          if-no-files-found: warn
