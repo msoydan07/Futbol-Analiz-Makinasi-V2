@@ -1,0 +1,38 @@
+name: "263 opponent-strength sparse-cell uncertainty no rerun M4"
+on:
+  push:
+    branches:
+      - research/263-public-scoreboard-expansion-20261110
+    paths:
+      - 'research/opponent_goals/opponent_group_uncertainty_263.py'
+      - 'research/opponent_goals/test_opponent_group_uncertainty_263.py'
+      - '.github/workflows/263-opponent-strength-uncertainty.yml'
+permissions:
+  contents: write
+jobs:
+  group_uncertainty:
+    if: github.ref == 'refs/heads/research/263-public-scoreboard-expansion-20261110'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Adversarial interval math and real report sample size checks, zero network
+        run: python research/opponent_goals/test_opponent_group_uncertainty_263.py
+      - name: Save only new uncertainty supplement (old report immutable)
+        run: |
+          python research/opponent_goals/opponent_group_uncertainty_263.py \
+            --root . \
+            --out research/opponent_goals/reports/team_opponent_strength_uncertainty_20261110.json
+      - name: Append independent report without changing model or fixture scores
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/opponent_goals/reports/team_opponent_strength_uncertainty_20261110.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Research: warn of sparse Beşiktaş opponent cells, show Wilson reference [skip ci]"
+          git push origin HEAD:research/263-public-scoreboard-expansion-20261110
