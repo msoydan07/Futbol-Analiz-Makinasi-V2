@@ -58,6 +58,8 @@ jobs:
           mkdir -p m4_quad_base
           gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
           echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+          echo '1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9  data/quad_accepted_263/extended_history.csv' | sha256sum -c -
+          echo '637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89  data/results_only_263/2026-11-10_completed_4617_scores_only.csv' | sha256sum -c -
       - name: Single official-gated append-only B/C2/C3/M4 batch
         id: forward
         if: steps.requests.outputs.has_requests == 'true'
@@ -69,14 +71,14 @@ jobs:
           set -euo pipefail
           python experiments/263/run_quad_requested_batch.py \
             --manifest /tmp/quad_new_requests.txt \
-            --history data/quad_accepted_263/extended_history.csv \
+            --history data/results_only_263/2026-11-10_completed_4617_scores_only.csv \
             --baseline m4_quad_base/historical_results.csv \
-            --source-acceptance data/quad_accepted_263/source_acceptance.json \
+            --source-acceptance data/results_only_263/4617_research_input_provenance.json \
             --records forward_quad_263 \
             --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json"
           python experiments/263/quad_prematch_bridge_263.py baseline \
             --report "experiments/263/quad_batch_reports/$GITHUB_SHA.json" \
-            --history data/quad_accepted_263/extended_history.csv
+            --history data/results_only_263/2026-11-10_completed_4617_scores_only.csv
       - name: Optional conditional morning quote join with original 4-model forecast
         if: steps.requests.outputs.has_requests == 'true' && steps.forward.outcome == 'success'
         env:
