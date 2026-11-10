@@ -12,7 +12,6 @@
   "observed_future_fixture_records": 9,
   "model_forecasts_created": 0,
   "not_allowed_for_backdated_or_prematch_sealing": true,
-  "tminus_60_first_eleven_not_required": false,
   "matches": [
     {
       "official_source_fixture_id": "1b54de12-e822-4cc5-a90a-c4393348810d",
