@@ -1,0 +1,1347 @@
+{
+  "fields_not_in_accepted_snapshot": [
+    "xG",
+    "shots location",
+    "passes",
+    "possession",
+    "pressing",
+    "PPDA",
+    "formations",
+    "lineups",
+    "match-state timings",
+    "coach tactics",
+    "player availability"
+  ],
+  "leagues": {
+    "BEL1": {
+      "days_since_latest_on_2026_11_10": 9,
+      "latest_scored_match": "2026-11-01",
+      "n": 400,
+      "seasons": {
+        "2025-2026": 311,
+        "2026-2027": 89
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 400
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots_on_target": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_yellow_cards": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 400,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 19
+    },
+    "ENG1": {
+      "days_since_latest_on_2026_11_10": 8,
+      "latest_scored_match": "2026-11-02",
+      "n": 470,
+      "seasons": {
+        "2025-2026": 380,
+        "2026-2027": 90
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 470
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots_on_target": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_yellow_cards": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 470,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 23
+    },
+    "ENG2": {
+      "days_since_latest_on_2026_11_10": 7,
+      "latest_scored_match": "2026-11-03",
+      "n": 717,
+      "seasons": {
+        "2025-2026": 552,
+        "2026-2027": 165
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 708,
+        "www.soccerway.com": 9
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "away_red_cards": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "away_shots": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "away_shots_on_target": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "away_yellow_cards": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "home_corners": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "home_red_cards": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "home_shots": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "home_shots_on_target": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        },
+        "home_yellow_cards": {
+          "available": 708,
+          "missing": 9,
+          "percent": 98.74
+        }
+      },
+      "unique_clubs": 30
+    },
+    "ESP1": {
+      "days_since_latest_on_2026_11_10": 8,
+      "latest_scored_match": "2026-11-02",
+      "n": 489,
+      "seasons": {
+        "2025-2026": 380,
+        "2026-2027": 109
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 489
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots_on_target": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_yellow_cards": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 489,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 23
+    },
+    "FRA1": {
+      "days_since_latest_on_2026_11_10": 8,
+      "latest_scored_match": "2026-11-02",
+      "n": 387,
+      "seasons": {
+        "2025-2026": 306,
+        "2026-2027": 81
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 387
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots_on_target": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_yellow_cards": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 387,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 20
+    },
+    "GER1": {
+      "days_since_latest_on_2026_11_10": 9,
+      "latest_scored_match": "2026-11-01",
+      "n": 378,
+      "seasons": {
+        "2025-2026": 306,
+        "2026-2027": 72
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 378
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots_on_target": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_yellow_cards": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 378,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 21
+    },
+    "ITA1": {
+      "days_since_latest_on_2026_11_10": 8,
+      "latest_scored_match": "2026-11-02",
+      "n": 480,
+      "seasons": {
+        "2025-2026": 380,
+        "2026-2027": 100
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 480
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 480,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 480,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 479,
+          "missing": 1,
+          "percent": 99.79
+        },
+        "away_shots_on_target": {
+          "available": 479,
+          "missing": 1,
+          "percent": 99.79
+        },
+        "away_yellow_cards": {
+          "available": 480,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 480,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 480,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 480,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 480,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 480,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 23
+    },
+    "NED1": {
+      "days_since_latest_on_2026_11_10": 9,
+      "latest_scored_match": "2026-11-01",
+      "n": 405,
+      "seasons": {
+        "2025-2026": 306,
+        "2026-2027": 99
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 405
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots_on_target": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_yellow_cards": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 405,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 21
+    },
+    "POR1": {
+      "days_since_latest_on_2026_11_10": 8,
+      "latest_scored_match": "2026-11-02",
+      "n": 396,
+      "seasons": {
+        "2025-2026": 306,
+        "2026-2027": 90
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 396
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots_on_target": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_yellow_cards": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 20
+    },
+    "TUR1": {
+      "days_since_latest_on_2026_11_10": 8,
+      "latest_scored_match": "2026-11-02",
+      "n": 396,
+      "seasons": {
+        "2025-2026": 306,
+        "2026-2027": 90
+      },
+      "source_hosts": {
+        "www.football-data.co.uk": 396
+      },
+      "statistics": {
+        "away_corners": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_red_cards": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_shots_on_target": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "away_yellow_cards": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_corners": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_red_cards": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_shots_on_target": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        },
+        "home_yellow_cards": {
+          "available": 396,
+          "missing": 0,
+          "percent": 100.0
+        }
+      },
+      "unique_clubs": 21
+    }
+  },
+  "limitations": [
+    "The original 4518 history is owner-accepted for research and NOT independently verified match-by-match",
+    "Dates are date-only; same-date result leakage prevented, but past matches' true kickoff time not known",
+    "Elo groups cannot certify how any team would tactically play versus stronger opponents",
+    "Shots and SoT are not xG; goals are not pre-match information for current fixture",
+    "No xG, formations, pressing, player or exact match-state data in accepted history",
+    "League-specific small slices are descriptive, not a selection rule",
+    "Freshness must be renewed by identity-safe, legally usable data provenance; do not append unverified results",
+    "No model parameters adjusted, no market probabilities or betting profitability implied"
+  ],
+  "match_count": 4518,
+  "opp_strength_elo_reference_assumptions": "Starting 1500 league-local each club; home +65; K=18; frozen before same-date results; no tuning; promoted team has cold start.",
+  "opponent_strength_all": {
+    "ALL/away_150_plus": {
+      "away_goal_mean": 2.1685,
+      "btts_rate": 0.5393,
+      "home_goal_mean": 0.8876,
+      "home_shot_share_avg": 0.3955,
+      "home_win_rate": 0.1685,
+      "n": 89,
+      "n_with_both_teams_8plus_prior_matches": 86,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6404,
+      "shot_share_n": 89
+    },
+    "ALL/away_50_to_150": {
+      "away_goal_mean": 1.6604,
+      "btts_rate": 0.5467,
+      "home_goal_mean": 1.1488,
+      "home_shot_share_avg": 0.4616,
+      "home_win_rate": 0.2476,
+      "n": 739,
+      "n_with_both_teams_8plus_prior_matches": 689,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5535,
+      "shot_share_n": 735
+    },
+    "ALL/close_under_50": {
+      "away_goal_mean": 1.238,
+      "btts_rate": 0.5474,
+      "home_goal_mean": 1.4949,
+      "home_shot_share_avg": 0.5491,
+      "home_win_rate": 0.4233,
+      "n": 2861,
+      "n_with_both_teams_8plus_prior_matches": 1968,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5194,
+      "shot_share_n": 2855
+    },
+    "ALL/home_150_plus": {
+      "away_goal_mean": 0.7529,
+      "btts_rate": 0.4824,
+      "home_goal_mean": 2.7529,
+      "home_shot_share_avg": 0.6866,
+      "home_win_rate": 0.8118,
+      "n": 85,
+      "n_with_both_teams_8plus_prior_matches": 84,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6471,
+      "shot_share_n": 85
+    },
+    "ALL/home_50_to_150": {
+      "away_goal_mean": 0.9597,
+      "btts_rate": 0.5699,
+      "home_goal_mean": 2.1304,
+      "home_shot_share_avg": 0.6344,
+      "home_win_rate": 0.6384,
+      "n": 744,
+      "n_with_both_teams_8plus_prior_matches": 694,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.629,
+      "shot_share_n": 744
+    }
+  },
+  "opponent_strength_by_league": {
+    "BEL1/away_150_plus": {
+      "away_goal_mean": 3.0,
+      "btts_rate": 0.6,
+      "home_goal_mean": 0.8,
+      "home_shot_share_avg": 0.3762,
+      "home_win_rate": 0.0,
+      "n": 5,
+      "n_with_both_teams_8plus_prior_matches": 5,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.8,
+      "shot_share_n": 5
+    },
+    "BEL1/away_50_to_150": {
+      "away_goal_mean": 1.7667,
+      "btts_rate": 0.5833,
+      "home_goal_mean": 1.3167,
+      "home_shot_share_avg": 0.4777,
+      "home_win_rate": 0.2833,
+      "n": 60,
+      "n_with_both_teams_8plus_prior_matches": 56,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6333,
+      "shot_share_n": 60
+    },
+    "BEL1/close_under_50": {
+      "away_goal_mean": 1.2008,
+      "btts_rate": 0.5038,
+      "home_goal_mean": 1.4545,
+      "home_shot_share_avg": 0.537,
+      "home_win_rate": 0.4167,
+      "n": 264,
+      "n_with_both_teams_8plus_prior_matches": 187,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4811,
+      "shot_share_n": 264
+    },
+    "BEL1/home_150_plus": {
+      "away_goal_mean": 0.8,
+      "btts_rate": 0.6,
+      "home_goal_mean": 2.4,
+      "home_shot_share_avg": 0.6404,
+      "home_win_rate": 0.8,
+      "n": 5,
+      "n_with_both_teams_8plus_prior_matches": 5,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4,
+      "shot_share_n": 5
+    },
+    "BEL1/home_50_to_150": {
+      "away_goal_mean": 0.9545,
+      "btts_rate": 0.5455,
+      "home_goal_mean": 2.0455,
+      "home_shot_share_avg": 0.6403,
+      "home_win_rate": 0.6212,
+      "n": 66,
+      "n_with_both_teams_8plus_prior_matches": 61,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6061,
+      "shot_share_n": 66
+    },
+    "ENG1/away_150_plus": {
+      "away_goal_mean": 1.0,
+      "btts_rate": 0.25,
+      "home_goal_mean": 1.0,
+      "home_shot_share_avg": 0.3941,
+      "home_win_rate": 0.25,
+      "n": 4,
+      "n_with_both_teams_8plus_prior_matches": 4,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.25,
+      "shot_share_n": 4
+    },
+    "ENG1/away_50_to_150": {
+      "away_goal_mean": 1.5067,
+      "btts_rate": 0.56,
+      "home_goal_mean": 1.1467,
+      "home_shot_share_avg": 0.4624,
+      "home_win_rate": 0.1867,
+      "n": 75,
+      "n_with_both_teams_8plus_prior_matches": 73,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4933,
+      "shot_share_n": 75
+    },
+    "ENG1/close_under_50": {
+      "away_goal_mean": 1.2616,
+      "btts_rate": 0.5497,
+      "home_goal_mean": 1.5298,
+      "home_shot_share_avg": 0.5475,
+      "home_win_rate": 0.4305,
+      "n": 302,
+      "n_with_both_teams_8plus_prior_matches": 208,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5563,
+      "shot_share_n": 302
+    },
+    "ENG1/home_150_plus": {
+      "away_goal_mean": 0.25,
+      "btts_rate": 0.25,
+      "home_goal_mean": 1.75,
+      "home_shot_share_avg": 0.6947,
+      "home_win_rate": 1.0,
+      "n": 4,
+      "n_with_both_teams_8plus_prior_matches": 4,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.25,
+      "shot_share_n": 4
+    },
+    "ENG1/home_50_to_150": {
+      "away_goal_mean": 0.8706,
+      "btts_rate": 0.5412,
+      "home_goal_mean": 1.8353,
+      "home_shot_share_avg": 0.6343,
+      "home_win_rate": 0.5765,
+      "n": 85,
+      "n_with_both_teams_8plus_prior_matches": 78,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5176,
+      "shot_share_n": 85
+    },
+    "ENG2/away_150_plus": {
+      "away_goal_mean": 1.6667,
+      "btts_rate": 0.6667,
+      "home_goal_mean": 0.8333,
+      "home_shot_share_avg": 0.352,
+      "home_win_rate": 0.1667,
+      "n": 6,
+      "n_with_both_teams_8plus_prior_matches": 6,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5,
+      "shot_share_n": 6
+    },
+    "ENG2/away_50_to_150": {
+      "away_goal_mean": 1.3398,
+      "btts_rate": 0.5728,
+      "home_goal_mean": 1.233,
+      "home_shot_share_avg": 0.4811,
+      "home_win_rate": 0.3204,
+      "n": 103,
+      "n_with_both_teams_8plus_prior_matches": 100,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4951,
+      "shot_share_n": 100
+    },
+    "ENG2/close_under_50": {
+      "away_goal_mean": 1.2681,
+      "btts_rate": 0.5827,
+      "home_goal_mean": 1.4032,
+      "home_shot_share_avg": 0.5555,
+      "home_win_rate": 0.3972,
+      "n": 496,
+      "n_with_both_teams_8plus_prior_matches": 366,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5262,
+      "shot_share_n": 490
+    },
+    "ENG2/home_150_plus": {
+      "away_goal_mean": 0.5,
+      "btts_rate": 0.5,
+      "home_goal_mean": 1.5,
+      "home_shot_share_avg": 0.6548,
+      "home_win_rate": 0.75,
+      "n": 4,
+      "n_with_both_teams_8plus_prior_matches": 4,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5,
+      "shot_share_n": 4
+    },
+    "ENG2/home_50_to_150": {
+      "away_goal_mean": 0.9074,
+      "btts_rate": 0.5741,
+      "home_goal_mean": 1.9352,
+      "home_shot_share_avg": 0.6138,
+      "home_win_rate": 0.6019,
+      "n": 108,
+      "n_with_both_teams_8plus_prior_matches": 101,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5926,
+      "shot_share_n": 108
+    },
+    "ESP1/away_150_plus": {
+      "away_goal_mean": 2.7,
+      "btts_rate": 0.6,
+      "home_goal_mean": 1.2,
+      "home_shot_share_avg": 0.3767,
+      "home_win_rate": 0.3,
+      "n": 10,
+      "n_with_both_teams_8plus_prior_matches": 10,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.9,
+      "shot_share_n": 10
+    },
+    "ESP1/away_50_to_150": {
+      "away_goal_mean": 1.3289,
+      "btts_rate": 0.5658,
+      "home_goal_mean": 1.1184,
+      "home_shot_share_avg": 0.4805,
+      "home_win_rate": 0.3289,
+      "n": 76,
+      "n_with_both_teams_8plus_prior_matches": 72,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4737,
+      "shot_share_n": 76
+    },
+    "ESP1/close_under_50": {
+      "away_goal_mean": 1.1293,
+      "btts_rate": 0.5678,
+      "home_goal_mean": 1.5174,
+      "home_shot_share_avg": 0.5605,
+      "home_win_rate": 0.4511,
+      "n": 317,
+      "n_with_both_teams_8plus_prior_matches": 221,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4795,
+      "shot_share_n": 317
+    },
+    "ESP1/home_150_plus": {
+      "away_goal_mean": 0.8182,
+      "btts_rate": 0.5455,
+      "home_goal_mean": 3.9091,
+      "home_shot_share_avg": 0.7065,
+      "home_win_rate": 1.0,
+      "n": 11,
+      "n_with_both_teams_8plus_prior_matches": 10,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.8182,
+      "shot_share_n": 11
+    },
+    "ESP1/home_50_to_150": {
+      "away_goal_mean": 0.9733,
+      "btts_rate": 0.5733,
+      "home_goal_mean": 2.1733,
+      "home_shot_share_avg": 0.6169,
+      "home_win_rate": 0.72,
+      "n": 75,
+      "n_with_both_teams_8plus_prior_matches": 73,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6267,
+      "shot_share_n": 75
+    },
+    "FRA1/away_150_plus": {
+      "away_goal_mean": 2.6667,
+      "btts_rate": 1.0,
+      "home_goal_mean": 1.3333,
+      "home_shot_share_avg": 0.4232,
+      "home_win_rate": 0.3333,
+      "n": 3,
+      "n_with_both_teams_8plus_prior_matches": 3,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 1.0,
+      "shot_share_n": 3
+    },
+    "FRA1/away_50_to_150": {
+      "away_goal_mean": 1.6351,
+      "btts_rate": 0.473,
+      "home_goal_mean": 1.1486,
+      "home_shot_share_avg": 0.4582,
+      "home_win_rate": 0.2297,
+      "n": 74,
+      "n_with_both_teams_8plus_prior_matches": 70,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5541,
+      "shot_share_n": 74
+    },
+    "FRA1/close_under_50": {
+      "away_goal_mean": 1.1992,
+      "btts_rate": 0.5285,
+      "home_goal_mean": 1.6463,
+      "home_shot_share_avg": 0.5547,
+      "home_win_rate": 0.4959,
+      "n": 246,
+      "n_with_both_teams_8plus_prior_matches": 165,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5203,
+      "shot_share_n": 246
+    },
+    "FRA1/home_150_plus": {
+      "away_goal_mean": 0.2,
+      "btts_rate": 0.2,
+      "home_goal_mean": 2.4,
+      "home_shot_share_avg": 0.6178,
+      "home_win_rate": 1.0,
+      "n": 5,
+      "n_with_both_teams_8plus_prior_matches": 5,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.8,
+      "shot_share_n": 5
+    },
+    "FRA1/home_50_to_150": {
+      "away_goal_mean": 1.0508,
+      "btts_rate": 0.5932,
+      "home_goal_mean": 1.9661,
+      "home_shot_share_avg": 0.6512,
+      "home_win_rate": 0.5932,
+      "n": 59,
+      "n_with_both_teams_8plus_prior_matches": 56,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5593,
+      "shot_share_n": 59
+    },
+    "GER1/away_150_plus": {
+      "away_goal_mean": 2.2222,
+      "btts_rate": 0.3333,
+      "home_goal_mean": 0.6667,
+      "home_shot_share_avg": 0.4237,
+      "home_win_rate": 0.0,
+      "n": 9,
+      "n_with_both_teams_8plus_prior_matches": 8,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5556,
+      "shot_share_n": 9
+    },
+    "GER1/away_50_to_150": {
+      "away_goal_mean": 1.9091,
+      "btts_rate": 0.6667,
+      "home_goal_mean": 1.3788,
+      "home_shot_share_avg": 0.4786,
+      "home_win_rate": 0.2576,
+      "n": 66,
+      "n_with_both_teams_8plus_prior_matches": 57,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.697,
+      "shot_share_n": 66
+    },
+    "GER1/close_under_50": {
+      "away_goal_mean": 1.393,
+      "btts_rate": 0.5939,
+      "home_goal_mean": 1.7162,
+      "home_shot_share_avg": 0.5441,
+      "home_win_rate": 0.4541,
+      "n": 229,
+      "n_with_both_teams_8plus_prior_matches": 146,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5939,
+      "shot_share_n": 229
+    },
+    "GER1/home_150_plus": {
+      "away_goal_mean": 1.375,
+      "btts_rate": 0.75,
+      "home_goal_mean": 3.5,
+      "home_shot_share_avg": 0.7115,
+      "home_win_rate": 0.5,
+      "n": 8,
+      "n_with_both_teams_8plus_prior_matches": 8,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 1.0,
+      "shot_share_n": 8
+    },
+    "GER1/home_50_to_150": {
+      "away_goal_mean": 1.0455,
+      "btts_rate": 0.6364,
+      "home_goal_mean": 2.7121,
+      "home_shot_share_avg": 0.6407,
+      "home_win_rate": 0.6667,
+      "n": 66,
+      "n_with_both_teams_8plus_prior_matches": 64,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.7576,
+      "shot_share_n": 66
+    },
+    "ITA1/away_150_plus": {
+      "away_goal_mean": 2.2143,
+      "btts_rate": 0.5,
+      "home_goal_mean": 0.6429,
+      "home_shot_share_avg": 0.4134,
+      "home_win_rate": 0.0,
+      "n": 14,
+      "n_with_both_teams_8plus_prior_matches": 14,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5,
+      "shot_share_n": 14
+    },
+    "ITA1/away_50_to_150": {
+      "away_goal_mean": 1.6897,
+      "btts_rate": 0.5057,
+      "home_goal_mean": 1.0,
+      "home_shot_share_avg": 0.4443,
+      "home_win_rate": 0.2299,
+      "n": 87,
+      "n_with_both_teams_8plus_prior_matches": 81,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4713,
+      "shot_share_n": 86
+    },
+    "ITA1/close_under_50": {
+      "away_goal_mean": 1.1459,
+      "btts_rate": 0.4591,
+      "home_goal_mean": 1.2384,
+      "home_shot_share_avg": 0.544,
+      "home_win_rate": 0.395,
+      "n": 281,
+      "n_with_both_teams_8plus_prior_matches": 192,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4448,
+      "shot_share_n": 281
+    },
+    "ITA1/home_150_plus": {
+      "away_goal_mean": 0.5833,
+      "btts_rate": 0.4167,
+      "home_goal_mean": 2.5833,
+      "home_shot_share_avg": 0.7062,
+      "home_win_rate": 0.8333,
+      "n": 12,
+      "n_with_both_teams_8plus_prior_matches": 12,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5833,
+      "shot_share_n": 12
+    },
+    "ITA1/home_50_to_150": {
+      "away_goal_mean": 1.0,
+      "btts_rate": 0.5233,
+      "home_goal_mean": 2.0,
+      "home_shot_share_avg": 0.641,
+      "home_win_rate": 0.6279,
+      "n": 86,
+      "n_with_both_teams_8plus_prior_matches": 78,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6395,
+      "shot_share_n": 86
+    },
+    "NED1/away_150_plus": {
+      "away_goal_mean": 1.6,
+      "btts_rate": 1.0,
+      "home_goal_mean": 1.8,
+      "home_shot_share_avg": 0.3814,
+      "home_win_rate": 0.6,
+      "n": 5,
+      "n_with_both_teams_8plus_prior_matches": 5,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 1.0,
+      "shot_share_n": 5
+    },
+    "NED1/away_50_to_150": {
+      "away_goal_mean": 2.371,
+      "btts_rate": 0.6129,
+      "home_goal_mean": 1.2258,
+      "home_shot_share_avg": 0.4348,
+      "home_win_rate": 0.1774,
+      "n": 62,
+      "n_with_both_teams_8plus_prior_matches": 57,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6935,
+      "shot_share_n": 62
+    },
+    "NED1/close_under_50": {
+      "away_goal_mean": 1.4457,
+      "btts_rate": 0.6367,
+      "home_goal_mean": 1.7116,
+      "home_shot_share_avg": 0.5359,
+      "home_win_rate": 0.4045,
+      "n": 267,
+      "n_with_both_teams_8plus_prior_matches": 183,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5955,
+      "shot_share_n": 267
+    },
+    "NED1/home_150_plus": {
+      "away_goal_mean": 1.25,
+      "btts_rate": 0.75,
+      "home_goal_mean": 3.75,
+      "home_shot_share_avg": 0.7554,
+      "home_win_rate": 0.5,
+      "n": 4,
+      "n_with_both_teams_8plus_prior_matches": 4,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 1.0,
+      "shot_share_n": 4
+    },
+    "NED1/home_50_to_150": {
+      "away_goal_mean": 1.1045,
+      "btts_rate": 0.6567,
+      "home_goal_mean": 2.5821,
+      "home_shot_share_avg": 0.6696,
+      "home_win_rate": 0.6866,
+      "n": 67,
+      "n_with_both_teams_8plus_prior_matches": 61,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.7313,
+      "shot_share_n": 67
+    },
+    "POR1/away_150_plus": {
+      "away_goal_mean": 2.3478,
+      "btts_rate": 0.5652,
+      "home_goal_mean": 0.7391,
+      "home_shot_share_avg": 0.3856,
+      "home_win_rate": 0.087,
+      "n": 23,
+      "n_with_both_teams_8plus_prior_matches": 21,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6522,
+      "shot_share_n": 23
+    },
+    "POR1/away_50_to_150": {
+      "away_goal_mean": 1.697,
+      "btts_rate": 0.4394,
+      "home_goal_mean": 0.7727,
+      "home_shot_share_avg": 0.4399,
+      "home_win_rate": 0.1364,
+      "n": 66,
+      "n_with_both_teams_8plus_prior_matches": 61,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5455,
+      "shot_share_n": 66
+    },
+    "POR1/close_under_50": {
+      "away_goal_mean": 1.1712,
+      "btts_rate": 0.491,
+      "home_goal_mean": 1.482,
+      "home_shot_share_avg": 0.5377,
+      "home_win_rate": 0.4099,
+      "n": 222,
+      "n_with_both_teams_8plus_prior_matches": 146,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5045,
+      "shot_share_n": 222
+    },
+    "POR1/home_150_plus": {
+      "away_goal_mean": 0.5833,
+      "btts_rate": 0.4167,
+      "home_goal_mean": 2.4583,
+      "home_shot_share_avg": 0.6921,
+      "home_win_rate": 0.9167,
+      "n": 24,
+      "n_with_both_teams_8plus_prior_matches": 24,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5417,
+      "shot_share_n": 24
+    },
+    "POR1/home_50_to_150": {
+      "away_goal_mean": 0.7869,
+      "btts_rate": 0.459,
+      "home_goal_mean": 1.9344,
+      "home_shot_share_avg": 0.6244,
+      "home_win_rate": 0.623,
+      "n": 61,
+      "n_with_both_teams_8plus_prior_matches": 57,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.623,
+      "shot_share_n": 61
+    },
+    "TUR1/away_150_plus": {
+      "away_goal_mean": 1.6,
+      "btts_rate": 0.3,
+      "home_goal_mean": 0.9,
+      "home_shot_share_avg": 0.4215,
+      "home_win_rate": 0.4,
+      "n": 10,
+      "n_with_both_teams_8plus_prior_matches": 10,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5,
+      "shot_share_n": 10
+    },
+    "TUR1/away_50_to_150": {
+      "away_goal_mean": 1.6571,
+      "btts_rate": 0.5,
+      "home_goal_mean": 1.1714,
+      "home_shot_share_avg": 0.4511,
+      "home_win_rate": 0.2857,
+      "n": 70,
+      "n_with_both_teams_8plus_prior_matches": 62,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.5714,
+      "shot_share_n": 70
+    },
+    "TUR1/close_under_50": {
+      "away_goal_mean": 1.1603,
+      "btts_rate": 0.5232,
+      "home_goal_mean": 1.3586,
+      "home_shot_share_avg": 0.5664,
+      "home_win_rate": 0.4008,
+      "n": 237,
+      "n_with_both_teams_8plus_prior_matches": 154,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.4979,
+      "shot_share_n": 237
+    },
+    "TUR1/home_150_plus": {
+      "away_goal_mean": 1.25,
+      "btts_rate": 0.5,
+      "home_goal_mean": 2.625,
+      "home_shot_share_avg": 0.6376,
+      "home_win_rate": 0.5,
+      "n": 8,
+      "n_with_both_teams_8plus_prior_matches": 8,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.625,
+      "shot_share_n": 8
+    },
+    "TUR1/home_50_to_150": {
+      "away_goal_mean": 0.9437,
+      "btts_rate": 0.6056,
+      "home_goal_mean": 2.3099,
+      "home_shot_share_avg": 0.6262,
+      "home_win_rate": 0.6901,
+      "n": 71,
+      "n_with_both_teams_8plus_prior_matches": 65,
+      "note": "Descriptive strength proxy; not game-state or formation data; all match scores already viewed.",
+      "over25_rate": 0.6761,
+      "shot_share_n": 71
+    }
+  },
+  "schema": "263_OPPONENT_GOALS_TENLEAGUE_SOURCE_INVENTORY_V1",
+  "snapshot_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "status": "EXISTING_ACCEPTED_SOURCE_ONLY_NO_NEW_PROVIDER_DOWNLOAD"
+}
