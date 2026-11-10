@@ -180,6 +180,45 @@ def date_bootstrap(values,*,seed=20261111,reps=600):
     return {"low":draws[int(.025*reps)],"high":draws[int(.975*reps)-1],
             "distinct_days":len(groups),"method":"calendar_day_block_bootstrap_EXPLORATORY"}
 
+def strength_difference_bootstrap(evaluated,*,reps=600,seed=20261111):
+    """Day-block uncertainty on home-goal residual for strong minus weak away defense.
+
+    Not independent validation or proof of causal defensive strength.
+    """
+    strong="strong_relative_fitted_away_defence"
+    weak="weak_relative_fitted_away_defence"
+    ab=[x for x in evaluated if x["opponent_defense_band"] in (strong,weak)]
+    unique=sorted({x["date"] for x in ab})
+    observed_strong=[x["goal_home_error"] for x in ab if x["opponent_defense_band"]==strong]
+    observed_weak=[x["goal_home_error"] for x in ab if x["opponent_defense_band"]==weak]
+    require(len(observed_strong)>=50 and len(observed_weak)>=50
+            and len(unique)>=10,"OPPONENT_BAND_SAMPLES_TOO_SMALL")
+    day_groups=defaultdict(list)
+    for x in ab:day_groups[x["date"]].append(x)
+    rnd=random.Random(seed)
+    draws=[]
+    for _ in range(reps):
+        sample=[]
+        for day in unique:
+            sample.extend(day_groups[unique[rnd.randrange(len(unique))]])
+        a=[x["goal_home_error"] for x in sample if x["opponent_defense_band"]==strong]
+        b=[x["goal_home_error"] for x in sample if x["opponent_defense_band"]==weak]
+        if a and b:draws.append(mean(a)-mean(b))
+    require(len(draws)==reps,"UNSTABLE_DAY_BOOTSTRAP_GROUPS")
+    draws.sort()
+    return {
+        "n_strong":len(observed_strong),"n_weak":len(observed_weak),
+        "strong_minus_weak_home_goal_residual":mean(observed_strong)-mean(observed_weak),
+        "day_block_exploratory_95pct":{
+            "low":draws[int(.025*reps)],"high":draws[int(.975*reps)-1],
+            "distinct_days":len(unique),
+            "method":"resample_all_games_within_selected_match_dates"
+        },
+        "predeclared_strength_cutoffs_not_tuned":True,
+        "historical_development_only_not_proof":True
+    }
+
+
 def run():
     dev,settings=load()
     evaluated=[]; paired=[];folds=[];skips=Counter()
@@ -310,6 +349,26 @@ def run():
                x["candidate_scores"]["0.1"]["Over25_Brier"]-x["candidate_scores"]["0.0"]["Over25_Brier"]
                for x in subset]),
         }
+    strength_by_league={}
+    strong_label="strong_relative_fitted_away_defence"
+    weak_label="weak_relative_fitted_away_defence"
+    for league in LEAGUES:
+        subset=[x for x in evaluated if x["league"]==league]
+        strong=[x["goal_home_error"] for x in subset if
+                x["opponent_defense_band"]==strong_label]
+        weak=[x["goal_home_error"] for x in subset if
+              x["opponent_defense_band"]==weak_label]
+        strength_by_league[league]={
+            "baseline_matches":len(subset),"strong_matches":len(strong),
+            "weak_matches":len(weak),
+            "strong_mean_home_goal_residual":mean(strong),
+            "weak_mean_home_goal_residual":mean(weak),
+            "strong_minus_weak_home_goal_residual":
+                mean(strong)-mean(weak) if strong and weak else None
+        }
+    consistent=sum(x["strong_minus_weak_home_goal_residual"] is not None and
+                   x["strong_minus_weak_home_goal_residual"]>0
+                   for x in strength_by_league.values())
     return {
        "schema":SCHEMA,"status":"RESEARCH_ONLY_NO_MODEL_OR_FORECAST_MODIFICATION",
        "source_4617_sha256":PIN["source"],
@@ -339,6 +398,9 @@ def run():
        "baseline_error_by_opponent_and_form":groups,
        "paired_form_challenger_scores":contrasts,
        "league_level_descriptives":score_corr,
+       "opponent_strength_by_league":strength_by_league,
+       "strong_minus_weak_home_goal_residual_by_day":strength_difference_bootstrap(evaluated),
+       "leagues_with_same_strong_to_weak_residual_direction":consistent,
        "automatic_model_promotion":False,"original_m4_settings_changed":False,
        "morning_or_mobile_percentages_changed":False,
        "betting_authorized":False,
@@ -371,6 +433,9 @@ def main():
        "paired_brier":{k:{m:v for m,v in x["candidate_minus_frozen_m4_negative_improves"].items()
                            if m in ("KG_Brier","Over25_Brier","MS_Brier")}
                        for k,x in report["paired_form_challenger_scores"].items()},
+       "opponent_gap":report["strong_minus_weak_home_goal_residual_by_day"],
+       "leagues_same_sign":report["leagues_with_same_strong_to_weak_residual_direction"],
+       "strength_by_league":report["opponent_strength_by_league"],
        "no_deployment":True},ensure_ascii=False))
 if __name__=="__main__":
     main()
