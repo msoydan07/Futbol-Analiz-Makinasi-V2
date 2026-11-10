@@ -1,0 +1,35 @@
+name: "263 current-source one-shot identity preflight no raw data retention"
+on:
+  push:
+    branches:
+      - research/263-data-source-preflight-20261110
+    paths:
+      - 'research/opponent_goals/source_current_one_shot_preflight.py'
+      - 'research/opponent_goals/test_source_current_one_shot_preflight.py'
+      - '.github/workflows/263-source-current-oneshot-preflight.yml'
+permissions:
+  contents: write
+jobs:
+  at_most_one_current_feeds_run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source identity and no-retry safety QA without downloading
+        run: python research/opponent_goals/test_source_current_one_shot_preflight.py
+      - name: Light supplier request exactly once for each of 10 leagues
+        run: |
+          python research/opponent_goals/source_current_one_shot_preflight.py \
+            --out research/opponent_goals/reports/current_source_preflight_20261110.json
+      - name: Persist only SHA and counts with no copyrighted raw rows
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/opponent_goals/reports/current_source_preflight_20261110.json
+          git commit -m "Research: one-shot provider identity preflight, no source redistribution [skip ci]"
+          git push origin HEAD:research/263-data-source-preflight-20261110
