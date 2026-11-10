@@ -1,8 +1,11 @@
-name: "263 nov7 SHA research separate-date KG Over audit only"
+name: "263 Nov6 Nov7 Nov8 strict separate date research only"
 on:
   push:
     branches: [research/263-staged99-evidence-join-20261110]
     paths:
+      - 'research/opponent_goals/nov6_primary_score_evidence_20261110.json'
+      - 'research/opponent_goals/nov6_7_8_separate_date_audit_263.py'
+      - 'research/opponent_goals/test_nov6_7_8_separate_date_audit_263.py'
       - 'research/opponent_goals/nov7_primary_score_evidence_20261110.json'
       - 'research/opponent_goals/nov7_sealed_date_block_263.py'
       - 'research/opponent_goals/test_nov7_sealed_date_block_263.py'
@@ -10,7 +13,7 @@ on:
 permissions:
   contents: read
 jobs:
-  nov7-sealed-research-no-refit:
+  three-date-sealed-research-no-refit:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -18,15 +21,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Verify original 7 Nov SHA seals, separate data cohorts, provenance gates
-        run: python -m unittest -v research/opponent_goals/test_nov7_sealed_date_block_263.py
-      - name: Produce separate research report (reference 8 Nov, do not rescore)
-        run: python research/opponent_goals/nov7_sealed_date_block_263.py --output /tmp/263_nov7_vs_nov8_separate_date_report.json
+      - name: Verify original Nov6 and Nov7 SHA seals and original team ID joining
+        run: python -m unittest -v research/opponent_goals/test_nov7_sealed_date_block_263.py research/opponent_goals/test_nov6_7_8_separate_date_audit_263.py
+      - name: Three separate dates: score Nov6 and Nov7; reference Nov8 only
+        run: python -m research.opponent_goals.nov6_7_8_separate_date_audit_263 --output /tmp/263_three_date_separate_research.json
       - name: Archive research output only, no official result promotion
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: 263-Nov7-primary-page-research-separate-from-Nov8-not-attested
-          path: /tmp/263_nov7_vs_nov8_separate_date_report.json
+          name: 263-three-separate-date-blocks-no-model-refit-no-official-attestation
+          path: /tmp/263_three_date_separate_research.json
           retention-days: 30
           if-no-files-found: warn
