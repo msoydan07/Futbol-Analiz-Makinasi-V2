@@ -184,7 +184,7 @@
       "away_alias": "wolves",
       "home_goals": 1,
       "away_goals": 2,
-      "score_source_url": "https://www.efl.com/news/2026/november/04/sky-bet-championship--wolves-close-in-on-top-spot/",
+      "score_source_url": "https://www.wolves.co.uk/news/mens-first-team/20261104-report-bristol-city-1-2-wolves/?isNative=true",
       "crosscheck_source_url": "https://www.efl.com/news/2026/november/07/sky-bet-championship--post-match-stat-pack/",
       "primary_evidence_grade": "OFFICIAL_LEAGUE_OR_CLUB_POSTMATCH_PUBLIC_PAGE_REVIEW",
       "independently_fetched_and_parsed_by_ci": false,
@@ -200,7 +200,7 @@
       "away_alias": "west ham",
       "home_goals": 3,
       "away_goals": 3,
-      "score_source_url": "https://www.efl.com/news/2026/november/04/sky-bet-championship--wolves-close-in-on-top-spot/",
+      "score_source_url": "https://www.whufc.com/en/matches/mens-team/cardiff-city-fc-v-west-ham-united-fc-championship-20261104",
       "crosscheck_source_url": "https://www.efl.com/news/2026/november/07/sky-bet-championship--post-match-stat-pack/",
       "primary_evidence_grade": "OFFICIAL_LEAGUE_OR_CLUB_POSTMATCH_PUBLIC_PAGE_REVIEW",
       "independently_fetched_and_parsed_by_ci": false,
@@ -264,7 +264,7 @@
       "away_alias": "stoke",
       "home_goals": 1,
       "away_goals": 2,
-      "score_source_url": "https://www.efl.com/news/2026/november/07/sky-bet-championship--post-match-stat-pack/",
+      "score_source_url": "https://www.portsmouthfc.co.uk/news/2026/november/07/match-report--pompey-v-stoke/",
       "crosscheck_source_url": "https://www.efl.com/news/2026/november/07/sky-bet-championship--post-match-stat-pack/",
       "primary_evidence_grade": "OFFICIAL_LEAGUE_OR_CLUB_POSTMATCH_PUBLIC_PAGE_REVIEW",
       "independently_fetched_and_parsed_by_ci": false,
@@ -312,7 +312,7 @@
       "away_alias": "west ham",
       "home_goals": 2,
       "away_goals": 1,
-      "score_source_url": "https://www.efl.com/news/2026/november/07/sky-bet-championship--post-match-stat-pack/",
+      "score_source_url": "https://www.whufc.com/en/news/match-report-or-hammers-suffer-defeat-at-blackburn",
       "crosscheck_source_url": "https://www.efl.com/news/2026/november/07/sky-bet-championship--post-match-stat-pack/",
       "primary_evidence_grade": "OFFICIAL_LEAGUE_OR_CLUB_POSTMATCH_PUBLIC_PAGE_REVIEW",
       "independently_fetched_and_parsed_by_ci": false,
@@ -360,7 +360,7 @@
       "away_alias": "southampton",
       "home_goals": 1,
       "away_goals": 0,
-      "score_source_url": "https://www.pnefc.net/news/2026/november/08/lee-nicholls--buzzing--to-mark-league-debut-with-a-clean-sheet-and-win/",
+      "score_source_url": "https://www.efl.com/news/2026/november/09/whoscored-s-sky-bet-championship-team-of-the-week/",
       "crosscheck_source_url": "https://www.efl.com/news/2026/november/07/sky-bet-championship--post-match-stat-pack/",
       "primary_evidence_grade": "OFFICIAL_LEAGUE_OR_CLUB_POSTMATCH_PUBLIC_PAGE_REVIEW",
       "independently_fetched_and_parsed_by_ci": false,
@@ -709,5 +709,6 @@
     "Direct league/club URLs for all 43; publication links are source evidence; this is not a claim of independent provider API attestations.",
     "Do not rewrite 99 immutable result facts, 4617 history file, existing pre-KO sealed forecasts, or official odds data.",
     "EFL news article body is sometimes JS-rendered and may not expose full embedded results to text crawlers; official match identity not independently attested in CI"
-  ]
+  ],
+  "notes_20261110_research_recheck": "Multiple publisher-score pages originally accessible but text-only truncated; replaced select ENG2 with official primary club FT report URLs from direct club sites. No factual score changes."
 }
