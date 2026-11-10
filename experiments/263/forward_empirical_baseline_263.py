@@ -23,8 +23,13 @@ def produce(forecast, history_path, *, now=None):
     if forecast.get("status")!="EXPERIMENTAL_PREMATCH_FOUR_MODEL_NO_BETTING":
         raise ValueError("SHADOW_NOT_ACCEPTED")
     data=forecast["data"]
-    if data.get("snapshot_acceptance")!="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED" or data.get("human_source_acceptance") is not True or data.get("research_shadow_unverified_source") is not False:
-        raise ValueError("UPDATED_SOURCE_NOT_HUMAN_ACCEPTED")
+    status=data.get("snapshot_acceptance")
+    if status not in ("APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED",
+                      "APPEND_ONLY_4617_PUBLIC_RESULTS_ONLY_RESEARCH_NOT_OFFICIAL_ID_VERIFIED"):
+        raise ValueError("SOURCE_GRADE_NOT_PERMITTED")
+    if (data.get("human_source_acceptance") is not (status=="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED")
+        or data.get("research_shadow_unverified_source") is not False):
+        raise ValueError("SOURCE_ACCEPTANCE_LABEL_MISMATCH")
     if hashlib.sha256(Path(history_path).read_bytes()).hexdigest()!=data.get("snapshot_sha256"):
         raise ValueError("HISTORY_SHA_MISMATCH")
     asof=_time(forecast["created_at_utc"])

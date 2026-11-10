@@ -87,6 +87,39 @@ def verify_snapshot(path,rows,now,base=None,source_audit=None,shadow_evidence=No
         verify_shadow_evidence(digest, len(rows), shadow_evidence, now)
         return 'MACHINE_STAGE_INTEGRITY_ONLY_NOT_HUMAN_VERIFIED_SHADOW',digest
     audit=json.loads(Path(source_audit).read_text(encoding='utf-8'))
+    if audit.get('schema')=='263_4617_RESULTS_ONLY_RESEARCH_INPUT_V1':
+        # Explicitly user-authorized experimental results-only use, NOT official
+        # fixture-ID score verification and NOT a human-source acceptance.
+        # Verify the complete 99-record append and all 4518 unchanged via the
+        # already-tested independent archive reconstruction acceptance.
+        from verify_completed99_results_archive import ROOT as HISTORY_ROOT, build
+        if (audit.get('status')!='PUBLIC_RESULT_SCORES_RESEARCH_ENABLEMENT_NOT_OFFICIAL_ID_VERIFIED'
+            or audit.get('source_snapshot_path')!='data/results_only_263/2026-11-10_completed_4617_scores_only.csv'
+            or Path(path).resolve()!=Path(HISTORY_ROOT,audit['source_snapshot_path']).resolve()
+            or audit.get('source_snapshot_sha256')!=digest
+            or audit.get('base_4518_sha256')!='1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9'
+            or audit.get('legacy_frozen_4413_sha256')!=FROZEN
+            or len(rows)!=4617 or audit.get('accepted_old_rows')!=4518
+            or audit.get('added_completed_results')!=99
+            or audit.get('usable_total_rows')!=4617
+            or audit.get('official_unique_match_id_verified') is not False
+            or audit.get('human_official_review_of_all_99') is not False
+            or audit.get('independent_source_verification_by_code') is not False
+            or audit.get('betting_authorized') is not False
+            or audit.get('forward_seals_rewrite_allowed') is not False
+            or audit.get('new_rows_shots_corners_xg_included') is not False
+            or audit.get('old_9_ENG2_stat_fields_modified') is not False
+            or audit.get('source_grade_counts')!={
+                'OFFICIAL_PAGE_AND_PROVIDER_RESEARCH_CONCORDANT':28,
+                'DIRECT_LEAGUE_OR_CLUB_SCORE_PAGE':28,
+                'PUBLIC_SECONDARY_SCORE_WITH_PARTIAL_OFFICIAL_FIXTURE':43}):
+            raise ValueError('results_only_4617_provenance_not_accepted_for_research')
+        report=build(HISTORY_ROOT)
+        if (report['results_only_4617_snapshot_sha256']!=digest
+            or report['new_result_records']!=99 or report['new_99_advanced_fields_admitted']!=0
+            or report['old_ENG2_changed_stage_rows_ignored']!=9):
+            raise ValueError('results_only_4617_archive_integrity_failed')
+        return 'APPEND_ONLY_4617_PUBLIC_RESULTS_ONLY_RESEARCH_NOT_OFFICIAL_ID_VERIFIED',digest
     if audit.get('status')!='HUMAN_VERIFIED_SOURCE_ACCEPTANCE' or audit.get('snapshot_sha256')!=digest or audit.get('baseline_sha256')!=FROZEN:
         raise ValueError('source_provenance_not_accepted')
     if not audit.get('reviewer') or not audit.get('source_links') or not isinstance(audit['source_links'],list):
@@ -160,7 +193,7 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
                      'source_checked_at_utc':checked.isoformat(),
                      'fixture_verification':'VERIFIED_BY_LIVE_OFFICIAL_GATE'},
           'data':{'snapshot_sha256':source_sha,'snapshot_acceptance':source_status,
-                  'human_source_acceptance':shadow_evidence is None,
+                  'human_source_acceptance':source_status=='APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED',
                   'research_shadow_unverified_source':shadow_evidence is not None,
                   'league_history_rows':len(past),'league_latest_result_date':latest,
                   'training_excluded_partial_match_ids':excluded_partial,

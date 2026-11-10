@@ -21,8 +21,13 @@ def connect_verified_baseline(forecast, calibration_lock, baseline_record):
         raise ValueError("BASELINE_HASH_MISMATCH")
     if baseline_record.get("forecast_sha256")!=forecast.get("payload_sha256"):
         raise ValueError("BASELINE_WRONG_FORECAST")
-    if forecast.get("data",{}).get("snapshot_acceptance")!="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED":
-        raise ValueError("UPSTREAM_SOURCE_NOT_HUMAN_ACCEPTED")
+    grade=forecast.get("data",{}).get("snapshot_acceptance")
+    if grade not in ("APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED",
+                     "APPEND_ONLY_4617_PUBLIC_RESULTS_ONLY_RESEARCH_NOT_OFFICIAL_ID_VERIFIED"):
+        raise ValueError("UPSTREAM_PROVENANCE_GRADE_NOT_SUPPORTED")
+    if forecast.get("data",{}).get("human_source_acceptance") is not (
+        grade=="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED"):
+        raise ValueError("PROVENANCE_LABEL_NOT_CONSISTENT")
     if baseline_record.get("league")!=forecast.get("fixture",{}).get("league"):
         raise ValueError("BASELINE_WRONG_LEAGUE")
     if baseline_record.get("method")!="PAST_RESULTS_LEAGUE_MARKET_RATE":

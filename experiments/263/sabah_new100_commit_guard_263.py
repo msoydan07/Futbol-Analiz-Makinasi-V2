@@ -72,7 +72,11 @@ def verify(report_path,mobile_dir,*,root=".",now=None):
             raise PilotBlocked("SOURCE_FIXTURE_TURKEY_DATE_MISMATCH")
         if (f.get("status")!="EXPERIMENTAL_PREMATCH_FOUR_MODEL_NO_BETTING"
             or fixture.get("fixture_verification")!="VERIFIED_BY_LIVE_OFFICIAL_GATE"
-            or f.get("data",{}).get("snapshot_acceptance")!="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED"):
+            or f.get("data",{}).get("snapshot_acceptance") not in (
+               "APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED",
+               "APPEND_ONLY_4617_PUBLIC_RESULTS_ONLY_RESEARCH_NOT_OFFICIAL_ID_VERIFIED")
+            or f.get("data",{}).get("human_source_acceptance") is not (
+               f.get("data",{}).get("snapshot_acceptance")=="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED")):
             raise PilotBlocked("OFFICIAL_RESEARCH_ONLY_SOURCE_INVALID")
         model_results=f.get("model_predictions",{})
         if set(model_results)!=set(MODELS):
