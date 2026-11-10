@@ -6,6 +6,8 @@ on:
       - 'experiments/263/sabah_postmatch_new100_263.py'
       - 'experiments/263/test_sabah_postmatch_new100_263.py'
       - 'experiments/263/sabah_postmatch_inputs/*/*.json'
+      - 'research/opponent_goals/prospective_goal_error_attribution_263.py'
+      - 'research/opponent_goals/test_prospective_goal_error_attribution_263.py'
       - '.github/workflows/263-sabah-new100-postmatch-readonly.yml'
 permissions:
   contents: read
@@ -36,6 +38,23 @@ jobs:
           python experiments/263/sabah_postmatch_new100_263.py \
             --out /tmp/263-new100-research-postmatch.json \
             --mobile /tmp/263-new100-mobile-postmatch.md
+      - name: Validate future-day only goal-error attribution and old-seal isolation
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263:research/opponent_goals
+        run: |
+          set -euo pipefail
+          python -m unittest -v research/opponent_goals/test_prospective_goal_error_attribution_263.py
+      - name: Calculate new dated M4 goal mean, KG and over-2.5 residuals read-only
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263:research/opponent_goals
+        run: |
+          set -euo pipefail
+          python research/opponent_goals/prospective_goal_error_attribution_263.py \
+            --out /tmp/263-prospective-goal-error-attribution.json
+          git diff --quiet
+          git diff --cached --quiet
       - name: Upload read-only outcome evidence; no forecast or result editing
         if: always()
         uses: actions/upload-artifact@v4
@@ -46,3 +65,4 @@ jobs:
           path: |
             /tmp/263-new100-research-postmatch.json
             /tmp/263-new100-mobile-postmatch.md
+            /tmp/263-prospective-goal-error-attribution.json
