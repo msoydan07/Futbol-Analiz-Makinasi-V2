@@ -207,7 +207,14 @@ def lookup(league,home,away):
      status=response.status if response else None
      body=""
      if status==200:
-      page.wait_for_timeout(3500)
+      if league=="POR1":
+       # Dynamic calendar can initially show only date headings; wait for a
+       # rendered kickoff clock instead of treating hydration as no fixtures.
+       # Fail closed if never loaded; do not invent a match.
+       try:page.wait_for_function(r"() => /\b\d{1,2}h\d{2}\b/i.test(document.body.innerText)",timeout=12000)
+       except Exception:pass
+      else:
+       page.wait_for_timeout(3500)
       body=page.locator("body").inner_text(timeout=10000)
      lines=[x.strip() for x in body.splitlines() if x.strip()]
      hits=extract(league,lines,home,away,now) if status==200 else []
