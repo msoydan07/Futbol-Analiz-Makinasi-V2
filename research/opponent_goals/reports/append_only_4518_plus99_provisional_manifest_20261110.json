@@ -1,0 +1,61 @@
+{
+  "accepted_history_altered": false,
+  "candidate_99_scores_match_public_score_ledgers": true,
+  "candidate_rows": 99,
+  "existing_seals_or_calibration_altered": false,
+  "limitations": [
+    "The reconstructed shadow is NOT uploaded to GitHub or production as an accepted dataset",
+    "99 newly staged source rows came from existing unverified Tuesday regenerated provider CSV",
+    "League/date/teams/score concordance with a web public score ledger is not federation game-ID attestation",
+    "9 previously accepted ENG2 scores originally had non-provider research provenance, so silent staged stats additions are held",
+    "Old 4518 row dictionaries are exactly preserved but CSV overall has a NEW SHA because it includes 99 extra rows",
+    "No live provider access or source redistribution; no new independent blind performance evidence"
+  ],
+  "new_99_provider_source_independently_verified": false,
+  "next_gate": "Independent official fixture-ID and rights check; separately review 9 ENG2 old-row half-time/shot/source changes without overwriting immutable old records.",
+  "nine_old_changed_rows_league_counts": {
+    "ENG2": 9
+  },
+  "nine_old_source_hosts": {
+    "www.soccerway.com": 9
+  },
+  "nine_stage_source_hosts": {
+    "www.football-data.co.uk": 9
+  },
+  "observed_tuesday_stage_sha256": "7f005d88465fa742354854a0459f06fbb17efe9fbb648e26a18844d0f7753958",
+  "old_nine_nonempty_fields_before": {
+    "away_corners": 0,
+    "away_shots": 0,
+    "away_shots_on_target": 0,
+    "away_yellow_cards": 0,
+    "half_time_away_goals": 0,
+    "half_time_home_goals": 0,
+    "home_corners": 0,
+    "home_shots": 0,
+    "home_shots_on_target": 0,
+    "home_yellow_cards": 0
+  },
+  "old_nine_nonempty_fields_in_candidate_stage_NOT_ADOPTED": {
+    "away_corners": 9,
+    "away_shots": 9,
+    "away_shots_on_target": 9,
+    "away_yellow_cards": 9,
+    "half_time_away_goals": 9,
+    "half_time_home_goals": 9,
+    "home_corners": 9,
+    "home_shots": 9,
+    "home_shots_on_target": 9,
+    "home_yellow_cards": 9
+  },
+  "original_accepted_rows_unchanged": 4518,
+  "original_old_nine_records_not_overwritten": 9,
+  "per_fixture_federation_id_verified": false,
+  "research_shadow_serialized_sha256": "6e7d6c4b74babe985132f4d73df142b70ef6a90e4cf34517df9546507248ecde",
+  "schema": "263_SAFE_APPEND_ONLY_4518_PLUS_99_SHADOW_RESEARCH_V1",
+  "shadow_rows": 4617,
+  "shadow_written_outside_git": true,
+  "snapshot_base_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "status": "SHADOW_STAGED_WITH_ORIGINAL_4518_UNCHANGED_NOT_ACCEPTED",
+  "train_or_calibrate_M4_with_shadow": false,
+  "usage_rights_verified": false
+}
