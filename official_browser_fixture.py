@@ -170,7 +170,7 @@ def discover(league, lines, now):
            "mfc":"Moreirense FC","rafc":"Rio Ave FC","fca":"FC Arouca",
            "alv":"FC Alverca","cpac":"Casa Pia AC","cfea":"Estrela Amadora"}
   day=re.compile(r"(?:seg|ter|qua|qui|sex|s[aá]b|dom)\.?\s*\d{1,2}\s+(?:jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\b",re.I)
-  time=re.compile(r"\d{1,2}h\d{2}")
+  time=re.compile(r"\d{1,2}h\d{2}",re.I)
   for i,line in enumerate(lines):
    if not day.search(line):continue
    end=next((k for k in range(i+1,len(lines)) if day.search(lines[k])),len(lines))
