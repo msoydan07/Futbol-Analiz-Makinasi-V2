@@ -61,5 +61,23 @@ class TestThreeLeagueDiscovery(unittest.TestCase):
         lines = ["Dom. 29 Nov", "FCP", "Seg. 30 Nov", "20H30", "SCP"]
         self.assertEqual(discover("POR1", lines, asof), [])
 
+
+    def test_portugal_neighbouring_match_cannot_steal_clubs(self):
+        asof = datetime(2026, 11, 24, tzinfo=timezone.utc)
+        lines = ["Dom. 29 Nov", "J12", "EPF", "18H00", "GVFC",
+                 "FCP", "20H30", "SCP"]
+        self.assertEqual(discover("POR1", lines, asof),
+                         [("Estoril Praia", "Gil Vicente FC"),
+                          ("FC Porto", "Sporting CP")])
+        self.assertNotIn(("Estoril Praia", "Sporting CP"),
+                         discover("POR1", lines, asof))
+
+    def test_portugal_unrelated_time_cannot_cross_a_club(self):
+        asof = datetime(2026, 11, 24, tzinfo=timezone.utc)
+        lines = ["Dom. 29 Nov", "EPF", "18H00", "unrelated",
+                 "FCP", "20H30", "SCP"]
+        self.assertEqual(discover("POR1", lines, asof),
+                         [("FC Porto", "Sporting CP")])
+
 if __name__ == "__main__":
     unittest.main()

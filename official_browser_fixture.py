@@ -100,15 +100,15 @@ def extract(league,lines,home,away,now):
    # Do not borrow a kickoff or team from the following match-day card.
    next_day=next((k for k in range(i+1,len(lines)) if dp.search(lines[k])),len(lines))
    context=lines[i+1:next_day]
-   for j,x in enumerate(context):
-    if norm(x) not in h:continue
-    for k in range(j+1,min(j+7,len(context))):
-     tm=tp.fullmatch(context[k])
-     if not tm:continue
-     if any(norm(y) in a for y in context[k+1:k+5]):
-      year=now.year+(1 if now.month==12 and months[dm.group(2).lower()]<=2 else 0)
-      local=datetime(year,months[dm.group(2).lower()],int(dm.group(1)),int(tm.group(1)),int(tm.group(2)),tzinfo=ZoneInfo("Europe/Lisbon"))
-      matches.append(local.astimezone(timezone.utc))
+   for j in range(len(context)-2):
+    # A game is one unbroken HOME / CLOCK / AWAY triplet.
+    # Never borrow the previous fixture's home club for the next kickoff.
+    if norm(context[j]) not in h or norm(context[j+2]) not in a:continue
+    tm=tp.fullmatch(context[j+1])
+    if tm is None:continue
+    year=now.year+(1 if now.month==12 and months[dm.group(2).lower()]<=2 else 0)
+    local=datetime(year,months[dm.group(2).lower()],int(dm.group(1)),int(tm.group(1)),int(tm.group(2)),tzinfo=ZoneInfo("Europe/Lisbon"))
+    matches.append(local.astimezone(timezone.utc))
  elif league=="ENG2":
   matches.extend(k for h,a,k in _efl_championship_competition_cards(lines)
                  if norm(h)==norm(home) and norm(a)==norm(away))
@@ -175,14 +175,11 @@ def discover(league, lines, now):
    if not day.search(line):continue
    end=next((k for k in range(i+1,len(lines)) if day.search(lines[k])),len(lines))
    block=lines[i+1:end]
-   for j,x in enumerate(block):
-    home=aliases.get(norm(x))
-    if not home:continue
-    for k in range(j+1,min(j+7,len(block))):
-     if not time.fullmatch(block[k]):continue
-     for y in block[k+1:k+5]:
-      away=aliases.get(norm(y))
-      if away and away!=home:found.append((home,away))
+   for j in range(len(block)-2):
+    home=aliases.get(norm(block[j]))
+    away=aliases.get(norm(block[j+2]))
+    if home and away and away!=home and time.fullmatch(block[j+1]):
+     found.append((home,away))
  elif league=="BEL1":
   # Belgium official cards have home, clock, date, away on adjacent lines.
   day=re.compile(r"^(?:lun|mar|mer|jeu|ven|sam|dim|ma|di|wo|do|vr|za|zo)\.\s*\d{1,2}\s+(?:oct|nov|okt)\.$",re.I)
