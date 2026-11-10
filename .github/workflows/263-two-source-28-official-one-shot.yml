@@ -1,0 +1,45 @@
+name: "263 second and FINAL weekly supplier light pull - 28 official score comparison"
+on:
+  push:
+    branches: [research/263-official-score-reconcile-20261110]
+    paths:
+      - 'research/opponent_goals/source_round_reconcile.py'
+      - 'research/opponent_goals/test_source_round_reconcile.py'
+      - '.github/workflows/263-two-source-28-official-one-shot.yml'
+permissions:
+  contents: write
+concurrency:
+  group: 263-final-weekly-20261110-source-access
+  cancel-in-progress: false
+jobs:
+  one_time_score_concordance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Strict prevent second-rerun after result committed
+        shell: bash
+        run: |
+          git fetch origin research/263-official-score-reconcile-20261110 --quiet
+          if git cat-file -e origin/research/263-official-score-reconcile-20261110:research/opponent_goals/reports/official_round_score_concordance_20261110.json 2>/dev/null; then
+            echo "SOURCE_ALREADY_DOWNLOADED_AND_REPORTED_NO_REPEAT"; exit 1
+          fi
+      - name: Offline association score, source mapping and mismatch adversarial tests
+        run: python research/opponent_goals/test_source_round_reconcile.py
+      - name: Second and final one-shot supplier light download this week
+        run: |
+          python research/opponent_goals/source_round_reconcile.py \
+            --root . \
+            --out research/opponent_goals/reports/official_round_score_concordance_20261110.json
+      - name: Archive independent source evidence only - no raw supplier file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/opponent_goals/reports/official_round_score_concordance_20261110.json
+          git commit -m "Research: 28 federation scoreboard comparisons and 99 candidate triage [skip ci]"
+          git push origin HEAD:research/263-official-score-reconcile-20261110
