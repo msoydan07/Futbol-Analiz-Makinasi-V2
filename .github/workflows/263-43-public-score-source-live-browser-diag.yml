@@ -4,8 +4,6 @@ on:
     branches: [experiment/263-toplu-karsilastirma]
     paths:
       - 'experiments/263/browser_verify_primary43_263.py'
-      - 'data/results_only_263/43_primary_public_score_review_20261110.json'
-      - '.github/workflows/263-43-public-score-source-live-browser-diag.yml'
 permissions:
   contents: read
 jobs:

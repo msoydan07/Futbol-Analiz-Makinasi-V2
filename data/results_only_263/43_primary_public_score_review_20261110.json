@@ -11,7 +11,7 @@
   "score_conflicts_with_existing_completed_99": 0,
   "network_fetched_live_by_ci": false,
   "all_43_official_provider_unique_match_ids_verified": false,
-  "all_43_1st_party_exact_score_attested": true,
+  "all_43_1st_party_exact_score_attested": false,
   "model_training_input_changed": false,
   "old_4518_records_changed": false,
   "records": [
@@ -708,7 +708,16 @@
     "Manual public web review of source pages, URLs and match narratives as of November 10. GitHub CI checks link domains and immutable score joins, NOT live webpage contents.",
     "Direct league/club URLs for all 43; publication links are source evidence; this is not a claim of independent provider API attestations.",
     "Do not rewrite 99 immutable result facts, 4617 history file, existing pre-KO sealed forecasts, or official odds data.",
-    "EFL news article body is sometimes JS-rendered and may not expose full embedded results to text crawlers; official match identity not independently attested in CI"
+    "EFL news article body is sometimes JS-rendered and may not expose full embedded results to text crawlers; official match identity not independently attested in CI",
+    "10 Nov browser check detected explicit score-plus-club text for 22/43, while 12 pages did not expose strict paired score text and 9 ProLeague pages returned HTTP 403; do NOT call 43/43 independently machine verified."
   ],
-  "notes_20261110_research_recheck": "Multiple publisher-score pages originally accessible but text-only truncated; replaced select ENG2 with official primary club FT report URLs from direct club sites. No factual score changes."
+  "notes_20261110_research_recheck": "Multiple publisher-score pages originally accessible but text-only truncated; replaced select ENG2 with official primary club FT report URLs from direct club sites. No factual score changes.",
+  "live_browser_score_evidence_retrieved": true,
+  "live_browser_latest_run_url": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42823832547",
+  "live_browser_latest_counts": {
+    "EXACT_SCORE_AND_TEAMS_IN_VISIBLE_BODY": 22,
+    "PAGE_READABLE_NO_PAIRWISE_EXPLICIT_SCORE": 12,
+    "HTTP_ERROR": 9
+  },
+  "independently_verified_43_of_43_live_webpage_score_body": false
 }
