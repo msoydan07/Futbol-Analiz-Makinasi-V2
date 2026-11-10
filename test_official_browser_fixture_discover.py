@@ -33,5 +33,33 @@ class TestThreeLeagueDiscovery(unittest.TestCase):
                  "Blackburn Rovers v Stoke City (19:45)"]
         self.assertEqual(discover("ENG2", lines, NOW), [])
 
+
+    def test_efl_official_competition_card_next_matchday(self):
+        asof = datetime(2026, 11, 18, tzinfo=timezone.utc)
+        lines = ["EFL Championship", "Sync Fixtures", "Fixtures", "All Fixtures",
+                 "Sat 21 Nov 2026", "12:30 KO", "Millwall",
+                 "Queens Park Rangers", "Sat 21 Nov 2026", "15:00 KO",
+                 "Stoke City", "Birmingham City", "League Table"]
+        self.assertEqual(discover("ENG2", lines, asof),
+                         [("Millwall", "Queens Park Rangers"),
+                          ("Stoke City", "Birmingham City")])
+
+    def test_efl_lookalike_not_competition_proven(self):
+        asof = datetime(2026, 11, 18, tzinfo=timezone.utc)
+        lines = ["EFL League One", "Sync Fixtures", "All Fixtures",
+                 "Sat 21 Nov 2026", "12:30 KO", "Millwall", "Queens Park Rangers"]
+        self.assertEqual(discover("ENG2", lines, asof), [])
+
+    def test_portugal_long_day_card_was_truncated(self):
+        asof = datetime(2026, 11, 24, tzinfo=timezone.utc)
+        lines = ["Dom. 29 Nov", "J12"] + ["UI filler"] * 24 + [
+            "FCP", "20H30", "SCP", "Seg. 30 Nov", "J12"]
+        self.assertEqual(discover("POR1", lines, asof), [("FC Porto", "Sporting CP")])
+
+    def test_portugal_never_borrow_from_next_day(self):
+        asof = datetime(2026, 11, 24, tzinfo=timezone.utc)
+        lines = ["Dom. 29 Nov", "FCP", "Seg. 30 Nov", "20H30", "SCP"]
+        self.assertEqual(discover("POR1", lines, asof), [])
+
 if __name__ == "__main__":
     unittest.main()

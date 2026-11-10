@@ -13,6 +13,41 @@ SOURCES={
 def norm(s):
  s=unicodedata.normalize("NFKD",s.casefold())
  return "".join(c for c in s if c.isalnum() and not unicodedata.combining(c))
+
+def _efl_championship_competition_cards(lines):
+ """Official /competitions/efl-championship/ fixture cards, not match-centre filters.
+ Require the competition-specific heading and sections before trusting KO rows.
+ """
+ if not ("EFL Championship" in lines and "Sync Fixtures" in lines and "All Fixtures" in lines):
+  return []
+ months={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
+ day_re=re.compile(r"^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+(\d{1,2})\s+([A-Za-z]{3})\s+(20\d{2})$",re.I)
+ time_re=re.compile(r"^(\d{1,2}):([0-5]\d)\s+KO$",re.I)
+ start=lines.index("All Fixtures")+1
+ current_date=None; found=[]
+ for i in range(start,len(lines)):
+  line=lines[i]
+  if line in ("League Table","Competition Stats","News","Key dates"):
+   break
+  dm=day_re.fullmatch(line)
+  if dm:
+   month=months.get(dm.group(2).lower())
+   try: current_date=datetime(int(dm.group(3)),month,int(dm.group(1))).date() if month else None
+   except ValueError: current_date=None
+   continue
+  tm=time_re.fullmatch(line)
+  if current_date is None or tm is None or i+2>=len(lines):
+   continue
+  h,a=lines[i+1].strip(),lines[i+2].strip()
+  if not (2<len(h)<90 and 2<len(a)<90 and any(c.isalpha() for c in h+a)
+          and h!=a and not day_re.fullmatch(h) and not day_re.fullmatch(a)
+          and not time_re.fullmatch(h) and not time_re.fullmatch(a)):
+   continue
+  local=datetime(current_date.year,current_date.month,current_date.day,
+                 int(tm.group(1)),int(tm.group(2)),tzinfo=ZoneInfo("Europe/London"))
+  found.append((h,a,local.astimezone(timezone.utc)))
+ return sorted(set(found),key=lambda x:(x[2],x[0],x[1]))
+
 def extract(league,lines,home,away,now):
  matches=[]
  if league=="BEL1":
@@ -64,7 +99,7 @@ def extract(league,lines,home,away,now):
    if not dm:continue
    # Do not borrow a kickoff or team from the following match-day card.
    next_day=next((k for k in range(i+1,len(lines)) if dp.search(lines[k])),len(lines))
-   context=lines[i+1:min(i+17,next_day)]
+   context=lines[i+1:next_day]
    for j,x in enumerate(context):
     if norm(x) not in h:continue
     for k in range(j+1,min(j+7,len(context))):
@@ -75,6 +110,8 @@ def extract(league,lines,home,away,now):
       local=datetime(year,months[dm.group(2).lower()],int(dm.group(1)),int(tm.group(1)),int(tm.group(2)),tzinfo=ZoneInfo("Europe/Lisbon"))
       matches.append(local.astimezone(timezone.utc))
  elif league=="ENG2":
+  matches.extend(k for h,a,k in _efl_championship_competition_cards(lines)
+                 if norm(h)==norm(home) and norm(a)==norm(away))
   # Official EFL match centre: date heading followed by home, kickoff, away.
   months={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
   datepat=re.compile(r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)$",re.I)
@@ -109,6 +146,7 @@ def discover(league, lines, now):
  """Discover real upcoming fixture pairings from visible official cards; never fabricate teams."""
  found=[]
  if league=="ENG2":
+  found.extend((h,a) for h,a,_ in _efl_championship_competition_cards(lines))
   months={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
   datepat=re.compile(r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)$",re.I)
   matchpat=re.compile(r"^(.+?)\s+v\s+(.+?)\s+\((\d{1,2}:\d{2})\)$",re.I)
@@ -136,7 +174,7 @@ def discover(league, lines, now):
   for i,line in enumerate(lines):
    if not day.search(line):continue
    end=next((k for k in range(i+1,len(lines)) if day.search(lines[k])),len(lines))
-   block=lines[i+1:min(i+25,end)]
+   block=lines[i+1:end]
    for j,x in enumerate(block):
     home=aliases.get(norm(x))
     if not home:continue
@@ -156,7 +194,7 @@ def discover(league, lines, now):
  return sorted(set((h,a) for h,a in found if len(h)>2 and len(a)>2 and len(h)<90 and len(a)<90
                     and len([t for t in extract(league,lines,h,a,now) if now<=t<=now+timedelta(days=7)])==1))
 
-FALLBACK_SOURCES={"BEL1":["https://kvmechelen.be/kalenderupdatesept/","https://www.krcgenk.be/en","https://www.proleague.be/nl/jpl-calendar"]}
+FALLBACK_SOURCES={"BEL1":["https://kvmechelen.be/kalenderupdatesept/","https://www.krcgenk.be/en","https://www.proleague.be/nl/jpl-calendar"],\n "ENG2":["https://www.efl.com/competitions/efl-championship/"]}
 def lookup(league,home,away):
  from playwright.sync_api import sync_playwright
  now=datetime.now(timezone.utc);url=SOURCES[league]
