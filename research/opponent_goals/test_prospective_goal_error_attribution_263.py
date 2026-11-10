@@ -82,14 +82,18 @@ class ProspectiveGoalAttributionTests(unittest.TestCase):
             rp.write_text(json.dumps(result),encoding="utf-8")
         return forecast,p,result,rp
 
-    def test_current_repository_really_has_zero_new_day_seals_not_synthetic_claim(self):
-        r=attribution_report(ROOT,now=NOW)
-        self.assertEqual(r["registered_new_day_sealed_forecasts"],0)
-        self.assertEqual(r["eligible_finished_reviewed_results"],0)
-        self.assertEqual(r["distinct_new_match_dates"],0)
+    def test_current_repository_never_replays_old_46_and_adapts_to_new_scores(self):
+        # Real repo can grow after 11 Nov. Do NOT pin "zero fixtures" forever.
+        r=attribution_report(ROOT,now=datetime.now(timezone.utc))
         self.assertTrue(r["no_nov6_7_8_reevaluation"])
-        self.assertIsNone(r["diagnostics"]["btts_residual"]["mean"])
+        self.assertGreaterEqual(r["registered_new_day_sealed_forecasts"],0)
+        self.assertLessEqual(r["eligible_finished_reviewed_results"],
+                             r["registered_new_day_sealed_forecasts"])
+        self.assertTrue(all(d>="2026-11-09" for d in r["observed_match_dates"]))
         self.assertFalse(r["automatic_model_promotion"])
+        self.assertFalse(r["betting_authorized"])
+        if r["eligible_finished_reviewed_results"]==0:
+            self.assertIsNone(r["diagnostics"]["btts_residual"]["mean"])
 
     def test_older_invalid_prediction_not_opened_or_re_evaluated(self):
         old=self.root/"forward_morning_263/2026-11-08/a.json"
