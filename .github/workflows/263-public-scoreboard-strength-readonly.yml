@@ -1,0 +1,40 @@
+name: "263 public scoreboard expansion and team strength proxy one-shot"
+on:
+  push:
+    branches:
+      - research/263-public-scoreboard-expansion-20261110
+    paths:
+      - 'research/opponent_goals/public_scoreboard_provenance_audit.py'
+      - 'research/opponent_goals/strength_conditioned_team_profile.py'
+      - 'research/opponent_goals/test_public_scoreboard_and_strength.py'
+      - '.github/workflows/263-public-scoreboard-strength-readonly.yml'
+permissions:
+  contents: write
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check 56 evidence records, 28 matched and 28 independent public, without supplier access
+        run: |
+          python research/opponent_goals/test_public_scoreboard_and_strength.py
+      - name: Compute team past-only matchup data sufficiency report
+        run: |
+          python research/opponent_goals/public_scoreboard_provenance_audit.py \
+            --out research/opponent_goals/reports/official_public_evidence_layers_20261110.json
+          python research/opponent_goals/strength_conditioned_team_profile.py \
+            --out research/opponent_goals/reports/team_opponent_strength_20261110.json
+      - name: Save only research-only reports; do not trigger another 10 league upstream data download
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/opponent_goals/reports/official_public_evidence_layers_20261110.json research/opponent_goals/reports/team_opponent_strength_20261110.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Research: evidence tiers and honest opponent-strength sample-size report [skip ci]"
+          git push origin HEAD:research/263-public-scoreboard-expansion-20261110
