@@ -1,0 +1,44 @@
+{
+  "schema": "263_NOV7_PUBLIC_PRIMARY_SCORE_RESEARCH_ONLY_V1",
+  "day": "2026-11-07",
+  "reviewed_public_web_on": "2026-11-10",
+  "cohort": "acceptance3_NOT_new100",
+  "source_checks_in_github_ci": false,
+  "production_result_attestation": false,
+  "observations": [
+    {
+      "league": "ESP1",
+      "home": "Valencia",
+      "away": "Real Madrid",
+      "home_goals": 0,
+      "away_goals": 3,
+      "source_type": "OFFICIAL_LEAGUE",
+      "source_url": "https://www.laliga.com/en-IN/match/temporada-2026-2027-laliga-ea-sports-valencia-cf-real-madrid-12"
+    },
+    {
+      "league": "ENG1",
+      "home": "Arsenal",
+      "away": "Hull City",
+      "home_goals": 1,
+      "away_goals": 0,
+      "source_type": "OFFICIAL_LEAGUE",
+      "source_url": "https://www.premierleague.com/es/news/4757016/what-we-learned-from-saturdays-premier-league-matches"
+    },
+    {
+      "league": "TUR1",
+      "home": "Samsunspor",
+      "away": "Konyaspor",
+      "home_goals": 1,
+      "away_goals": 0,
+      "source_type": "OFFICIAL_CLUB",
+      "source_url": "https://konyaspor.org.tr/haber/samsunspor-1-0-tumosan-konyasporumuz3829"
+    }
+  ],
+  "limitations": [
+    "These three acceptance3 forecasts were sealed on 7 Nov; they are not the independent new100 prospective cohort",
+    "Public primary-page source reviewed externally, but CI only checks file integrity and does not independently fetch the URLs",
+    "Do not merge with 39 matches on 8 Nov as a single forward-calibration certificate",
+    "Only 3 matches; no confidence interval or per-probability-bin skill claims or M4 refit",
+    "No results or predictions added to M4 training, accepted postmatch, or official-result store"
+  ]
+}
