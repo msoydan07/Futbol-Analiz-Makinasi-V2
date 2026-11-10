@@ -47,6 +47,18 @@ class New100Tests(unittest.TestCase):
         self.assertEqual(receipt["bookmaker_api_calls"],0)
         self.assertFalse(Path("forward_quad_263").exists())
         self.assertFalse(Path("forward_acceptance_263").exists())
+    def test_legacy_mock_provenance_inconsistent_label_is_rejected(self):
+        r,rep,mobile=self.bundle()
+        first=Path(r["outcomes"][0]["forecast_path"])
+        obj=json.loads(first.read_text(encoding="utf-8"))
+        obj["data"]["human_source_acceptance"]=False
+        obj["payload_sha256"]=sha({k:v for k,v in obj.items() if k!="payload_sha256"})
+        first.write_text(json.dumps(obj),encoding="utf-8")
+        # The SHA receipt must reject changed content; a label mismatch must
+        # not be reclassified into the 4617 source grade.
+        with self.assertRaises((PilotBlocked,ValueError)):
+            verify(rep,mobile,now=NOW+timedelta(minutes=1))
+
     def test_no_mobile_mutation(self):
         r,rep,mobile=self.bundle()
         (mobile/"summary.md").write_text("unproven sure-win forecast",encoding="utf-8")

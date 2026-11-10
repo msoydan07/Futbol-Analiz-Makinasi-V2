@@ -26,7 +26,7 @@ def produce(forecast, history_path, *, now=None):
     status=data.get("snapshot_acceptance")
     if status not in ("APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED",
                       "APPEND_ONLY_4617_PUBLIC_RESULTS_ONLY_RESEARCH_NOT_OFFICIAL_ID_VERIFIED"):
-        raise ValueError("SOURCE_GRADE_NOT_PERMITTED")
+        raise ValueError("UPDATED_SOURCE_NOT_HUMAN_ACCEPTED")
     if (data.get("human_source_acceptance") is not (status=="APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED")
         or data.get("research_shadow_unverified_source") is not False):
         raise ValueError("SOURCE_ACCEPTANCE_LABEL_MISMATCH")

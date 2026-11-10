@@ -29,7 +29,8 @@ def fake_predict(g,history,out_dir,lock,now=None,base=None,source_audit=None):
                   "kickoff_utc":g["kickoff_utc"],"match_local_date":"2026-11-07",
                   "official_source":g["source_url"],
                   "fixture_verification":"VERIFIED_BY_LIVE_OFFICIAL_GATE"},
-       "data":{"snapshot_acceptance":"APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED"},
+       "data":{"snapshot_acceptance":"APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED",
+               "human_source_acceptance":True,"research_shadow_unverified_source":False},
        "model_predictions":{m:{"status":"AVAILABLE","goals":{"markets":raw}} for m in ("B","C2","C3","M4")}}
     # One diagnostic-only B model has insufficient historical context,
     # exactly as in the live Arsenal / Hull test. No imputation.

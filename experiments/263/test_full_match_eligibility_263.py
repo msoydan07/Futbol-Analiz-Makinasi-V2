@@ -36,10 +36,10 @@ class FullMatchEligibilityAcceptance(unittest.TestCase):
             writer.writeheader();writer.writerows(entries)
         return path,entries
 
-    def test_existing_staged_4501_retains_awarded_score_but_excludes_training(self):
+    def test_existing_staged_4617_retains_awarded_score_but_excludes_training(self):
         with (ROOT/"data/staged_263/extended_history.csv").open(encoding="utf-8-sig",newline="") as handle:
             source=list(csv.DictReader(handle))
-        self.assertEqual(len(source),4501)
+        self.assertEqual(len(source),4617)
         original=[r for r in source if r["fixture_id"]==EXCEPTION_ID]
         self.assertEqual(len(original),1)
         self.assertEqual((original[0]["home_goals"],original[0]["away_goals"]),("4","0"))
@@ -48,7 +48,7 @@ class FullMatchEligibilityAcceptance(unittest.TestCase):
         self.assertEqual(excluded,[EXCEPTION_ID])
         self.assertEqual(len(eligible),len(subset)-1)
         self.assertEqual(digest,hashlib.sha256(POLICY_PATH.read_bytes()).hexdigest())
-        self.assertEqual(len(source),4501)
+        self.assertEqual(len(source),4617)
 
     def test_tampered_exception_score_blocks(self):
         row={"fixture_id":EXCEPTION_ID,"league":"NED1","match_date":"2026-10-31",
