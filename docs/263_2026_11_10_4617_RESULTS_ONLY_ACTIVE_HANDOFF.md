@@ -25,6 +25,22 @@ Bu yükseltme **araştırma kullanımına** alınmıştır, bütün 99 maçın r
 - İş akışları `263-sabah-new100-on-request.yml` ve `263-quad-forward-on-request.yml` yeni dosya ve kaynağı okuyor.
 - Dal devri 10 Kasım 2026'da `experiment/263-toplu-karsilastirma` üzerine ileri yönlü (fast-forward) yapıldı. O sıradaki dal SHA `b93c2f6825afcfed7c82b112a5ddc5159a6c53c9`. `main` değiştirilmedi.
 
+## Son kalite kapanışı — 10 Kasım 2026, 10 lig
+
+**Tamamlanan ve GitHub Actions ile doğrulanan işler:**
+
+- [10 ligin tamamında 4.617 satırlık gerçek sonuç verisiyle M4/B/C2/C3 hesapları, tarih-kesit, MS/KG/1,5/2,5/3,5 olasılıkları ve araştırma PAS güvenlik testi: 9/9](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42819330391) — SUCCESS.
+- [Sabah entegrasyonu ve mobil SHA mührü 223/223](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42818789654) — SUCCESS.
+- [Normal süreden önce bitip hükmen tescil edilen maçın 90 dakika modellerinden çıkarılması 25/25](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42818789879) — SUCCESS.
+- [Empirik baz oran ve önceki kaynak zinciri: bütün test grupları](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42818789763) — SUCCESS.
+- Testten önceki iki kırmızı CI koşusu, eski 4.501 satırlık test varsayımı ve sentetik kayıtta eksik kaynak bayrağı nedeniyle oluşmuştu. Test girdileri gerçek 4.617 arşiv ve bugünkü kabul etiketleriyle uyumlu hâle getirildi; **üretim kabul kapıları gevşetilmedi**.
+- En son kapsamlı CI, `m4_integrated.py`, `m4_lock.json`, eski 4.518 dosyası ve `forward_quad_263`, `forward_morning_263`, `forward_acceptance_263` ağaçlarını eski Git SHA ile birebir karşılaştırdı: **aynı**.
+- Özgün 4.413 temel, 4.518 kabul edilmiş tarihçe, 4.617 sonuç dosyasının üç SHA'sı tekrar doğrulandı.
+
+**Tamamlanan işin sınırı:** İş akışını 10 ligin tamamında gerçek sonuçlarla model hesaplayacak şekilde kanıtladık; testlerde kullanılan **fikstür geçidi sentetiktir**. Yeni bir gerçek maç için bağımsız resmî fikstür sayfası doğrulaması ve maç önü gerçek SHA mührü **henüz yapılmadı**; istenen gerçek maç gelmeden uydurulmamalı. 99 sonucun 43'ü ikincil kaynaklı araştırma kanıtına dayanır; tekil federasyon maç ID kanıtı yok. Bu iki açıklık modelin tahmin/başarı kanıtı gibi gösterilemez.
+
+**Sonraki tek işlem:** Gelecek **gerçek, başlamamış** kapsam maçı için sabah model koşusu (4.617 araştırma kaynağı, resmî fixture gate, yeni SHA mührü) ve daha sonra maç sonrası karşılaştırma. **Eski 99 maçın yeniden aranması veya M4 parametrelerinin değiştirilmesi gerekmiyor.**
+
 ## Tek sonraki iş
 
 Yeni gerçek bir maç geldiğinde **resmî canlı fikstürü önce doğrula**, 4.617 kaynakla gerçek maç öncesi sabah tahmini üret ve SHA mühürle; sonuçtan sonra aynı mührü gerçek sonuçla kıyasla. **Yeni 99 maç için aynı kaynak araştırmalarını yeniden başlatma.** Gelecekteki 99'luk veya başka sonuç gruplarını arşive eklerken ayrı kanıt sınıflarını koru; model formüllerini kör pilot performansı olmadan değiştirme.
