@@ -125,5 +125,60 @@ class Active4617Input(unittest.TestCase):
             self.assertIsNone(decision["main_candidate"])
             self.assertEqual(decision["forecast_sha256"],forecast["payload_sha256"])
 
+
+    def test_complete_new100_morning_mobile_receipt_mock_only_not_real_fixture(self):
+        """Exercise the normal 4-model morning route with a test-only fake gate.
+
+        The dummy 'official' gate is never submitted as a user fixture and
+        its temporary predictions are deleted after this unit test.
+        """
+        import os
+        from sabah_batch_263 import run as morning_batch, sha as sealed_hash
+        from sabah_mobile_screens_263 import build as make_mobile
+        from sabah_new100_commit_guard_263 import verify as verify_receipt
+        now=self.cutoff
+        ids=sorted({r["home_id"] for r in self.new if r["league"]=="ENG1"})
+        home,away=ids[:2]
+        fake_gate={"status":"VERIFIED","league":"ENG1","home_id":home,"away_id":away,
+                   "kickoff_utc":"2026-11-11T17:00:00+00:00",
+                   "retrieved_at_utc":now.isoformat(),
+                   "source_url":"https://www.premierleague.com/en/fixtures"}
+        def test_only_lookup(league,h,a):
+            self.assertEqual(league,"ENG1")
+            self.assertEqual(h,"Test Home")
+            self.assertEqual(a,"Test Away")
+            return fake_gate
+        original_cwd=Path.cwd()
+        with tempfile.TemporaryDirectory() as temp:
+            try:
+                os.chdir(temp)
+                req=Path("new100_technical_mock.json")
+                req.write_text(json.dumps({
+                    "schema":"SABAH_TOPLU_V1","day_turkey":"2026-11-11",
+                    "matches":[{"league":"ENG1","home":"Test Home","away":"Test Away"}]
+                }),encoding="utf-8")
+                report=morning_batch(
+                    "new100","2026-11-11",req,NEW,BASE,PROVENANCE,M4LOCK,
+                    root=".",now=now,lookup=test_only_lookup,
+                    dev_lock_path=DEVLOCK)
+                self.assertEqual(report["new_forecasts"],1,report)
+                self.assertEqual(report["blocked"],0,report)
+                self.assertEqual(report["outcomes"][0]["decision_status"],"RESEARCH_PAS")
+                Path("experiments/263/sabah_batch_reports").mkdir(parents=True,exist_ok=True)
+                rp=Path("experiments/263/sabah_batch_reports/mock_only.json")
+                rp.write_text(json.dumps(report),encoding="utf-8")
+                md=Path("experiments/263/sabah_mobile_reports/test_mock")
+                (md/"matches").mkdir(parents=True,exist_ok=True)
+                summary,singles=make_mobile(Path("."),report)
+                (md/"summary.md").write_text(summary,encoding="utf-8")
+                for stem,panel in singles.items():
+                    (md/"matches"/(stem+".md")).write_text(panel,encoding="utf-8")
+                receipt=verify_receipt(rp,md,root=".",now=now)
+                self.assertEqual(receipt["new_count"],1)
+                self.assertTrue(receipt["mobile_sha_equal_to_seal"])
+                self.assertFalse(receipt["betting_authorized"])
+            finally:
+                os.chdir(original_cwd)
+
 if __name__=="__main__":
     unittest.main()
