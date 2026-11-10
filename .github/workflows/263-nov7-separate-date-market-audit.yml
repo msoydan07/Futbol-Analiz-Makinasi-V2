@@ -1,0 +1,32 @@
+name: "263 nov7 SHA research separate-date KG Over audit only"
+on:
+  push:
+    branches: [research/263-staged99-evidence-join-20261110]
+    paths:
+      - 'research/opponent_goals/nov7_primary_score_evidence_20261110.json'
+      - 'research/opponent_goals/nov7_sealed_date_block_263.py'
+      - 'research/opponent_goals/test_nov7_sealed_date_block_263.py'
+      - '.github/workflows/263-nov7-separate-date-market-audit.yml'
+permissions:
+  contents: read
+jobs:
+  nov7-sealed-research-no-refit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify original 7 Nov SHA seals, separate data cohorts, provenance gates
+        run: python -m unittest -v research/opponent_goals/test_nov7_sealed_date_block_263.py
+      - name: Produce separate research report (reference 8 Nov, do not rescore)
+        run: python research/opponent_goals/nov7_sealed_date_block_263.py --output /tmp/263_nov7_vs_nov8_separate_date_report.json
+      - name: Archive research output only, no official result promotion
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-Nov7-primary-page-research-separate-from-Nov8-not-attested
+          path: /tmp/263_nov7_vs_nov8_separate_date_report.json
+          retention-days: 30
+          if-no-files-found: warn
