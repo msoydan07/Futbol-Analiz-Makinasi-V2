@@ -1,0 +1,45 @@
+name: "263 opponent-strength BTTS O2.5 4617 frozen-math diagnostic"
+on:
+  push:
+    branches:
+      - research/263-opponent-goal-market-diagnostic-20261110
+    paths:
+      - 'research/opponent_goals/m4_opponent_market_4617_readonly.py'
+      - 'research/opponent_goals/test_m4_opponent_market_4617_readonly.py'
+      - '.github/workflows/263-opponent-goals-4617-exact-math-readonly-ci.yml'
+permissions:
+  contents: read
+jobs:
+  ten-league-opponent-strength-and-goal-probability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Numeric dependencies for pinned M4, unchanged
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Pin 4518 original and 4617 completed results-only history
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9  data/quad_accepted_263/extended_history.csv' | sha256sum -c -
+          echo '637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89  data/results_only_263/2026-11-10_completed_4617_scores_only.csv' | sha256sum -c -
+          echo 'eac755e54086738f40d7f30a514b2c9bb789b2c428ffef4ee70bb2fd2b49bc45  experiments/263/m4_integrated.py' | sha256sum -c -
+      - name: Five separate math-invariance tests including real 10 league M4 fits
+        env:
+          PYTHONPATH: .:experiments/263:research/opponent_goals
+        run: python -m unittest -v research/opponent_goals/test_m4_opponent_market_4617_readonly.py
+      - name: Produce 10 league read-only model decomposition artifact
+        env:
+          PYTHONPATH: .:experiments/263:research/opponent_goals
+        run: python research/opponent_goals/m4_opponent_market_4617_readonly.py --out /tmp/263_opponent_market_4617_explain.json
+      - name: Save reproducible 10 league math output without touching historical pilots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-opponent-goal-market-exact-math-10-league-4617-readonly
+          path: /tmp/263_opponent_market_4617_explain.json
+          if-no-files-found: warn
+          retention-days: 30
