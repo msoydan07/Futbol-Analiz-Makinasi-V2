@@ -70,7 +70,9 @@ def _checked_forecasts(root):
         kickoff=read_aware(fixture["kickoff_utc"])
         require(made<kickoff and checked<kickoff and checked<=made+timedelta(seconds=60),
                 "FORECAST_AFTER_KICKOFF_OR_UNTRUSTED_CLOCK")
-        require(made.date()>=START and kickoff.date()>=START,
+        # Scope by fixture's LOCAL calendar date, not UTC date of
+        # the source check: late UTC evening can already be next Turkey day.
+        require(date.fromisoformat(fixture["match_local_date"])>=START,
                 "PREVIOUS_WEEKEND_FORECAST_CANNOT_ENTER_NEW_DAYS")
         key=(fixture["league"],fixture["home_id"],fixture["away_id"],
              fixture["match_local_date"],fixture["kickoff_utc"])
