@@ -4,6 +4,7 @@ Never archives page bodies, updates prediction data, or guesses kickoff times.
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+import os
 from playwright.sync_api import sync_playwright
 from official_browser_fixture import SOURCES, FALLBACK_SOURCES, discover, extract
 
@@ -27,6 +28,9 @@ def run():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
         for league, urls in TARGETS.items():
+            selected=os.environ.get("LIVE_DIAGNOSTIC_LEAGUES", "")
+            if selected and league not in selected.split(","):
+                continue
             records = []
             for url in urls:
                 page = browser.new_page(locale="fr-BE" if league == "BEL1" else "en-GB")
@@ -36,6 +40,12 @@ def run():
                     rec["http_status"] = response.status if response else 0
                     if rec["http_status"] == 200:
                         page.wait_for_timeout(2200)
+                        if league == "POR1":
+                            try:
+                                page.wait_for_function(r"() => /\b\d{1,2}h\d{2}\b/i.test(document.body.innerText)", timeout=12000)
+                                rec["fixture_clock_rendered"] = True
+                            except Exception:
+                                rec["fixture_clock_rendered"] = False
                         body = page.locator("body").inner_text(timeout=15000)
                         lines = [x.strip() for x in body.splitlines() if x.strip()]
                         rec["visible_lines"] = len(lines)

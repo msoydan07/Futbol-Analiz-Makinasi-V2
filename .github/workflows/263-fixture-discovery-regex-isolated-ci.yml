@@ -31,6 +31,8 @@ jobs:
           python -m playwright install chromium
       - name: Read official pages once; classify no schedule versus not parseable
         run: python live_fixture_source_diagnostic_263.py
+        env:
+          LIVE_DIAGNOSTIC_LEAGUES: POR1
       - uses: actions/upload-artifact@v4
         if: always()
         with:
