@@ -119,6 +119,37 @@ class ProspectiveGoalAttributionTests(unittest.TestCase):
         self.assertEqual(r["triage_hypothesis_not_model_decision"],
                          "NEW_INDEPENDENT_DATES_INSUFFICIENT_FOR_DIAGNOSTIC_CI")
 
+    def test_dev_only_lambda_105_shadow_has_exact_paired_losses_and_never_edits_seal(self):
+        forecast,p,_,_=self.put(score=(2,1),lh=1.2,la=.8)
+        sealed_before=p.read_bytes()
+        report=attribution_report(self.root,now=NOW)
+        s=report["fixed_lambda_105_dev_candidate_shadow"]
+        self.assertEqual(s["same_match_new_day_n"],1)
+        self.assertTrue(s["no_pre_match_probability_changes"])
+        self.assertTrue(s["no_model_promotion"])
+        self.assertTrue(s["no_new_pilot"])
+        candidate=score_markets(1.2*1.05,.8*1.05)["markets"]
+        baseline=score_markets(1.2,.8)["markets"]
+        expected_kg=(candidate["BTTS_YES"]-1)**2-(baseline["BTTS_YES"]-1)**2
+        expected_o25=(candidate["OVER_2.5"]-1)**2-(baseline["OVER_2.5"]-1)**2
+        means=s["candidate_minus_original_lower_brier_is_better"]
+        self.assertAlmostEqual(means["candidate_minus_original_KG_Brier"]["mean"],expected_kg)
+        self.assertAlmostEqual(means["candidate_minus_original_O25_Brier"]["mean"],expected_o25)
+        self.assertIsNone(means["candidate_minus_original_KG_Brier"]["date_block_95pct_interval"])
+        self.assertEqual(p.read_bytes(),sealed_before)
+        self.assertEqual(report["per_match"][0]["forecast_sha256"],forecast["payload_sha256"])
+
+    def test_105_candidate_never_fills_out_of_range_expected_goals(self):
+        self.put(score=(1,0),lh=4.9,la=.8)
+        r=attribution_report(self.root,now=NOW)
+        self.assertEqual(r["eligible_finished_reviewed_results"],1)
+        self.assertIsNone(r["per_match"][0]["fixed_lambda_105_dev_candidate"])
+        s=r["fixed_lambda_105_dev_candidate_shadow"]
+        self.assertEqual(s["same_match_new_day_n"],0)
+        self.assertEqual(s["excluded_out_of_safe_lambda_range"],1)
+        self.assertIsNone(s["candidate_minus_original_lower_brier_is_better"]
+                          ["candidate_minus_original_MS_Brier"]["mean"])
+
     def test_pending_prediction_is_not_imputed_as_zero_score(self):
         self.put(with_result=False)
         r=attribution_report(self.root,now=NOW)
