@@ -1,0 +1,157 @@
+{
+  "accepted_history_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "all_teams_sample_sizes_per_league": {
+    "BEL1": 19,
+    "ENG1": 23,
+    "ENG2": 30,
+    "ESP1": 23,
+    "FRA1": 20,
+    "GER1": 21,
+    "ITA1": 23,
+    "NED1": 21,
+    "POR1": 20,
+    "TUR1": 21
+  },
+  "as_of_exclusive": "2026-11-10",
+  "example_besiktas": {
+    "AWAY": {
+      "opponent_150_plus": {
+        "avg_goals_allowed": null,
+        "avg_goals_scored": null,
+        "avg_points": null,
+        "btts_frequency": null,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 0,
+        "mean_historical_shot_share": null,
+        "n": 0,
+        "over_2_5_frequency": null,
+        "quality_flag": "TOO_FEW_FOR_OPPONENT_STYLE_OR_INDEPENDENT_PROBABILITY",
+        "shot_pair_coverage": 0
+      },
+      "opponent_50_to_150": {
+        "avg_goals_allowed": 1.0,
+        "avg_goals_scored": 2.0,
+        "avg_points": 3.0,
+        "btts_frequency": 1.0,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 1,
+        "mean_historical_shot_share": 0.6087,
+        "n": 1,
+        "over_2_5_frequency": 1.0,
+        "quality_flag": "TOO_FEW_FOR_OPPONENT_STYLE_OR_INDEPENDENT_PROBABILITY",
+        "shot_pair_coverage": 1
+      },
+      "similar_under_50": {
+        "avg_goals_allowed": 1.4545,
+        "avg_goals_scored": 1.5455,
+        "avg_points": 1.3636,
+        "btts_frequency": 0.4545,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 7,
+        "mean_historical_shot_share": 0.5173,
+        "n": 11,
+        "over_2_5_frequency": 0.4545,
+        "quality_flag": "DESCRIPTIVE_MIN_8_GAMES_ONLY_NOT_TACTICALLY_GROUNDED",
+        "shot_pair_coverage": 11
+      },
+      "team_150_plus": {
+        "avg_goals_allowed": null,
+        "avg_goals_scored": null,
+        "avg_points": null,
+        "btts_frequency": null,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 0,
+        "mean_historical_shot_share": null,
+        "n": 0,
+        "over_2_5_frequency": null,
+        "quality_flag": "TOO_FEW_FOR_OPPONENT_STYLE_OR_INDEPENDENT_PROBABILITY",
+        "shot_pair_coverage": 0
+      },
+      "team_50_to_150": {
+        "avg_goals_allowed": 1.2,
+        "avg_goals_scored": 1.6,
+        "avg_points": 1.5,
+        "btts_frequency": 0.5,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 9,
+        "mean_historical_shot_share": 0.5579,
+        "n": 10,
+        "over_2_5_frequency": 0.5,
+        "quality_flag": "DESCRIPTIVE_MIN_8_GAMES_ONLY_NOT_TACTICALLY_GROUNDED",
+        "shot_pair_coverage": 10
+      }
+    },
+    "HOME": {
+      "opponent_150_plus": {
+        "avg_goals_allowed": null,
+        "avg_goals_scored": null,
+        "avg_points": null,
+        "btts_frequency": null,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 0,
+        "mean_historical_shot_share": null,
+        "n": 0,
+        "over_2_5_frequency": null,
+        "quality_flag": "TOO_FEW_FOR_OPPONENT_STYLE_OR_INDEPENDENT_PROBABILITY",
+        "shot_pair_coverage": 0
+      },
+      "opponent_50_to_150": {
+        "avg_goals_allowed": null,
+        "avg_goals_scored": null,
+        "avg_points": null,
+        "btts_frequency": null,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 0,
+        "mean_historical_shot_share": null,
+        "n": 0,
+        "over_2_5_frequency": null,
+        "quality_flag": "TOO_FEW_FOR_OPPONENT_STYLE_OR_INDEPENDENT_PROBABILITY",
+        "shot_pair_coverage": 0
+      },
+      "similar_under_50": {
+        "avg_goals_allowed": 1.0909,
+        "avg_goals_scored": 1.8182,
+        "avg_points": 1.8182,
+        "btts_frequency": 0.6364,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 8,
+        "mean_historical_shot_share": 0.5989,
+        "n": 11,
+        "over_2_5_frequency": 0.6364,
+        "quality_flag": "DESCRIPTIVE_MIN_8_GAMES_ONLY_NOT_TACTICALLY_GROUNDED",
+        "shot_pair_coverage": 11
+      },
+      "team_150_plus": {
+        "avg_goals_allowed": 0.0,
+        "avg_goals_scored": 0.0,
+        "avg_points": 1.0,
+        "btts_frequency": 0.0,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 1,
+        "mean_historical_shot_share": 0.625,
+        "n": 1,
+        "over_2_5_frequency": 0.0,
+        "quality_flag": "TOO_FEW_FOR_OPPONENT_STYLE_OR_INDEPENDENT_PROBABILITY",
+        "shot_pair_coverage": 1
+      },
+      "team_50_to_150": {
+        "avg_goals_allowed": 1.1,
+        "avg_goals_scored": 2.4,
+        "avg_points": 2.5,
+        "btts_frequency": 0.7,
+        "matches_with_8plus_pre_match_team_and_opponent_history": 7,
+        "mean_historical_shot_share": 0.6992,
+        "n": 10,
+        "over_2_5_frequency": 0.8,
+        "quality_flag": "DESCRIPTIVE_MIN_8_GAMES_ONLY_NOT_TACTICALLY_GROUNDED",
+        "shot_pair_coverage": 10
+      }
+    }
+  },
+  "example_besiktas_team_id": "4e0b2072-7256-59f1-a14a-1be0aa41827c",
+  "leagues": 10,
+  "limitation": "Shots/gols in previous matches reveal past outcomes, not future tactical behavior. Each score band can have tiny sample; team opponent profile cannot be treated as % probability without calibration.",
+  "new_model_integration": false,
+  "not_a_live_match_forecast": true,
+  "opponent_strength_proxy_is_not_formation_or_pressing": true,
+  "past_accepted_matches": 4518,
+  "schema": "263_20261110_OPPONENT_STRENGTH_PROFILE_PAST_ONLY_V1",
+  "strength_rating": "Fixed, league-local 1500 start, home+65, K18, before same-day scores; no parameter tuning.",
+  "team_opponent_venue_coverage": {
+    "cells_with_5plus_past_games": 671,
+    "cells_with_8plus_past_games": 477,
+    "cells_with_under_5_past_games": 609,
+    "total_league_team_venue_strength_cells_observed": 1280
+  }
+}
