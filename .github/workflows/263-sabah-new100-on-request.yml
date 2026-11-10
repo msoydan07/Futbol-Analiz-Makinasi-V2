@@ -271,6 +271,35 @@ jobs:
           path: |
             /tmp/pinnacle_new100_plan.json
             /tmp/pinnacle_prequery_*.json
+      # Quiet engineering-only sidecar, after the model, mobile, and prices.
+      # Its status cannot block the original signed model forecasts.
+      - name: Quiet team coverage diagnosis - no model or mobile change
+        if: always() && steps.intake.outputs.kind == 'real_named_request'
+        continue-on-error: true
+        shell: bash
+        env:
+          PYTHONPATH: .:experiments/263:research/team_strength
+          REPORT: ${{ steps.intake.outputs.report }}
+          RECEIPT: ${{ steps.intake.outputs.receipt }}
+        run: |
+          set -euo pipefail
+          if [ -f "$REPORT" ] && [ -f "$RECEIPT" ]; then
+            python research/team_strength/sabah_internal_coverage_sidecar_263.py \
+              --report "$REPORT" --receipt "$RECEIPT" \
+              --out "/tmp/263-internal-new100-team-coverage-${GITHUB_RUN_ID}.json"
+          else
+            echo 'INTERNAL_COVERAGE_SIDECAR_SKIPPED_MISSING_RECEIPT'
+          fi
+          git diff --quiet
+          git diff --cached --quiet
+      - name: Store internal research-only coverage, not user mobile output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: internal-team-history-coverage-readonly-not-a-market-signal
+          retention-days: 14
+          if-no-files-found: ignore
+          path: /tmp/263-internal-new100-team-coverage-*.json
       - name: Upload new100 and optional independent Pinnacle research evidence
         if: always()
         uses: actions/upload-artifact@v4
