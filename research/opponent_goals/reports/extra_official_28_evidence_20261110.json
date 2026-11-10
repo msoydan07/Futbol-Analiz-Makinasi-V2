@@ -1,0 +1,37 @@
+{
+  "additional_published_league_or_club_source_score_observations": 28,
+  "existing_model_updated": false,
+  "frozen_99_provider_candidate_count": 99,
+  "limitations": [
+    "This offline code validates recorded canonical team IDs, league season membership, date, scores, evidence URL origin, and bookkeeping; it does NOT fetch official pages itself",
+    "Scores from a club weekly report have lower source authority than individual federation fixture records",
+    "The new 28 observations were NOT compared to original Football-Data row-level scores, because two light supplier downloads had already been performed this week",
+    "The original 28 older comparison scores lack unique federation fixture-ID attestation too",
+    "Even with 56 published observations, NONE of the 99 may be silently appended to the accepted 4518-history as newly official-verified match",
+    "Without new rights-cleared live 2026-27 event data no reliable pressing or tactical-block input can be created"
+  ],
+  "m4_lambdas_recalculated": false,
+  "new_official_club_source_not_yet_provider_concordant": 28,
+  "new_score_sources_by_league": {
+    "ESP1": 10,
+    "FRA1": 9,
+    "NED1": 9
+  },
+  "no_source_supplier_download": true,
+  "observed_official_or_club_source_total": 56,
+  "official_match_provider_independent_api_attestation_count_new": 0,
+  "official_match_unique_id_coverage_new": 0,
+  "original_28_prior_provider_and_official_page_concordant_not_independent_official_fixture_id": 28,
+  "original_4518_data_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "original_seals_updated": false,
+  "production_history_updated": false,
+  "schema": "263_ADDITIONAL_28_SCORE_OBSERVATION_OFFLINE_AUDIT_V1",
+  "separate_source_categories": {
+    "ESP1": "La Liga official matchday published scores, match-specific league IDs not captured",
+    "FRA1": "PSG club weekly summary, NOT the official LFP result-ID ledger",
+    "NED1": "KNVB official results, provisional until 5 full working days after match"
+  },
+  "source_access_budget_not_exceeded": true,
+  "status": "ADDITIONAL_OFFICIAL_OR_CLUB_SIDE_SCORES_IDENTIFIED_NOT_PROVIDER_CHECKED",
+  "without_official_or_club_source_research_observation": 43
+}
