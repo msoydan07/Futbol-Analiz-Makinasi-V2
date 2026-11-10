@@ -110,8 +110,8 @@ def discover(league, lines, now):
  found=[]
  if league=="ENG2":
   months={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
-  datepat=re.compile(r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\\s+(\\d{1,2})(?:st|nd|rd|th)?\\s+([A-Za-z]+)$",re.I)
-  matchpat=re.compile(r"^(.+?)\\s+v\\s+(.+?)\\s+\\((\\d{1,2}:\\d{2})\\)$",re.I)
+  datepat=re.compile(r"^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)$",re.I)
+  matchpat=re.compile(r"^(.+?)\s+v\s+(.+?)\s+\((\d{1,2}:\d{2})\)$",re.I)
   date=None;champ=False
   for i,line in enumerate(lines):
    d=datepat.fullmatch(line)
@@ -131,8 +131,8 @@ def discover(league, lines, now):
            "gvfc":"Gil Vicente FC","cdn":"CD Nacional","fcf":"FC Famalicao",
            "mfc":"Moreirense FC","rafc":"Rio Ave FC","fca":"FC Arouca",
            "alv":"FC Alverca","cpac":"Casa Pia AC","cfea":"Estrela Amadora"}
-  day=re.compile(r"(?:seg|ter|qua|qui|sex|s[aá]b|dom)\\.?\\s*\\d{1,2}\\s+(?:jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\\b",re.I)
-  time=re.compile(r"\\d{1,2}h\\d{2}")
+  day=re.compile(r"(?:seg|ter|qua|qui|sex|s[aá]b|dom)\.?\s*\d{1,2}\s+(?:jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)\b",re.I)
+  time=re.compile(r"\d{1,2}h\d{2}")
   for i,line in enumerate(lines):
    if not day.search(line):continue
    end=next((k for k in range(i+1,len(lines)) if day.search(lines[k])),len(lines))
@@ -147,8 +147,8 @@ def discover(league, lines, now):
       if away and away!=home:found.append((home,away))
  elif league=="BEL1":
   # Belgium official cards have home, clock, date, away on adjacent lines.
-  day=re.compile(r"^(?:lun|mar|mer|jeu|ven|sam|dim|ma|di|wo|do|vr|za|zo)\\.\\s*\\d{1,2}\\s+(?:oct|nov|okt)\\.$",re.I)
-  clock=re.compile(r"\\d{1,2}:\\d{2}")
+  day=re.compile(r"^(?:lun|mar|mer|jeu|ven|sam|dim|ma|di|wo|do|vr|za|zo)\.\s*\d{1,2}\s+(?:oct|nov|okt)\.$",re.I)
+  clock=re.compile(r"\d{1,2}:\d{2}")
   for i,line in enumerate(lines):
    if i+3>=len(lines):break
    if clock.fullmatch(lines[i+1]) and day.fullmatch(lines[i+2]):
