@@ -15,7 +15,7 @@ from verify_completed99_results_archive import build, load_archive, ROOT
 PROOF="data/results_only_263/43_primary_public_score_review_20261110.json"
 GRADE="OFFICIAL_LEAGUE_OR_CLUB_POSTMATCH_PUBLIC_PAGE_REVIEW"
 HOSTS={"ENG1":{"www.premierleague.com"},
-       "ENG2":{"www.efl.com","www.wrexhamafc.co.uk","www.pnefc.net","www.qpr.co.uk","www.watfordfc.com"},
+       "ENG2":{"www.efl.com","www.wrexhamafc.co.uk","www.pnefc.net","www.qpr.co.uk","www.watfordfc.com","www.wolves.co.uk","www.whufc.com","www.portsmouthfc.co.uk"},
        "BEL1":{"www.proleague.be","kvmechelen.be"},
        "POR1":{"www.ligaportugal.pt"}}
 

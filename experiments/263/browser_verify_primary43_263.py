@@ -26,7 +26,7 @@ ALTS={
 "wolves":["wolverhampton wanderers","wolverhampton","wolves"],
 "cardiff":["cardiff city"],"west ham":["west ham united"],
 "derby":["derby county"],"bolton":["bolton wanderers"],
-"norwich":["norwich city"],"stoke":["stoke city"],
+"norwich":["norwich city"],"stoke":["stoke city"],"portsmouth":["pompey","portsmouth fc"],
 "birmingham":["birmingham city"],"blackburn":["blackburn rovers"],
 "charlton":["charlton athletic"],"preston":["preston north end"],
 "qpr":["queens park rangers"],"lincoln":["lincoln city"],
@@ -66,6 +66,14 @@ def match_score(row,body):
             return "BELGIUM_FT_SCOREBOARD_WITH_OFFICIAL_MATCH_URL"
         return "PAGE_READABLE_BELGIAN_FT_SCORE_MISMATCH_OR_MISSING"
     flat=norm(body)
+    if row["league"]=="BEL1" and urlsplit(row["score_source_url"]).hostname=="kvmechelen.be":
+        # A single-game official club page: exact date, competition, clubs
+        # and scoreboard. Do not borrow a result from a calendar list.
+        expected_date="04 november 2026"
+        has_both=("kortrijk" in flat and "mechelen" in flat)
+        if ("jupiler pro league" in flat and expected_date in flat and has_both
+             and re.search(r"(?<!\\d)1\\s*[-–]\\s*3(?!\\d)",flat)):
+            return "EXACT_SCORE_AND_TEAMS_IN_VISIBLE_BODY"
     # For other official sites, a score alone is insufficient: require
     # both teams around that exact score; don't borrow across adjacent games.
     pattern=rf"(?<!\d){hg}\s*(?:[-:–]\s*|\s+){ag}(?!\d)"
