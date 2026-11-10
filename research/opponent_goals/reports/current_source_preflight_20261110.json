@@ -1,0 +1,173 @@
+{
+  "cutoff": "2026-11-10",
+  "leagues": {
+    "BEL1": {
+      "accepted_snapshot_latest_match_date": "2026-11-01",
+      "historical_exact_row_score_date_anchors": 89,
+      "historical_provider_source_rows_in_accepted_snapshot": 89,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 10
+      },
+      "newer_completed_score_rows_candidate_count": 10,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "18b4e99712138acf33dc2691742ee9465ff6e7daa04a629970a08ba0931c09c4",
+      "provider_rows_with_a_fulltime_score": 99,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/B1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "ENG1": {
+      "accepted_snapshot_latest_match_date": "2026-11-02",
+      "historical_exact_row_score_date_anchors": 90,
+      "historical_provider_source_rows_in_accepted_snapshot": 90,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 10
+      },
+      "newer_completed_score_rows_candidate_count": 10,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "d598a5f681e1a9a4acf9dad9fb203b68da6f67e2d195678dbe99e95fbba14593",
+      "provider_rows_with_a_fulltime_score": 100,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/E0.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "ENG2": {
+      "accepted_snapshot_latest_match_date": "2026-11-03",
+      "historical_exact_row_score_date_anchors": 156,
+      "historical_provider_source_rows_in_accepted_snapshot": 156,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 15
+      },
+      "newer_completed_score_rows_candidate_count": 15,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "bdd804d2f60d84045368c8dea5abd76b29ad369dadf3c6ef6547873b72f34e4d",
+      "provider_rows_with_a_fulltime_score": 180,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/E1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "ESP1": {
+      "accepted_snapshot_latest_match_date": "2026-11-02",
+      "historical_exact_row_score_date_anchors": 109,
+      "historical_provider_source_rows_in_accepted_snapshot": 109,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 10
+      },
+      "newer_completed_score_rows_candidate_count": 10,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "b4c9a5cc1139f30dbd1026679c360de4626ce97fe64ae62ff1ff8ba3af0b7828",
+      "provider_rows_with_a_fulltime_score": 119,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/SP1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "FRA1": {
+      "accepted_snapshot_latest_match_date": "2026-11-02",
+      "historical_exact_row_score_date_anchors": 81,
+      "historical_provider_source_rows_in_accepted_snapshot": 81,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 9
+      },
+      "newer_completed_score_rows_candidate_count": 9,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "351303e69ffd3e18a25ac6f06463929faa3db6b86abbf2564709f3c5a9f92f31",
+      "provider_rows_with_a_fulltime_score": 90,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/F1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "GER1": {
+      "accepted_snapshot_latest_match_date": "2026-11-01",
+      "historical_exact_row_score_date_anchors": 72,
+      "historical_provider_source_rows_in_accepted_snapshot": 72,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 9
+      },
+      "newer_completed_score_rows_candidate_count": 9,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "85b5ff5199866f452016473e927ff2431c05c7b2ae045b5edd3b7f5bb5847d2a",
+      "provider_rows_with_a_fulltime_score": 81,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/D1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "ITA1": {
+      "accepted_snapshot_latest_match_date": "2026-11-02",
+      "historical_exact_row_score_date_anchors": 100,
+      "historical_provider_source_rows_in_accepted_snapshot": 100,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 10
+      },
+      "newer_completed_score_rows_candidate_count": 10,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "91f517fedb41215a32e80faa8f4ec44e26d970e557c6c120a664686dbc4d22f0",
+      "provider_rows_with_a_fulltime_score": 110,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/I1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "NED1": {
+      "accepted_snapshot_latest_match_date": "2026-11-01",
+      "historical_exact_row_score_date_anchors": 99,
+      "historical_provider_source_rows_in_accepted_snapshot": 99,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 9
+      },
+      "newer_completed_score_rows_candidate_count": 9,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "46d37b0084ce615220b3a4ba02b5190df724f3664f8f1fa4bf4869d14d2ed184",
+      "provider_rows_with_a_fulltime_score": 108,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/N1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "POR1": {
+      "accepted_snapshot_latest_match_date": "2026-11-02",
+      "historical_exact_row_score_date_anchors": 90,
+      "historical_provider_source_rows_in_accepted_snapshot": 90,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 8
+      },
+      "newer_completed_score_rows_candidate_count": 8,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "e3a2fddeee1f705dbc66c872328ade03b7dc0a8c092b279ac601c62b7d1f13d0",
+      "provider_rows_with_a_fulltime_score": 98,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/P1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    },
+    "TUR1": {
+      "accepted_snapshot_latest_match_date": "2026-11-02",
+      "historical_exact_row_score_date_anchors": 90,
+      "historical_provider_source_rows_in_accepted_snapshot": 90,
+      "newer_candidate_provisional_identity_summary": {
+        "TEAM_NAME_AND_OLD_SCORE_ANCHOR_RESOLVED_PROVISIONAL_ONLY": 9
+      },
+      "newer_completed_score_rows_candidate_count": 9,
+      "note": "Provider's league row index and scores checked against owner-accepted old source. Not independent official federation score verification. No raw rows or private data re-published.",
+      "old_anchor_rejections": {},
+      "provider_payload_sha256": "86af3b956c49ea86c5e1a58c8ac45237ba0b7bd52e46e5874e9697f09336bf08",
+      "provider_rows_with_a_fulltime_score": 99,
+      "provider_url": "https://www.football-data.co.uk/mmz4281/2627/T1.csv",
+      "safe_historical_name_to_id_crosswalk": true,
+      "source_status": "SOURCE_IDENTITIES_PROVISIONAL_NEVER_AUTO_APPEND"
+    }
+  },
+  "model_or_seal_mutated": false,
+  "note": "A green workflow is only a read-only source-compatibility audit, not acceptance of fresh goals, club mapping or production forecast use.",
+  "provider_usage_policy": "Personal/academic; at most two light downloads per week. One GET per league in this one-shot job. Not commercial machine learning product.",
+  "raw_supplier_rows_published": false,
+  "schema": "263_20261110_LIGHT_CURRENT_SOURCE_SAFETY_PREFLIGHT_V1",
+  "source_4518_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "source_data_mutated": false,
+  "upstream_data_requested_once_each": true
+}
