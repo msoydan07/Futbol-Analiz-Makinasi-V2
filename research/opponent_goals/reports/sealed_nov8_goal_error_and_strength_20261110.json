@@ -1,0 +1,861 @@
+{
+  "accepted_past_history_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "by_both_teams_prior_8_matches": {
+    "no": {
+      "n": 0,
+      "reliability": "NO_SAMPLE"
+    },
+    "yes": {
+      "average_away_error_goals_actual_minus_expected": 0.07968,
+      "average_home_error_goals_actual_minus_expected": -0.07795,
+      "average_total_error_goals_actual_minus_expected": 0.00174,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.244841,
+          "m4_brier": 0.248164,
+          "m4_minus_climatology_brier_lower_is_better": 0.003323,
+          "n": 39,
+          "observed_event_rate": 0.53846,
+          "predicted_event_rate": 0.53568,
+          "predicted_minus_observed": -0.00278
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.146586,
+          "m4_brier": 0.165231,
+          "m4_minus_climatology_brier_lower_is_better": 0.018645,
+          "n": 39,
+          "observed_event_rate": 0.82051,
+          "predicted_event_rate": 0.77109,
+          "predicted_minus_observed": -0.04942
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.257019,
+          "m4_brier": 0.262744,
+          "m4_minus_climatology_brier_lower_is_better": 0.005725,
+          "n": 39,
+          "observed_event_rate": 0.51282,
+          "predicted_event_rate": 0.54404,
+          "predicted_minus_observed": 0.03122
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.184357,
+          "m4_brier": 0.182749,
+          "m4_minus_climatology_brier_lower_is_better": -0.001608,
+          "n": 39,
+          "observed_event_rate": 0.23077,
+          "predicted_event_rate": 0.33055,
+          "predicted_minus_observed": 0.09979
+        }
+      },
+      "n": 39,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    }
+  },
+  "by_elo_strength": {
+    "away_150_plus": {
+      "average_away_error_goals_actual_minus_expected": 0.31026,
+      "average_home_error_goals_actual_minus_expected": 0.77509,
+      "average_total_error_goals_actual_minus_expected": 1.08535,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.284444,
+          "m4_brier": 0.308909,
+          "m4_minus_climatology_brier_lower_is_better": 0.024464,
+          "n": 2,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.44994,
+          "predicted_minus_observed": -0.55006
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.071111,
+          "m4_brier": 0.066298,
+          "m4_minus_climatology_brier_lower_is_better": -0.004813,
+          "n": 2,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.76539,
+          "predicted_minus_observed": -0.23461
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.207531,
+          "m4_brier": 0.231761,
+          "m4_minus_climatology_brier_lower_is_better": 0.02423,
+          "n": 2,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.54246,
+          "predicted_minus_observed": -0.45754
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.277778,
+          "m4_brier": 0.154325,
+          "m4_minus_climatology_brier_lower_is_better": -0.123453,
+          "n": 2,
+          "observed_event_rate": 0.5,
+          "predicted_event_rate": 0.33542,
+          "predicted_minus_observed": -0.16458
+        }
+      },
+      "n": 2,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "away_50_to_150": {
+      "average_away_error_goals_actual_minus_expected": 0.37108,
+      "average_home_error_goals_actual_minus_expected": -0.145,
+      "average_total_error_goals_actual_minus_expected": 0.22608,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.226973,
+          "m4_brier": 0.240337,
+          "m4_minus_climatology_brier_lower_is_better": 0.013364,
+          "n": 13,
+          "observed_event_rate": 0.53846,
+          "predicted_event_rate": 0.56554,
+          "predicted_minus_observed": 0.02708
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.077532,
+          "m4_brier": 0.104412,
+          "m4_minus_climatology_brier_lower_is_better": 0.02688,
+          "n": 13,
+          "observed_event_rate": 0.92308,
+          "predicted_event_rate": 0.77824,
+          "predicted_minus_observed": -0.14484
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.241852,
+          "m4_brier": 0.235974,
+          "m4_minus_climatology_brier_lower_is_better": -0.005878,
+          "n": 13,
+          "observed_event_rate": 0.53846,
+          "predicted_event_rate": 0.55279,
+          "predicted_minus_observed": 0.01433
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.213017,
+          "m4_brier": 0.217345,
+          "m4_minus_climatology_brier_lower_is_better": 0.004328,
+          "n": 13,
+          "observed_event_rate": 0.30769,
+          "predicted_event_rate": 0.33761,
+          "predicted_minus_observed": 0.02992
+        }
+      },
+      "n": 13,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "close_under_50": {
+      "average_away_error_goals_actual_minus_expected": 0.05166,
+      "average_home_error_goals_actual_minus_expected": 0.0441,
+      "average_total_error_goals_actual_minus_expected": 0.09575,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.244619,
+          "m4_brier": 0.268293,
+          "m4_minus_climatology_brier_lower_is_better": 0.023675,
+          "n": 18,
+          "observed_event_rate": 0.61111,
+          "predicted_event_rate": 0.5538,
+          "predicted_minus_observed": -0.05731
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.169393,
+          "m4_brier": 0.201837,
+          "m4_minus_climatology_brier_lower_is_better": 0.032444,
+          "n": 18,
+          "observed_event_rate": 0.77778,
+          "predicted_event_rate": 0.76251,
+          "predicted_minus_observed": -0.01527
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.234122,
+          "m4_brier": 0.271548,
+          "m4_minus_climatology_brier_lower_is_better": 0.037426,
+          "n": 18,
+          "observed_event_rate": 0.55556,
+          "predicted_event_rate": 0.53288,
+          "predicted_minus_observed": -0.02268
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.163416,
+          "m4_brier": 0.178634,
+          "m4_minus_climatology_brier_lower_is_better": 0.015218,
+          "n": 18,
+          "observed_event_rate": 0.22222,
+          "predicted_event_rate": 0.32055,
+          "predicted_minus_observed": 0.09832
+        }
+      },
+      "n": 18,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "home_150_plus": {
+      "n": 0,
+      "reliability": "NO_SAMPLE"
+    },
+    "home_50_to_150": {
+      "average_away_error_goals_actual_minus_expected": -0.54444,
+      "average_home_error_goals_actual_minus_expected": -0.58313,
+      "average_total_error_goals_actual_minus_expected": -1.12758,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.271019,
+          "m4_brier": 0.184486,
+          "m4_minus_climatology_brier_lower_is_better": -0.086533,
+          "n": 6,
+          "observed_event_rate": 0.16667,
+          "predicted_event_rate": 0.44518,
+          "predicted_minus_observed": 0.27852
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.252942,
+          "m4_brier": 0.220165,
+          "m4_minus_climatology_brier_lower_is_better": -0.032777,
+          "n": 6,
+          "observed_event_rate": 0.66667,
+          "predicted_event_rate": 0.78325,
+          "predicted_minus_observed": 0.11658
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.375066,
+          "m4_brier": 0.304662,
+          "m4_minus_climatology_brier_lower_is_better": -0.070404,
+          "n": 6,
+          "observed_event_rate": 0.16667,
+          "predicted_event_rate": 0.55911,
+          "predicted_minus_observed": 0.39244
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.153941,
+          "m4_brier": 0.129611,
+          "m4_minus_climatology_brier_lower_is_better": -0.02433,
+          "n": 6,
+          "observed_event_rate": 0.0,
+          "predicted_event_rate": 0.34367,
+          "predicted_minus_observed": 0.34367
+        }
+      },
+      "n": 6,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    }
+  },
+  "by_league": {
+    "BEL1": {
+      "average_away_error_goals_actual_minus_expected": -0.27595,
+      "average_home_error_goals_actual_minus_expected": -0.54232,
+      "average_total_error_goals_actual_minus_expected": -0.81827,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.250284,
+          "m4_brier": 0.155715,
+          "m4_minus_climatology_brier_lower_is_better": -0.094569,
+          "n": 4,
+          "observed_event_rate": 0.5,
+          "predicted_event_rate": 0.46265,
+          "predicted_minus_observed": -0.03735
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.352544,
+          "m4_brier": 0.295762,
+          "m4_minus_climatology_brier_lower_is_better": -0.056782,
+          "n": 4,
+          "observed_event_rate": 0.5,
+          "predicted_event_rate": 0.80048,
+          "predicted_minus_observed": 0.30048
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.348851,
+          "m4_brier": 0.312375,
+          "m4_minus_climatology_brier_lower_is_better": -0.036476,
+          "n": 4,
+          "observed_event_rate": 0.25,
+          "predicted_event_rate": 0.58306,
+          "predicted_minus_observed": 0.33306
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.202089,
+          "m4_brier": 0.220326,
+          "m4_minus_climatology_brier_lower_is_better": 0.018237,
+          "n": 4,
+          "observed_event_rate": 0.25,
+          "predicted_event_rate": 0.36654,
+          "predicted_minus_observed": 0.11654
+        }
+      },
+      "n": 4,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "ENG1": {
+      "average_away_error_goals_actual_minus_expected": 0.30891,
+      "average_home_error_goals_actual_minus_expected": 0.25429,
+      "average_total_error_goals_actual_minus_expected": 0.56319,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.254938,
+          "m4_brier": 0.205945,
+          "m4_minus_climatology_brier_lower_is_better": -0.048993,
+          "n": 5,
+          "observed_event_rate": 0.6,
+          "predicted_event_rate": 0.58904,
+          "predicted_minus_observed": -0.01096
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.161975,
+          "m4_brier": 0.141838,
+          "m4_minus_climatology_brier_lower_is_better": -0.020137,
+          "n": 5,
+          "observed_event_rate": 0.8,
+          "predicted_event_rate": 0.8016,
+          "predicted_minus_observed": 0.0016
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.257778,
+          "m4_brier": 0.204832,
+          "m4_minus_climatology_brier_lower_is_better": -0.052946,
+          "n": 5,
+          "observed_event_rate": 0.6,
+          "predicted_event_rate": 0.58116,
+          "predicted_minus_observed": -0.01884
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.25,
+          "m4_brier": 0.256529,
+          "m4_minus_climatology_brier_lower_is_better": 0.006529,
+          "n": 5,
+          "observed_event_rate": 0.4,
+          "predicted_event_rate": 0.36057,
+          "predicted_minus_observed": -0.03943
+        }
+      },
+      "n": 5,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "ESP1": {
+      "average_away_error_goals_actual_minus_expected": -0.45567,
+      "average_home_error_goals_actual_minus_expected": -0.84906,
+      "average_total_error_goals_actual_minus_expected": -1.30473,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.30287,
+          "m4_brier": 0.247124,
+          "m4_minus_climatology_brier_lower_is_better": -0.055746,
+          "n": 5,
+          "observed_event_rate": 0.2,
+          "predicted_event_rate": 0.5531,
+          "predicted_minus_observed": 0.3531
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.269119,
+          "m4_brier": 0.285234,
+          "m4_minus_climatology_brier_lower_is_better": 0.016115,
+          "n": 5,
+          "observed_event_rate": 0.6,
+          "predicted_event_rate": 0.77653,
+          "predicted_minus_observed": 0.17653
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.30287,
+          "m4_brier": 0.241226,
+          "m4_minus_climatology_brier_lower_is_better": -0.061644,
+          "n": 5,
+          "observed_event_rate": 0.2,
+          "predicted_event_rate": 0.54859,
+          "predicted_minus_observed": 0.34859
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.121539,
+          "m4_brier": 0.119331,
+          "m4_minus_climatology_brier_lower_is_better": -0.002207,
+          "n": 5,
+          "observed_event_rate": 0.0,
+          "predicted_event_rate": 0.33214,
+          "predicted_minus_observed": 0.33214
+        }
+      },
+      "n": 5,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "FRA1": {
+      "average_away_error_goals_actual_minus_expected": 0.13173,
+      "average_home_error_goals_actual_minus_expected": -0.53207,
+      "average_total_error_goals_actual_minus_expected": -0.40034,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.261012,
+          "m4_brier": 0.191427,
+          "m4_minus_climatology_brier_lower_is_better": -0.069585,
+          "n": 6,
+          "observed_event_rate": 0.5,
+          "predicted_event_rate": 0.53979,
+          "predicted_minus_observed": 0.03979
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.039018,
+          "m4_brier": 0.073002,
+          "m4_minus_climatology_brier_lower_is_better": 0.033984,
+          "n": 6,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.74417,
+          "predicted_minus_observed": -0.25583
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.289438,
+          "m4_brier": 0.224839,
+          "m4_minus_climatology_brier_lower_is_better": -0.064599,
+          "n": 6,
+          "observed_event_rate": 0.33333,
+          "predicted_event_rate": 0.50706,
+          "predicted_minus_observed": 0.17372
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.128182,
+          "m4_brier": 0.098682,
+          "m4_minus_climatology_brier_lower_is_better": -0.029499,
+          "n": 6,
+          "observed_event_rate": 0.0,
+          "predicted_event_rate": 0.29582,
+          "predicted_minus_observed": 0.29582
+        }
+      },
+      "n": 6,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "GER1": {
+      "average_away_error_goals_actual_minus_expected": -0.18391,
+      "average_home_error_goals_actual_minus_expected": -0.12166,
+      "average_total_error_goals_actual_minus_expected": -0.30556,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.229167,
+          "m4_brier": 0.263569,
+          "m4_minus_climatology_brier_lower_is_better": 0.034403,
+          "n": 3,
+          "observed_event_rate": 0.66667,
+          "predicted_event_rate": 0.53503,
+          "predicted_minus_observed": -0.13163
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.037809,
+          "m4_brier": 0.057477,
+          "m4_minus_climatology_brier_lower_is_better": 0.019668,
+          "n": 3,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.78034,
+          "predicted_minus_observed": -0.21966
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.222994,
+          "m4_brier": 0.296303,
+          "m4_minus_climatology_brier_lower_is_better": 0.073309,
+          "n": 3,
+          "observed_event_rate": 0.66667,
+          "predicted_event_rate": 0.56017,
+          "predicted_minus_observed": -0.1065
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.278549,
+          "m4_brier": 0.13594,
+          "m4_minus_climatology_brier_lower_is_better": -0.142609,
+          "n": 3,
+          "observed_event_rate": 0.0,
+          "predicted_event_rate": 0.34845,
+          "predicted_minus_observed": 0.34845
+        }
+      },
+      "n": 3,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "ITA1": {
+      "average_away_error_goals_actual_minus_expected": -0.35216,
+      "average_home_error_goals_actual_minus_expected": -0.07073,
+      "average_total_error_goals_actual_minus_expected": -0.42289,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.2404,
+          "m4_brier": 0.358348,
+          "m4_minus_climatology_brier_lower_is_better": 0.117948,
+          "n": 5,
+          "observed_event_rate": 0.6,
+          "predicted_event_rate": 0.54441,
+          "predicted_minus_observed": -0.05559
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.1636,
+          "m4_brier": 0.233912,
+          "m4_minus_climatology_brier_lower_is_better": 0.070312,
+          "n": 5,
+          "observed_event_rate": 0.8,
+          "predicted_event_rate": 0.75195,
+          "predicted_minus_observed": -0.04805
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.2841,
+          "m4_brier": 0.352959,
+          "m4_minus_climatology_brier_lower_is_better": 0.068859,
+          "n": 5,
+          "observed_event_rate": 0.4,
+          "predicted_event_rate": 0.52075,
+          "predicted_minus_observed": 0.12075
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.1796,
+          "m4_brier": 0.230767,
+          "m4_minus_climatology_brier_lower_is_better": 0.051167,
+          "n": 5,
+          "observed_event_rate": 0.2,
+          "predicted_event_rate": 0.31318,
+          "predicted_minus_observed": 0.11318
+        }
+      },
+      "n": 5,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "NED1": {
+      "average_away_error_goals_actual_minus_expected": 1.13518,
+      "average_home_error_goals_actual_minus_expected": 2.17461,
+      "average_total_error_goals_actual_minus_expected": 3.30979,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.098051,
+          "m4_brier": 0.160977,
+          "m4_minus_climatology_brier_lower_is_better": 0.062925,
+          "n": 3,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.59978,
+          "predicted_minus_observed": -0.40022
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.012346,
+          "m4_brier": 0.039648,
+          "m4_minus_climatology_brier_lower_is_better": 0.027303,
+          "n": 3,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.80273,
+          "predicted_minus_observed": -0.19727
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.079992,
+          "m4_brier": 0.177309,
+          "m4_minus_climatology_brier_lower_is_better": 0.097317,
+          "n": 3,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.58086,
+          "predicted_minus_observed": -0.41914
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.155188,
+          "m4_brier": 0.413726,
+          "m4_minus_climatology_brier_lower_is_better": 0.258537,
+          "n": 3,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.35804,
+          "predicted_minus_observed": -0.64196
+        }
+      },
+      "n": 3,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "POR1": {
+      "average_away_error_goals_actual_minus_expected": 0.1483,
+      "average_home_error_goals_actual_minus_expected": 0.15512,
+      "average_total_error_goals_actual_minus_expected": 0.30342,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.267778,
+          "m4_brier": 0.331251,
+          "m4_minus_climatology_brier_lower_is_better": 0.063473,
+          "n": 4,
+          "observed_event_rate": 0.75,
+          "predicted_event_rate": 0.4496,
+          "predicted_minus_observed": -0.3004
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.187778,
+          "m4_brier": 0.252601,
+          "m4_minus_climatology_brier_lower_is_better": 0.064823,
+          "n": 4,
+          "observed_event_rate": 0.75,
+          "predicted_event_rate": 0.72389,
+          "predicted_minus_observed": -0.02611
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.229753,
+          "m4_brier": 0.338107,
+          "m4_minus_climatology_brier_lower_is_better": 0.108354,
+          "n": 4,
+          "observed_event_rate": 0.75,
+          "predicted_event_rate": 0.49172,
+          "predicted_minus_observed": -0.25828
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.194444,
+          "m4_brier": 0.116776,
+          "m4_minus_climatology_brier_lower_is_better": -0.077668,
+          "n": 4,
+          "observed_event_rate": 0.25,
+          "predicted_event_rate": 0.29143,
+          "predicted_minus_observed": 0.04143
+        }
+      },
+      "n": 4,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    },
+    "TUR1": {
+      "average_away_error_goals_actual_minus_expected": 0.61717,
+      "average_home_error_goals_actual_minus_expected": -0.2825,
+      "average_total_error_goals_actual_minus_expected": 0.33467,
+      "goals_by_market": {
+        "BTTS_YES": {
+          "league_pre_nov8_climatology_brier": 0.234444,
+          "m4_brier": 0.312813,
+          "m4_minus_climatology_brier_lower_is_better": 0.078368,
+          "n": 4,
+          "observed_event_rate": 0.25,
+          "predicted_event_rate": 0.54164,
+          "predicted_minus_observed": 0.29164
+        },
+        "OVER_1.5": {
+          "league_pre_nov8_climatology_brier": 0.049383,
+          "m4_brier": 0.054061,
+          "m4_minus_climatology_brier_lower_is_better": 0.004679,
+          "n": 4,
+          "observed_event_rate": 1.0,
+          "predicted_event_rate": 0.77761,
+          "predicted_minus_observed": -0.22239
+        },
+        "OVER_2.5": {
+          "league_pre_nov8_climatology_brier": 0.21,
+          "m4_brier": 0.220038,
+          "m4_minus_climatology_brier_lower_is_better": 0.010038,
+          "n": 4,
+          "observed_event_rate": 0.75,
+          "predicted_event_rate": 0.55014,
+          "predicted_minus_observed": -0.19986
+        },
+        "OVER_3.5": {
+          "league_pre_nov8_climatology_brier": 0.194444,
+          "m4_brier": 0.126143,
+          "m4_minus_climatology_brier_lower_is_better": -0.068301,
+          "n": 4,
+          "observed_event_rate": 0.25,
+          "predicted_event_rate": 0.33397,
+          "predicted_minus_observed": 0.08397
+        }
+      },
+      "n": 4,
+      "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+    }
+  },
+  "forecast_sha_locked": 40,
+  "league_current_season_baselines": {
+    "BEL1": {
+      "latest_date": "2026-11-01",
+      "n": 89,
+      "rates": {
+        "BTTS_YES": 0.48314606741573035,
+        "OVER_1.5": 0.8202247191011236,
+        "OVER_2.5": 0.651685393258427,
+        "OVER_3.5": 0.3707865168539326
+      }
+    },
+    "ENG1": {
+      "latest_date": "2026-11-02",
+      "n": 90,
+      "rates": {
+        "BTTS_YES": 0.4777777777777778,
+        "OVER_1.5": 0.7555555555555555,
+        "OVER_2.5": 0.4666666666666667,
+        "OVER_3.5": 0.3
+      }
+    },
+    "ENG2": {
+      "latest_date": "2026-11-03",
+      "n": 165,
+      "rates": {
+        "BTTS_YES": 0.6181818181818182,
+        "OVER_1.5": 0.7696969696969697,
+        "OVER_2.5": 0.6121212121212121,
+        "OVER_3.5": 0.38181818181818183
+      }
+    },
+    "ESP1": {
+      "latest_date": "2026-11-02",
+      "n": 109,
+      "rates": {
+        "BTTS_YES": 0.5779816513761468,
+        "OVER_1.5": 0.7706422018348624,
+        "OVER_2.5": 0.5779816513761468,
+        "OVER_3.5": 0.3486238532110092
+      }
+    },
+    "FRA1": {
+      "latest_date": "2026-11-02",
+      "n": 81,
+      "rates": {
+        "BTTS_YES": 0.6049382716049383,
+        "OVER_1.5": 0.8024691358024691,
+        "OVER_2.5": 0.5925925925925926,
+        "OVER_3.5": 0.35802469135802467
+      }
+    },
+    "GER1": {
+      "latest_date": "2026-11-01",
+      "n": 72,
+      "rates": {
+        "BTTS_YES": 0.5833333333333334,
+        "OVER_1.5": 0.8055555555555556,
+        "OVER_2.5": 0.6944444444444444,
+        "OVER_3.5": 0.5277777777777778
+      }
+    },
+    "ITA1": {
+      "latest_date": "2026-11-02",
+      "n": 100,
+      "rates": {
+        "BTTS_YES": 0.58,
+        "OVER_1.5": 0.86,
+        "OVER_2.5": 0.61,
+        "OVER_3.5": 0.34
+      }
+    },
+    "NED1": {
+      "latest_date": "2026-11-01",
+      "n": 99,
+      "rates": {
+        "BTTS_YES": 0.6868686868686869,
+        "OVER_1.5": 0.8888888888888888,
+        "OVER_2.5": 0.7171717171717171,
+        "OVER_3.5": 0.6060606060606061
+      }
+    },
+    "POR1": {
+      "latest_date": "2026-11-02",
+      "n": 90,
+      "rates": {
+        "BTTS_YES": 0.4666666666666667,
+        "OVER_1.5": 0.7333333333333333,
+        "OVER_2.5": 0.5444444444444444,
+        "OVER_3.5": 0.3333333333333333
+      }
+    },
+    "TUR1": {
+      "latest_date": "2026-11-02",
+      "n": 90,
+      "rates": {
+        "BTTS_YES": 0.4666666666666667,
+        "OVER_1.5": 0.7777777777777778,
+        "OVER_2.5": 0.6,
+        "OVER_3.5": 0.3333333333333333
+      }
+    }
+  },
+  "model_changed": false,
+  "negative_conclusions": [
+    "This research web review is not independent federation fixture-ID attestation",
+    "39 scores on one calendar day cannot certify any 70% event or future calibration",
+    "Strength band is past-only league-local Elo proxy, NOT observed tactical low block/press",
+    "League baseline uses 2026-27 completed games strictly BEFORE Nov 8; not a matched-lambda sophisticated model",
+    "Prior 984 retrospective matches were NOT refitted or re-evaluated",
+    "No M4 model or 4518/4617 dataset change, no 99 candidates used, no odds or betting inference"
+  ],
+  "nonavailable_m4": {},
+  "only_primary_pages": {
+    "average_away_error_goals_actual_minus_expected": 0.07184,
+    "average_home_error_goals_actual_minus_expected": -0.10458,
+    "average_total_error_goals_actual_minus_expected": -0.03274,
+    "goals_by_market": {
+      "BTTS_YES": {
+        "league_pre_nov8_climatology_brier": 0.242219,
+        "m4_brier": 0.238668,
+        "m4_minus_climatology_brier_lower_is_better": -0.003551,
+        "n": 35,
+        "observed_event_rate": 0.51429,
+        "predicted_event_rate": 0.54552,
+        "predicted_minus_observed": 0.03123
+      },
+      "OVER_1.5": {
+        "league_pre_nov8_climatology_brier": 0.141879,
+        "m4_brier": 0.155246,
+        "m4_minus_climatology_brier_lower_is_better": 0.013367,
+        "n": 35,
+        "observed_event_rate": 0.82857,
+        "predicted_event_rate": 0.77649,
+        "predicted_minus_observed": -0.05209
+      },
+      "OVER_2.5": {
+        "league_pre_nov8_climatology_brier": 0.260135,
+        "m4_brier": 0.254132,
+        "m4_minus_climatology_brier_lower_is_better": -0.006004,
+        "n": 35,
+        "observed_event_rate": 0.48571,
+        "predicted_event_rate": 0.55002,
+        "predicted_minus_observed": 0.06431
+      },
+      "OVER_3.5": {
+        "league_pre_nov8_climatology_brier": 0.183204,
+        "m4_brier": 0.190289,
+        "m4_minus_climatology_brier_lower_is_better": 0.007085,
+        "n": 35,
+        "observed_event_rate": 0.22857,
+        "predicted_event_rate": 0.33503,
+        "predicted_minus_observed": 0.10645
+      }
+    },
+    "n": 35,
+    "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+  },
+  "postponed_excluded": 1,
+  "production_accepted_rows": 4518,
+  "same_match_date_goal_data_used_in_model_features": false,
+  "schema": "263_NOV8_SEALED_M4_GOAL_MATCHUP_ERROR_DIAG_V1",
+  "scored_m4": 39,
+  "seals_changed": false,
+  "source_class_counts": {
+    "MEDIA_CROSSCHECKED_NOT_LEAGUE_OFFICIAL": 4,
+    "PRIMARY_LEAGUE_OR_CLUB": 35
+  },
+  "status": "DESCRIPTIVE_39_RESEARCH_ONLY_NOT_INDEPENDENT_CALIBRATION",
+  "whole": {
+    "average_away_error_goals_actual_minus_expected": 0.07968,
+    "average_home_error_goals_actual_minus_expected": -0.07795,
+    "average_total_error_goals_actual_minus_expected": 0.00174,
+    "goals_by_market": {
+      "BTTS_YES": {
+        "league_pre_nov8_climatology_brier": 0.244841,
+        "m4_brier": 0.248164,
+        "m4_minus_climatology_brier_lower_is_better": 0.003323,
+        "n": 39,
+        "observed_event_rate": 0.53846,
+        "predicted_event_rate": 0.53568,
+        "predicted_minus_observed": -0.00278
+      },
+      "OVER_1.5": {
+        "league_pre_nov8_climatology_brier": 0.146586,
+        "m4_brier": 0.165231,
+        "m4_minus_climatology_brier_lower_is_better": 0.018645,
+        "n": 39,
+        "observed_event_rate": 0.82051,
+        "predicted_event_rate": 0.77109,
+        "predicted_minus_observed": -0.04942
+      },
+      "OVER_2.5": {
+        "league_pre_nov8_climatology_brier": 0.257019,
+        "m4_brier": 0.262744,
+        "m4_minus_climatology_brier_lower_is_better": 0.005725,
+        "n": 39,
+        "observed_event_rate": 0.51282,
+        "predicted_event_rate": 0.54404,
+        "predicted_minus_observed": 0.03122
+      },
+      "OVER_3.5": {
+        "league_pre_nov8_climatology_brier": 0.184357,
+        "m4_brier": 0.182749,
+        "m4_minus_climatology_brier_lower_is_better": -0.001608,
+        "n": 39,
+        "observed_event_rate": 0.23077,
+        "predicted_event_rate": 0.33055,
+        "predicted_minus_observed": 0.09979
+      }
+    },
+    "n": 39,
+    "reliability": "EXPLORATORY_SAME_DAY_NOT_CALIBRATION"
+  }
+}
