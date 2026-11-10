@@ -1,0 +1,115 @@
+{
+  "accepted_4518_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "accepted_n": 4518,
+  "accepted_original_missing_in_staged_count": 0,
+  "accepted_original_modified_in_staged_count": 9,
+  "all_99_have_published_scores_but_provenance_varies": true,
+  "limitations": [
+    "Existing GitHub staged CSV derived from owner pipeline; its audit records provider_fetch_independently_verified=false",
+    "Published web score ledger records have mixed primary, club and secondary provenance",
+    "Matching staged scores to those ledgers is NOT matching official federation's canonical per-fixture ID",
+    "League+date+canonical teams are known but provider-source-row provenance and usage rights still need assessment",
+    "The previous Tuesday stage rows and 99 candidate public score observations all represent retrospective outcomes",
+    "No model training, calibration, historic append or daily forecast update was made",
+    "A status of COMPLETE indicates data consistency across stored copies, not that source scores are true"
+  ],
+  "matches_by_league": {
+    "BEL1": {
+      "new": 10,
+      "published_tier_counts": {
+        "43_EXTERNAL_SCORE_WITH_OFFICIAL_FIXTURE_PARTIAL": 10
+      },
+      "score_conflicts": 0,
+      "score_matches": 10
+    },
+    "ENG1": {
+      "new": 10,
+      "published_tier_counts": {
+        "43_EXTERNAL_SCORE_WITH_OFFICIAL_FIXTURE_PARTIAL": 10
+      },
+      "score_conflicts": 0,
+      "score_matches": 10
+    },
+    "ENG2": {
+      "new": 15,
+      "published_tier_counts": {
+        "43_EXTERNAL_SCORE_WITH_OFFICIAL_FIXTURE_PARTIAL": 15
+      },
+      "score_conflicts": 0,
+      "score_matches": 15
+    },
+    "ESP1": {
+      "new": 10,
+      "published_tier_counts": {
+        "28_OFFICIAL_OR_CLUB_PUBLIC_SOURCE_NO_PROVIDER_JOIN": 10
+      },
+      "score_conflicts": 0,
+      "score_matches": 10
+    },
+    "FRA1": {
+      "new": 9,
+      "published_tier_counts": {
+        "28_OFFICIAL_OR_CLUB_PUBLIC_SOURCE_NO_PROVIDER_JOIN": 9
+      },
+      "score_conflicts": 0,
+      "score_matches": 9
+    },
+    "GER1": {
+      "new": 9,
+      "published_tier_counts": {
+        "28_PRIOR_OFFICIAL_SCORE_AND_PROVIDER_CONCORDANCE": 9
+      },
+      "score_conflicts": 0,
+      "score_matches": 9
+    },
+    "ITA1": {
+      "new": 10,
+      "published_tier_counts": {
+        "28_PRIOR_OFFICIAL_SCORE_AND_PROVIDER_CONCORDANCE": 10
+      },
+      "score_conflicts": 0,
+      "score_matches": 10
+    },
+    "NED1": {
+      "new": 9,
+      "published_tier_counts": {
+        "28_OFFICIAL_OR_CLUB_PUBLIC_SOURCE_NO_PROVIDER_JOIN": 9
+      },
+      "score_conflicts": 0,
+      "score_matches": 9
+    },
+    "POR1": {
+      "new": 8,
+      "published_tier_counts": {
+        "43_EXTERNAL_SCORE_WITH_OFFICIAL_FIXTURE_PARTIAL": 8
+      },
+      "score_conflicts": 0,
+      "score_matches": 8
+    },
+    "TUR1": {
+      "new": 9,
+      "published_tier_counts": {
+        "28_PRIOR_OFFICIAL_SCORE_AND_PROVIDER_CONCORDANCE": 9
+      },
+      "score_conflicts": 0,
+      "score_matches": 9
+    }
+  },
+  "new_staged_fixture_id_count": 99,
+  "new_staged_key_overlaps_old_count": 0,
+  "not_an_independent_published_score_validation": true,
+  "official_unique_fixture_id_attestations_new": 0,
+  "preexisting_evidence_total": 99,
+  "production_M4_untouched": true,
+  "promote_to_accepted_history": false,
+  "published_evidence_missing_from_staged_n": 0,
+  "schema": "263_ACCEPTED4518_STAGED4617_PUBLIC99_INTEGRITY_GATE_V1",
+  "sealed_forecasts_untouched": true,
+  "source_license_verified_for_reuse": false,
+  "stage_experiment_branch_provider_fetch_independently_verified": false,
+  "staged_4617_sha256": "7f005d88465fa742354854a0459f06fbb17efe9fbb648e26a18844d0f7753958",
+  "staged_n": 4617,
+  "staged_vs_published_score_disagreements": [],
+  "status": "HOLD_STAGE_CONFLICT_OR_MISSING_RECORD",
+  "unexplained_staged_new_records_n": 0
+}
