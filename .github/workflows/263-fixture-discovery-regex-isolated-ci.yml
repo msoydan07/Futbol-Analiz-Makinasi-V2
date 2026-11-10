@@ -32,7 +32,7 @@ jobs:
       - name: Read official pages once; classify no schedule versus not parseable
         run: python live_fixture_source_diagnostic_263.py
         env:
-          LIVE_DIAGNOSTIC_LEAGUES: POR1
+          LIVE_DIAGNOSTIC_LEAGUES: BEL1,POR1,ENG2
       - uses: actions/upload-artifact@v4
         if: always()
         with:
