@@ -1,0 +1,42 @@
+name: "263 staged OLD nine changed rows diagnostic research only"
+on:
+  push:
+    branches: [research/263-staged99-evidence-join-20261110]
+    paths:
+      - 'research/opponent_goals/stage_original9_field_diff_263.py'
+      - 'research/opponent_goals/test_stage_original9_field_diff_263.py'
+      - '.github/workflows/263-staged-old-nine-why.yml'
+permissions:
+  contents: write
+jobs:
+  offline_diff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline accepted integrity and source-safety regression
+        run: python research/opponent_goals/test_stage_original9_field_diff_263.py
+      - name: Existing GitHub staged snapshot only, do not contact third-party providers
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin +refs/heads/experiment/263-toplu-karsilastirma:refs/remotes/origin/experiment/263-toplu-karsilastirma --quiet
+          stage="$(mktemp)"
+          trap 'rm -f "$stage"' EXIT
+          git show origin/experiment/263-toplu-karsilastirma:data/staged_263/extended_history.csv > "$stage"
+          python research/opponent_goals/stage_original9_field_diff_263.py \
+            --root . --staged "$stage" \
+            --out research/opponent_goals/reports/accepted_old9_stage_field_changes_20261110.json
+      - name: Archive only 9 changed fields metadata and hashes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/opponent_goals/reports/accepted_old9_stage_field_changes_20261110.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Research: fingerprint 9 old stage changes, no approved history overwritten [skip ci]"
+          git push origin HEAD:research/263-staged99-evidence-join-20261110
