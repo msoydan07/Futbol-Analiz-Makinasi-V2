@@ -9,7 +9,7 @@ on:
       - 'experiments/263/test_verify_completed99_results_archive.py'
       - '.github/workflows/263-99-completed-results-archive-gate.yml'
 permissions:
-  contents: read
+  contents: write
 jobs:
   completed99-score-archive:
     runs-on: ubuntu-latest
@@ -23,6 +23,27 @@ jobs:
         run: python -m unittest -v experiments/263/test_verify_completed99_results_archive.py
       - name: Generate separate 4617 score-only snapshot, not M4 training
         run: python experiments/263/verify_completed99_results_archive.py --out /tmp/263_4617_results_only_unpromoted.csv > /tmp/263_99_archive_acceptance.json
+      - name: Persist nonproduction 4617 results-only snapshot without replacing 4518
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="data/results_only_263/2026-11-10_completed_4617_scores_only.csv"
+          mkdir -p "$(dirname "$target")"
+          if [ -e "$target" ]; then
+            cmp -s /tmp/263_4617_results_only_unpromoted.csv "$target" || {
+              echo "Existing archive differs; refuse overwrite"
+              exit 1
+            }
+            echo "Identical immutable results archive already exists"
+            exit 0
+          fi
+          cp /tmp/263_4617_results_only_unpromoted.csv "$target"
+          sha256sum "$target" > "$target.sha256"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "$target" "$target.sha256"
+          git commit -m "data(263): persist 4617 results-only archive, old 4518 unchanged"
+          git push origin HEAD:experiment/263-toplu-karsilastirma
       - uses: actions/upload-artifact@v4
         if: always()
         with:
