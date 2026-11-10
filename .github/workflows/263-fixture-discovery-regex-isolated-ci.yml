@@ -1,0 +1,18 @@
+name: 263 isolated fixture discovery regex regression
+on:
+  push:
+    branches:
+      - fix/263-fixture-discovery-regex-20261110
+permissions:
+  contents: read
+jobs:
+  fixture-discovery-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing parsers and new discover fail-closed tests (offline)
+        run: python -m unittest -v test_official_browser_fixture.py test_official_browser_fixture_discover.py test_verify_match_on_demand.py test_tff_fixture_lookup.py
