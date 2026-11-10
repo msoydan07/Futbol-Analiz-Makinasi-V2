@@ -1,0 +1,39 @@
+name: "263 additional 28 official and club score evidence - offline acceptance only"
+on:
+  push:
+    branches:
+      - research/263-additional-official-evidence-20261110
+    paths:
+      - 'research/opponent_goals/official_additional_28_nov06_08_2026.json'
+      - 'research/opponent_goals/verify_additional_official_28.py'
+      - 'research/opponent_goals/test_verify_additional_official_28.py'
+      - '.github/workflows/263-additional-28-official-offline.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  no_download_evidence:
+    if: github.ref == 'refs/heads/research/263-additional-official-evidence-20261110'
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline real-cohort counts and adversarial source-bound identity tests
+        run: python research/opponent_goals/test_verify_additional_official_28.py
+      - name: Offline append-only new score-source scope audit - ZERO third-party requests
+        run: |
+          python research/opponent_goals/verify_additional_official_28.py \
+            --root . --out research/opponent_goals/reports/extra_official_28_evidence_20261110.json
+      - name: Archive research result with no provider score redistributions
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/opponent_goals/reports/extra_official_28_evidence_20261110.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Research: 28 additional published scores, 43 remaining; no supplier pull [skip ci]"
+          git push origin HEAD:research/263-additional-official-evidence-20261110
