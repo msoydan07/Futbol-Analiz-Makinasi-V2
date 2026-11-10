@@ -4,69 +4,69 @@
   "base_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
   "base_rows": 4413,
   "source_season": "2026-2027",
-  "as_of_exclusive": "2026-11-03",
+  "as_of_exclusive": "2026-11-10",
   "leagues_provided": 10,
   "leagues_expected": 10,
   "source_completeness": "TEN_LEAGUES",
-  "appended": 88,
-  "total_rows": 4501,
+  "appended": 204,
+  "total_rows": 4617,
   "source_file_audit": {
     "ENG1": {
-      "new_completed": 9,
+      "new_completed": 20,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "ENG2": {
-      "new_completed": 12,
+      "new_completed": 36,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "GER1": {
-      "new_completed": 9,
+      "new_completed": 18,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "ESP1": {
-      "new_completed": 9,
+      "new_completed": 20,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "ITA1": {
-      "new_completed": 8,
+      "new_completed": 20,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "FRA1": {
-      "new_completed": 8,
+      "new_completed": 18,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "NED1": {
-      "new_completed": 9,
+      "new_completed": 18,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "TUR1": {
-      "new_completed": 8,
+      "new_completed": 18,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "POR1": {
-      "new_completed": 7,
+      "new_completed": 17,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     },
     "BEL1": {
-      "new_completed": 9,
+      "new_completed": 19,
       "source": "EXISTING_GITHUB_WEEKLY_PIPELINE_REGENERATED_CSV",
       "provider_fetch_independently_verified": false
     }
   },
   "pipeline_audit_rechecked": true,
-  "regenerated_input_sha256": "0c5456ed3a5e3c88b3e28dc72f3e77ef7f2b69509b99f8cdba4088798e88e4a9",
+  "regenerated_input_sha256": "e3662fa28a82795c32c044ca0decce5c491f1efc5abac05f297ebd0ec45ef42f",
   "independent_source_verification": false,
   "retrospective_model_acceptance_transferred": false,
   "probability_recommendations_authorized": false,
   "main_or_production_modified": false,
-  "extended_history_sha256": "279cb00096da270f6987ae9e518fbe7248c17c993c34508499a971cae76ca4e8"
+  "extended_history_sha256": "7f005d88465fa742354854a0459f06fbb17efe9fbb648e26a18844d0f7753958"
 }
