@@ -23,7 +23,7 @@ jobs:
           python-version: '3.11'
       - name: Verify original Nov6 and Nov7 SHA seals and original team ID joining
         run: python -m unittest -v research/opponent_goals/test_nov7_sealed_date_block_263.py research/opponent_goals/test_nov6_7_8_separate_date_audit_263.py
-      - name: Three separate dates: score Nov6 and Nov7; reference Nov8 only
+      - name: 'Three separate dates - score Nov6 and Nov7, reference Nov8 only'
         run: python -m research.opponent_goals.nov6_7_8_separate_date_audit_263 --output /tmp/263_three_date_separate_research.json
       - name: Archive research output only, no official result promotion
         uses: actions/upload-artifact@v4
