@@ -1,0 +1,62 @@
+{
+  "accepted_training_history_n": 4518,
+  "all_99_canonical_team_date_home_away_keys_unique": true,
+  "decision": "99_OF_99_PUBLISHED_SCORE_OBSERVATIONS_RECORDED_BUT_NO_MODEL_ACCEPTANCE",
+  "football_data_access_repeated": false,
+  "frozen_original_history_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "historical_score_archive_modified": false,
+  "last_external_published_scores_n": 43,
+  "league_detail": {
+    "BEL1": {
+      "external_published_score_observations": 10,
+      "historical_provider_row_rejoined": 0,
+      "observed_btts_count": 5,
+      "observed_over25_count": 5,
+      "official_federation_match_id_attested": 0,
+      "source_tier": "SECONDARY_SCORES_FOREIGN_FEDERATION_CROSSCHECK_ROUND11_EXCEPT_NOV04"
+    },
+    "ENG1": {
+      "external_published_score_observations": 10,
+      "historical_provider_row_rejoined": 0,
+      "observed_btts_count": 6,
+      "observed_over25_count": 5,
+      "official_federation_match_id_attested": 0,
+      "source_tier": "SECONDARY_ROUND_SCORES_OFFICIAL_LEAGUE_FIXTURES_PARTIAL_OFFICIAL_SCORE_ARTICLES"
+    },
+    "ENG2": {
+      "external_published_score_observations": 15,
+      "historical_provider_row_rejoined": 0,
+      "observed_btts_count": 10,
+      "observed_over25_count": 11,
+      "official_federation_match_id_attested": 0,
+      "source_tier": "BROADCASTER_SCORES_EFL_PARTIAL_SCORE_ARTICLE"
+    },
+    "POR1": {
+      "external_published_score_observations": 8,
+      "historical_provider_row_rejoined": 0,
+      "observed_btts_count": 4,
+      "observed_over25_count": 3,
+      "official_federation_match_id_attested": 0,
+      "source_tier": "SECONDARY_SCORES_OFFICIAL_LEAGUE_FIXTURE_SCHEDULE"
+    }
+  },
+  "limitations": [
+    "Original 28 have official round and provider independently observed same results, but lack federation match-ID attestation",
+    "Second 28 have published league/federation/club source score observations, but have not been reconciled to provider source rows",
+    "Final 43 have published score observations, with secondary or partly official support; they lack independent provider row reconciliation and local federation game-ID attestation",
+    "The public source webpages are not fetched by GitHub QA, which validates ONLY the manually transcribed records and their known source domains",
+    "Raw third-party result rows or fixture IDs were not downloaded; 99 public scores do not automatically constitute rights-cleared accepted CSV records",
+    "These 99 are all after current 4518 archive's latest date per league; they are NOT eligible for prior already sealed pre-match predictions",
+    "This is not a new 99-game forward model accuracy pilot",
+    "Do not calculate or adjust M4/KG/Over percentages from these unaccepted records"
+  ],
+  "models_or_forecasts_changed": false,
+  "new_43_provider_row_matches": 0,
+  "portugal_postponed_estoril_maritimo_not_scored": true,
+  "previous_official_or_league_score_provider_concordance_n": 28,
+  "previous_published_official_league_or_club_only_n": 28,
+  "schema": "263_LAST43_PUBLIC_SCORE_IDENTITY_UNCERTAINTY_AUDIT_V1",
+  "total_new_federation_unique_fixture_ids_attested": 0,
+  "total_newly_accepted_provider_rows": 0,
+  "total_score_observations": 99
+}
