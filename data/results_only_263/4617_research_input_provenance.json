@@ -1,0 +1,33 @@
+{
+  "schema": "263_4617_RESULTS_ONLY_RESEARCH_INPUT_V1",
+  "status": "PUBLIC_RESULT_SCORES_RESEARCH_ENABLEMENT_NOT_OFFICIAL_ID_VERIFIED",
+  "source_snapshot_path": "data/results_only_263/2026-11-10_completed_4617_scores_only.csv",
+  "source_snapshot_sha256": "637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89",
+  "base_archive_path": "data/quad_accepted_263/extended_history.csv",
+  "base_4518_sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+  "legacy_frozen_4413_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "new_99_result_archive": "data/quad_accepted_263/completed_99_results_only_20261110.json",
+  "accepted_old_rows": 4518,
+  "added_completed_results": 99,
+  "usable_total_rows": 4617,
+  "source_grade_counts": {
+    "OFFICIAL_PAGE_AND_PROVIDER_RESEARCH_CONCORDANT": 28,
+    "DIRECT_LEAGUE_OR_CLUB_SCORE_PAGE": 28,
+    "PUBLIC_SECONDARY_SCORE_WITH_PARTIAL_OFFICIAL_FIXTURE": 43
+  },
+  "official_unique_match_id_verified": false,
+  "new_rows_shots_corners_xg_included": false,
+  "old_9_ENG2_stat_fields_modified": false,
+  "approval_scope": "USER_EXPLICITLY_REQUESTED_M4_USE_4617_RESULT_ROWS_FOR_NEW_RESEARCH_FORECASTS_2026_11_10",
+  "human_official_review_of_all_99": false,
+  "independent_source_verification_by_code": false,
+  "betting_authorized": false,
+  "forward_seals_rewrite_allowed": false,
+  "training_policy": "AS_OF_PREMATCH_DATE_EXCLUSIVE_AND_FULL_MATCH_ELIGIBILITY",
+  "limitations": [
+    "Results-only archive not equivalent to independently accepted official per-fixture score evidence",
+    "Use new scores for experimental football M4 goal fitting, never for retrospective prediction rewrites",
+    "Old 4518 accepted rows and model coefficients / DEV hyperparameter lock remain unchanged",
+    "43 scores have secondary source observations with partial official fixture crosschecks"
+  ]
+}
