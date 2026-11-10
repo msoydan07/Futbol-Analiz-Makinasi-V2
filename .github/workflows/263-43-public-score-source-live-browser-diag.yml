@@ -1,0 +1,33 @@
+name: "263 43 official public score pages live browser read-only evidence"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/browser_verify_primary43_263.py'
+      - 'data/results_only_263/43_primary_public_score_review_20261110.json'
+      - '.github/workflows/263-43-public-score-source-live-browser-diag.yml'
+permissions:
+  contents: read
+jobs:
+  live-official-page-text-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prepare one read-only browser with bounded source checks
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.58.0
+          python -m playwright install chromium
+      - name: Fetch each unique source URL, compare explicit visible final score and both clubs
+        run: python experiments/263/browser_verify_primary43_263.py --output /tmp/263_primary43_live_webpage_score_results.json
+      - name: Save all 43 per-game verification statuses even if some blocked
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-primary43-official-page-LIVE-score-verification-not-a-model-change
+          path: /tmp/263_primary43_live_webpage_score_results.json
+          retention-days: 30
+          if-no-files-found: warn
