@@ -1,0 +1,114 @@
+{
+  "schema": "263_NOV10_REAL_BELGIAN_OFFICIAL_SSR_FUTURE_FIXTURE_SOURCE_OBSERVATIONS_V1",
+  "observation_day_turkey": "2026-11-10",
+  "source_url": "https://www.proleague.be/jpl-kalender!",
+  "source_type": "FIRST_PARTY_PROLEAGUE_NEXTJS_SERVER_SIDE_RENDERED_JSON",
+  "fixture_source_gh_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/42897323995",
+  "fixture_source_sha256": "cf852ac069bed224cc0ad2419f5392e87cd99f90f754d04a7015a38ac7bf67f7",
+  "confirmed_page_http_200": true,
+  "parser": "belgium_proleague_nextjs_jpl",
+  "next_7_day_window_until": "2026-11-17",
+  "matches_in_real_next_7_days": 0,
+  "observed_future_fixture_records": 9,
+  "model_forecasts_created": 0,
+  "not_allowed_for_backdated_or_prematch_sealing": true,
+  "tminus_60_first_eleven_not_required": false,
+  "matches": [
+    {
+      "official_source_fixture_id": "1b54de12-e822-4cc5-a90a-c4393348810d",
+      "league": "BEL1",
+      "home": "Cercle Brugge",
+      "away": "KVC Westerlo",
+      "kickoff_utc": "2026-11-20T19:45:00Z",
+      "local_date": "2026-11-20",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    },
+    {
+      "official_source_fixture_id": "774e6d1f-0652-4983-8f0a-0cd8add0aedd",
+      "league": "BEL1",
+      "home": "Sporting Charleroi",
+      "away": "STVV",
+      "kickoff_utc": "2026-11-21T15:00:00Z",
+      "local_date": "2026-11-21",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    },
+    {
+      "official_source_fixture_id": "103e07de-a0ce-4948-a149-e471be4c225d",
+      "league": "BEL1",
+      "home": "KRC Genk",
+      "away": "RAAL La Louvière",
+      "kickoff_utc": "2026-11-21T17:15:00Z",
+      "local_date": "2026-11-21",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    },
+    {
+      "official_source_fixture_id": "8523f794-dba8-48eb-bca1-d21f1c975e82",
+      "league": "BEL1",
+      "home": "KV Mechelen",
+      "away": "Club Brugge",
+      "kickoff_utc": "2026-11-21T19:45:00Z",
+      "local_date": "2026-11-21",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    },
+    {
+      "official_source_fixture_id": "c90b0d15-6a94-4f57-9b82-82568489b21a",
+      "league": "BEL1",
+      "home": "SV Zulte Waregem",
+      "away": "Royal Antwerp FC",
+      "kickoff_utc": "2026-11-21T19:45:00Z",
+      "local_date": "2026-11-21",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    },
+    {
+      "official_source_fixture_id": "62cc7431-999d-445d-8d8f-e8aced3b9971",
+      "league": "BEL1",
+      "home": "SK Beveren",
+      "away": "KAA Gent",
+      "kickoff_utc": "2026-11-22T12:30:00Z",
+      "local_date": "2026-11-22",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    },
+    {
+      "official_source_fixture_id": "62c7ad93-b157-40a0-a8b2-96eba5ab290c",
+      "league": "BEL1",
+      "home": "KV Kortrijk",
+      "away": "Royale Union Saint-Gilloise",
+      "kickoff_utc": "2026-11-22T15:00:00Z",
+      "local_date": "2026-11-22",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    },
+    {
+      "official_source_fixture_id": "2b17bd3d-4c96-482b-83f1-a3d6917f8cbf",
+      "league": "BEL1",
+      "home": "RSC Anderlecht",
+      "away": "OH Leuven",
+      "kickoff_utc": "2026-11-22T17:30:00Z",
+      "local_date": "2026-11-22",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    },
+    {
+      "official_source_fixture_id": "65f837af-e5b5-438a-89d0-8b237c77a118",
+      "league": "BEL1",
+      "home": "Lommel SK",
+      "away": "Standard de Liège",
+      "kickoff_utc": "2026-11-22T18:15:00Z",
+      "local_date": "2026-11-22",
+      "match_status": "PRE_MATCH_FUTURE_OBSERVED",
+      "fixture_source_url": "https://www.proleague.be/jpl-kalender!"
+    }
+  ],
+  "limitations": [
+    "Observed on 10 Nov; all nine fixtures are after the strict next-seven-day window. Future official source must be fetched again for a user's actual game-day prematch SHA seal.",
+    "Source match UUIDs are from Pro League website and not interchangeable with internal 2.6.3 team UUIDs.",
+    "Live official score pages can still return 403 to GitHub browser. This fixture endpoint itself was HTTP 200.",
+    "Do not report these November 20-22 games as today's games or as a 10 November pre-match sealed pilot."
+  ]
+}
