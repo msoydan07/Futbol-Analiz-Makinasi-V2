@@ -1,0 +1,39 @@
+name: "263 future-day goal lambda versus KG/Over2.5 error read-only"
+on:
+  push:
+    branches:
+      - research/263-future-goal-error-attribution-20261111
+    paths:
+      - 'research/opponent_goals/prospective_goal_error_attribution_263.py'
+      - 'research/opponent_goals/test_prospective_goal_error_attribution_263.py'
+      - '.github/workflows/263-future-days-goal-error-attribution-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-seals-unchanged-and-future-observer-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned numeric dependencies for existing M4 probability helper
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Test new-day-only result SHA, chronology, no leakage, 10-day bootstrap
+        env:
+          PYTHONPATH: ".:experiments/263:research/opponent_goals"
+        run: python -m unittest -v research/opponent_goals/test_prospective_goal_error_attribution_263.py
+      - name: Real repo has no Nov 9 onward results - report WAITING not invented
+        env:
+          PYTHONPATH: ".:experiments/263:research/opponent_goals"
+        run: python research/opponent_goals/prospective_goal_error_attribution_263.py --out /tmp/263-prospective-goal-error-attribution.json
+      - name: Persist prospective readiness evidence separate from older 96/99/46
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-future-only-goal-error-observer-not-new-pilot
+          path: /tmp/263-prospective-goal-error-attribution.json
+          retention-days: 30
+          if-no-files-found: warn
