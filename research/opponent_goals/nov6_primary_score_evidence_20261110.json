@@ -1,0 +1,70 @@
+{
+  "schema": "263_NOV6_PRIMARY_SOURCE_OBSERVATIONS_OLD_QUAD4_RESEARCH_V1",
+  "day": "2026-11-06",
+  "cohort": "legacy_forward_quad4_NOT_acceptance3_or_new100",
+  "reviewed_public_web_on": "2026-11-10",
+  "ci_independently_rechecks_sources": false,
+  "production_result_attestation": false,
+  "observations": [
+    {
+      "league": "TUR1",
+      "home": "gaziantep",
+      "away": "kasimpasa",
+      "score": [
+        0,
+        2
+      ],
+      "source_type": "OFFICIAL_FEDERATION",
+      "source_url": "https://www.tff.org/Default.aspx?macId=317874&pageId=29",
+      "seal_path": "forward_quad_263/2026-11-06/1d6b6f16fef8bac971c184c4.json",
+      "seal_sha256": "7b93dd66386bb2bad76d4719aec4cb5a6cf1c12d0fc2e39c8c822af41e3199e0"
+    },
+    {
+      "league": "ITA1",
+      "home": "venezia",
+      "away": "udinese",
+      "score": [
+        2,
+        1
+      ],
+      "source_type": "OFFICIAL_LEAGUE",
+      "source_url": "https://www.legaseriea.it/serie-a/match/bf37357a39104053ba3416ab143870e9/Venezia-vs-Udinese",
+      "seal_path": "forward_quad_263/2026-11-06/3cd1e224f932b9351e6820a0.json",
+      "seal_sha256": "69d5903390f8c56b104c8045acc5c5d6f2d43eaf8847011ec055ae35f678a9cb"
+    },
+    {
+      "league": "NED1",
+      "home": "willem ii",
+      "away": "pec zwolle",
+      "score": [
+        1,
+        1
+      ],
+      "source_type": "OFFICIAL_FEDERATION",
+      "source_url": "https://www.knvb.nl/competities/eredivisie/uitslagen",
+      "seal_path": "forward_quad_263/2026-11-06/90debab20dde0a252464c894.json",
+      "seal_sha256": "3d84bf5b4d5877a69ea484ae914addf158b794ae9fa6891539b685aaad10a61e"
+    },
+    {
+      "league": "FRA1",
+      "home": "toulouse",
+      "away": "strasbourg",
+      "score": [
+        3,
+        1
+      ],
+      "source_type": "OFFICIAL_CLUB",
+      "source_url": "https://www.toulousefc.com/match-center/equipe-professionnelle-20262027-a4qw50gbzq6myjglp6r96l4wk",
+      "seal_path": "forward_quad_263/2026-11-06/b3bebd5fc0d3f2f56212bce5.json",
+      "seal_sha256": "be375b7dba9cc26582d04ad5cf4f05acc8a3ad16be59ff72df36947e979190cc"
+    }
+  ],
+  "limitations": [
+    "Old 6 Nov four SHA files are legacy forward_quad research and not the new100 cohort",
+    "All four pairs matched registered team identity index IDs, not merely by kickoff date",
+    "Primary league/federation/club webpages reviewed externally; CI does not independently fetch their live bodies",
+    "Results are research observations, not production-accepted official game-ID attestations",
+    "Do not pool distinct cohorts' outcomes to certify probability calibration; 4+3+39 across 3 dates remains exploratory",
+    "Unmodified original model, probability estimates, source history and sealed hashes"
+  ]
+}
