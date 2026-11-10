@@ -109,7 +109,7 @@ def evaluate(root=ROOT, *, evidence_override=None):
             raise Blocked("UNSUPPORTED_SOURCE_CLASS")
         batch_row = registered[key]
         path = batch_row.get("forecast_path", "")
-        if not re.fullmatch(r"forward_acceptance_263/2026-11-07/[0-9a-f]{24}\\.json", path):
+        if not re.fullmatch(r"forward_acceptance_263/2026-11-07/[0-9a-f]{24}\.json", path):
             raise Blocked("NOT_ORIGINAL_NOV7_ACCEPTANCE3_SEAL_PATH")
         seal = load(root, path)
         digest = sha256_object({k: v for k, v in seal.items() if k != "payload_sha256"})
