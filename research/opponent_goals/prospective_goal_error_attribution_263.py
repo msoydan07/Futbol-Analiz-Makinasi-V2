@@ -26,6 +26,9 @@ sys.path.insert(0,str(ROOT/"experiments/263"))
 from forward_c3 import read_aware
 from market_fifth_baseline_263 import sealed_payload
 from sabah_postmatch_new100_263 import checked_score, scores_for
+from m4_integrated import score_markets
+# Fixed DEV-only research hypothesis; not an M4 setting or betting percentage.
+CANDIDATE_LAMBDA_SCALE=1.05
 
 START=date(2026,11,9)  # Explicit: none of original Nov 6, 7, 8 forward pilot.
 MODELS=("B","C2","C3","M4")
@@ -155,6 +158,30 @@ def _metrics(f,observation):
             p=scored["market_scores"]
             comparisons[f"{other}_minus_M4_{market}_brier"]=(p[other][market]["brier"]
                                                               -p["M4"][market]["brier"])
+    # Only genuine prospective SHA-locked new100 fixture outcomes are eligible.
+    # The candidate stays OUT of saved forecasts, MS/KG/O25 user displays and picks.
+    fixed_candidate=None
+    if 0.05<=lh*CANDIDATE_LAMBDA_SCALE<=5 and 0.05<=la*CANDIDATE_LAMBDA_SCALE<=5:
+        shifted=score_markets(lh*CANDIDATE_LAMBDA_SCALE,
+                              la*CANDIDATE_LAMBDA_SCALE)["markets"]
+        ms_observed="H" if h>a else "A" if a>h else "D"
+        m4_ms=published["1X2"]
+        require(set(m4_ms)=={"H","D","A"},"ORIGINAL_M4_MS_UNAVAILABLE")
+        base_ms=sum((m4_ms[k]-int(k==ms_observed))**2 for k in ("H","D","A"))
+        shifted_ms=sum((shifted["1X2"][k]-int(k==ms_observed))**2
+                       for k in ("H","D","A"))
+        fixed_candidate={
+            "method":"M4_SAME_PREMATCH_LAMBDAS_SCALED_1_05_DEV_RESEARCH_ONLY",
+            "lambda_scale":CANDIDATE_LAMBDA_SCALE,
+            "candidate_minus_original_KG_Brier":(
+                (shifted["BTTS_YES"]-outcomes["btts"])**2-
+                (independent["BTTS_YES"]-outcomes["btts"])**2),
+            "candidate_minus_original_O25_Brier":(
+                (shifted["OVER_2.5"]-outcomes["over25"])**2-
+                (independent["OVER_2.5"]-outcomes["over25"])**2),
+            "candidate_minus_original_MS_Brier":shifted_ms-base_ms,
+            "saved_model_and_forecast_unchanged":True
+        }
     return {
         "forecast_sha256":f["payload_sha256"],
         "league":fg["league"],
@@ -168,6 +195,7 @@ def _metrics(f,observation):
         "m4_over25_brier":(outcomes["over25"]-independent["OVER_2.5"])**2,
         "diagnostics":diag,
         "paired_comparisons":comparisons,
+        "fixed_lambda_105_dev_candidate":fixed_candidate,
         "result_provenance":observation["verification_scope"],
     }
 
@@ -233,6 +261,30 @@ def attribution_report(root=ROOT,now=None):
                 "other_minus_M4_positive_favors_M4":_mean([x["value"] for x in matched]),
                 "date_block_95pct_interval":_day_ci(matched,"value")
             }
+    # Research challenger comparisons are computed after match completion,
+    # but the precommitted scale was fixed from the 2025/26 DEV experiment.
+    # Missing/unsafe lambda candidates are excluded, never imputed.
+    fixed_keys=("candidate_minus_original_KG_Brier",
+                "candidate_minus_original_O25_Brier",
+                "candidate_minus_original_MS_Brier")
+    fixed_rows=[r for r in completed if r["fixed_lambda_105_dev_candidate"] is not None]
+    fixed_summary={
+      "schema":"263_FIXED_LAMBDA_105_DEV_CANDIDATE_PAIRED_NEW_DAYS_V1",
+      "label":"EXPLORATORY_DEV_PREDECLARED_SHADOW_COMPARISON_NOT_MODEL_PROMOTION",
+      "candidate_lambda_scale":CANDIDATE_LAMBDA_SCALE,
+      "same_match_new_day_n":len(fixed_rows),
+      "excluded_out_of_safe_lambda_range":len(completed)-len(fixed_rows),
+      "candidate_minus_original_lower_brier_is_better":{
+        k:{"mean":_mean([r["fixed_lambda_105_dev_candidate"][k] for r in fixed_rows]),
+           "date_block_95pct_interval":_day_ci(
+               [{"date":r["date"],"value":r["fixed_lambda_105_dev_candidate"][k]}
+                for r in fixed_rows],"value")}
+        for k in fixed_keys
+      },
+      "no_pre_match_probability_changes":True,
+      "no_new_pilot":True,
+      "no_model_promotion":True,
+    }
     enough=len(completed)>=MIN_MATCHES and len(days)>=MIN_DISTINCT_DAYS
     lambda_bias=any(_in_interval(aggregate[name]["date_block_95pct_interval"])
                     for name in ("home_goal_residual","away_goal_residual",
@@ -266,6 +318,7 @@ def attribution_report(root=ROOT,now=None):
         "day_block_interval_minimum_matches":MIN_MATCHES,
         "diagnostics":aggregate,
         "mean_market_brier_and_paired_models":summaries,
+        "fixed_lambda_105_dev_candidate_shadow":fixed_summary,
         "triage_hypothesis_not_model_decision":triage,
         "causal_lambda_vs_dependence_identification_proven":False,
         "forecasts_or_model_modified":False,
@@ -279,7 +332,9 @@ def attribution_report(root=ROOT,now=None):
             "Even a near-zero aggregate goal residual does NOT establish individual lambda calibration.",
             "Cross-goal and zero-goal residuals can reflect omitted context or lambda errors, not uniquely goal dependence.",
             "Date-block CIs only begin at 10 distinct dates and 80 matched games; they do not authorize promotion or betting.",
-            "Four-model market Brier is compared ONLY on same eligible matches; a missing model remains missing."]
+            "Four-model market Brier is compared ONLY on same eligible matches; a missing model remains missing.",
+            "DEV-only lambda x1.05 challenger is a fixed after-result research comparison, never a live forecast probability or model approval.",
+            "The 2025/26 DEV confidence interval crossed zero for KG, over 2.5 and MS; only new dated prospective results may provide further evidence."]
     }
 
 def main():
