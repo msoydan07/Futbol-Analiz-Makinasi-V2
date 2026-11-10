@@ -194,7 +194,8 @@ def discover(league, lines, now):
  return sorted(set((h,a) for h,a in found if len(h)>2 and len(a)>2 and len(h)<90 and len(a)<90
                     and len([t for t in extract(league,lines,h,a,now) if now<=t<=now+timedelta(days=7)])==1))
 
-FALLBACK_SOURCES={"BEL1":["https://kvmechelen.be/kalenderupdatesept/","https://www.krcgenk.be/en","https://www.proleague.be/nl/jpl-calendar"],\n "ENG2":["https://www.efl.com/competitions/efl-championship/"]}
+FALLBACK_SOURCES={"BEL1":["https://kvmechelen.be/kalenderupdatesept/","https://www.krcgenk.be/en","https://www.proleague.be/nl/jpl-calendar"],
+ "ENG2":["https://www.efl.com/competitions/efl-championship/"]}
 def lookup(league,home,away):
  from playwright.sync_api import sync_playwright
  now=datetime.now(timezone.utc);url=SOURCES[league]
