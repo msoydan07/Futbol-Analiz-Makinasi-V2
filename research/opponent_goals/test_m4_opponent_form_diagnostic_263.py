@@ -106,6 +106,12 @@ class M4OpponentFormAuditTests(unittest.TestCase):
         self.assertEqual(set(report["league_level_descriptives"]),
                          {"ENG1","ENG2","GER1","ESP1","ITA1","FRA1","NED1","TUR1","POR1","BEL1"})
         self.assertEqual(set(report["paired_form_challenger_scores"]),{"0.1","0.2"})
+        self.assertEqual(len(report["opponent_strength_by_league"]),10)
+        self.assertGreaterEqual(report["leagues_with_same_strong_to_weak_residual_direction"],0)
+        self.assertLessEqual(report["leagues_with_same_strong_to_weak_residual_direction"],10)
+        self.assertEqual(report["strong_minus_weak_home_goal_residual_by_day"]
+                         ["day_block_exploratory_95pct"]["method"],
+                         "resample_all_games_within_selected_match_dates")
         for c in ("0.1","0.2"):
             self.assertEqual(report["paired_form_challenger_scores"][c]["n_paired"],
                              report["paired_five_match_asof_form_matches"])
