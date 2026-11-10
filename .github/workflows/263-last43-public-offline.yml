@@ -1,0 +1,36 @@
+name: "263 last 43 public score sources - source-tier QA only"
+on:
+  push:
+    branches:
+      - research/263-last43-public-evidence-20261110
+    paths:
+      - 'research/opponent_goals/remaining_43_public_score_observations_20261110.json'
+      - 'research/opponent_goals/final_43_public_score_audit_263.py'
+      - 'research/opponent_goals/test_final_43_public_score_audit_263.py'
+      - '.github/workflows/263-last43-public-offline.yml'
+permissions:
+  contents: write
+jobs:
+  reconcile_public_evidence_not_official_attestation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline 99-count no-dup source tier and malicious-ID tests
+        run: python research/opponent_goals/test_final_43_public_score_audit_263.py
+      - name: Commit new source-class research summary, no supplier access
+        run: |
+          python research/opponent_goals/final_43_public_score_audit_263.py \
+            --root . \
+            --out research/opponent_goals/reports/last43_public_score_evidence_audit_20261110.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/opponent_goals/reports/last43_public_score_evidence_audit_20261110.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Research: 99 public score sources across 3 evidence tiers, no source re-download [skip ci]"
+          git push origin HEAD:research/263-last43-public-evidence-20261110
