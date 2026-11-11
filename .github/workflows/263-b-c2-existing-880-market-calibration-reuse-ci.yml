@@ -1,0 +1,55 @@
+name: "263 B C2 KG O25 MS reuse original 880 DEV and existing October audit"
+on:
+  push:
+    branches: [research/263-b-c2-market-calibration-reuse-20261111]
+    paths:
+      - 'research/model_selection/b_c2_existing_880_market_calibration_audit_263.py'
+      - 'research/model_selection/test_b_c2_existing_880_market_calibration_audit_263.py'
+      - '.github/workflows/263-b-c2-existing-880-market-calibration-reuse-ci.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  reuse-880-no-old-model-refit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit tests use already installed Python only - zero numerical model recomputation
+        env:
+          PYTHONPATH: experiments/263:research/model_selection
+        run: python -m unittest -v research/model_selection/test_b_c2_existing_880_market_calibration_audit_263.py
+      - name: Download EXACT previous original 880 reconstructions - never train again
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/263_reuse
+          gh run download 41836437930 --repo "$GITHUB_REPOSITORY" \
+            -n 263-880-four-model-goals-PAS-RESEARCH-ONLY -D /tmp/263_reuse
+          test -s /tmp/263_reuse/first_goal_market_asof_predictions.csv
+          test -s /tmp/263_reuse/first_goal_pas_report.json
+          echo 'dc674e2d05641eca27a8655eacfe6457e4140fb2adbdb0d9002b45e38cca1b3d  /tmp/263_reuse/first_goal_market_asof_predictions.csv' | sha256sum -c -
+      - name: Compare same-date 4-model KG / 2.5 / 1X2 and first DEV B/C2 calibration
+        env:
+          PYTHONPATH: experiments/263:research/model_selection
+        run: |
+          python research/model_selection/b_c2_existing_880_market_calibration_audit_263.py \
+            --predictions /tmp/263_reuse/first_goal_market_asof_predictions.csv \
+            --prior-report /tmp/263_reuse/first_goal_pas_report.json \
+            --out /tmp/263_reuse/B_C2_original_880_market_calibration_audit.json
+      - name: Ensure no source, existing calibration lock, or SHA forecasts changed
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
+      - name: Retain fully marked old-development/inspected-October research-only result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-existing-880-B-C2-KG-O25-MS-dev-market-calibration-audit-only
+          retention-days: 30
+          if-no-files-found: warn
+          path: /tmp/263_reuse/B_C2_original_880_market_calibration_audit.json
