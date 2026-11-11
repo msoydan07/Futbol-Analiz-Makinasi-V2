@@ -82,6 +82,41 @@ def main():
                         if t.get("countryCode")!="IT":reasons.append(tname+"_country_not_IT")
             for reason in reasons:
                 checks["schema_issues"][reason]=checks["schema_issues"].get(reason,0)+1
+
+        from datetime import datetime,timezone
+        import re
+        edge={};seen=set();cases=[]
+        for i,m in enumerate(raw):
+            if not isinstance(m,dict) or m.get("status")!="UPCOMING":continue
+            reasons=[]
+            h=m.get("home") or {};a=m.get("away") or {}
+            for t,side in ((h,"home"),(a,"away")):
+                tid=str(t.get("teamId"))
+                if re.fullmatch(r"serie-a::Football_Team::[a-f0-9]{32}",tid) is None:
+                    reasons.append(side+"_id_not_32hex")
+                name=t.get("officialName") or t.get("shortName")
+                if not isinstance(name,str) or not name.strip():
+                    reasons.append(side+"_name_missing")
+            if h.get("teamId")==a.get("teamId"):reasons.append("same_team")
+            try:
+                stamp=datetime.fromisoformat(str(m.get("matchDateUtc")).replace("Z","+00:00"))
+                if stamp.tzinfo is None:reasons.append("date_naive")
+                else:
+                    stamp=stamp.astimezone(timezone.utc)
+                    if not(datetime(2026,8,1,tzinfo=timezone.utc)<=stamp<=datetime(2027,6,1,tzinfo=timezone.utc)):
+                        reasons.append("date_out_of_season")
+            except Exception:
+                reasons.append("date_unparseable")
+                stamp=None
+            key=(h.get("officialName") or h.get("shortName"),
+                 a.get("officialName") or a.get("shortName"),str(stamp))
+            if key in seen:reasons.append("duplicate_fixture")
+            seen.add(key)
+            if reasons and len(cases)<6:
+                cases.append({"i":i,"reasons":reasons,"teams":key,"matchDateUtc":m.get("matchDateUtc")})
+            for reason in reasons:edge[reason]=edge.get(reason,0)+1
+        checks["strict_rejection_reasons"]=edge
+        checks["strict_rejection_examples"]=cases
         checks["strict_events"]=len(parse_sdp_events(matches))
         print("SERIEA_PARSER_INSPECTION="+json.dumps(checks,ensure_ascii=False),flush=True)
 
