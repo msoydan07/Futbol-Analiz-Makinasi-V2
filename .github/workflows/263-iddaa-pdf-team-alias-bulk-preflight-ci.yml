@@ -16,6 +16,11 @@ on:
       - 'experiments/263/test_iddaa_pdf_first_value_bridge_263.py'
       - 'experiments/263/iddaa_pdf_one_step_263.py'
       - 'experiments/263/test_iddaa_pdf_one_step_263.py'
+      - 'experiments/263/test_263_independent_goal_math_audit.py'
+      - 'experiments/263/real_4617_math_readiness_audit_263.py'
+      - 'experiments/263/iddaa_pdf_value_bridge_263.py'
+      - 'experiments/263/forward_empirical_baseline_263.py'
+      - '.gitignore'
       - 'experiments/263/four_model_value_policy_263.py'
       - '.github/workflows/263-iddaa-pdf-team-alias-bulk-preflight-ci.yml'
 permissions:
@@ -23,7 +28,7 @@ permissions:
 jobs:
   no-odds-api-safe-label-preflight:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -41,7 +46,22 @@ jobs:
       - name: Single 7-test alias / strict fixture order / skip only unmatched batch check
         env:
           PYTHONPATH: experiments/263
-        run: python -m unittest -v experiments/263/test_iddaa_pdf_team_alias_preflight_263.py experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_session_263.py experiments/263/test_iddaa_pdf_report_263.py experiments/263/test_iddaa_pdf_first_value_bridge_263.py experiments/263/test_four_model_value_policy_263.py experiments/263/test_iddaa_pdf_one_step_263.py
+        run: python -m unittest -v experiments/263/test_iddaa_pdf_team_alias_preflight_263.py experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_session_263.py experiments/263/test_iddaa_pdf_report_263.py experiments/263/test_iddaa_pdf_first_value_bridge_263.py experiments/263/test_four_model_value_policy_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_263_independent_goal_math_audit.py
+      - name: Real 4617 completed-score historical snapshot fixed ten-league M4/B/C2/C3 as-of readiness audit
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python experiments/263/real_4617_math_readiness_audit_263.py \
+            --history data/results_only_263/2026-11-10_completed_4617_scores_only.csv \
+            --lock experiments/263/m4_lock.json \
+            --out /tmp/263_real_4617_readiness.json
+      - name: Save one read-only aggregate math audit evidence JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-real-4617-asof-ten-league-math-readiness
+          path: /tmp/263_real_4617_readiness.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Assert this preflight never modified sealed predictions, odds, models, or registry
         run: |
           git diff --quiet
