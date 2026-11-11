@@ -47,6 +47,10 @@ KNOWN_EXTERNAL_VARIANTS={
           "Genclerbirligi SK":"GENÇLERBİRLİĞİ"},
 }
 assert sum(len(x) for x in KNOWN_EXTERNAL_VARIANTS.values())==20
+# KNVB federation's live display spelling, with 2026-27 canonical N.E.C.
+# Nijmegen identity pinned by the signed registry. Separate from bookmaker
+# observed spellings; never claim that the Iddaa PDF used this alias.
+OFFICIAL_SOURCE_VARIANTS={"NED1":{"N.E.C.":"N.E.C. Nijmegen"}}
 
 def normal(s):
     if not isinstance(s,str):return ""
@@ -92,6 +96,13 @@ def index_registry(registry_path=REGISTRY):
             if new in aliases and aliases[new]!=tid:
                 raise ValueError("EXTERNAL_TEAM_ALIAS_COLLISION_"+league)
             aliases[new]=tid
+        for shown,canonical in OFFICIAL_SOURCE_VARIANTS.get(league,{}).items():
+            tid=aliases.get(normal(canonical))
+            if tid is None:raise ValueError("OFFICIAL_ALIAS_TARGET_MISSING_"+league)
+            key=normal(shown)
+            if key in aliases and aliases[key]!=tid:
+                raise ValueError("OFFICIAL_ALIAS_COLLISION_"+league)
+            aliases[key]=tid
         byleague[league]=aliases
     return byleague,names,members
 

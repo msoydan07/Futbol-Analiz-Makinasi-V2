@@ -368,7 +368,12 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     m=_Markup();m.feed(html)
     from sabah_portugal_official_news_263 import PARSER as POR_NEWS_PARSER,parse_news
     from sabah_belgium_official_nextjs_263 import PARSER as BEL_NEWS_PARSER,parse_proleague
-    funcs={BEL_NEWS_PARSER:lambda _m:parse_proleague(html),
+    from postbreak_official_parsers_263 import (
+        parse_tff_round12,parse_ligue1_round11,parse_portugal_round12)
+    funcs={'tff_2026_week12':lambda _m:parse_tff_round12(html),
+           'ligue1_2026_round11_tv':lambda _m:parse_ligue1_round11(html),
+           'ligaportugal_2026_round12_tv':lambda _m:parse_portugal_round12(html),
+           BEL_NEWS_PARSER:lambda _m:parse_proleague(html),
            POR_NEWS_PARSER:lambda _m:parse_news(html),
            'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,
            'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026,

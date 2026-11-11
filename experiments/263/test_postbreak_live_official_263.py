@@ -53,21 +53,23 @@ class RealSourceAndBreakGate(unittest.TestCase):
             result=lookup(lg,home,away,now=T,fetcher=lambda u:(u,"<html>Loading...</html>"))
             self.assertNotEqual(result.get("status"),"VERIFIED_OFFICIAL_FIXTURE")
 
-    def test_break_only_two_scoped_leagues_and_sources(self):
-        for lg in ("ENG1","ENG2"):
-            src=EXCEPTIONS[lg]["source"]
-            kickoff="2026-11-21T12:30:00+00:00"
-            gate={"status":"VERIFIED","source_url":src,
-                  "retrieved_at_utc":T.isoformat(),"kickoff_utc":kickoff}
-            result=freshness_gate(league=lg,latest="2026-11-08",
-                       match_date="2026-11-21",gate=gate,now=T)
-            self.assertEqual(result["status"],"REVIEWED_FIRST_POST_BREAK_SCHEDULE_ONLY",result)
+    def test_break_all_ten_scoped_leagues_and_sources(self):
+        self.assertEqual(set(EXCEPTIONS),set(("ENG1","ENG2","GER1","ESP1","ITA1",
+                                           "FRA1","NED1","TUR1","POR1","BEL1")))
+        for lg,cfg in EXCEPTIONS.items():
+            date=cfg["official_scope"].split("/")[0]
+            at=datetime.fromisoformat(date+"T10:00:00+00:00")
+            ko=datetime.fromisoformat(date+"T12:30:00+00:00")
+            gate={"status":"VERIFIED","source_url":cfg["source"],
+                  "retrieved_at_utc":at.isoformat(),"kickoff_utc":ko.isoformat()}
+            result=freshness_gate(league=lg,latest="2026-11-07",
+                    match_date=date,gate=gate,now=at)
+            self.assertEqual(result["status"],"REVIEWED_FIRST_POST_BREAK_SCHEDULE_ONLY",
+                    (lg,result))
             for bad in ("https://unofficial.com","https://www.tff.org/"):
-                with self.subTest(lg=lg,bad=bad):
-                    changed={**gate,"source_url":bad}
-                    self.assertTrue(freshness_gate(league=lg,latest="2026-11-08",
-                        match_date="2026-11-21",gate=changed,now=T)["status"].startswith("BLOCKED"))
-        assert "TUR1" not in EXCEPTIONS
+                changed={**gate,"source_url":bad}
+                self.assertTrue(freshness_gate(league=lg,latest="2026-11-07",
+                    match_date=date,gate=changed,now=at)["status"].startswith("BLOCKED"))
         self.assertTrue(freshness_gate(league="TUR1",latest="2026-11-08",
                 match_date="2026-11-21",gate={},now=T)["status"].startswith("BLOCKED"))
 
@@ -81,5 +83,93 @@ class RealSourceAndBreakGate(unittest.TestCase):
                 match_date=day,gate=gate,now=T)["status"].startswith("BLOCKED"))
         self.assertEqual(freshness_gate(league="TUR1",latest="2026-11-14",
             match_date="2026-11-21",gate={},now=T)["status"],"NORMAL_TEN_DAY_LIMIT")
+
+
+    def test_actual_knvb_short_nec_identity_is_exact_canonical(self):
+        idx,_,_=index_registry()
+        self.assertEqual(resolve_label("NED1","N.E.C.",idx)["status"],"MAPPED")
+        self.assertEqual(resolve_label("NED1","N.E.C.",idx)["team_id"],
+                         resolve_label("NED1","N.E.C. Nijmegen",idx)["team_id"])
+
+    def test_official_tff_nov12_round_uses_only_exact_cells_and_clock(self):
+        from postbreak_official_parsers_263 import parse_tff_round12
+        names=[
+         ("21.11.2026 13:30","GENÇLERBİRLİĞİ","GAZİANTEP FUTBOL KULÜBÜ A.Ş."),
+         ("21.11.2026 16:00","AMED SPORTİF FAALİYETLER","ÇAYKUR RİZESPOR A.Ş."),
+         ("21.11.2026 16:00","GALATASARAY A.Ş.","SAMSUNSPOR A.Ş."),
+         ("21.11.2026 19:00","KOCAELİSPOR","FENERBAHÇE A.Ş."),
+         ("22.11.2026 13:30","ERZURUMSPOR FK","GÖZTEPE A.Ş."),
+         ("22.11.2026 16:00","KASIMPAŞA A.Ş.","CORENDON ALANYASPOR"),
+         ("22.11.2026 16:00","TÜMOSAN KONYASPOR","BEŞİKTAŞ A.Ş."),
+         ("22.11.2026 19:00","TRABZONSPOR A.Ş.","EYÜPSPOR"),
+         ("23.11.2026 20:00","İSTANBUL BAŞAKŞEHİR FK","ARCA ÇORUM FK")]
+        prefix="<h1>Trendyol Süper Lig 2026-2027 Sezonu Fikstürü</h1><p>12.Hafta</p>"
+        def build(rows):
+            return "<html>"+prefix+"<table>"+"".join(
+                "<tr><td>"+dt+"</td><td>"+h+"</td><td>-</td><td>"+a+"</td><td>Detaylar</td></tr>"
+                for dt,h,a in rows)+"</table></html>"
+        source=build(names)
+        self.assertEqual(len(parse_tff_round12(source)),9)
+        result=lookup("TUR1","GALATASARAY A.Ş.","SAMSUNSPOR A.Ş.",
+            now=datetime(2026,11,21,11,0,tzinfo=timezone.utc),
+            fetcher=lambda u:(u,source))
+        self.assertEqual(result["status"],"VERIFIED_OFFICIAL_FIXTURE",result)
+        self.assertEqual(result["kickoff_utc"],"2026-11-21T13:00:00+00:00")
+        self.assertEqual(parse_tff_round12(build(names[:-1])),[])
+        self.assertEqual(lookup("TUR1","SAMSUNSPOR A.Ş.","GALATASARAY A.Ş.",
+            now=datetime(2026,11,21,11,0,tzinfo=timezone.utc),
+            fetcher=lambda u:(u,source))["status"],"NOT_VERIFIED")
+
+    def test_french_official_11th_round_full_fixture_context(self):
+        from postbreak_official_parsers_263 import parse_ligue1_round11
+        pairs=[
+            ("Vendredi 20 novembre 2026 à 20h45 sur Ligue 1+",
+             ("ESTAC Troyes – Havre AC",)),
+            ("Samedi 21 novembre 2026 à 17h15 sur Ligue 1+",
+             ("OGC Nice – Paris Saint-Germain",)),
+            ("Samedi 21 novembre 2026 à 20h45 sur Ligue 1+",
+             ("LOSC – Olympique Lyonnais","RC Lens – Toulouse FC",
+              "AS Monaco – AJ Auxerre","RC Strasbourg Alsace – Stade Brestois 29")),
+            ("Dimanche 22 novembre 2026 à 15h00 sur Ligue 1+",
+             ("Paris FC – Angers SCO",)),
+            ("Dimanche 22 novembre 2026 à 17h15 sur Ligue 1+",
+             ("FC Lorient – Stade Rennais FC",)),
+            ("Dimanche 22 novembre 2026 à 20h45 sur Ligue 1+",
+             ("Olympique de Marseille – Le Mans FC",))]
+        def page(groups):
+            return "<html><h1>Programmations TV : J10 et J11</h1><h2>11e JOURNÉE DE LIGUE 1 McDONALD’S</h2>"+ "".join(
+                "<p>"+heading+"</p>"+"".join("<p>"+s+"</p>" for s in games)
+                for heading,games in groups)+"</html>"
+        document=page(pairs)
+        self.assertEqual(len(parse_ligue1_round11(document)),9)
+        sample=lookup("FRA1","OGC Nice","Paris Saint-Germain",
+            now=datetime(2026,11,20,12,0,tzinfo=timezone.utc),
+            fetcher=lambda u:(u,document))
+        self.assertEqual(sample["status"],"VERIFIED_OFFICIAL_FIXTURE",sample)
+        self.assertEqual(parse_ligue1_round11(page(pairs[:-1])),[])
+
+    def test_portugal_nov27_official_nine_game_context_never_partial(self):
+        from postbreak_official_parsers_263 import parse_portugal_round12
+        data=[
+        ("Sexta-feira, 27 de novembro",("Marítimo M. - CD Nacional, 20h15 - SportTV",)),
+        ("Sábado, 28 de novembro",("FC Arouca - Rio Ave FC, 15h30 - SportTV",
+             "Moreirense FC - Santa Clara, 15h30 - TVI",
+             "Académico - FC Alverca, 18h00 - SportTV",
+             "Vitória SC - Estrela Amadora, 20h30 - SportTV")),
+        ("Domingo, 29 de novembro",("Gil Vicente FC - Estoril Praia, 18h00 - SportTV",
+             "FC Porto - Sporting CP, 20h30 - SportTV")),
+        ("Segunda-feira, 30 de novembro",("Casa Pia AC - SC Braga, 20h15 - SportTV",
+             "SL Benfica - FC Famalicão, 20h15 - BTV"))]
+        def page(groups):
+            return "<h1>Horários definidos até à 12.ª jornada</h1><p>Jornada 12</p>"+ "".join(
+                "<p>"+heading+"</p>"+"".join("<p>"+s+"</p>" for s in games)
+                for heading,games in groups)+"</html>"
+        html=page(data)
+        self.assertEqual(len(parse_portugal_round12(html)),9)
+        self.assertEqual(parse_portugal_round12(page(data[:-1])),[])
+        r=lookup("POR1","FC Porto","Sporting CP",
+            now=datetime(2026,11,29,16,0,tzinfo=timezone.utc),
+            fetcher=lambda u:(u,html))
+        self.assertEqual(r["status"],"VERIFIED_OFFICIAL_FIXTURE",r)
 
 if __name__=="__main__":unittest.main()

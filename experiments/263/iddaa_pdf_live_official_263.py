@@ -18,6 +18,12 @@ CURRENT_PAGES={
             "epl_nov26_confirmed","OFFICIAL_NOVEMBER_REVISED_ALL_LEAGUE_GAMES"),
     "ENG2":("https://www.efl.com/news/2026/july/30/see-the-latest-sky-sports-tv-selections/",
             "efl_2026_27_official_tv_selection","OFFICIAL_PARTIAL_TELEVISED_ONLY"),
+    "TUR1":("https://www.tff.org/Default.aspx?hafta=12&pageId=198",
+            "tff_2026_week12","OFFICIAL_2026_NOV12_TURKISH_SUPERLIG_FULL_ROUND"),
+    "FRA1":("https://ligue1.com/fr/articles/l1_article_5839-",
+            "ligue1_2026_round11_tv","OFFICIAL_NOVEMBER_ROUND11_TV_9_FIXTURES"),
+    "POR1":("https://www.ligaportugal.pt/noticias/28531/horarios-definidos-ate-a-12.a-jornada",
+            "ligaportugal_2026_round12_tv","OFFICIAL_NOVEMBER_ROUND12_TV_9_FIXTURES"),
     "ESP1":("https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-13",
             "jsonld","TIMED_JSONLD_ONLY_NO_HTML_INFERENCE"),
     "ITA1":("https://www.legaseriea.it/serie-a/calendario-risultati",
@@ -41,9 +47,10 @@ def lookup(league,home,away,*,now=None,fetcher=None):
         right=resolve_label(league,requested,index)
         return (left.get("status")=="MAPPED" and right.get("status")=="MAPPED"
                 and left.get("team_id")==right.get("team_id"))
-    # Reuse only three genuinely rolling named-match adapters, not stale news.
+    # Use only the current approved published league page. All ambiguous or
+    # missing timestamps fail closed; never use stale referee announcements.
     # They are still fail-closed if the actual official page cannot be parsed.
-    if league in ("GER1","NED1","TUR1"):
+    if league in ():
         from mackolik_identity_gate_263 import OFFICIAL_ADAPTERS
         from importlib import import_module
         if fetcher is not None:

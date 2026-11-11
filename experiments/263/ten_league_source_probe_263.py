@@ -23,10 +23,11 @@ SOURCES={
     "GER1":("https://products.bundesliga.com/fixtures","dfl"),
     "ESP1":("https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-13","jsonld"),
     "ITA1":("https://www.legaseriea.it/serie-a/calendario-risultati","jsonld"),
-    "FRA1":("https://ligue1.com/fr/articles/l1_article_5839-","jsonld"),
+    "FRA1":("https://ligue1.com/fr/articles/l1_article_5839-","ligue1_2026_round11_tv"),
     "NED1":("https://www.knvb.nl/competities/eredivisie/programma","knvb"),
-    "TUR1":("https://www.tff.org/Default.aspx?hafta=12&pageId=198","jsonld"),
-    "POR1":("https://www.ligaportugal.pt/calendar","jsonld"),
+    "TUR1":("https://www.tff.org/Default.aspx?hafta=12&pageId=198","tff_2026_week12"),
+    "POR1":("https://www.ligaportugal.pt/noticias/28531/horarios-definidos-ate-a-12.a-jornada",
+            "ligaportugal_2026_round12_tv"),
     "BEL1":("https://www.proleague.be/jpl-kalender!","belgium_proleague_nextjs_jpl")
 }
 class Visible(HTMLParser):
