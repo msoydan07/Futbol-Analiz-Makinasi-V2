@@ -30,6 +30,18 @@ def one(league):
     rows=[row for row in p.rows if any(key.casefold() in " ".join(row).casefold() for key in patterns)]
     out={"league":league,"bytes":len(html),"row_samples":rows[:3],"row_count":len(p.rows),
          "windows":parts}
+    if league in ("ENG2","ITA1","POR1"):
+      needles={
+        "ENG2":["21-Nov-26","Millwall","Championship","Sky Sports"],
+        "ITA1":["Como","Cagliari","Giornata 12","2026-11-21","MATCHDAY 12"],
+        "POR1":["Jornada 12","Jornada 11","Marítimo","Mar\\u00edtimo","27 de novembro",
+                "FC Porto","Sporting CP","Horários definidos até à 12.ª jornada"]
+      }[league]
+      out["raw_evidence"]=[]
+      for needle in needles:
+        at=html.casefold().find(needle.casefold())
+        out["raw_evidence"].append({"needle":needle,"present":at>=0,
+            "window":html[max(0,at-85):at+230] if at>=0 else ""})
     if league=="NED1":
       index,_,_=index_registry()
       events=parse_official_events("NED1",html,"knvb")
