@@ -93,7 +93,7 @@ class AwayDefenseShrinkLaterPeriodTests(unittest.TestCase):
         self.assertFalse(r["pre_game_probability_changed"])
         self.assertFalse(r["model_promoted"])
         self.assertEqual(r["factors"],[1.,.75,.5])
-        for factor in (".75",".5"):
+        for factor in ("0.75","0.5"):
             self.assertIn(factor,r["same_match_matched_loss"])
 
 if __name__=="__main__":
