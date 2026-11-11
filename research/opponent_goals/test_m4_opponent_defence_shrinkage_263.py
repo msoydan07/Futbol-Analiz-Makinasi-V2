@@ -27,11 +27,14 @@ class DefenceDampingSafetyTests(unittest.TestCase):
         original=predict_m4(self.fit,"HOME","AWAY")
         ref=candidate_lambdas(self.fit,"HOME","AWAY","original",1.)
         self.assertEqual(ref,original)
-        self.assertEqual(original,(1.6*math.exp(-.5),1.1*math.exp(.3)))
+        self.assertAlmostEqual(original[0],1.6*math.exp(-.5),places=11)
+        self.assertAlmostEqual(original[1],1.1*math.exp(.3),places=11)
 
     def test_selected_away_defence_reduction_changes_only_home_lambda(self):
         lh,la=predict_m4(self.fit,"HOME","AWAY")
-        self.assertEqual(defence_effects(self.fit,"HOME","AWAY"),(-.5,.3))
+        d1,d2=defence_effects(self.fit,"HOME","AWAY")
+        self.assertAlmostEqual(d1,-.5,places=11)
+        self.assertAlmostEqual(d2,.3,places=11)
         for weight in (.9,.8):
             a,b=candidate_lambdas(self.fit,"HOME","AWAY","away_only",weight)
             self.assertAlmostEqual(a,lh*math.exp((weight-1)*(-.5)),places=11)
