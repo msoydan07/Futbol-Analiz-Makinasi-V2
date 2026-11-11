@@ -1,0 +1,51 @@
+name: "263 archived Nov99 asof M4 vs 80pct defence shadow NOT pregame seals"
+on:
+  push:
+    branches: [research/263-nov99-defence-080-asof-backtest-20261111]
+    paths:
+      - 'research/opponent_goals/nov99_opponent_defence_080_asof_backtest_263.py'
+      - 'research/opponent_goals/test_nov99_opponent_defence_080_asof_263.py'
+      - '.github/workflows/263-nov99-asof-opponent-defence-080-research-ci.yml'
+permissions:
+  contents: read
+jobs:
+  retrospective-only-99-fixed-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Pinned frozen M4 numeric dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: No tampered original 4518, completed 4617 or M4 engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9  data/quad_accepted_263/extended_history.csv' | sha256sum -c -
+          echo '637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89  data/results_only_263/2026-11-10_completed_4617_scores_only.csv' | sha256sum -c -
+          echo 'eac755e54086738f40d7f30a514b2c9bb789b2c428ffef4ee70bb2fd2b49bc45  experiments/263/m4_integrated.py' | sha256sum -c -
+      - name: Six archive, math and date-leakage regressions (no actual 99 fits here)
+        env:
+          PYTHONPATH: ".:experiments/263:research/opponent_goals"
+        run: python -m unittest -v research/opponent_goals/test_nov99_opponent_defence_080_asof_263.py
+      - name: One-time historical 99 asof locked M4 versus 80pct symmetric defence
+        env:
+          PYTHONPATH: ".:experiments/263:research/opponent_goals"
+        run: |
+          python research/opponent_goals/nov99_opponent_defence_080_asof_backtest_263.py \
+            --out /tmp/263_nov99_original_m4_vs_80_defence_asof_only.json
+      - name: Keep repo, M4 and old immutable SHA forecasts unchanged
+        shell: bash
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
+      - name: Keep full match-by-match audit and no pretend official pregame seal
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-99-nov4to8-2026-asof-m4-vs-defence080-retrospective-only
+          retention-days: 30
+          if-no-files-found: warn
+          path: /tmp/263_nov99_original_m4_vs_80_defence_asof_only.json
