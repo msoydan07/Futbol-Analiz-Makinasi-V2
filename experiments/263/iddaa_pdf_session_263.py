@@ -89,7 +89,7 @@ def _check_official(observed,league,home_id,away_id,index,now):
             "local_time_tr":ko.astimezone(TR).strftime("%H:%M")}
 
 def analyze_one(n,row,*,index,team_names,pdf_time,now,
-                official_lookup=None,forecast_options=None):
+                official_lookup=None,forecast_options=None,baseline_clock=None):
     output={"index":n,"league":row.get("league"),
             "pdf_home":row.get("home_label"),"pdf_away":row.get("away_label"),
             "match_date_tr":row.get("match_date_tr"),
@@ -178,6 +178,26 @@ def analyze_one(n,row,*,index,team_names,pdf_time,now,
             else:
                 output["model_1x2_and_core_markets"][model]={"status":item.get("status")}
         output["status"]="FOUR_MODELS_FORECAST_SHA_CREATED"
+        # Empirical baseline uses the SAME accepted-as-of history and the
+        # SHA-sealed forecast. Store immediately, not at the end of a 20-game
+        # batch where the strict 10-minute baseline seal could go stale.
+        try:
+            from forward_empirical_baseline_263 import produce as build_baseline
+            baseline_now=baseline_clock() if baseline_clock is not None else now
+            baseline=build_baseline(forecast,forecast_options["history"],now=baseline_now)
+            baseline_root=Path(forecast_options.get("empirical_baseline_out_dir",
+                "experiments/263/iddaa_pdf_empirical_baselines_263"))
+            target_baseline=(baseline_root/forecast["fixture"]["match_local_date"]/
+                             (target.stem+".json"))
+            target_baseline.parent.mkdir(parents=True,exist_ok=True)
+            with target_baseline.open("x",encoding="utf-8") as handle:
+                json.dump(baseline,handle,sort_keys=True,ensure_ascii=False,indent=2)
+                handle.write("\n")
+            output["empirical_baseline_sha256"]=baseline["payload_sha256"]
+            output["empirical_baseline_path"]=str(target_baseline)
+        except (ValueError,KeyError,AssertionError,OSError,ImportError) as baseline_exc:
+            output["empirical_baseline_status"]="BASELINE_RESEARCH_PROVENANCE_BLOCKED"
+            output["empirical_baseline_reason"]=str(baseline_exc)[:160]
     except (ValueError,KeyError,AssertionError,OSError,ImportError) as exc:
         output["status"]="ONE_ROW_FOUR_MODEL_EVIDENCE_BLOCKED"
         output["model_error_type"]=type(exc).__name__
@@ -190,6 +210,7 @@ def run_session(bulletin,*,now=None,official_lookup=None,forecast_options=None,
         raise ValueError("IDDAA_PDF_SCHEMA_MISMATCH")
     if bulletin.get("source_domain")!="iddaa.com" or not bulletin.get("pdf_sha256"):
         raise ValueError("IDDAA_SOURCE_UNTRUSTED")
+    fixed_clock=now is not None   # deterministic injected unit tests only
     now=(now or datetime.now(timezone.utc)).astimezone(timezone.utc)
     pdf_time=read_aware(bulletin["pdf_capture_utc"])
     index,names,_=index_registry()
@@ -198,11 +219,13 @@ def run_session(bulletin,*,now=None,official_lookup=None,forecast_options=None,
         raise ValueError("IMPLAUSIBLE_PDF_BATCH_SIZE")
     by_number=[None]*len(rows)
     def task(i,row):
-        # Injected official_lookup is only for offline tests; live session
-        # defaults to existing official adapter with one call per fixture.
+        # For real execution use the actual per-row as-of clock, rather than
+        # incorrectly backdating all forecasts to the start of a long batch.
+        row_now=now if fixed_clock else datetime.now(timezone.utc)
+        baseline_clock=(lambda:now) if fixed_clock else (lambda:datetime.now(timezone.utc))
         return analyze_one(i,row,index=index,team_names=names,
-            pdf_time=pdf_time,now=now,official_lookup=official_lookup,
-            forecast_options=forecast_options)
+            pdf_time=pdf_time,now=row_now,official_lookup=official_lookup,
+            forecast_options=forecast_options,baseline_clock=baseline_clock)
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures={pool.submit(task,i,r):i for i,r in enumerate(rows)}
         for future in as_completed(futures):
@@ -244,7 +267,9 @@ def main():
         pdf_short=bulletin["pdf_sha256"][:16]
         options={"history":args.history,"lock":args.m4_lock,
                  "baseline":args.baseline,"source_acceptance":args.source_acceptance,
-                 "out_dir":str(Path(args.forecast_out_dir)/pdf_short)}
+                 "out_dir":str(Path(args.forecast_out_dir)/pdf_short),
+                 "empirical_baseline_out_dir":str(
+                    Path("experiments/263/iddaa_pdf_empirical_baselines_263")/pdf_short)}
     result=run_session(bulletin,forecast_options=options)
     output=Path(args.out);output.parent.mkdir(parents=True,exist_ok=True)
     with output.open("x",encoding="utf-8") as file:
