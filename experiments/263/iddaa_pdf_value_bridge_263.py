@@ -24,7 +24,20 @@ def _safe(root,filename):
         raise ValueError("ASOF_RESEARCH_FILE_MISSING_OR_OUTSIDE_REPO")
     return path
 
-def _load(root,rel):
+def _load(root,rel,*,session_dir=None,record_kind=None):
+    # A model record may be in a PRIVATE, absolute /mnt/data output folder,
+    # never committed to the GitHub repository. Limit reads to the current
+    # session's exact forecasts/baselines subfolder; reject symlink escape.
+    if session_dir is not None and record_kind is not None:
+        if record_kind not in ("forecasts","empirical_baselines"):
+            raise ValueError("PDF_FIRST_UNSUPPORTED_RECORD_KIND")
+        if not isinstance(rel,str) or not rel.endswith(".json"):
+            raise ValueError("PDF_FIRST_RECORD_NOT_JSON")
+        full=Path(rel).resolve()
+        permitted=(Path(session_dir).resolve()/record_kind).resolve()
+        if not full.is_relative_to(permitted) or not full.is_file():
+            raise ValueError("PDF_FIRST_RECORD_ESCAPES_PRIVATE_SESSION")
+        return json.loads(full.read_text(encoding="utf-8"))
     return json.loads(_safe(root,rel).read_text(encoding="utf-8"))
 
 def _locked(record):
@@ -41,7 +54,7 @@ def _ensure_true_age_observation(now):
 
 def calibrate_session(bulletin,session,*,original_pdf,repo_root=".",
                       dev_lock_path="experiments/263/forward_dev_calibration_lock_263.json",
-                      now=None):
+                      now=None,session_dir=None):
     pdf_sha=verify_original_pdf(original_pdf,bulletin)
     if session.get("pdf_sha256")!=pdf_sha:
         raise ValueError("PDF_FIRST_SOURCE_SHA_CHANGED")
@@ -53,8 +66,10 @@ def calibrate_session(bulletin,session,*,original_pdf,repo_root=".",
         if row.get("status")!="FOUR_MODELS_FORECAST_SHA_CREATED":
             continue
         try:
-            forecast=_load(repo_root,row.get("model_forecast_path"))
-            baseline=_load(repo_root,row.get("empirical_baseline_path"))
+            forecast=_load(repo_root,row.get("model_forecast_path"),
+                session_dir=session_dir,record_kind="forecasts" if session_dir is not None else None)
+            baseline=_load(repo_root,row.get("empirical_baseline_path"),
+                session_dir=session_dir,record_kind="empirical_baselines" if session_dir is not None else None)
             if (row.get("empirical_baseline_sha256")!=baseline.get("payload_sha256")
                 or row.get("model_forecast_sha256")!=forecast.get("payload_sha256")):
                 raise ValueError("PDF_FIRST_ROW_SOURCE_SEAL_MISMATCH")
