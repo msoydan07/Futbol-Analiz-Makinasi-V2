@@ -90,7 +90,7 @@ def defense_contribution(fit,away):
 
 def center_defense(fit):
     beta,ix,m,n=fit
-    require(len(ix)==m and m>=10,"BAD_FIT_INDEX")
+    require(len(ix)==m and m>=2,"BAD_FIT_INDEX")
     # Center across unique *training* teams only (zero-sum in mean).
     return sum(defense_contribution(fit,t) for t in ix)/m
 
