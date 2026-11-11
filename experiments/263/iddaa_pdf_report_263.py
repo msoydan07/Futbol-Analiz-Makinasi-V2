@@ -47,28 +47,13 @@ def _pp(value):
     return "—" if value is None else f"{value:+.1f}".replace(".",",")
 
 def _render_pick(row,session):
-    """Accept a pick only from a frozen decision carrying the SAME PDF SHA.
+    """No false candidate certification from an arbitrary JSON boolean.
 
-    Current 2.6.3 calibration policy does not yet supply this PDF-first
-    binding. Until there is a linked SHA-pinned decision: PAS, never guess.
+    We still need to link the existing frozen development-calibration value
+    policy to the PRE-forecast PDF SHA. Until that bridge is verified with
+    a real in-scope PDF, a raw model-vs-odds gap MUST NOT be a main pick.
     """
-    d=row.get("pdf_linked_policy_decision")
-    if not isinstance(d,dict):
-        return "ANA: —     ALTERNATİF: —     DURUM: PAS (kalibre karar yok)"
-    if (d.get("pdf_sha256")!=session["pdf_sha256"] or
-        d.get("forecast_sha256")!=row.get("model_forecast_sha256") or
-        d.get("frozen_policy_verified") is not True):
-        return "ANA: —     ALTERNATİF: —     DURUM: PAS (karar kanıtı eşleşmedi)"
-    market=d.get("main_market")
-    alternate=d.get("alternative_market")
-    if market is not None and market not in CANONICAL_MARKETS:
-        return "ANA: —     ALTERNATİF: —     DURUM: PAS (yasak pazar)"
-    if alternate is not None and alternate not in CANONICAL_MARKETS:
-        return "ANA: —     ALTERNATİF: —     DURUM: PAS (yasak alternatif)"
-    pretty={k:label for label,k,_ in ROWS}
-    return ("ANA: "+pretty.get(market,"—")+
-            "     ALTERNATİF: "+pretty.get(alternate,"—")+
-            "     DURUM: KOŞULLU ARAŞTIRMA (bahis onayı değil)")
+    return "ANA: —     ALTERNATİF: —     DURUM: PAS (kalibre değer kararı henüz yok)"
 
 def _table_for(row,norm,bold,font):
     from reportlab.platypus import Table,TableStyle,Paragraph
