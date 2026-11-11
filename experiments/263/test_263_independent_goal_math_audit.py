@@ -75,8 +75,14 @@ class IndependentPoissonAudit(unittest.TestCase):
     def test_b_c3_extreme_out_of_domain_is_unavailable_not_faked(self):
         for lh,la in ((0.,1.),(.001,1.),(1.,5.1),(math.inf,1.),(1.,math.nan)):
             self.assertIsNone(legacy_scores(lh,la))
-        for scorer in (m4_scores,c2_scores):
-            for lh,la in ((0.,1.),(.001,1.),(5.01,1.),(1.,math.inf),(1.,math.nan)):
+        # C2's mathematical count distribution explicitly permits zero,
+        # while the empirical M4 prediction domain requires >=0.05.
+        self.assertAlmostEqual(c2_scores(0.,1.)["markets"]["BTTS_YES"],0.)
+        for scorer,points in (
+            (m4_scores,((0.,1.),(.001,1.),(5.01,1.),(1.,math.inf),(1.,math.nan))),
+            (c2_scores,((-.001,1.),(5.01,1.),(1.,math.inf),(1.,math.nan))),
+        ):
+            for lh,la in points:
                 with self.subTest(scorer=scorer.__name__,lh=lh,la=la):
                     with self.assertRaises(ValueError):
                         scorer(lh,la)
