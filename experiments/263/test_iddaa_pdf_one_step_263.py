@@ -52,9 +52,22 @@ class OneStepTests(unittest.TestCase):
             # Reusing the same PDF is append-only blocked, not silently
             # replacing stored odds/forecast at another timestamp.
             with patch("iddaa_pdf_one_step_263.parse_pdf",return_value=bulletin):
-                with self.assertRaises(FileExistsError):
+                def forbid_repeat(*args,**kwargs):
+                    raise AssertionError("DUPLICATE_USER_PDF_MUST_NOT_REQUERY_OFFICIAL")
+                cached=one_step(src,history=history,output_root=root/"results",
+                                now=NOW,official_lookup=forbid_repeat)
+            self.assertTrue(cached["already_processed_same_pdf_sha"])
+            self.assertEqual(cached["pdf_report_path"],output["pdf_report_path"])
+            receipt=Path(output["processing_folder"])/"completed_receipt.json"
+            self.assertTrue(receipt.is_file())
+            import json
+            original_receipt=json.loads(receipt.read_text(encoding="utf-8"))
+            original_receipt["report_sha256"]="0"*64
+            receipt.write_text(json.dumps(original_receipt),encoding="utf-8")
+            with patch("iddaa_pdf_one_step_263.parse_pdf",return_value=bulletin):
+                with self.assertRaisesRegex(ValueError,"RECEIPT_SHA_TAMPERED"):
                     one_step(src,history=history,output_root=root/"results",
-                             now=NOW,official_lookup=official)
+                             now=NOW,official_lookup=forbid_repeat)
 
     def test_absolute_private_session_real_frozen_decision_and_pdf(self):
         """Regression: before fix, /tmp session records failed repo-root check."""
