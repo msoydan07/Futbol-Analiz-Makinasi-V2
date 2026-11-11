@@ -60,6 +60,31 @@ def main():
         sid=options[0]["seasonId"]
         matches,bytes_n=official_json("seasons/"+quote(sid,safe="")+"/matches?locale=en-GB")
         print("SERIEA_MATCHES="+json.dumps({"bytes":bytes_n,"shape":shape(matches)},ensure_ascii=False),flush=True)
+        raw=matches.get("matches",[]) if isinstance(matches,dict) else []
+        checks={"n_matches":len(raw),"status_counts":{},"schema_issues":{}}
+        from seriea_official_sdp_263 import SEASON_ID,COMP_ID,parse_sdp_events
+        for m in raw:
+            if not isinstance(m,dict):checks["schema_issues"]["not_dict"]=checks["schema_issues"].get("not_dict",0)+1;continue
+            status=str(m.get("status"))
+            checks["status_counts"][status]=checks["status_counts"].get(status,0)+1
+            reasons=[]
+            if m.get("seasonId")!=SEASON_ID:reasons.append("season_wrong")
+            matchset=m.get("matchSet")
+            if not isinstance(matchset,dict):reasons.append("missing_match_set")
+            elif matchset.get("seasonId")!=SEASON_ID:reasons.append("match_set_season_wrong")
+            elif matchset.get("competitionId")!=COMP_ID:reasons.append("competition_wrong")
+            if status=="UPCOMING":
+                for tname in ("home","away"):
+                    t=m.get(tname)
+                    if not isinstance(t,dict):reasons.append(tname+"_not_dict")
+                    else:
+                        if t.get("isTeamFake") is not False:reasons.append(tname+"_fake_not_false")
+                        if t.get("countryCode")!="IT":reasons.append(tname+"_country_not_IT")
+            for reason in reasons:
+                checks["schema_issues"][reason]=checks["schema_issues"].get(reason,0)+1
+        checks["strict_events"]=len(parse_sdp_events(matches))
+        print("SERIEA_PARSER_INSPECTION="+json.dumps(checks,ensure_ascii=False),flush=True)
+
         fixtures=[]
         stack=[matches]
         while stack:
