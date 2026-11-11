@@ -1,0 +1,34 @@
+name: "263 iddaa PDF preflight 10-league existing 215 team names and external aliases"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - 'experiments/263/iddaa_pdf_team_alias_preflight_263.py'
+      - 'experiments/263/test_iddaa_pdf_team_alias_preflight_263.py'
+      - '.github/workflows/263-iddaa-pdf-team-alias-bulk-preflight-ci.yml'
+permissions:
+  contents: read
+jobs:
+  no-odds-api-safe-label-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify canonical registry unchanged and complete archived sample names
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s experiments/263/evidence/identity_index_263.json
+          test -s experiments/263/pinnacle_daily_snapshots/2026-11-08/ENG1.json
+          test -s experiments/263/pinnacle_daily_snapshots/2026-11-08/TUR1.json
+      - name: Single 7-test alias / strict fixture order / skip only unmatched batch check
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v experiments/263/test_iddaa_pdf_team_alias_preflight_263.py
+      - name: Assert this preflight never modified sealed predictions, odds, models, or registry
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
