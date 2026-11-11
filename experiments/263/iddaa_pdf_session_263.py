@@ -17,7 +17,11 @@ from iddaa_pdf_bulletin_263 import SCHEMA as INPUT_SCHEMA,TR
 from iddaa_pdf_team_alias_preflight_263 import index_registry,resolve_label
 from mackolik_identity_gate_263 import OFFICIAL_ADAPTERS,_official
 from classification_odds_263 import canonical_markets
-from forward_c3 import read_aware
+def read_aware(value):
+    """Lightweight UTC parse; do not import numpy/M4 during PDF intake."""
+    parsed=datetime.fromisoformat(str(value).replace("Z","+00:00"))
+    if parsed.tzinfo is None:raise ValueError("AWARE_DATETIME_REQUIRED")
+    return parsed.astimezone(timezone.utc)
 
 SCHEMA="263_iddaa_pdf_first_official_gate_session_v1"
 SELECT=("MS1","MSX","MS2","OVER_2.5","UNDER_2.5","BTTS_YES","BTTS_NO")
