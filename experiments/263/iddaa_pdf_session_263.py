@@ -130,7 +130,10 @@ def analyze_one(n,row,*,index,team_names,pdf_time,now,
         output["status"]="KICKOFF_PASSED_OR_PDF_NOT_PREMATCH";return output
     try:
         if official_lookup is None:
-            fn=importlib.import_module(OFFICIAL_ADAPTERS[league]).lookup
+            # Current page only. No stale week-11 article, price requery or
+            # unchecked fallback to an old referee announcement.
+            from iddaa_pdf_live_official_263 import lookup as live_official
+            fn=lambda h,a:live_official(league,h,a,now=now)
         else:
             fn=official_lookup
         output["official_lookup_attempts"]=1
