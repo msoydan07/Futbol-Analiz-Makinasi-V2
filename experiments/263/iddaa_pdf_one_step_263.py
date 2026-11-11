@@ -30,6 +30,31 @@ def _write_once(destination,data):
         json.dump(data,f,sort_keys=True,ensure_ascii=False,indent=2)
         f.write("\n")
 
+def _prior_completed_session(folder,original_sha):
+    """Duplicate upload returns existing verified report, not another official
+    fixture lookup, model seal, or bookmaker API call. Never overwrite results.
+    An interrupted transaction remains explicitly incomplete, not rebranded.
+    """
+    receipt=folder/"completed_receipt.json"
+    if not receipt.is_file():
+        raise FileExistsError("SAME_PDF_INCOMPLETE_SESSION_REVIEW_NO_OVERWRITE")
+    state=json.loads(receipt.read_text(encoding="utf-8"))
+    record=dict(state)
+    digest=record.pop("receipt_sha256",None)
+    if not isinstance(digest,str) or hashlib.sha256(
+         json.dumps(record,ensure_ascii=False,sort_keys=True,
+                    separators=(",",":")).encode("utf-8")).hexdigest()!=digest:
+        raise ValueError("PREVIOUS_RECEIPT_SHA_TAMPERED")
+    report=folder/"futbol_263_iddaa_oranli_rapor.pdf"
+    source=folder/"iddaa_original_user.pdf"
+    if (state.get("pdf_sha256")!=original_sha
+        or not report.is_file() or not source.is_file()
+        or hashlib.sha256(source.read_bytes()).hexdigest()!=original_sha
+        or hashlib.sha256(report.read_bytes()).hexdigest()!=state.get("report_sha256")):
+        raise ValueError("PREVIOUS_PDF_OR_REPORT_SHA_CHANGED")
+    return {**state["summary"],"already_processed_same_pdf_sha":True}
+
+
 def one_step(pdf,*,history,output_root,
              m4_lock="experiments/263/m4_lock.json",
              source_baseline=None,source_acceptance=None,
@@ -43,7 +68,10 @@ def one_step(pdf,*,history,output_root,
     bulletin=parse_pdf(source)
     pdf_sha=bulletin["pdf_sha256"]
     folder=Path(output_root)/pdf_sha[:20]
-    # One immutable run directory prevents accidental price/prediction rewrite.
+    # Exactly one immutable session per original user PDF. Duplicate finished
+    # upload is a cache hit with ZERO repeat official/model/quote calls.
+    if folder.exists():
+        return _prior_completed_session(folder,pdf_sha)
     folder.mkdir(parents=True,exist_ok=False)
     copied=folder/"iddaa_original_user.pdf"
     with copied.open("xb") as handle:
@@ -66,7 +94,7 @@ def one_step(pdf,*,history,output_root,
                         dev_lock_path=dev_lock,now=now,session_dir=folder)
     _write_once(folder/"calibrated_session.json",calibrated)
     final=report_pdf(calibrated,folder/"futbol_263_iddaa_oranli_rapor.pdf")
-    return {
+    result={
         "status":"LOCAL_IDDAA_PDF_FIRST_SESSION_RESEARCH_COMPLETE",
         "pdf_sha256":pdf_sha,
         "source_rows":bulletin["total_visible_fixtures"],
@@ -80,6 +108,14 @@ def one_step(pdf,*,history,output_root,
         "pdf_report_path":str(final),
         "processing_folder":str(folder),
     }
+    receipt={"pdf_sha256":pdf_sha,
+             "report_sha256":hashlib.sha256(final.read_bytes()).hexdigest(),
+             "summary":result}
+    receipt["receipt_sha256"]=hashlib.sha256(json.dumps(
+        receipt,ensure_ascii=False,sort_keys=True,
+        separators=(",",":")).encode("utf-8")).hexdigest()
+    _write_once(folder/"completed_receipt.json",receipt)
+    return result
 
 def main():
     p=argparse.ArgumentParser()
