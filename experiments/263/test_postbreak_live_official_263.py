@@ -175,9 +175,9 @@ class RealSourceAndBreakGate(unittest.TestCase):
 
     def test_efl_serialized_official_tv_table_is_parsed_but_only_partial(self):
         from sabah_eng2_official_tv_263 import parse_efl_tv
-        tr='<tr><td>Championship</td><td>21-Nov-26</td><td>Saturday</td>'+
-           '<td>12:30</td><td>Millwall</td><td>V</td><td>Queens Park Rangers</td>'+
-           '<td>Sky Sports Football</td></tr>'
+        tr=('<tr><td>Championship</td><td>21-Nov-26</td><td>Saturday</td>'
+            '<td>12:30</td><td>Millwall</td><td>V</td><td>Queens Park Rangers</td>'
+            '<td>Sky Sports Football</td></tr>')
         page='<html><h1>Sky Sports Championship</h1><script>const body="<table>'+tr+'</table>";</script></html>'
         rows=parse_efl_tv(page)
         self.assertEqual(len(rows),1,rows)
