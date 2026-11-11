@@ -28,8 +28,6 @@ CURRENT_PAGES={
             "jsonld","TIMED_JSONLD_ONLY_NO_HTML_INFERENCE"),
     "ITA1":("https://www.legaseriea.it/serie-a/calendario-risultati",
             "jsonld","TIMED_JSONLD_ONLY_NO_HTML_INFERENCE"),
-    "FRA1":("https://ligue1.com/en/matches",
-            "jsonld","TIMED_JSONLD_ONLY_NO_HTML_INFERENCE"),
 }
 # Pages in the existing experiment may be date-scoped to the expired J11.
 # Never reuse those stale pages for a future PDF-first prediction.

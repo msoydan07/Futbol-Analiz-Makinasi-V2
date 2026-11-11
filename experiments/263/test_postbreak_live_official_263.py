@@ -3,7 +3,7 @@ import unittest
 from datetime import datetime,timezone
 from iddaa_pdf_live_official_263 import lookup,CURRENT_PAGES
 from postbreak_freshness_gate_263 import freshness_gate,EXCEPTIONS
-from iddaa_pdf_team_alias_preflight_263 import index_registry
+from iddaa_pdf_team_alias_preflight_263 import index_registry,resolve_label
 
 T=datetime(2026,11,21,10,0,tzinfo=timezone.utc)
 PL_HTML="""<html><body>
