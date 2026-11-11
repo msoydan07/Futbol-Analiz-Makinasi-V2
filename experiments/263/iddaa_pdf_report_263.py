@@ -123,6 +123,11 @@ def _render_workload(row):
     if not isinstance(teams,dict) or home not in teams or away not in teams:
         return ("7 günlük maç yoğunluğu: VERİ YETERSİZ — "
                 "iki takımın güvenilir fikstürü bulunamadı.")
+    try:
+        from iddaa_pdf_team_alias_preflight_263 import index_registry
+        _,team_names,_=index_registry()
+    except (OSError,ValueError,KeyError,TypeError):
+        team_names={}
     lines=["7 günlük maç yoğunluğu (analiz talebi: geçmiş 7 / gelecek 7 gün)"]
     for team_id,label in ((home,"Ev sahibi"),(away,"Deplasman")):
         info=teams[team_id]
@@ -143,7 +148,8 @@ def _render_workload(row):
                      " · "+risk_text+suffix)
         for event in (prior[-2:]+future[:2]):
             lines.append("  LİG · "+str(event.get("utc") or "")[:16]+
-                         " · rakip ID "+str(event.get("opponent") or "")[:10])
+                         " · rakip "+str(team_names.get(
+                             event.get("opponent"),"doğrulanamadı"))[:55])
     lines.append("Avrupa/kupa ve lig fikstürlerinin tamamı doğrulanmadı; "
                  "görünmeyen maç = maç yok demek değildir.")
     lines.append("Rotasyon uyarısı bilgilendirmedir; B/C2/C3/M4 yüzde değişimi: 0.")

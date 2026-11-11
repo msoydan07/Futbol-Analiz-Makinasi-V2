@@ -69,6 +69,11 @@ def collect_same_page(league,home_id,away_id,events,*,source_url,
         a=_canonical(league,row.get("away"),index)
         if h is None or a is None or h==a:
             continue
+        # The requested fixture itself is NEVER an adjacent game. A league
+        # round page necessarily contains that row; treating it as future
+        # rotation would create a spurious zero-hour rest/extra-match alert.
+        if {h,a}=={home_id,away_id}:
+            continue
         try:dt=_aware(row.get("kickoff_utc"))
         except (ValueError,TypeError,OverflowError):
             continue

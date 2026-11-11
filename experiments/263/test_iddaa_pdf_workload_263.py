@@ -45,6 +45,20 @@ class OfficialWorkloadTests(unittest.TestCase):
         self.assertFalse(output["model_probabilities_changed"])
         self.assertEqual(output["new_official_network_calls"],0)
 
+    def test_target_game_never_counted_as_extra_future_game(self):
+        source=[
+            self.event("GALATASARAY A.Ş.","SAMSUNSPOR A.Ş.",KICKOFF)]
+        p=collect_same_page("TUR1",self.h,self.a,source,
+                 source_url=SOURCE,retrieved_at_utc=NOW.isoformat(),
+                 source_payload="fixture html",index=self.idx)
+        self.assertEqual(p["verified_adjacent_league_events"],[])
+        self.obs["adjacent_league_evidence"]=p
+        answer=workload_for_pdf(self.obs,self.ver,"TUR1",self.h,self.a,NOW)
+        self.assertEqual(answer["status"],"VERIFIED_SAME_PAGE_LEAGUE_PARTIAL")
+        self.assertEqual(answer["teams"][self.h]["next_7_days"],[])
+        self.assertEqual(answer["teams"][self.a]["next_7_days"],[])
+        self.assertEqual(answer["teams"][self.h]["rotation_label"],"VERI_YETERSIZ")
+
     def test_conflicting_official_clocks_never_claim_rotation(self):
         raw=[
             self.event("GALATASARAY A.Ş.","FENERBAHÇE A.Ş.",
