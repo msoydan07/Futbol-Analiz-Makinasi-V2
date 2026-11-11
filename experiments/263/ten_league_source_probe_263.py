@@ -72,10 +72,15 @@ def main():
             future=[e for e in events if "2026-11-20"<=e["match_date"]<="2026-11-30" and e["kickoff_utc"]]
             canonical=[e for e in future if resolve_label(league,e["home"],index)["status"]=="MAPPED" and
                        resolve_label(league,e["away"],index)["status"]=="MAPPED"]
+            unmapped=[{"home":e["home"],"away":e["away"],
+                "home_match":resolve_label(league,e["home"],index)["status"],
+                "away_match":resolve_label(league,e["away"],index)["status"]}
+                for e in future if not (resolve_label(league,e["home"],index)["status"]=="MAPPED"
+                and resolve_label(league,e["away"],index)["status"]=="MAPPED")]
             item.update(status="OFFICIAL_HTML_FETCHED" if future else "BLOCKED_NO_TIMED_EVENTS",
                         fetched_url=effective,html_bytes=len(html.encode("utf-8")),
                         events_total=len(events),events_nov20_30=len(future),
-                        canonical_nov20_30=len(canonical),
+                        canonical_nov20_30=len(canonical),unmapped=unmapped[:5],
                         sample=[{k:e[k] for k in ("home","away","kickoff_utc")} for e in future[:2]])
             if not future:
                 v=Visible();v.feed(html)
