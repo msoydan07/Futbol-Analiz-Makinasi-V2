@@ -71,7 +71,7 @@ def _odds(obs,f,now):
     return prices,("ODDSPAPI_AGGREGATOR_SOURCED_NOT_DIRECT_BOOKMAKER_VERIFIED" if is_provider
                    else "HUMAN_ATTESTED_NOT_NETWORK_REVERIFIED"),obs["payload_sha256"]
 
-def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
+def decide(f,base,lock,observation=None,*,morning_snapshot=None,pdf_first_snapshot=None,now=None):
     now=now or datetime.now(timezone.utc)
     if now.tzinfo is None:raise ValueError("AWARE_CLOCK_REQUIRED")
     now=now.astimezone(timezone.utc)
@@ -87,12 +87,21 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
     # Its legacy M4-only preliminary pick is intentionally not reused.
     connect_verified_baseline(f,lock,base)
     if read_aware(base["created_at_utc"])>now:raise ValueError("BASELINE_FUTURE")
+    if pdf_first_snapshot is not None and (observation is not None or morning_snapshot is not None):
+        raise ValueError("PDF_FIRST_CANNOT_MIX_OTHER_BOOKMAKERS_OR_PRICE_WINDOWS")
     fresh,price_status,quote_sha=_odds(observation,f,now)
+    pdf_first={}
+    if pdf_first_snapshot is not None:
+        # Original iddaa PDF precedes the immutable forecast, unlike legacy
+        # human post-forecast quotes. Local PDF SHA + exact fixture join are
+        # independently checked by iddaa_pdf_first_quote_263.
+        from iddaa_pdf_first_quote_263 import extract as extract_pdf_first
+        pdf_first,price_status=extract_pdf_first(pdf_first_snapshot,f,now)
     morning=extract_morning(morning_snapshot,f,now) if morning_snapshot is not None else {}
     morning_sha=morning_snapshot["payload_sha256"] if morning_snapshot is not None else None
     # Same market: newer real price always wins, even when its EV falls.
     # Missing newer groups inherit old morning prices but stay conditional.
-    prices={**morning,**{k:{**v,"age_class":"CURRENT_T60","snapshot_sha256":quote_sha}
+    prices={**morning,**pdf_first,**{k:{**v,"age_class":"CURRENT_T60","snapshot_sha256":quote_sha}
                          for k,v in fresh.items()}}
     raw={};scores={}
     for name in MODELS:
@@ -102,7 +111,8 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
             scores[name]=m["goals"].get("top_scores",{})
         else:scores[name]={}
     out=[];qualified=[];alerts=[]
-    for market in MARKETS:
+    allowed=("MS1","MSX","MS2","OVER_2.5","UNDER_2.5","BTTS_YES","BTTS_NO") if pdf_first_snapshot is not None else MARKETS
+    for market in allowed:
         vals={name:p[market] for name,p in raw.items()}
         if not vals:continue
         b=base["markets"][market]
@@ -128,7 +138,7 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
         if len(vals)<3 or support<3:reason.append("UNDER_3_MODEL_SUPPORT")
         if selected is None:reason.append("NO_POSITIVE_DEV_BRIER_SKILL")
         elif q<.60 or q-b<.025:reason.append("LOW_CALIBRATED_LIFT")
-        if price is None:reason.append("NO_SYNCHRONIZED_ODDS")
+        if price is None:reason.append("NO_VALID_PDF_QUOTE" if pdf_first_snapshot is not None else "NO_SYNCHRONIZED_ODDS")
         elif q is not None and (ev<.05 or edge<.03):reason.append("EV_OR_NO_VIG_EDGE_FAIL")
         row={"market":market,"family":("MS" if market.startswith("MS") else "KG" if market.startswith("BTTS") else "GOALS"),
              "raw_model_probabilities":vals,"raw_median_diagnostic_only":median(vals.values()),
@@ -150,21 +160,29 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
     main=qualified[0] if qualified else None
     alt=next((x for x in qualified[1:] if x["family"]!=main["family"]),None) if main else None
     leader=max(("MS1","MSX","MS2"),key=lambda x:median([p[x] for p in raw.values()])) if raw else None
-    main_old=bool(main and main["price_age_class"]=="MORNING_ARCHIVE_NOT_CURRENT")
-    alt_old=bool(alt and alt["price_age_class"]=="MORNING_ARCHIVE_NOT_CURRENT")
-    stage=("RESEARCH_CONDITIONAL_MORNING_PRICE_NOT_CURRENT" if main_old else
+    conditional_classes=("MORNING_ARCHIVE_NOT_CURRENT","ARCHIVED_PDF_PRE_FORECAST")
+    main_old=bool(main and main["price_age_class"] in conditional_classes)
+    alt_old=bool(alt and alt["price_age_class"] in conditional_classes)
+    stage=("RESEARCH_CONDITIONAL_IDDAA_PDF_PRICE_NOT_CURRENT"
+           if main_old and pdf_first_snapshot is not None else
+           "RESEARCH_CONDITIONAL_MORNING_PRICE_NOT_CURRENT" if main_old else
            "RESEARCH_VALUE_CANDIDATE_NOT_APPROVED" if main else "RESEARCH_PAS")
     result={"schema":SCHEMA,"status":stage,
       "created_at_utc":now.isoformat(),"fixture":f["fixture"],
       "forecast_sha256":f["payload_sha256"],"baseline_sha256":base["payload_sha256"],
       "dev_lock_sha256":lock["payload_sha256"],"quote_sha256":quote_sha,
       "morning_quote_sha256":morning_sha,
+      "iddaa_pdf_first_sha256":pdf_first_snapshot.get("payload_sha256") if pdf_first_snapshot is not None else None,
+      "iddaa_original_pdf_sha256":pdf_first_snapshot.get("source_pdf_sha256") if pdf_first_snapshot is not None else None,
+      "iddaa_pdf_only_seven_markets":pdf_first_snapshot is not None,
       "morning_quote_status":"MORNING_ARCHIVE_NOT_CURRENT" if morning else "NO_MORNING_ARCHIVE",
       "main_value_conditional":main_old,"main_price_current":bool(main and not main_old),
       "alternative_value_conditional":alt_old,
       "alternative_price_current":bool(alt and not alt_old),
       "any_selected_value_conditional":main_old or alt_old,
       "morning_and_fresh_mixed_by_market":bool(morning and fresh),
+      "iddaa_pdf_pre_forecast_not_live":pdf_first_snapshot is not None,
+      "current_bookmaker_odds_not_reverified":pdf_first_snapshot is not None,
       "quote_status":price_status,"quote_reverified_by_code":False,
       "model_1x2":{k:{s:v[s] for s in ("MS1","MSX","MS2")} for k,v in raw.items()},
       "descriptive_most_likely_1x2_by_model_median":leader,"model_top_scores":scores,
@@ -172,7 +190,8 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,now=None):
       "main_candidate":main,"alternative_candidate":alt,
       "PAS_reasons":[] if main else (["NO_MORNING_OR_CURRENT_ODDS"] if not prices else ["NO_QUALIFIED_VALUE_CANDIDATE"]),
       "old_price_EV_is_historical_scenario_only":True,
-      "no_arbitrary_1_5_over_penalty":True,
+      "no_arbitrary_1_5_over_penalty":pdf_first_snapshot is None,
+      "user_pdf_markets_1_5_and_3_5_excluded":pdf_first_snapshot is not None,
       "same_goal_family_never_separate_alternative":True,
       "frozen_dev_only_calibration":True,"B_C2_C3_M4_not_blended":True,
       "S1_S2_official_approved":False,"betting_authorized":False,
@@ -186,7 +205,7 @@ def render(result):
            "En olası 1X2 (model medyanı, karar olasılığı değil): "+str(result["descriptive_most_likely_1x2_by_model_median"]),
            "Oran kanıtı: "+result["quote_status"],
            "Sabah arşivi: "+result.get("morning_quote_status","NO_MORNING_ARCHIVE"),
-           "Ana tercih fiyat durumu: "+("SABAH FİYATIYLA KOŞULLU — güncel fiyat doğrulanmadı"
+           "Ana tercih fiyat durumu: "+("PDF ÖNCE ALINDI — fiyat koşullu, güncelliği doğrulanmadı" if result.get("iddaa_pdf_only_seven_markets") and result.get("main_value_conditional") else "SABAH FİYATIYLA KOŞULLU — güncel fiyat doğrulanmadı"
                if result.get("main_value_conditional") else "GÜNCEL FİYAT VEYA PAS"),
            "Alternatif fiyat durumu: "+("SABAH FİYATIYLA KOŞULLU — güncel fiyat doğrulanmadı"
                if result.get("alternative_value_conditional") else
@@ -201,14 +220,21 @@ def render(result):
         a=result["alternative_candidate"]
         lines.append(f"Alternatif olasılık %{a['calibrated_probability']*100:.1f} — Oran {a['observed_odds']} ({a['price_age_class']}, {a['price_checked_at_utc']}) — EV %{a['EV']*100:+.1f}")
         if result.get("alternative_value_conditional"):
-            lines.append("Alternatif EV yalnızca SABAH fiyatındaki varsayımsal değerdir; güncel fiyatı doğrulanmadı.")
+            lines.append("Alternatif EV yalnızca kayıtlı İddaa PDF fiyatındaki koşullu değerdir; canlı fiyat değildir."
+                if result.get("iddaa_pdf_only_seven_markets") else
+                "Alternatif EV yalnızca SABAH fiyatındaki varsayımsal değerdir; güncel fiyatı doğrulanmadı.")
     if result["main_candidate"]:
         m=result["main_candidate"]
         lines.append(f"Olasılık %{m['calibrated_probability']*100:.1f} — Oran {m['observed_odds']} ({m['price_age_class']}, {m['price_checked_at_utc']}) — EV %{m['EV']*100:+.1f} — Marjsız avantaj {m['no_vig_advantage_pp']:+.1f} puan")
         if result.get("main_value_conditional"):
-            lines.append("Bu EV yalnızca SABAH fiyatıyla senaryo değeridir; maç saatinde aynı fiyatın alınabildiği doğrulanmadı.")
+            lines.append("Bu EV yalnızca kayıtlı İddaa PDF fiyatıyla araştırma senaryosudur; maç saatinde aynı fiyatın alınabildiği doğrulanmadı."
+                if result.get("iddaa_pdf_only_seven_markets") else
+                "Bu EV yalnızca SABAH fiyatıyla senaryo değeridir; maç saatinde aynı fiyatın alınabildiği doğrulanmadı.")
     lines.append("PAS nedeni: "+", ".join(result["PAS_reasons"]))
-    lines.append("1.5 Üst özel cezaya uğramaz; bütün pazarlar aynı kalibrasyon ve fiyat kontrollerinden geçer.")
+    if result.get("iddaa_pdf_only_seven_markets"):
+        lines.append("Kapsam yalnız MS 1/X/2, KG Var/Yok ve 2.5 Alt/Üst. PDF fiyatları tahminden ÖNCE arşivlenmiştir; canlı fiyat değildir.")
+    else:
+        lines.append("1.5 Üst özel cezaya uğramaz; bütün pazarlar aynı kalibrasyon ve fiyat kontrollerinden geçer.")
     lines.append("Fiyat kaynağı insan gözlemidir, kod internetten bağımsız doğrulamaz.")
     return "\n\n".join(lines)+"\n"
 
