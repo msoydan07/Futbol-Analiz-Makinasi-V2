@@ -14,6 +14,8 @@ on:
       - 'experiments/263/iddaa_pdf_first_quote_263.py'
       - 'experiments/263/iddaa_pdf_value_bridge_263.py'
       - 'experiments/263/test_iddaa_pdf_first_value_bridge_263.py'
+      - 'experiments/263/iddaa_pdf_one_step_263.py'
+      - 'experiments/263/test_iddaa_pdf_one_step_263.py'
       - 'experiments/263/four_model_value_policy_263.py'
       - '.github/workflows/263-iddaa-pdf-team-alias-bulk-preflight-ci.yml'
 permissions:
@@ -39,7 +41,7 @@ jobs:
       - name: Single 7-test alias / strict fixture order / skip only unmatched batch check
         env:
           PYTHONPATH: experiments/263
-        run: python -m unittest -v experiments/263/test_iddaa_pdf_team_alias_preflight_263.py experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_session_263.py experiments/263/test_iddaa_pdf_report_263.py experiments/263/test_iddaa_pdf_first_value_bridge_263.py experiments/263/test_four_model_value_policy_263.py
+        run: python -m unittest -v experiments/263/test_iddaa_pdf_team_alias_preflight_263.py experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_session_263.py experiments/263/test_iddaa_pdf_report_263.py experiments/263/test_iddaa_pdf_first_value_bridge_263.py experiments/263/test_four_model_value_policy_263.py experiments/263/test_iddaa_pdf_one_step_263.py
       - name: Assert this preflight never modified sealed predictions, odds, models, or registry
         run: |
           git diff --quiet
