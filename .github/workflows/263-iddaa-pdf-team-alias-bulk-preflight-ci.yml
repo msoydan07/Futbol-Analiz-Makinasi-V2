@@ -11,6 +11,10 @@ on:
       - 'experiments/263/test_iddaa_pdf_session_263.py'
       - 'experiments/263/iddaa_pdf_report_263.py'
       - 'experiments/263/test_iddaa_pdf_report_263.py'
+      - 'experiments/263/iddaa_pdf_first_quote_263.py'
+      - 'experiments/263/iddaa_pdf_value_bridge_263.py'
+      - 'experiments/263/test_iddaa_pdf_first_value_bridge_263.py'
+      - 'experiments/263/four_model_value_policy_263.py'
       - '.github/workflows/263-iddaa-pdf-team-alias-bulk-preflight-ci.yml'
 permissions:
   contents: read
@@ -24,7 +28,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install PDF text positioning dependency
-        run: python -m pip install --disable-pip-version-check 'PyMuPDF>=1.24,<1.27' 'reportlab>=4,<5'
+        run: python -m pip install --disable-pip-version-check 'PyMuPDF>=1.24,<1.27' 'reportlab>=4,<5' 'numpy>=1.26,<3' 'scipy>=1.11,<2'
       - name: Verify canonical registry unchanged and complete archived sample names
         shell: bash
         run: |
@@ -35,7 +39,7 @@ jobs:
       - name: Single 7-test alias / strict fixture order / skip only unmatched batch check
         env:
           PYTHONPATH: experiments/263
-        run: python -m unittest -v experiments/263/test_iddaa_pdf_team_alias_preflight_263.py experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_session_263.py experiments/263/test_iddaa_pdf_report_263.py
+        run: python -m unittest -v experiments/263/test_iddaa_pdf_team_alias_preflight_263.py experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_session_263.py experiments/263/test_iddaa_pdf_report_263.py experiments/263/test_iddaa_pdf_first_value_bridge_263.py experiments/263/test_four_model_value_policy_263.py
       - name: Assert this preflight never modified sealed predictions, odds, models, or registry
         run: |
           git diff --quiet
