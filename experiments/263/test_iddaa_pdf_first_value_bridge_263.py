@@ -61,9 +61,10 @@ def sample():
            "market_no_vig":market_no_vig(pdfrow),
            "official":{"source_url":"https://www.tff.org/fikstur",
                        "kickoff_utc":"2026-11-06T17:00:00+00:00"},
-           "model_1x2_and_core_markets":{"M4":dict(
-               MS1=.72,MSX=.17,MS2=.11,OVER_2.5=.53,UNDER_2.5=.47,
-               BTTS_YES=.58,BTTS_NO=.42)}}
+           "model_1x2_and_core_markets":{"M4":{
+               "MS1":.72,"MSX":.17,"MS2":.11,
+               "OVER_2.5":.53,"UNDER_2.5":.47,
+               "BTTS_YES":.58,"BTTS_NO":.42}}
     session={"schema":SESSION,"source_bookmaker":"iddaa.com",
              "bookmaker_reverification_calls":0,"pdf_sha256":PDF_SHA,
              "pdf_capture_utc":PDF_TIME,"n_rows":1,
