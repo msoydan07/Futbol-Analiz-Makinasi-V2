@@ -63,11 +63,20 @@ def parse_sdp_events(payload):
             if not isinstance(name,str) or not name.strip():return []
             clubs.append(name.strip())
         if home["teamId"]==away["teamId"]:return []
+        # This very official API carries provisional 2027 calendar-only
+        # placeholders such as "2027-01-17Z", with NO kickoff clock.
+        # These are NEVER verified fixtures. Skip those unrelated entries
+        # without rejecting the independent, timed Nov 2026 fixtures.
+        raw_kick=m.get("matchDateUtc")
+        if not isinstance(raw_kick,str) or not re.fullmatch(
+                r"20\d\d-\d\d-\d\dT\d\d:\d\d(?::\d\d)?(?:\.\d+)?(?:Z|[+-]\d\d:\d\d)",
+                raw_kick):
+            continue
         try:
-            kick=datetime.fromisoformat(m["matchDateUtc"].replace("Z","+00:00"))
-            if kick.tzinfo is None:raise ValueError("no timezone")
+            kick=datetime.fromisoformat(raw_kick.replace("Z","+00:00"))
+            if kick.tzinfo is None:continue
             kick=kick.astimezone(timezone.utc)
-        except (KeyError,TypeError,ValueError):return []
+        except ValueError:continue
         if not (datetime(2026,8,1,tzinfo=timezone.utc)
                 <=kick<=datetime(2027,6,1,tzinfo=timezone.utc)):
             return []

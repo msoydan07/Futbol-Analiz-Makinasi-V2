@@ -34,14 +34,6 @@ jobs:
         env:
           PYTHONPATH: .:experiments/263
         run: python experiments/263/ten_league_source_probe_263.py
-      - name: Narrow source structure diagnosis for blocked leagues (read-only)
-        env:
-          PYTHONPATH: .:experiments/263
-        run: python experiments/263/ten_league_parser_context_263.py
-      - name: One read-only official Lega Serie A API probe (no model or odds)
-        env:
-          PYTHONPATH: .:experiments/263
-        run: python experiments/263/seriea_official_api_diagnostic_263.py
       - name: Confirm no sealed predictions or model sources touched
         run: |
           git diff --quiet

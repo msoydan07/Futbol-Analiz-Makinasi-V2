@@ -233,6 +233,17 @@ class RealSourceAndBreakGate(unittest.TestCase):
         self.assertEqual(italy_lookup("Milan","Inter",now=t,fetcher=lambda:payload,
             same_team=same)["status"],"NOT_VERIFIED")
         self.assertEqual(parse_sdp_events({**payload,"matches":items[:-1]}),[])
+        # The real SDP feed contains 190 Jan+ date-only placeholders.
+        # They must not poison independent November timed observations.
+        postponed=[dict(x) for x in items]
+        postponed[3]={**items[3],"status":"UPCOMING","matchDateUtc":"2027-01-17Z"}
+        self.assertEqual(len(parse_sdp_events({**payload,"matches":postponed})),1)
+        self.assertEqual(italy_lookup("Inter","Milan",now=t,fetcher=lambda:
+            {**payload,"matches":postponed},same_team=same)["status"],
+            "VERIFIED_OFFICIAL_FIXTURE")
+        self.assertEqual(italy_lookup("Inter","Milan",now=t,fetcher=lambda:
+            {**payload,"matches":[{**x,"matchDateUtc":"2027-01-17Z"} for x in items]},
+            same_team=same)["status"],"NOT_VERIFIED")
         illegal=[dict(x) for x in items]
         illegal[1]={**items[1],"seasonId":"2025/2026"}
         self.assertEqual(parse_sdp_events({**payload,"matches":illegal}),[])
