@@ -47,13 +47,65 @@ def _pp(value):
     return "—" if value is None else f"{value:+.1f}".replace(".",",")
 
 def _render_pick(row,session):
-    """No false candidate certification from an arbitrary JSON boolean.
+    """Render ONLY SHA-validated results of the actual frozen value policy.
 
-    We still need to link the existing frozen development-calibration value
-    policy to the PRE-forecast PDF SHA. Until that bridge is verified with
-    a real in-scope PDF, a raw model-vs-odds gap MUST NOT be a main pick.
+    A caller's boolean such as "frozen_policy_verified": True has no authority.
+    Actual file SHA + official forecast SHA + as-of baseline SHA are verified
+    upstream by iddaa_pdf_value_bridge_263; here require sealed result identity.
     """
-    return "ANA: —     ALTERNATİF: —     DURUM: PAS (kalibre değer kararı henüz yok)"
+    from iddaa_pdf_first_quote_263 import sha256 as sha
+    d=row.get("pdf_linked_policy_decision")
+    snap=row.get("pdf_first_price_snapshot")
+    if not isinstance(d,dict) or not isinstance(snap,dict):
+        reason=str(row.get("value_decision_reason") or "kalibre karar kanıtı yok")
+        return "ANA: PAS  |  ALTERNATİF: —  |  Neden: "+reason[:100]
+    if (d.get("payload_sha256")!=sha({k:v for k,v in d.items()
+                                            if k!="payload_sha256"})
+        or snap.get("payload_sha256")!=sha({k:v for k,v in snap.items()
+                                             if k!="payload_sha256"})
+        or d.get("schema")!="263_four_model_value_decision_research_v1"
+        or d.get("iddaa_original_pdf_sha256")!=session.get("pdf_sha256")
+        or snap.get("source_pdf_sha256")!=session.get("pdf_sha256")
+        or d.get("forecast_sha256")!=row.get("model_forecast_sha256")
+        or snap.get("forecast_sha256")!=row.get("model_forecast_sha256")
+        or d.get("iddaa_pdf_first_sha256")!=snap["payload_sha256"]
+        or d.get("dev_lock_sha256")!=session.get("policy_dev_lock_sha256")
+        or d.get("iddaa_pdf_only_seven_markets") is not True
+        or d.get("iddaa_pdf_pre_forecast_not_live") is not True
+        or d.get("quote_reverified_by_code") is not False
+        or d.get("betting_authorized") is not False
+        or d.get("official_pilot_count_increment")!=0):
+        return "ANA: PAS  |  ALTERNATİF: —  |  Neden: karar SHA/kimlik uyuşmazlığı"
+    if not set(x["market"] for x in d.get("all_market_diagnostics",[])).issubset(CANONICAL_MARKETS):
+        return "ANA: PAS  |  ALTERNATİF: —  |  Neden: izinsiz pazar"
+    pretty={k:label for label,k,_ in ROWS}
+    def verified(v):
+        if v is None:return True
+        if not isinstance(v,dict) or v.get("market") not in CANONICAL_MARKETS:
+            return False
+        if v.get("price_age_class")!="ARCHIVED_PDF_PRE_FORECAST":
+            return False
+        if v.get("qualification_reasons")!=[]:
+            return False
+        return any(x==v for x in d["all_market_diagnostics"])
+    main=d.get("main_candidate")
+    alt=d.get("alternative_candidate")
+    if not verified(main) or not verified(alt):
+        return "ANA: PAS  |  ALTERNATİF: —  |  Neden: karar pazarı doğrulanmadı"
+    if alt and (not main or alt.get("family")==main.get("family")):
+        return "ANA: PAS  |  ALTERNATİF: —  |  Neden: alternatif aile kontrolü"
+    if main is None:
+        return "ANA: PAS  |  ALTERNATİF: —  |  Kalibrasyon/fiyat eşiği sağlanmadı"
+    def line(v):
+        return (pretty[v["market"]]+" · oran "+_odds(v["observed_odds"])+
+                " · kalibre "+_pct(v["calibrated_probability"])+
+                " · marjsız fark "+_pp(v["no_vig_advantage_pp"]))
+    # IMPORTANT: these are snapshots from before the forecast. They MUST
+    # always be displayed as CONDITIONAL research, never tradable live offers.
+    return ("ANA KOŞULLU (PDF): "+line(main)+
+            ("  |  ALTERNATİF KOŞULLU: "+line(alt) if alt else
+             "  |  ALTERNATİF: —")+
+            "  |  Canlı fiyat teyidi yok")
 
 def _table_for(row,norm,bold,font):
     from reportlab.platypus import Table,TableStyle,Paragraph
@@ -101,6 +153,14 @@ def build(session,output):
     from reportlab.lib import colors
     if session.get("schema")!=SCHEMA:
         raise ValueError("SESSION_SCHEMA_INVALID")
+    # Verify enriched-session hash so a post-analysis file rewrite cannot
+    # silently modify per-row candidate presentation.
+    if "signed_research_session_sha256" in session:
+        from iddaa_pdf_first_quote_263 import sha256
+        seal=session["signed_research_session_sha256"]
+        if seal!=sha({k:v for k,v in session.items()
+                         if k!="signed_research_session_sha256"}):
+            raise ValueError("PDF_REPORT_SESSION_SHA_MODIFIED")
     target=Path(output)
     if target.exists():raise FileExistsError("REPORT_NEVER_OVERWRITE")
     font,bold=_font()
