@@ -208,4 +208,41 @@ class RealSourceAndBreakGate(unittest.TestCase):
         events=parse_portugal_round12(page)
         self.assertEqual(len(events),9,events)
 
+
+    def test_seriea_official_sdp_2026_27_future_exact_clubs_host_and_abort(self):
+        from seriea_official_sdp_263 import (lookup as italy_lookup,
+            parse_sdp_events,COMP_ID,SEASON_ID,URL)
+        def row(n,status="FINISHED",home="Inter",away="Milan",start="2026-11-21T19:45:00Z"):
+            def team(name,index):
+                return {"teamId":"serie-a::Football_Team::"+f"{index:032x}",
+                        "countryCode":"IT","officialName":name,"shortName":name,
+                        "isTeamFake":False}
+            return {"seasonId":SEASON_ID,"status":status,"matchDateUtc":start,
+                    "home":team(home,n*2+1),"away":team(away,n*2+2),
+                    "matchSet":{"seasonId":SEASON_ID,"competitionId":COMP_ID}}
+        items=[row(n) for n in range(380)]
+        items[1]=row(1,status="UPCOMING",home="Inter",away="Milan")
+        payload={"competition":{},"matches":items}
+        normalized=parse_sdp_events(payload)
+        self.assertEqual(len(normalized),1)
+        t=datetime(2026,11,21,10,0,tzinfo=timezone.utc)
+        same=lambda l,r:l==r
+        answer=italy_lookup("Inter","Milan",now=t,fetcher=lambda:payload,same_team=same)
+        self.assertEqual(answer["status"],"VERIFIED_OFFICIAL_FIXTURE",answer)
+        self.assertEqual(answer["source_url"],URL)
+        self.assertEqual(italy_lookup("Milan","Inter",now=t,fetcher=lambda:payload,
+            same_team=same)["status"],"NOT_VERIFIED")
+        self.assertEqual(parse_sdp_events({**payload,"matches":items[:-1]}),[])
+        illegal=[dict(x) for x in items]
+        illegal[1]={**items[1],"seasonId":"2025/2026"}
+        self.assertEqual(parse_sdp_events({**payload,"matches":illegal}),[])
+        bad=[dict(x) for x in items]
+        bad[1]={**items[1],"status":"CANCELLED"}
+        self.assertEqual(parse_sdp_events({**payload,"matches":bad}),[])
+        expired=italy_lookup("Inter","Milan",now=datetime(2026,11,5,tzinfo=timezone.utc),
+            fetcher=lambda:payload,same_team=same)
+        self.assertEqual(expired["status"],"OUTSIDE_WINDOW")
+        self.assertEqual(italy_lookup("Inter","Milan",now=t,
+            fetcher=lambda:{"matches":[]},same_team=same)["status"],"NOT_VERIFIED")
+
 if __name__=="__main__":unittest.main()

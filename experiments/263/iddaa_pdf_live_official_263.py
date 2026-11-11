@@ -48,12 +48,19 @@ def lookup(league,home,away,*,now=None,fetcher=None):
     # Use only the current approved published league page. All ambiguous or
     # missing timestamps fail closed; never use stale referee announcements.
     # They are still fail-closed if the actual official page cannot be parsed.
-    if league in ():
-        from mackolik_identity_gate_263 import OFFICIAL_ADAPTERS
-        from importlib import import_module
+    if league=="ITA1":
+        from seriea_official_sdp_263 import lookup as sdp_lookup
+        # An official JSON feed and the same canonical identity test used
+        # for the nine HTML-sourced leagues, never a third-party schedule.
         if fetcher is not None:
-            return {"status":"NOT_VERIFIED","reason":"no_injected_legacy_fetch"}
-        return import_module(OFFICIAL_ADAPTERS[league]).lookup(home,away,now=now)
+            def supplied():
+                url,data=fetcher(__import__("seriea_official_sdp_263").URL)
+                if url!=__import__("seriea_official_sdp_263").URL:
+                    raise ValueError("official_json_url_changed")
+                return data
+        else:
+            supplied=None
+        return sdp_lookup(home,away,now=now,fetcher=supplied,same_team=same_team)
     url,parser,coverage=(CURRENT_PAGES.get(league)
                 or (*SOURCES[league][::2], "SINGLE_OFFICIAL_PAGE_PARTIAL_COVERAGE"))
     if league in UNSAFE_OLD_WEEK and league not in CURRENT_PAGES:

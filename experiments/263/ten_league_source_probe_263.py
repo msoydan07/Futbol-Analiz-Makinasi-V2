@@ -59,8 +59,16 @@ def main():
         if not is_approved_url(url,league):
             item["status"]="BLOCKED_DOMAIN_NOT_APPROVED";report[league]=item;continue
         try:
-            effective,html=_default_fetch(url,league)
-            events=parse_official_events(league,html,parser=parser)
+            if league=="ITA1":
+                from seriea_official_sdp_263 import _fetch,parse_sdp_events,URL
+                events=parse_sdp_events(_fetch())
+                effective=URL
+                item["source_url"]=URL
+                item["parser"]="lega_seriea_sdp_current_2026_27"
+                html="OFFICIAL_JSON_API"
+            else:
+                effective,html=_default_fetch(url,league)
+                events=parse_official_events(league,html,parser=parser)
             future=[e for e in events if "2026-11-20"<=e["match_date"]<="2026-11-30" and e["kickoff_utc"]]
             canonical=[e for e in future if resolve_label(league,e["home"],index)["status"]=="MAPPED" and
                        resolve_label(league,e["away"],index)["status"]=="MAPPED"]

@@ -17,7 +17,7 @@ EXCEPTIONS={
  "ENG2":{"source":"https://www.efl.com/news/2026/july/30/see-the-latest-sky-sports-tv-selections/","official_scope":"2026-11-21/2026-11-22","max_age":16},
  "GER1":{"source":"https://products.bundesliga.com/fixtures","official_scope":"2026-11-20/2026-11-22","max_age":16},
  "ESP1":{"source":"https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-13","official_scope":"2026-11-20/2026-11-23","max_age":16},
- "ITA1":{"source":"https://www.legaseriea.it/serie-a/calendario-risultati","official_scope":"2026-11-21/2026-11-23","max_age":16},
+ "ITA1":{"source":"https://api-sdp.legaseriea.it/v1/serie-a/football/seasons/serie-a%3A%3AFootball_Season%3A%3Aed7fdc2a3e7b408b942ec177b7b956b5/matches?locale=en-GB","official_scope":"2026-11-21/2026-11-23","max_age":16},
  "FRA1":{"source":"https://ligue1.com/fr/articles/l1_article_5839-","official_scope":"2026-11-20/2026-11-22","max_age":16},
  "NED1":{"source":"https://www.knvb.nl/competities/eredivisie/programma","official_scope":"2026-11-21/2026-11-22","max_age":16},
  "TUR1":{"source":"https://www.tff.org/Default.aspx?hafta=12&pageId=198","official_scope":"2026-11-21/2026-11-23","max_age":16},
