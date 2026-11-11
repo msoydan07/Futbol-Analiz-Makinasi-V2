@@ -1,62 +1,57 @@
-# 2.6.3 — İddaa PDF önce, tek resmî fikstür kontrolü, dört model, oranlı PDF
+# Futbol 2.6.3 — Tek İddaa PDF → dört model → oranlı rapor
 
-**Tarih:** 11 Kasım 2026 | **Güvenlik:** Deney dalı `experiment/263-toplu-karsilastirma`; ana motor ve 96 mühürlü pilot değişmez. Ana 10 lig yalnızca: ENG1, ENG2, GER1, ESP1, ITA1, FRA1, NED1, TUR1, POR1, BEL1. LITE ve basketbol ayrı.
+**Durum (11 Kasım 2026):** PDF-FIRST karar entegrasyonu deney dalına eklendi, **48/48 çevrimdışı GitHub testi başarılı**. İlk kapsam ligi PDF'siyle gerçek canlı resmî fikstür ve model uçtan uca kabulü henüz yapılmadı.
 
-## Kabul edilen kullanıcı iş akışı
+**Son başarılı test:** https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43056590227
 
-1. Kullanıcı iddaa.com **futbol bülteninde** yalnız istediği kapsam liglerini filtreleyip tarayıcının **Yazdır → PDF olarak kaydet** seçeneğiyle **tek PDF** verir. İddaa PDF'si maç listesi + **oranlar için birinci kaynak**, ayrıca ikinci bir bahis operatöründen oran teyidi istenmez.
-2. PDF'nin metin sütunları topluca okunur; **MS1/MSX/MS2, 2.5 Alt/Üst, KG Var/Yok**. **1.5 Üst ve 3.5 Alt, ayrıca bütün 1.5/3.5 pazarları raporda yasak**. Karşıt fiyat eksikse sadece o pazar no-vig dışıdır; diğer pazarlar ilerler.
-3. Mevcut SHA-kilitli takım siciline ek bir alias çözümleyici team UUID'si bulur. Kısaltılmış veya belirsiz isim sadece ilgili maçı ayırır; yanlış ev/deplasman eşleştirmesine izin yok.
-4. Mevcut 10 federasyon/lig/kulüp resmî adapterinden **tek sorgu / maç** yapılır. Maçın iki ekibi, tarih, saat, source host ve henüz başlamamış olması kontrol edilir. Adapter sorguları **en çok beş eşzamanlı** yürütülür; aynı maç için defalarca alternatif kaynak yoktur. **Bu sürüm lig başına tek HTTP isteği değil, maç başına tek mevcut resmî adapter çağrısı kullanır**; yerinde farklı bir şey iddia edilmez.
-5. Resmî olarak doğrulanmış ve verisi yeterli maçlar, **eski matematik kodu değiştirilmeden** `forward_quad.predict_quad_from_verified_gate` yoluyla B/C2/C3/M4 hesaplarına bağlanır. Model tahmini PDF'den *sonra* oluşturulur ve ayrı SHA ile kaydolur. Orijinal 96 maçlık dosyalara dokunulmaz. Tarihsel kaynak güncel/as-of değilse model engel verir; başka maçların çalışması devam eder.
-6. Siyah-beyaz, 7 oranlı, seçilebilir metinli, telefon uyumlu PDF raporu oluşturulur. **M4 ham % ile piyasanın marjsız % farkı bilgilendirme amaçlıdır.** Dört modelin temel yüzdeleri varsa gösterilir.
-7. **Tamamlanmamış kalan ayrım:** eski `four_model_value_policy_263.py` fiyatın tahminden *sonra* en çok 10 dakika içinde gözlenmesini bekler. Yeni PDF-first akışı bununla henüz güvenilirce birleştirilmedi. Bu nedenle **ana/alternatif bahis önerisi üretimi şu an bilinçli PAS**; sadece geçmiş matematik yüzdeleri + kaynak fiyatı + piyasa farkı gösterilir. Geçerli tahmin/kod veya olumlu EV kanıtı gibi sunulmaz. Bir sonraki tek kapsamlı iş: PDF-first SHA'lı fiyat snapshotını mevcut donmuş geliştirme kalibrasyonuna bağlayarak fiyat zamanı farklılığını `ARCHIVED_PDF_PRE_FORECAST` şeklinde sınıflandırmak ve tüm karar şablonlarını topluca test etmek. Fiyatı canlıymış gibi yeniden adlandırmak yasak.
+## Kesinleşen kullanıcı iş akışı
 
-## Eklenen dosyalar
+1. Kullanıcı İddaa.com'da yalnız o günün 10 kapsam liginden istediği ligleri filtreleyip **Chrome Yazdır → PDF olarak kaydet** ile tek PDF gönderir. Kullanıcıdan maçları tek tek yazması, iki ayrı bahis marketi seçmesi veya ikinci bir oran sitesinden teyit etmesi istenmez.
+2. Resmî İddaa PDF'si tek maç/odds kaynağı olarak **MS 1/X/2, KG Var/Yok, 2.5 Alt/Üst** olmak üzere yalnız yedi fiyatı içerir; 1.5 ve 3.5 marketleri rapora alınmaz. Metin, 14 PDF hücresinin yerinde kaldığı kontrol edilerek okunur, eksik fiyat kayıp marketin karşılaştırmasını etkiler.
+3. Takım isimleri SHA-korumalı mevcut **215 takım** siciline bağlanır. Bilinmeyen veya kısaltılmış ad yüzünden başka maç durdurulmaz. Kapsam dışı kupa, U19 ve kadın ligleri ana 10 ligin skor modellerine karışmaz.
+4. Lig/federasyon/kulübün **mevcut resmî fixture adapteri, maç başına bir çağrı** yapılır. Tek çağrı ev-deplasman, gün, saat ve henüz başlamamış maç kontrolünü yapar. Maçlarla ilgisiz başka odds kaynağına erişilmez. Bu sürüm lig başına tek HTTP çağrısı değil, **maç başına tek adapter çağrısı** uygular.
+5. Tek seferde **mevcut B/C2/C3/M4** modelleri kabul edilmiş tarihsel verilerle çalışır. Tahmin SHA kilitlenir. Ardından **aynı geçmiş sonuç kesiminden as-of ampirik piyasa temel oranları** ayrı SHA ile hemen kaydedilir. Eski 96 pilot, ana M4 katsayıları, lig kapsamı veya LITE/basketbol depoları değiştirilmez.
+6. Özgün kullanıcı PDF'si **yerel olarak bir kez tekrar okunup byte SHA ile** giriş JSON'una bağlanır (bu başka bahis kaynağından tekrar araştırma değildir). PDF zamanı < tahmin zamanı < karar zamanı < resmî maç başlama zamanı koşulu korunur. 24 saatten eski fiyat sadece arşivdir, değer seçiminde kullanılamaz.
+7. **Donmuş Ağustos–Eylül kalibrasyonuyla aynı önceki değer karar formülü** kullanılmaya devam eder. Model desteği, pozitif geçmiş Brier skill, olasılık/temel oran farkı, marjsız piyasa farkı ve EV şartları geçerse **koşullu ana aday** ve ayrı aileden **koşullu alternatif** sunulur; geçmiyorsa **PAS**. PDF fiyatı kesinlikle canlı/T-60 fiyatı diye adlandırılmaz: `ARCHIVED_PDF_PRE_FORECAST`.
+8. Siyah-beyaz, büyük okunaklı metinli, her maç çerçeveli PDF'de yedi oran + M4 ham %, piyasa marjsız %, fark ve imzalı **kalibre koşullu aday/alternatif/PAS** görüntülenir. Eski kullanıcı talimatına uygun 1.5/3.5 hiçbir satırda yoktur. Modül, sahte bir `frozen_policy_verified` boolean alanından tercih çıkarmaz.
 
-- `iddaa_pdf_team_alias_preflight_263.py`: 215 mevcut takım UUID'sini korur, daha önce gözlemlenmiş 20 dış isim biçimini aynı kimliklere bağlar.
-- `iddaa_pdf_bulletin_263.py`: gerçek Chrome/Android print-to-PDF metin/koordinatlarını, PDF SHA ve oluşturulma saatini alır; fiyat hücresini asla komşu pazarına kaydırmaz.
-- `iddaa_pdf_session_263.py`: on maç/lig sayısı ne olursa olsun satır bazında hızlı resmî kaynak kontrolü, 3 pazarda no-vig ve (isteğe bağlı) önceki B/C2/C3/M4 matematik çağrısı.
-- `iddaa_pdf_report_263.py`: siyah-beyaz ayrı maç kutuları, yedi oran, M4/piyasa/fark, dört model özet ve **PAS korunumu**.
-- `test_iddaa_pdf_*_263.py`: fixture kimliği, ters takımlar, tek resmî sorgu, geç kalan PDF, eksik fiyat, Türkçe font/PDF rapor, sahte onay/PAS testleri.
-- `.github/workflows/263-iddaa-pdf-team-alias-bulk-preflight-ci.yml`: tek GitHub Actions işinde ilgili testleri yürütür; dış bahis fiyatı API'sine hiç çıkmaz.
+## Uygulanan kodlar
 
-## Hazır komutlar (yerel repo veya kullanıcı PDF'si erişimli çalışma ortamı)
+- `iddaa_pdf_team_alias_preflight_263.py` — takım adları ve UUID
+- `iddaa_pdf_bulletin_263.py` — kullanıcının gerçek Android/Chrome PDF sütunları ve SHA
+- `iddaa_pdf_session_263.py` — tek resmi fixture denetimi; per-match dört model; modelden hemen sonra ampirik baseline SHA
+- `iddaa_pdf_first_quote_263.py` — gerçek orijinal PDF SHA, fiyatın tahminden önce olması, sadece 7 market, 24h bayat fiyat PAS
+- `four_model_value_policy_263.py` — **geriye uyumlu opsiyonel PDF-FIRST giriş**, eski normal karar formülünü veya varsayılan odds akışını değiştirmez
+- `iddaa_pdf_value_bridge_263.py` — donmuş geliştirme kalibrasyonunu PDF-first SHA zinciriyle bağlar; tek satır sorununda diğer maçlar devam eder
+- `iddaa_pdf_report_263.py` — sadece mühürlü karar/kalibrasyon verisinden siyah-beyaz, telefon okunur PDF
+- **Tek komut:** `iddaa_pdf_one_step_263.py` — kullanıcı PDF'sinden çıktı PDF'sine tek oturum; dosyalar yerel, GitHub'a otomatik yükleme yok
 
-Python bağımlılıkları: `PyMuPDF`, `reportlab`; yalnız dört model etkinleştirilirse mevcut proje matematik bağımlılıkları.
+## Tek komut: teknik çalıştırma
 
 ```bash
-export PYTHONPATH=experiments/263
-python experiments/263/iddaa_pdf_bulletin_263.py \
-  --pdf /path/to/kullanicidan-iddaa.pdf --out /tmp/iddaa_bulten.json
-
-# Bu adım gerçek mevcut resmî federasyon adapterlerine ağ erişimi gerektirir.
-python experiments/263/iddaa_pdf_session_263.py \
-  --intake-json /tmp/iddaa_bulten.json --out /tmp/iddaa_oturum.json \
-  --history /path/to/verified_historical_results.csv \
+PYTHONPATH=.:experiments/263 python experiments/263/iddaa_pdf_one_step_263.py \
+  --pdf "/path/to/user-iddaa.pdf" \
+  --history data/results_only_263/2026-11-10_completed_4617_scores_only.csv \
+  --source-baseline m4_quad_base/historical_results.csv \
+  --source-acceptance data/results_only_263/4617_research_input_provenance.json \
   --m4-lock experiments/263/m4_lock.json \
-  --baseline /path/to/accepted_baseline.csv \
-  --source-acceptance /path/to/accepted_source.json
-
-python experiments/263/iddaa_pdf_report_263.py \
-  --session-json /tmp/iddaa_oturum.json --out /tmp/263_oranli_rapor.pdf
+  --dev-lock experiments/263/forward_dev_calibration_lock_263.json \
+  --out-dir experiments/263/iddaa_pdf_sessions_263
 ```
 
-Sadece fikstür testinde `--history` bayrağını çıkar; resmî kontrolü ve fiyat kıyasını çalıştırır fakat **model yüzdesi üretmez**.
+Ön koşullar: mevcut `numpy`/`scipy`/`PyMuPDF`/`reportlab`; 4413 maçlık değişmez `m4_quad_base/historical_results.csv` (SHA `35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1`) GitHub sabah workflow'sunda olduğu gibi orijinal araştırma artifact'inden alınır. 4617'lik sonuç seti **research-only** veri kabul düzeyini aşmış gibi gösterilemez. User PDF'si GitHub repo içine otomatik gönderilmez.
 
-## Fiilî test kanıtı ve sınırlar
+Üretilenler: `bulletin.json`, `source_session.json`, `calibrated_session.json`, orijinal `iddaa_original_user.pdf`, ayrı SHA mühürlü dört model/baseline kayıtları, `futbol_263_iddaa_oranli_rapor.pdf`. Aynı PDF SHA ile oturum klasörü üzerine yazılmaz.
 
-- Kullanıcının 11 Kasım 2026 tarihli 3 sayfalık **gerçek iddaa.com PDF'si** yerel görsel/metin incelemesinde **30 maç satırı** içeriyor. **28 satırda 14 sıralı fiyat sütunu**, **2 satırda 13 sütun** var; son ikisi güvenli biçimde şüpheli kabul edilir. Bu PDF'deki organizasyonlar ana 10 lig kapsamında değil; **gerçek 10 lig fiyatı/isim eşleşmesi başarısı varmış gibi iddia edilmez**.
-- Mevcut 8 Kasım 2026 haricî arşiv (iddaa değil): dokuz lig, 43 karşılaşma, 86 kulüp adı kullanımı. Eski aliasla 66/86, yeni aliasla 86/86; bu iddaa isim garantisi değildir.
-- GitHub eylemi: https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43053085410 — ilk birleşik tur **28 testin 28'i geçti**. Son güvenlik değişikliğinden sonra testin yeniden yeşil olması gerekir.
-- Bu sürüm gerçek kapsam maçının **canlı federasyon + B/C2/C3/M4 + PDF-first kalibre değer seçimi uçtan uca kabulünü henüz tamamlamadı**. Eski dönem pilotu / tahmin doğruluğu garantisi değildir. Maç günü yeni örnek PDF ile bir kez, toplu kabul gereklidir.
+## Denetim / açık sınırlar
 
-## Akışın tekrar etmeme kuralı
+- **48/48 offline** test: PDF kolon/boşluk, alias, tek resmî adapter simülasyonu, SHA'lı tahmin ve empirical baseline bağlantısı, yanlış saat/isim, 24h fiyat, diğer bookmaker çağrısı yapmama, eski değer politika geriye uyumluluk, yasak 1.5/3.5, PAS veya koşullu ana tercih, gerçek PDF üretimi ve tek-komut bütünlük. https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43056590227
+- Kullanıcının ilk 11 Kasım **3 sayfalık gerçek örnek PDF'si** on lig dışından 30 maç içeriyor; 28 satırın fiyat hücresi uygun biçimde okunuyor, 2 satır eksik sütun nedeniyle ayrı tutuluyor. Bu, gerçek kapsam ligi isimlerini onaylayan bir test değildir.
+- 8 Kasım Pinnacle kayıtlarında (İddaa değil) 86 kulüp adı örneğiyle harici 20 isim farkı çözülmüş, 86/86 test edilmiştir; **İddaa özel adları için garanti** sayılamaz.
+- **Kalan tek kabul:** 10 kapsam liginden maç içeren ilk gerçek İddaa PDF'sinde aynı toplu akışı canlı federasyon/lig adapteri, kabul edilmiş as-of veri, gerçek B/C2/C3/M4 ve PDF çıktısıyla bir kez uçtan uca sınamak. Bu aşamaya kadar canlıda yüzde yüz çalışıyor veya bahis avantajı kanıtlandı iddiası yoktur. Model ve oran fiyatı değişebilir; adaylar yalnız araştırma amaçlı koşulludur.
 
-**Bir PDF al → toplu satır ayıklama → her resmî fixture için en çok bir çağrı → analizi çalıştır → tek PDF.** Eksik tek pazar, bilinmeyen tek isim veya tek resmî kaynak hatası diğer maçları bloke etmez. Tamamlanan maçları tekrarlı olarak ikinci odds sitesine gönderme veya artık başlamış maçın fiyatını yeniden öncesiymiş gibi yazma. Eski/Pinnacle API kota tüketimi bu yolun parçası değil.
+## Durum defteri
 
-## Mevcut durum defteri
+**Bitti:** PDF-first gerçek kaynak SHA bağlama, eski kalibre matematik kararı, 7 market, tek CLI girişi, Unicode PDF ve 48/48 araştırma testi.
 
-- Yeşil: PDF kolon çıkarımı + 215 takım aliasları + resmî tek-sorgu simülasyonu + no-vig + Unicode PDF renderer + 28 alt test.
-- Açık: Gerçek 10 lig İddaa PDF başlıklarının/görünür takım adlarının ilk canlı kabulu; gerçek resmî adapter ve dört model uçtan uca koşusu; **PDF-first zaman sıralı fiyatın mevcut donmuş değer politikasına bağlanması (ana/alternatif/PAS)**.
-- Sonraki tek iş: tam/tek seferlik gerçek 10 lig PDF kabulü ve kalibrasyon bağlantısı; baştan yeni pilot veya yeniden model yarıştırması yok.
+**Açık:** İlk gerçek on lig İddaa PDF'siyle canlı saha kabulü. Yeni 96 pilot başlatmak, ikinci bahis fiyatı teyit etmek, eski M4'e test edilmemiş katsayı eklemek veya mevcut mühürleri değiştirmek YASAK.
