@@ -62,7 +62,6 @@ def ensure_sources():
     require(lock["m4_engine_sha256"]==EXPECTED_HASHES["engine"] and
             lock["evaluation_season_excluded"]=="2026-2027" and
             lock["training_season"]=="2025-2026","LOCK_NOT_FROZEN_OR_UNEXPECTED")
-    require(tuple(FOLDS) if False else True,"NO_RELAXATION")
     settings=use_lock(lock)
     rows=clean_rows(HISTORY)
     old=clean_rows(OLD)
