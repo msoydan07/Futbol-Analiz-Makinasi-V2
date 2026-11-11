@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
 jobs:
   one-offline-acceptance:
     runs-on: ubuntu-latest
@@ -34,6 +35,20 @@ jobs:
         env:
           PYTHONPATH: .:experiments/263
         run: python experiments/263/ten_league_source_probe_263.py
+      - name: Retrieve immutable original 4413 research baseline (only for real M4 acceptance)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+          echo '637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89  data/results_only_263/2026-11-10_completed_4617_scores_only.csv' | sha256sum -c -
+      - name: REAL B C2 C3 M4 + SHA + report using SYNTHETIC PDF and controlled official HTML
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_pdf_first_real_4617_end_to_end_263.py
       - name: Confirm no sealed predictions or model sources touched
         run: |
           git diff --quiet
