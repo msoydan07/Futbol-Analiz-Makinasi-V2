@@ -158,7 +158,7 @@ def build(session,output):
     if "signed_research_session_sha256" in session:
         from iddaa_pdf_first_quote_263 import sha256
         seal=session["signed_research_session_sha256"]
-        if seal!=sha({k:v for k,v in session.items()
+        if seal!=sha256({k:v for k,v in session.items()
                          if k!="signed_research_session_sha256"}):
             raise ValueError("PDF_REPORT_SESSION_SHA_MODIFIED")
     target=Path(output)
