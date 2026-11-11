@@ -6,3 +6,8 @@
 /data/understat_alias_review.csv
 /data/understat_unmatched_diagnosis.csv
 /data/understat_unmatched_diagnosis.json
+
+# User-supplied bookmaker PDF files and private per-day output (NEVER commit).
+/experiments/263/iddaa_pdf_sessions_263/
+/experiments/263/iddaa_pdf_forecasts_263/
+/experiments/263/iddaa_pdf_empirical_baselines_263/
