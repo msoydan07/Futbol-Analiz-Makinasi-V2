@@ -69,8 +69,8 @@ class PdfReportTests(unittest.TestCase):
         self.row["pdf_linked_policy_decision"]["main_market"]="MS1"
         self.row["pdf_linked_policy_decision"]["alternative_market"]="BTTS_YES"
         text=_render_pick(self.row,self.session)
-        self.assertIn("ANA: MS 1",text)
-        self.assertIn("KG Var",text)
+        self.assertIn("PAS",text)
+        self.assertNotIn("ANA: MS 1",text)
 
     def test_pdf_never_overwrite(self):
         with tempfile.TemporaryDirectory() as d:
