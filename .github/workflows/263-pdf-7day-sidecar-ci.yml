@@ -21,6 +21,8 @@ jobs:
     timeout-minutes: 7
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -33,12 +35,14 @@ jobs:
           python -m unittest -v \
             experiments/263/test_iddaa_pdf_workload_263.py \
             experiments/263/test_iddaa_pdf_session_263.py \
-            experiments/263/test_iddaa_pdf_report_263.py
+            experiments/263/test_iddaa_pdf_report_263.py \
+            experiments/263/test_sabah_fixture_rotation_263.py \
+            experiments/263/test_sabah_official_fixture_gateway_263.py
       - name: Confirm frozen model source and original historical seals untouched
         shell: bash
         run: |
           set -euo pipefail
-          base=5a8e354f8cab7e002461aec951fbd3e8bb68e7a2
+          base=f548b61480310e52f060c4be5904cf944bd3b020
           for p in experiments/263/m4_integrated.py experiments/263/m4_lock.json \
                    data/quad_accepted_263/extended_history.csv; do
             test "$(git rev-parse "$base:$p")" = "$(git rev-parse "HEAD:$p")"
