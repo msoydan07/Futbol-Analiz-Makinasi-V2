@@ -8,7 +8,8 @@ forecast. No odds or external bookmaker calls.
 from __future__ import annotations
 from datetime import datetime,timezone
 from official_page_lookup_263 import (
-    SOURCES,official_page_lookup,_default_fetch)
+    SOURCES,official_page_lookup,_default_fetch,parse_official_events)
+from iddaa_pdf_workload_263 import collect_same_page
 from iddaa_pdf_team_alias_preflight_263 import index_registry,resolve_label
 
 # Explicit CURRENT fixture surface replacements for the stale week-11 news
@@ -40,6 +41,11 @@ def lookup(league,home,away,*,now=None,fetcher=None):
     if league not in SOURCES:
         return {"status":"NOT_VERIFIED","reason":"outside_ten_leagues"}
     index,_,_=index_registry()
+    def _team_id(name):
+        result=resolve_label(league,name,index)
+        if result.get("status")!="MAPPED":
+            raise ValueError("PDF_WORKLOAD_TEAM_NOT_CANONICAL")
+        return result["team_id"]
     def same_team(observed,requested):
         left=resolve_label(league,observed,index)
         right=resolve_label(league,requested,index)
@@ -49,28 +55,60 @@ def lookup(league,home,away,*,now=None,fetcher=None):
     # missing timestamps fail closed; never use stale referee announcements.
     # They are still fail-closed if the actual official page cannot be parsed.
     if league=="ITA1":
-        from seriea_official_sdp_263 import lookup as sdp_lookup
+        from seriea_official_sdp_263 import (
+            lookup as sdp_lookup,parse_sdp_events,_fetch as fetch_sdp,URL)
+        captured=[None]
         # An official JSON feed and the same canonical identity test used
         # for the nine HTML-sourced leagues, never a third-party schedule.
-        if fetcher is not None:
-            def supplied():
-                url,data=fetcher(__import__("seriea_official_sdp_263").URL)
-                if url!=__import__("seriea_official_sdp_263").URL:
-                    raise ValueError("official_json_url_changed")
-                return data
-        else:
-            supplied=None
-        return sdp_lookup(home,away,now=now,fetcher=supplied,same_team=same_team)
+        def supplied():
+            if fetcher is not None:
+                url,data=fetcher(URL)
+                if url!=URL:raise ValueError("official_json_url_changed")
+            else:
+                data=fetch_sdp()
+            captured[0]=data
+            return data
+        found=sdp_lookup(home,away,now=now,fetcher=supplied,same_team=same_team)
+        if found.get("status")=="VERIFIED_OFFICIAL_FIXTURE" and captured[0] is not None:
+            try:
+                payload=captured[0]
+                if isinstance(payload,str):
+                    import json
+                    payload=json.loads(payload)
+                events=parse_sdp_events(payload)
+                found["adjacent_league_evidence"]=collect_same_page(
+                    league,_team_id(home),_team_id(away),events,
+                    source_url=found["source_url"],
+                    retrieved_at_utc=found["retrieved_at_utc"],
+                    source_payload=payload,index=index)
+            except (ValueError,TypeError,KeyError,OverflowError):
+                found["adjacent_league_evidence_status"]="UNVERIFIED_INCOMPLETE"
+        return found
     url,parser,coverage=(CURRENT_PAGES.get(league)
                 or (*SOURCES[league][::2], "SINGLE_OFFICIAL_PAGE_PARTIAL_COVERAGE"))
     if league in UNSAFE_OLD_WEEK and league not in CURRENT_PAGES:
         return {"status":"NOT_VERIFIED","reason":"no_current_official_schedule"}
+    captured=[None]
     def load(page):
-        return fetcher(page) if fetcher else _default_fetch(page,league)
+        outcome=fetcher(page) if fetcher else _default_fetch(page,league)
+        if isinstance(outcome,tuple) and len(outcome)==2:
+            captured[0]=outcome
+        return outcome
     found=official_page_lookup(league,home,away,now=now,source_url=url,
                               parser=parser,same_team=same_team,fetcher=load)
     if found.get("status")=="VERIFIED_OFFICIAL_FIXTURE":
         # The returned page has an explicit time and exact canonical team order.
         found["coverage"]=coverage
         found["official_live_page_not_old_week"]=True
+        if captured[0] is not None:
+            effective,html=captured[0]
+            try:
+                events=parse_official_events(league,html,parser=parser)
+                found["adjacent_league_evidence"]=collect_same_page(
+                    league,_team_id(home),_team_id(away),events,
+                    source_url=found["source_url"],
+                    retrieved_at_utc=found["retrieved_at_utc"],
+                    source_payload=html,index=index)
+            except (ValueError,TypeError,KeyError,OverflowError):
+                found["adjacent_league_evidence_status"]="UNVERIFIED_INCOMPLETE"
     return found

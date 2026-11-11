@@ -65,6 +65,55 @@ class SessionTests(unittest.TestCase):
         self.assertEqual(outcome["rows"][0]["status"],"ONE_OFFICIAL_SOURCE_CONFIRMED")
         self.assertEqual(outcome["rows"][0]["official_lookup_attempts"],1)
 
+    def test_validated_same_page_workload_is_read_only_and_request_anchored(self):
+        from iddaa_pdf_workload_263 import SCHEMA as WORK_SCHEMA,page_sha
+        from iddaa_pdf_team_alias_preflight_263 import index_registry
+        index,_,_=index_registry()
+        home=index["TUR1"]["besiktas"]
+        away=index["TUR1"]["genclerbirligi"]
+        observed=real_official("BEŞİKTAŞ A.Ş.","GENÇLERBİRLİĞİ")
+        observed["adjacent_league_evidence"]={
+            "schema":WORK_SCHEMA,"source":"SAME_FETCHED_OFFICIAL_LEAGUE_PAGE",
+            "source_url":observed["source_url"],
+            "retrieved_at_utc":observed["retrieved_at_utc"],
+            "source_payload_sha256":page_sha("source example"),
+            "coverage":"PARTIAL_LEAGUE_EVENTS_ONLY",
+            "uefa_and_cups_verified":False,
+            "verified_adjacent_league_events":[{
+                "team_id":home,"opponent":"another-canonical-opponent",
+                "kickoff_utc":"2026-11-12T19:00:00+00:00",
+                "competition":"LIG","verification":"VERIFIED_OFFICIAL_ADAPTER",
+                "source_url":observed["source_url"]
+            }]
+        }
+        x=run_session(source([row()]),now=NOW,
+                      official_lookup=lambda h,a:observed,max_workers=1)
+        w=x["rows"][0]["rotation_7day"]
+        self.assertEqual(w["status"],"VERIFIED_SAME_PAGE_LEAGUE_PARTIAL")
+        self.assertEqual(w["window_basis"],"ANALYSIS_REQUEST_PLUS_MINUS_SEVEN_DAYS")
+        self.assertEqual(len(w["teams"][home]["next_7_days"]),1)
+        self.assertEqual(w["teams"][away]["rotation_label"],"VERI_YETERSIZ")
+        self.assertFalse(w["model_probabilities_changed"])
+        self.assertEqual(w["new_odds_network_calls"],0)
+        self.assertEqual(w["new_official_network_calls"],0)
+
+    def test_workload_wrong_league_source_never_blocks_verified_match(self):
+        observed=real_official("BEŞİKTAŞ A.Ş.","GENÇLERBİRLİĞİ")
+        observed["adjacent_league_evidence"]={
+            "schema":"263_PDF_OFFICIAL_SAME_PAGE_ADJACENT_V1",
+            "source":"SAME_FETCHED_OFFICIAL_LEAGUE_PAGE",
+            "source_url":"https://malicious.invalid/fake",
+            "retrieved_at_utc":observed["retrieved_at_utc"],
+            "source_payload_sha256":"a"*64,
+            "coverage":"PARTIAL_LEAGUE_EVENTS_ONLY",
+            "uefa_and_cups_verified":False,"verified_adjacent_league_events":[]}
+        x=run_session(source([row()]),now=NOW,
+                      official_lookup=lambda h,a:observed,max_workers=1)
+        self.assertEqual(x["n_official"],1)
+        self.assertEqual(x["rows"][0]["status"],"ONE_OFFICIAL_SOURCE_CONFIRMED")
+        self.assertEqual(x["rows"][0]["rotation_7day"]["status"],
+                         "ADJACENT_SOURCE_REJECTED_DATA_INCOMPLETE")
+
     def test_one_bad_name_does_not_block_valid_row(self):
         calls=[]
         def official(h,a):

@@ -107,6 +107,48 @@ def _render_pick(row,session):
              "  |  ALTERNATİF: —")+
             "  |  Canlı fiyat teyidi yok")
 
+
+def _render_workload(row):
+    """Plain-text schedule disclaimer: no fabricated clean calendar/rotation."""
+    w=row.get("rotation_7day")
+    if not isinstance(w,dict) or w.get("schema")!="263_PDF_7DAY_WORKLOAD_V1":
+        return ("7 günlük maç yoğunluğu: VERİ YETERSİZ — "
+                "analiz anı için doğrulanmış yan fikstür yok. "
+                "Avrupa ve kupa takvimleri doğrulanmadı.")
+    if w.get("model_probabilities_changed") is not False:
+        return "7 günlük maç yoğunluğu: VERİ YETERSİZ — model müdahalesi şüpheli."
+    home=row.get("home_id")
+    away=row.get("away_id")
+    teams=w.get("teams")
+    if not isinstance(teams,dict) or home not in teams or away not in teams:
+        return ("7 günlük maç yoğunluğu: VERİ YETERSİZ — "
+                "iki takımın güvenilir fikstürü bulunamadı.")
+    lines=["7 günlük maç yoğunluğu (analiz talebi: geçmiş 7 / gelecek 7 gün)"]
+    for team_id,label in ((home,"Ev sahibi"),(away,"Deplasman")):
+        info=teams[team_id]
+        prior=info.get("past_7_days") or []
+        future=info.get("next_7_days") or []
+        if not isinstance(prior,list) or not isinstance(future,list):
+            return "7 günlük maç yoğunluğu: VERİ YETERSİZ — kayıt biçimi yanlış."
+        rest=info.get("last_rest_hours")
+        risk=info.get("rotation_label")
+        risk_text=("Yoğunluk incelenmeli" if risk=="INCELENMELI"
+                   else "Veri yetersiz" if risk=="VERI_YETERSIZ"
+                   else "Belirgin işaret yok (takvim kısmi)"
+                        if risk=="BELIRGIN_ISARET_YOK" else "Durum belirsiz")
+        suffix=(" · Son maçtan dinlenme: "+str(rest)+" saat"
+                if isinstance(rest,(int,float)) and rest>=0 else "")
+        lines.append(label+": doğrulanan lig maçı geçmiş "+str(len(prior))+
+                     ", gelecek "+str(len(future))+
+                     " · "+risk_text+suffix)
+        for event in (prior[-2:]+future[:2]):
+            lines.append("  LİG · "+str(event.get("utc") or "")[:16]+
+                         " · rakip ID "+str(event.get("opponent") or "")[:10])
+    lines.append("Avrupa/kupa ve lig fikstürlerinin tamamı doğrulanmadı; "
+                 "görünmeyen maç = maç yok demek değildir.")
+    lines.append("Rotasyon uyarısı bilgilendirmedir; B/C2/C3/M4 yüzde değişimi: 0.")
+    return "\n".join(lines)
+
 def _table_for(row,norm,bold,font):
     from reportlab.platypus import Table,TableStyle,Paragraph
     from reportlab.lib import colors
@@ -214,6 +256,10 @@ def build(session,output):
                     modelbits.append(f"{m}: veri yok")
             segments+=[Spacer(1,6),Paragraph(
                 escape("  |  ".join(modelbits)),small)]
+        # Workload notes are independent of the probabilistic/EV decision.
+        segments+=[Spacer(1,8)]
+        for line in _render_workload(row).split("\n"):
+            segments.append(Paragraph(escape(line),small))
         segments+=[Spacer(1,5),Paragraph(
             "Fark = M4 ham % − piyasa marjsız %. Pozitif fark tek başına "
             "kalibre bahis avantajı değildir.",small),Spacer(1,20)]

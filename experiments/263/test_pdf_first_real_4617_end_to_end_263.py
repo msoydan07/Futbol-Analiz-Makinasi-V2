@@ -138,6 +138,10 @@ class FullModelRehearsal(unittest.TestCase):
             self.assertIn("ONE_ROW_OFFICIAL_PDF_TIME_OR_DATE_DIFFER",by_status)
             passed=by_status["FOUR_MODELS_FORECAST_SHA_CREATED"]
             self.assertEqual(passed["official_lookup_attempts"],1)
+            self.assertEqual(passed["rotation_7day"]["status"],
+                             "VERIFIED_SAME_PAGE_LEAGUE_PARTIAL")
+            self.assertFalse(passed["rotation_7day"]["model_probabilities_changed"])
+            self.assertFalse(passed["rotation_7day"]["uefa_and_cup_schedule_complete"])
             self.assertEqual(passed["home_id"],index["TUR1"]["galatasaray"])
             self.assertEqual(passed["away_id"],index["TUR1"]["samsunspor"])
             self.assertEqual(set(passed["model_1x2_and_core_markets"]),
@@ -161,6 +165,8 @@ class FullModelRehearsal(unittest.TestCase):
             self.assertIn("Galatasaray",contents)
             self.assertIn("Kocaelispor",contents)
             self.assertIn("KG Var",contents)
+            self.assertIn("7 günlük maç yoğunluğu",contents)
+            self.assertIn("Avrupa/kupa",contents)
             self.assertNotIn("1.5 Üst",contents)
             self.assertNotIn("3.5 Alt",contents)
             self.assertIn("PAS",contents)
