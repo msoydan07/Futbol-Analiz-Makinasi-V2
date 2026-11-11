@@ -30,6 +30,10 @@ jobs:
           PYTHONPATH: .:experiments/263
         run: |
           python experiments/263/real_4617_math_readiness_audit_263.py --history data/results_only_263/2026-11-10_completed_4617_scores_only.csv --lock experiments/263/m4_lock.json --out /tmp/263-isolated-real-math.json
+      - name: One read-only live survey of all ten official leagues (no results promoted)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python experiments/263/ten_league_source_probe_263.py
       - name: Confirm no sealed predictions or model sources touched
         run: |
           git diff --quiet
