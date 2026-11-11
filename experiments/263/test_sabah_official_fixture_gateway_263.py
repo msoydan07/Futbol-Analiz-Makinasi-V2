@@ -1,5 +1,5 @@
 import unittest
-from datetime import datetime,timezone
+from datetime import datetime,timezone,timedelta
 from sabah_official_fixture_gateway_263 import OfficialFixtureGateway
 
 NOW=datetime(2026,11,7,7,0,tzinfo=timezone.utc)
@@ -83,6 +83,17 @@ class GatewayTests(unittest.TestCase):
     self.assertEqual(events[0]["opponent"],"C")
     self.assertEqual(events[0]["competition"],"LIG")
     self.assertEqual(events[0]["verification"],"VERIFIED_OFFICIAL_ADAPTER")
+    self.assertFalse(g.coverage()["ESP1"]["all_competitions_covered"])
+ def test_adjacent_requested_at_7_day_boundary_and_no_extra_source_calls(self):
+    called=[]
+    inside=(NOW+timedelta(days=7)).isoformat()
+    outside=(NOW+timedelta(days=7,seconds=1)).isoformat()
+    g=self.init(ld("A","B")+ld("A","C",inside)+ld("A","D",outside),called)
+    f=g.lookup("ESP1","A","B")
+    items=g.adjacent_for(f,requested_at=NOW)
+    self.assertEqual(len(items),1)
+    self.assertEqual(items[0]["opponent"],"C")
+    self.assertEqual(len(called),1)
     self.assertFalse(g.coverage()["ESP1"]["all_competitions_covered"])
  def test_adjacent_conflicting_times_fail_closed(self):
     called=[]

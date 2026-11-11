@@ -1,0 +1,36 @@
+name: "263 7-day request-anchored workload isolated regression"
+on:
+  push:
+    branches:
+      - fix/263-live-fixture-break-gates-20261111
+    paths:
+      - 'experiments/263/sabah_fixture_rotation_263.py'
+      - 'experiments/263/sabah_official_fixture_gateway_263.py'
+      - 'experiments/263/sabah_batch_263.py'
+      - 'experiments/263/test_sabah_fixture_rotation_263.py'
+      - 'experiments/263/test_sabah_official_fixture_gateway_263.py'
+      - '.github/workflows/263-7day-request-workload-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  request-clock-no-fake-cups:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: No-network 7-day requested-at schedule and fail-closed unknown competitions
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_sabah_fixture_rotation_263.py experiments/263/test_sabah_official_fixture_gateway_263.py
+      - name: Confirm protected M4 coefficients, original seals and history untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          for item in experiments/263/m4_integrated.py experiments/263/m4_lock.json data/quad_accepted_263/extended_history.csv; do
+            test "$(git rev-parse HEAD:"$item")" = "$(git rev-parse 5a8e354f8cab7e002461aec951fbd3e8bb68e7a2:"$item")"
+          done
+          echo "ORIGINAL_263_MODEL_LOCK_AND_ACCEPTED_HISTORY_IDENTICAL"
