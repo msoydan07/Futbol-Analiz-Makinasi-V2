@@ -244,8 +244,8 @@ def run_session(bulletin,*,now=None,official_lookup=None,forecast_options=None,
             "modifies_original_96_pilot":False,
             "modifies_frozen_models":False,
             "n_rows":len(rows),
-            "n_official":sum(r.get("status") in
-                ("ONE_OFFICIAL_SOURCE_CONFIRMED","FOUR_MODELS_FORECAST_SHA_CREATED")
+            "n_official":sum(isinstance(r.get("official"),dict) and
+                 r["official"].get("status")=="OFFICIAL_READY"
                  for r in by_number),
             "n_forecast":sum(r.get("model_forecast_created") for r in by_number),
             "rows":by_number}
