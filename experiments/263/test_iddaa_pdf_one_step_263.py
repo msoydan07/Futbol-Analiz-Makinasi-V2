@@ -103,8 +103,10 @@ class OneStepTests(unittest.TestCase):
             self.assertNotIn("1.5 Üst",text)
             self.assertNotIn("3.5 Alt",text)
             # Traversal/symlink access via untrusted row JSON is prohibited.
+            outside=root/"outside.json"
+            outside.write_text("{}",encoding="utf-8")
             with self.assertRaisesRegex(ValueError,"ESCAPES_PRIVATE_SESSION"):
-                _load(".",str(history),session_dir=done["processing_folder"],
+                _load(".",str(outside),session_dir=done["processing_folder"],
                       record_kind="forecasts")
             with self.assertRaisesRegex(ValueError,"UNSUPPORTED_RECORD_KIND"):
                 _load(".",str(history),session_dir=done["processing_folder"],
