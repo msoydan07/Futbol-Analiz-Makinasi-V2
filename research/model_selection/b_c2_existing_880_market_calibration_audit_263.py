@@ -138,7 +138,9 @@ def binary_shadow_calibration(rows,model,dev_cal,market):
     sample=[r for r in rows if model in r["p"]]
     out=[]
     for r in sample:
-        p,b,y=(r[name][fields[0]] if name=="base" else None for name in []) if False else (r["p"][model][fields[0]],r["base"][fields[0]],r["obs"][fields[0]])
+        p=r["p"][model][fields[0]]
+        b=r["base"][fields[0]]
+        y=r["obs"][fields[0]]
         q=b+w*(p-b)
         need(0<=q<=1,"SHADOW_WEIGHT_WRONG")
         out.append({"raw":(p-y)**2,"shrunk":(q-y)**2,
