@@ -63,7 +63,7 @@ def one_step(pdf,*,history,output_root,
     _write_once(folder/"source_session.json",session)
     calibrated=calibrate_session(bulletin,session,
                         original_pdf=copied,repo_root=repo_root,
-                        dev_lock_path=dev_lock,now=now)
+                        dev_lock_path=dev_lock,now=now,session_dir=folder)
     _write_once(folder/"calibrated_session.json",calibrated)
     final=report_pdf(calibrated,folder/"futbol_263_iddaa_oranli_rapor.pdf")
     return {
