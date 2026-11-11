@@ -81,8 +81,18 @@ def parse_portugal_round12(html):
     if "12.a-jornada" not in html and "12.ª jornada" not in html:return []
     # Official Nuxt embeds escaped <p> article paragraphs in JSON. Only decode
     # the fixed article text; do NOT search the other league's generic calendar.
-    decoded=html.replace(r"\u003C","<").replace(r"\u003E",">").replace(r"\u0026","&")
-    decoded=decoded.replace(r"\"","\"")
+    # Extract the serialized article fragment OUTSIDE its <script> wrapper:
+    # a full HTMLParser feed of the original Nuxt page suppresses script
+    # contents, even if escaped paragraphs have been decoded.
+    pivot=html.find("Jornada 12")
+    begin=html.rfind(r"\u003Cp",0,pivot) if pivot>=0 else -1
+    if begin<0:
+        decoded=html
+    else:
+        end=html.find("Consulte AQUI",pivot)
+        cap=min(len(html),begin+14000)
+        decoded=html[begin:min(cap,end+200 if end>=0 else cap)]
+    decoded=decoded.replace(r"\u003C","<").replace(r"\u003E",">").replace(r"\u0026","&")
     decoded=decoded.replace(r"\n","\n")
     decoded=html_lib.unescape(decoded)
     p=_Markup();p.feed(decoded)

@@ -172,4 +172,40 @@ class RealSourceAndBreakGate(unittest.TestCase):
             fetcher=lambda u:(u,html))
         self.assertEqual(r["status"],"VERIFIED_OFFICIAL_FIXTURE",r)
 
+
+    def test_efl_serialized_official_tv_table_is_parsed_but_only_partial(self):
+        from sabah_eng2_official_tv_263 import parse_efl_tv
+        tr='<tr><td>Championship</td><td>21-Nov-26</td><td>Saturday</td>'+
+           '<td>12:30</td><td>Millwall</td><td>V</td><td>Queens Park Rangers</td>'+
+           '<td>Sky Sports Football</td></tr>'
+        page='<html><h1>Sky Sports Championship</h1><script>const body="<table>'+tr+'</table>";</script></html>'
+        rows=parse_efl_tv(page)
+        self.assertEqual(len(rows),1,rows)
+        self.assertEqual(rows[0]["home"],"Millwall")
+        self.assertEqual(rows[0]["kickoff_utc"],"2026-11-21T12:30:00+00:00")
+        wrong=page.replace('<td>Championship</td>','<td>League One</td>')
+        self.assertEqual(parse_efl_tv(wrong),[])
+
+    def test_portugal_nuxt_escaped_article_is_decoded_inside_strict_round12(self):
+        from postbreak_official_parsers_263 import parse_portugal_round12
+        paragraphs=[
+          'Jornada 12',
+          'Sexta-feira, 27 de novembro',
+          'Marítimo M. - CD Nacional, 20h15 - SportTV',
+          'Sábado, 28 de novembro',
+          'FC Arouca - Rio Ave FC, 15h30 - SportTV',
+          'Moreirense FC - Santa Clara, 15h30 - TVI',
+          'Académico - FC Alverca, 18h00 - SportTV',
+          'Vitória SC - Estrela Amadora, 20h30 - SportTV',
+          'Domingo, 29 de novembro',
+          'Gil Vicente FC - Estoril Praia, 18h00 - SportTV',
+          'FC Porto - Sporting CP, 20h30 - SportTV',
+          'Segunda-feira, 30 de novembro',
+          'Casa Pia AC - SC Braga, 20h15 - SportTV',
+          'SL Benfica - FC Famalicão, 20h15 - BTV']
+        serialized=''.join(r'\u003Cp>'+s+r'\u003C/p>' for s in paragraphs)
+        page='<html><title>Horários definidos até à 12.ª jornada</title><script>window.__NUXT__="'+serialized+'";</script></html>'
+        events=parse_portugal_round12(page)
+        self.assertEqual(len(events),9,events)
+
 if __name__=="__main__":unittest.main()
