@@ -77,8 +77,11 @@ def main():
                 "away_match":resolve_label(league,e["away"],index)["status"]}
                 for e in future if not (resolve_label(league,e["home"],index)["status"]=="MAPPED"
                 and resolve_label(league,e["away"],index)["status"]=="MAPPED")]
-            item.update(status="OFFICIAL_HTML_FETCHED" if future else "BLOCKED_NO_TIMED_EVENTS",
-                        fetched_url=effective,html_bytes=len(html.encode("utf-8")),
+            source_type="OFFICIAL_JSON_API" if league=="ITA1" else "OFFICIAL_HTML"
+            source_ok="OFFICIAL_JSON_FETCHED" if league=="ITA1" else "OFFICIAL_HTML_FETCHED"
+            item.update(source_type=source_type,
+                        status=source_ok if future else "BLOCKED_NO_TIMED_EVENTS",
+                        fetched_url=effective,html_bytes=(None if league=="ITA1" else len(html.encode("utf-8"))),
                         events_total=len(events),events_nov20_30=len(future),
                         canonical_nov20_30=len(canonical),unmapped=unmapped[:5],
                         sample=[{k:e[k] for k in ("home","away","kickoff_utc")} for e in future[:2]])
@@ -99,9 +102,11 @@ def main():
             "day":"2026-11-11","no_predictions":True,"no_bookmakers":True,
             "not_full_user_pdf_acceptance":True,"leagues":report}
     print("LIVE_10LEAGUE_AGGREGATE="+json.dumps({
-        "live_fetched":sum(r["status"]=="OFFICIAL_HTML_FETCHED" for r in report.values()),
+        "live_fetched":sum(r["status"] in ("OFFICIAL_HTML_FETCHED","OFFICIAL_JSON_FETCHED")
+                           for r in report.values()),
         "timed_events":sum(r["events_nov20_30"] for r in report.values()),
         "canonical_timed_events":sum(r["canonical_nov20_30"] for r in report.values()),
-        "blocked":[l for l,r in report.items() if r["status"]!="OFFICIAL_HTML_FETCHED"]
+        "blocked":[l for l,r in report.items()
+                   if r["status"] not in ("OFFICIAL_HTML_FETCHED","OFFICIAL_JSON_FETCHED")]
     },ensure_ascii=False),flush=True)
 if __name__=="__main__":main()

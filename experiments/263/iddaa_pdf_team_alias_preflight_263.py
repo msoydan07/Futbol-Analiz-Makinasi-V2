@@ -50,7 +50,12 @@ assert sum(len(x) for x in KNOWN_EXTERNAL_VARIANTS.values())==20
 # KNVB federation's live display spelling, with 2026-27 canonical N.E.C.
 # Nijmegen identity pinned by the signed registry. Separate from bookmaker
 # observed spellings; never claim that the Iddaa PDF used this alias.
-OFFICIAL_SOURCE_VARIANTS={"NED1":{"N.E.C.":"N.E.C. Nijmegen"}}
+OFFICIAL_SOURCE_VARIANTS={
+    "NED1":{"N.E.C.":"N.E.C. Nijmegen"},
+    # League's official SDP uses Internazionale, signed canonical registry
+    # uses Inter, identity supported by the existing verified club aliases.
+    "ITA1":{"Internazionale":"Inter"},
+}
 
 def normal(s):
     if not isinstance(s,str):return ""

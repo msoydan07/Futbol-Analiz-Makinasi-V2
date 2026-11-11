@@ -91,6 +91,14 @@ class RealSourceAndBreakGate(unittest.TestCase):
         self.assertEqual(resolve_label("NED1","N.E.C.",idx)["team_id"],
                          resolve_label("NED1","N.E.C. Nijmegen",idx)["team_id"])
 
+    def test_official_seriea_sdp_internazionale_is_signed_inter(self):
+        idx,_,_=index_registry()
+        self.assertEqual(resolve_label("ITA1","Internazionale",idx)["status"],"MAPPED")
+        self.assertEqual(resolve_label("ITA1","Internazionale",idx)["team_id"],
+                         resolve_label("ITA1","Inter",idx)["team_id"])
+        self.assertEqual(resolve_label("ITA1","Internazionale Torino",idx)["status"],
+                         "UNMAPPED_NAME_SINGLE_MATCH_ONLY")
+
     def test_official_tff_nov12_round_uses_only_exact_cells_and_clock(self):
         from postbreak_official_parsers_263 import parse_tff_round12
         names=[
