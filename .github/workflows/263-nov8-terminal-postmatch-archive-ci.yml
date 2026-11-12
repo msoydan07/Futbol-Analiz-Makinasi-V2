@@ -1,0 +1,74 @@
+name: "263 one-time Nov8 archive 39 finished 1 postponed NO REQUERY"
+on:
+  push:
+    branches:
+      - research/263-tff-corum-postmatch-readonly-20261112
+    paths:
+      - 'data/results_only_263/nov8_new100_terminal_archive_20261112.json'
+      - 'experiments/263/postmatch_terminal_archive_263.py'
+      - 'experiments/263/postmatch_csv_bridge_263.py'
+      - 'experiments/263/test_postmatch_terminal_archive_263.py'
+      - '.github/workflows/263-nov8-terminal-postmatch-archive-ci.yml'
+permissions:
+  contents: read
+jobs:
+  archive-once-and-skip-future-requeries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Original 40 SHA closure, score conflict, postponed, no fabricated official evidence tests
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python -m unittest -v \
+            experiments/263/test_postmatch_terminal_archive_263.py \
+            experiments/263/test_postmatch_csv_bridge_263.py \
+            experiments/263/test_postmatch_tff_one_match_263.py \
+            experiments/263/test_postmatch_tff_remaining_two_263.py
+      - name: Run actual daily scoreboard twice, ensure never re-fetch old league or TFF sources
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/postmatch_csv_bridge_263.py \
+            --out /tmp/nov8_archived_scores_a.json \
+            --mobile /tmp/nov8_archived_mobile.md
+          python experiments/263/postmatch_csv_bridge_263.py \
+            --out /tmp/nov8_archived_scores_b.json \
+            --mobile /tmp/nov8_archived_mobile_b.md
+          python - <<'PY'
+          import json
+          a=json.load(open("/tmp/nov8_archived_scores_a.json"))
+          b=json.load(open("/tmp/nov8_archived_scores_b.json"))
+          assert (a["registered"],a["provisional_scored"],a["pending"])==(40,39,1)
+          assert a["archive_closed"] and b["archive_closed"]
+          assert a["daily_external_csv_calls"]==b["daily_external_csv_calls"]==0
+          assert a["per_model"]==b["per_model"]
+          assert a["human_attestations_written"]==0
+          print("FINAL_39_FINISHED_1_POSTPONED_DOUBLE_DAILY_RUN_ZERO_NETWORK_PASS")
+          PY
+      - name: M4 lock, 4617 history and all 40 old pre-KO sealed records unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=2542bda79918f296f71d1a145768f408ca5a538b
+          for f in experiments/263/m4_integrated.py experiments/263/m4_lock.json data/results_only_263/2026-11-10_completed_4617_scores_only.csv forward_morning_263/2026-11-08/*.json; do
+            test "$(git rev-parse HEAD:"$f")" = "$(git rev-parse "$base:$f")"
+          done
+          echo "OLD_DATA_AND_ALL_40_FORECAST_SHA_PRESERVED"
+      - name: Save human-readable sealed-score report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: one-time-nov8-39-scores-one-postponed-no-repeat
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            /tmp/nov8_archived_scores_a.json
+            /tmp/nov8_archived_mobile.md

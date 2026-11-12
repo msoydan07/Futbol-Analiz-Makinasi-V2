@@ -172,6 +172,13 @@ def evaluate(root=ROOT,*,now=None,fetcher=None,official_tff_fetcher=None):
     now=now.astimezone(timezone.utc)
     names=Names(root)
     forecasts=sealed(root);named=registered_names(root)
+    # Old Nov8 results are already stored. Resolve them by original SHA.
+    # Never re-fetch the same finished scores on subsequent daily runs.
+    # Explicit injected source tests still exercise the legacy live bridge.
+    if fetcher is None and official_tff_fetcher is None:
+        from postmatch_terminal_archive_263 import REL,checked,summary
+        if len(forecasts)==40 and (root/REL).is_file():
+            return summary(checked(root,forecasts,named),forecasts,score_market,avg)
     review=previous_web_review(root,names)
     if any(k not in named for k in forecasts):raise Blocked("SEAL_WITHOUT_BATCH_IDENTITY")
     feeds,source_status=sources_for(root,names,{f["fixture"]["league"] for f in forecasts.values()},fetcher)
