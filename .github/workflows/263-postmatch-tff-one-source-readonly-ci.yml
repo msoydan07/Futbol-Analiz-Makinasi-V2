@@ -7,6 +7,8 @@ on:
       - 'experiments/263/postmatch_tff_one_match_263.py'
       - 'experiments/263/postmatch_csv_bridge_263.py'
       - 'experiments/263/test_postmatch_tff_one_match_263.py'
+      - 'experiments/263/postmatch_tff_remaining_two_263.py'
+      - 'experiments/263/test_postmatch_tff_remaining_two_263.py'
       - '.github/workflows/263-postmatch-tff-one-source-readonly-ci.yml'
   workflow_dispatch:
 permissions:
@@ -28,7 +30,8 @@ jobs:
         run: |
           python -m unittest -v \
             experiments/263/test_postmatch_csv_bridge_263.py \
-            experiments/263/test_postmatch_tff_one_match_263.py
+            experiments/263/test_postmatch_tff_one_match_263.py \
+            experiments/263/test_postmatch_tff_remaining_two_263.py
       - name: Live CSV plus independent TFF one missing match (no model/forecast rewrite)
         env:
           PYTHONPATH: .:experiments/263
@@ -43,6 +46,9 @@ jobs:
           row=next(x for x in result["rows"] if x["forecast_sha256"]==FORECAST_SHA)
           assert row["score"]==[0,5], "TFF_CSV_SOURCE_CONFLICT"
           assert result["human_attestations_written"]==0
+          assert result["independent_federation_verified"]==3, "PINNED_THREE_TFF_MATCHES_NOT_CONFIRMED"
+          assert sum(1 for x in result["rows"] if x["official_network_evidence"] and x["league"]=="TUR1")==3
+          assert result["provisional_scored"]==39 and result["pending"]==1
           assert not result["forecast_modified"] and not result["models_retrained"]
           if not row["official_network_evidence"]:
               # If the CSV later catches up, still independently read the
@@ -68,4 +74,6 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD:experiments/263/m4_lock.json)" = "$(git rev-parse 2542bda79918f296f71d1a145768f408ca5a538b:experiments/263/m4_lock.json)"
           test "$(git rev-parse HEAD:forward_morning_263/2026-11-08/f0a7dd75ba79329ab6e1bff1.json)" = "$(git rev-parse 2542bda79918f296f71d1a145768f408ca5a538b:forward_morning_263/2026-11-08/f0a7dd75ba79329ab6e1bff1.json)"
+          test "$(git rev-parse HEAD:forward_morning_263/2026-11-08/ef6d6dbdb8075839cda5abbd.json)" = "$(git rev-parse 2542bda79918f296f71d1a145768f408ca5a538b:forward_morning_263/2026-11-08/ef6d6dbdb8075839cda5abbd.json)"
+          test "$(git rev-parse HEAD:forward_morning_263/2026-11-08/8730c98b5070ec379d653b5d.json)" = "$(git rev-parse 2542bda79918f296f71d1a145768f408ca5a538b:forward_morning_263/2026-11-08/8730c98b5070ec379d653b5d.json)"
           echo "LOCKED_MODELS_AND_REAL_MATCH_SHA_UNCHANGED"

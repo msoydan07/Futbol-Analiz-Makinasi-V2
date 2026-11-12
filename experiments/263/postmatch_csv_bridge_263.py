@@ -211,6 +211,22 @@ def evaluate(root=ROOT,*,now=None,fetcher=None,official_tff_fetcher=None):
                 # One failed independent source cannot fabricate any score.
                 extra["tff_source_status"]="NOT_INDEPENDENTLY_VERIFIED"
                 extra["tff_failure_type"]=type(exc).__name__
+        if (reason is None and league=="TUR1" and w
+            and w.get("status")=="FULL_TIME"
+            and (fetcher is None or official_tff_fetcher is not None)):
+            # Preserve original CSV + web research status unless an exact
+            # pinned independent federation match page also proves score.
+            try:
+                from postmatch_tff_remaining_two_263 import PINS,url_for,verify_two
+                if sha in PINS and w.get("source_url")==url_for(sha):
+                    official=verify_two(f,b,now=now,fetcher=official_tff_fetcher)
+                    if (official["score"]==rows[0]["score"] and
+                        official["score"]==[w["home_goals"],w["away_goals"]]):
+                        tff=official
+                    else:extra["tff_source_status"]="OFFICIAL_SCORE_CONFLICT"
+            except (ValueError,TypeError,KeyError,OSError,TimeoutError) as exc:
+                extra["tff_source_status"]="NOT_INDEPENDENTLY_VERIFIED"
+                extra["tff_failure_type"]=type(exc).__name__
         if reason:
             if reason=="NO_EXACT_RESULT" and w and w["status"]=="POSTPONED":reason="WEB_REPORTED_POSTPONED"
             counts[reason]+=1;pending.append({**extra,"status":reason});continue
