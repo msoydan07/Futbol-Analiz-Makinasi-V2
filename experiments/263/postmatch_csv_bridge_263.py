@@ -186,6 +186,16 @@ def evaluate(root=ROOT,*,now=None,fetcher=None,official_tff_fetcher=None):
     review=previous_web_review(root,names)
     if any(k not in named for k in forecasts):raise Blocked("SEAL_WITHOUT_BATCH_IDENTITY")
     unarchived={sha:f for sha,f in forecasts.items() if sha not in closed_sha}
+    # New dates: terminal onepass archives also take precedence over CSV.
+    # Exactly one final outcome per genuine immutable pregame forecast SHA.
+    onepass={}
+    if fetcher is None and official_tff_fetcher is None:
+        from postmatch_once_accept_263 import read_once
+        for sha,f in unarchived.items():
+            archived=read_once(root,f)
+            if archived is not None:
+                onepass[sha]=archived
+    unarchived={sha:f for sha,f in unarchived.items() if sha not in onepass}
     requested_leagues={f["fixture"]["league"] for f in unarchived.values()}
     feeds,source_status=sources_for(root,names,requested_leagues,fetcher)
     grouped=defaultdict(list);done=[];pending=[];counts=defaultdict(int)
@@ -208,6 +218,22 @@ def evaluate(root=ROOT,*,now=None,fetcher=None,official_tff_fetcher=None):
             "score":archived["score"],"status":label,
             "source_url":archived["evidence_url"],"archive_closed_no_daily_fetch":True})
     federation_network_checked=sum(row["evidence_grade"]=="TFF_NETWORK_VERIFIED" for row in closed)
+    for sha,record in sorted(onepass.items()):
+        if record["score"] is None:
+            label="ARCHIVED_POSTPONED_NO_SCORE"
+            counts[label]+=1
+            pending.append({"forecast_sha256":sha,"league":record["league"],
+                "status":label})
+            continue
+        label="ARCHIVED_"+record["source_grade"]
+        for model,metrics in score_market(forecasts[sha],record["score"]).items():
+            grouped[("ALL_PROVISIONAL",model)].append(metrics)
+            grouped[(label,model)].append(metrics)
+        counts[label]+=1
+        done.append({"forecast_sha256":sha,"league":record["league"],
+             "score":record["score"],"status":label,
+             "source_urls":[e["source_url"] for e in record["source_evidence"]],
+             "archive_closed_no_daily_fetch":True})
     for sha,f in sorted(unarchived.items()):
         x=f["fixture"];league=x["league"];b=named[sha]
         if b["league"]!=league or b["kickoff_utc"]!=x["kickoff_utc"]:
@@ -281,10 +307,12 @@ def evaluate(root=ROOT,*,now=None,fetcher=None,official_tff_fetcher=None):
         return {"n":len(part),**{m:avg([x[m] for x in part])
                  for m in ("MS","KG","OVER_1.5","OVER_2.5","OVER_3.5")}}
     classes=("ALL_PROVISIONAL","CSV_ONLY_PROVISIONAL","TWO_SOURCE_RESEARCH_CONCORDANT_NOT_OFFICIAL",
-             "OFFICIAL_TFF_NETWORK_READ_RESEARCH_NOT_HUMAN_ATTESTED")
+             "OFFICIAL_TFF_NETWORK_READ_RESEARCH_NOT_HUMAN_ATTESTED",
+             "ARCHIVED_OFFICIAL_LEAGUE_OR_CLUB","ARCHIVED_TWO_INDEPENDENT_PUBLISHER_SOURCES")
     return {"schema":"263_POSTMATCH_CSV_SOURCE_CANDIDATE_V1","created_at_utc":now.isoformat(),
         "registered":len(forecasts),"provisional_scored":len(done),"pending":len(pending),
-        "archived_prior":len(closed_sha),"daily_external_csv_calls":len(requested_leagues),
+        "archived_prior":len(closed_sha),"archived_new_once":len(onepass),
+        "daily_external_csv_calls":len(requested_leagues),
         "archive_closed":not unarchived,
         "human_attestations_written":0,"independent_federation_verified":federation_network_checked,
         "per_model":{c:{m:agg(grouped[(c,m)]) for m in MODELS} for c in classes},
