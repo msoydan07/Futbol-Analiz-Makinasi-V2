@@ -1,0 +1,36 @@
+name: "263 Nov8 full 36 remaining research-source SHA ledger integrity"
+on:
+  push:
+    branches:
+      - research/263-tff-corum-postmatch-readonly-20261112
+    paths:
+      - 'data/results_only_263/nov8_remaining36_source_review_20261112.json'
+      - 'experiments/263/test_nov8_remaining36_source_review_263.py'
+      - 'docs/263_2026_11_12_NOV8_REMAINING36_SOURCE_REPORT.md'
+      - '.github/workflows/263-nov8-remaining36-source-ledger-ci.yml'
+permissions:
+  contents: read
+jobs:
+  grade-36-actual-scores-and-original-SHA:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check all 36 research rows, match identities, genuine 40 sealed SHA, grade one external federation separately
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_nov8_remaining36_source_review_263.py
+      - name: Guard the original data, frozen M4 code and all 40 November 8 SHA forecast files
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=2542bda79918f296f71d1a145768f408ca5a538b
+          for f in experiments/263/m4_integrated.py experiments/263/m4_lock.json data/results_only_263/2026-11-10_completed_4617_scores_only.csv forward_morning_263/2026-11-08/*.json; do
+            test "$(git rev-parse HEAD:"$f")" = "$(git rev-parse "$base:$f")"
+          done
+          echo "NO_MODEL_RESULT_OR_PREMATCH_SHA_MUTATION"

@@ -166,17 +166,49 @@ def score_market(f,goals):
         result[model]=s
     return result
 
-def evaluate(root=ROOT,*,now=None,fetcher=None):
+def evaluate(root=ROOT,*,now=None,fetcher=None,official_tff_fetcher=None):
     root=Path(root);now=now or datetime.now(timezone.utc)
     if now.tzinfo is None:raise Blocked("CLOCK_NEEDS_TIMEZONE")
     now=now.astimezone(timezone.utc)
     names=Names(root)
     forecasts=sealed(root);named=registered_names(root)
+    # Existing 8 Nov SHA results are already archived: NEVER re-fetch those
+    # old matches even when future dates add additional SHA seals to new100.
+    closed=[];closed_sha=set()
+    if fetcher is None and official_tff_fetcher is None:
+        from postmatch_terminal_archive_263 import REL,checked,summary
+        if (root/REL).is_file():
+            frozen=checked(root,forecasts,named)
+            closed=frozen["rows"]
+            closed_sha={row["forecast_sha256"] for row in closed}
+            if len(forecasts)==len(closed_sha):
+                return summary(frozen,forecasts,score_market,avg)
     review=previous_web_review(root,names)
     if any(k not in named for k in forecasts):raise Blocked("SEAL_WITHOUT_BATCH_IDENTITY")
-    feeds,source_status=sources_for(root,names,{f["fixture"]["league"] for f in forecasts.values()},fetcher)
+    unarchived={sha:f for sha,f in forecasts.items() if sha not in closed_sha}
+    requested_leagues={f["fixture"]["league"] for f in unarchived.values()}
+    feeds,source_status=sources_for(root,names,requested_leagues,fetcher)
     grouped=defaultdict(list);done=[];pending=[];counts=defaultdict(int)
-    for sha,f in sorted(forecasts.items()):
+    federation_network_checked=0
+    for archived in closed:
+        sha=archived["forecast_sha256"]
+        if archived["score"] is None:
+            label="POSTPONED_ARCHIVED_NO_SCORE"
+            counts[label]+=1
+            pending.append({"forecast_sha256":sha,"league":archived["league"],
+                "home":archived["home"],"away":archived["away"],"status":label})
+            continue
+        label="ARCHIVED_"+archived["evidence_grade"]
+        for model,metrics in score_market(forecasts[sha],archived["score"]).items():
+            grouped[("ALL_PROVISIONAL",model)].append(metrics)
+            grouped[(label,model)].append(metrics)
+        counts[label]+=1
+        done.append({"forecast_sha256":sha,"league":archived["league"],
+            "home":archived["home"],"away":archived["away"],"day":archived["match_date"],
+            "score":archived["score"],"status":label,
+            "source_url":archived["evidence_url"],"archive_closed_no_daily_fetch":True})
+    federation_network_checked=sum(row["evidence_grade"]=="TFF_NETWORK_VERIFIED" for row in closed)
+    for sha,f in sorted(unarchived.items()):
         x=f["fixture"];league=x["league"];b=named[sha]
         if b["league"]!=league or b["kickoff_utc"]!=x["kickoff_utc"]:
             raise Blocked("BATCH_IDENTITY_MISMATCH")
@@ -192,37 +224,83 @@ def evaluate(root=ROOT,*,now=None,fetcher=None):
         elif w and (w["status"]!="FULL_TIME" or rows[0]["score"]!=[w["home_goals"],w["away_goals"]]):
             reason="WEB_REVIEW_CONFLICT"
         else:reason=None
+        tff=None
+        if (reason=="NO_EXACT_RESULT" and league=="TUR1" and
+            w and w.get("status")=="FULL_TIME" and
+            w.get("source_url")=="https://www.tff.org/Default.aspx?macId=317879&pageId=29" and
+            (fetcher is None or official_tff_fetcher is not None)):
+            # Dedicated named single-match fallback: never generalize arbitrary
+            # missing CSV scores to a URL-only or team-name-only assertion.
+            try:
+                from postmatch_tff_one_match_263 import verify_one
+                proof=verify_one(f,b,now=now,fetcher=official_tff_fetcher)
+                if proof["score"]!=[w["home_goals"],w["away_goals"]]:
+                    reason="WEB_REVIEW_CONFLICT"
+                else:
+                    tff=proof;reason=None
+            except (ValueError,TypeError,KeyError,OSError,TimeoutError) as exc:
+                # One failed independent source cannot fabricate any score.
+                extra["tff_source_status"]="NOT_INDEPENDENTLY_VERIFIED"
+                extra["tff_failure_type"]=type(exc).__name__
+        if (reason is None and league=="TUR1" and w
+            and w.get("status")=="FULL_TIME"
+            and (fetcher is None or official_tff_fetcher is not None)):
+            # Preserve original CSV + web research status unless an exact
+            # pinned independent federation match page also proves score.
+            try:
+                from postmatch_tff_remaining_two_263 import PINS,url_for,verify_two
+                if sha in PINS and w.get("source_url")==url_for(sha):
+                    official=verify_two(f,b,now=now,fetcher=official_tff_fetcher)
+                    if (official["score"]==rows[0]["score"] and
+                        official["score"]==[w["home_goals"],w["away_goals"]]):
+                        tff=official
+                    else:extra["tff_source_status"]="OFFICIAL_SCORE_CONFLICT"
+            except (ValueError,TypeError,KeyError,OSError,TimeoutError) as exc:
+                extra["tff_source_status"]="NOT_INDEPENDENTLY_VERIFIED"
+                extra["tff_failure_type"]=type(exc).__name__
         if reason:
             if reason=="NO_EXACT_RESULT" and w and w["status"]=="POSTPONED":reason="WEB_REPORTED_POSTPONED"
             counts[reason]+=1;pending.append({**extra,"status":reason});continue
-        label="TWO_SOURCE_RESEARCH_CONCORDANT_NOT_OFFICIAL" if w else "CSV_ONLY_PROVISIONAL"
-        scores=score_market(f,rows[0]["score"])
+        label=("OFFICIAL_TFF_NETWORK_READ_RESEARCH_NOT_HUMAN_ATTESTED" if tff
+               else "TWO_SOURCE_RESEARCH_CONCORDANT_NOT_OFFICIAL" if w
+               else "CSV_ONLY_PROVISIONAL")
+        used_score=tff["score"] if tff else rows[0]["score"]
+        scores=score_market(f,used_score)
         for model,metrics in scores.items():
             grouped[("ALL_PROVISIONAL",model)].append(metrics)
             grouped[(label,model)].append(metrics)
         counts[label]+=1
-        done.append({**extra,"status":label,"score":rows[0]["score"],"csv_line":rows[0]["csv_line"],
-                     "csv_url":source_status[league]["url"],"csv_sha256":source_status[league]["sha256"],
+        if tff:federation_network_checked+=1
+        done.append({**extra,"status":label,"score":used_score,
+                     "csv_line":None if tff else rows[0]["csv_line"],
+                     "csv_url":None if tff else source_status[league]["url"],
+                     "csv_sha256":None if tff else source_status[league]["sha256"],
+                     "official_network_evidence":tff,
                      "web_review_url":w["source_url"] if w else None})
     def agg(part):
         return {"n":len(part),**{m:avg([x[m] for x in part])
                  for m in ("MS","KG","OVER_1.5","OVER_2.5","OVER_3.5")}}
-    classes=("ALL_PROVISIONAL","CSV_ONLY_PROVISIONAL","TWO_SOURCE_RESEARCH_CONCORDANT_NOT_OFFICIAL")
+    classes=("ALL_PROVISIONAL","CSV_ONLY_PROVISIONAL","TWO_SOURCE_RESEARCH_CONCORDANT_NOT_OFFICIAL",
+             "OFFICIAL_TFF_NETWORK_READ_RESEARCH_NOT_HUMAN_ATTESTED")
     return {"schema":"263_POSTMATCH_CSV_SOURCE_CANDIDATE_V1","created_at_utc":now.isoformat(),
         "registered":len(forecasts),"provisional_scored":len(done),"pending":len(pending),
-        "human_attestations_written":0,"independent_federation_verified":0,
+        "archived_prior":len(closed_sha),"daily_external_csv_calls":len(requested_leagues),
+        "archive_closed":not unarchived,
+        "human_attestations_written":0,"independent_federation_verified":federation_network_checked,
         "per_model":{c:{m:agg(grouped[(c,m)]) for m in MODELS} for c in classes},
         "sources":source_status,"status_counts":dict(counts),"rows":done,"pending_rows":pending,
         "forecast_modified":False,"models_retrained":False,"odds_api_calls":0,
         "limitations":["Football-data.co.uk is NOT an official league/federation source",
                        "Matching prior web research increases confidence but is NOT independent official network verification",
                        "Only exact date and reviewed team aliases accepted; missing or mismatched scores remain pending",
+                       "One TFF direct public match-page reading is source evidence, not human attestation",
                        "Nothing enters the official human-attestation result file directory"]}
 
 def mobile(r):
     lines=["# 2.6.3 — Maç sonrası günlük kaynak kontrolü","",
         "**Mühürlü:** "+str(r["registered"])+" · **Dış CSV ile eşleşen:** "+str(r["provisional_scored"])+" · **Bekleyen:** "+str(r["pending"]),"",
-        "**Kaynak sınırı:** Dış CSV ön kontrolü. Resmî skor onayı değildir; bağımsız federasyon teyidi: 0.","",
+        "**Kaynak sınırı:** Dış CSV eşleşmeleri resmî değildir. TFF resmî sayfasından bağımsız okunan maç sayısı: "
+        +str(r["independent_federation_verified"])+". İnsan onaylı resmî attestation: 0.","",
         "| Model | N | MS yön | MS Brier | KG yön | 2.5 Alt/Üst yön |",
         "|---|---:|---:|---:|---:|---:|"]
     for m in MODELS:

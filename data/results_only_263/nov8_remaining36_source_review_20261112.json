@@ -1,0 +1,564 @@
+{
+  "schema": "263_NOV8_REMAINING36_PRIMARY_SOURCE_WEB_RESEARCH_V1",
+  "date_of_review": "2026-11-12",
+  "review_method": "ONE_PASS_PUBLIC_WEB_SOURCE_RESULT_MATCH_RESEARCH_NO_AUTOMATED_36_PROVIDER_NETWORK_ATTESTATION",
+  "original_sealed_40": true,
+  "remaining_36_records": 36,
+  "previously_direct_TFF_3": true,
+  "postponed_1_excluded": true,
+  "grading_counts": {
+    "CLUB": 13,
+    "LEAGUE": 22,
+    "EXTERNAL_FEDERATION": 1
+  },
+  "model_training_or_old_seals_edited": false,
+  "official_accepted_result_attestations_created": 0,
+  "rows": [
+    {
+      "league": "TUR1",
+      "date": "2026-11-08",
+      "home": "Alanyaspor",
+      "away": "Trabzonspor",
+      "score": [
+        0,
+        2
+      ],
+      "original_research_url": "https://www.trabzonspor.org.tr/tr/haberler/corendon-alanyaspor-0-2-trabzonspor-08-11-2026",
+      "new_score_evidence_url": "https://www.trabzonspor.org.tr/tr/haberler/corendon-alanyaspor-0-2-trabzonspor-08-11-2026",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ENG1",
+      "date": "2026-11-08",
+      "home": "Brighton",
+      "away": "Brentford",
+      "score": [
+        2,
+        0
+      ],
+      "original_research_url": "https://www.premierleague.com/en/news/4726845",
+      "new_score_evidence_url": "https://www.premierleague.com/en/news/4761117",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ENG1",
+      "date": "2026-11-08",
+      "home": "Crystal Palace",
+      "away": "Liverpool",
+      "score": [
+        1,
+        3
+      ],
+      "original_research_url": "https://www.premierleague.com/en/news/4726845",
+      "new_score_evidence_url": "https://www.liverpoolfc.com/matches/mens-team/crystal-palace-v-liverpool-english-premier-league-20261108",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ENG1",
+      "date": "2026-11-08",
+      "home": "Ipswich Town",
+      "away": "Bournemouth",
+      "score": [
+        1,
+        2
+      ],
+      "original_research_url": "https://www.premierleague.com/en/news/4726845",
+      "new_score_evidence_url": "https://www.afcb.co.uk/news/2026/november/08/match-report-v-ipswich/",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ENG1",
+      "date": "2026-11-08",
+      "home": "Sunderland",
+      "away": "Chelsea",
+      "score": [
+        1,
+        0
+      ],
+      "original_research_url": "https://www.premierleague.com/en/news/4726845",
+      "new_score_evidence_url": "https://www.premierleague.com/en/news/4757009/sunderland-stun-chelsea-to-move-off-the-bottom",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ENG1",
+      "date": "2026-11-08",
+      "home": "Manchester United",
+      "away": "Aston Villa",
+      "score": [
+        4,
+        4
+      ],
+      "original_research_url": "https://www.premierleague.com/en/news/4726845",
+      "new_score_evidence_url": "https://www.manutd.com/en/matches/mens-team/manchester-united-v-aston-villa-fc-premier-league-20261108",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "GER1",
+      "date": "2026-11-08",
+      "home": "1. FC Köln",
+      "away": "Bayer Leverkusen",
+      "score": [
+        1,
+        2
+      ],
+      "original_research_url": "https://www.bundesliga.com/de/bundesliga/news/1-fc-koeln-bayer-04-leverkusen-spieltag-9-spielbericht-highlights-39944",
+      "new_score_evidence_url": "https://www.bundesliga.com/de/bundesliga/news/1-fc-koeln-bayer-04-leverkusen-spieltag-9-spielbericht-highlights-39944",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "GER1",
+      "date": "2026-11-08",
+      "home": "Freiburg",
+      "away": "Union Berlin",
+      "score": [
+        2,
+        0
+      ],
+      "original_research_url": "https://www.bundesliga.com/en/bundesliga/live-blog-all-games-fixtures-results-scores-conference",
+      "new_score_evidence_url": "https://www.bundesliga.com/en/bundesliga/news/sport-club-freiburg-union-berlin-match-report-highlights-matchday-9-39948",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "GER1",
+      "date": "2026-11-08",
+      "home": "Hoffenheim",
+      "away": "Schalke 04",
+      "score": [
+        2,
+        1
+      ],
+      "original_research_url": "https://www.bundesliga.com/en/bundesliga/news/hoffenheim-schalke-match-report-highlights-matchday-9-39951",
+      "new_score_evidence_url": "https://www.bundesliga.com/en/bundesliga/news/hoffenheim-schalke-match-report-highlights-matchday-9-39951",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ESP1",
+      "date": "2026-11-08",
+      "home": "Elche",
+      "away": "Real Betis",
+      "score": [
+        0,
+        2
+      ],
+      "original_research_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "new_score_evidence_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ESP1",
+      "date": "2026-11-08",
+      "home": "Real Sociedad",
+      "away": "Rayo Vallecano",
+      "score": [
+        1,
+        0
+      ],
+      "original_research_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "new_score_evidence_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ESP1",
+      "date": "2026-11-08",
+      "home": "Celta Vigo",
+      "away": "Levante",
+      "score": [
+        0,
+        0
+      ],
+      "original_research_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "new_score_evidence_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ESP1",
+      "date": "2026-11-08",
+      "home": "Villarreal",
+      "away": "Getafe",
+      "score": [
+        2,
+        0
+      ],
+      "original_research_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "new_score_evidence_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ESP1",
+      "date": "2026-11-08",
+      "home": "Atlético Madrid",
+      "away": "Barcelona",
+      "score": [
+        1,
+        2
+      ],
+      "original_research_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "new_score_evidence_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-12",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ITA1",
+      "date": "2026-11-08",
+      "home": "Napoli",
+      "away": "Lazio",
+      "score": [
+        1,
+        1
+      ],
+      "original_research_url": "https://www.legaseriea.it/serie-a",
+      "new_score_evidence_url": "https://sscnapoli.it/en/match-report-napoli-lazio-1-1/",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ITA1",
+      "date": "2026-11-08",
+      "home": "Genoa",
+      "away": "Milan",
+      "score": [
+        1,
+        2
+      ],
+      "original_research_url": "https://www.legaseriea.it/serie-a",
+      "new_score_evidence_url": "https://www.acmilan.com/en/news/articles/serie_a/2026-11-08/rossoneri-bounce-back-at-marassi",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ITA1",
+      "date": "2026-11-08",
+      "home": "Monza",
+      "away": "Atalanta",
+      "score": [
+        0,
+        1
+      ],
+      "original_research_url": "https://www.legaseriea.it/serie-a",
+      "new_score_evidence_url": "https://en.atalanta.it/news/krstovic-strikes-to-sink-monza",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ITA1",
+      "date": "2026-11-08",
+      "home": "Inter",
+      "away": "Como",
+      "score": [
+        2,
+        0
+      ],
+      "original_research_url": "https://www.legaseriea.it/serie-a",
+      "new_score_evidence_url": "https://www.inter.it/en/match_center/5379/inter-como",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "ITA1",
+      "date": "2026-11-08",
+      "home": "Fiorentina",
+      "away": "Juventus",
+      "score": [
+        2,
+        2
+      ],
+      "original_research_url": "https://www.legaseriea.it/serie-a",
+      "new_score_evidence_url": "https://www.juventus.com/en/news/articles/bremer-and-woltemade-score-in-draw-with-fiorentina-08-11-26",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "FRA1",
+      "date": "2026-11-08",
+      "home": "Rennes",
+      "away": "Lille",
+      "score": [
+        1,
+        2
+      ],
+      "original_research_url": "https://www.staderennais.com/actualites/ligue-1-mcdonalds/en-manque-defficacite-le-srfc-sincline-face-a-lille-1-2",
+      "new_score_evidence_url": "https://www.staderennais.com/actualites/ligue-1-mcdonalds/en-manque-defficacite-le-srfc-sincline-face-a-lille-1-2",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "FRA1",
+      "date": "2026-11-08",
+      "home": "Brest",
+      "away": "Lyon",
+      "score": [
+        2,
+        0
+      ],
+      "original_research_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "new_score_evidence_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "FRA1",
+      "date": "2026-11-08",
+      "home": "Le Mans",
+      "away": "Monaco",
+      "score": [
+        1,
+        1
+      ],
+      "original_research_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "new_score_evidence_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "FRA1",
+      "date": "2026-11-08",
+      "home": "Angers",
+      "away": "Nice",
+      "score": [
+        0,
+        2
+      ],
+      "original_research_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "new_score_evidence_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "FRA1",
+      "date": "2026-11-08",
+      "home": "Le Havre",
+      "away": "Lorient",
+      "score": [
+        0,
+        2
+      ],
+      "original_research_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "new_score_evidence_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "FRA1",
+      "date": "2026-11-08",
+      "home": "Lens",
+      "away": "Marseille",
+      "score": [
+        1,
+        2
+      ],
+      "original_research_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "new_score_evidence_url": "https://ligue1.com/fr/articles/l1_article_6054-j10-les-enseignements-du-week-end-ligue-1-2026-2027",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "NED1",
+      "date": "2026-11-08",
+      "home": "Heerenveen",
+      "away": "Feyenoord",
+      "score": [
+        5,
+        3
+      ],
+      "original_research_url": "https://www.knvb.nl/competities/eredivisie/uitslagen",
+      "new_score_evidence_url": "https://eredivisie.nl/nieuws/terugblik-speelronde-12/",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "NED1",
+      "date": "2026-11-08",
+      "home": "FC Twente",
+      "away": "Ajax",
+      "score": [
+        2,
+        2
+      ],
+      "original_research_url": "https://www.knvb.nl/competities/eredivisie/uitslagen",
+      "new_score_evidence_url": "https://eredivisie.nl/nieuws/terugblik-speelronde-12/",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "NED1",
+      "date": "2026-11-08",
+      "home": "AZ Alkmaar",
+      "away": "FC Groningen",
+      "score": [
+        4,
+        3
+      ],
+      "original_research_url": "https://www.knvb.nl/competities/eredivisie/uitslagen",
+      "new_score_evidence_url": "https://eredivisie.nl/nieuws/terugblik-speelronde-12/",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "POR1",
+      "date": "2026-11-08",
+      "home": "Santa Clara",
+      "away": "Gil Vicente",
+      "score": [
+        1,
+        2
+      ],
+      "original_research_url": "https://vsports.pt/cmpt/1/31/vsports/f41a88c079eb9a711879e26dc2155752",
+      "new_score_evidence_url": "https://www.ligaportugal.pt/video/70894/liga-portugal-betclic-%2811aj%29%3A-resumo-santa-clara-1-2-gil-vicente-fc",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "POR1",
+      "date": "2026-11-08",
+      "home": "Vitória Guimarães",
+      "away": "FC Porto",
+      "score": [
+        1,
+        2
+      ],
+      "original_research_url": "https://vsports.pt/cmpt/1/31/vsports/f41a88c079eb9a711879e26dc2155752",
+      "new_score_evidence_url": "https://www.ligaportugal.pt/video/70908/liga-portugal-betclic-%2811aj%29%3A-resumo-flash-vitoria-sc-1-2-fc-porto",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "POR1",
+      "date": "2026-11-08",
+      "home": "Estrela Amadora",
+      "away": "Benfica",
+      "score": [
+        2,
+        3
+      ],
+      "original_research_url": "https://vsports.pt/cmpt/1/31/vsports/f41a88c079eb9a711879e26dc2155752",
+      "new_score_evidence_url": "https://www.ligaportugal.pt/video/70928/liga-portugal-betclic-%2811aj%29%3A-resumo-estrela-amadora-2-3-sl-benfica",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "POR1",
+      "date": "2026-11-08",
+      "home": "Rio Ave",
+      "away": "Braga",
+      "score": [
+        0,
+        1
+      ],
+      "original_research_url": "https://vsports.pt/cmpt/1/31/vsports/f41a88c079eb9a711879e26dc2155752",
+      "new_score_evidence_url": "https://www.ligaportugal.pt/video/70932/liga-portugal-betclic-%2811aj%29%3A-resumo-rio-ave-fc-0-1-sc-braga",
+      "source_class": "LEAGUE",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "BEL1",
+      "date": "2026-11-08",
+      "home": "Club Brugge",
+      "away": "Anderlecht",
+      "score": [
+        1,
+        1
+      ],
+      "original_research_url": "https://www.proleague.be/jpl-kalender%21",
+      "new_score_evidence_url": "https://datencenter.dfb.de/en/competitions/2584/seasons/current/current_matchweek?datacenter_name=data-center",
+      "source_class": "EXTERNAL_FEDERATION",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "BEL1",
+      "date": "2026-11-08",
+      "home": "Gent",
+      "away": "Kortrijk",
+      "score": [
+        1,
+        0
+      ],
+      "original_research_url": "https://www.proleague.be/jpl-kalender%21",
+      "new_score_evidence_url": "https://www.kaagent.be/nl/team/games/jupiler-pro-league-2026-2027/11/kaa-gent/kv-kortrijk/digest",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "BEL1",
+      "date": "2026-11-08",
+      "home": "Union Saint-Gilloise",
+      "away": "Genk",
+      "score": [
+        1,
+        0
+      ],
+      "original_research_url": "https://www.proleague.be/jpl-kalender%21",
+      "new_score_evidence_url": "https://rusg.brussels/nl/nieuws/sykes-kopt-union-naar-zege-tegen-racing-genk",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    },
+    {
+      "league": "BEL1",
+      "date": "2026-11-08",
+      "home": "Sint-Truiden",
+      "away": "Zulte Waregem",
+      "score": [
+        4,
+        1
+      ],
+      "original_research_url": "https://www.proleague.be/jpl-kalender%21",
+      "new_score_evidence_url": "https://stvv.com/en/games?timeframe=past",
+      "source_class": "CLUB",
+      "source_review": "PUBLIC_WEB_SOURCE_RESULT_RESEARCH_NOT_PROVIDER_API_ATTESTATION",
+      "human_attestation": false
+    }
+  ],
+  "limitations": [
+    "Official-domain league/club web results were inspected in research, but this JSON and its SHA identity/unit tests do not constitute each provider's API-signed response",
+    "German DFB data center is an independent federation scoreboard but is not Belgian Pro League's primary source for Club Brugge–Anderlecht",
+    "Original 40 pregame forecast SHA values, M4, source and historical results remain untouched",
+    "The single postponed match is unscored; no claimed betting return, model promotion, or proof of accuracy improvement"
+  ]
+}
