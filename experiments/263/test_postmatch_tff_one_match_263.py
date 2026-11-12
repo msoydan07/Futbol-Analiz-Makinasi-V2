@@ -40,8 +40,7 @@ class TFFSingleSourceTests(unittest.TestCase):
            HTML.replace("ARCA ÇORUM FK","GÖZTEPE"),
            HTML.replace("8.11.2026 - 16:00","8.11.2026 - 20:00"),
            HTML.replace("Trendyol Süper Lig","Ziraat Kupası"),
-           HTML.replace("<strong>5</strong>","<strong>5</strong><span>FENERBAHÇE A.Ş. 2</span>").replace(
-                "<strong>0</strong><a>FENERBAHÇE", "<strong>1</strong><a>FENERBAHÇE"),
+           HTML.replace("</body>","<p>ARCA ÇORUM FK 1 FENERBAHÇE A.Ş. 4</p></body>"),
         ):
             with self.subTest(variant=variant[:32]):
                 with self.assertRaises(Blocked):parse_tff(variant)
