@@ -6,7 +6,11 @@ on:
       - 'experiments/263/sabah_preflight_requests/*.json'
   workflow_dispatch:
 permissions:
-  contents: read
+  # Write only an append-only source preflight receipt, never a pilot/odds request.
+  contents: write
+concurrency:
+  group: quad-263-append-only
+  cancel-in-progress: false
 jobs:
   ten-league-diagnostic:
     runs-on: ubuntu-latest
@@ -14,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -73,6 +77,58 @@ jobs:
             --out /tmp/263-three-official-HTML-source-diagnosis.json
           git diff --quiet
           git diff --cached --quiet
+      - name: Archive immutable same-day source preflight for the chat command router
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          DAY: ${{ steps.requested.outputs.day }}
+        run: |
+          set -euo pipefail
+          target="experiments/263/sabah_preflight_results/$DAY/preflight_$GITHUB_RUN_ID"
+          test -n "$DAY"
+          test ! -e "$target.json"
+          test ! -e "$target.md"
+          test ! -e "$target"_candidates_not_sealed.json
+          mkdir -p "$(dirname "$target")"
+          cp /tmp/263-ten-league-official-preflight.json "$target.json"
+          cp /tmp/263-ten-league-official-preflight.md "$target.md"
+          cp /tmp/263-ten-league-CANDIDATES-NOT-SEALED.json "$target"_candidates_not_sealed.json
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          day=os.environ["DAY"]
+          p=Path("experiments/263/sabah_preflight_results")/day/("preflight_"+os.environ["GITHUB_RUN_ID"]+".json")
+          x=json.loads(p.read_text(encoding="utf-8"))
+          assert x["schema"]=="263_10_LEAGUE_SAME_DAY_OFFICIAL_MANIFEST_PREFLIGHT_V1"
+          assert x["day_turkey"]==day
+          assert x["league_count"]==len(x["source_coverage"])==10
+          assert x["candidate_count"]==len(x["candidates"])
+          assert x["does_not_write_pilot_or_place_bets"] is True
+          assert x["new100_pilot_count_change"]==x["bookmaker_api_calls"]==0
+          assert x["all_ten_leagues_claimed_fully_covered"] is False
+          print("STORED_TEN_LEAGUE_READONLY_PREFLIGHT_ONLY")
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$target.json" "$target.md" "$target"_candidates_not_sealed.json
+          python - <<'PY'
+          import subprocess,os
+          prefix="experiments/263/sabah_preflight_results/"+os.environ["DAY"]+"/preflight_"+os.environ["GITHUB_RUN_ID"]
+          expected={prefix+".json",prefix+".md",prefix+"_candidates_not_sealed.json"}
+          staged=subprocess.check_output(["git","diff","--cached","--name-status"],text=True)
+          rows=[line.split("\t",1) for line in staged.strip().splitlines()]
+          assert len(rows)==3 and all(v=="A" for v,_ in rows)
+          assert {name for _,name in rows}==expected
+          print("ONLY_THREE_NEW_PREFLIGHT_FILES_NO_PILOT_NO_ODDS")
+          PY
+          git commit -m "Archive one fresh official ten-league fixture preflight receipt, not a forecast"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          git fetch origin "$GITHUB_REF_NAME"
+          for path in "$target.json" "$target.md" "$target"_candidates_not_sealed.json; do
+            git cat-file -e "origin/$GITHUB_REF_NAME:$path"
+          done
+          echo "SAME_DAY_CHAT_PREFLIGHT_RECEIPT_VERIFIED_NO_NEW100_TRIGGER"
       - name: Upload exact source-mapped readiness report, not an approved pilot
         if: always()
         uses: actions/upload-artifact@v4
