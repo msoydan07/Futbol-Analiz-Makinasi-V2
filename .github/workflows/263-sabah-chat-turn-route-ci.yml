@@ -1,0 +1,44 @@
+name: "263 on-demand morning chat request route targeted acceptance"
+on:
+  push:
+    branches: [fix/263-morning-chat-command-bridge-20261112]
+    paths:
+      - 'experiments/263/sabah_chat_turn_router_263.py'
+      - 'experiments/263/test_sabah_chat_turn_router_263.py'
+      - '.github/workflows/263-sabah-10lig-fixture-preflight.yml'
+      - '.github/workflows/263-sabah-chat-turn-route-ci.yml'
+      - 'docs/263_2026_11_12_MORNING_CHAT_TO_GITHUB_ROUTE_FINAL.md'
+permissions:
+  contents: read
+jobs:
+  route-no-pilot-single-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing frozen model dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Only affected new chat route and existing manual/ten-league source tests
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v \
+            experiments/263/test_sabah_chat_turn_router_263.py \
+            experiments/263/test_sabah_manual_preflight_bridge_263.py \
+            experiments/263/test_sabah_10league_manifest_preflight_263.py \
+            experiments/263/test_sabah_manual_window_263.py
+      - name: Old 40 sealed forecasts, models and historical source files unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=3f6c09407a139814757fa050fe53b830da356f51
+          for p in experiments/263/sabah_batch_263.py experiments/263/sabah_new100_commit_guard_263.py experiments/263/m4_integrated.py experiments/263/m4_lock.json data/results_only_263/2026-11-10_completed_4617_scores_only.csv forward_morning_263/2026-11-08/*.json; do
+            test "$(git rev-parse HEAD:"$p")" = "$(git rev-parse "$base:$p")"
+          done
+          echo "CHAT_BRIDGE_ONLY_NO_MODEL_OR_OLD_SHA_MUTATION_PASS"
