@@ -31,7 +31,7 @@ def checked(root,forecasts,named,doc=None):
         raise ArchiveRejected("ARCHIVE_HEADER_OR_PROVENANCE_CHANGED")
     rows=d.get("rows")
     if (not isinstance(rows,list) or len(rows)!=40
-        or len(forecasts)!=40 or len(named)!=40):
+        or len(forecasts)<40 or len(named)<40):
         raise ArchiveRejected("ORIGINAL_COHORT_NOT_EXACTLY_40")
     previous=json.loads((root/"experiments/263/nov8_webreview_results_263.json").read_text(encoding="utf-8"))
     reviewed={(r["league"],r["home"],r["away"]):r for r in previous["rows"]}
@@ -84,7 +84,7 @@ def checked(root,forecasts,named,doc=None):
             if (kind!=expected or r["evidence_url"]!=e["new_score_evidence_url"]
                 or r["official_network_verified"] is not False):
                 raise ArchiveRejected("WEB_SOURCE_LEVEL_NOT_SAME_AS_PRIOR_RESEARCH")
-    if got_sha!=set(forecasts) or got_key!=set(reviewed) or dict(grades)!=EXPECTED:
+    if not got_sha.issubset(set(forecasts)) or got_key!=set(reviewed) or dict(grades)!=EXPECTED:
         raise ArchiveRejected("NOT_ALL_40_UNIQUELY_CLOSED")
     return d
 

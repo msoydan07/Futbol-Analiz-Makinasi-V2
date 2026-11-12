@@ -172,19 +172,43 @@ def evaluate(root=ROOT,*,now=None,fetcher=None,official_tff_fetcher=None):
     now=now.astimezone(timezone.utc)
     names=Names(root)
     forecasts=sealed(root);named=registered_names(root)
-    # Old Nov8 results are already stored. Resolve them by original SHA.
-    # Never re-fetch the same finished scores on subsequent daily runs.
-    # Explicit injected source tests still exercise the legacy live bridge.
+    # Existing 8 Nov SHA results are already archived: NEVER re-fetch those
+    # old matches even when future dates add additional SHA seals to new100.
+    closed=[];closed_sha=set()
     if fetcher is None and official_tff_fetcher is None:
         from postmatch_terminal_archive_263 import REL,checked,summary
-        if len(forecasts)==40 and (root/REL).is_file():
-            return summary(checked(root,forecasts,named),forecasts,score_market,avg)
+        if (root/REL).is_file():
+            frozen=checked(root,forecasts,named)
+            closed=frozen["rows"]
+            closed_sha={row["forecast_sha256"] for row in closed}
+            if len(forecasts)==len(closed_sha):
+                return summary(frozen,forecasts,score_market,avg)
     review=previous_web_review(root,names)
     if any(k not in named for k in forecasts):raise Blocked("SEAL_WITHOUT_BATCH_IDENTITY")
-    feeds,source_status=sources_for(root,names,{f["fixture"]["league"] for f in forecasts.values()},fetcher)
+    unarchived={sha:f for sha,f in forecasts.items() if sha not in closed_sha}
+    requested_leagues={f["fixture"]["league"] for f in unarchived.values()}
+    feeds,source_status=sources_for(root,names,requested_leagues,fetcher)
     grouped=defaultdict(list);done=[];pending=[];counts=defaultdict(int)
     federation_network_checked=0
-    for sha,f in sorted(forecasts.items()):
+    for archived in closed:
+        sha=archived["forecast_sha256"]
+        if archived["score"] is None:
+            label="POSTPONED_ARCHIVED_NO_SCORE"
+            counts[label]+=1
+            pending.append({"forecast_sha256":sha,"league":archived["league"],
+                "home":archived["home"],"away":archived["away"],"status":label})
+            continue
+        label="ARCHIVED_"+archived["evidence_grade"]
+        for model,metrics in score_market(forecasts[sha],archived["score"]).items():
+            grouped[("ALL_PROVISIONAL",model)].append(metrics)
+            grouped[(label,model)].append(metrics)
+        counts[label]+=1
+        done.append({"forecast_sha256":sha,"league":archived["league"],
+            "home":archived["home"],"away":archived["away"],"day":archived["match_date"],
+            "score":archived["score"],"status":label,
+            "source_url":archived["evidence_url"],"archive_closed_no_daily_fetch":True})
+    federation_network_checked=sum(row["evidence_grade"]=="TFF_NETWORK_VERIFIED" for row in closed)
+    for sha,f in sorted(unarchived.items()):
         x=f["fixture"];league=x["league"];b=named[sha]
         if b["league"]!=league or b["kickoff_utc"]!=x["kickoff_utc"]:
             raise Blocked("BATCH_IDENTITY_MISMATCH")
@@ -260,6 +284,8 @@ def evaluate(root=ROOT,*,now=None,fetcher=None,official_tff_fetcher=None):
              "OFFICIAL_TFF_NETWORK_READ_RESEARCH_NOT_HUMAN_ATTESTED")
     return {"schema":"263_POSTMATCH_CSV_SOURCE_CANDIDATE_V1","created_at_utc":now.isoformat(),
         "registered":len(forecasts),"provisional_scored":len(done),"pending":len(pending),
+        "archived_prior":len(closed_sha),"daily_external_csv_calls":len(requested_leagues),
+        "archive_closed":not unarchived,
         "human_attestations_written":0,"independent_federation_verified":federation_network_checked,
         "per_model":{c:{m:agg(grouped[(c,m)]) for m in MODELS} for c in classes},
         "sources":source_status,"status_counts":dict(counts),"rows":done,"pending_rows":pending,

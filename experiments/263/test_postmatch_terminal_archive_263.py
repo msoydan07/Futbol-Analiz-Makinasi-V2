@@ -45,6 +45,11 @@ class OneTimeResults(unittest.TestCase):
   a=copy.deepcopy(checked(ROOT,self.sealed,self.named))
   a["human_attestation_count"]=39
   with self.assertRaises(ArchiveRejected):checked(ROOT,self.sealed,self.named,doc=a)
+ def test_a_new_future_cohort_does_not_invalidate_40_cached_sha(self):
+  f=dict(self.sealed);n=dict(self.named)
+  f["1"*64]=next(iter(self.sealed.values()))
+  n["1"*64]=next(iter(self.named.values()))
+  self.assertEqual(len(checked(ROOT,f,n)["rows"]),40)
  def test_second_daily_check_returns_exact_same_without_fresh_network(self):
   a=evaluate(ROOT);b=evaluate(ROOT)
   for k in ("registered","provisional_scored","pending","status_counts","per_model"):
