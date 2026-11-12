@@ -1,0 +1,51 @@
+name: "263 Nov8 pinned TFF official postmatch source read-only check"
+on:
+  push:
+    branches:
+      - research/263-tff-corum-postmatch-readonly-20261112
+    paths:
+      - 'experiments/263/postmatch_tff_one_match_263.py'
+      - 'experiments/263/postmatch_csv_bridge_263.py'
+      - 'experiments/263/test_postmatch_tff_one_match_263.py'
+      - '.github/workflows/263-postmatch-tff-one-source-readonly-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-single-source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing CSV isolation tests plus six source-conflict and sealed SHA tests
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python -m unittest -v \
+            experiments/263/test_postmatch_csv_bridge_263.py \
+            experiments/263/test_postmatch_tff_one_match_263.py
+      - name: Live official TFF score read-only (no model, no original seal rewrite)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime,timezone
+          from postmatch_csv_bridge_263 import ROOT,sealed,registered_names
+          from postmatch_tff_one_match_263 import verify_one,FORECAST_SHA
+          evidence=verify_one(sealed(ROOT)[FORECAST_SHA],registered_names(ROOT)[FORECAST_SHA],
+                              now=datetime.now(timezone.utc))
+          assert evidence["score"]==[0,5], "OFFICIAL_SOURCE_SCORE_VS_REVIEW_CONFLICT"
+          assert evidence["human_attestation_written"] is False
+          print("TFF_PINNED_OFFICIAL_NETWORK_READ="+json.dumps(evidence,ensure_ascii=False,sort_keys=True))
+          PY
+      - name: No frozen models or sealed forecasts touched
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:experiments/263/m4_lock.json)" = "$(git rev-parse 2542bda79918f296f71d1a145768f408ca5a538b:experiments/263/m4_lock.json)"
+          test "$(git rev-parse HEAD:forward_morning_263/2026-11-08/f0a7dd75ba79329ab6e1bff1.json)" = "$(git rev-parse 2542bda79918f296f71d1a145768f408ca5a538b:forward_morning_263/2026-11-08/f0a7dd75ba79329ab6e1bff1.json)"
+          echo "LOCKED_MODELS_AND_REAL_MATCH_SHA_UNCHANGED"
