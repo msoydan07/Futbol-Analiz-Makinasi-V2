@@ -1,0 +1,43 @@
+name: "263 onepass final score acceptance single batch safety"
+on:
+  push:
+    branches: [fix/263-onepass-postmatch-acceptance-20261112]
+    paths:
+      - 'experiments/263/postmatch_once_accept_263.py'
+      - 'experiments/263/test_postmatch_once_accept_263.py'
+      - 'experiments/263/test_postmatch_once_bridge_263.py'
+      - 'experiments/263/postmatch_csv_bridge_263.py'
+      - 'docs/263_2026_11_12_ONE_MATCH_ONE_RESULT_ACCEPTANCE.md'
+      - '.github/workflows/263-postmatch-onepass-acceptance-ci.yml'
+permissions:
+  contents: read
+jobs:
+  onepass-terminal-result-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One batch of new acceptance, old archival and live source isolation tests
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v \
+            experiments/263/test_postmatch_once_accept_263.py \
+            experiments/263/test_postmatch_once_bridge_263.py \
+            experiments/263/test_postmatch_terminal_archive_263.py \
+            experiments/263/test_postmatch_csv_bridge_263.py
+      - name: Old 40 sealed forecasts, M4 lock, 4617 historical results untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=97de38b7bbc741f692efb063761ea17c2dce5488
+          for f in experiments/263/m4_integrated.py experiments/263/m4_lock.json data/results_only_263/2026-11-10_completed_4617_scores_only.csv forward_morning_263/2026-11-08/*.json data/results_only_263/nov8_new100_terminal_archive_20261112.json; do
+            test "$(git rev-parse HEAD:"$f")" = "$(git rev-parse "$base:$f")"
+          done
+          echo "OLD40_4617_FROZEN_M4_IMMUTABLE_ACCEPT"
