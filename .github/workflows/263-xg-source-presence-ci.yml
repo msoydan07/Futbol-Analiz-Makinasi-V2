@@ -1,0 +1,28 @@
+name: 263 one-time source-only xG CSV presence audit
+on:
+  push:
+    branches: [research/263-xg-ten-csv-availability-20261112]
+    paths:
+      - '.github/workflows/263-xg-source-presence-ci.yml'
+      - 'research/xg/2026_11_12_xg_source_presence_gate.py'
+permissions:
+  contents: read
+jobs:
+  ten-csv-readonly-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read only ten documented public CSVs; print coverage, never publish raw data
+        run: |
+          set -euo pipefail
+          python research/xg/2026_11_12_xg_source_presence_gate.py
+      - name: No predictions, licensed raw data or source files written to repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git status --porcelain)"
+          echo 'SOURCE_PRESENCE_ONLY_NO_MODEL_OR_DATA_CHANGE'
