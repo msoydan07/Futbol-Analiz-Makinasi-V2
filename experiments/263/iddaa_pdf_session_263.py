@@ -130,7 +130,10 @@ def analyze_one(n,row,*,index,team_names,pdf_time,now,
         output["status"]="KICKOFF_PASSED_OR_PDF_NOT_PREMATCH";return output
     try:
         if official_lookup is None:
-            fn=importlib.import_module(OFFICIAL_ADAPTERS[league]).lookup
+            # Current page only. No stale week-11 article, price requery or
+            # unchecked fallback to an old referee announcement.
+            from iddaa_pdf_live_official_263 import lookup as live_official
+            fn=lambda h,a:live_official(league,h,a,now=now)
         else:
             fn=official_lookup
         output["official_lookup_attempts"]=1
@@ -152,6 +155,20 @@ def analyze_one(n,row,*,index,team_names,pdf_time,now,
     output["status"]="ONE_OFFICIAL_SOURCE_CONFIRMED"
     output["official"]=verified
     output["pdf_name_mapping_only"]=False
+    # Workload is a separate read-only sidecar. The original official page was
+    # already fetched for the match; NEVER fetch a second league/cup/odds page.
+    # No sidecar may influence B/C2/C3/M4 probabilities or block a valid row.
+    try:
+        from iddaa_pdf_workload_263 import workload_for_pdf
+        output["rotation_7day"]=workload_for_pdf(
+            observed,verified,league,h,a,now)
+    except (ValueError,KeyError,TypeError,OverflowError,ImportError):
+        output["rotation_7day"]={
+            "schema":"263_PDF_7DAY_WORKLOAD_V1",
+            "status":"ADJACENT_SOURCE_REJECTED_DATA_INCOMPLETE",
+            "model_probabilities_changed":False,
+            "new_odds_network_calls":0,
+            "new_official_network_calls":0}
     if not forecast_options:return output
     # Important: original pilot out-dir / old 96 sealed predictions untouched.
     # This is a NEW session-specific directory; the original forecasting

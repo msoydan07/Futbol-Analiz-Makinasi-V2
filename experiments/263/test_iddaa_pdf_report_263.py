@@ -2,7 +2,7 @@
 import tempfile,unittest
 from pathlib import Path
 from iddaa_pdf_session_263 import SCHEMA
-from iddaa_pdf_report_263 import build,_render_pick
+from iddaa_pdf_report_263 import build,_render_pick,_render_workload
 
 class PdfReportTests(unittest.TestCase):
     def setUp(self):
@@ -50,6 +50,15 @@ class PdfReportTests(unittest.TestCase):
             self.assertNotIn("1.5 Alt",text)
             self.assertNotIn("3.5 Üst",text)
             self.assertIn("Fark",text)
+
+    def test_schedule_disclaimer_visible_and_model_unchanged(self):
+        import fitz
+        with tempfile.TemporaryDirectory() as d:
+            text=" ".join(pg.get_text() for pg in fitz.open(
+                build(self.session,Path(d)/"workload.pdf")))
+        self.assertIn("7 günlük maç yoğunluğu",text)
+        self.assertIn("Avrupa ve kupa takvimleri doğrulanmadı",text)
+        self.assertIn("VERİ YETERSİZ",_render_workload(self.row))
 
     def test_no_unverified_main_pick(self):
         text=_render_pick(self.row,self.session)

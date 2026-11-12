@@ -55,7 +55,27 @@ class PreparationTests(unittest.TestCase):
     r=rotation_from_official_inputs(TARGET,
         [event("HomeA",KO-timedelta(days=8)),event("HomeA",KO+timedelta(days=11))],NOW)
     self.assertFalse(r["teams"]["HomeA"]["past_7_days"])
-    self.assertFalse(r["teams"]["HomeA"]["next_10_days"])
+    self.assertFalse(r["teams"]["HomeA"]["next_7_days"])
+ def test_request_anchored_plus_seven_not_kickoff_plus_seven(self):
+    inside=NOW+timedelta(days=7)
+    outside=inside+timedelta(seconds=1)
+    r=rotation_from_official_inputs(TARGET,[
+        event("HomeA",inside),event("HomeA",outside),
+        event("AwayB",NOW-timedelta(days=7))],NOW)
+    self.assertEqual([x["utc"] for x in r["teams"]["HomeA"]["next_7_days"]],
+                     [inside.isoformat()])
+    self.assertEqual(len(r["teams"]["AwayB"]["past_7_days"]),1)
+    self.assertEqual(r["window_basis"],"ANALYSIS_REQUEST_PLUS_MINUS_SEVEN_DAYS")
+    self.assertEqual(r["analysis_requested_at_utc"],NOW.isoformat())
+ def test_pre_target_match_after_request_still_counts_future_from_request(self):
+    before_target=NOW+timedelta(hours=4)
+    r=rotation_from_official_inputs(TARGET,[event("HomeA",before_target)],NOW,
+                                   feeds_complete={"HomeA":True,"AwayB":True})
+    self.assertEqual(len(r["teams"]["HomeA"]["past_7_days"]),0)
+    self.assertEqual(len(r["teams"]["HomeA"]["next_7_days"]),1)
+    self.assertEqual(r["teams"]["HomeA"]["last_rest_hours"],4.0)
+    self.assertEqual(r["teams"]["HomeA"]["rotation_label"],"INCELENMELI")
+    self.assertFalse(r["model_probabilities_changed"])
  def test_unverified_does_not_upgrade(self):
     r=rotation_from_official_inputs(TARGET,[event("HomeA",KO+timedelta(days=2),verified=False)],NOW)
     self.assertEqual(r["teams"]["HomeA"]["rotation_label"],"VERI_YETERSIZ")

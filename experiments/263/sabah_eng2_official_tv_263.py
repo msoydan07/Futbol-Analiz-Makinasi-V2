@@ -34,6 +34,17 @@ def parse_efl_tv(html):
     if not isinstance(html,str) or not 50<=len(html)<=2_000_000:return []
     if "Sky Sports" not in html or "Championship" not in html:return []
     p=_Table();p.feed(html)
+    if not p.rows:
+        # The live official news page contains its TV table as serialized
+        # article HTML inside a script. The normal HTML parser correctly
+        # doesn't treat those tags as DOM rows; isolate only the explicitly
+        # dated official table and parse it as a separate fragment.
+        probe=html.find("21-Nov-26")
+        start=html.rfind("<table",0,probe) if probe>=0 else -1
+        finish=html.find("</table>",probe) if probe>=0 else -1
+        if 0<=start<probe<finish and finish-start<=500_000:
+            fragment=html[start:finish+8].replace(r"\n","\n")
+            p=_Table();p.feed(fragment)
     rows=[];pairs=set()
     for line in p.rows:
         if len(line)<7 or line[0].casefold() not in ("championship","sky bet championship"):

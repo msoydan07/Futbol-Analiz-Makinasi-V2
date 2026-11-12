@@ -75,11 +75,15 @@ def prepare_day(data,day):
             "not_a_forecast":True,"not_an_official_kickoff_verification":True}
 
 def rotation_from_official_inputs(target, adjacent, now, *, feeds_complete=None):
-    """Read-only classification of adapter-verified schedule observations.
+    """Read-only, REQUEST-ANCHORED 7-day workload and qualitative rotation hint.
 
-    The caller is responsible for independent official URL retrieval. Merely
-    supplying a VERIFIED marker does not prove web verification. This module
-    does not change model lambdas or probabilities.
+    Previous seven days and next seven days are measured from the instant the
+    user requested analysis, NOT from a future kickoff. Rest hours are measured
+    relative to the actual target kickoff using verified events in that window.
+
+    The caller must independently verify official match times. A VERIFIED
+    marker alone proves nothing; this code changes no model probabilities.
+    Missing UEFA/cup feeds are UNKNOWN, never a clean-schedule claim.
     """
     if now.tzinfo is None: raise FixturePreparationError("AWARE_NOW_REQUIRED")
     if not isinstance(target,dict) or target.get("status")!="VERIFIED":
@@ -93,16 +97,20 @@ def rotation_from_official_inputs(target, adjacent, now, *, feeds_complete=None)
     ko=aware(target.get("kickoff_utc"))
     if not now.astimezone(timezone.utc)<ko: raise FixturePreparationError("TARGET_NOT_PREMATCH")
     if not isinstance(adjacent,list):raise FixturePreparationError("ADJACENT_SCHEDULE_LIST_REQUIRED")
+    asof=now.astimezone(timezone.utc)
+    window_start=asof-timedelta(days=7)
+    window_end=asof+timedelta(days=7)
     feeds_complete=feeds_complete or {}
     out={}
     for team in (home,away):
-        past=[];upcoming=[];unknown=0;seen=set()
+        past=[];upcoming=[];verified_before_target=[];verified_after_target=[]
+        unknown=0;seen=set()
         for event in adjacent:
             if not isinstance(event,dict):raise FixturePreparationError("ADJACENT_EVENT_INVALID")
             if event.get("team_id")!=team:continue
             event_time=aware(event.get("kickoff_utc"))
             if event_time==ko:continue
-            if not (ko-timedelta(days=7)<=event_time<ko or ko<event_time<=ko+timedelta(days=10)):
+            if not (window_start<=event_time<asof or asof<event_time<=window_end):
                 continue
             key=(team,event_time,event.get("competition"))
             if key in seen:raise FixturePreparationError("DUPLICATE_ADJACENT_GAME")
@@ -115,11 +123,15 @@ def rotation_from_official_inputs(target, adjacent, now, *, feeds_complete=None)
             item={"utc":event_time.isoformat(),"competition":event["competition"],
                   "source_url":event["source_url"],"opponent":event.get("opponent") or "BILINMIYOR",
                   "hours_from_target":round((event_time-ko).total_seconds()/3600,1)}
-            if event_time<ko:past.append(item)
+            if event_time<asof:past.append(item)
             else:upcoming.append(item)
+            if event_time<ko:verified_before_target.append(event_time)
+            else:verified_after_target.append(event_time)
         past.sort(key=lambda x:x["utc"]);upcoming.sort(key=lambda x:x["utc"])
-        prior_hours=round((ko-aware(past[-1]["utc"])).total_seconds()/3600,1) if past else None
-        future_hours=round((aware(upcoming[0]["utc"])-ko).total_seconds()/3600,1) if upcoming else None
+        prior_hours=(round((ko-max(verified_before_target)).total_seconds()/3600,1)
+                     if verified_before_target else None)
+        future_hours=(round((min(verified_after_target)-ko).total_seconds()/3600,1)
+                      if verified_after_target else None)
         dense=(prior_hours is not None and prior_hours<=72) or (future_hours is not None and future_hours<=72)
         complete=feeds_complete.get(team) is True
         if dense or len(past)>=3 or len(upcoming)>=4:
@@ -131,7 +143,7 @@ def rotation_from_official_inputs(target, adjacent, now, *, feeds_complete=None)
         else:
             level="BELIRGIN_ISARET_YOK"
             reason="ELDEKI_DOGRULANMIS_FIKSTURDE_KISA_DINLENME_ISARETI_YOK"
-        out[team]={"past_7_days":past,"next_10_days":upcoming,
+        out[team]={"past_7_days":past,"next_7_days":upcoming,
                    "last_rest_hours":prior_hours,"next_match_gap_hours":future_hours,
                    "unverified_adjacent_count":unknown,
                    "rotation_label":level,"reason":reason,
@@ -141,7 +153,11 @@ def rotation_from_official_inputs(target, adjacent, now, *, feeds_complete=None)
                    "quantitative_model_adjustment":0}
         if out[team]["rotation_label"] not in RISK_STATUSES:
             raise AssertionError("ROTATION_LABEL_UNKNOWN")
-    return {"schema":ROT_SCHEMA,"target_kickoff_utc":ko.isoformat(),
+    return {"schema":ROT_SCHEMA,"analysis_requested_at_utc":asof.isoformat(),
+            "window_previous_utc":window_start.isoformat(),
+            "window_next_utc":window_end.isoformat(),
+            "window_basis":"ANALYSIS_REQUEST_PLUS_MINUS_SEVEN_DAYS",
+            "target_kickoff_utc":ko.isoformat(),
             "target_source_url":target["source_url"],"home_id":home,"away_id":away,
             "teams":out,"forecast_changed":False,"model_probabilities_changed":False,
             "schedule_source_verification_must_be_performed_upstream":True}

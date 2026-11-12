@@ -254,17 +254,20 @@ class OfficialFixtureGateway:
                      if x["league"]==league and x["requested_home"]==home
                      and x["requested_away"]==away),None)
 
-    def adjacent_for(self,gate):
-        """Return only uniquely paired timed official *league* fixtures.
+    def adjacent_for(self,gate,*,requested_at=None):
+        """League observations within seven days before/after ANALYSIS REQUEST.
 
-        This deliberately does NOT assert UEFA or domestic cup completeness.
-        League schedules are insufficient to infer absence of rotation risk.
+        Only uniquely paired official timed events. UEFA/cup coverage is NOT
+        implied by the league page; report unknown rather than zero games.
         """
         league=gate.get("league")
         if league not in self.cache:return []
         entry=self.cache[league]
         if entry["status"]!="FETCHED_OFFICIAL_PAGE":return []
         kickoff=datetime.fromisoformat(gate["kickoff_utc"].replace("Z","+00:00")).astimezone(timezone.utc)
+        instant=requested_at if requested_at is not None else self.now()
+        if instant.tzinfo is None:raise OfficialGatewayError("REQUEST_CLOCK_MUST_BE_AWARE")
+        instant=instant.astimezone(timezone.utc)
         target={gate["home_id"],gate["away_id"]}
         candidates={}
         conflict=set()
@@ -275,7 +278,8 @@ class OfficialFixtureGateway:
                 t=datetime.fromisoformat(iso.replace("Z","+00:00"))
                 if t.tzinfo is None:continue
                 t=t.astimezone(timezone.utc)
-                if not kickoff-timedelta(days=7)<=t<=kickoff+timedelta(days=10):continue
+                if not (instant-timedelta(days=7)<=t<instant or
+                        instant<t<=instant+timedelta(days=7)):continue
                 home=self.resolve_id(league,e["home"])
                 away=self.resolve_id(league,e["away"])
                 if home==away:continue

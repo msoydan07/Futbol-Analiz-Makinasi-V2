@@ -148,8 +148,11 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
         [r for r in rows if r['league']==league])
     if not league_rows:raise ValueError('missing_league_history')
     latest=max(r['match_date'] for r in league_rows)
-    if (datetime.fromisoformat(local_date).date()-datetime.fromisoformat(latest).date()).days>MAX_DATA_AGE_DAYS:
-        raise ValueError('stale_history_refresh_required')
+    from postbreak_freshness_gate_263 import freshness_gate
+    freshness=freshness_gate(league=league,latest=latest,match_date=local_date,
+                            gate=gate,now=now,max_age=MAX_DATA_AGE_DAYS)
+    if freshness["status"].startswith("BLOCKED"):
+        raise ValueError("stale_history_refresh_required: "+freshness["status"])
     past=[r for r in league_rows if r['match_date']<local_date]
     if len(past)<60:raise ValueError('m4_minimum_historical_sample_missing')
     lock_path=Path(lock_path)
@@ -196,6 +199,7 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
                   'human_source_acceptance':source_status=='APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED',
                   'research_shadow_unverified_source':shadow_evidence is not None,
                   'league_history_rows':len(past),'league_latest_result_date':latest,
+                  'history_freshness_verification':freshness,
                   'training_excluded_partial_match_ids':excluded_partial,
                   'full_match_policy_sha256':eligibility_sha,
                   'cutoff_rule':'strictly_before_local_kickoff_date'},

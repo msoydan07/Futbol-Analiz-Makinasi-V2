@@ -1,0 +1,57 @@
+name: "263 isolated live official source + international gap combined acceptance"
+on:
+  push:
+    branches: [fix/263-live-fixture-break-gates-20261111]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  one-offline-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install frozen research PDF and math test dependencies
+        run: python -m pip install --disable-pip-version-check 'PyMuPDF>=1.24,<1.27' 'reportlab>=4,<5' 'numpy>=1.26,<3' 'scipy>=1.11,<2'
+      - name: Source and post-break fail-closed gate regressions
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_postbreak_live_official_263.py
+      - name: Full existing 53 regression tests unchanged
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python -m unittest -v experiments/263/test_iddaa_pdf_team_alias_preflight_263.py experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_session_263.py experiments/263/test_iddaa_pdf_report_263.py experiments/263/test_iddaa_pdf_first_value_bridge_263.py experiments/263/test_four_model_value_policy_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_263_independent_goal_math_audit.py
+      - name: Existing real 4617 ten-league fixed-model as-of integrity gate
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python experiments/263/real_4617_math_readiness_audit_263.py --history data/results_only_263/2026-11-10_completed_4617_scores_only.csv --lock experiments/263/m4_lock.json --out /tmp/263-isolated-real-math.json
+      - name: One read-only live survey of all ten official leagues (no results promoted)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python experiments/263/ten_league_source_probe_263.py
+      - name: Retrieve immutable original 4413 research baseline (only for real M4 acceptance)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+          echo '637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89  data/results_only_263/2026-11-10_completed_4617_scores_only.csv' | sha256sum -c -
+      - name: REAL B C2 C3 M4 + SHA + report using SYNTHETIC PDF and controlled official HTML
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_pdf_first_real_4617_end_to_end_263.py
+      - name: Confirm no sealed predictions or model sources touched
+        run: |
+          git diff --quiet
+          git diff --cached --quiet
+          git diff --name-only HEAD^ HEAD | tee /tmp/changed
+          ! grep -E '^((forward_.*\.json)|(data/)|(experiments/263/m4_integrated.py)|(experiments/263/m4_lock.json))' /tmp/changed

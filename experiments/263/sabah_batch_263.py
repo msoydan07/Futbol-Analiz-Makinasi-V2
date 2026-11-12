@@ -150,14 +150,16 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     if cohort in ("acceptance3","new100"):
      raise Blocked("RESEARCH_DECISION_MUST_NOT_FAIL:"+type(exc).__name__)
     item["decision_status"]="UNAVAILABLE_MODEL_ONLY";item["decision_error"]=str(exc)[:140]
-   adjacent=gateway.adjacent_for(gate) if gateway is not None else []
+   adjacent=gateway.adjacent_for(gate,requested_at=observed_now) if gateway is not None else []
    rotation=rotation_from_official_inputs(gate,adjacent,observed_now)
    item["rotation"]={k:v["rotation_label"] for k,v in rotation["teams"].items()}
    item["rotation_evidence"]={
-     k:{"past_7_days":v["past_7_days"],"next_10_days":v["next_10_days"],
+     k:{"past_7_days":v["past_7_days"],"next_7_days":v["next_7_days"],
         "last_rest_hours":v["last_rest_hours"],
         "next_match_gap_hours":v["next_match_gap_hours"],
-        "reason":v["reason"]}
+        "reason":v["reason"],"all_competitions_verified":v["schedule_completeness_reported_by_upstream"],
+        "window_basis":rotation["window_basis"],
+        "analysis_requested_at_utc":rotation["analysis_requested_at_utc"]}
      for k,v in rotation["teams"].items()}
    item["rotation_applied_to_model_probabilities"]=False
   except (ValueError,OSError,KeyError,TypeError,AssertionError) as exc:
