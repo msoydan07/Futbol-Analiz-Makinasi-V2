@@ -1,4 +1,4 @@
-name: "263 Nov8 pinned TFF official postmatch source read-only check"
+name: "263 Nov8 pinned TFF results reuse archived source proof, no repeat HTTP"
 on:
   push:
     branches:
@@ -32,41 +32,24 @@ jobs:
             experiments/263/test_postmatch_csv_bridge_263.py \
             experiments/263/test_postmatch_tff_one_match_263.py \
             experiments/263/test_postmatch_tff_remaining_two_263.py
-      - name: Live CSV plus independent TFF one missing match (no model/forecast rewrite)
+      - name: Reuse the already-verified pinned TFF source records from terminal archive, no new HTTP
         env:
           PYTHONPATH: .:experiments/263
         run: |
           python - <<'PY'
-          import json
-          from datetime import datetime,timezone
           from postmatch_csv_bridge_263 import ROOT,sealed,registered_names,evaluate
-          from postmatch_tff_one_match_263 import verify_one,FORECAST_SHA
-          result=evaluate(now=datetime.now(timezone.utc))
-          assert result["registered"]==40
-          row=next(x for x in result["rows"] if x["forecast_sha256"]==FORECAST_SHA)
-          assert row["score"]==[0,5], "TFF_CSV_SOURCE_CONFLICT"
-          assert result["human_attestations_written"]==0
-          assert result["independent_federation_verified"]==3, "PINNED_THREE_TFF_MATCHES_NOT_CONFIRMED"
-          assert sum(1 for x in result["rows"] if x["official_network_evidence"] and x["league"]=="TUR1")==3
-          assert result["provisional_scored"]==39 and result["pending"]==1
-          assert not result["forecast_modified"] and not result["models_retrained"]
-          if not row["official_network_evidence"]:
-              # If the CSV later catches up, still independently read the
-              # pinned actual TFF source; never confuse CSV with federation.
-              row["official_network_evidence"]=verify_one(
-                  sealed(ROOT)[FORECAST_SHA],registered_names(ROOT)[FORECAST_SHA],
-                  now=datetime.now(timezone.utc))
-          proof=row["official_network_evidence"]
-          assert proof["score"]==[0,5] and proof["federation_page_read"] is True
-          print("TFF_PINNED_OFFICIAL_NETWORK_READ="+json.dumps(proof,ensure_ascii=False,sort_keys=True))
-          print("RESEARCH_POSTMATCH_SUMMARY="+json.dumps({
-              "registered":result["registered"],
-              "provisional_scored":result["provisional_scored"],
-              "pending":result["pending"],
-              "source_classes":result["status_counts"],
-              "independent_official_page_count":result["independent_federation_verified"],
-              "human_attestations_written":0,
-              "not_betting_performance_proof":True},ensure_ascii=False))
+          from postmatch_terminal_archive_263 import checked
+          doc=checked(ROOT,sealed(ROOT),registered_names(ROOT))
+          verified=[r for r in doc["rows"] if r["evidence_grade"]=="TFF_NETWORK_VERIFIED"]
+          assert len(verified)==3
+          assert {r["home"] for r in verified}=={"Çaykur Rizespor","Çorum FK","Beşiktaş"}
+          assert all(r["official_network_verified"] for r in verified)
+          assert all(not r["human_attestation"] for r in verified)
+          result=evaluate()
+          assert result["archive_closed"] and result["daily_external_csv_calls"]==0
+          assert (result["registered"],result["provisional_scored"],result["pending"])==(40,39,1)
+          assert result["independent_federation_verified"]==3
+          print("TFF_THREE_PINNED_SOURCE_PROOFS_ARCHIVED_NO_REPEAT_HTTP_PASS")
           PY
       - name: No frozen models or sealed forecasts touched
         shell: bash
