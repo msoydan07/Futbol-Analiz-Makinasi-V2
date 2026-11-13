@@ -124,6 +124,7 @@ class ItemText(HTMLParser):
         super().__init__(convert_charrefs=True);self.items=[];self.stack=[];self.pre=""
     def handle_starttag(self,tag,attrs):
         if tag=="li":self.stack.append([])
+        elif tag=="a" and self.stack:self.stack[-1].append(" ")
         elif tag in ("h2","h3","p","div") and not self.stack:self.pre+="\n"
     def handle_data(self,data):
         if self.stack:self.stack[-1].append(data)
