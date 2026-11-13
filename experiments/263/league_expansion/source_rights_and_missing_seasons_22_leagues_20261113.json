@@ -120,7 +120,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "CHE1 2025/26 228/228 independently verified (216 RSSSF exact +12 official corrections); DO NOT RECHECK SAME SHA. DNK1 2025/26 only 15/192 independently score-verified: 177 left; find genuinely separate accessible source covering ALL match types, and source-use rights. CH/DK 2026/27 identity gap and 153 England source conflict reviews remain. Research quarantine remains 2393; M4/main immutable.",
+  "next_priority": "2025/26 CHE1 228 and DNK1 192 fully independently compared (420 total), do not re-run. Next licensing/admission rights for public CSV, then separate 2026/27 CHE1/DNK1 season completeness and alias QA, 153 England score disagreements. Existing 2393 scored quarantine untouched.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -215,5 +215,41 @@
     "training_or_republication_rights": "NOT_ESTABLISHED",
     "new_quarantine_rows": 0,
     "model_status": "UNCHANGED"
+  },
+  "denmark_192_final_independent_score_qa_20261114": {
+    "status": "DNK1_2025_26_ALL_192_FT_FACTS_INDEPENDENTLY_CHECKED",
+    "evidence": "experiments/263/league_expansion/dnk1_2526_192_complete_independent_ft_evidence_20261114.json",
+    "github_actions_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43516592516",
+    "checked_total": 192,
+    "prior_individual_checks": 15,
+    "additionally_checked": 177,
+    "checks": {
+      "regular": 132,
+      "championship": 30,
+      "relegation": 30,
+      "independent_list_scores": 190,
+      "supplemented_from_other_sources": 2,
+      "haslund_official_date_corrections": 3,
+      "haslund_wrong_score_official_correction": 1
+    },
+    "rights": "NOT_ESTABLISHED",
+    "trainable_rows_admitted": 0,
+    "new_public_rows": 0,
+    "remaining_independent_checks": {
+      "CHE1": 0,
+      "DNK1": 0
+    },
+    "no_repeat_rule": "Do not re-run identical Swiss/Danish 2025/26 SHA-pinned file comparison unless sources change or a new conflict is found."
+  },
+  "final_2025_26_two_analysis_leagues_420_qa_20261114": {
+    "independent_fixture_score_checks": 420,
+    "swiss": 228,
+    "denmark": 192,
+    "newly_independently_checked_since_prior_51": 369,
+    "total_2025_26_independent_scores_pending": 0,
+    "rights_to_train_or_rehost": "NOT_ESTABLISHED",
+    "scored_research_quarantine_unchanged": 2393,
+    "training_accepted": 0,
+    "models_SHA_seals_main_modified": false
   }
 }
