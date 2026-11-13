@@ -90,7 +90,7 @@ def club(name:str,look:dict)->str|None:
 def parse_round_list(raw:bytes,section:str)->tuple[dict,dict]:
     t=html_text(raw)
     first=1 if section=="regular_22_rounds" else 23
-    start=re.search(r"\b"+str(first)+r"\.\s*RUNDE\b",t,re.I)
+    start=re.search(r"\b"+str(first)+r"\.\s*RUNDE\b",t)  # exclude preceding lower-case navigation link
     if start is None: raise ValueError("MISSING_START_ROUND_"+section)
     # Do not parse home-v-away score matrix before the detailed date-labelled
     # results; ignore other division links and archived years after the list.
