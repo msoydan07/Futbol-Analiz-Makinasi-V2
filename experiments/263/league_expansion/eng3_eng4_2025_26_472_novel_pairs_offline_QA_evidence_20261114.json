@@ -1,0 +1,96 @@
+{
+  "created_date": "2026-11-14",
+  "scope": "ENG3 and ENG4 2025/26 strictly new 472 fixture pairs; no repeat of 178 score conflicts and 22 date-shift cases",
+  "audit_status": "OFFLINE_SOURCE_SHAPE_COMPLETE__INDEPENDENT_FT_AND_RIGHTS_BLOCKED",
+  "run_url": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43526560527",
+  "job_id": 132233659251,
+  "offline_validator": "experiments/263/league_expansion/audit_472_novel_2025_26_eng3_eng4_offline_once.py",
+  "input_blobs": {
+    "eng3_eng4_2025_26_1104_ALTERNATIVE_NONADDITIVE_20261113.csv": "320c28af572afd4f2557698d54a375011ca869ff",
+    "training_2025_26_cc0_scored_QUARANTINE.csv": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+    "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": "46071b306d6f73be71d27b0a6c5f4480630b73a0"
+  },
+  "input_sha256": {
+    "sean_full_nonadditive": "7f45feb3b4710f09e2e5ea21d266e39d188aa678c761c0de80a7c6992a6d3172",
+    "legacy_1249": "61e6d874bd48eb74703f9a6d577f035d44968e1f2676b7f4a2faa47613dbf185",
+    "legacy_recovered_295": "141c85542d7a2d5a23e57d3726420499e10c73a2c3dd317dc48bba5c45f711ec"
+  },
+  "existing_legacy_unique_pairs": 632,
+  "new_unique_fixture_pairs": 472,
+  "full_season_alt_score_candidates": 1104,
+  "league_integrity": {
+    "ENG3": {
+      "full_alternate_season": {
+        "fixtures": 552,
+        "clubs": 24,
+        "each_club_home": 23,
+        "each_club_away": 23,
+        "total_goals": 1452,
+        "zero_zero": 33
+      },
+      "new_distinct_pairs": {
+        "count": 196,
+        "goals": 536,
+        "zero_zero": 13,
+        "month_distribution": {
+          "2025-11": 3,
+          "2026-02": 47,
+          "2026-03": 61,
+          "2026-04": 73,
+          "2026-05": 12
+        }
+      },
+      "external_independent_match_by_match_FT_confirmation_for_new_pairs": 0,
+      "trainable_rows": 0
+    },
+    "ENG4": {
+      "full_alternate_season": {
+        "fixtures": 552,
+        "clubs": 24,
+        "each_club_home": 23,
+        "each_club_away": 23,
+        "total_goals": 1423,
+        "zero_zero": 36
+      },
+      "new_distinct_pairs": {
+        "count": 276,
+        "goals": 699,
+        "zero_zero": 20,
+        "month_distribution": {
+          "2026-01": 62,
+          "2026-02": 68,
+          "2026-03": 68,
+          "2026-04": 66,
+          "2026-05": 12
+        }
+      },
+      "external_independent_match_by_match_FT_confirmation_for_new_pairs": 0,
+      "trainable_rows": 0
+    }
+  },
+  "novel_472_total_goals": 1235,
+  "novel_472_0_0_count": 33,
+  "independently_corrobated_FT_for_472_count": 0,
+  "source_licence_findings": {
+    "sean_source": "https://github.com/seanelvidge/England-football-results/blob/main/LICENCE.md",
+    "github_licence_blob": "39ccb62c3b743b5cda439830852f9d4cec3c88de",
+    "licence": "CC BY 4.0 only for Sean Elvidge's rights in compilation and original contribution, not independent third-party rights.",
+    "football_data_source": "https://www.football-data.co.uk/contact.php",
+    "football_data_source_policy": "Free CSV restricted to personal/academic use, light <=twice per week automation, no unapproved AI/commercial model training or heavy data downloads.",
+    "decision": "Do not claim all 472 rows are licensed for AI model training merely because a source is public/CC BY. Need a specifically permitted data path before promotion; original full compilation is stored pre-existing nonadditive but has no training admission."
+  },
+  "conditions_to_promote": [
+    "Written grant or independently licensed lawful source covering intended training/reuse scope.",
+    "Second genuinely independent FT-score/source date check for 472 fixture pairs.",
+    "Existing 178 original incorrect FT and 22 wrong-date match source keys remain held; no silent replacement.",
+    "Chronological as-of/backtest split preventing same-game or future-season leakage.",
+    "Only then a separately approved shadow experiment, no direct M4 integration."
+  ],
+  "old_178_score_checks_repeated": 0,
+  "old_22_date_checks_repeated": 0,
+  "new_raw_data_exported": 0,
+  "current_research_quarantine_total": 2396,
+  "trainable_rows_added": 0,
+  "production_10_leagues_m4_sha_untouched": true,
+  "immediate_next": "Current English 472 source shape check closed. Resolve training-data rights for 472 before external independent full FT proof; independently clean/integrate user's manual xG workflow separately."
+}
