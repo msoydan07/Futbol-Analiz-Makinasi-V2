@@ -1,0 +1,44 @@
+name: 263 Research - Swiss 2025-26 RSSSF Full Independent FT QA
+
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-che-rsssf-228-independent-once.yml
+
+permissions:
+  contents: read
+
+jobs:
+  independent-228:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parser synthetic acceptance
+        run: python experiments/263/league_expansion/verify_che1_2526_rsssf_fullseason_once.py --self-test
+      - name: Read exact pinned 228-match CSV and independent RSSSF text into memory
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/verify_che1_2526_rsssf_fullseason_once.py --live | tee swiss_rsssf_summary.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          log=Path('swiss_rsssf_summary.log').read_text(encoding='utf-8')
+          a=log.index('SWISS_FULL_COMPARE_START')+len('SWISS_FULL_COMPARE_START')
+          b=log.index('SWISS_FULL_COMPARE_END')
+          report=json.loads(log[a:b])
+          Path('swiss_rsssf_aggregate.json').write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('## Swiss 2025/26 individual FT result check vs RSSSF\n')
+              for k in ('independent_full_228_match_score_gate','source_scored_rows','independent_scored_rows','matched_date_club_score','score_disagreements','unmatched_csv_fixtures','new_unique_score_checks_beyond_36','status'):
+                  f.write('- '+str(k)+': '+str(report.get(k,'n/a'))+'\n')
+              f.write('\nResearch only. Original raw datasets not committed or redistributed; never train automatically.\n')
+          PY
+      - name: Preserve aggregate only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-swiss-2526-rsssf-independent-aggregate
+          path: swiss_rsssf_aggregate.json
+          retention-days: 14
