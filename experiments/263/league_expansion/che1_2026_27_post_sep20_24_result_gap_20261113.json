@@ -1,0 +1,44 @@
+{
+  "created_on": "2026-11-13",
+  "purpose": "Read-only CHE1 2026/27 current season gap; preserve original 54 CC0 scored candidates; do not duplicate or copy restricted third-party provider rows.",
+  "base": {
+    "source": "openfootball/europe",
+    "path": "switzerland/2026-27_ch1.txt",
+    "blob_sha": "d0234e0d4356fa92adcf6b2fdc728014ce081136",
+    "scored_match_rows": 54,
+    "latest_scored_match_date": "2026-09-20",
+    "earliest_scored_match_date": "2026-07-25",
+    "exact_existing_quarantine_rows": 54,
+    "duplicates_not_added": true
+  },
+  "external_newer_results": {
+    "source": "Cornerflick Swiss Super League 2026/27 public results index",
+    "url": "https://cornerflick.com/football/leagues/swiss-super-league/results",
+    "official_scoring_comparator": "https://tv.sfl.ch/league/610/event-center/brack-super-league?locale=it",
+    "window_from_exclusive": "2026-09-20",
+    "window_to_inclusive": "2026-11-08",
+    "new_result_rounds": [
+      10,
+      11,
+      12,
+      13
+    ],
+    "results_per_round": 6,
+    "number_newer_result_candidates": 24,
+    "earliest_new_result_date": "2026-10-10",
+    "latest_new_result_date": "2026-11-08",
+    "interpretation": "Four complete subsequent six-game result rounds are listed in public source, all strictly after existing CC0 source latest score, so these are identity-date-nonoverlapping potential additions.",
+    "license_issues": "Cornerflick CC BY compilation but upstream third-party api-football rights uncertain; no bulk re-licensing assumed.",
+    "status": "SOURCE_DISCOVERY_ONLY_PENDING_LICENSE_AND_OFFICIAL_SCORE_QA",
+    "independent_official_match_sample": "https://matchcenter-sfl.football.ch/Default.aspx?ln=&lng=3&oid=2&tg=4308971&v=0",
+    "caution": "The official sample is an August game validating historical source provenance, not all 24 newer results."
+  },
+  "training_decision": {
+    "count_of_new_rows_added": 0,
+    "additive_quarantine_total_unchanged": 2393,
+    "model_changes": false,
+    "approval": "DENIED_UNTIL_RIGHTS_AND_OFFICIAL_RESULT_MATCH_LEVEL_CHECK",
+    "potential_future_rows_if_all_verified": 24
+  },
+  "recommended_single_batch": "Audit 24 Oct-Nov fixture identities against SFL match center, record correct match date and after-90-minutes result, verify data rights, then add one new-only CHE1-2026/27 quarantined CSV with 24 unique keys; leave original 54 file byte-for-byte unchanged."
+}
