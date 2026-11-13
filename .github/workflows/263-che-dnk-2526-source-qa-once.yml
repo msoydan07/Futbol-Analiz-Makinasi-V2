@@ -1,0 +1,86 @@
+name: 263 Research - CHE/DNK 2025-26 One-shot CSV QA
+
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-che-dnk-2526-source-qa-once.yml
+
+permissions:
+  contents: read
+
+jobs:
+  quality-audit:
+    name: Read-only 420 game source audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run existing fail-closed self-test
+        run: python experiments/263/league_expansion/verify_public_season_csv_2526.py --self-test
+      - name: Fetch two public CSVs to memory and check against official table
+        shell: bash
+        run: |
+          python - <<'PY'
+          import sys, json, csv, io, hashlib, os
+          import urllib.request
+          from datetime import datetime, timezone
+          from pathlib import Path
+          sys.path.insert(0,'experiments/263/league_expansion')
+          from verify_public_season_csv_2526 import csv_rows, analyze
+          report={
+              'research_only': True,
+              'raw_files_committed': False,
+              'new_training_rows': 0,
+              'production_changes': False,
+              'collected_at_utc': datetime.now(timezone.utc).isoformat(),
+              'sources': []
+          }
+          for league, slug, expected in (
+              ('CHE1','swiss-super-league',228),
+              ('DNK1','danish-superliga',192),
+          ):
+              url=f'https://matchdaysync.com/api/public/csv/{slug}/2025-26/matches'
+              entry={'league':league,'season':'2025-26','source_url':url,
+                     'expected_2025_26_rows':expected,'status':'SOURCE_NOT_YET_VERIFIED'}
+              try:
+                  req=urllib.request.Request(url,headers={'User-Agent':'Research-Csv-QA/1.0 (personal noncommercial; single request)','Accept':'text/csv'})
+                  with urllib.request.urlopen(req, timeout=20) as response:
+                      content_type=response.headers.get('Content-Type','').lower()
+                      raw=response.read(2000001)
+                      if 'text/csv' not in content_type:
+                          raise ValueError('WRONG_CONTENT_TYPE')
+                      if len(raw)>2000000:
+                          raise ValueError('SIZE_LIMIT')
+                  decoded=raw.decode('utf-8-sig')
+                  if not decoded.startswith('# Source:'):
+                      raise ValueError('INVALID_SOURCE_HEADER')
+                  if not all(part in decoded.splitlines()[0].lower() for part in (slug,'2025-26')):
+                      raise ValueError('SOURCE_HEADER_MISMATCH')
+                  entry.update(analyze(csv_rows(decoded),league))
+                  entry['file_sha256']=hashlib.sha256(raw).hexdigest()
+                  entry['status']='SOURCE_QA_COMPLETE' if entry['score_and_coverage_gate']=='PASS' else 'SOURCE_QA_REJECTED'
+              except Exception as exc:
+                  entry['status']='SOURCE_UNAVAILABLE_OR_PARSE_FAILED'
+                  entry['error_class']=type(exc).__name__
+                  entry['score_and_coverage_gate']='NOT_TESTED'
+              report['sources'].append(entry)
+          out=json.dumps(report,ensure_ascii=False,indent=2)+'\n'
+          Path('research_qa_results.json').write_text(out,encoding='utf-8')
+          print('RESEARCH_QA_REPORT_START')
+          print(out)
+          print('RESEARCH_QA_REPORT_END')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as summary:
+              summary.write('### Swiss / Danish 2025-26 read-only score QA\n')
+              summary.write('| League | Rows | Gate | Status |\n|---|---:|---|---|\n')
+              for entry in report['sources']:
+                  summary.write('| {} | {} | {} | {} |\n'.format(entry['league'],entry.get('valid_unique_scored_rows','?'),entry.get('score_and_coverage_gate','NOT_TESTED'),entry['status']))
+              summary.write('\nNo raw CSV was saved to the repository; no models, SHA forecasts or training rows modified.\n')
+          PY
+      - name: Upload aggregate audit only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-che-dnk-2526-aggregate-qa
+          path: research_qa_results.json
+          retention-days: 14
