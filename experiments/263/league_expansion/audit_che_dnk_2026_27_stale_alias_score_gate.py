@@ -25,7 +25,7 @@ LEAGUES = {
     "independent_goals":293,
     "score_reference":"https://uniquescores.com/football/league/swiss-super-league/results/",
     "extra_aliases":{"Vaduz":["FC Vaduz"],"Thun":["FC Thun","Thun"],
-                     "St Gallen":["FC St.Gallen 1879","FC St. Gallen 1879","St. Gallen"],
+                     "St Gallen":["FC St.Gallen 1879","FC St. Gallen 1879","St. Gallen","FC Sankt Gallen"],
                      "Lugano":["FC Lugano"],"Sion":["FC Sion"]},
     "clubs":["Thun","St Gallen","Lugano","Sion","Basel","Young Boys",
              "Luzern","Servette","Lausanne","Zurich","Grasshoppers","Vaduz"],
@@ -214,6 +214,7 @@ def self_test():
     lookup=canonical_lookup("CHE1")
     assert lookup[norm("FC Vaduz")]=="Vaduz"
     assert lookup[norm("FC St. Gallen 1879")]=="St Gallen"
+    assert lookup[norm("FC Sankt Gallen")]=="St Gallen"
     assert canonical_lookup("DNK1")[norm("Lyngby Boldklub")]=="Lyngby"
     assert canonical_lookup("DNK1")[norm("AC Horsens")]=="Horsens"
     base=[
