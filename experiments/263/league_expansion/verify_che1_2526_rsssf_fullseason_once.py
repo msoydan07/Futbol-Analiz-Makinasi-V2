@@ -29,6 +29,7 @@ MONTHS = {"jan": 1, "janv": 1, "january": 1, "feb": 2, "february": 2, "mar": 3, 
           "aug": 8, "august": 8, "sep": 9, "sept": 9, "september": 9,
           "oct": 10, "october": 10, "nov": 11, "november": 11, "dec": 12, "december": 12}
 DATE_LINE = re.compile(r"^\s*\[\s*([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?(?:\s*,?\s*(202[56]))?(?:\s+[^]]+)?\]\s*$")
+REPLAY_LINE = re.compile(r"^\s*\[Replay\s+([A-Za-z]+)\s+(\d{1,2})\]\s*$", re.I)
 RESULT_LINE = re.compile(r"^\s*([^\d\[\]\n][^\d\n]*?)\s+(\d{1,2})-(\d{1,2})\s+(.+?)\s*$")
 ALIASES = {"FC Lausanne": "Lausanne", "Grasshopper Club": "Grasshoppers",
            "FC St.Gallen": "St Gallen", "FC St. Gallen": "St Gallen",
@@ -86,10 +87,11 @@ def rsssf_results(text: str) -> tuple[dict, dict]:
                 if "Promotion/Relegation Playoff" in lines[i]), None)
     if end is None: raise ValueError("MISSING_PROMOTION_RELEGATION_STOP")
     match_lines = lines[start:end]
-    found, unknown, repeats, divergent_repeats, no_date = {}, Counter(), [], [], 0
+    found, unknown, repeats, divergent_repeats, no_date, abandoned = {}, Counter(), [], [], 0, 0
     current_day = None
     for line in match_lines:
-        m = DATE_LINE.match(line)
+        replay = REPLAY_LINE.match(line)
+        m = replay or DATE_LINE.match(line)
         if m:
             month = MONTHS.get(m.group(1).lower())
             day = int(m.group(2))
@@ -99,6 +101,9 @@ def rsssf_results(text: str) -> tuple[dict, dict]:
             continue
         m = RESULT_LINE.match(line)
         if not m: continue
+        if re.search(r"\[(?:Abd|Abandoned)[^]]*\]", line, re.I):
+            abandoned += 1
+            continue
         home = canonical(m.group(1),lookup)
         away = canonical(m.group(4),lookup)
         # Ignore standings, scorer notes, match commentary, etc.;
@@ -123,6 +128,7 @@ def rsssf_results(text: str) -> tuple[dict, dict]:
     return found, {"parsed_scored_games":len(found),
                    "not_mapped_football_lines":dict(unknown),
                    "duplicate_keys":len(repeats), "divergent_duplicate_keys":len(divergent_repeats),
+                   "abandoned_incomplete_match_scores_ignored":abandoned,
                    "duplicate_examples":[{"date":k[0],"home":k[1],"away":k[2]} for k in repeats[:6]],
                    "score_without_valid_day":no_date,
                    "selection_start":"first Round 1", "selection_end":"Promotion/Relegation Playoff"}
@@ -201,12 +207,18 @@ def self_test():
     Relegation Playoff
     [May 17]
     Grasshopper Club        3-2 FC Winterthur
+    [Nov 2]
+    FC Lugano        1-0 FC St. Gallen [Abd at 49\'(rain); Replayed Nov 26]
+    [Replay Nov 26]
+    FC Lugano        1-3 FC St. Gallen
     Promotion/Relegation Playoff
     [May 18]
     FC Aarau                0-0 Grasshopper Club
     """
     parsed,detail=rsssf_results("<pre>"+sample+"</pre>")
-    assert len(parsed)==5, (parsed,detail)
+    assert len(parsed)==6, (parsed,detail)
+    assert detail["abandoned_incomplete_match_scores_ignored"]==1
+    assert parsed[("2025-11-26","Lugano","St Gallen")]==(1,3)
     assert parsed[("2025-07-25","Zurich","Sion")]==(2,3)
     assert parsed[("2026-05-14","Thun","Young Boys")]==(3,8)
     assert ("2026-05-18","Aarau","Grasshoppers") not in parsed
