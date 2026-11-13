@@ -1,0 +1,45 @@
+name: 263 Research - ENG3 ENG4 472 novel pairs offline QA
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-eng3-eng4-2526-472-offline-unique-rights-gate-once.yml
+
+permissions:
+  contents: read
+
+jobs:
+  novel-472-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic aliases, zero-zero and historical date gate
+        run: python experiments/263/league_expansion/audit_472_novel_2025_26_eng3_eng4_offline_once.py --self-test
+      - name: Audit 472 novel pairs entirely offline using immutable research CSV files
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/audit_472_novel_2025_26_eng3_eng4_offline_once.py --audit | tee eng472_offline.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          data=Path('eng472_offline.log').read_text(encoding='utf-8')
+          i=data.index('ENG472_AUDIT_START')+len('ENG472_AUDIT_START')
+          j=data.index('ENG472_AUDIT_END')
+          output=json.loads(data[i:j])
+          Path('eng472_offline_aggregate.json').write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('### ENG3 / ENG4 2025-26 - novel 472 pairs; offline source-shape QA only\n')
+              f.write('| League | New novel pairs | Goals | 0-0 results |\n|---|---:|---:|---:|\n')
+              for league,data in output['full_season_integrity'].items():
+                  v=data['new_distinct_pairs']
+                  f.write(f"| {league} | {v['count']} | {v['goals']} | {v['zero_zero']} |\n")
+              f.write('\nNot independently FT-verified or licensed for model training. 0 promoted rows, main untouched.\n')
+          PY
+      - name: Archive aggregate audit only; not the external dataset
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-472-novel-eng3-eng4-offline-qa-evidence
+          path: eng472_offline_aggregate.json
+          retention-days: 14
