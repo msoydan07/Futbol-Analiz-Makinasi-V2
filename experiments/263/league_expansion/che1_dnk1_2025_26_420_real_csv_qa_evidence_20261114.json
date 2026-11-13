@@ -1,0 +1,70 @@
+{
+  "recorded_date": "2026-11-14",
+  "source_test_mode": "ACTUAL_PUBLIC_CSV_BYTES_FETCHED_ON_GITHUB_RUNNER; AGGREGATE_REPORT_ONLY",
+  "git_branch": "research/263-13-lig-22-havuz-20261113",
+  "run_link": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43511170073",
+  "run_id": 43511170073,
+  "job_id": 132181503802,
+  "workflow_commit": "a14b912120566f5432328aa8fdf1054994bee27a",
+  "tooling": {
+    "validator": "experiments/263/league_expansion/verify_public_season_csv_2526.py",
+    "validator_blob_sha": "310e5b9d4015628b42a261f9c53a87aeddd2c66d",
+    "synthetic_selftest": "PASS"
+  },
+  "source_policy": "MatchDaySync publicly accessible for personal analysis; no permission to republish CSV or original compiled rows established. Do not use to rehost data in public repo. Keep raw CSV out of GitHub.",
+  "result_interpretation": "Aggregate score/coverage/team-stat QA passed; independent per-match external result confirmation and rights for training/republication not yet completed.",
+  "no_inference_of_xg_from_missing": true,
+  "no_raw_matches_in_this_file": true,
+  "sources": [
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "source_url": "https://matchdaysync.com/api/public/csv/swiss-super-league/2025-26/matches",
+      "status": "SOURCE_QA_COMPLETE",
+      "bytes_sha256": "46a8b9aedb6bf294a6991e701609c04d511eb844bd02a24094349ce4be51678c",
+      "records": 228,
+      "valid_scored_games": 228,
+      "official_expected_games": 228,
+      "unique_clubs": 12,
+      "zero_zero": 9,
+      "goals_total": 750,
+      "expected_goals_total": 750,
+      "team_stat_mismatches": 0,
+      "quarantine_reasons": {},
+      "score_and_coverage_gate": "PASS",
+      "rights_gate": "SEPARATE_REVIEW_REQUIRED_BEFORE_PUBLIC_DATA_REDISTRIBUTION"
+    },
+    {
+      "league": "DNK1",
+      "season": "2025-26",
+      "source_url": "https://matchdaysync.com/api/public/csv/danish-superliga/2025-26/matches",
+      "status": "SOURCE_QA_COMPLETE",
+      "bytes_sha256": "8b5e31555919beb083b875b8d38bc2227350ffc950a39308bbd803cefa64d6fa",
+      "records": 192,
+      "valid_scored_games": 192,
+      "official_expected_games": 192,
+      "unique_clubs": 12,
+      "zero_zero": 11,
+      "goals_total": 595,
+      "expected_goals_total": 595,
+      "team_stat_mismatches": 0,
+      "quarantine_reasons": {},
+      "score_and_coverage_gate": "PASS",
+      "rights_gate": "SEPARATE_REVIEW_REQUIRED_BEFORE_PUBLIC_DATA_REDISTRIBUTION"
+    }
+  ],
+  "summary": {
+    "downloaded_and_checked_games": 420,
+    "passed_basic_QA": 420,
+    "unique_leagues": 2,
+    "zero_zero_total": 20,
+    "scored_train_rows_approved": 0,
+    "added_to_existing_2393": 0,
+    "model_or_main_changes": false
+  },
+  "follow_up": [
+    "Check explicit scope of license and downstream provider rights before public rows or model training.",
+    "Independently validate match-level dates and FT scores against official match centers or an independently sourced licensed fixture list.",
+    "On authorized private storage, rerun strict fixture and temporal as-of tests before new shadow experiments."
+  ]
+}
