@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-14",
+  "source": "User Library original workbook (read-only)",
+  "filename": "263_xg_elle_giris_1855_haftalik_tek_kaynak.xlsx",
+  "sha256": "ad37e604b69d23f018b0145331afa62f8ad81e3049c1379fd8eff30fff6a4ed3",
+  "current_season_missing": 90,
+  "previous_season_missing": 1765,
+  "old_comparison_rows": 459,
+  "weekly_new_rows": 0,
+  "old_provider_one_sided": 56,
+  "unique_fixture_IDs": 2314,
+  "unique_fixture_keys": 2314,
+  "duplicate_IDs": 0,
+  "invalid_score_shapes": 0,
+  "manual_new_xg_pairs": 0,
+  "training_rows_admitted": 0,
+  "original_workbook_modified": false,
+  "raw_row_values_published": false,
+  "checker_script": "experiments/263/league_expansion/check_manual_xg_excel_1855_read_only.py",
+  "synthetic_ci": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43528328627",
+  "manual_provider_rights": "NOT ESTABLISHED"
+}
