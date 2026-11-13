@@ -1,0 +1,47 @@
+{
+  "created_on": "2026-11-13",
+  "intent": "Only previously missing 2026-27 ENG3+ENG4 candidate results, no change to older rows or production.",
+  "source_research": "seanelvidge/England-football-results",
+  "source_csv_url": "https://github.com/seanelvidge/England-football-results/blob/main/EnglandLeagueResults.csv",
+  "blob_sha": "a27f04e87e1b82718f6c487964f7de2def5a2043",
+  "source_attribution": "Sean Elvidge, English Football League Data, https://github.com/seanelvidge/England-football-results; CC BY 4.0 original contributions only. Upstream third-party rights reserved.",
+  "source_license_url": "https://github.com/seanelvidge/England-football-results/blob/main/LICENCE.md",
+  "coverage_latest_date": "2026-11-08",
+  "source_only_2025_26_leagues_disputed": true,
+  "source_2026_27_rows": 322,
+  "comparisons": [
+    {
+      "code": "ENG3",
+      "primary_source_count": 158,
+      "secondary_source_count": 158,
+      "matched_same_date_clubs_score": 158,
+      "unmatched": 0,
+      "score_conflicts": 0,
+      "secondary_sha": "e1c8d54afcd160e428a28f1a4e05b4531456a117"
+    },
+    {
+      "code": "ENG4",
+      "primary_source_count": 164,
+      "secondary_source_count": 164,
+      "matched_same_date_clubs_score": 164,
+      "unmatched": 0,
+      "score_conflicts": 0,
+      "secondary_sha": "72b3fa5b495b6b00ce4c6b114d9707adf19034a2"
+    }
+  ],
+  "independent_comparator": "oladeeayo/open-matchday",
+  "comparator_data_imported": false,
+  "comparator_use": "Read-only identity+score check; secondary provider non-commercial and subject to source terms",
+  "deliberate_2025_26_exclusion": "Disputed existing 2025/26 ENG3/ENG4 match results; don't import here or overwrite 2025/26 source until official conflict adjudication.",
+  "keys_unique": 322,
+  "previous_quarantine_rows": 2071,
+  "aggregate_quarantine_rows_if_combined": 2393,
+  "training_rows_accepted": 0,
+  "limitations": [
+    "Some official/third-party rights not licensed by Sean; original CC BY only",
+    "Comparing two independent aggregations does not by itself establish official match-by-match source truth",
+    "No match from after 2026-11-08; remaining results missing through 2026-11-13",
+    "No training, deployed forecasts or model changes"
+  ],
+  "frozen_branches_untouched": true
+}
