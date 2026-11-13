@@ -24,9 +24,10 @@ INDEPENDENT = "https://www.rsssf.org/tablesz/zwit2026.html"
 EXPECTED_SHA = "46a8b9aedb6bf294a6991e701609c04d511eb844bd02a24094349ce4be51678c"
 WITNESSES = "experiments/263/league_expansion/che_dnk_2526_51_independent_match_score_witnesses_20261114.json"
 
-MONTHS = {"jan": 1, "janv": 1, "feb": 2, "february": 2, "mar": 3, "march": 3,
-          "apr": 4, "may": 5, "jun": 6, "june": 6, "jul": 7, "july": 7,
-          "aug": 8, "sep": 9, "sept": 9, "oct": 10, "nov": 11, "dec": 12}
+MONTHS = {"jan": 1, "janv": 1, "january": 1, "feb": 2, "february": 2, "mar": 3, "march": 3,
+          "apr": 4, "april": 4, "may": 5, "jun": 6, "june": 6, "jul": 7, "july": 7,
+          "aug": 8, "august": 8, "sep": 9, "sept": 9, "september": 9,
+          "oct": 10, "october": 10, "nov": 11, "november": 11, "dec": 12, "december": 12}
 DATE_LINE = re.compile(r"^\s*\[\s*([A-Za-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?(?:\s*,?\s*(202[56]))?(?:\s+[^]]+)?\]\s*$")
 RESULT_LINE = re.compile(r"^\s*([^\d\[\]\n][^\d\n]*?)\s+(\d{1,2})-(\d{1,2})\s+(.+?)\s*$")
 ALIASES = {"FC Lausanne": "Lausanne", "Grasshopper Club": "Grasshoppers",
