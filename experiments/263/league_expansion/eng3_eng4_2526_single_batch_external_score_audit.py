@@ -29,7 +29,7 @@ EXPECTED_PRIOR=25
 def norm(v):
     v=unicodedata.normalize("NFKD",v.casefold())
     v="".join(c for c in v if not unicodedata.combining(c))
-    v=v.replace("peterboro","peterborough").replace("bristol rvs","bristol rovers")
+    v=re.sub(r"\bpeterboro\b","peterborough",v).replace("bristol rvs","bristol rovers")
     v=v.replace("mk dons","milton keynes dons")
     v=re.sub(r"[^a-z0-9 ]"," ",v)
     v=re.sub(r"\s+"," ",v).strip()
