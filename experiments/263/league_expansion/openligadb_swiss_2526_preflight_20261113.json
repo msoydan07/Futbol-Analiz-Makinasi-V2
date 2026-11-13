@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-13",
+  "task": "Swiss Super League 2025/26 22-league research-pool gap; licensing + sample matchday + offline parser",
+  "source": {
+    "name": "OpenLigaDB community sports database",
+    "license": "ODbL 1.0",
+    "attribution": "Data from OpenLigaDB (www.openligadb.de), licensed under ODbL 1.0.",
+    "license_url": "https://www.openligadb.de/en/license",
+    "terms_url": "https://www.openligadb.de/en/terms-of-use",
+    "league_overview": "https://beta.openligadb.de/Leagues?season=2025",
+    "league_shortcut": "bsl",
+    "league_id": 4902,
+    "season_start_year": 2025,
+    "full_season_api": "https://api.openligadb.de/getmatchdata/bsl/2025",
+    "sample_group_url": "https://beta.openligadb.de/Matches/bsl/2025/20",
+    "quality_index_in_index": 81,
+    "notes": "Quality-index is not a match count and not independent score validation. Community-provided results are not editor reviewed. API requests should be cached and rate-limited."
+  },
+  "official_expectation": {
+    "matches": 228,
+    "clubs": 12,
+    "matchdays": 38,
+    "basis": "Swiss Football League (SFL) 2025/26 38 rounds x 6 games; 33-round regular and 5 split rounds",
+    "source_url": "https://sfl.ch/articles/la-sfl-publie-les-calendriers-de-la-saison-202526"
+  },
+  "observed_20th_round": {
+    "group_order_id": 20,
+    "displayed_rows": 6,
+    "displayed_completed": 5,
+    "unplayed_outside_season": 1,
+    "stray_record_local_date": "2026-07-31",
+    "score_rule": "Reject out-of-season and unfinished; never turn no result into 0-0.",
+    "caution": "Single matchday page does not establish full season completeness or licensed source accuracy; no full API payload could be fetched in this execution environment."
+  },
+  "parser": {
+    "path": "experiments/263/league_expansion/audit_openligadb_swiss_2526.py",
+    "last_validated_commit": "47394c5e0243ea1b3f7d231514bc1cf23d7904c0",
+    "tool_run": "python audit_openligadb_swiss_2526.py --self-test",
+    "result": "PASS_LOCAL_SYNTHETIC_FIXTURES_ONLY",
+    "checks": [
+      "after-90-minutes FT result kind; not HT or latest array element",
+      "0-0 kept as a real result",
+      "out-of-season local date excluded",
+      "unplayed match skipped",
+      "duplicate IDs and fixture keys quarantined",
+      "reference 228 count only, does not approve training"
+    ]
+  },
+  "rights_and_quality_gate": {
+    "training_status": "BLOCKED",
+    "new_pool_rows": 0,
+    "model_changes": 0,
+    "next_data_required": "One permitted cached API season export with every match record, independent match date/score cross-check against Swiss Football League or equivalent credible evidence, ODbL database attribution and separate storage",
+    "no_merge_into_cc0": true,
+    "no_production_change": true
+  },
+  "provenance_urls": [
+    "https://api.openligadb.de/index.html",
+    "https://www.openligadb.de/en/license",
+    "https://www.openligadb.de/en/terms-of-use",
+    "https://beta.openligadb.de/Matches/bsl/2025/20",
+    "https://sfl.ch/articles/la-sfl-publie-les-calendriers-de-la-saison-202526"
+  ]
+}
