@@ -1,0 +1,81 @@
+{
+  "date_local": "2026-11-14",
+  "scope": "Newly identified CHE1 and DNK1 2026/27 missing FT factual results, 13 analysis/22 research pool",
+  "status": "50_OF_50_NEW_MATCH_SCORE_FACTS_VERIFIED__LICENSE_GATE_STILL_BLOCKED",
+  "run_url": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43520966983",
+  "job_id": 132214817998,
+  "implementation_root": "experiments/263/league_expansion/audit_current_50_gaps_v2_license_safe.py",
+  "source_pages": {
+    "CHE1": {
+      "first": "https://sportsdatavault.com/en/football/competition/Switzerland/super-league",
+      "second": "https://stadiro.com/leagues/switzerland/super-league/results/",
+      "recent_official": "https://matchcenter-sfl.football.ch/"
+    },
+    "DNK1": {
+      "first": "https://www.haslund.info/10_danmark/30_danmarksturneringen/2026_2027/superliga.asp",
+      "second": "https://sportsdatavault.com/en/football/competition/Denmark/superliga",
+      "further_score_facts": "https://sportpremi.com/league/superliga-119/results"
+    }
+  },
+  "two_source_evidence": {
+    "CHE1": {
+      "previous_unique_candidates": 57,
+      "previous_57_semantically_passed": 57,
+      "external_source_newest_subset": 24,
+      "verified_new": 21,
+      "goals_new": 71,
+      "zero_zero_new": 2,
+      "current_season_total_unique": 78,
+      "score_conflicts": 0,
+      "unresolved_second_source": 0
+    },
+    "DNK1": {
+      "previous_unique_candidates": 55,
+      "external_source_full_current": 84,
+      "verified_new": 29,
+      "goals_new": 97,
+      "zero_zero_new": 1,
+      "current_season_total_unique": 84,
+      "score_conflicts": 0,
+      "unresolved_second_source": 0
+    },
+    "total_new_independent_result_facts": 50,
+    "new_goal_events_total": 168,
+    "new_zero_zero_results": 3
+  },
+  "official_source_identity_adjudication": [
+    {
+      "wrong_date": "2026-07-26",
+      "official_date": "2026-07-27",
+      "home": "Randers",
+      "away": "Silkeborg",
+      "score": "1-1",
+      "source": "https://dbu.dk/resultater/kamp/526593_506118/kampinfo"
+    },
+    {
+      "wrong_date": "missing",
+      "official_date": "2026-09-11",
+      "home": "Copenhagen",
+      "away": "Horsens",
+      "score": "2-0",
+      "source": "https://www.fck.dk/en/kamp/11-09-26/fc-kobenhavn-ac-horsens"
+    }
+  ],
+  "pinned_inputs_sha256": {
+    "CHE1_old": "e8052ce4b0cd84e209b1f33fba7554036beb5c9bd913e6e2e2b211b789603ada",
+    "CH_first": "abca457a602086f211a0b0928b06bd172e03ea6b3a493891e70b1e1335e4c18b",
+    "CH_second": "be5be2204d995cdbd6daf3f620c29bfb866b036f0db4481c1fb62e3bacf77008",
+    "DNK1_old": "cee9501406143e5ae031cb5b015c7b7d9cb05ee46e69665fbe2ed3700a78015b",
+    "DNK_first": "ca6e2209ae0561b36212830e035439d621e6aec4105916c54493b0030bf6cc14",
+    "DNK_second": "96de47185dd0d161c6d11f5523748f2e430ea888c428cf2d22a31307a8f83fb2"
+  },
+  "no_raw_season_source_archived": true,
+  "no_current_full_source_data_rehosted": true,
+  "rights_to_rehost_or_train_third_party_compilation": "NOT ESTABLISHED",
+  "new_train_rows": 0,
+  "new_scored_public_quarantine_rows": 0,
+  "existing_research_scored_quarantine": 2396,
+  "existing_research_snapshot": "experiments/263/league_expansion/coverage_snapshot_22_leagues_20261114_v4_che_dnk_2627_alias_source_qa.json",
+  "untouched_main_models_and_SHA": true,
+  "rule": "Historical 2025/26 420 QA and 2026/27 50 match facts are now checked. Do not redo these exact source hashes. Future work: permissions/origin review and new shadow chronological experiments using only lawfully admitted observations."
+}
