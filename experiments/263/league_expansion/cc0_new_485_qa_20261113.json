@@ -1,0 +1,104 @@
+{
+  "created_on": "2026-11-13",
+  "research_only": true,
+  "status": "QUARANTINE_NOT_MODEL_TRAINING_READY",
+  "scope": "Only five previously absent league-season combinations. Does not replace 1,249 existing scored candidates.",
+  "seasons": [
+    "2025-26",
+    "2026-27"
+  ],
+  "new_scored_candidates": 485,
+  "existing_candidate_count_untouched": 1249,
+  "aggregate_candidate_rows_not_training_ready": 1734,
+  "unique_identity_keys": 485,
+  "duplicate_identity_keys": 0,
+  "source_files": [
+    {
+      "league": "ENG5",
+      "season": "2025-26",
+      "provider": "openfootball/england",
+      "path": "2025-26/5-nationalleague.txt",
+      "blob_sha": "713756e02b4159b497fb9234dafe9cc44d9e3fa3",
+      "listed": 552,
+      "scored_candidate": 296,
+      "coverage_ratio": 0.5362,
+      "min_date": "2025-08-09",
+      "max_date": "2025-12-30",
+      "raw_url": "https://github.com/openfootball/england/blob/master/2025-26/5-nationalleague.txt"
+    },
+    {
+      "league": "SCO1",
+      "season": "2025-26",
+      "provider": "openfootball/football.json",
+      "path": "2025-26/sco.1.json",
+      "blob_sha": "df63e19c4db53474d1ecb824276f294d6010988a",
+      "listed": 198,
+      "scored_candidate": 58,
+      "coverage_ratio": 0.2929,
+      "min_date": "2025-08-02",
+      "max_date": "2025-11-01",
+      "raw_url": "https://github.com/openfootball/football.json/blob/master/2025-26/sco.1.json"
+    },
+    {
+      "league": "SCO1",
+      "season": "2026-27",
+      "provider": "openfootball/europe",
+      "path": "scotland/2026-27_sco1.txt",
+      "blob_sha": "60b4918c6ee436fae3716ebe50dbcbc6b9cb84fb",
+      "listed": 198,
+      "scored_candidate": 42,
+      "coverage_ratio": 0.2121,
+      "min_date": "2026-07-31",
+      "max_date": "2026-09-20",
+      "raw_url": "https://github.com/openfootball/europe/blob/master/scotland/2026-27_sco1.txt"
+    },
+    {
+      "league": "CHE1",
+      "season": "2026-27",
+      "provider": "openfootball/europe",
+      "path": "switzerland/2026-27_ch1.txt",
+      "blob_sha": "d0234e0d4356fa92adcf6b2fdc728014ce081136",
+      "listed": 132,
+      "scored_candidate": 54,
+      "coverage_ratio": 0.4091,
+      "min_date": "2026-07-25",
+      "max_date": "2026-09-20",
+      "raw_url": "https://github.com/openfootball/europe/blob/master/switzerland/2026-27_ch1.txt"
+    },
+    {
+      "league": "GRE1",
+      "season": "2026-27",
+      "provider": "openfootball/europe",
+      "path": "greece/2026-27_gr1.txt",
+      "blob_sha": "887c592e263406efc12eae97a5c808422957c09c",
+      "listed": 182,
+      "scored_candidate": 35,
+      "coverage_ratio": 0.1923,
+      "min_date": "2026-08-22",
+      "max_date": "2026-09-20",
+      "raw_url": "https://github.com/openfootball/europe/blob/master/greece/2026-27_gr1.txt"
+    }
+  ],
+  "independent_read_only_score_comparison": {
+    "comparison_repo": "oladeeayo/open-matchday",
+    "season": "2026-27",
+    "league_keys": [
+      "SCO1",
+      "CHE1",
+      "GRE1"
+    ],
+    "matched_by_date_home_away_and_score": 131,
+    "source_rows_compared": 131,
+    "score_mismatches": 0,
+    "limitations": "Read-only cross-provider check, not official match-by-match source adjudication; secondary provider has non-commercial/provider-rights restrictions. We did not import its rows."
+  },
+  "blockers": [
+    "New season 2026-27 candidate sources are stale (no newer scores than 2026-09-20).",
+    "2025-26 ENG5 score source stops at 2025-12-30 with 296/552, and SCO1 at 2025-11-01 with 58/198.",
+    "No 2025-26 DNK1 or CHE1 CC0 score source found in inspected OpenFootball directories.",
+    "No match is accepted for training by this ingestion.",
+    "League aliases, stage/rounds, per-record independent source validation, completeness and license conditions must pass separately.",
+    "No M4, main, locked history, predictions, or automation edited."
+  ],
+  "no_production_merge": true
+}
