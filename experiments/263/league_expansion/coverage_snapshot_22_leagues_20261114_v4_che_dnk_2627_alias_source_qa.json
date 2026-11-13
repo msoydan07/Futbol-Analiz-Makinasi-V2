@@ -1,0 +1,76 @@
+{
+  "version": "v4-20261114",
+  "branch": "research/263-13-lig-22-havuz-20261113",
+  "scope": "13-analysis and 22-league research only; seasons 2025/26 and 2026/27",
+  "prior_snapshot": "experiments/263/league_expansion/coverage_snapshot_22_leagues_20261113_v3_england_qa.json",
+  "files": [
+    {
+      "path": "experiments/263/league_expansion/training_2025_26_cc0_scored_QUARANTINE.csv",
+      "rows": 1249,
+      "blob_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c"
+    },
+    {
+      "path": "experiments/263/league_expansion/cc0_new_485_2526_2627_QUARANTINE_20261113.csv",
+      "rows": 485,
+      "blob_sha": "2582e3ffa6e200b74704702dccc01ca19ad4750e"
+    },
+    {
+      "path": "experiments/263/league_expansion/cc0_aut1_2026_27_42_QUARANTINE_20261113.csv",
+      "rows": 42,
+      "blob_sha": "a404b3a395b32c42ac4e6cfef724bdebd3cbecb9"
+    },
+    {
+      "path": "experiments/263/league_expansion/score_shape_recovery_295_2526_QUARANTINE_20261113.csv",
+      "rows": 295,
+      "blob_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0"
+    },
+    {
+      "path": "experiments/263/league_expansion/eng3_eng4_2026_27_322_CCBY_QUARANTINE_20261113.csv",
+      "rows": 322,
+      "blob_sha": "22b909a504254bfd3c9013f27fdbf2736ffbf746"
+    },
+    {
+      "path": "experiments/263/league_expansion/che1_2026_27_oct10_3_match_score_facts_QUARANTINE_20261114.csv",
+      "rows": 3,
+      "blob_sha": "7098dd60bde56f8dbcd5b16930308028f332b821"
+    }
+  ],
+  "base_quarantine": 2393,
+  "new_evidence_only_quarantine_rows": 3,
+  "scored_research_quarantine_total": 2396,
+  "unique_fixture_keys": 2396,
+  "duplicate_fixture_keys": 0,
+  "invalid_date_or_score_rows": 0,
+  "zero_zero_rows": 143,
+  "new_records_file": "experiments/263/league_expansion/che1_2026_27_oct10_3_match_score_facts_QUARANTINE_20261114.csv",
+  "swiss_current_2026_27": {
+    "prior_cc0_54_matched": 54,
+    "new_oct10_independent_score_matches": 3,
+    "research_quarantine_now": 57,
+    "external_raw_finished_labels": 93,
+    "external_deduped_scored_rows": 57,
+    "external_duplicate_rows": 36,
+    "last_external_csv_scored_date": "2026-10-10",
+    "independent_scored_through_2026_11_08": 78,
+    "independent_scored_reference": "https://uniquescores.com/football/league/swiss-super-league/results/",
+    "missing_from_external_csv": 21,
+    "external_snapshot_sha256": "e8052ce4b0cd84e209b1f33fba7554036beb5c9bd913e6e2b211b789603ada"
+  },
+  "denmark_current_2026_27": {
+    "external_raw_finished_labels": 87,
+    "external_deduped_scored_rows": 55,
+    "external_duplicate_rows": 32,
+    "last_external_csv_scored_date": "2026-10-09",
+    "independent_scored_through_2026_11_08": 84,
+    "independent_scored_reference": "https://uniquescores.com/football/league/danish-superliga/results/",
+    "missing_from_external_csv": 29,
+    "external_snapshot_sha256": "cee9501406143e5ae031cb5b015c7b7d9cb05ee46e69665fbe2ed3700a78015b"
+  },
+  "source_check_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43518205850",
+  "new_records_license_status": "Evidence-only match score facts; source permissions for full training or dataset redistribution not established",
+  "trainable_rows_promoted": 0,
+  "production_main_m4_modified": false,
+  "old_SHA_seals_modified": false,
+  "original_2393_rows_mutated": false,
+  "next": "Find permissible up-to-date 2026/27 source for 21 Swiss and 29 Danish source gaps, compare all 78/84 against independent scoring references; no auto train, no repeat of completed 2025/26 420 checks."
+}
