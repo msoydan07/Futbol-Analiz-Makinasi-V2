@@ -41,6 +41,14 @@ OFFICIAL_DATE_CORRECTIONS = [
     {"source_date":"2026-04-05","date":"2026-04-06","home":"Odense","away":"Fredericia","ft":[1,0],
      "source_url":"https://www.eurosport.dk/fodbold/3f-superliga/2025-2026/live-ob-fc-fredericia_mtc1599289/live-stats.shtml"}
 ]
+# Haslund additionally has one wrong FT score. The official Danish FA
+# DBU match record and verified danskfodbold match record both show 0-2.
+OFFICIAL_SCORE_CORRECTION = {
+    "date":"2025-08-17","home":"Vejle","away":"Midtjylland",
+    "source_score":[1,3],"official_score":[0,2],
+    "official_url":"https://www.dbu.dk/resultater/kamp/939861_473806/kampinfo",
+    "second_official_stat_url":"https://www.danskfodbold.com/kamp.php?ID=73201"
+}
 MISSING_CHAMPIONSHIP_FACTS = [
     {"date":"2026-05-10","home":"Brondby","away":"AGF","ft":[0,2],
      "source_url":"https://www.agf.dk/nyheder/2026/maj/sadan-vandt-vi-dm-i-brondby"},
@@ -191,6 +199,12 @@ def audit(primary:bytes,sources:dict[str,bytes],old_witnesses:list[dict])->dict:
         combined[new_key]=combined.pop(old_key)
         corrected.append({"date":c["date"],"home":c["home"],"away":c["away"],
                           "ft":c["ft"],"provenance":c["source_url"]})
+    c=OFFICIAL_SCORE_CORRECTION
+    score_key=(c["date"],c["home"],c["away"])
+    if combined.get(score_key)!=tuple(c["source_score"]):
+        return {"status":"FAIL_CLOSED_OFFICIAL_SCORE_SOURCE_DRIFT",
+                "official_score_exception":c,"source_scored_rows":len(combined),"trainable_rows":0}
+    combined[score_key]=tuple(c["official_score"])
     missing_champ_keys={(x["date"],x["home"],x["away"]) for x in MISSING_CHAMPIONSHIP_FACTS}
     if len(missing_champ_keys)!=2: raise ValueError("DUPLICATE_MISSING_CHAMP_KEYS")
     missing_from_primary=set(main)-set(combined)
@@ -219,6 +233,7 @@ def audit(primary:bytes,sources:dict[str,bytes],old_witnesses:list[dict])->dict:
         "source_total":len(main),"independent_round_list_scored":190,
         "independently_corroborated_missing_championship":2,
         "official_date_corrections":corrected,
+        "official_score_correction":OFFICIAL_SCORE_CORRECTION,
         "matched_date_club_ft_score":len(matching),"score_differences":len(differing),
         "source_only_count":len(unmatched_primary),
         "independent_only_count":len(unmatched_reference),
@@ -251,6 +266,7 @@ def selftest():
     assert not x and summary["unscored_fixtures"],summary
     assert len(OFFICIAL_DATE_CORRECTIONS)==3
     assert len(MISSING_CHAMPIONSHIP_FACTS)==2
+    assert OFFICIAL_SCORE_CORRECTION["source_score"]==[1,3] and OFFICIAL_SCORE_CORRECTION["official_score"]==[0,2]
     print("PASS Danish parser fixture/date/club/score, 3 separately cited date corrections, 2 missing FT checks")
 
 
