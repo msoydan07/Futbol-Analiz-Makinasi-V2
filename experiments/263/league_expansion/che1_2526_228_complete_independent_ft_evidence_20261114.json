@@ -1,0 +1,39 @@
+{
+  "created_on": "2026-11-14",
+  "scope": "CHE1 Swiss Super League 2025/26; final full season verified match identity, date, after-90-minutes FT score; research-only",
+  "source_csv_sha256": "46a8b9aedb6bf294a6991e701609c04d511eb844bd02a24094349ce4be51678c",
+  "source_rsssf_html_sha256": "6acd77c9ffb70d66058fc6ecfa37c4279aae4baf01aa75420db25f8bae90d63b",
+  "workflow": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43515329991",
+  "workflow_id": 43515329991,
+  "job_id": 132195744507,
+  "source_commit": "646c8f8ab2a2790e351aea342efee5b79c4b8415",
+  "previous_aggregate_420": "experiments/263/league_expansion/che1_dnk1_2025_26_420_real_csv_qa_evidence_20261114.json",
+  "previous_36_swiss_15_danish": "experiments/263/league_expansion/che_dnk_2526_51_independent_witness_run_evidence_20261114.json",
+  "exception_ledger": "experiments/263/league_expansion/che1_2526_12_official_exception_score_witnesses_20261114.json",
+  "result": {
+    "status": "FULL_INDEPENDENT_228_FACT_CHECK_PASS",
+    "league": "CHE1",
+    "season": "2025-26",
+    "matches_in_league": 228,
+    "all_games_independently_checked": 228,
+    "exact_rsssf_matches": 216,
+    "official_source_exception_matches": 12,
+    "score_conflicts_after_adjudication": 0,
+    "unresolved_fixture_identities": 0,
+    "total_additional_unique_checked_since_prior_51_batch": 192,
+    "unsupported_score_sources_excluded": {
+      "nine_one_day_early_RSSSF": 9,
+      "one_source_reversed_home_away": 1,
+      "one_source_one_day_late": 1,
+      "one_wrong_RSSSF_score": 1,
+      "abandoned_1_0_ignored_replayed_1_3": 1
+    }
+  },
+  "zero_new_dataset_rows_added": 0,
+  "total_quarantine_rows_remain": 2393,
+  "license_to_rehost_and_train": "NOT_ESTABLISHED",
+  "rights_decision": "NOT CLEARED FOR PUBLIC REHOSTING OR M4 TRAINING. Score correctness and distribution/data-use rights are separate gates.",
+  "no_main_or_model_changes": true,
+  "no_raw_csv_or_rsssf_copy": true,
+  "next": "Do NOT rerun CHE1 2025-26 same pinned source hashes; Denmark DNK1 2025-26 has only 15 of 192 independently checked (177 pending). 2026/27 CHE1/DNK1 gaps remain separate."
+}
