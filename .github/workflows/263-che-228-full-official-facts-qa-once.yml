@@ -1,0 +1,46 @@
+name: 263 Research - CHE1 2025-26 full 228 factual score QA
+
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-che-228-full-official-facts-qa-once.yml
+
+permissions:
+  contents: read
+
+jobs:
+  combined-228:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate 12 official exception witnesses and RSSSF parser offline
+        run: |
+          python experiments/263/league_expansion/verify_che1_2526_combined_228_official_once.py --self-test
+          python experiments/263/league_expansion/verify_che1_2526_rsssf_fullseason_once.py --self-test
+      - name: One-time 228 Swiss date-club-FT score audit, all raw sources in memory
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/verify_che1_2526_combined_228_official_once.py --live | tee swiss_228_live_summary.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          raw=Path('swiss_228_live_summary.log').read_text()
+          a=raw.index('COMBINED_SWISS_228_START')+len('COMBINED_SWISS_228_START')
+          b=raw.index('COMBINED_SWISS_228_END')
+          result=json.loads(raw[a:b])
+          Path('swiss_228_evidence_aggregate.json').write_text(json.dumps(result,indent=2)+'\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('## Swiss 2025/26 228 score witness acceptance (no training license)\n')
+              f.write('| RSSSF exact | Official exceptions | Total date-team-FT checks | Status |\n|---:|---:|---:|---|\n')
+              f.write('| {} | {} | {} | {} |\n'.format(result.get('independent_exact_RSSSF_date_team_score',0),result.get('independent_official_exception_date_team_score',0),result.get('independent_checked_unique_games',0),result.get('status')))
+              f.write('\nNo source CSV copied, no training rows or M4/10-league changes.\n')
+          PY
+      - name: Upload aggregate evidence only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-che1-2526-228-complete-independent-score-qa
+          path: swiss_228_evidence_aggregate.json
+          retention-days: 14
