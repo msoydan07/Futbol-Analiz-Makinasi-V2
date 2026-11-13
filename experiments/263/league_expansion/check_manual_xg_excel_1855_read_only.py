@@ -106,11 +106,14 @@ def audit(workbook):
                     if not re.fullmatch(r"\d{1,2}-\d{1,2}",score):
                         raise ValueError("INVALID_FINAL_SCORE")
                     season="2026-27" if tab=="EKSIK_2026" else "2025-26"
+                    if tab=="ESKI_459_KONTROL":
+                        season="2026-27" if day>=DATE(2026,7,1) else "2025-26"
                     if tab=="HAFTALIK_YENI":season=value(r,"K")
                     if season not in ("2025-26","2026-27"):
                         raise ValueError("INVALID_SEASON")
                     if day>datetime.date.today():raise ValueError("FUTURE_MATCH")
-                    if day<DATE(2025,7,1) if season=="2025-26" else day<DATE(2026,7,1):
+                    valid_window=(DATE(2025,7,1)<=day<=DATE(2026,6,30)) if season=="2025-26" else (day>=DATE(2026,7,1))
+                    if not valid_window:
                         raise ValueError("MATCH_OUTSIDE_SEASON")
                     k=(league,season,day.isoformat(),home.casefold(),away.casefold())
                     if k in identities:raise ValueError("DUPLICATE_MATCH")
