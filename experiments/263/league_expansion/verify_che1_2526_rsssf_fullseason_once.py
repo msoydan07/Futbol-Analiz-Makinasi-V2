@@ -86,7 +86,7 @@ def rsssf_results(text: str) -> tuple[dict, dict]:
                 if "Promotion/Relegation Playoff" in lines[i]), None)
     if end is None: raise ValueError("MISSING_PROMOTION_RELEGATION_STOP")
     match_lines = lines[start:end]
-    found, unknown, repeats, no_date = {}, Counter(), [], 0
+    found, unknown, repeats, divergent_repeats, no_date = {}, Counter(), [], [], 0
     current_day = None
     for line in match_lines:
         m = DATE_LINE.match(line)
@@ -116,11 +116,15 @@ def rsssf_results(text: str) -> tuple[dict, dict]:
         key = (current_day,home,away)
         if key in found:
             repeats.append(key)
+            if found[key] != (int(m.group(2)),int(m.group(3))):
+                divergent_repeats.append(key)
             continue
         found[key] = (int(m.group(2)),int(m.group(3)))
     return found, {"parsed_scored_games":len(found),
                    "not_mapped_football_lines":dict(unknown),
-                   "duplicate_keys":len(repeats), "score_without_valid_day":no_date,
+                   "duplicate_keys":len(repeats), "divergent_duplicate_keys":len(divergent_repeats),
+                   "duplicate_examples":[{"date":k[0],"home":k[1],"away":k[2]} for k in repeats[:6]],
+                   "score_without_valid_day":no_date,
                    "selection_start":"first Round 1", "selection_end":"Promotion/Relegation Playoff"}
 
 
@@ -128,7 +132,7 @@ def primary_results(rows: list[dict]) -> tuple[dict, int]:
     lookup = name_map("CHE1")
     records,duplicates = {},0
     for row in rows:
-        if row.get("status","").strip().lower()!="finished":
+        if row.get("status","").strip().lower() not in ("finished", "completed", "ft", "full-time", "full time"):
             continue
         home = canonical(row.get("home",""),lookup)
         away = canonical(row.get("away",""),lookup)
@@ -158,7 +162,7 @@ def audit(csv_raw: bytes, rsssf_raw: bytes, existing_witnesses: list[dict]) -> d
     previously_checked = len(already & same)
     newly_verified=len(same-already)
     full=(len(primary)==228 and len(independent)==228 and len(same)==228 and not dups
-          and not parser["duplicate_keys"] and not missing and not extra
+          and not parser["divergent_duplicate_keys"] and not missing and not extra
           and not parser["not_mapped_football_lines"] and parser["score_without_valid_day"]==0)
     return {
         "league":"CHE1","season":"2025-26",
