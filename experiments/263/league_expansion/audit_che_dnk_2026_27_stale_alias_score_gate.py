@@ -245,7 +245,9 @@ def self_test():
     assert result["source_score_0_0"]==1,result
     assert result["independent_recent_round_present_score_equal"]==1,result
     assert result["new_training_rows_approved"]==0,result
-    assert result["cc0_prior_54_comparison"]["new_unique_matches_beyond_existing_cc0"]==1,result
+    assert result["cc0_prior_54_comparison"] is None,result
+    sample_with_baseline=assess("CHE1",base,baseline54=[])
+    assert sample_with_baseline["cc0_prior_54_comparison"]["new_unique_matches_beyond_existing_cc0"]==1,sample_with_baseline
     print("SELFTEST_PASS 2026/27 alias, Vaduz/Lyngby/Horsens, duplicate, real 0-0, future FT rejected")
 
 
