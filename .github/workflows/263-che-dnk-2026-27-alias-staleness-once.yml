@@ -1,0 +1,50 @@
+name: 263 Research - CHE DNK 2026-27 alias and current-season source gate
+
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-che-dnk-2026-27-alias-staleness-once.yml
+
+permissions:
+  contents: read
+
+jobs:
+  one-shot-2026-source-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic 2026-27 club alias, duplicate, as-of and FT score tests
+        run: python experiments/263/league_expansion/audit_che_dnk_2026_27_stale_alias_score_gate.py --self-test
+      - name: Inspect real public 2026-27 CSVs in memory, read-only
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/audit_che_dnk_2026_27_stale_alias_score_gate.py --live | tee che_dnk_2026_27_onepass.log
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          raw=Path("che_dnk_2026_27_onepass.log").read_text(encoding="utf-8")
+          a=raw.index("NEW_SEASON_QA_START")+len("NEW_SEASON_QA_START")
+          b=raw.index("NEW_SEASON_QA_END")
+          result=json.loads(raw[a:b])
+          Path("che_dnk_2026_27_aggregate_qa.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n")
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+            f.write('## CHE/DNK 2026-27 as-of, alias and duplicate quality gate\n')
+            f.write('| League | Source FT labels | Unique canonical fixtures | Independent count | Recent score matches | Status |\n|---|---:|---:|---:|---:|---|\n')
+            for e in result["leagues"]:
+              f.write('| {} | {} | {} | {} | {} | {} |\n'.format(
+                e['league'],e.get('source_finished_label_count','?'),
+                e.get('canonical_scored_match_count','?'),
+                e.get('expected_completed_from_other_sources','?'),
+                e.get('independent_recent_round_present_score_equal','?'),
+                e.get('completeness_and_score_gate',e['status'])))
+            f.write('\nResearch quality evidence only: no new raw source CSVs, model training, or M4 changes.\n')
+          PY
+      - name: Upload only aggregate audit, not raw match lists
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-che-dnk-2026-27-source-qa-aggregate
+          path: che_dnk_2026_27_aggregate_qa.json
+          retention-days: 14
