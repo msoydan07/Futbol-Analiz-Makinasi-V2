@@ -1,0 +1,140 @@
+{
+  "created_on": "2026-11-13",
+  "branch": "research/263-13-lig-22-havuz-20261113",
+  "addendum_status": "QUARANTINE_NOT_TRAINING_READY",
+  "source_issue_1": "Prior 1,249 extraction treated only JSON score.ft; score:[home,away] can also be a valid final score, with no HT specified.",
+  "source_issue_2": "ENG3 2025/26 original JSON writes 85 January/February 2026 dates as 2025; 85 repaired only when identical home/away/final score + month/day in same repo's football.txt and weekday/date agreement.",
+  "source_issue_3": "AUT1 2025/26 initial at.1.json has 132 fixtures, 71 scored; full at.1-full.json has 195 scored across all league stages and play-offs.",
+  "original_1249_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+  "original_1249_unchanged": true,
+  "prior_separate_527_unchanged": true,
+  "new_2025_26": 295,
+  "new_from_7_league_score_arrays": 167,
+  "new_from_AU_full_coverage": 128,
+  "eng3_corrected_2025_to_2026_count": 85,
+  "post_addendum_quarantine_total": 2071,
+  "aus_alias_map": {
+    "LASK Linz": "LASK",
+    "Blau-Weiß Linz": "FC Blau Weiß Linz",
+    "FC Salzburg": "RB Salzburg"
+  },
+  "aus_basic_to_full_score_matched": 71,
+  "eng3_txt_source_sha": "aba1cd26669f54faf982ec4e0d8e3d5526e56e4a",
+  "eng3_txt_source_scored": 356,
+  "eng3_txt_weekday_errors": 0,
+  "source_counts": [
+    {
+      "code": "ENG3",
+      "path": "2025-26/en.3.json",
+      "source_sha": "85eff2982c2154ea2ef9ded45dec1d88ac1407d5",
+      "source_fixture_rows": 552,
+      "source_score_object": 261,
+      "source_score_array": 95,
+      "source_missing": 196,
+      "overlaps_old_verified": 261,
+      "new_candidate_rows": 95,
+      "new_date_repairs": 85
+    },
+    {
+      "code": "ENG4",
+      "path": "2025-26/en.4.json",
+      "source_sha": "858a30d7661ecab0f390f71c1c3e9bf62ad77684",
+      "source_fixture_rows": 564,
+      "source_score_object": 261,
+      "source_score_array": 15,
+      "source_missing": 288,
+      "overlaps_old_verified": 261,
+      "new_candidate_rows": 15,
+      "new_date_repairs": 0
+    },
+    {
+      "code": "GER2",
+      "path": "2025-26/de.2.json",
+      "source_sha": "d7a5d081ac99327f6d3afd52d0f4e90125de5a17",
+      "source_fixture_rows": 306,
+      "source_score_object": 94,
+      "source_score_array": 5,
+      "source_missing": 207,
+      "overlaps_old_verified": 94,
+      "new_candidate_rows": 5,
+      "new_date_repairs": 0
+    },
+    {
+      "code": "ESP2",
+      "path": "2025-26/es.2.json",
+      "source_sha": "ee20d4fc21d0a8df18bba74c2760579bf64a433e",
+      "source_fixture_rows": 462,
+      "source_score_object": 115,
+      "source_score_array": 16,
+      "source_missing": 331,
+      "overlaps_old_verified": 115,
+      "new_candidate_rows": 16,
+      "new_date_repairs": 0
+    },
+    {
+      "code": "ITA2",
+      "path": "2025-26/it.2.json",
+      "source_sha": "df8043d6833f397cee0668baeee6ac36f1d46598",
+      "source_fixture_rows": 380,
+      "source_score_object": 283,
+      "source_score_array": 26,
+      "source_missing": 71,
+      "overlaps_old_verified": 283,
+      "new_candidate_rows": 26,
+      "new_date_repairs": 0
+    },
+    {
+      "code": "FRA2",
+      "path": "2025-26/fr.2.json",
+      "source_sha": "b110df523122f94a721bb9298524352d11a7d11e",
+      "source_fixture_rows": 306,
+      "source_score_object": 107,
+      "source_score_array": 9,
+      "source_missing": 190,
+      "overlaps_old_verified": 107,
+      "new_candidate_rows": 9,
+      "new_date_repairs": 0
+    },
+    {
+      "code": "GRE1",
+      "path": "2025-26/gr.1.json",
+      "source_sha": "61b8e27231409ba6e5f289a8e0eb2a2a2fd6c700",
+      "source_fixture_rows": 182,
+      "source_score_object": 61,
+      "source_score_array": 1,
+      "source_missing": 120,
+      "overlaps_old_verified": 61,
+      "new_candidate_rows": 1,
+      "new_date_repairs": 0
+    },
+    {
+      "code": "AUT1",
+      "path": "2025-26/at.1-full.json",
+      "source_sha": "a600e9dba542ed6598d108c2f78253fc7518f6da",
+      "source_fixture_rows": 195,
+      "source_score_object": 195,
+      "source_score_array": 0,
+      "source_missing": 0,
+      "overlaps_old_verified": 67,
+      "new_candidate_rows": 128,
+      "new_date_repairs": 0
+    }
+  ],
+  "unique_source_identity_keys": 1544,
+  "unique_delta_identity_keys": 295,
+  "delta_key_conflicts_vs_original_1249": 0,
+  "existing_score_conflicts": 0,
+  "independent_official_spotchecks": {
+    "ENG3 2025-08-07 Port Vale 0-0 Cardiff": "https://www.efl.com/news/2025/august/07/port-vale-and-cardiff-city-play-out-a-goalless-draw/",
+    "AUT1 2025-08-01 LASK 0-2 Sturm": "https://www.bundesliga.at/de/spielbericht/saison-2025-2026/56137/matchcenter"
+  },
+  "limitations": [
+    "Source JSON and text are same OpenFootball upstream, cross-file date checking is not independent official verification.",
+    "ENG3 85 date repair flagged and not eligible for training until accepted.",
+    "Austrian full season includes post-regular-season stages; stage-specific filtering required.",
+    "Not all matches independently validated; no live odds/xG/fixture/alias production sync.",
+    "CC0 declarations do not guarantee all third-party rights have been cleared.",
+    "No changes to main, experiment/263-toplu-karsilastirma, M4, sealed predictions, daily automation, or user Excel."
+  ],
+  "research_only": true
+}
