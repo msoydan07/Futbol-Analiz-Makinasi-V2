@@ -243,22 +243,29 @@ def audit():
     for league,config in SOURCES.items():
         entry={"league":league,"status":"SOURCE_NOT_CHECKED","rights":"SOURCE_COMPILATION_REUSE_UNCONFIRMED"}
         try:
+            entry["stage"]="fetch_pinned_stale_source"
             old=get(config["stale"])
             if hashlib.sha256(old).hexdigest()!=config["stale_sha"]:
                 raise ValueError("STALE_SOURCE_HASH_DRIFT")
             historical,dups=flatten_records(old,league)
             if len(historical)!=config["expected_stale"]:
                 raise ValueError("PREVIOUS_NORMALIZED_IDENTITY_COUNT_CHANGED")
+            entry["stage"]="fetch_first_reference"
             fresh=get(config["new"])
             if league=="CHE1":
+                entry["stage"]="parse_swiss_stadiro"
                 new,diag=parse_stadiro(fresh)
+                entry["stage"]="fetch_second_reference"
                 compare_raw=get(config["reference"])
+                entry["stage"]="parse_sportsdatavault"
                 independent,cmp_diag=parse_sportsdatavault(compare_raw)
                 independent.update(SWISS_FINAL_ROUND)   # 6 separately sourced official facts
                 expected_new=24
             else:
+                entry["stage"]="parse_danish_footypulse"
                 new,diag=parse_footypulse(fresh)
                 compare_raw=get(config["reference"])
+                entry["stage"]="parse_danish_haslund"
                 independent,cmp_diag=parse_haslund(compare_raw)
                 independent.update(DANISH_FINAL_FOUR)
                 # FootyPulse suppresses scored 0-0 games as "–––" for 2 dates.
@@ -309,7 +316,9 @@ def audit():
               "new_game_rows_approved_for_training":0
             })
         except Exception as e:
-            entry.update({"status":"FAIL_CLOSED_SOURCE_OR_PARSER","error_class":type(e).__name__})
+            entry.update({"status":"FAIL_CLOSED_SOURCE_OR_PARSER","error_class":type(e).__name__,
+                          "http_status":getattr(e,"code",None),
+                          "error_reason":str(e)[:130] if isinstance(e,ValueError) else "external access or parser blocked"})
         record["leagues"].append(entry)
     return record
 
