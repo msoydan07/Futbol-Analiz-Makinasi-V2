@@ -1,0 +1,47 @@
+name: 263 Research - ENG3 ENG4 2025-26 single batch score conflict QA
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-eng3-eng4-2526-178-source-batch-once.yml
+permissions:
+  contents: read
+jobs:
+  existing-178-one-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check frozen ledger 178+22, known 25 and football-data alias test
+        run: python experiments/263/league_expansion/eng3_eng4_2526_single_batch_external_score_audit.py --self-test
+      - name: Compare 178 conflicts and 22 old-only identities against independent 2526 E2/E3
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/eng3_eng4_2526_single_batch_external_score_audit.py --live | tee eng178_onebatch.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          content=Path("eng178_onebatch.log").read_text()
+          a=content.index("ENG_SCORE_BATCH_START")+len("ENG_SCORE_BATCH_START")
+          b=content.index("ENG_SCORE_BATCH_END")
+          doc=json.loads(content[a:b])
+          Path("eng3_eng4_178_aggregate_source_qa.json").write_text(json.dumps(doc,ensure_ascii=False,indent=2)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as summary:
+              summary.write("## ENG3/ENG4 2025-26 178 original scores: one batch QA\n")
+              summary.write("Source request attempted once per E2/E3 file; no raw CSV rehosted.\n\n")
+              summary.write("Overall status: "+str(doc.get("status"))+"\n\n")
+              for league,x in doc.get("source_results",{}).items():
+                  summary.write("- "+league+": "+str(x["score_check_counts"])+
+                      " new beyond prior 25 = "+str(x["new_alternate_match_scores_from_third_compilation"])+"\n")
+              if doc.get("status")!="THIRD_SOURCE_COMPARISON_COMPLETE":
+                  summary.write("Blocked: "+str(doc.get("blocked_error_class"))+
+                      " HTTP "+str(doc.get("blocked_http_status"))+"\n")
+              summary.write("\nNo training admission, no source CSV published, no sealed predictions changed.\n")
+          PY
+      - name: Upload only aggregate conflict QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-eng3-eng4-2526-single-score-batch-aggregate
+          path: eng3_eng4_178_aggregate_source_qa.json
+          retention-days: 14
