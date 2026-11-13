@@ -1,0 +1,64 @@
+{
+  "created_on": "2026-11-13",
+  "goal": "Preserve and fully reconcile existing 2025/26 ENG3 ENG4 scored-match disagreements before any training. Do not merge alternate records additively.",
+  "owner_original_blob_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+  "prior_295_blob_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+  "legacy_sources": [
+    "openfootball/football.json 2025-26/en.3.json",
+    "openfootball/football.json 2025-26/en.4.json"
+  ],
+  "alternate_source": "https://github.com/seanelvidge/England-football-results/blob/main/EnglandLeagueResults.csv",
+  "source_blob_sha": "a27f04e87e1b82718f6c487964f7de2def5a2043",
+  "license": "CC BY 4.0 Sean original contributions only; third-party rights reserved",
+  "license_link": "https://github.com/seanelvidge/England-football-results/blob/main/LICENCE.md",
+  "current_2025_26_openfootball_rows": 632,
+  "sean_2025_26_tier3_tier4_rows": 1104,
+  "group_counts": {
+    "SAME_SCORE": 432,
+    "SCORE_CONFLICT": 178,
+    "SEAN_ONLY_NO_OLD_ID": 494,
+    "OLD_ONLY_NO_SEAN_ID": 22
+  },
+  "entire_source_league_2025_26": {
+    "ENG3": 552,
+    "ENG4": 552
+  },
+  "official_web_spot_checks": [
+    {
+      "league": "ENG3",
+      "date": "2025-11-06",
+      "match": "Reading - Stevenage",
+      "old_score": "2-0",
+      "sean_score": "1-0",
+      "verified_final": "1-0",
+      "url": "https://www.bbc.co.uk/sport/football/live/czr11jrl8pkt"
+    },
+    {
+      "league": "ENG3",
+      "date": "2025-11-08",
+      "match": "Blackpool - Cardiff",
+      "old_score": "0-2",
+      "sean_score": "3-1",
+      "verified_final": "3-1",
+      "url": "https://www.bbc.co.uk/sport/football/live/c3w97w02n1xt"
+    },
+    {
+      "league": "ENG3",
+      "date": "2025-11-08",
+      "match": "Northampton - Mansfield",
+      "old_score": "1-1",
+      "sean_score": "2-1",
+      "verified_final": "2-1",
+      "url": "https://www.bbc.co.uk/sport/football/live/c0qp5qv28p2t"
+    }
+  ],
+  "new_2025_26_unioned_into_2071": false,
+  "blocked_for_training": [
+    "178 conflicting identity-equal scores",
+    "22 old-only identity keys with new source missing",
+    "494 Sean-only rows pending date/club alias and upstream rights validation"
+  ],
+  "source_closure": "Sean 2025-26 results full 552 for each league but may include differently dated fixtures vs OpenFootball; no naive union.",
+  "qa_status": "FROZEN_SCORE_CONFLICTS_DOCUMENTED_ALL_2025_26_ENG3_ENG4",
+  "production_untouched": true
+}
