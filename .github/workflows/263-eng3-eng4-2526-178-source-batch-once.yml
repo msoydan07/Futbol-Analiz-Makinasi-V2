@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-eng3-eng4-2526-178-source-batch-once.yml
+      - experiments/263/league_expansion/eng3_eng4_2526_single_batch_external_score_audit.py
 permissions:
   contents: read
 jobs:
