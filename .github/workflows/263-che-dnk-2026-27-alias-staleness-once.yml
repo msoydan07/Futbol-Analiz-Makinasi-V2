@@ -6,6 +6,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-che-dnk-2026-27-alias-staleness-once.yml
+      - experiments/263/league_expansion/audit_che_dnk_2026_27_stale_alias_score_gate.py
 
 permissions:
   contents: read
