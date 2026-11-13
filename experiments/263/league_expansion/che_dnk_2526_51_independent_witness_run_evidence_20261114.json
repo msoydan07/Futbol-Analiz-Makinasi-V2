@@ -1,0 +1,57 @@
+{
+  "date_utc": "2026-11-13T21:42:12.832466+00:00",
+  "purpose": "Pin actual 51 individual date+club+full-time score checks against independently cited public match-result sources.",
+  "source_witness_file": "experiments/263/league_expansion/che_dnk_2526_51_independent_match_score_witnesses_20261114.json",
+  "actions_run_url": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43513019440",
+  "actions_run_id": 43513019440,
+  "actions_job_id": 132187764767,
+  "action_result": "SUCCESS",
+  "prior_full_season_basic_qa": "experiments/263/league_expansion/che1_dnk1_2025_26_420_real_csv_qa_evidence_20261114.json",
+  "compared_season_total": 420,
+  "independently_checked_sample_total": 51,
+  "independent_match_comparison_summary": [
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "sample_size": 36,
+      "verified_equal": 36,
+      "score_disagreements": 0,
+      "unmatched_fixture_identities": 0,
+      "duplicate_source_fixtures": 0,
+      "full_csv_rows": 228,
+      "source_sha256": "46a8b9aedb6bf294a6991e701609c04d511eb844bd02a24094349ce4be51678c"
+    },
+    {
+      "league": "DNK1",
+      "season": "2025-26",
+      "sample_size": 15,
+      "verified_equal": 15,
+      "score_disagreements": 0,
+      "unmatched_fixture_identities": 0,
+      "duplicate_source_fixtures": 0,
+      "full_csv_rows": 192,
+      "source_sha256": "8b5e31555919beb083b875b8d38bc2227350ffc950a39308bbd803cefa64d6fa"
+    }
+  ],
+  "totals": {
+    "verified": 51,
+    "score_conflicts": 0,
+    "unmatched_identities": 0,
+    "remaining_not_sampled": 369
+  },
+  "known_selection_bias": "36/228 Swiss matches are only rounds 1-6; 15/192 Denmark matches are only 1-0 home wins. No season-wide error-rate inference.",
+  "fbref_full_420_attempt": {
+    "run_url": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43512529120",
+    "state": "BLOCKED_BY_HTTP_ERROR_FROM_GITHUB_RUNNER_FOR_BOTH_LEAGUES",
+    "consequence": "NO_FULL_SEASON_INDEPENDENT_MATCH_CHECK; DO_NOT_REPORT_420_INDEPENDENTLY_VERIFIED",
+    "next": "Avoid repeating blocked FBref endpoint; seek usable independent source with permitted access."
+  },
+  "training_status": "BLOCKED_PENDING_LICENSE_AND_BROADER_INDEPENDENT_QA",
+  "unchanged": {
+    "quarantine_matches": 2393,
+    "trainable_new_rows": 0,
+    "main_modified": false,
+    "m4_modified": false,
+    "sha_seals_modified": false
+  }
+}
