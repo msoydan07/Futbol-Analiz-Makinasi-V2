@@ -1,0 +1,36 @@
+name: 263 Research - Manual xG 1855 Excel read-only contract QA
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-manual-xg-1855-excel-safety-once.yml
+      - experiments/263/league_expansion/check_manual_xg_excel_1855_read_only.py
+permissions:
+  contents: read
+jobs:
+  xg-user-input-contract-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic zero-vs-blank and formula-injection acceptance
+        run: python experiments/263/league_expansion/check_manual_xg_excel_1855_read_only.py --self-test
+      - name: Verify all 22 leagues/2 seasons and research-only matrix invariants
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path("experiments/263/league_expansion")
+          p=json.loads((root/"coverage_matrix_22_leagues_2_seasons_readiness_20261114.json").read_text())
+          assert p["analysis_league_targets"]==13
+          assert p["training_only_leagues"]==9
+          assert len(p["league_rows"])==22
+          assert sum(r["research_quarantine_total"] for r in p["league_rows"])==2396
+          assert p["model_training_newly_admitted_rows"]==0
+          assert p["manual_xg_workbook"]["planned_missing"]==1855
+          assert p["manual_xg_workbook"]["one_sided_old_provider_requiring_both_new_values"]==56
+          assert all(not row["league_prediction_extension_approved"] for row in p["league_rows"])
+          print("PASS 22 leagues x 2 seasons, 2396 research-only, manual Excel 1855 and one-sided 56")
+          PY
