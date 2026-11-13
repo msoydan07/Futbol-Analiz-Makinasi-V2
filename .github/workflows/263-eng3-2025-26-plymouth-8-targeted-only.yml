@@ -1,0 +1,41 @@
+name: 263 Research - exactly 8 Plymouth score alias exceptions
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-eng3-2025-26-plymouth-8-targeted-only.yml
+permissions:
+  contents: read
+jobs:
+  only-eight-no-repeat-170:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Self-test only 8 frozen Plymouth alias cases
+        run: python experiments/263/league_expansion/eng3_2025_26_8_plymouth_only_alias_reconciliation.py --self-test
+      - name: Source SHA-pinned score fact QA for just 8 match keys
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/eng3_2025_26_8_plymouth_only_alias_reconciliation.py --live | tee plymouth_eight.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          text=Path("plymouth_eight.log").read_text()
+          a=text.index("PLYMOUTH_EIGHT_START")+len("PLYMOUTH_EIGHT_START")
+          b=text.index("PLYMOUTH_EIGHT_END")
+          d=json.loads(text[a:b])
+          Path("plymouth_8_factual_qa_aggregate.json").write_text(json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as s:
+              s.write("## Only 8 Plymouth alias cases, not repeating 170 prior rows\n")
+              for field in ("status","same_90min_ft_score","not_found","other_score","new_external_matches_beyond_prior_25"):
+                  s.write("- "+field+": "+str(d.get(field))+"\n")
+              s.write("\nNo external full CSV archived and no M4/training updates.\n")
+          PY
+      - name: Keep aggregate evidence only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-plymouth-only-8-aggregate-results
+          path: plymouth_8_factual_qa_aggregate.json
+          retention-days: 14
