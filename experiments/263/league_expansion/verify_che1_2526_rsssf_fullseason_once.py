@@ -95,7 +95,7 @@ def rsssf_results(text: str) -> tuple[dict, dict]:
         if m:
             month = MONTHS.get(m.group(1).lower())
             day = int(m.group(2))
-            year = int(m.group(3)) if m.group(3) else (2025 if month and month>=7 else 2026)
+            year = int(m.group(3)) if m.re is DATE_LINE and m.group(3) else (2025 if month and month>=7 else 2026)
             try: current_day = date(year,month,day).isoformat()
             except (TypeError,ValueError): current_day = None
             continue
