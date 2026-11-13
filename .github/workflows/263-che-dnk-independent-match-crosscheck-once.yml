@@ -1,0 +1,47 @@
+name: 263 Research - 420 Swiss Danish independent match comparison
+
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-che-dnk-independent-match-crosscheck-once.yml
+
+permissions:
+  contents: read
+
+jobs:
+  independent-comparison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate score-dedup fixture comparator on synthetic examples
+        run: python experiments/263/league_expansion/check_420_cross_source_2526.py --self-test
+      - name: Compare historical pinned CSV with independent FBref match results in memory
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/check_420_cross_source_2526.py --live > independent_score_qa.json.log
+          cat independent_score_qa.json.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          raw=Path('independent_score_qa.json.log').read_text()
+          start=raw.index('CROSS_SOURCE_REPORT_START')+len('CROSS_SOURCE_REPORT_START')
+          end=raw.index('CROSS_SOURCE_REPORT_END',start)
+          report=json.loads(raw[start:end])
+          Path('independent_score_qa_summary.json').write_text(json.dumps(report,indent=2)+'\n')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('### Read-only Swiss and Danish individual fixture-score crosscheck\n')
+              f.write('| League | Cross-checked | Matching score | Disagreement | Status |\n')
+              f.write('|---|---:|---:|---:|---|\n')
+              for x in report['sources']:
+                  f.write('| {} | {} | {} | {} | {} |\n'.format(x['league'],x.get('same_day_team_fixture_keys','n/a'),x.get('same_score','n/a'),x.get('different_score','n/a'),x['state']))
+              f.write('\nNo new training rows, no raw 420 CSV repository import; any blocked reference remains unverified.\n')
+          PY
+      - name: Save aggregate comparison only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-che-dnk-independent-aggregate-score-check
+          path: independent_score_qa_summary.json
+          retention-days: 14
