@@ -200,9 +200,20 @@
   },
   "csv_gate_script": "experiments/263/league_expansion/verify_public_season_csv_2526.py",
   "csv_gate_commit": "682b97878e3327af4e93662c6bab1b9a7a21b694",
-  "csv_download_test_status": "FULL_CSV_NOT_ACCESSIBLE_IN_THIS_CHAT_RUNTIME; adapter not run on real 228/192 files",
+  "csv_download_test_status": "REAL_GITHUB_RUNNER_CSV_DOWNLOAD_COMPLETE__228_CHE1_192_DNK1__BASIC_QA_PASS__RIGHTS_AND_INDEPENDENT_MATCH_CHECK_PENDING",
   "now_added_match_rows": 0,
   "quarantine_row_count_stays": 2393,
   "models_unmodified": true,
-  "next_step": "Locally download two public CSV files. Apply offline name/score/FT/date dedup checks and compare 12 team WDL/GF/GA/points to SFL or RSSSF tables; then independent sample verification. After confirming allowed rights, admit clean nonduplicate records to research-only quarantine, never to main."
+  "next_step": "Not another source search/download for these same hashes. Independently corroborate scores and match identities and verify source/underlying provider rights for model-training and possible local archiving. Existing 2393 quarantine unchanged.",
+  "csv_readonly_batch_audit": {
+    "status": "COMPLETE_TWO_CSV_FILES__BASIC_VALIDITY_PASS",
+    "run_url": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43511170073",
+    "report_repo_path": "experiments/263/league_expansion/che1_dnk1_2025_26_420_real_csv_qa_evidence_20261114.json",
+    "rows_checked": 420,
+    "teams": 24,
+    "rows_added_to_public_quarantine": 0,
+    "training_approved": 0,
+    "raw_CSV_retained_in_public_repo": false,
+    "original_status_replaced": "FULL_CSV_NOT_ACCESSIBLE_IN_THIS_CHAT_RUNTIME; adapter not run on real 228/192 files"
+  }
 }
