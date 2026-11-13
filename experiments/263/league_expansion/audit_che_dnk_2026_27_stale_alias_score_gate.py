@@ -158,7 +158,22 @@ def assess(league, rows, baseline54=None):
         matched=[k for k,sc in base_keys.items() if seen.get(k)==sc]
         wrong=[k for k,sc in base_keys.items() if k in seen and seen[k]!=sc]
         missing=[k for k in base_keys if k not in seen]
+        # Three Oct 10 Swiss games are independently published on the
+        # UniqueScores results page. No reproduction of the full results table.
+        oct10={
+            ("2026-10-10","Zurich","Thun"):(4,2),
+            ("2026-10-10","Lugano","Luzern"):(4,0),
+            ("2026-10-10","Servette","Sion"):(3,0),
+        }
+        newkeys=sorted(set(seen)-set(base_keys))
+        newly_independently_checked=sum(1 for k in newkeys
+                                          if k in oct10 and seen[k]==oct10[k])
         baseline={
+            "new_unique_matches_beyond_existing_cc0":len(newkeys),
+            "oct10_new_unique_matches_independent_score_matches":newly_independently_checked,
+            "new_matches_evidence_only":[{"date":k[0],"home":k[1],"away":k[2],
+                                          "ft":list(seen[k]),"source_url":cfg["score_reference"]}
+                                         for k in newkeys[:6]],
             "existing_cc0_2026_27_che1_rows":len(base_keys),
             "same_fixture_and_score":len(matched),
             "score_conflicts":len(wrong),
@@ -230,6 +245,7 @@ def self_test():
     assert result["source_score_0_0"]==1,result
     assert result["independent_recent_round_present_score_equal"]==1,result
     assert result["new_training_rows_approved"]==0,result
+    assert result["cc0_prior_54_comparison"]["new_unique_matches_beyond_existing_cc0"]==1,result
     print("SELFTEST_PASS 2026/27 alias, Vaduz/Lyngby/Horsens, duplicate, real 0-0, future FT rejected")
 
 
