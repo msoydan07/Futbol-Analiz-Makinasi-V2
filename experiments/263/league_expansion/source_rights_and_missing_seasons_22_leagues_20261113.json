@@ -120,7 +120,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "CHE1/DNK1 2025/26 full-source research links and aggregate checksum FOUND (see follow_on_checked_sources_20261114). Do not repeat source search. Need actual locally downloaded 228/192 CSV, canonical team fixture/score QA and independent match checks and source rights approval. DNK1 2026/27 and CHE1 2026/27 identity aliases require fail-closed dedup first. Then single A/B/C comparison.",
+  "next_priority": "CHE1 2025/26 228 & DNK1 2025/26 192 public CSV files now fetched and aggregate QA PASS. Do NOT repeat this download/QA unless source hashes change. Next: independent match-level official-source checks and data-use rights, then quarantine only if allowed; continue 2026/27 season gaps, 153 unresolved ENG3/ENG4 conflict reviews.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -154,5 +154,27 @@
     "current_season_alias_risk": "MatchDaySync CHE1 2026-27 lists 17 and DNK1 lists 16 distinct club identities in competitions of 12; canonical fixture de-dup mandatory, 93/87 claimed finished rows cannot be treated as independent games.",
     "gate_script": "experiments/263/league_expansion/verify_public_season_csv_2526.py",
     "dataset_production_status": "NO_NEW_TRAINING_NO_NEW_M4_NO_OVERWRITE"
+  },
+  "real_CSV_QA_finished_20261114": {
+    "result": "BOTH_COMPLETE_BASIC_QA_PASS",
+    "seasons": [
+      "CHE1 2025-26",
+      "DNK1 2025-26"
+    ],
+    "data_sources": [
+      "MatchDaySync Switzerland 2025-26 matches CSV",
+      "MatchDaySync Denmark 2025-26 matches CSV"
+    ],
+    "github_action_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43511170073",
+    "audit_path": "experiments/263/league_expansion/che1_dnk1_2025_26_420_real_csv_qa_evidence_20261114.json",
+    "checked_scored_rows": 420,
+    "verified_aggregate_team_table_rows": 24,
+    "confirmed_0_0_games": 20,
+    "invalid_and_duplicates": 0,
+    "match_by_match_independent_score_acceptance": false,
+    "license_to_rehost_and_train": "NOT_ESTABLISHED",
+    "public_new_data_rows": 0,
+    "training_accepted_rows": 0,
+    "policy": "Do not redownload two unchanged file SHA hashes. Do not claim 2813 trained observations. No M4/10-league/old SHA changes."
   }
 }
