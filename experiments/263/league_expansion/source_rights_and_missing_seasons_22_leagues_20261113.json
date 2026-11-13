@@ -120,7 +120,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "CHE1 2025/26 228 & DNK1 2025/26 192 public CSV files now fetched and aggregate QA PASS. Do NOT repeat this download/QA unless source hashes change. Next: independent match-level official-source checks and data-use rights, then quarantine only if allowed; continue 2026/27 season gaps, 153 unresolved ENG3/ENG4 conflict reviews.",
+  "next_priority": "CHE1/DNK1 2025/26: 420/420 passed fixture/score-table aggregates and 51/51 separately sourced score witnesses matched; remaining 369 have NOT been independently checked. Do not repeat same exact source hashes or FBref 403 route. Find rights-permitted independent 2025/26 match-level source covering other dates and all score shapes; retain split-stage consistency, do not admit training. 2026/27 current-season CHE1 DNK1 and 153 other England source conflicts still open.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -176,5 +176,23 @@
     "public_new_data_rows": 0,
     "training_accepted_rows": 0,
     "policy": "Do not redownload two unchanged file SHA hashes. Do not claim 2813 trained observations. No M4/10-league/old SHA changes."
+  },
+  "independent_51_crosscheck_20261114": {
+    "status": "COMPLETE__51_CHECKS_ALL_MATCH_SOURCE_CSV",
+    "separate_witnesses": "experiments/263/league_expansion/che_dnk_2526_51_independent_match_score_witnesses_20261114.json",
+    "proof": "experiments/263/league_expansion/che_dnk_2526_51_independent_witness_run_evidence_20261114.json",
+    "run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43513019440",
+    "checked": {
+      "CHE1": 36,
+      "DNK1": 15,
+      "total": 51,
+      "matching": 51,
+      "conflict": 0,
+      "unchecked": 369
+    },
+    "limitations": "Non-random: Swiss first six matchdays, Danish only home 1-0 results. 369 matches not verified independently; no season-wide success-rate conclusion.",
+    "blocked_attempt": "FBref runner HTTPError for both leagues, run 43512529120; DO_NOT_REPEAT_SAME_BLOCKED_ENDPOINT",
+    "no_raw_data_import": true,
+    "approved_training_rows": 0
   }
 }
