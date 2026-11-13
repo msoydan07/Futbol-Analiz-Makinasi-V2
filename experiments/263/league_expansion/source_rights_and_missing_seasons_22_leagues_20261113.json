@@ -91,6 +91,25 @@
       "observed": "Two sources disagree on 178 matched game scores, plus 22 old-only identities, 494 Sean-only rows; BBC confirms 3 sample Sean outcomes",
       "rights": "SOURCES HAVE THEIR OWN LICENSES, BOTH STILL RESEARCH ONLY",
       "decision": "NO ADDITIVE UNION OF ALTERNATE 1104; treat old conflict rows as ineligible for model training until independent adjudication"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "source": "OpenLigaDB (community entered), league bsl",
+      "league_shortcut": "bsl",
+      "league_season": 2025,
+      "league_id": 4902,
+      "data_api": "https://api.openligadb.de/getmatchdata/bsl/2025",
+      "results_ui": "https://beta.openligadb.de/Matches/bsl/2025/20",
+      "league_list": "https://beta.openligadb.de/Leagues?season=2025",
+      "license_url": "https://www.openligadb.de/en/license",
+      "format": "JSON API / UI matchday results",
+      "rights": "ODbL 1.0 ATTRIBUTION + SHARE-ALIKE FOR REDISTRIBUTED DERIVATIVE DATABASE; do not mix indiscriminately into CC0 repository dataset",
+      "observed": "The live 2025/26 league index lists bsl (quality index 81, not a row count or quality guarantee). Group 20 publicly shows 5 finished match score reports and one out-of-season 2026-07-31 schedule row; data is community contributed without independent editorial audit.",
+      "evidence_basis": "Live league overview and group 20 match page as of 2026-11-13; the full season API JSON could not be read end-to-end from this session, therefore completeness count is UNKNOWN.",
+      "decision": "SOURCE_DISCOVERED_LICENSE_POTENTIALLY_USABLE; READ-ONLY RECON; DO NOT CLAIM 228 MATCHES OR IMPORT UNTIL full season API parsed, final score kind extracted and date/team/season check passed. Keep ODbL data separate from CC0, record attribution, compare to SFL/independent.",
+      "alt_shortcut": "ch1 (2025 season, quality index 10) appears lower coverage; not the preferred candidate",
+      "new_scored_rows_added": 0
     }
   ],
   "frozen_production_code": true,
@@ -101,5 +120,14 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "Obtain suitable licensed full-season sources for 2025/26 Denmark and Switzerland and additional 2026/27 helpers; after score/source resolution, create as-of training set and single A/B/C comparison."
+  "next_priority": "Read and verify complete OpenLigaDB bsl/2025 Swiss 2025/26 once under API usage terms, keep ODbL attribution and data separate; verify official match identities/scores and season before admission. Denmark 2025/26 and 2026/27 still need rights-cleared full-season source. 2025/26 ENG3/ENG4 score conflicts and data quality gates remain blocked.",
+  "new_source_findings": [
+    {
+      "date": "2026-11-13",
+      "scope": "CHE1 2025-26",
+      "source": "OpenLigaDB bsl/2025",
+      "state": "potentially_permitted_not_yet_quality_accepted",
+      "reason": "ODbL source with unknown completion and one suspicious outside-season row; no API dump stored"
+    }
+  ]
 }
