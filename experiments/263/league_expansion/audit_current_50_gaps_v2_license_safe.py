@@ -151,6 +151,26 @@ def audit():
                 source_bytes=get(HASLUND)
                 from_raw,diag=parse_haslund(source_bytes)
                 fresh={**from_raw,**DK_08_NOV4}
+                # Two independent corrections of the Haslund HTML, not edits
+                # to the source: Danish FA confirms Monday 27 Jul (not Sun 26),
+                # Copenhagen official confirms Fri 11 Sep, missing date in HTML.
+                wrong_july=("2026-07-26","Randers","Silkeborg")
+                actual_july=("2026-07-27","Randers","Silkeborg")
+                actual_sep=("2026-09-11","Copenhagen","Horsens")
+                if fresh.get(wrong_july)!=(1,1):
+                    raise ValueError("DANISH_HASLUND_JULY_SOURCE_DRIFT")
+                if actual_july in fresh or actual_sep in fresh:
+                    raise ValueError("DANISH_FIXTURE_CORRECTION_NOT_NEEDED")
+                fresh[actual_july]=fresh.pop(wrong_july)
+                fresh[actual_sep]=(2,0)
+                r["danish_source_identity_corrections"]=[
+                  {"wrong_date":"2026-07-26","official_date":"2026-07-27",
+                   "home":"Randers","away":"Silkeborg","score":"1-1",
+                   "source":"https://dbu.dk/resultater/kamp/526593_506118/kampinfo"},
+                  {"wrong_date":"missing","official_date":"2026-09-11",
+                   "home":"Copenhagen","away":"Horsens","score":"2-0",
+                   "source":"https://www.fck.dk/en/kamp/11-09-26/fc-kobenhavn-ac-horsens"}
+                ]
                 r["danish_haslund_diagnostics"]=diag
                 r["stage"]="danish_data_vault_crosscheck"
                 other_bytes=get(VAULT_DNK)
@@ -198,6 +218,7 @@ def audit():
 def selftest():
     assert len(OFFICIAL_CHE6)==6
     assert len(DK_08_NOV4)==4 and len(DK_07_NOV1)==1
+    assert ("2026-07-27","Randers","Silkeborg") not in DK_08_NOV4
     assert len(old_swiss_57())==57
     html_sample=b"<table><tr><th>Date</th><th>Home</th><th>Score</th><th>Away</th></tr><tr><td>2026-10-25</td><td>FC Zurich</td><td>2\xe2\x80\x931</td><td>Luzern</td></tr></table>"
     parsed,diagnostics=parse_vault(html_sample,"CHE1")
