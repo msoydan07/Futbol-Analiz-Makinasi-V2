@@ -1,0 +1,174 @@
+{
+  "checked_on": "2026-11-14",
+  "research_only": true,
+  "github_actions_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43529678035",
+  "implementation": "experiments/263/league_expansion/prepare_2396_provenance_rights_quality_gate_20261114.py",
+  "evidence_checked_at": "2026-11-13T23:47:18.760843+00:00",
+  "source_license_provenance": {
+    "PUBLISHER_CC0_CLAIM": 2071,
+    "CCBY_COMPILATION_UPSTREAM_UNCLEAR": 322,
+    "THIRD_PARTY_REHOST_UNCLEARED": 3
+  },
+  "record_quality": {
+    "EXPLICIT_LEGACY_FT_OR_IDENTITY_HOLD": 200,
+    "NOT_CLEARED_BUT_NOT_IN_EXPLICIT_HOLD": 2196
+  },
+  "CC0_publisher_claim_not_held_but_other_gates_pending": 1871,
+  "pinned_source_inventory": {
+    "training_2025_26_cc0_scored_QUARANTINE.csv": {
+      "published_license_provenance": "PUBLISHER_CC0_CLAIM",
+      "total_scored_candidate_rows": 1249,
+      "frozen_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+      "hard_hold_rows": 186,
+      "other_rows_still_need_quality_and_rights_gates": 1063,
+      "hold_types": {
+        "ORIGINAL_FT_SCORE_INVALID_CONFIRMED_THIRD_SOURCE": 171,
+        "LEGACY_MATCH_DATE_MISRECORDED__22_INDEPENDENT_DATE_FT_WITNESSES": 15
+      },
+      "by_league_season": {
+        "AUT1/2025-26": 67,
+        "ENG3/2025-26": 261,
+        "ENG4/2025-26": 261,
+        "ESP2/2025-26": 115,
+        "FRA2/2025-26": 107,
+        "GER2/2025-26": 94,
+        "GRE1/2025-26": 61,
+        "ITA2/2025-26": 283
+      },
+      "training_admitted": 0
+    },
+    "cc0_new_485_2526_2627_QUARANTINE_20261113.csv": {
+      "published_license_provenance": "PUBLISHER_CC0_CLAIM",
+      "total_scored_candidate_rows": 485,
+      "frozen_sha": "2582e3ffa6e200b74704702dccc01ca19ad4750e",
+      "hard_hold_rows": 0,
+      "other_rows_still_need_quality_and_rights_gates": 485,
+      "hold_types": {},
+      "by_league_season": {
+        "CHE1/2026-27": 54,
+        "ENG5/2025-26": 296,
+        "GRE1/2026-27": 35,
+        "SCO1/2025-26": 58,
+        "SCO1/2026-27": 42
+      },
+      "training_admitted": 0
+    },
+    "cc0_aut1_2026_27_42_QUARANTINE_20261113.csv": {
+      "published_license_provenance": "PUBLISHER_CC0_CLAIM",
+      "total_scored_candidate_rows": 42,
+      "frozen_sha": "a404b3a395b32c42ac4e6cfef724bdebd3cbecb9",
+      "hard_hold_rows": 0,
+      "other_rows_still_need_quality_and_rights_gates": 42,
+      "hold_types": {},
+      "by_league_season": {
+        "AUT1/2026-27": 42
+      },
+      "training_admitted": 0
+    },
+    "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": {
+      "published_license_provenance": "PUBLISHER_CC0_CLAIM",
+      "total_scored_candidate_rows": 295,
+      "frozen_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+      "hard_hold_rows": 14,
+      "other_rows_still_need_quality_and_rights_gates": 281,
+      "hold_types": {
+        "LEGACY_MATCH_DATE_MISRECORDED__22_INDEPENDENT_DATE_FT_WITNESSES": 7,
+        "ORIGINAL_FT_SCORE_INVALID_CONFIRMED_THIRD_SOURCE": 7
+      },
+      "by_league_season": {
+        "AUT1/2025-26": 128,
+        "ENG3/2025-26": 95,
+        "ENG4/2025-26": 15,
+        "ESP2/2025-26": 16,
+        "FRA2/2025-26": 9,
+        "GER2/2025-26": 5,
+        "GRE1/2025-26": 1,
+        "ITA2/2025-26": 26
+      },
+      "training_admitted": 0
+    },
+    "eng3_eng4_2026_27_322_CCBY_QUARANTINE_20261113.csv": {
+      "published_license_provenance": "CCBY_COMPILATION_UPSTREAM_UNCLEAR",
+      "total_scored_candidate_rows": 322,
+      "frozen_sha": "22b909a504254bfd3c9013f27fdbf2736ffbf746",
+      "hard_hold_rows": 0,
+      "other_rows_still_need_quality_and_rights_gates": 322,
+      "hold_types": {},
+      "by_league_season": {
+        "ENG3/2026-27": 158,
+        "ENG4/2026-27": 164
+      },
+      "training_admitted": 0
+    },
+    "che1_2026_27_oct10_3_match_score_facts_QUARANTINE_20261114.csv": {
+      "published_license_provenance": "THIRD_PARTY_REHOST_UNCLEARED",
+      "total_scored_candidate_rows": 3,
+      "frozen_sha": "7098dd60bde56f8dbcd5b16930308028f332b821",
+      "hard_hold_rows": 0,
+      "other_rows_still_need_quality_and_rights_gates": 3,
+      "hold_types": {},
+      "by_league_season": {
+        "CHE1/2026-27": 3
+      },
+      "training_admitted": 0
+    }
+  },
+  "license_sources": {
+    "openfootball_football_json": "https://github.com/openfootball/football.json/blob/master/README.md",
+    "openfootball_england": "https://github.com/openfootball/england/blob/master/LICENSE.md",
+    "openfootball_austria": "https://github.com/openfootball/austria/blob/master/LICENSE.md",
+    "openfootball_europe": "https://github.com/openfootball/europe",
+    "Sean_license": "https://github.com/seanelvidge/England-football-results/blob/main/LICENCE.md"
+  },
+  "status": {
+    "publisher_CC0_claim_is_not_full_third_party_rights_review": true,
+    "future_independent_fulltime_score_QA_needed": true,
+    "proper_feature_vintage_and_no_leakage_needed": true,
+    "existing_200_legacy_issues_HOLD": true,
+    "external_source_derivative_rights_unclear_for_325": true,
+    "no_trainable_rows_promoted": true
+  },
+  "experimental_pre_registration": {
+    "experiment_id": "263_shadow_22_pool_chronological_B_C2_C3_M4_competition_preflight",
+    "status": "PRE_REGISTERED_ONLY_NOT_EXECUTED",
+    "no_new_model_if_admitted_rows_zero": true,
+    "target_markets": [
+      "BTTS_yes_no",
+      "over_2_5_yes_no",
+      "1X2"
+    ],
+    "primary_metrics": [
+      "log_loss",
+      "brier_score",
+      "calibration_by_predicted_probability_bin",
+      "sample_count"
+    ],
+    "stratifications": [
+      "league",
+      "season",
+      "home_away",
+      "opponent_strength_quantile"
+    ],
+    "splits": "Chronological time-series split. Require min sample/coverage thresholds before running; never train on target-match postgame xG.",
+    "compare": "Frozen prior models as baseline, pooled research candidate as shadow only. Hyperparameters selected without test-lookahead. Never merge into production M4 without preregistered improvement evidence.",
+    "hard_exclusions": [
+      "All 200 2025/26 ENG3/ENG4 exact source problem keys",
+      "No score-only independent witness rehosted in training without right and provenance",
+      "Manual xG target-match post-game value never allowed as pre-kickoff feature",
+      "No external source with rights unclear auto-admitted",
+      "Unplayed, duplicate, missing score, unsupported season and future-information rows excluded"
+    ],
+    "acceptance_dependency": "A later explicitly reviewed LICENSE + FT + as-of + temporal split gate must separately promote candidates. This step does not."
+  },
+  "summary_numbers": {
+    "all_research_quarantine_rows": 2396,
+    "source_CC0_declared": 2071,
+    "source_CC0_declared_but_wrong_original_ft_or_identity_held": 200,
+    "remaining_CC0_claimed_pending_individual_quality_and_vintage": 1871,
+    "alternative_compilation_upstream_rights_unclear": 322,
+    "third_party_results_rights_unclear": 3,
+    "research_training_rows_approved": 0,
+    "original_M4_and_10_league_sealed_forecasts_changed": 0
+  },
+  "notes": "The rights preflight is only legal provenance screening, not legal advice or a blanket model-training license. All original research rows remain byte-identical. No additional match score verification repeated."
+}
