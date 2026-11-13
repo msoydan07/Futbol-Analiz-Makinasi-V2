@@ -1,0 +1,238 @@
+{
+  "audited_at": "2026-11-13",
+  "scope": "2025/26 official season phase/FT-score acceptance reference for 13-analysis/22-research league expansion. Season 2026/27 inherits structure ONLY when league rules unchanged; do not require full season in November 2026.",
+  "branch": "research/263-13-lig-22-havuz-20261113",
+  "production_change": false,
+  "train_admissions": 0,
+  "additive_quarantine_rows_unchanged": 2393,
+  "objective": "Stop false full-season acceptance from incomplete split rounds and mistaken European-playoff extra-time results.",
+  "CHE1_2025_26": {
+    "league": "Swiss Brack Super League",
+    "source_authority": "Swiss Football League",
+    "sources": {
+      "official_2025_26_final_table": "https://report.sfl.ch/report/sportlicher-rueckblick/2025-26/das-maerchen-thun-ein-aufsteiger-schreibt-schweizer",
+      "official_2025_26_format": "https://sfl.ch/de/articles/sfl-veroffentlich-spielplane-der-saison-202526",
+      "official_34_38_split_rounds": "https://sfl.ch/de/articles/sfl-setzt-die-letzten-funf-runden-der-brack-super-league-an",
+      "observed_openligadb_schedule": "https://beta.openligadb.de/Spielplan/bsl/2025",
+      "observed_openligadb_group20": "https://beta.openligadb.de/Matches/bsl/2025/20"
+    },
+    "expected": {
+      "teams": 12,
+      "regular_rounds": 33,
+      "regular_matches": 198,
+      "final_split_rounds": 5,
+      "final_split_matches": 30,
+      "total_rounds": 38,
+      "full_season_matches": 228,
+      "matches_per_team": 38,
+      "home_per_team": 19,
+      "away_per_team": 19,
+      "final_score_kind": "AFTER_90_MINUTES",
+      "barrage_and_cup_excluded": true
+    },
+    "official_full_season_team_table": [
+      {
+        "team": "FC Thun",
+        "played": 38,
+        "wins": 24,
+        "draws": 3,
+        "losses": 11,
+        "goals_for": 80,
+        "goals_against": 52,
+        "points": 75
+      },
+      {
+        "team": "FC St.Gallen 1879",
+        "played": 38,
+        "wins": 20,
+        "draws": 10,
+        "losses": 8,
+        "goals_for": 72,
+        "goals_against": 47,
+        "points": 70
+      },
+      {
+        "team": "FC Lugano",
+        "played": 38,
+        "wins": 19,
+        "draws": 10,
+        "losses": 9,
+        "goals_for": 59,
+        "goals_against": 42,
+        "points": 67
+      },
+      {
+        "team": "FC Sion",
+        "played": 38,
+        "wins": 16,
+        "draws": 15,
+        "losses": 7,
+        "goals_for": 63,
+        "goals_against": 40,
+        "points": 63
+      },
+      {
+        "team": "FC Basel 1893",
+        "played": 38,
+        "wins": 16,
+        "draws": 8,
+        "losses": 14,
+        "goals_for": 55,
+        "goals_against": 58,
+        "points": 56
+      },
+      {
+        "team": "BSC Young Boys",
+        "played": 38,
+        "wins": 15,
+        "draws": 10,
+        "losses": 13,
+        "goals_for": 80,
+        "goals_against": 69,
+        "points": 55
+      },
+      {
+        "team": "FC Luzern",
+        "played": 38,
+        "wins": 14,
+        "draws": 11,
+        "losses": 13,
+        "goals_for": 76,
+        "goals_against": 66,
+        "points": 53
+      },
+      {
+        "team": "Servette FC",
+        "played": 38,
+        "wins": 13,
+        "draws": 14,
+        "losses": 11,
+        "goals_for": 71,
+        "goals_against": 63,
+        "points": 53
+      },
+      {
+        "team": "FC Lausanne-Sport",
+        "played": 38,
+        "wins": 11,
+        "draws": 9,
+        "losses": 18,
+        "goals_for": 53,
+        "goals_against": 67,
+        "points": 42
+      },
+      {
+        "team": "FC Zürich",
+        "played": 38,
+        "wins": 11,
+        "draws": 5,
+        "losses": 22,
+        "goals_for": 49,
+        "goals_against": 72,
+        "points": 38
+      },
+      {
+        "team": "Grasshopper Club Zürich",
+        "played": 38,
+        "wins": 8,
+        "draws": 9,
+        "losses": 21,
+        "goals_for": 48,
+        "goals_against": 74,
+        "points": 33
+      },
+      {
+        "team": "FC Winterthur",
+        "played": 38,
+        "wins": 5,
+        "draws": 8,
+        "losses": 25,
+        "goals_for": 44,
+        "goals_against": 100,
+        "points": 23
+      }
+    ],
+    "official_aggregates": {
+      "games": 228,
+      "goal_events": 750,
+      "per_team_goals_for_total": 750,
+      "per_team_goals_against_total": 750,
+      "draws": 56,
+      "decisive_matches": 172,
+      "home_away_club_appearances": 456
+    },
+    "observed_source_quality": {
+      "observed_openligadb_groups_1_to_33_each_rows": 6,
+      "observed_openligadb_group_34_rows": 0,
+      "total_scheduled_rows_in_source": 198,
+      "out_of_season_sample_in_group20": {
+        "date": "2026-07-31",
+        "reason": "not a 2025/26 fixture",
+        "status": "REJECT"
+      },
+      "missing_phase": "championship and relegation groups rounds 34-38",
+      "minimum_missing_total_slots": 30,
+      "audit_note": "198 listed slots is not 198 verified completed, valid scored matches. One listed slot is 2026-07-31 (outside-season); therefore >=31 valid 2025/26 match identities are absent if no other duplication.",
+      "training_decision": "FAIL_CLOSED__PARTIAL_INVALID_SOURCE"
+    },
+    "acceptance": [
+      "Only exactly 228 match identities AFTER-90-MINUTES FT with 12 official clubs in both phases, no cups/barrage",
+      "All clubs 38 matches and 19 home 19 away",
+      "Cross-check every club wins/draws/losses, goals_for/goals_against, points against official final table",
+      "Exactly 750 summed match goals, 56 draws, 172 non-draws",
+      "Official match ID/date/club name+score spot checks; no training solely from aggregate checksum",
+      "ODbL attribution and separate database licensing; don't silently merge with CC0"
+    ]
+  },
+  "DNK1_2025_26": {
+    "league": "Danish 3F Superliga",
+    "source_authority": "Danish Superliga organization",
+    "sources": {
+      "official_regular_split_match_count": "https://www.superliga.dk/nyheder/pressemeddelelser/fakta-omkring-hverdagskampe",
+      "separate_european_playoff_and_extra_time_evidence": "https://rsssf.org/tablesd/den2026.html",
+      "independent_playoff_description": "https://www.odds.dk/superligaen/kampprogram/"
+    },
+    "expected": {
+      "teams": 12,
+      "regular_rounds": 22,
+      "regular_matches": 132,
+      "post_split_rounds": 10,
+      "championship_matches": 30,
+      "relegation_matches": 30,
+      "normal_domestic_league_matches": 192,
+      "club_normal_match_count": 32,
+      "club_normal_home_count": 16,
+      "club_normal_away_count": 16,
+      "additional_european_qualification_playoff_matches": 1,
+      "archive_competition_total_if_playoff_included": 193
+    },
+    "observed_extra_match": {
+      "date": "2026-05-21",
+      "home": "Brøndby",
+      "away": "FC København",
+      "published_final": "1-3 AFTER EXTRA TIME",
+      "stage": "Conference League qualification playoff",
+      "training_policy": "EXCLUDE_FROM_192_STANDARD_LEAGUE_MATCHES; DO NOT MISLABEL EXTRA-TIME SCORE AS 90-MINUTE FT",
+      "regulation_time_score": "NOT_ESTABLISHED_BY_THIS_SOURCE"
+    },
+    "acceptance": [
+      "132 regular + 30 championship +30 relegation =192 standard domestic league matches; no 193rd playoff in this model pool",
+      "Each of 12 teams has 32 matches: 16 home and 16 away",
+      "Separate competition stage labels, no copying cup or conference qualification playoff rows",
+      "Missing FT or draw not equivalent to zero; 90-minute score must be explicit",
+      "2026/27 is in progress, never assert 192 finished matches as of Nov 2026",
+      "Licence and provenance approval must be completed independently of fixture-count validity"
+    ],
+    "status": "STRUCTURE_AND_POSTSEASON_SEPARATION_FROZEN__RESULTS_MISSING"
+  },
+  "common_hard_gates": [
+    "No training/prediction promotion",
+    "No SHA resealing or 10-league baseline changes",
+    "No xG inference from missing values",
+    "No raw external datasets copied by this evidence file",
+    "Team alias resolution explicit; never silently fuzzy match",
+    "No chronological leakage across target kickoff",
+    "Aggregation checks are necessary, not sufficient, for correctness"
+  ],
+  "next_work": "Obtain admissible complete 2025/26 CHE1 and 2025/26 DNK1 source match records; test phase counts, independent scores and team-score checksum before adding separate quarantine."
+}
