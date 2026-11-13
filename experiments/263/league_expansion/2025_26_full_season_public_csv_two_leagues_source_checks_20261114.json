@@ -1,0 +1,208 @@
+{
+  "created": "2026-11-14",
+  "branch": "research/263-13-lig-22-havuz-20261113",
+  "scope": "Two 2025/26 target ANALYSIS_LEAGUES; evidence only, no full season raw rows copied into GitHub",
+  "existing_source_cross_ref": "experiments/263/league_expansion/source_rights_and_missing_seasons_22_leagues_20261113.json",
+  "previous_official_rules": "experiments/263/league_expansion/official_swiss_danish_2526_stage_and_score_gates_20261113.json",
+  "private_download_info": "MatchDaySync intentionally offers free CSV downloads for analysis. Public access is not permission to redistribute or resell or store copied bulk rows in this public repository. Download locally and QA; store only summary evidence publicly.",
+  "source_api_reference": "https://matchdaysync.com/developers",
+  "source_terms": "https://matchdaysync.com/terms",
+  "source_rights_decision": "PUBLIC_CSV_PERSONAL_RESEARCH_POSSIBLE; THIRD_PARTY_RIGHTS_AND_REHOSTING_UNVERIFIED; NO_PUBLIC_RAW_CSV_IMPORT",
+  "full_season_candidates": [
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "competition": "Swiss Super League",
+      "matches": 228,
+      "club_count": 12,
+      "result_page": "https://matchdaysync.com/leagues/swiss-super-league/results?season=2025-26",
+      "league_table": "https://matchdaysync.com/leagues/swiss-super-league/table?season=2025-26",
+      "csv_url": "https://matchdaysync.com/api/public/csv/swiss-super-league/2025-26/matches",
+      "overall_table_matches_official_points_and_goal_differences": true,
+      "external_reference": "https://report.sfl.ch/report/sportlicher-rueckblick/2025-26/das-maerchen-thun-ein-aufsteiger-schreibt-schweizer",
+      "validated_official_checks": {
+        "club_count": 12,
+        "each_team_played": 38,
+        "each_team_home": 19,
+        "each_team_away": 19,
+        "match_count": 228,
+        "total_goals": 750,
+        "draw_matches": 56,
+        "decisive_matches": 172
+      },
+      "rights": "PUBLIC_EXPORT_BUT_NO_REPUBLISH_PERMISSION_CONFIRMED",
+      "status": "FULL_SEASON_CANDIDATE_ONLY"
+    },
+    {
+      "league": "DNK1",
+      "season": "2025-26",
+      "competition": "Danish Superliga",
+      "matches": 192,
+      "club_count": 12,
+      "result_page": "https://matchdaysync.com/leagues/danish-superliga?season=2025-26",
+      "csv_url": "https://matchdaysync.com/api/public/csv/danish-superliga/2025-26/matches",
+      "external_reference": "https://www.rsssf.org/tablesd/den2026.html",
+      "validated_external_aggregates": {
+        "club_count": 12,
+        "each_team_played": 32,
+        "match_count": 192,
+        "total_goals": 595,
+        "draw_matches": 45,
+        "decisive_matches": 147
+      },
+      "danish_final_table_provenance": "Rec.Sport.Soccer Statistics Foundation (RSSSF), Karel Stokkermans, 14 Jun 2026",
+      "separate_extra_time_match": "Brøndby vs FC København 2026-05-21, 1-3 after extra time, EXCLUDE from 192",
+      "rights": "PUBLIC_EXPORT_BUT_NO_REPUBLISH_PERMISSION_CONFIRMED",
+      "status": "FULL_SEASON_CANDIDATE_ONLY"
+    }
+  ],
+  "denmark_2025_26_independent_final_team_aggregate": [
+    {
+      "team": "AGF",
+      "played": 32,
+      "wins": 19,
+      "draws": 10,
+      "losses": 3,
+      "gf": 62,
+      "ga": 32,
+      "points": 67
+    },
+    {
+      "team": "Midtjylland",
+      "played": 32,
+      "wins": 16,
+      "draws": 12,
+      "losses": 4,
+      "gf": 72,
+      "ga": 36,
+      "points": 60
+    },
+    {
+      "team": "Nordsjaelland",
+      "played": 32,
+      "wins": 15,
+      "draws": 5,
+      "losses": 12,
+      "gf": 51,
+      "ga": 46,
+      "points": 50
+    },
+    {
+      "team": "Brondby",
+      "played": 32,
+      "wins": 13,
+      "draws": 6,
+      "losses": 13,
+      "gf": 44,
+      "ga": 35,
+      "points": 45
+    },
+    {
+      "team": "Viborg",
+      "played": 32,
+      "wins": 13,
+      "draws": 5,
+      "losses": 14,
+      "gf": 49,
+      "ga": 51,
+      "points": 44
+    },
+    {
+      "team": "Sonderjyske",
+      "played": 32,
+      "wins": 12,
+      "draws": 8,
+      "losses": 12,
+      "gf": 44,
+      "ga": 49,
+      "points": 44
+    },
+    {
+      "team": "Copenhagen",
+      "played": 32,
+      "wins": 15,
+      "draws": 6,
+      "losses": 11,
+      "gf": 67,
+      "ga": 44,
+      "points": 51
+    },
+    {
+      "team": "Odense",
+      "played": 32,
+      "wins": 11,
+      "draws": 8,
+      "losses": 13,
+      "gf": 51,
+      "ga": 60,
+      "points": 41
+    },
+    {
+      "team": "Silkeborg",
+      "played": 32,
+      "wins": 10,
+      "draws": 6,
+      "losses": 16,
+      "gf": 41,
+      "ga": 67,
+      "points": 36
+    },
+    {
+      "team": "Randers",
+      "played": 32,
+      "wins": 9,
+      "draws": 8,
+      "losses": 15,
+      "gf": 33,
+      "ga": 47,
+      "points": 35
+    },
+    {
+      "team": "Fredericia",
+      "played": 32,
+      "wins": 9,
+      "draws": 7,
+      "losses": 16,
+      "gf": 45,
+      "ga": 68,
+      "points": 34
+    },
+    {
+      "team": "Vejle",
+      "played": 32,
+      "wins": 5,
+      "draws": 9,
+      "losses": 18,
+      "gf": 36,
+      "ga": 60,
+      "points": 24
+    }
+  ],
+  "current_season_2026_27_source_warning": {
+    "CHE1": {
+      "website_reported_finished_rows": 93,
+      "website_identified_team_identities": 17,
+      "real_league_clubs": 12,
+      "snapshot_last_update_note": "restored 11 Oct backup, updates disconnected",
+      "fail_closed": "MULTIPLE_ALIASES_FOR_ONE_CLUB_AND_POSSIBLE_DUPLICATE_GAMES; NOT 93 independent examples",
+      "url": "https://matchdaysync.com/leagues/swiss-super-league?season=2026-27"
+    },
+    "DNK1": {
+      "website_reported_finished_rows": 87,
+      "website_identified_team_identities": 16,
+      "real_league_clubs": 12,
+      "snapshot_last_update_note": "restored 11 Oct backup, updates disconnected",
+      "fail_closed": "MULTIPLE_ALIASES_FOR_ONE_CLUB_AND_POSSIBLE_DUPLICATE_GAMES; NOT 87 independent examples",
+      "identity_example": "FC København and FC Copenhagen; AGF and Aarhus; source page shows overlapping Viborg–Nordsjælland results under alias variants on Sep 20",
+      "url": "https://matchdaysync.com/leagues/danish-superliga?season=2026-27"
+    },
+    "policy": "Do not add 2026/27 scores from these snapshots without canonical team ID and exact date/score/dedup audit."
+  },
+  "csv_gate_script": "experiments/263/league_expansion/verify_public_season_csv_2526.py",
+  "csv_gate_commit": "682b97878e3327af4e93662c6bab1b9a7a21b694",
+  "csv_download_test_status": "FULL_CSV_NOT_ACCESSIBLE_IN_THIS_CHAT_RUNTIME; adapter not run on real 228/192 files",
+  "now_added_match_rows": 0,
+  "quarantine_row_count_stays": 2393,
+  "models_unmodified": true,
+  "next_step": "Locally download two public CSV files. Apply offline name/score/FT/date dedup checks and compare 12 team WDL/GF/GA/points to SFL or RSSSF tables; then independent sample verification. After confirming allowed rights, admit clean nonduplicate records to research-only quarantine, never to main."
+}
