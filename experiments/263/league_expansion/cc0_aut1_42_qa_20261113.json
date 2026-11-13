@@ -1,0 +1,28 @@
+{
+  "created_on": "2026-11-13",
+  "scope": "AUT1 2026-27 only (additional to cc0_new_485); new unique scored candidates",
+  "status": "QUARANTINE_NOT_TRAINING",
+  "source": "openfootball/austria/2026-27/1-bundesliga.txt",
+  "source_blob_sha": "3d94e3020c2fbe38f298af9e5d63369fbc069c95",
+  "season": "2026-27",
+  "listed_fixtures": 132,
+  "scored_candidates": 42,
+  "last_scored_match": "2026-09-20",
+  "internal_unique_key_count": 42,
+  "duplicate_key_count": 0,
+  "secondary_read_only_crosscheck": {
+    "source": "oladeeayo/open-matchday",
+    "date_club_alias_score_matches": 42,
+    "conflicts": 0,
+    "data_rows_reused": false
+  },
+  "total_new_candidates_since_prior_snapshot": 527,
+  "prior_1249_untouched": true,
+  "aggregate_quarantine_candidates": 1776,
+  "limitations": [
+    "Not an official-by-official match adjudication",
+    "Source stalled at September, not current to November 13",
+    "Input row provider rights and identity to be verified",
+    "No model/training/production merge"
+  ]
+}
