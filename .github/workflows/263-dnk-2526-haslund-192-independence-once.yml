@@ -1,0 +1,45 @@
+name: 263 Research - DNK1 2025-26 independent 192 match QA
+
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-dnk-2526-haslund-192-independence-once.yml
+      - experiments/263/league_expansion/verify_dnk1_2526_haslund_fullseason_once.py
+
+permissions:
+  contents: read
+
+jobs:
+  danish-192:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic Danish date/team/score and scoreless test
+        run: python experiments/263/league_expansion/verify_dnk1_2526_haslund_fullseason_once.py --self-test
+      - name: Check 3 independent league stages versus SHA-pinned 192 original CSV matches
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/verify_dnk1_2526_haslund_fullseason_once.py --live | tee danish_192_qa.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          log=Path('danish_192_qa.log').read_text(encoding='utf-8')
+          a=log.index('DANISH_192_REPORT_START')+len('DANISH_192_REPORT_START')
+          b=log.index('DANISH_192_REPORT_END')
+          data=json.loads(log[a:b])
+          Path('danish_192_qa_aggregate.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+              f.write('## Danish Superliga 2025/26 independent 192 match FT QA\n')
+              for key in ('status','matched_date_club_ft_score','score_differences','source_only_count','independent_only_count','previous_15_witnesses_still_matching','new_unique_witnesses_beyond_previous_15'):
+                  f.write('- '+key+': '+str(data.get(key,'n/a'))+'\n')
+              f.write('\nNo raw source copied to repo; no training or main M4 modifications.\n')
+          PY
+      - name: Upload limited aggregate result only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-dnk1-2526-192-independent-results-aggregate
+          path: danish_192_qa_aggregate.json
+          retention-days: 14
