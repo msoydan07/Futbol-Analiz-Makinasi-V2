@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "22 league x 2 season research matrix frozen from six original CSVs: 2396 unique research-quarantine matches, no training admissions. Original 1855 manual Excel audited read-only: 90 current +1765 previous missing, 459 old xG comparison rows and 56 old one-sided values. Next need user-entered xG with source dates; source reuse permission/as-of certification remain blocked. 472 novel ENG3/ENG4 pairs are shape-checked but independent score licensing unresolved. Never repeat old 178/22/472/420/50 checks. Main M4 stays untouched.",
+  "next_priority": "Rights classification completed for all 2396 research quarantine records: 2071 publisher-claimed CC0, including 200 hard legacy FT/identity holds; 1871 without these specific holds STILL need independent row accuracy and upstream rights review, 322 CC BY upstream unclear and 3 other third-party unclear. 0 training approved. Chronological shadow prereg frozen, not executed. 1855 manual xG values not filled; source postgame xG as-of/vintage unconfirmed. Next distinct work: validate accuracy/rights for specific admitted subset without repeating closed historical QA, then chronological shadow experiment. Main M4/10-league sealed records unchanged.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -469,5 +469,21 @@
     "production_m4_touched": false,
     "new_training_rows": 0,
     "no_repeat_rule": "22x2 matrix and the original 1855 workbook baseline frozen. Audit changes only after new manual xG entries, licensed data or an actual source SHA change."
+  },
+  "rights_vs_quality_2396_and_shadow_prereg_20261114": {
+    "status": "PUBLISHER_RIGHTS_CLASSIFIED__NO_TRAINING_PROMOTIONS",
+    "evidence": "experiments/263/league_expansion/source_rights_quality_2396_pass_and_shadow_prereg_20261114.json",
+    "run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43529678035",
+    "research_records": 2396,
+    "CC0_publisher_claim": 2071,
+    "held_original_score_or_identity": 200,
+    "CC0_publisher_claim_and_not_in_explicit_hold_but_quality_pending": 1871,
+    "other_compilation_upstream_rights_unclear": 322,
+    "other_third_party_rights_unclear": 3,
+    "training_admitted": 0,
+    "production_M4_modified": false,
+    "source_CCO_not_entire_quality_approval": true,
+    "chronology_prereg_only_no_backtest_yet": true,
+    "loop_policy": "No repeats of 178/22/472 English or 420/50 Swiss-Danish completed FT checks. Future work must independently validate source-specific accuracy/rights and point-in-time split for possible 1871 candidate subset; do not auto promote."
   }
 }
