@@ -1,0 +1,58 @@
+{
+  "created_on": "2026-11-13",
+  "provider": "openfootball/football.json",
+  "license": "CC0/public domain as provider states",
+  "season": "2025-26",
+  "result_scope": "source reconnaissance only; no rows imported or trained",
+  "league_counts": [
+    {
+      "code": "ENG3",
+      "listed": 552,
+      "scored": 261,
+      "source": "openfootball/football.json/2025-26/en.3.json"
+    },
+    {
+      "code": "ENG4",
+      "listed": 564,
+      "scored": 261,
+      "source": "openfootball/football.json/2025-26/en.4.json"
+    },
+    {
+      "code": "GER2",
+      "listed": 306,
+      "scored": 94,
+      "source": "openfootball/football.json/2025-26/de.2.json"
+    },
+    {
+      "code": "ESP2",
+      "listed": 462,
+      "scored": 115,
+      "source": "openfootball/football.json/2025-26/es.2.json"
+    },
+    {
+      "code": "ITA2",
+      "listed": 380,
+      "scored": 283,
+      "source": "openfootball/football.json/2025-26/it.2.json"
+    },
+    {
+      "code": "FRA2",
+      "listed": 306,
+      "scored": 107,
+      "source": "openfootball/football.json/2025-26/fr.2.json"
+    },
+    {
+      "code": "GRE1",
+      "listed": 182,
+      "scored": 61,
+      "source": "openfootball/football.json/2025-26/gr.1.json"
+    },
+    {
+      "code": "AUT1",
+      "listed": 132,
+      "scored": 67,
+      "source": "openfootball/football.json/2025-26/at.1.json"
+    }
+  ],
+  "checks": "Listed includes fixtures without final scores; non-finished rows must not be used for supervised training. Record-level match source and cross checks remain pending."
+}
