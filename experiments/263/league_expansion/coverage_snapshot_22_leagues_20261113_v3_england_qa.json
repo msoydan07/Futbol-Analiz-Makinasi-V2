@@ -1,0 +1,251 @@
+{
+  "created_on": "2026-11-13",
+  "branch": "research/263-13-lig-22-havuz-20261113",
+  "scope": "Futbol 2.6.3; 13 analysis target + 9 training-only = 22 leagues; 2025/26 and 2026/27 only",
+  "snapshot_revision": 3,
+  "additive_quarantine_total": 2393,
+  "additive_unique_fixture_identity_keys": 2393,
+  "additive_duplicates": 0,
+  "additional_today": 322,
+  "prior_quarantine": 2071,
+  "inputs": [
+    {
+      "path": "experiments/263/league_expansion/training_2025_26_cc0_scored_QUARANTINE.csv",
+      "blob_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+      "rows": 1249
+    },
+    {
+      "path": "experiments/263/league_expansion/cc0_new_485_2526_2627_QUARANTINE_20261113.csv",
+      "blob_sha": "2582e3ffa6e200b74704702dccc01ca19ad4750e",
+      "rows": 485
+    },
+    {
+      "path": "experiments/263/league_expansion/cc0_aut1_2026_27_42_QUARANTINE_20261113.csv",
+      "blob_sha": "a404b3a395b32c42ac4e6cfef724bdebd3cbecb9",
+      "rows": 42
+    },
+    {
+      "path": "experiments/263/league_expansion/score_shape_recovery_295_2526_QUARANTINE_20261113.csv",
+      "blob_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+      "rows": 295
+    },
+    {
+      "path": "experiments/263/league_expansion/eng3_eng4_2026_27_322_CCBY_QUARANTINE_20261113.csv",
+      "blob_sha": "22b909a504254bfd3c9013f27fdbf2736ffbf746",
+      "rows": 322
+    }
+  ],
+  "alternative_2025_26_eng3_eng4_non_additive": {
+    "source_file": "experiments/263/league_expansion/eng3_eng4_2025_26_1104_ALTERNATIVE_NONADDITIVE_20261113.csv",
+    "source_count": 1104,
+    "not_included_in_additive_quarantine": true,
+    "matched_432": 432,
+    "score_conflicts_178": 178,
+    "source_only_494": 494,
+    "old_only_22": 22,
+    "issue_ledger": "experiments/263/league_expansion/eng3_eng4_2025_26_200_issues_20261113.csv",
+    "status": "BLOCK_TRAINING_UNTIL_MATCH_LEVEL_OFFICIAL_RECONCILIATION"
+  },
+  "matrix": [
+    {
+      "code": "ENG1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "ENG2",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "GER1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "ESP1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "ITA1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "FRA1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "NED1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "TUR1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "POR1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "BEL1",
+      "role": "PRODUCTION_10_READONLY",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": true
+    },
+    {
+      "code": "SCO1",
+      "role": "NEW_ANALYSIS_SHADOW_TARGET",
+      "quarantine_2025_26": 58,
+      "quarantine_2026_27": 42,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "DNK1",
+      "role": "NEW_ANALYSIS_SHADOW_TARGET",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "CHE1",
+      "role": "NEW_ANALYSIS_SHADOW_TARGET",
+      "quarantine_2025_26": 0,
+      "quarantine_2026_27": 54,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "ENG3",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 356,
+      "quarantine_2026_27": 158,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "ENG4",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 276,
+      "quarantine_2026_27": 164,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "ENG5",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 296,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "GER2",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 99,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "ESP2",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 131,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "ITA2",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 309,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "FRA2",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 116,
+      "quarantine_2026_27": 0,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "GRE1",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 62,
+      "quarantine_2026_27": 35,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    },
+    {
+      "code": "AUT1",
+      "role": "RESEARCH_ONLY_HELPER",
+      "quarantine_2025_26": 195,
+      "quarantine_2026_27": 42,
+      "admitted_train_rows_added": 0,
+      "production_allowed": false
+    }
+  ],
+  "hard_gates": [
+    "One source score disagreement blocks that fixture from training",
+    "Same match in distinct sources is not two distinct training examples",
+    "No training with unlicensed unverified provider data",
+    "Latest date of ENG3 and ENG4 2026/27 CC BY source is 2026-11-08, not 2026-11-13",
+    "Historical match-day xG must never be used before it existed",
+    "Never treat absent xG or unplayed fixture as 0",
+    "Existing 10-league main and 96 SHA sealed forecasts cannot change",
+    "A/B/C one paired chronological test after source-data and rights QA"
+  ],
+  "rights_notes": [
+    "OpenFootball CC0 stated, upstream third-party rights still must be considered",
+    "Sean Elvidge original data compilation CC BY 4.0 with attribution, third party data rights explicitly reserved",
+    "open-matchday non-commercial source read only for this project, no bulk source rows copied",
+    "Cornerflick score data is from api-football: CC BY original compilation only; investigate downstream vendor permissions before importing"
+  ],
+  "frozen": [
+    "main",
+    "experiment/263-toplu-karsilastirma",
+    "M4/B/C2/C3",
+    "10 league morning fixture, analysis, SHA archives",
+    "existing user xG Excel and automations"
+  ],
+  "note": "Old 2025/26 ENG3 and ENG4 quarantine rows contain at least 178 score collisions across two independently prepared datasets, three independently spot-checked matches support alternate source; 2025/26 remains NOT ACCEPTED TRAINING."
+}
