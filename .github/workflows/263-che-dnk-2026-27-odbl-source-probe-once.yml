@@ -1,0 +1,39 @@
+name: 263 Research - one-shot ODbL current Swiss Danish source coverage
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-che-dnk-2026-27-odbl-source-probe-once.yml
+permissions:
+  contents: read
+jobs:
+  license-safe-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify ODbL current season source, no raw match records archived
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/probe_openligadb_che_dnk_2026_27_odbl.py | tee openligadb_qa.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("openligadb_qa.log").read_text()
+          a=s.index("ODBL_SOURCE_PROBE_START")+len("ODBL_SOURCE_PROBE_START")
+          b=s.index("ODBL_SOURCE_PROBE_END")
+          doc=json.loads(s[a:b])
+          Path("odbl_2026_27_source_coverage_aggregate.json").write_text(json.dumps(doc,indent=2,ensure_ascii=False)+'\n')
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+              f.write("## ODbL league and coverage gates, no training\n")
+              f.write("| League | Shortcut | FT games | 12-team validation pending | Source gate |\n|---|---|---:|---|---|\n")
+              for x in doc["sources"]:
+                  f.write("| {} | {} | {} | Yes | {} |\n".format(x['league'],x['shortcut'],x.get('valid_unique_finished_FT_before_Nov14','?'),x.get('source_quality_gate',x.get('status'))))
+          PY
+      - name: Archive aggregate summary only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-che-dnk-2026-27-odbl-source-probe-summary
+          path: odbl_2026_27_source_coverage_aggregate.json
+          retention-days: 14
