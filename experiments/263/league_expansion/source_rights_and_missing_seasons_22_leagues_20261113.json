@@ -120,7 +120,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "Read and verify complete OpenLigaDB bsl/2025 Swiss 2025/26 once under API usage terms, keep ODbL attribution and data separate; verify official match identities/scores and season before admission. Denmark 2025/26 and 2026/27 still need rights-cleared full-season source. 2025/26 ENG3/ENG4 score conflicts and data quality gates remain blocked.",
+  "next_priority": "CHE1/DNK1 2025/26 full-source research links and aggregate checksum FOUND (see follow_on_checked_sources_20261114). Do not repeat source search. Need actual locally downloaded 228/192 CSV, canonical team fixture/score QA and independent match checks and source rights approval. DNK1 2026/27 and CHE1 2026/27 identity aliases require fail-closed dedup first. Then single A/B/C comparison.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -129,5 +129,30 @@
       "state": "potentially_permitted_not_yet_quality_accepted",
       "reason": "ODbL source with unknown completion and one suspicious outside-season row; no API dump stored"
     }
-  ]
+  ],
+  "follow_on_checked_sources_20261114": {
+    "source_manifest": "experiments/263/league_expansion/2025_26_full_season_public_csv_two_leagues_source_checks_20261114.json",
+    "validated_reference_sources": [
+      {
+        "league": "CHE1",
+        "season": "2025-26",
+        "full_season_candidate_rows": 228,
+        "independent_final_table": "SFL 2025/26 228 matches, 750 total goals, 12 clubs 38 matches each",
+        "raw_source_ingestion": "NOT_DONE",
+        "right_to_republish": "UNVERIFIED"
+      },
+      {
+        "league": "DNK1",
+        "season": "2025-26",
+        "full_season_candidate_rows": 192,
+        "independent_final_table": "RSSSF 2025/26 192 matches, 595 total goals, 12 clubs 32 matches each",
+        "raw_source_ingestion": "NOT_DONE",
+        "right_to_republish": "UNVERIFIED"
+      }
+    ],
+    "caveat": "Public CSV route is documented for own analysis but permission to redistribute or resell is not granted. Never copy the 420 underlying rows into public GitHub before rights are checked.",
+    "current_season_alias_risk": "MatchDaySync CHE1 2026-27 lists 17 and DNK1 lists 16 distinct club identities in competitions of 12; canonical fixture de-dup mandatory, 93/87 claimed finished rows cannot be treated as independent games.",
+    "gate_script": "experiments/263/league_expansion/verify_public_season_csv_2526.py",
+    "dataset_production_status": "NO_NEW_TRAINING_NO_NEW_M4_NO_OVERWRITE"
+  }
 }
