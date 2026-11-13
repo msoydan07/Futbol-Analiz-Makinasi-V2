@@ -1,0 +1,427 @@
+{
+  "source_revision": "2026-11-14",
+  "scope": "22-league x 2-season RESEARCH QUARANTINE matrix ONLY; not a production 10-league coverage report",
+  "research_branch": "research/263-13-lig-22-havuz-20261113",
+  "season_policy": [
+    "2025-26",
+    "2026-27"
+  ],
+  "analysis_league_targets": 13,
+  "training_only_leagues": 9,
+  "raw_training_candidate_match_rows": 2396,
+  "distinct_research_fixture_rows": 2396,
+  "old_ENG3_ENG4_problematic_holds_inside_these_rows": 200,
+  "model_training_newly_admitted_rows": 0,
+  "do_not_subtract_200_to_claim_ready_training_matches": true,
+  "qualification": "Known unresolved license/source provenance and broader requirements mean all 2396 remain research quarantine, including the other 2196 without those specific 200 FT/date holds.",
+  "research_source_files": [
+    {
+      "path": "experiments/263/league_expansion/training_2025_26_cc0_scored_QUARANTINE.csv",
+      "blob_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+      "row_count": 1249,
+      "by_league_season": {
+        "ENG3/2025-26": 261,
+        "ENG4/2025-26": 261,
+        "GER2/2025-26": 94,
+        "ESP2/2025-26": 115,
+        "ITA2/2025-26": 283,
+        "FRA2/2025-26": 107,
+        "GRE1/2025-26": 61,
+        "AUT1/2025-26": 67
+      }
+    },
+    {
+      "path": "experiments/263/league_expansion/cc0_new_485_2526_2627_QUARANTINE_20261113.csv",
+      "blob_sha": "2582e3ffa6e200b74704702dccc01ca19ad4750e",
+      "row_count": 485,
+      "by_league_season": {
+        "ENG5/2025-26": 296,
+        "SCO1/2025-26": 58,
+        "CHE1/2026-27": 54,
+        "GRE1/2026-27": 35,
+        "SCO1/2026-27": 42
+      }
+    },
+    {
+      "path": "experiments/263/league_expansion/cc0_aut1_2026_27_42_QUARANTINE_20261113.csv",
+      "blob_sha": "a404b3a395b32c42ac4e6cfef724bdebd3cbecb9",
+      "row_count": 42,
+      "by_league_season": {
+        "AUT1/2026-27": 42
+      }
+    },
+    {
+      "path": "experiments/263/league_expansion/score_shape_recovery_295_2526_QUARANTINE_20261113.csv",
+      "blob_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+      "row_count": 295,
+      "by_league_season": {
+        "AUT1/2025-26": 128,
+        "ENG3/2025-26": 95,
+        "ENG4/2025-26": 15,
+        "ESP2/2025-26": 16,
+        "FRA2/2025-26": 9,
+        "GER2/2025-26": 5,
+        "GRE1/2025-26": 1,
+        "ITA2/2025-26": 26
+      }
+    },
+    {
+      "path": "experiments/263/league_expansion/eng3_eng4_2026_27_322_CCBY_QUARANTINE_20261113.csv",
+      "blob_sha": "22b909a504254bfd3c9013f27fdbf2736ffbf746",
+      "row_count": 322,
+      "by_league_season": {
+        "ENG3/2026-27": 158,
+        "ENG4/2026-27": 164
+      }
+    },
+    {
+      "path": "experiments/263/league_expansion/che1_2026_27_oct10_3_match_score_facts_QUARANTINE_20261114.csv",
+      "blob_sha": "7098dd60bde56f8dbcd5b16930308028f332b821",
+      "row_count": 3,
+      "by_league_season": {
+        "CHE1/2026-27": 3
+      }
+    }
+  ],
+  "league_rows": [
+    {
+      "code": "ENG1",
+      "name": "İngiltere Premier League",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "ENG2",
+      "name": "İngiltere Championship",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": true,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "GER1",
+      "name": "Almanya Bundesliga",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "ESP1",
+      "name": "İspanya La Liga",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "ITA1",
+      "name": "İtalya Serie A",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "FRA1",
+      "name": "Fransa Ligue 1",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "NED1",
+      "name": "Hollanda Eredivisie",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": true,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "TUR1",
+      "name": "Türkiye Süper Lig",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": true,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "POR1",
+      "name": "Portekiz Primeira Liga",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": true,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "BEL1",
+      "name": "Belçika Pro League",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": true,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": true,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "SCO1",
+      "name": "İskoçya Premiership",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 58,
+        "2026-27": 42
+      },
+      "research_quarantine_total": 100,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "DNK1",
+      "name": "Danimarka Superliga",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 0,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "CHE1",
+      "name": "İsviçre Super League",
+      "group": "analysis",
+      "research_quarantine_by_season": {
+        "2025-26": 0,
+        "2026-27": 57
+      },
+      "research_quarantine_total": 57,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "ENG3",
+      "name": "İngiltere League One",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 356,
+        "2026-27": 158
+      },
+      "research_quarantine_total": 514,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "ENG4",
+      "name": "İngiltere League Two",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 276,
+        "2026-27": 164
+      },
+      "research_quarantine_total": 440,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "ENG5",
+      "name": "İngiltere National League",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 296,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 296,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "GER2",
+      "name": "Almanya 2. Bundesliga",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 99,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 99,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "ESP2",
+      "name": "İspanya Segunda División",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 131,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 131,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "ITA2",
+      "name": "İtalya Serie B",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 309,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 309,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "FRA2",
+      "name": "Fransa Ligue 2",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 116,
+        "2026-27": 0
+      },
+      "research_quarantine_total": 116,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "GRE1",
+      "name": "Yunanistan Super League",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 62,
+        "2026-27": 35
+      },
+      "research_quarantine_total": 97,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    },
+    {
+      "code": "AUT1",
+      "name": "Avusturya Bundesliga",
+      "group": "training_only",
+      "research_quarantine_by_season": {
+        "2025-26": 195,
+        "2026-27": 42
+      },
+      "research_quarantine_total": 237,
+      "production_existing_10_league_data_not_counted_here": false,
+      "ft_data_rights": "NOT_CLEARED_FOR_RESEARCH_MODEL_TRAINING",
+      "xg_manual_excel_scope": false,
+      "league_prediction_extension_approved": false
+    }
+  ],
+  "other_verified_match_facts_not_inserted": {
+    "CHE1_2025_26": 228,
+    "DNK1_2025_26": 192,
+    "CHE1_2026_27_independent_extra": 21,
+    "DNK1_2026_27_independent_extra": 29,
+    "ENG3_ENG4_2025_26_alternative_472": "candidate-only nonadditive"
+  },
+  "manual_xg_workbook": {
+    "filename": "263_xg_elle_giris_1855_haftalik_tek_kaynak.xlsx",
+    "planned_missing": 1855,
+    "current_season_2026_27": 90,
+    "previous_season_2025_26": 1765,
+    "prior_xg_comparison_pairs": 459,
+    "one_sided_old_provider_requiring_both_new_values": 56,
+    "manual_entry_leagues": [
+      "ENG2",
+      "NED1",
+      "POR1",
+      "TUR1",
+      "BEL1"
+    ],
+    "unverified_asof_and_license": true
+  },
+  "notes": [
+    "Zero in ten original production leagues means no ADDITIONAL research quarantine rows in those leagues, not zero production history.",
+    "Research folder has no imported Danish scores despite separately verified 192+84 factual game results; rights gate blocks importing.",
+    "2026/27 is not a completed season; no full-season expected counts imposed.",
+    "22-league target is not an active 13-league model; SCO1/CHE1/DNK1 remain research pending full promotion.",
+    "200 score/identity issue keys overlap this pool and are not additional scored games.",
+    "No new live odds, predictions, or betting conclusions."
+  ]
+}
