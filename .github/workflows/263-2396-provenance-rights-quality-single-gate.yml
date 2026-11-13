@@ -1,0 +1,46 @@
+name: 263 Research - 2396 Rights Provenance vs Quality Gate
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-2396-provenance-rights-quality-single-gate.yml
+permissions:
+  contents: read
+jobs:
+  rights-vs-quality-once:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic licence whitelist and pinned source tests
+        run: python experiments/263/league_expansion/prepare_2396_provenance_rights_quality_gate_20261114.py --self-test
+      - name: Exact rows, six files and 200 holds rights-quality classification
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/prepare_2396_provenance_rights_quality_gate_20261114.py --run | tee provenance.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("provenance.log").read_text()
+          a=s.index("PROVENANCE_QA_START")+len("PROVENANCE_QA_START")
+          b=s.index("PROVENANCE_QA_END")
+          p=json.loads(s[a:b])
+          assert p["training_approved_rows"]==0
+          assert sum(p["published_license_provenance_counts"].values())==2396
+          assert p["quality"]["EXPLICIT_LEGACY_FT_OR_IDENTITY_HOLD"]==200
+          assert p["CC0_declared_without_hard_hold"]==1871
+          Path("provenance_rights_2396_aggregate.json").write_text(json.dumps(p,indent=2,ensure_ascii=False)+'\n')
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+              f.write("## Research rights vs individual data-quality gate\n\n")
+              for k,v in p["published_license_provenance_counts"].items():
+                  f.write("- "+k+": "+str(v)+"\n")
+              f.write("\n- 200 exact broken or date-identity HOLD; 0 training admissions\n")
+              f.write("- 1871 CC0-published, not-held research candidates are NOT trained or QA approved\n")
+              f.write("\nNo training data exported or signed predictions modified.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-rights-quality-gate-2396-aggregate
+          path: provenance_rights_2396_aggregate.json
+          retention-days: 14
