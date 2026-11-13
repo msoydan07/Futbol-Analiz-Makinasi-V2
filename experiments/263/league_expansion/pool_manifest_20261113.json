@@ -1,0 +1,166 @@
+{
+  "created_on": "2026-11-13",
+  "intent": "13 domestic league prediction coverage + 9 additional leagues for training-only research",
+  "research_only": true,
+  "merged_into_main": false,
+  "allowed_seasons": [
+    "2025-26",
+    "2026-27"
+  ],
+  "active_leagues": [
+    {
+      "code": "ENG1",
+      "name": "İngiltere Premier League",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "ENG2",
+      "name": "İngiltere Championship",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "GER1",
+      "name": "Almanya Bundesliga",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "ESP1",
+      "name": "İspanya La Liga",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "ITA1",
+      "name": "İtalya Serie A",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "FRA1",
+      "name": "Fransa Ligue 1",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "NED1",
+      "name": "Hollanda Eredivisie",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "TUR1",
+      "name": "Türkiye Süper Lig",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "POR1",
+      "name": "Portekiz Primeira Liga",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "BEL1",
+      "name": "Belçika Pro League",
+      "status": "existing_2_6_3",
+      "production_allowed": true
+    },
+    {
+      "code": "SCO1",
+      "name": "İskoçya Premiership",
+      "status": "new_pending_identity_source_and_backtest",
+      "production_allowed": false
+    },
+    {
+      "code": "DNK1",
+      "name": "Danimarka Superliga",
+      "status": "new_pending_identity_source_and_backtest",
+      "production_allowed": false
+    },
+    {
+      "code": "CHE1",
+      "name": "İsviçre Super League",
+      "status": "new_pending_identity_source_and_backtest",
+      "production_allowed": false
+    }
+  ],
+  "training_only_leagues": [
+    {
+      "code": "ENG3",
+      "name": "İngiltere League One",
+      "training_use": "research_only",
+      "production_predictions": false
+    },
+    {
+      "code": "ENG4",
+      "name": "İngiltere League Two",
+      "training_use": "research_only",
+      "production_predictions": false
+    },
+    {
+      "code": "ENG5",
+      "name": "İngiltere National League",
+      "training_use": "research_only",
+      "production_predictions": false
+    },
+    {
+      "code": "GER2",
+      "name": "Almanya 2. Bundesliga",
+      "training_use": "research_only",
+      "production_predictions": false
+    },
+    {
+      "code": "ESP2",
+      "name": "İspanya Segunda División",
+      "training_use": "research_only",
+      "production_predictions": false
+    },
+    {
+      "code": "ITA2",
+      "name": "İtalya Serie B",
+      "training_use": "research_only",
+      "production_predictions": false
+    },
+    {
+      "code": "FRA2",
+      "name": "Fransa Ligue 2",
+      "training_use": "research_only",
+      "production_predictions": false
+    },
+    {
+      "code": "GRE1",
+      "name": "Yunanistan Super League",
+      "training_use": "research_only",
+      "production_predictions": false
+    },
+    {
+      "code": "AUT1",
+      "name": "Avusturya Bundesliga",
+      "training_use": "research_only",
+      "production_predictions": false
+    }
+  ],
+  "unique_leagues": 22,
+  "new_analysis_leagues": [
+    "SCO1",
+    "DNK1",
+    "CHE1"
+  ],
+  "training_gates": [
+    "use only licensed/open datasets",
+    "validate match date/team score and deduplicate",
+    "exclude unplayed and unknown FT results",
+    "preserve league ID, season and stage; never treat missing xG as zero",
+    "only pre-kickoff features in chronological splits; post-match xG of target fixture forbidden",
+    "hierarchical league effects and opponent strength per league",
+    "paired time-ordered validation vs frozen 10 league M4 baseline for 1X2, BTTS, O/U 2.5; no deployment absent evidence"
+  ],
+  "source_notes": [
+    "OpenFootball CC0 published JSON: match scores are often incomplete even for supposedly past seasons; retain only audited matches",
+    "Football-Data permits private/personal light use but forbids commercial/model-training products with heavy automated collection; do not bulk-harvest without confirming applicability",
+    "New analysis league promotion requires fixture, team alias, data gates and full report tests; live M4 is unchanged"
+  ]
+}
