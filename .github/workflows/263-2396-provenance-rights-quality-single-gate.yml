@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-2396-provenance-rights-quality-single-gate.yml
+      - experiments/263/league_expansion/prepare_2396_provenance_rights_quality_gate_20261114.py
 permissions:
   contents: read
 jobs:
