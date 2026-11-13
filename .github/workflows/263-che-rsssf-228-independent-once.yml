@@ -6,6 +6,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-che-rsssf-228-independent-once.yml
+      - experiments/263/league_expansion/verify_che1_2526_rsssf_fullseason_once.py
 
 permissions:
   contents: read
