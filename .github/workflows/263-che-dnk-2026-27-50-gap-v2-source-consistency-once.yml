@@ -1,0 +1,44 @@
+name: 263 Research - Current CHE DNK 50-gap two-source reconciliation v2
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-che-dnk-2026-27-50-gap-v2-source-consistency-once.yml
+      - experiments/263/league_expansion/audit_current_50_gaps_v2_license_safe.py
+permissions:
+  contents: read
+jobs:
+  scores-as-facts-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify unchanged old 57 Swiss and source parsing samples
+        run: python experiments/263/league_expansion/audit_current_50_gaps_v2_license_safe.py --self-test
+      - name: Current 21 CHE and 29 DNK facts against independent sources without raw imports
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/audit_current_50_gaps_v2_license_safe.py --live | tee v2_fifty_qa.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("v2_fifty_qa.log").read_text()
+          a=s.index("V2_50_GAP_START")+len("V2_50_GAP_START")
+          b=s.index("V2_50_GAP_END")
+          obj=json.loads(s[a:b])
+          Path("v2_50_gap_scores_aggregate.json").write_text(json.dumps(obj,indent=2,ensure_ascii=False)+'\n')
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## CHE 21 + DNK 29 current scores: independent QA only\n")
+            f.write("| League | New distinct | 2nd source equal | Conflicts | Status |\n|---|---:|---:|---:|---|\n")
+            for d in obj["results"]:
+              f.write("| {} | {} | {} | {} | {} |\n".format(d["league"],d.get("new_unique_fixtures","?"),
+                d.get("independent_verified_new_ft_scores","?"),d.get("conflicting_new_ft_scores","?"),d["status"]))
+            f.write("\nNo archived raw upstream match table, no approval to train models.\n")
+          PY
+      - name: Aggregate audit artifact only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-current-50-score-facts-second-source-aggregate-v2
+          path: v2_50_gap_scores_aggregate.json
+          retention-days: 14
