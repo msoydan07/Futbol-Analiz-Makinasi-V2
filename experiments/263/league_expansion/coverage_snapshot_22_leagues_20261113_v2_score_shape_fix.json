@@ -1,0 +1,266 @@
+{
+  "snapshot_date": "2026-11-13",
+  "snapshot_version": "v2_score_shape_date_recovery",
+  "branch": "research/263-13-lig-22-havuz-20261113",
+  "allowed_seasons": [
+    "2025-26",
+    "2026-27"
+  ],
+  "current_production_leagues": 10,
+  "goal_analysis_leagues": 13,
+  "extra_training_leagues": 9,
+  "unique_pool_leagues": 22,
+  "training_eligible_count": 0,
+  "quarantine_count_total": 2071,
+  "previous_quarantine": 1776,
+  "new_candidate_rows": 295,
+  "fixes": {
+    "recovered_score_arrays_7_leagues": 167,
+    "austria_full_season_128": 128,
+    "ENG3_wrong_2025_year_corrected_2026": 85
+  },
+  "unique_identity_keys": 2071,
+  "global_duplicate_count": 0,
+  "global_out_of_season_count": 0,
+  "input_files": [
+    {
+      "path": "experiments/263/league_expansion/training_2025_26_cc0_scored_QUARANTINE.csv",
+      "sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+      "count": 1249
+    },
+    {
+      "path": "experiments/263/league_expansion/cc0_new_485_2526_2627_QUARANTINE_20261113.csv",
+      "sha": "2582e3ffa6e200b74704702dccc01ca19ad4750e",
+      "count": 485
+    },
+    {
+      "path": "experiments/263/league_expansion/cc0_aut1_2026_27_42_QUARANTINE_20261113.csv",
+      "sha": "a404b3a395b32c42ac4e6cfef724bdebd3cbecb9",
+      "count": 42
+    },
+    {
+      "path": "experiments/263/league_expansion/score_shape_recovery_295_2526_QUARANTINE_20261113.csv",
+      "sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+      "count": 295
+    }
+  ],
+  "league_rows": [
+    {
+      "code": "ENG1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "ENG2",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "GER1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "ESP1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "ITA1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "FRA1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "NED1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "TUR1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "POR1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "BEL1",
+      "role": "FROZEN_PRODUCTION_10",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "some_season_missing": false
+    },
+    {
+      "code": "SCO1",
+      "role": "SHADOW_TARGET_PENDING_PROMOTION",
+      "quarantine_scored_2025_26": 58,
+      "quarantine_scored_2026_27": 42,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": false
+    },
+    {
+      "code": "DNK1",
+      "role": "SHADOW_TARGET_PENDING_PROMOTION",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "CHE1",
+      "role": "SHADOW_TARGET_PENDING_PROMOTION",
+      "quarantine_scored_2025_26": 0,
+      "quarantine_scored_2026_27": 54,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "ENG3",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 356,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "ENG4",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 276,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "ENG5",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 296,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "GER2",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 99,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "ESP2",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 131,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "ITA2",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 309,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "FRA2",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 116,
+      "quarantine_scored_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": true
+    },
+    {
+      "code": "GRE1",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 62,
+      "quarantine_scored_2026_27": 35,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": false
+    },
+    {
+      "code": "AUT1",
+      "role": "TRAINING_RESEARCH_ONLY",
+      "quarantine_scored_2025_26": 195,
+      "quarantine_scored_2026_27": 42,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "some_season_missing": false
+    }
+  ],
+  "remaining_work": [
+    "Complete 2025/26 9 helper leagues to full verified scored coverage; current files remain partial.",
+    "Acquire 2026/27 results with licensed evidence for ENG3, ENG4, ENG5, GER2, ESP2, ITA2, FRA2 and DNK1 (no accepted candidate rows).",
+    "Acquire 2025/26 coverage for CHE1, DNK1 (zero candidate rows).",
+    "Improve 2026/27 SCO1 CHE1 GRE1 AUT1 source freshness beyond 2026-09-20.",
+    "Verify newly expanded 295 rows against official sources/identity and license checks before training.",
+    "Preserve Austrian stage-specific feature treatment and avoid treating missing HT or xG as 0.",
+    "Only after source + identity + as-of gates, evaluate paired A/B/C in same time-ordered 2026/27 match cohort."
+  ],
+  "never_mutate": [
+    "main",
+    "experiment/263-toplu-karsilastirma",
+    "production M4/B/C2/C3",
+    "10 league fixture code",
+    "historical SHA sealed predictions",
+    "automations",
+    "user manual xG spreadsheet"
+  ],
+  "note": "Candidate scored rows != accepted training rows; same-source text/json checks not official independent match verification."
+}
