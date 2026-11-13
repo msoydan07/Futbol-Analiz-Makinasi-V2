@@ -1,0 +1,170 @@
+{
+  "created_on": "2026-11-14",
+  "scope": "Swiss Super League 2025/26: 11 date-or-venue mismatches + 1 RSSSF erroneous full-time score, isolated from primary and secondary raw source",
+  "prior_independent_match_comparison": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43514842224",
+  "prior_exact_match_count": 216,
+  "raw_csv_sha256": "46a8b9aedb6bf294a6991e701609c04d511eb844bd02a24094349ce4be51678c",
+  "sources_are_independent_match_official_or_federation_or_club": true,
+  "exception_facts": [
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2025-09-28",
+      "home": "Basel",
+      "away": "Luzern",
+      "ft_home": 1,
+      "ft_away": 2,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://datencenter.dfb.de/competitions/super-league/seasons/2025-2026?datacenter_name=datencenter",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2025-09-28",
+      "home": "Sion",
+      "away": "Lausanne",
+      "ft_home": 0,
+      "ft_away": 0,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://datencenter.dfb.de/competitions/super-league/seasons/2025-2026?datacenter_name=datencenter",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2025-09-28",
+      "home": "Young Boys",
+      "away": "Thun",
+      "ft_home": 4,
+      "ft_away": 2,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://datencenter.dfb.de/competitions/super-league/seasons/2025-2026?datacenter_name=datencenter",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-02-15",
+      "home": "Basel",
+      "away": "Lugano",
+      "ft_home": 1,
+      "ft_away": 1,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://matchcenter-sfl.football.ch/default.aspx?a=sp&lng=1&ls=25230&oid=2&sg=69235&t=52469&v=777842",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-02-15",
+      "home": "Lausanne",
+      "away": "Servette",
+      "ft_home": 3,
+      "ft_away": 3,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://matchcenter-sfl.football.ch/default.aspx?a=sp&lng=1&ls=25230&oid=2&sg=69235&t=52469&v=777842",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-02-15",
+      "home": "Thun",
+      "away": "Sion",
+      "ft_home": 1,
+      "ft_away": 0,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://matchcenter-sfl.football.ch/default.aspx?a=sp&lng=1&ls=25230&oid=2&sg=69235&t=52469&v=777842",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-04-12",
+      "home": "Luzern",
+      "away": "St Gallen",
+      "ft_home": 2,
+      "ft_away": 2,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://matchcenter-sfl.football.ch/default.aspx?a=sp&lng=1&ls=25230&oid=2&sg=69235&t=52469&v=777842",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-04-12",
+      "home": "Sion",
+      "away": "Lausanne",
+      "ft_home": 3,
+      "ft_away": 0,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://matchcenter-sfl.football.ch/default.aspx?a=sp&lng=1&ls=25230&oid=2&sg=69235&t=52469&v=777842",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-04-12",
+      "home": "Young Boys",
+      "away": "Servette",
+      "ft_home": 1,
+      "ft_away": 1,
+      "cause": "DAY_IN_RSSSF_ONE_EARLIER",
+      "source_url": "https://matchcenter-sfl.football.ch/default.aspx?a=sp&lng=1&ls=25230&oid=2&sg=69235&t=52469&v=777842",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-04-18",
+      "home": "Thun",
+      "away": "Basel",
+      "ft_home": 3,
+      "ft_away": 1,
+      "cause": "RSSSF_HOME_AWAY_REVERSED_AND_SOURCE_HELD_AT_WRONG_CLUB",
+      "source_url": "https://matchcenter-sfl.football.ch/Default.aspx?lng=3&ls=25230&oid=2&sg=69235&t=55584&tg=4263035&v=876315",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-04-25",
+      "home": "Thun",
+      "away": "Lugano",
+      "ft_home": 0,
+      "ft_away": 1,
+      "cause": "DAY_IN_RSSSF_ONE_LATER",
+      "source_url": "https://fclugano.com/match-center/thun-vs-lugano-2026-04-25",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "date": "2026-04-26",
+      "home": "Basel",
+      "away": "Sion",
+      "ft_home": 0,
+      "ft_away": 2,
+      "cause": "RSSSF_WRONG_FT_SCORE_2_2",
+      "source_url": "https://matchcenter.avf-wfv.ch/Default.aspx?lng=1&ls=25593&oid=17&sg=69905&t=52463&tg=4304175&v=777833",
+      "admission": "EVIDENCE_NOT_TRAINING"
+    }
+  ],
+  "explanation": [
+    "9 RSSSF date transcription offsets for three rounds: Sep 2025, Feb 2026, Apr 2026",
+    "1 home/away inversion by RSSSF on postponed Thun–Basel fixture",
+    "1 one-day misdate on Thun–Lugano championship round",
+    "1 erroneous RSSSF full-time score Basel 2-2 Sion (official 0-2)",
+    "Abandoned 2 Nov Lugano vs St Gallen 1-0 is not league final result; replay Nov 26 1-3 accepted separately"
+  ],
+  "additional_source_urls": [
+    "https://sfl.ch/de/articles/lugano-saint-gall-refix%C3%A9-au-mercredi-26-novembre",
+    "https://fclugano.com/en/news/lugano-colpito-in-rimonta-il-san-gallo-vince-3-1",
+    "https://assets-eu-01.kc-usercontent.com/3668e732-8a21-0181-1c69-be073a63937a/1ca2f2b7-b380-4c3a-b617-f174c9db415c/Brack_Super_League_Spielplan-Calendrier_2025-26.pdf"
+  ],
+  "next_step": "One-shot compare these 12 specific official match-result facts with pinned CSV. Only after 12/12 pass can 216 +12 =228 independent fixture/score witnesses be claimed; this STILL does not confer reuse/republication/training license.",
+  "source_rights": "Do not copy any upstream full match list. Store only 12 exception event facts and URLs.",
+  "new_training_rows": 0,
+  "public_quarantine_rows_added": 0
+}
