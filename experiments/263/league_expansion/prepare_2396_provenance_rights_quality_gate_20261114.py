@@ -24,7 +24,7 @@ EXPECTED={
 }
 HOLD="eng3_eng4_2025_26_200_exact_legacy_fixture_training_HOLD_20261114.csv"
 PUBLISHERS={
- "PUBLISHER_CC0_CLAIM":{"github.com/openfootball/football.json","github.com/openfootball/england","github.com/openfootball/austria"},
+ "PUBLISHER_CC0_CLAIM":{"github.com/openfootball/football.json","github.com/openfootball/england","github.com/openfootball/austria","github.com/openfootball/europe"},
  "CCBY_COMPILATION_UPSTREAM_UNCLEAR":{"github.com/seanelvidge/England-football-results"},
  "THIRD_PARTY_REHOST_UNCLEARED":{"uniquescores.com"},
 }
