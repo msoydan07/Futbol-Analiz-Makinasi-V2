@@ -1,0 +1,36 @@
+{
+  "date_local": "2026-11-14",
+  "audit_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43522322812",
+  "test_tool": "experiments/263/league_expansion/eng3_eng4_2526_single_batch_external_score_audit.py",
+  "scope": "Exactly existing frozen 178 score conflicts plus 22 missing-alt-source keys (2025/26, ENG3 and ENG4); third-party CSV read in runner memory, not imported",
+  "initial_178_score_conflicts": 178,
+  "prior_25_separately_individual_editorial_checks": 25,
+  "third_source_score_conflicts_matching_alternate": 170,
+  "prior_individual_also_matched": 24,
+  "new_third_source_factual_score_matches": 146,
+  "not_matched_due_to_club_alias": 8,
+  "unmatched_reason": "All eight have Plymouth Argyle vs football-data Plymouth; they require targeted alias-only QA, not rechecking other 170.",
+  "third_source_urls": [
+    "https://www.football-data.co.uk/mmz4281/2526/E2.csv",
+    "https://www.football-data.co.uk/mmz4281/2526/E3.csv"
+  ],
+  "third_source_hashes": {
+    "ENG3": "4c96eff8a2f20c5e26015af8609c4f90478ff055f58ab6e137cc3445bf4c67ee",
+    "ENG4": "eff4fa15cb18857091d1f0666d0b8a6c61eda7a8374feef8f2d8a38244e0e45d"
+  },
+  "source_file_rows": {
+    "ENG3": 552,
+    "ENG4": 552
+  },
+  "old_only_identity_keys": 22,
+  "old_only_exact_source_matches": 0,
+  "old_only_remain_blocked": true,
+  "result_source_status": "EXTERNAL_FT_FACTS_ONLY_NOT_3RD_PARTY_DATASET_REUSE_RIGHTS",
+  "public_raw_CSV_rehosted": false,
+  "quarantine_rows_unchanged": 2396,
+  "trainable_rows_added": 0,
+  "old_main_m4_sha_seals_unchanged": true,
+  "independent_issue": "https://github.com/openfootball/england/issues/62",
+  "issue_maintainer_accepted_data_errors": true,
+  "next": "Do NOT rerun 170 checked scores: target 8 missing Plymouth alias keys against pinned E2 SHA, then adjudicate 22 identity-only missing-alt-source rows separately."
+}
