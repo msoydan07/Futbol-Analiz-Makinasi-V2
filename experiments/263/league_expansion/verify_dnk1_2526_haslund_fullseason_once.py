@@ -30,6 +30,17 @@ PAGES = {
 PREVIOUS_WITNESSES = "experiments/263/league_expansion/che_dnk_2526_51_independent_match_score_witnesses_20261114.json"
 # Explicitly corroborated because Haslund round list omits FT scores for two
 # fixtures. See AGF official match report and independent game statistics.
+# Haslund's date fields contain three one-day transcription errors. Resolved
+# against DBU federation / Danish press. These corrections are evidence
+# overlays, NOT edits to the independent raw source.
+OFFICIAL_DATE_CORRECTIONS = [
+    {"source_date":"2025-11-10","date":"2025-11-09","home":"Brondby","away":"Nordsjaelland","ft":[2,0],
+     "source_url":"https://www.dbu.dk/resultater/kamp/946968_473806/kampinfo"},
+    {"source_date":"2026-02-22","date":"2026-02-23","home":"Brondby","away":"Sonderjyske","ft":[0,0],
+     "source_url":"https://www.dbu.dk/resultater/kamp/947267_473806/kampinfo"},
+    {"source_date":"2026-04-05","date":"2026-04-06","home":"Odense","away":"Fredericia","ft":[1,0],
+     "source_url":"https://www.eurosport.dk/fodbold/3f-superliga/2025-2026/live-ob-fc-fredericia_mtc1599289/live-stats.shtml"}
+]
 MISSING_CHAMPIONSHIP_FACTS = [
     {"date":"2026-05-10","home":"Brondby","away":"AGF","ft":[0,2],
      "source_url":"https://www.agf.dk/nyheder/2026/maj/sadan-vandt-vi-dm-i-brondby"},
@@ -167,6 +178,19 @@ def audit(primary:bytes,sources:dict[str,bytes],old_witnesses:list[dict])->dict:
         for key,value in parsed.items():
             if key in combined: raise ValueError("REPEATED_FIXTURE_ACROSS_SECTIONS")
             combined[key]=value
+    corrected=[]
+    for c in OFFICIAL_DATE_CORRECTIONS:
+        old_key=(c["source_date"],c["home"],c["away"])
+        new_key=(c["date"],c["home"],c["away"])
+        expected_ft=tuple(c["ft"])
+        if old_key not in combined or combined[old_key]!=expected_ft:
+            return {"status":"FAIL_CLOSED_OFFICIAL_DATE_SOURCE_DRIFT","date_exception":c,
+                    "source_rows":len(combined),"trainable_rows":0}
+        if new_key in combined or old_key==new_key:
+            raise ValueError("OFFICIAL_CORRECTION_CAUSES_DUPLICATE")
+        combined[new_key]=combined.pop(old_key)
+        corrected.append({"date":c["date"],"home":c["home"],"away":c["away"],
+                          "ft":c["ft"],"provenance":c["source_url"]})
     missing_champ_keys={(x["date"],x["home"],x["away"]) for x in MISSING_CHAMPIONSHIP_FACTS}
     if len(missing_champ_keys)!=2: raise ValueError("DUPLICATE_MISSING_CHAMP_KEYS")
     missing_from_primary=set(main)-set(combined)
@@ -194,6 +218,7 @@ def audit(primary:bytes,sources:dict[str,bytes],old_witnesses:list[dict])->dict:
         "per_section":per_section,
         "source_total":len(main),"independent_round_list_scored":190,
         "independently_corroborated_missing_championship":2,
+        "official_date_corrections":corrected,
         "matched_date_club_ft_score":len(matching),"score_differences":len(differing),
         "source_only_count":len(unmatched_primary),
         "independent_only_count":len(unmatched_reference),
@@ -224,7 +249,9 @@ def selftest():
     assert rows[("2026-02-08","Brondby","Randers")]==(0,0)
     x,summary=parse_round_list(fake([("10.05.2026","Brøndby - AGF")],"championship_10_rounds"),"championship_10_rounds")
     assert not x and summary["unscored_fixtures"],summary
-    print("PASS Danish parser fixture/date/club/score, real 0-0, unscored championship, fail-closed")
+    assert len(OFFICIAL_DATE_CORRECTIONS)==3
+    assert len(MISSING_CHAMPIONSHIP_FACTS)==2
+    print("PASS Danish parser fixture/date/club/score, 3 separately cited date corrections, 2 missing FT checks")
 
 
 def get(url,accept):
