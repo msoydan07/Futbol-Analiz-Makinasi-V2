@@ -1,0 +1,45 @@
+{
+  "closed_date": "2026-11-14",
+  "scope": "ENG3+ENG4 2025/26 frozen 178 equal-identity contradictory original vs Sean alternate FT scores",
+  "status": "178_OF_178_ALTERNATE_SCORES_MATCH_THIRD_COMPILATION__NO_TRAINING_OR_REPUBLICATION",
+  "conflict_total": 178,
+  "league_conflict_totals": {
+    "ENG3": 85,
+    "ENG4": 93
+  },
+  "independent_full_season_csv_match_total": 178,
+  "direct_bulk_crosscheck": 170,
+  "isolated_additional_Plymouth_alias_checks": 8,
+  "already_individually_checked_from_editorial_reports": 25,
+  "new_third_compilation_score_checks_beyond_prior_25": 153,
+  "old_openfootball_score_supported_by_third_source": 0,
+  "alternative_sean_score_conflicts_with_third_source": 0,
+  "unresolved_same_identity_score_conflicts_after_QA": 0,
+  "incomplete_identity_keys_not_in_alternative": 22,
+  "additional_sean_only_unimported_2025_26_candidates": 494,
+  "third_party_data_use_licence_for_model_training": "NOT CLEARED",
+  "source_integrity": {
+    "ENG3": {
+      "url": "https://www.football-data.co.uk/mmz4281/2526/E2.csv",
+      "sha256": "4c96eff8a2f20c5e26015af8609c4f90478ff055f58ab6e137cc3445bf4c67ee",
+      "regular_season_matches": 552
+    },
+    "ENG4": {
+      "url": "https://www.football-data.co.uk/mmz4281/2526/E3.csv",
+      "sha256": "eff4fa15cb18857091d1f0666d0b8a6c61eda7a8374feef8f2d8a38244e0e45d",
+      "regular_season_matches": 552
+    }
+  },
+  "upstream_source_issue": "https://github.com/openfootball/england/issues/62",
+  "upstream_maintainer_accepted_block_corruption": true,
+  "prior_170_evidence": "experiments/263/league_expansion/eng3_eng4_2025_26_170_batch_external_source_score_evidence_20261114.json",
+  "first_action_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43522322812",
+  "final_eight_action_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43522607672",
+  "loop_prevention": "Do not re-run either third-party CSV when SHA matches; eight Plymouth cases were checked separately, previously successful 170 never rechecked. No further individual-score internet lookups for these 178 unless a new conflicting source is found.",
+  "model_integration": false,
+  "production_main_m4_10_leagues_old_SHA_modified": false,
+  "scored_research_quarantine_unchanged": 2396,
+  "new_dataset_rows": 0,
+  "training_approved_rows": 0,
+  "decision": "Treat 178 old-score candidates as inaccurate for training. Do not patch historical original quarantine or automatically replace with third-party/Sean compilation. Maintain independent 200-key training exclusion manifest; 22 identity gaps remain unresolved."
+}
