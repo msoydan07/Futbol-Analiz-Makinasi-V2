@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "ENG3/ENG4 2025/26: 178 score conflicts and 22 date shifts closed, 472 novel match pairs offline validated against 24-team season structure; third-party rights and independently permitted 472 score proof STILL open. Do not repeat old checks/source downloads. Need rights-cleared data for future model training, 1855 xG manual entry, and 22-league coverage acceptance; current 2396 research quarantine and main M4/10 league sealed forecasts unchanged.",
+  "next_priority": "22 league x 2 season research matrix frozen from six original CSVs: 2396 unique research-quarantine matches, no training admissions. Original 1855 manual Excel audited read-only: 90 current +1765 previous missing, 459 old xG comparison rows and 56 old one-sided values. Next need user-entered xG with source dates; source reuse permission/as-of certification remain blocked. 472 novel ENG3/ENG4 pairs are shape-checked but independent score licensing unresolved. Never repeat old 178/22/472/420/50 checks. Main M4 stays untouched.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -430,5 +430,44 @@
     "original_quarantine_rows_unchanged": 2396,
     "old_main_m4_sha_unchanged": true,
     "no_repeat": "Do not repeat identical 472 source shape checks; only a permission-cleared independent score source can advance acceptance."
+  },
+  "manual_xg_1855_and_22_league_readiness_gate_20261114": {
+    "status": "READ_ONLY_AUDIT_COMPLETE__MANUAL_XG_STILL_1855_MISSING__NO_TRAINING_APPROVAL",
+    "league_matrix": "experiments/263/league_expansion/coverage_matrix_22_leagues_2_seasons_readiness_20261114.json",
+    "manual_xg_evidence": "experiments/263/league_expansion/manual_xg_1855_excel_readonly_snapshot_20261114.json",
+    "manual_xg_checker": "experiments/263/league_expansion/check_manual_xg_excel_1855_read_only.py",
+    "checker_actions_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43528752501",
+    "research_quarantine_matches": 2396,
+    "known_ENG3_ENG4_training_HOLD_inside_count": 200,
+    "league_targets": {
+      "analysis": 13,
+      "training_research": 9,
+      "seasons": [
+        "2025-26",
+        "2026-27"
+      ]
+    },
+    "manually_missing_xg": {
+      "current": 90,
+      "previous": 1765,
+      "total": 1855,
+      "old_comparison": 459,
+      "previous_one_sided": 56,
+      "manual_filled_complete_pairs": 0,
+      "weekly_new_rows": 0
+    },
+    "manual_xg_scope_leagues": [
+      "ENG2",
+      "NED1",
+      "POR1",
+      "TUR1",
+      "BEL1"
+    ],
+    "source_rights_gate": "ALL_NEW_TRAINING_ROWS_UNAPPROVED",
+    "xg_input_acceptance": "Require both numeric post-match xG from same provider, match identity/FT/date, direct URL and checked date; exclude formulas and partial xG; workbook stays private.",
+    "asof_vintage_for_model_backtests": "NOT_CERTIFIED; use a prior match's xG only when publication precedes the target match and no leakage occurs.",
+    "production_m4_touched": false,
+    "new_training_rows": 0,
+    "no_repeat_rule": "22x2 matrix and the original 1855 workbook baseline frozen. Audit changes only after new manual xG entries, licensed data or an actual source SHA change."
   }
 }
