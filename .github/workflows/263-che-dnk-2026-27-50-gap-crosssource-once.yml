@@ -1,0 +1,47 @@
+name: 263 Research - CHE DNK 2026-27 missing fifty two-source QA
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-che-dnk-2026-27-50-gap-crosssource-once.yml
+      - experiments/263/league_expansion/audit_50_2026_27_missing_scores_independent_sources.py
+permissions:
+  contents: read
+jobs:
+  fifty-gaps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Independent source parser self tests before network
+        run: python experiments/263/league_expansion/audit_50_2026_27_missing_scores_independent_sources.py --self-test
+      - name: Compare only previously missing 21 Swiss and 29 Danish 2026/27 fixtures
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/audit_50_2026_27_missing_scores_independent_sources.py --live | tee gap_50_qa_summary.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("gap_50_qa_summary.log").read_text()
+          a=s.index("CURRENT_50_GAP_START")+len("CURRENT_50_GAP_START")
+          b=s.index("CURRENT_50_GAP_END")
+          d=json.loads(s[a:b])
+          Path("current_50_gap_qa_aggregate.json").write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## New season 21 Swiss + 29 Danish fixture & FT score QA\n")
+              f.write("| League | Unique gaps | Second-source matches | Score disagreement | Status |\n")
+              f.write("|---|---:|---:|---:|---|\n")
+              for x in d["leagues"]:
+                  f.write("| {} | {} | {} | {} | {} |\n".format(x["league"],
+                    x.get("fresh_new_nonoverlapping_matches","?"),
+                    x.get("new_match_score_2nd_source_matches","?"),
+                    x.get("new_match_score_2nd_source_conflicts","?"),x["status"]))
+              f.write("\nNo third-party complete match lists retained; source rights for training still unapproved.\n")
+          PY
+      - name: Archive aggregate report only, without source CSV or scraped tables
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-che-dnk-2026-27-50-gap-two-source-qa
+          path: current_50_gap_qa_aggregate.json
+          retention-days: 14
