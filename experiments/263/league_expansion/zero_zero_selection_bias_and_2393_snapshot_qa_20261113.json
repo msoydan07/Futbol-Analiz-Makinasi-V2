@@ -1,0 +1,154 @@
+{
+  "run_date": "2026-11-13",
+  "purpose": "Reproducible zero-goal selection-bias and match integrity checkpoint for existing 2393 quarantined candidates; no train approval",
+  "branch": "research/263-13-lig-22-havuz-20261113",
+  "input_snapshot": {
+    "path": "experiments/263/league_expansion/coverage_snapshot_22_leagues_20261113_v3_england_qa.json",
+    "sha": "a67311004354ba5f9d3d8e27f30ce7b51c9f87a9"
+  },
+  "input_manifest": {
+    "path": "experiments/263/league_expansion/pool_manifest_20261113.json",
+    "sha": "8b036958cf66c00a2ba8ff961caf81810f7d8fc0"
+  },
+  "files": {
+    "experiments/263/league_expansion/training_2025_26_cc0_scored_QUARANTINE.csv": {
+      "blob_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+      "rows": 1249,
+      "score_0_0": 0
+    },
+    "experiments/263/league_expansion/cc0_new_485_2526_2627_QUARANTINE_20261113.csv": {
+      "blob_sha": "2582e3ffa6e200b74704702dccc01ca19ad4750e",
+      "rows": 485,
+      "score_0_0": 19
+    },
+    "experiments/263/league_expansion/cc0_aut1_2026_27_42_QUARANTINE_20261113.csv": {
+      "blob_sha": "a404b3a395b32c42ac4e6cfef724bdebd3cbecb9",
+      "rows": 42,
+      "score_0_0": 1
+    },
+    "experiments/263/league_expansion/score_shape_recovery_295_2526_QUARANTINE_20261113.csv": {
+      "blob_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+      "rows": 295,
+      "score_0_0": 98
+    },
+    "experiments/263/league_expansion/eng3_eng4_2026_27_322_CCBY_QUARANTINE_20261113.csv": {
+      "blob_sha": "22b909a504254bfd3c9013f27fdbf2736ffbf746",
+      "rows": 322,
+      "score_0_0": 25
+    }
+  },
+  "checks": {
+    "total_rows": 2393,
+    "unique_exact_fixture_keys": 2393,
+    "duplicate_exact_fixture_keys": 0,
+    "invalid_score_or_date_or_season_rows": 0,
+    "earliest_scored_date": "2025-08-01",
+    "latest_scored_date": "2026-11-04",
+    "zero_zero_rows": 143,
+    "zero_zero_share_percent": 5.98,
+    "initial_1249_zero_zero_rows": 0,
+    "initial_1249_zero_zero_selection_bias_flag": true,
+    "independent_score_conflicts": 178,
+    "unmatched_old_fixture_keys": 22,
+    "score_conflict_months": {
+      "2025-11": 79,
+      "2025-12": 99
+    },
+    "independent_conflicts_checked_as_of_latest": 25,
+    "remaining_independent_conflicts": 153
+  },
+  "per_league_season": {
+    "ENG3|2025-26": {
+      "rows": 356,
+      "zero_zero": 14,
+      "zero_zero_percent": 3.93
+    },
+    "ENG4|2025-26": {
+      "rows": 276,
+      "zero_zero": 15,
+      "zero_zero_percent": 5.43
+    },
+    "GER2|2025-26": {
+      "rows": 99,
+      "zero_zero": 5,
+      "zero_zero_percent": 5.05
+    },
+    "ESP2|2025-26": {
+      "rows": 131,
+      "zero_zero": 16,
+      "zero_zero_percent": 12.21
+    },
+    "ITA2|2025-26": {
+      "rows": 309,
+      "zero_zero": 26,
+      "zero_zero_percent": 8.41
+    },
+    "FRA2|2025-26": {
+      "rows": 116,
+      "zero_zero": 9,
+      "zero_zero_percent": 7.76
+    },
+    "GRE1|2025-26": {
+      "rows": 62,
+      "zero_zero": 1,
+      "zero_zero_percent": 1.61
+    },
+    "AUT1|2025-26": {
+      "rows": 195,
+      "zero_zero": 12,
+      "zero_zero_percent": 6.15
+    },
+    "ENG5|2025-26": {
+      "rows": 296,
+      "zero_zero": 14,
+      "zero_zero_percent": 4.73
+    },
+    "SCO1|2025-26": {
+      "rows": 58,
+      "zero_zero": 0,
+      "zero_zero_percent": 0
+    },
+    "CHE1|2026-27": {
+      "rows": 54,
+      "zero_zero": 1,
+      "zero_zero_percent": 1.85
+    },
+    "GRE1|2026-27": {
+      "rows": 35,
+      "zero_zero": 2,
+      "zero_zero_percent": 5.71
+    },
+    "SCO1|2026-27": {
+      "rows": 42,
+      "zero_zero": 2,
+      "zero_zero_percent": 4.76
+    },
+    "AUT1|2026-27": {
+      "rows": 42,
+      "zero_zero": 1,
+      "zero_zero_percent": 2.38
+    },
+    "ENG3|2026-27": {
+      "rows": 158,
+      "zero_zero": 13,
+      "zero_zero_percent": 8.23
+    },
+    "ENG4|2026-27": {
+      "rows": 164,
+      "zero_zero": 12,
+      "zero_zero_percent": 7.32
+    }
+  },
+  "decision": {
+    "status": "FAIL_CLOSED_FOR_TRAINING",
+    "trainable_rows_promoted": 0,
+    "production_affected": false,
+    "reason": [
+      "Initial 1249 candidate scores have zero 0-0 outcomes: incomplete score distribution",
+      "178 2025/26 ENG3/ENG4 source collisions still pending full resolution",
+      "22 fixture identities unmatched to alternative source",
+      "Remaining source rights and 22-league coverage are unconfirmed"
+    ],
+    "next": "Resolve score source disagreement without overwriting raw rows; establish valid licenses and complete seasonal sources; only then prepare chronological A/B/C dataset."
+  }
+}
