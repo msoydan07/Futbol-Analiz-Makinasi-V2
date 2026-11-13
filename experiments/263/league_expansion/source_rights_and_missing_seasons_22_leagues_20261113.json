@@ -1,0 +1,105 @@
+{
+  "created_on": "2026-11-13",
+  "scope": "0 TL; 13 analysis target +9 training-only; 2025/26 and 2026/27; research only",
+  "data_source_policy": "Public accessibility alone is not sufficient evidence of rights to re-distribute/import to training; preserve source-specific provenance and use only as allowed.",
+  "actual_progress": {
+    "current_additive_scored_quarantine": 2393,
+    "new_2026_27_eng3_eng4": 322,
+    "new_2025_26_eng3_eng4_additive": 0,
+    "alternate_2025_26_entire_source_non_additive": 1104,
+    "confirmed_2025_26_source_conflicts": 178,
+    "old_only_identity_gaps": 22,
+    "eng3_eng4_2025_26_status": "BLOCKED_FOR_TRAINING_UNTIL_OFFICIAL_RECONCILIATION"
+  },
+  "candidates": [
+    {
+      "league": "DNK1",
+      "season": "2025-26",
+      "source": "aimidas1/aimidas1",
+      "url": "https://github.com/aimidas1/aimidas1/blob/main/data/matches/leagues/Denmark_Superliga_2025-2026.xlsx",
+      "format": "xlsx",
+      "observed": "122 KB publicly visible, dataset page has columns for match scores and xG",
+      "rights": "NO_EXPLICIT_ROOT_LICENSE_FOUND_ON_2026_11_13",
+      "decision": "DO_NOT_COPY_OR_TRAIN; request/use rights evidence first; do not assume 0 TL sheet is CC0"
+    },
+    {
+      "league": "CHE1",
+      "season": "2025-26",
+      "source": "FootyStats Switzerland Super League datasets",
+      "url": "https://footystats.org/tr/switzerland/super-league/datasets",
+      "format": "csv advertised",
+      "observed": "2025/26 228 match rows listed, includes some non-result season rows; availability not a verified license",
+      "rights": "UPSTREAM_TERMS_AND_AUTOMATED_DOWNLOAD_RIGHTS_UNVERIFIED",
+      "decision": "DO_NOT_BULK_DOWNLOAD_OR_IMPORT; research candidate only"
+    },
+    {
+      "league": "DNK1",
+      "season": "2026-27",
+      "source": "Cornerflick",
+      "url": "https://cornerflick.com/football/leagues/danish-superliga/results/season.json",
+      "format": "json",
+      "observed": "72 matches through 2026-11-08, metadata last_updated_at 2026-11-11T23:00:47+00:00, provider api-football; source may be incomplete for July",
+      "rights": "CC_BY4_COMPILATION_BUT_API_FOOTBALL_UPSTREAM_TERMS_NOT_CLEARED",
+      "decision": "DISCOVERY_AND_READ_ONLY_SOURCE_QA_ONLY; no public repository copy yet"
+    },
+    {
+      "league": "CHE1",
+      "season": "2026-27",
+      "source": "Cornerflick",
+      "url": "https://cornerflick.com/football/leagues/swiss-super-league/results/season.json",
+      "format": "json",
+      "observed": "66 results listed Aug 8-Nov 8, 2026; compared with existing CC0 scored sources only at discovery level",
+      "rights": "CC_BY4_COMPILATION_UPSTREAM_API_FOOTBALL_TERMS_NOT_CLEARED",
+      "decision": "DISCOVERY_ONLY; no new results imported without identity & rights check"
+    },
+    {
+      "league": "ENG5",
+      "season": "2026-27",
+      "source": "oladeeayo/open-matchday",
+      "url": "https://github.com/oladeeayo/open-matchday/blob/master/data/ENG_5_national-league/results_2627.csv",
+      "format": "csv",
+      "observed": "Current-season score source found, but source is compilation of ESPN etc; source rights separate",
+      "rights": "NON_COMMERCIAL_COMPILED; PROVIDER_RESTRICTIONS",
+      "decision": "READ_ONLY_COMPARATOR_NOT_PUBLIC_GITHUB_IMPORT"
+    },
+    {
+      "league": "GER2/ESP2/ITA2/FRA2",
+      "season": "2026-27",
+      "source": "oladeeayo/open-matchday and other non-CC0 sources",
+      "url": "https://github.com/oladeeayo/open-matchday",
+      "format": "csv",
+      "observed": "Provider has current-season divisions in LEAGUE_INDEX.md",
+      "rights": "NON_COMMERCIAL_OR_THIRD_PARTY_RESTRICTIONS",
+      "decision": "NO_PUBLIC_REPO_DATA_DUMP; identify per-league independently licensed source first"
+    },
+    {
+      "league": "ENG3/ENG4",
+      "season": "2026-27",
+      "source": "Sean Elvidge",
+      "url": "https://github.com/seanelvidge/England-football-results",
+      "format": "csv",
+      "observed": "158 ENG3 and 164 ENG4 finished games through Nov 8, 2026; 322 checked against read-only independent source with 322/322 matching scores",
+      "rights": "CC_BY_4_FOR_ORIGINAL_CONTRIBUTIONS; THIRD_PARTY_RIGHTS_RESERVED",
+      "decision": "322 QUARANTINE MATCHES ALREADY IMPORTED ON RESEARCH BRANCH; training remains blocked pending source rights and further QA"
+    },
+    {
+      "league": "ENG3/ENG4",
+      "season": "2025-26",
+      "source": "OpenFootball vs Sean Elvidge",
+      "url": "https://github.com/seanelvidge/England-football-results/blob/main/EnglandLeagueResults.csv",
+      "format": "csv",
+      "observed": "Two sources disagree on 178 matched game scores, plus 22 old-only identities, 494 Sean-only rows; BBC confirms 3 sample Sean outcomes",
+      "rights": "SOURCES HAVE THEIR OWN LICENSES, BOTH STILL RESEARCH ONLY",
+      "decision": "NO ADDITIVE UNION OF ALTERNATE 1104; treat old conflict rows as ineligible for model training until independent adjudication"
+    }
+  ],
+  "frozen_production_code": true,
+  "forbidden_actions": [
+    "touch M4/B/C2/C3 on main/experiment branches",
+    "regenerate historical SHA records",
+    "claim that 13 leagues are currently deployable",
+    "copy xG site rows without user manual workflow",
+    "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
+  ],
+  "next_priority": "Obtain suitable licensed full-season sources for 2025/26 Denmark and Switzerland and additional 2026/27 helpers; after score/source resolution, create as-of training set and single A/B/C comparison."
+}
