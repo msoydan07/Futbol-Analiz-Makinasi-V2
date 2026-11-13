@@ -9,7 +9,7 @@
     "alternate_2025_26_entire_source_non_additive": 1104,
     "confirmed_2025_26_source_conflicts": 178,
     "old_only_identity_gaps": 22,
-    "eng3_eng4_2025_26_status": "BLOCKED_FOR_TRAINING_UNTIL_OFFICIAL_RECONCILIATION",
+    "eng3_eng4_2025_26_status": "178_CORRUPTED_ORIGINAL_FT_SCORES_EXTERNAL_CONFIRMED; 22 OLD_ONLY_IDENTITY_GAPS + 494 SEAN_ONLY OPEN; TRAINING_NOT_APPROVED",
     "baseline_20261113_additive_scored_quarantine": 2393,
     "incremental_che1_2026_27_oct10_evidence_only": 3
   },
@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "CHE1/DNK1 2026/27: 21+29 missing source score facts now independently verified (50/50), previously 2025/26 420/420 score verified. Public training/rehosting rights remain NOT approved, so freeze 2396 research-quarantine match rows (no false increase to 2446). Next: rights-licensed source discovery/admission and England ENG3/ENG4 153 unresolved old score conflicts. Do not repeat identical source-hash tests. Main 10 leagues and M4 sealed SHA unchanged.",
+  "next_priority": "ENG3/ENG4 2025/26 178/178 old score conflicts closed at source FT factual level (25 prior editorial +153 new third compilation); 200 exact existing research row identities HOLD for training, NOT integrated into main. Next one batch resolve 22 old-only vs 494 Sean-only identity/date differences and permissions; do not repeat 178, 420 Swiss/Danish 2025/26, or 50 Swiss/Danish 2026/27, and do not admit the 2396 unapproved scored research rows. Existing 10 leagues, M4 and sealed SHA unchanged.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -307,5 +307,54 @@
     "new_training_or_public_quarantine_rows": 0,
     "direct_main_M4_production_changes": false,
     "no_repeat": "Do not re-evaluate the 50 exact source-hashed results absent a material upstream correction. 2025/26 420 remained closed."
+  },
+  "eng3_eng4_2025_26_178_conflict_closure_20261114": {
+    "status": "ALL_178_FT_SCORE_CONFLICTS_MATCH_SEAN_ALTERNATIVE_AND_THIRD_RESULTS_COMPILATION",
+    "scope": "Research score provenance, no production modification or data rights concession",
+    "evidence": "experiments/263/league_expansion/eng3_eng4_2025_26_all_178_external_ft_conflicts_closed_20261114.json",
+    "evidence_170": "experiments/263/league_expansion/eng3_eng4_2025_26_170_batch_external_source_score_evidence_20261114.json",
+    "eight_targeted_action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43522607672",
+    "bulk_comparison_action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43522322812",
+    "supported_alternative_score_total": 178,
+    "old_scores_supported_by_third_source": 0,
+    "score_mismatches_vs_third_source": 0,
+    "prior_editorial_verified": 25,
+    "additional_score_compilation_matches": 153,
+    "score_conflicts_remaining": 0,
+    "exact_legacy_training_hold_file": "experiments/263/league_expansion/eng3_eng4_2025_26_200_exact_legacy_fixture_training_HOLD_20261114.csv",
+    "wrong_score_candidates_on_hold": 178,
+    "unresolved_identity_candidates_on_hold": 22,
+    "hold_split_across_research_CSVs": {
+      "training_2025_26_cc0_scored_QUARANTINE": 186,
+      "score_shape_recovery_295_2526_QUARANTINE": 14
+    },
+    "original_legacy_source_score_rows_untouched": true,
+    "public_training_license_for_third_party_scores": "NOT_ESTABLISHED",
+    "no_trainable_rows_added": true,
+    "note": "The hold manifest is a preparation/safety list, not an automatic filter inserted into the production M4 training pipeline. It requires deliberate enforcement before any future research model-training integration.",
+    "next_reconciliation": "Resolve 22 old-only source identity gaps (possible schedule date changes, no exact E2/E3 match) and 494 Sean-only extra identities separately; source provenance/rights before any training."
+  },
+  "loop_prevention_lock_20261114": {
+    "authoritative_research_evidence": [
+      "experiments/263/league_expansion/eng3_eng4_2025_26_all_178_external_ft_conflicts_closed_20261114.json",
+      "experiments/263/league_expansion/che_dnk_2026_27_50_missing_score_facts_full_two_source_qa_20261114.json",
+      "experiments/263/league_expansion/che1_2526_228_complete_independent_ft_evidence_20261114.json",
+      "experiments/263/league_expansion/dnk1_2526_192_complete_independent_ft_evidence_20261114.json"
+    ],
+    "no_repeat_rules": [
+      "Do not repeat the already completed 420 CHE1/DNK1 2025/26 independent match FT checks unless source SHA changes or a concrete conflict emerges.",
+      "Do not repeat 50 CHE1/DNK1 2026/27 scored factual checks for same source hashes.",
+      "Do not repeat 178 ENG3/ENG4 2025/26 exact conflict score checks, including 8 resolved Plymouth aliases; trusted proof already frozen.",
+      "Never rerun source-discovery/FTP probes already shown stale/blocked simply to create extra run outputs.",
+      "New workflow must target an UNRESOLVED validation dimension, use synthetic checks before remote requests, run as a single batch and file one final evidence record."
+    ],
+    "only_next_unresolved_english_work": {
+      "old_only_alternative_identity_gaps": 22,
+      "Sean_only_new_2025_26_unadmitted_rows": 494,
+      "historical_score_conflicts_178": "CLOSED_EXTERNAL_SCORE_FACTS_NOT_LICENSE",
+      "license_to_train_or_bulk_rehost": "NOT_ESTABLISHED"
+    },
+    "current_2396_research_quarantine_rows": 2396,
+    "main_m4_existing_10_league_SHA_seals": "UNCHANGED"
   }
 }
