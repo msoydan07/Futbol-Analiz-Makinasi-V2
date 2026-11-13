@@ -163,6 +163,7 @@ def audit():
                 r["fresh_source_sha256"]=hashlib.sha256(source_bytes).hexdigest()
                 r["second_source_sha256"]=hashlib.sha256(other_bytes).hexdigest()
                 expected_direct=84
+            keys_old_missing=set(stale)-set(fresh)
             keys_new=set(fresh)-set(stale)
             conflicts_old=[k for k in set(fresh)&set(stale) if stale[k]!=fresh[k]]
             comparisons=[k for k in keys_new if independent.get(k)==fresh[k]]
@@ -177,6 +178,8 @@ def audit():
              "new_unique_fixtures":len(keys_new),"independent_verified_new_ft_scores":len(comparisons),
              "unknown_new_ft_scores":len(unmatched),"conflicting_new_ft_scores":len(mismatches),
              "old_match_score_conflicts":len(conflicts_old),
+             "old_keys_missing_from_new_source":len(keys_old_missing),
+             "old_keys_missing_examples":[{"date":k[0],"home":k[1],"away":k[2],"score":list(stale[k])} for k in sorted(keys_old_missing)[:8]],
              "source_covered_unique":len(set(stale)|set(fresh)),
              "expected_covered_unique":conf["expected_all"],
              "new_matches_0_0":sum(fresh[k]==(0,0) for k in keys_new),
