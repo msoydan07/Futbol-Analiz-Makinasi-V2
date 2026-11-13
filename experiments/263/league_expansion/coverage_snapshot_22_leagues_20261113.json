@@ -1,0 +1,259 @@
+{
+  "status_date": "2026-11-13",
+  "research_branch": "research/263-13-lig-22-havuz-20261113",
+  "production_scope": 10,
+  "target_analysis_scope": 13,
+  "unique_training_research_pool_leagues": 22,
+  "allowed_seasons": [
+    "2025-26",
+    "2026-27"
+  ],
+  "source_snapshot_note": "Quarantine scored rows only; NONE of the candidate counts certify full-season coverage, official match verification, confirmed permission from every upstream holder, xG completeness, or promotion to training.",
+  "rows": [
+    {
+      "code": "ENG1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "ENG2",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "GER1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "ESP1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "ITA1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "FRA1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "NED1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "TUR1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "POR1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "BEL1",
+      "role": "PRODUCTION_FROZEN_10",
+      "scored_quarantine_2025_26": null,
+      "scored_quarantine_2026_27": null,
+      "accepted_training_rows_added": 0,
+      "production_allowed": true,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "SCO1",
+      "role": "SHADOW_TARGET_NO_PRODUCTION",
+      "scored_quarantine_2025_26": 58,
+      "scored_quarantine_2026_27": 42,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "DNK1",
+      "role": "SHADOW_TARGET_NO_PRODUCTION",
+      "scored_quarantine_2025_26": 0,
+      "scored_quarantine_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "CHE1",
+      "role": "SHADOW_TARGET_NO_PRODUCTION",
+      "scored_quarantine_2025_26": 0,
+      "scored_quarantine_2026_27": 54,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "ENG3",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 261,
+      "scored_quarantine_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "ENG4",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 261,
+      "scored_quarantine_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "ENG5",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 296,
+      "scored_quarantine_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "GER2",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 94,
+      "scored_quarantine_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "ESP2",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 115,
+      "scored_quarantine_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "ITA2",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 283,
+      "scored_quarantine_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "FRA2",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 107,
+      "scored_quarantine_2026_27": 0,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": true
+    },
+    {
+      "code": "GRE1",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 61,
+      "scored_quarantine_2026_27": 35,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": false
+    },
+    {
+      "code": "AUT1",
+      "role": "RESEARCH_TRAINING_ONLY",
+      "scored_quarantine_2025_26": 67,
+      "scored_quarantine_2026_27": 42,
+      "accepted_training_rows_added": 0,
+      "production_allowed": false,
+      "source_limited_or_missing": false
+    }
+  ],
+  "totals": {
+    "legacy_1249_unchanged": 1249,
+    "new_2025_26": 354,
+    "new_2026_27": 173,
+    "new_total": 527,
+    "aggregate_quarantine_not_training": 1776
+  },
+  "scoped_existing_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+  "new_candidate_file_shas": [
+    "2582e3ffa6e200b74704702dccc01ca19ad4750e",
+    "a404b3a395b32c42ac4e6cfef724bdebd3cbecb9"
+  ],
+  "source_bottlenecks": [
+    "ENG5 2025/26 296 of 552 fixture rows scored, partial",
+    "SCO1 2025/26 58 of 198 fixture rows scored, partial",
+    "SCO1 2026/27 42 scored through 2026-09-20, partial/stale",
+    "CHE1 2026/27 54 scored through 2026-09-20, partial/stale",
+    "GRE1 2026/27 35 scored through 2026-09-20, partial/stale",
+    "AUT1 2026/27 42 scored through 2026-09-20, partial/stale",
+    "DNK1 both target seasons missing from inspected OpenFootball CC0 source trees",
+    "CHE1 2025/26 missing from inspected OpenFootball CC0 source trees",
+    "2026/27 remaining seven training-only leagues not imported under trustworthy CC0 rights gate"
+  ],
+  "restricted_candidate_notes": [
+    {
+      "provider": "oladeeayo/open-matchday",
+      "season": "2026-27",
+      "status": "READ_ONLY_CROSS_SOURCE_QA_ONLY",
+      "reason": "Non-commercial/provider-origin terms; checked existing CC0 score matches without ingesting provider rows."
+    },
+    {
+      "provider": "football-data.co.uk",
+      "status": "NO_BULK_AUTOMATED_TRAINING_DOWNLOAD",
+      "reason": "Provider states personal/light-download restrictions and blocks heavy automated model-training projects."
+    }
+  ],
+  "gates": [
+    "source provenance and rights",
+    "expected complete played fixtures as of prediction date",
+    "deduplication across existing 1249 and new 527",
+    "team aliases and fixture stages",
+    "independent score+date+identity checking",
+    "as-of features; no target-match xG",
+    "paired frozen A/B/C MS KG OVER2.5 scores with same validation subset",
+    "proof required before production merge"
+  ],
+  "change_scope": "research-only metadata and quarantined snapshots; no main, M4, 10-league live fixtures, hashed predictions, automation or manual xG workbook edits"
+}
