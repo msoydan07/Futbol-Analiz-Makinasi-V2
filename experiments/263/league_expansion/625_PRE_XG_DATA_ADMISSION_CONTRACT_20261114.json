@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-14",
+  "cutoff": "2026-11-13",
+  "status": "PRE_XG_DATA_ONLY_625_DISPOSITION_AND_TEST_ADMISSION_PREP_DONE",
+  "source_pointer_rows_unchanged": 9460,
+  "core_results_unchanged": 4617,
+  "research_score_fact_QA_PASS_LABEL_ONLY": 4218,
+  "research_HOLD": 625,
+  "hold_disjoint_counts": {
+    "OLD_ENG3_ENG4_BAD": 200,
+    "OLD_ENG5_BAD": 96,
+    "UNCLEARED_RIGHTS": 325,
+    "AUT1_OTHER_COMPETITION_STAGE": 3,
+    "FRA2_ABANDONED_NOT_FT": 1
+  },
+  "hold_counts_by_league": {
+    "AUT1": {
+      "EXCLUDED_NONLEAGUE_CONFERENCE_PLAYOFF": 3
+    },
+    "CHE1": {
+      "EXCLUDED_UNCLEARED_UPSTREAM_RIGHTS": 3
+    },
+    "ENG3": {
+      "EXCLUDED_LEGACY_SCORE_OR_DATE_HOLD": 100,
+      "EXCLUDED_UNCLEARED_UPSTREAM_RIGHTS": 158
+    },
+    "ENG4": {
+      "EXCLUDED_LEGACY_SCORE_OR_DATE_HOLD": 100,
+      "EXCLUDED_UNCLEARED_UPSTREAM_RIGHTS": 164
+    },
+    "ENG5": {
+      "EXCLUDED_LEGACY_SCORE_OR_DATE_HOLD": 96
+    },
+    "FRA2": {
+      "EXCLUDED_ABANDONED_NOT_FT": 1
+    }
+  },
+  "old_200_corrected_only_as_NONADDITIVE_reference": 200,
+  "old_200_score_only_replacements": 178,
+  "old_200_date_and_score_replacements": 22,
+  "old_ENG5_96_held_not_user_96_sealed_pilot": true,
+  "source_rows_promoted_to_training": 0,
+  "exact_future_feature_receipts_known_for_research": 0,
+  "corrected_200_pointers_promoted_to_training": 0,
+  "core_99_old_official_review_incomplete": 43,
+  "2025_26_vs_2026_27_SCORE_ONLY_NOT_A_SPLIT": {
+    "2025-26": 3946,
+    "2026-27": 272
+  },
+  "analysis_vs_training_only_SCORE_ONLY_NOT_A_SPLIT": {
+    "training_only": 3467,
+    "analysis": 751
+  },
+  "date_leakage_synthetic_contract_passed": true,
+  "prediction_accuracy_rerun": false,
+  "new_pilot": false,
+  "old_96_real_sealed_pilot_rewritten": false,
+  "old_39_sealed_scoring_repeated": false,
+  "model_retrained": false,
+  "M4_unchanged": true,
+  "user_xg_workbook_unchanged": true,
+  "new_751_external_candidate_rows": 0,
+  "today_done": [
+    "625 existing exact pointer partitions verified",
+    "200 corrected pointer references checked without duplicating matches",
+    "96 distinct ENG5 original bad fixtures correctly held",
+    "existing 4218 score facts kept distinct from model eligible features",
+    "strict feature leakage, UTC timing and data rights guard preregistered",
+    "no new mathematical experiment and no old pilot rescoring"
+  ],
+  "after_xg_external_gates_not_solved_by_xg_alone": [
+    "independent source rights for previously collected research labels and features",
+    "real historic time-of-availability evidence for retrospective model inputs",
+    "43 partially confirmed historical core results if official-grade certification required"
+  ],
+  "no_automatic_model_ready_claim": true,
+  "existing_sealed_96_evaluation_policy": "NO_REWRITE_NO_NEW_PILOT",
+  "comparison_prospective_policy": "B/C2/C3/M4 on same sealed fixture cohort; MS/BTTS/2.5 OVER only, performance cannot be interpreted from score-only archive",
+  "remaining_user_action": "manual entry of 1855 paired post-match xG values with per-match source"
+}
