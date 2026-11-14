@@ -1,0 +1,52 @@
+name: 263 Research - ONE only 17 other 2026 27 sources freshness aggregate comparisons
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-current-17-cumulative-cutoff-source-count-once.yml
+permissions:
+  contents: write
+jobs:
+  fresh_17_never_5_previous:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: 17 current league strict cutoff and duplicate count self-test
+        run: python experiments/263/league_expansion/2026_27_new_only_17_source_freshness_counts_once.py --test
+      - name: Read only 17 new scope source cohorts once, preserve aggregate metadata not scores
+        run: python experiments/263/league_expansion/2026_27_new_only_17_source_freshness_counts_once.py --run
+      - name: Result report unlicensed raw data protection and counts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json,os
+          path=Path("experiments/263/league_expansion/2026_27_17_persisted_leagues_one_freshness_aggregates_only_20261114.json")
+          d=json.loads(path.read_text())
+          assert d["status"]=="17_CURRENT_LEAGUE_SOURCE_FRESHNESS_AGGREGATES_ONLY"
+          assert len(d["counts"])==17
+          assert d["new_raw_provider_result_rows_published"]==0
+          assert d["new_model_training_approved"]==0
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## 17 league current-season new source-freshness counts, one-time only\n")
+            f.write("- Resolved source groups: "+str(d["league_coverage_resolved"])+"/17\n")
+            f.write("- Possible unarchived score identities indicated by count difference (not confirmed fixture identities): "+str(d["source_possible_new_unarchived_count_sum"])+"\n")
+            f.write("- Five other leagues' old 633 live-only results not rechecked\n")
+            f.write("- Rights: no public raw result rows, zero model admissions.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-new-17-2026-27-league-only-source-freshness-aggregates
+          path: experiments/263/league_expansion/2026_27_17_persisted_leagues_one_freshness_aggregates_only_20261114.json
+          retention-days: 14
+      - name: Git commit aggregate counts no raw source copies
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/2026_27_17_persisted_leagues_one_freshness_aggregates_only_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): once-only current 17 league freshness comparison aggregate metadata, no raw scores"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
