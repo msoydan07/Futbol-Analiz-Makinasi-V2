@@ -1,0 +1,86 @@
+{
+  "checked_on": "2026-11-14",
+  "mode": "HISTORICAL_2025_26_AND_2026_27_SCORED_FIXTURES_ONLY",
+  "status": "COMPLETED_OFFLINE_COVERAGE_AND_DATE_LAG_FEASIBILITY__DATA_GAPS_STILL_OPEN",
+  "source_commit": "058ef3945374efb18a7463260c1cf980f3cb86c1",
+  "github_actions_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43586549779",
+  "job_artifact_name": "263-historical-only-22x2-coverage-and-date-lag",
+  "source_code": "experiments/263/league_expansion/audit_historical_22x2_archive_and_lagged_form_once.py",
+  "league_count": 22,
+  "allowed_seasons": [
+    "2025-26",
+    "2026-27"
+  ],
+  "league_season_cells": 44,
+  "main_existing_league_season_cells_separate_not_scanned": 20,
+  "research_league_season_cells": 24,
+  "research_league_season_with_pinned_rows": 16,
+  "research_league_season_without_pinned_rows": 8,
+  "research_cells_with_external_score_evidence_but_not_in_2396": [
+    {
+      "group": "CHE1/2025-26",
+      "distinct_match_score_facts": 228,
+      "reviewed_sources": "separate Swiss two-source official and RSSSF previous results"
+    },
+    {
+      "group": "DNK1/2025-26",
+      "distinct_match_score_facts": 192,
+      "reviewed_sources": "separate Danish previous independent source checks"
+    },
+    {
+      "group": "DNK1/2026-27",
+      "distinct_match_score_facts": 84,
+      "reviewed_sources": "separate current-season Denmark independent facts; current as of earlier research cutoff"
+    }
+  ],
+  "research_cells_no_pinned_rows_and_no_prior_independent_score_witness": [
+    "ENG5/2026-27",
+    "GER2/2026-27",
+    "ESP2/2026-27",
+    "ITA2/2026-27",
+    "FRA2/2026-27"
+  ],
+  "current_source_limit": {
+    "provider": "https://github.com/openfootball/football.json/tree/master/2026-27",
+    "github_2026_27_files": [
+      "de.1.json",
+      "en.1.json",
+      "en.2.json",
+      "es.1.json",
+      "fr.1.json",
+      "it.1.json",
+      "nl.1.json",
+      "pt.1.json"
+    ],
+    "note": "Not a claim that the five uncovered competitions have no legal data anywhere; the visited CC0 publisher 2026/27 JSON directory has no files for those five leagues. Do not harvest rights-restricted alternatives."
+  },
+  "known_external_fact_coverage_not_additive": {
+    "CHE1_2025_26": 228,
+    "DNK1_2025_26": 192,
+    "CHE1_2026_27": 78,
+    "DNK1_2026_27": 84
+  },
+  "original_research_quarantine_rows": 2396,
+  "source_quality_hold_exact_keys": 296,
+  "source_rights_unclear": 325,
+  "Austrian_conference_playoff_outside_regular_league": 3,
+  "score_witnessed_CC0_ordinary_league_date_only_records": 1772,
+  "conservative_no_same_day_date_form_2_day_lag": {
+    "both_teams_at_least_1_past_match": 1649,
+    "both_teams_at_least_3_past_matches": 1409,
+    "both_teams_at_least_5_past_matches": 1166,
+    "limitation": "Date-only retrospective feasibility, not actual prior publication timestamp proof or certification for model training."
+  },
+  "training_rows_added": 0,
+  "external_bulk_data_rehosted": false,
+  "old_score_QA_repeated": 0,
+  "main_M4_or_sealed_predictions_modified": false,
+  "historical_completion_rules": [
+    "Do not confuse separate 420 Swiss/Danish 2025/26 witnessed facts with admitted CSV match rows.",
+    "First identify the five unrepresented 2026/27 training-only league seasons via independently licensed sources, and three externally reviewed but unimported research cells.",
+    "2026/27 still underway; historical means fixtures played through date cutoff, never future fixtures.",
+    "Never force missing historical source-observed timestamps to fabricated values. Date-only lag features are exploratory, not pre-match certification.",
+    "Do not rerun frozen 871+904 result cross-checks and 96 ENG5 third-source classification or 296 HOLD membership; only re-open if source evidence or rights genuinely change.",
+    "Do not initiate fresh match analysis or modify production ten leagues until user authorizes after past archive closure."
+  ]
+}

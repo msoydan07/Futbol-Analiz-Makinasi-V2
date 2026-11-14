@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "Six remaining leagues covered in one new 967-score batch with targeted 228 alias exceptions: 871/967 exact same-date home-away FT confirmed (ENG3 256/256, ENG4 176/176, ENG5 200/296, GRE1 97/97, SCO1 100/100, AUT1 42/42). 96 specific 2025/26 National League old FT/date conflicts are held under dedicated exact-match CSV; combined with previous 200 ENG3/4 original quality hold =296 source-specific research holds. Previously independent-witnessed 904 +871 = 1775 of 2071 CC0 publisher-claimed research scored rows (2071=1775+296 holds). Other 322 CC-BY compilation and 3 third-party unclear rights separate. 0 approved training rows, original 2396 quarantined rows untouched. Do not redo completed 871 or 904; next distinct research work 96 ENG5 independent source score adjudication and model-feature as-of/licence gates before any chronological shadow experiments. Main 10-league M4 and signed SHA seals unchanged.",
+  "next_priority": "HISTORICAL_ONLY: Finish 2025-26 & played-to-date 2026-27 archive; 5 no-source-witness groups (ENG5 GER2 ESP2 ITA2 FRA2 current season), 3 Swiss/Danish fact-witness-only groups without licensed ingestion; preserve prior 871/904 validation and 296 hold; no new future fixture predictions.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -698,5 +698,18 @@
     "previous_match_results_not_retested": true,
     "production_M4_or_sha_seals_modified": false,
     "future_work": "Timestamped independent data-vintage snapshots and permission checks; no 96-match reruns"
+  },
+  "historical_22x2_20261114_archive_and_date_lag_closure": {
+    "report": "experiments/263/league_expansion/historical_22x2_20261114_coverage_gap_and_lagged_form_closure.json",
+    "actions": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43586549779",
+    "historical_only": true,
+    "coverage_cells": 44,
+    "pinned_research_cells": 16,
+    "missing_research_cells": 8,
+    "unrepresented_no_witness_2026_27": 5,
+    "already_witnessed_not_ingested_cells": 3,
+    "date_only_both_teams_ge5_prior": 1166,
+    "trainable_new_rows": 0,
+    "no_future_match_work_until_history_closed": true
   }
 }
