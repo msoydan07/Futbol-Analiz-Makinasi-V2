@@ -34,6 +34,11 @@
       "scope": "Five current-season compiled external provider CSVs (632 candidate rows)",
       "state": "RIGHTS_HOLD_METADATA_ONLY",
       "key": "Git blob pins recorded in prior 632 report, do not copy source rows while upstream rights uncertain"
+    },
+    {
+      "scope": "Eight other 2025/26 CC BY source-specific league archives 3041 and ONE offline canonical comparison against old 2396",
+      "state": "PASS_SOURCE_ARCHIVED_AND_OFFLINE_DEDUP_CANDIDATE_CLASSIFIED; NOT TRAINING NOR FINAL_STAGE_ADMISSION",
+      "key": "Pinned Football Charts SHA 08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10. Offline identity-only report experiments/263/league_expansion/ccby_footballcharts_9_other_2025_26_source_ledger/8_leagues_3041_new_source_canonical_vs_old_CC0_one_batch_20261114.json; GitHub Actions run 43592010418. Skip same unchanged source scopes and prior matched 1324. Do not increment 3122 until 1376 candidates obtain stage/score gates."
     }
   ],
   "explicitly_open": [
@@ -43,9 +48,25 @@
     "FRA2/2026-27 original rights-cleared source archive",
     "DNK1/2026-27 original rights-cleared source archive",
     "pre-match as-of/publisher provenance proof for model-training admission; do not fabricate timestamps",
-    "user manual xG completion remains separate, never overwrite workbook"
+    "user manual xG completion remains separate, never overwrite workbook",
+    "Stage and playoffs resolution for 1376 candidate novel matches in eight 2025/26 CC BY source groups; only then count verified identity additions",
+    "63 old-vs-new near-date source identity holds, 10 Greek alias duplicates, 8 out-of-roster or playoff team records (new 260 score disagreements already included in existing 296 HOLD—do not reopen without fresh evidence)",
+    "ESP2/2025-26 CC BY source league-name mapping exception; inspect metadata only, avoid re-download of unchanged 76991-row snapshot"
   ],
   "allowed_next_behavior": "Fetch a new original licensed provider or update coverage only if actual source SHA differs and historical results are genuinely new. Keep original source rows, rights and point-in-time feature gates separate.",
   "new_fixture_prediction_work_requested": false,
-  "model_training_approved": 0
+  "model_training_approved": 0,
+  "latest_source_only_classification_20261114": {
+    "report": "experiments/263/league_expansion/ccby_footballcharts_9_other_2025_26_source_ledger/8_leagues_3041_new_source_canonical_vs_old_CC0_one_batch_20261114.json",
+    "achieved": "3,041 archived original CC BY source rows, one offline canonical source classification",
+    "frozen_old_3122": 3122,
+    "exact_prior": 1324,
+    "potential_novel_stage_pending": 1376,
+    "old_quality_hold_conflicts": 260,
+    "near_date": 63,
+    "duplicate": 10,
+    "outside": 8,
+    "no_old_finished_QA_repeat": true,
+    "new_training_rows_approved": 0
+  }
 }

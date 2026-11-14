@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "Historical ONLY 22 leagues x seasons. Research 3122 distinct source-specific fixture identities: baseline 2396 + GER2 306 novel (all independent-score-witnessed) + Swiss ODbL 161 (155 corroborated +6 official corrected) + Danish 2025/26 new CC BY 192 + Swiss 2025/26 additional CC BY 67. Reconstruct official 2025/26 standings PASS for Danish192 and Switzerland228; 18 known historical error-event checks PASS without rerunning full source QA. Five original rights-cleared 2026/27 research archives remain missing; 632 externally compiled rows on source-rights hold, not imported. Zero new training approval. Consult no-repeat lock before next work; never tamper with main M4 or xG workbook.",
+  "next_priority": "HISTORICAL ONLY: unique source-specific research match IDs remain 3122 after newly verified CC BY 259 (DNK1 192 + CHE1 67). Additionally archived eight 2025/26 source-original CC BY groups totaling 3041 match records, offline separated: 1324 exact prior matches, 260 conflicting records all within prior 296 existing quality holds, 63 near-date exceptions, 10 Greek duplicate canonical keys, 8 outsiders/playoff identity, and 1376 source-only candidate new match identities with stage+score QA pending; zero novel IDs added to 3122 until independently verified. ESP2/2025-26 new-source candidate not found by first-name filter; do not assume zero games. No rerun old 871+904 FT checks or new source already pinned; other five 2026/27 source-rights unresolved. No M4/xG changes.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -847,5 +847,22 @@
     "status": "NO_REPEAT_SOURCE_AND_WORKFLOW_LOCK_FOR_HISTORICAL_DATA_ARCHIVE",
     "source_sha256": "08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10",
     "no_repeat_old_verified": true
+  },
+  "historical_CC_BY_eight_3041_offline_source_dedup_20261114": {
+    "status": "EIGHT_NEW_2025_26_CC_BY_SOURCE_FILES_3041_OFFLINE_CANONICAL_DEDUP_QA_COMPLETE_RESEARCH_ONLY",
+    "source_original_license": "CC-BY-4.0",
+    "evidence": "experiments/263/league_expansion/ccby_footballcharts_9_other_2025_26_source_ledger/8_leagues_3041_new_source_canonical_vs_old_CC0_one_batch_20261114.json",
+    "action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43592010418",
+    "archived_new_source_candidates_not_counted_as_new_unique": 3041,
+    "exact_old_match_score_date": 1324,
+    "potential_novel_identities_pending_stage_validation": 1376,
+    "old_explicit_296_holds_against_new_source_confirmed_score_conflict": 260,
+    "newly_discovered_old_nonheld_score_conflicts": 0,
+    "near_date_checks_held": 63,
+    "canonical_duplicate_held": 10,
+    "outsider_or_playoff_team_held": 8,
+    "retained_old_3122_research_unique": 3122,
+    "added_new_training": 0,
+    "note": "No previous completed league result QA re-executed; offline name-map/dedup against immutable old 2396 + frozen 296 held keys. Second-source facts for 1376 novel IDs, explicit league stage, and vintage gates still pending."
   }
 }
