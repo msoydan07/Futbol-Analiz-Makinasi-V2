@@ -1,0 +1,224 @@
+{
+  "status": "ONE_PASS_331_NEW_ESP2_REGULAR_SECOND_SOURCE_FACT_CHECK_PLUS_6_PROMOTION_PLAYOFF_FACTS",
+  "target_new_2025_26_regular_only": 331,
+  "separate_promotions_2025_26": 6,
+  "normal_second_source_score_date_team_exact": 299,
+  "normal_second_source_score_conflict_hold": 0,
+  "normal_second_source_unmapped_or_missing_hold": 32,
+  "normal_quality_flags": {
+    "SECOND_SOURCE_DATE_TEAM_FT_EXACT": 299,
+    "SECOND_SOURCE_NO_EXACT_KEY_HOLD": 30,
+    "SAME_PAIR_NEAR_DATE_NOT_MATCHED_HOLD": 2
+  },
+  "first_24_exception_keys_only": [
+    {
+      "league": "ESP2",
+      "date": "2025-11-09",
+      "home": "UD Las Palmas",
+      "away": "Racing Santander",
+      "original_score": "3-1",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2025-11-15",
+      "home": "Racing Santander",
+      "away": "Granada CF",
+      "original_score": "2-2",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2025-11-23",
+      "home": "Burgos CF",
+      "away": "Racing Santander",
+      "original_score": "0-2",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2025-11-30",
+      "home": "Racing Santander",
+      "away": "SD Eibar",
+      "original_score": "4-0",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2025-12-07",
+      "home": "Cádiz CF",
+      "away": "Racing Santander",
+      "original_score": "2-3",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2025-12-13",
+      "home": "Racing Santander",
+      "away": "CD Leganés",
+      "original_score": "1-1",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2025-12-20",
+      "home": "SD Huesca",
+      "away": "Racing Santander",
+      "original_score": "1-1",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-01-03",
+      "home": "Real Valladolid",
+      "away": "Racing Santander",
+      "original_score": "1-1",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-01-10",
+      "home": "Racing Santander",
+      "away": "Real Zaragoza",
+      "original_score": "2-3",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-01-18",
+      "home": "Racing Santander",
+      "away": "UD Las Palmas",
+      "original_score": "4-1",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-01-25",
+      "home": "Deportivo La Coruña",
+      "away": "Racing Santander",
+      "original_score": "0-1",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-02-01",
+      "home": "Granada CF",
+      "away": "Racing Santander",
+      "original_score": "1-0",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-02-07",
+      "home": "Cádiz CF",
+      "away": "UD Almería",
+      "original_score": "1-2",
+      "reason": "SAME_PAIR_NEAR_DATE_NOT_MATCHED_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-02-09",
+      "home": "Racing Santander",
+      "away": "CD Mirandés",
+      "original_score": "1-0",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-02-15",
+      "home": "SD Eibar",
+      "away": "Racing Santander",
+      "original_score": "2-1",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-02-22",
+      "home": "Racing Santander",
+      "away": "Burgos CF",
+      "original_score": "1-0",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-02-28",
+      "home": "CD Castellón",
+      "away": "Racing Santander",
+      "original_score": "1-3",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-03-01",
+      "home": "Sporting Gijón",
+      "away": "CD Leganés",
+      "original_score": "0-0",
+      "reason": "SAME_PAIR_NEAR_DATE_NOT_MATCHED_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-03-08",
+      "home": "Racing Santander",
+      "away": "Córdoba CF",
+      "original_score": "4-3",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-03-14",
+      "home": "Cultural Leonesa",
+      "away": "Racing Santander",
+      "original_score": "1-2",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-03-21",
+      "home": "Racing Santander",
+      "away": "Albacete",
+      "original_score": "0-4",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-03-29",
+      "home": "Real Zaragoza",
+      "away": "Racing Santander",
+      "original_score": "2-0",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-04-01",
+      "home": "Racing Santander",
+      "away": "Sporting Gijón",
+      "original_score": "3-1",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    },
+    {
+      "league": "ESP2",
+      "date": "2026-04-05",
+      "home": "FC Andorra",
+      "away": "Racing Santander",
+      "original_score": "6-2",
+      "reason": "SECOND_SOURCE_NO_EXACT_KEY_HOLD"
+    }
+  ],
+  "playoff_scoreboard_original_author_vs_FBref_exact": 6,
+  "playoff_independent_scoreboard": "https://fbref.com/en/comps/17/2025-2026/schedule/2025-2026-Segunda-Division-Scores-and-Fixtures",
+  "normal_secondary_source": "https://www.football-data.co.uk/mmz4281/2526/SP2.csv",
+  "source_provider_raw_dataset_republished": false,
+  "secondary_source_response_sha256": "4986060e5c1d55626aef24c4bbeaaea2278b27a0b7696927405705aaa57405de",
+  "second_source_identity_rows_mapped_for_current_only": 420,
+  "unmapped_provider_team_labels": [
+    [
+      "Santander",
+      42
+    ]
+  ],
+  "prior_131_ESP2_source_matches_retested": 0,
+  "source_original_CCBY_license": "CC BY 4.0 publisher; other upstream training and as-of gates pending",
+  "source_original_509_and_existing_4505_unchanged": true,
+  "new_training_rows_approved": 0,
+  "main_M4_and_manual_xg_untouched": true
+}
