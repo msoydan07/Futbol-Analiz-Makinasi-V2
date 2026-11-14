@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-aut1-2025-26-195-independent-full-ft-once.yml
+      - experiments/263/league_expansion/verify_aut1_2526_195_rsssf_stage_ft_once.py
 permissions:
   contents: read
 jobs:
