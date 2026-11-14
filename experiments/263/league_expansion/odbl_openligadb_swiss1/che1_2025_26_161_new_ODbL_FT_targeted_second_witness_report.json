@@ -1,0 +1,49 @@
+{
+  "status": "SWISS_NEW_161_ODBL_TARGETED_SECOND_SCORE_WITNESS_DONE",
+  "at_utc": "2026-11-14T11:16:19.610023+00:00",
+  "only_new_odbl_match_facts_checked": 161,
+  "old_228_source_witnesses_rechecked": 0,
+  "pinned_228_old_source_reused_as_comparison_only": true,
+  "first_source": "OpenLigaDB ODbL-1.0",
+  "comparison_source": "https://matchdaysync.com/api/public/csv/swiss-super-league/2025-26/matches",
+  "comparison_source_sha256": "46a8b9aedb6bf294a6991e701609c04d511eb844bd02a24094349ce4be51678c",
+  "ODbL_exact_date_teams_90min_FT_against_prior_228": 155,
+  "ODbL_FT_conflicts": 3,
+  "ODbL_unmatched_date_or_team": 3,
+  "unmatched_or_conflicting_ODbL_original_only": [
+    {
+      "match_id": "80667",
+      "key": "2025-12-17|Luzern|Basel",
+      "original_ODbL_score": "2-1"
+    },
+    {
+      "match_id": "80679",
+      "key": "2026-02-01|Luzern|St Gallen",
+      "original_ODbL_score": "3-2"
+    },
+    {
+      "match_id": "80799",
+      "key": "2026-02-11|Lugano|Servette",
+      "original_ODbL_score": "2-1"
+    },
+    {
+      "match_id": "80686",
+      "key": "2026-02-07|Basel|Zurich"
+    },
+    {
+      "match_id": "80687",
+      "key": "2026-02-07|Lausanne|St Gallen"
+    },
+    {
+      "match_id": "80685",
+      "key": "2026-02-07|Servette|Thun"
+    }
+  ],
+  "no_publishing_of_competing_source_FT": true,
+  "source_is_PARTIAL_161_of_228": true,
+  "original_2396_296_holds_unchanged": true,
+  "training_rows_newly_approved": 0,
+  "main_M4_and_signed_predictions_untouched": true,
+  "other_67_not_archived_from_unlicensed_provider": true,
+  "no_repeated_full_228_RSSSF_swiss_fact_audit": true
+}
