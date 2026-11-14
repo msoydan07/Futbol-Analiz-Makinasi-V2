@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-14",
+  "status": "HISTORICAL_TWO_LICENSED_SOURCE_PACKAGES_ARCHIVED_467_NEW_IDENTITIES_461_SECOND_SOURCE_MATCHES_SIX_SWISS_HOLD",
+  "scope": "Historical played results only, 2025-26 and to Nov 13 2026 in 2026-27; separate ODbL research archive, no production integration",
+  "base_legacy_research_quarantine": 2396,
+  "new_source_specific_ODbL_research_matches": {
+    "GER2_2025_26": {
+      "archive_total": 306,
+      "overlap_original_existing_CC0": 99,
+      "new_distinct": 207,
+      "new_score_fact_witness": 207,
+      "score_conflicts": 0
+    },
+    "GER2_2026_27": {
+      "archive_total": 99,
+      "overlap_original_existing_CC0": 0,
+      "new_distinct": 99,
+      "new_score_fact_witness": 99,
+      "score_conflicts": 0
+    },
+    "CHE1_2025_26": {
+      "archive_total": 161,
+      "overlap_original_existing_CC0": 0,
+      "new_distinct": 161,
+      "new_score_fact_witness": 155,
+      "source_FT_conflicts_HOLD": 3,
+      "source_date_or_fixture_identity_unmatched_HOLD": 3,
+      "source_season_incomplete_vs_independent_reference_228": 67
+    }
+  },
+  "new_distinct_research_match_identities": 467,
+  "new_research_match_facts_corrobated_by_second_source": 461,
+  "new_swiss_quality_hold": 6,
+  "old_original_296_explicit_holds_unchanged": 296,
+  "cross_source_total_excluding_99_overlap": 2863,
+  "cross_source_quality_hold_count_old296_plus_new6": 302,
+  "ODbL_license_and_attribution": "Data from OpenLigaDB (www.openligadb.de), licensed under ODbL 1.0, attribution and share-alike apply to ODbL database derivatives.",
+  "source_license_url": "https://www.openligadb.de/en/license",
+  "original_new_ODbL_CSVs": [
+    "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2025_2026_207_novel_only_quarantine.csv",
+    "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2026_2027_ODbL_research_quarantine.csv",
+    "experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_football_scores_ODbL_research_quarantine.csv"
+  ],
+  "independent_QA_evidence": [
+    "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_306_novel_only_second_source_fact_QA_20261114.json",
+    "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2026_27_30_new_alias_frozen_fact_QA_20261114.json",
+    "experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_161_new_ODbL_FT_targeted_second_witness_report.json"
+  ],
+  "six_original_swiss_source_records_HOLD_CSV": "experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_six_original_ODbL_source_disputes_HOLD_20261114.csv",
+  "original_swiss_source_blob_pin": "81752d8722c28accc84608c1116547ebb436b248",
+  "previous_228_swiss_independent_source_fullseason_QA": "experiments/263/league_expansion/che1_2526_228_complete_independent_ft_evidence_20261114.json",
+  "previous_192_danish_independent_source_fullseason_QA": "experiments/263/league_expansion/dnk1_2526_192_complete_independent_ft_evidence_20261114.json",
+  "whole_source_2025_26_Swiss_228_and_Danish_192_licensed_bulk_rehost_training_rights": "UNCONFIRMED. Their independent score witness outputs remain separate evidence only, not ODbL source substitutes.",
+  "original_22x2_research_unpinned_cells_before": 8,
+  "newly_archived_previously_unpinned_cells": [
+    "GER2/2026-27",
+    "CHE1/2025-26"
+  ],
+  "remaining_non_production_research_cells_without_admissible_own_archive": [
+    "DNK1/2025-26",
+    "DNK1/2026-27",
+    "ENG5/2026-27",
+    "ESP2/2026-27",
+    "ITA2/2026-27",
+    "FRA2/2026-27"
+  ],
+  "source_rights_and_source_fact_caveats": [
+    "Not all 2863 source records constitute a homogeneous license-clean training database; original and ODbL source blocks remain separate.",
+    "The 155 Swiss ODbL score matches and the prior 228 Swiss source score-check records are not additive training records.",
+    "A historical source capture on 2026-11-14 cannot prove when match features were available before that original match kickoff.",
+    "Six Swiss source identities remain explicitly HOLD; no raw second source scores or bulk tables republished.",
+    "The 67 Swiss matches absent from ODbL bsl partial 161 must not be filled by copying a source with unverified data-use or republishing rights.",
+    "This is an archived-source and match-fact QA summary, not proof of model predictive accuracy or authorization to train."
+  ],
+  "freezes": {
+    "original_2396_source_files_modified": false,
+    "old_296_HOLD_files_modified": false,
+    "earlier_871_and_904_source_FT_QA_repeated": 0,
+    "original_10_league_main_M4_or_SHA_signatures_modified": false,
+    "manual_1855_xg_workbook_modified": false,
+    "new_training_rows_approved": 0
+  },
+  "follow_up_archival_without_new_match_predictions": "Find licensed sources for six remaining 2025/26 and played 2026/27 research cells; verify and archive only truly completed unique facts. Investigate six held Swiss original ODbL records separately only if new authorized independent facts are available. Never rerun completed 306 or 155 source matches."
+}

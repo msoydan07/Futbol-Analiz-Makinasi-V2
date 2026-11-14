@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "HISTORICAL ONLY: GER2 ODbL 405 historical score records archived; 99 old source overlaps verified identical FT, 207 new 2025-26 +99 new 2026-27 records quarantined, 306 novel research identities. Independent corroboration of novel scores and other seven unpinned league-seasons remains. Main 10 leagues/M4 undisturbed.",
+  "next_priority": "HISTORICAL-ONLY: Archived 306 distinct licensed GER2 games (207 old season, 99 current) plus 161 CHE1 2025/26 ODbL games; 461/467 independent source FT matched, 6 Swiss source FT/identity discrepancies held. 2863 distinct research fixture identities (not training-ready); remaining 6 nonproduction league-season cells unarchived, 67 Swiss missing from ODbL partial source. No production changes; do not replay completed old tests.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -722,5 +722,55 @@
     "unique_research_addition": 306,
     "cross_source_research_candidate_count": 2702,
     "training_approved": 0
+  },
+  "historical_odbl_467_new_20261114": {
+    "status": "HISTORICAL_TWO_LICENSED_SOURCE_PACKAGES_ARCHIVED_467_NEW_IDENTITIES_461_SECOND_SOURCE_MATCHES_SIX_SWISS_HOLD",
+    "report": "experiments/263/league_expansion/historical_odbl_467_unique_additional_461_witnessed_6_swiss_HOLD_20261114.json",
+    "addition_by_league_season": {
+      "GER2_2025_26": {
+        "archive_total": 306,
+        "overlap_original_existing_CC0": 99,
+        "new_distinct": 207,
+        "new_score_fact_witness": 207,
+        "score_conflicts": 0
+      },
+      "GER2_2026_27": {
+        "archive_total": 99,
+        "overlap_original_existing_CC0": 0,
+        "new_distinct": 99,
+        "new_score_fact_witness": 99,
+        "score_conflicts": 0
+      },
+      "CHE1_2025_26": {
+        "archive_total": 161,
+        "overlap_original_existing_CC0": 0,
+        "new_distinct": 161,
+        "new_score_fact_witness": 155,
+        "source_FT_conflicts_HOLD": 3,
+        "source_date_or_fixture_identity_unmatched_HOLD": 3,
+        "source_season_incomplete_vs_independent_reference_228": 67
+      }
+    },
+    "new_distinct_historical_archive_identities": 467,
+    "new_secondary_source_corrobated": 461,
+    "new_Swiss_2025_26_source_HOLD": 6,
+    "six_hold_path": "experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_six_original_ODbL_source_disputes_HOLD_20261114.csv",
+    "old_original_holds_preserved": 296,
+    "combined_original_plus_ODbL_distinct_research_count": 2863,
+    "research_cells_newly_archived": [
+      "GER2/2026-27",
+      "CHE1/2025-26"
+    ],
+    "remaining_six_research_cells": [
+      "DNK1/2025-26",
+      "DNK1/2026-27",
+      "ENG5/2026-27",
+      "ESP2/2026-27",
+      "ITA2/2026-27",
+      "FRA2/2026-27"
+    ],
+    "ODbL_separate_license_and_training_unchanged": true,
+    "new_training_approved": 0,
+    "production_M4_SHA_and_user_manual_xg_untouched": true
   }
 }
