@@ -10,8 +10,21 @@ import argparse,hashlib,json,math
 from collections import Counter,defaultdict
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from forward_c3 import read_aware
-from market_fifth_baseline_263 import sealed_payload
+# Inline the audit-locked canonical JSON and aware-time contracts for a pure
+# stdlib scoring step. Importing model-fit modules pulls numerical dependencies
+# and would be unnecessary for read-only outcomes.
+def read_aware(value):
+ parsed=datetime.fromisoformat(str(value).replace("Z","+00:00"))
+ if parsed.tzinfo is None:raise ValueError("TIMEZONE_REQUIRED")
+ return parsed.astimezone(timezone.utc)
+def sealed_payload(obj, expected_schema):
+ if obj.get("schema")!=expected_schema:raise ValueError("FORECAST_SCHEMA_WRONG")
+ fingerprint=obj.get("payload_sha256")
+ if not isinstance(fingerprint,str) or len(fingerprint)!=64:raise ValueError("FORECAST_SHA_MISSING")
+ rest=dict(obj);rest.pop("payload_sha256",None)
+ canonical=json.dumps(rest,ensure_ascii=False,sort_keys=True,separators=(",",":"),allow_nan=False).encode("utf-8")
+ if hashlib.sha256(canonical).hexdigest()!=fingerprint:raise ValueError("FORECAST_SHA_TAMPERED")
+ return fingerprint
 
 ROOT=Path(".")
 ARCH=ROOT/"data/results_only_263/nov8_new100_terminal_archive_20261112.json"
