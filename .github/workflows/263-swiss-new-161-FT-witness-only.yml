@@ -1,0 +1,56 @@
+name: 263 Research - Swiss only new 161 ODbL original FT witnesses
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-swiss-new-161-FT-witness-only.yml
+permissions:
+  contents: write
+jobs:
+  only161_new_no_repeat_old_228:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preserve exact 161 new ODbL match keys and aliases
+        run: python experiments/263/league_expansion/reconcile_swiss_new161_against_old228_once.py --self-test
+      - name: Compare only 161 new ODbL keys to one SHA-pinned old 228 source
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/reconcile_swiss_new161_against_old228_once.py --live | tee swiss_161_only.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("swiss_161_only.log").read_text()
+          d=json.loads(s.split("SWISS_NEW161_START",1)[1].split("SWISS_NEW161_END",1)[0])
+          if d["status"]=="SWISS_NEW_161_ODBL_TARGETED_SECOND_SCORE_WITNESS_DONE":
+            assert d["ODbL_exact_date_teams_90min_FT_against_prior_228"]+d["ODbL_FT_conflicts"]+d["ODbL_unmatched_date_or_team"]==161
+            assert d["training_rows_newly_approved"]==0
+            Path("experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_161_new_ODbL_FT_targeted_second_witness_report.json").write_text(json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Swiss 2025/26 only NEW 161 ODbL score identities\n")
+            f.write("- Status: "+d["status"]+"\n")
+            for k in ("ODbL_exact_date_teams_90min_FT_against_prior_228","ODbL_FT_conflicts","ODbL_unmatched_date_or_team"):
+              f.write("- "+k+": "+str(d.get(k,"unknown"))+"\n")
+            f.write("- Prior 228 source QA not re-executed. No training or M4 changes.\n")
+          assert d["status"]=="SWISS_NEW_161_ODBL_TARGETED_SECOND_SCORE_WITNESS_DONE",d
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-Swiss-only-161-new-ODbL-FT-witnesses
+          path: |
+            swiss_161_only.log
+            experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_161_new_ODbL_FT_targeted_second_witness_report.json
+          retention-days: 14
+      - name: Commit only target 161 score witness verdicts
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_161_new_ODbL_FT_targeted_second_witness_report.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): targeted FT witness ONLY new 161 Swiss ODbL match keys, old 228 frozen"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
