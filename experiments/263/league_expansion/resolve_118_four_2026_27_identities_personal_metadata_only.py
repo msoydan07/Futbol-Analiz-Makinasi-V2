@@ -36,6 +36,60 @@ def blobsha(raw):return hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\x00"+raw
 def strict_norm(s):
  s="".join(c for c in unicodedata.normalize("NFKD",str(s).casefold()) if not unicodedata.combining(c))
  return re.sub(r"[^a-z0-9]+","",s)
+# Explicit factual club-name identities from earlier pinned league rosters.
+# Punctuation/suffix heuristics by themselves are NOT enough for an approval.
+# No score info is used to invent a club mapping.
+ALIASES={
+"SCO1":{
+"hearts":"hearts","heartofmidlothian":"hearts",
+"stjohnstone":"stjohnstone","saintjohnstonefc":"stjohnstone",
+"saintjohnstone":"stjohnstone","stjohnstonefc":"stjohnstone",
+"stmirren":"stmirren","stmirrenfc":"stmirren",
+"falkirk":"falkirk","falkirkfc":"falkirk",
+"dundee":"dundee","dundeefc":"dundee",
+"dundeeunited":"dundeeunited","dundeeutd":"dundeeunited",
+"hibernian":"hibernian","hibernianfc":"hibernian",
+"aberdeen":"aberdeen","aberdeenfc":"aberdeen",
+"celtic":"celtic","celticfc":"celtic",
+"rangers":"rangers","rangersfc":"rangers",
+"kilmarnock":"kilmarnock","kilmarnockfc":"kilmarnock",
+"motherwell":"motherwell","motherwellfc":"motherwell"},
+"CHE1":{
+"basel":"basel","fcbasel":"basel","fcbasel1893":"basel",
+"lausanne":"lausanne","lausannesport":"lausanne","fclausannesport":"lausanne",
+"luzern":"luzern","fcluzern":"luzern",
+"stgallen":"stgallen","fcstgallen":"stgallen","fcsanktgallen":"stgallen",
+"stgallenfc":"stgallen","sanktgallen":"stgallen",
+"sion":"sion","fcsion":"sion",
+"thun":"thun","fcthun":"thun",
+"vaduz":"vaduz","fcvaduz":"vaduz",
+"zurich":"zurich","fczurich":"zurich",
+"grasshoppers":"grasshoppers","grasshopper":"grasshoppers",
+"grasshopperclubzurich":"grasshoppers",
+"lugano":"lugano","fclugano":"lugano",
+"youngboys":"youngboys","bscyoungboys":"youngboys",
+"servette":"servette","servettefc":"servette"},
+"GRE1":{
+"aek":"aek","aekathens":"aek","aekathensfc":"aek","aekathen":"aek",
+"aris":"aris","aristhessaloniki":"aris","aristhessalonikis":"aris","arissaloniki":"aris",
+"asterastripolis":"asterastripolis","asterasaktors":"asterastripolis",
+"atromitos":"atromitos","atromitosathinon":"atromitos",
+"iraklis1908":"iraklis","iraklis":"iraklis",
+"kalamata":"kalamata","kalamatapss":"kalamata",
+"kifisia":"kifisia","aekifisias":"kifisia","kifissia":"kifisia",
+"levadiakos":"levadiakos",
+"ofi":"ofi","oficrete":"ofi","ofiheraklion":"ofi",
+"olympiakospiraeus":"olympiakos","olympiacospiraeus":"olympiakos",
+"olympiacos":"olympiakos","olympiakos":"olympiakos",
+"paok":"paok","paokfc":"paok","paoksaloniki":"paok",
+"panathinaikos":"panathinaikos",
+"panetolikos":"panetolikos",
+"volos":"volos","volosnfc":"volos"},
+"AUT1":{}}
+def canonical_team(league,name):
+ key=strict_norm(name)
+ return ALIASES.get(league,{}).get(key,key)
+
 def reduced_norm(s):
  # Heuristic ONLY, never silent source-ID certification.
  s="".join(c for c in unicodedata.normalize("NFKD",str(s).casefold()) if not unicodedata.combining(c))
@@ -111,66 +165,40 @@ def source_matches(code):
   fixtures[key]=(d,h,a,goals)
  return list(fixtures.values()),dict(counts)
 def reconcile(local,remote,league):
- def key(r,fn):
-  d,h,a=r[:3]
-  return (d,fn(h),fn(a))
- olds={key(r,strict_norm):r for r in local}
- srcs={key(r,strict_norm):r for r in remote}
- direct=set(olds)&set(srcs)
- conflicting_exact=sum(olds[k][3]!=srcs[k][3] for k in direct)
- # Existing, explicitly pinned season-club alias table (independent older
- # model-free 967-match source QA). Every mapped club must be in local roster.
- roster={team for _,h,a,_,_ in local for team in (h,a)}
- canonical=exact_name_maps(league,roster)
- mapped={};ambiguous_alias=0;score_conflicting_canonical=0
- for r in remote:
-  d,h,a,score=r
-  ch=match_name(h,canonical);ca=match_name(a,canonical)
-  if not ch or not ca or ch==ca:
-   ambiguous_alias+=1;continue
-  k=(d,ch,ca)
-  if k in mapped and mapped[k][3]!=score:
-   raise ValueError("DIFFERENT_SCORES_SAME_CANONICAL_SOURCE_FIXTURE")
-  mapped[k]=r
- canonical_exact=0
- for r in local:
-  d,h,a,score,_=r
-  k=(d,h,a)
-  if k in mapped:
-   if score==mapped[k][3]:canonical_exact+=1
-   else:score_conflicting_canonical+=1
- # Remaining unpaired: only strict spelling is unquestionably identical.
- ol=[r for k,r in olds.items() if k not in direct]
- re=[r for k,r in srcs.items() if k not in direct]
- oa=defaultdict(list);ra=defaultdict(list)
- for x in ol:oa[key(x,reduced_norm)].append(x)
- for x in re:ra[key(x,reduced_norm)].append(x)
- safe_alias=set()
- score_conflict=0
- for k in set(oa)&set(ra):
-  if len(oa[k])==len(ra[k])==1:
-   l,r=oa[k][0],ra[k][0]
-   if l[3]==r[3]:safe_alias.add(k)
-   else:score_conflict+=1
- # all pairs from same local/remote with same date+ft that are not definitely
- # identified as same clubs remain unverified candidates; no silent addition.
+ # Each team alias is explicit and local season-roster grounded, never fuzzy.
+ old_names={canonical_team(league,n) for _,h,a,_,_ in local for n in (h,a)}
+ oldmap={}
+ for d,h,a,score,p in local:
+  k=(d,canonical_team(league,h),canonical_team(league,a))
+  if k in oldmap:raise ValueError("CANONICAL_LOCAL_DATE_TEAM_DUPLICATE")
+  oldmap[k]=score
+ srcmap={}
+ unknown_count=0
+ for d,h,a,score in remote:
+  x=canonical_team(league,h);y=canonical_team(league,a)
+  if x not in old_names or y not in old_names:
+   unknown_count+=1
+   continue
+  k=(d,x,y)
+  if k in srcmap and srcmap[k]!=score:raise ValueError("CANONICAL_SOURCE_SCORE_CONFLICT")
+  srcmap[k]=score
+ common=set(oldmap)&set(srcmap)
+ conflicts=sum(oldmap[k]!=srcmap[k] for k in common)
+ confirmed=len(common)-conflicts
+ gap=len(remote)-confirmed
+ strict_old={(d,strict_norm(h),strict_norm(a)):score for d,h,a,score,p in local}
+ strict_src={(d,strict_norm(h),strict_norm(a)):score for d,h,a,score in remote}
+ strict_common=set(strict_old)&set(strict_src)
  return {
-  "local":len(local),
-  "source":len(remote),
-  "strict_same_date_home_away":len(direct),
-  "known_pinned_roster_alias_same_date_FT_confirmed":canonical_exact,
-  "known_pinned_roster_alias_same_date_FT_conflicts_hold":score_conflicting_canonical,
-  "provider_teams_not_mappable_by_pinned_club_aliases":ambiguous_alias,
-  "provider_canonical_fixture_keys_total":len(mapped),
-  "source_not_covered_by_canonical_pinned_matches":len(remote)-canonical_exact,
-  "local_not_covered_by_canonical_pinned_matches":len(local)-canonical_exact,
-  "strict_score_conflicts_hold":conflicting_exact,
-  "additional_suffix_alias_same_date_FT_candidate_only":len(safe_alias),
-  "suffix_alias_same_date_but_score_conflict_hold":score_conflict,
-  "source_fixture_identities_not_accounted_for_strictly":len(remote)-len(direct),
-  "source_fixture_identities_not_accounted_for_after_candidate_alias":len(remote)-len(direct)-len(safe_alias),
-  "local_not_accounted_for_after_candidate_alias":len(local)-len(direct)-len(safe_alias),
-  "confidence":"PERSONAL_SOURCE_METADATA_ONLY_NOT_FINAL_CROSS_SOURCE_FT_CERTIFICATION",
+   "local":len(local),"source":len(remote),
+   "exact_club_spelling_same_date_matches":len(strict_common),
+   "curated_team_roster_date_score_matches":confirmed,
+   "curated_team_roster_source_date_or_FT_conflicts_hold":conflicts,
+   "provider_source_rows_unmatched_club_roster":unknown_count,
+   "source_missing_identity_candidates_after_curated_aliases":gap,
+   "old_rows_not_recovered_from_source":len(local)-confirmed,
+   "source_minus_local_simple_count":len(remote)-len(local),
+   "confidence":"CURATED_CLUB_NAMES_AND_DATE_FT_AGREE_NO_INDEPENDENT_RIGHTS_OR_PREMATCH_CERTIFICATION"
  }
 def run():
  before=json.loads(PREVIOUS.read_text())
@@ -179,8 +207,9 @@ def run():
   "date":"2026-11-14","cutoff":"2026-11-13",
   "status":"FOUR_SOURCE_IDENTITY_RECONCILIATION_VOLATILE_METADATA_ONLY",
   "source":"Football Charts personal free research API",
+  "prior_Austria_42_72_reused_without_network":True,
   "terms":"https://www.football-charts.com/terms",
-  "scope":list(SPECS),"requests_max":4,
+  "scope":list(SPECS),"requests_max":3,
   "source_raw_rows_rehosted":0,"source_match_urls_published":0,
   "new_model_training_rows":0,"old_9460_and_200_source_manifest_modified":False,
   "main_M4_or_xG_file_modified":False,
@@ -194,14 +223,34 @@ def run():
    "Source raw results were volatile and never written to git, files or logs."],
   "actionable_next":"For a public scores archive, license-clean primary data or explicit reuse permission and independent FT corroboration are required. Do not promote source-only fixtures."
  }
+ earlier_run=json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else None
+ # Austria was fully matched in prior successful source run: reuse its 42/42
+ # without calling the same API again, preserving the no-repeat rule.
  for lg,spec in SPECS.items():
   earlier=before["counts"][lg]
   if (earlier["source_minus_local_count"]!=spec["source_expected"]-spec["local_expected"]
      or earlier["persisted_research_or_core"]!=spec["local_expected"]):
    raise ValueError("BASE_SOURCE_COUNTS_CHANGED:"+lg)
   try:
-   live,qa=source_matches(spec["code"])
-   counts=reconcile(locally[lg],live,lg)
+   if lg=="AUT1" and earlier_run:
+    prior=earlier_run.get("league_results",{}).get("AUT1",{})
+    if not (prior.get("known_pinned_roster_alias_same_date_FT_confirmed")==42
+            and prior.get("source")==72 and prior.get("local")==42
+            and prior.get("known_pinned_roster_alias_same_date_FT_conflicts_hold")==0):
+     raise ValueError("PRIOR_AUSTRIA_IDENTITY_PASS_MISSING")
+    counts={"local":42,"source":72,"exact_club_spelling_same_date_matches":1,
+      "curated_team_roster_date_score_matches":42,
+      "curated_team_roster_source_date_or_FT_conflicts_hold":0,
+      "provider_source_rows_unmatched_club_roster":0,
+      "source_missing_identity_candidates_after_curated_aliases":30,
+      "old_rows_not_recovered_from_source":0,
+      "source_minus_local_simple_count":30,
+      "confidence":"REUSED_PREVIOUS_PINNED_42_OF_42_FT_AND_DATE_MATCH_NO_NEW_CALL"}
+    qa={"reused_previous_au":
+     "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43634128246"}
+   else:
+    live,qa=source_matches(spec["code"])
+    counts=reconcile(locally[lg],live,lg)
    counts["source_qa_status"]=qa
    counts["source_league_code"]=spec["code"]
    counts["prior_count_only_gap"]=earlier["source_minus_local_count"]
@@ -218,13 +267,12 @@ def run():
  OUT.write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
  print(json.dumps({"status":report["status"],
    "successful":report["source_successful"],"blocked":report["source_access_blocked"],
-   "aggregate":{k:{q:v.get(q) for q in ("local","source","strict_same_date_home_away","known_pinned_roster_alias_same_date_FT_confirmed",
-      "source_not_covered_by_canonical_pinned_matches",
-      "known_pinned_roster_alias_same_date_FT_conflicts_hold",
-      "provider_teams_not_mappable_by_pinned_club_aliases",
-      "additional_suffix_alias_same_date_FT_candidate_only",
-      "source_fixture_identities_not_accounted_for_after_candidate_alias",
-      "source_count_matches_prior_snapshot","status")}
+   "aggregate":{k:{"local":v.get("local"),"source":v.get("source"),
+      "matched":v.get("curated_team_roster_date_score_matches"),
+      "missing_candidates":v.get("source_missing_identity_candidates_after_curated_aliases"),
+      "conflicts":v.get("curated_team_roster_source_date_or_FT_conflicts_hold"),
+      "unknown_roster":v.get("provider_source_rows_unmatched_club_roster"),
+      "status":v.get("status")}
      for k,v in report["league_results"].items()},
    "model_training":0},ensure_ascii=False))
 def selftest():
@@ -234,8 +282,8 @@ def selftest():
  a=[("2026-10-01","FC Thun","Basel",(1,0),"src")]
  b=[("2026-10-01","Thun","Basel",(1,0))]
  q=reconcile(a,b,"CHE1")
- assert q["known_pinned_roster_alias_same_date_FT_confirmed"]==1
- assert q["strict_same_date_home_away"]==0
+ assert q["curated_team_roster_date_score_matches"]==1
+ assert q["exact_club_spelling_same_date_matches"]==0
  print("PASS 4 leagues 118 historical count gap, deterministic string and match-identity guard")
 if __name__=="__main__":
  p=argparse.ArgumentParser();p.add_argument("--self-test",action="store_true")
