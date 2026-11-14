@@ -1,0 +1,289 @@
+{
+  "stage_source_cutoff": "2026-11-13",
+  "stage_inspection_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43572112472",
+  "status": "STAGE_AND_2026_SOURCE_RECENCY_DIAGNOSED_NO_TRAINING",
+  "initial_stage_input_snapshot": {
+    "checked_utc": "2026-11-14T07:39:32.133957+00:00",
+    "original_frozen_cutoff": "2026-11-13",
+    "analysis_scope": "1871_unheld_CC0_publication_claim_only_no_training",
+    "all_2396_scored_research_keys_unchanged": 2396,
+    "old_200_held_source_identities_unchanged": 200,
+    "CC0_not_explicitly_held": 1871,
+    "prior_already_double_source_corrobated_FT_CHE1_2026_27": 54,
+    "other_records_without_prior_reusable_individual_FT_witness": 1817,
+    "competition_stage_separation": {
+      "AUT1_2025_26": {
+        "raw_scored_total": 195,
+        "67_unlabeled_early_results": 67,
+        "65_labeled_regular_results": 65,
+        "regular_candidate_sum_not_independent_stage_proof": 132,
+        "championship_group": 30,
+        "relegation_group": 30,
+        "extra_conference_league_playoffs_not_normal_league": 3,
+        "playoff_event_facts": [
+          {
+            "date": "2026-05-19",
+            "home": "SV Ried",
+            "away": "Wolfsberger AC",
+            "stage": "Conference League Play-offs - 1st Round"
+          },
+          {
+            "date": "2026-05-22",
+            "home": "SV Ried",
+            "away": "Rapid Wien",
+            "stage": "Conference League Play-offs - Final"
+          },
+          {
+            "date": "2026-05-25",
+            "home": "Rapid Wien",
+            "away": "SV Ried",
+            "stage": "Conference League Play-offs - Final"
+          }
+        ],
+        "default_shadow_train_exclusion": "ALL_3_CONFERENCE_LEAGUE_PLAYOFFS",
+        "additional_conditional_gate": "67 early regular-stage candidates have no explicit stored stage label; infer only after schedule stage verification"
+      }
+    },
+    "same_club_two_scored_games_on_same_day": {
+      "potential_anomaly_count": 0,
+      "sample_anomalies": [],
+      "automatic_training_exclusions_pending_review": 0
+    },
+    "source_file_candidate_counts": {
+      "training_2025_26_cc0_scored_QUARANTINE.csv": 1063,
+      "cc0_new_485_2526_2627_QUARANTINE_20261113.csv": 485,
+      "cc0_aut1_2026_27_42_QUARANTINE_20261113.csv": 42,
+      "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": 281
+    },
+    "league_season_candidate_coverage": {
+      "AUT1/2025-26": {
+        "candidate_rows": 195,
+        "stage_declared_rows": 128,
+        "stage_undeclared_rows": 67,
+        "stages": {
+          "undeclared": 67,
+          "regular": 65,
+          "championship": 30,
+          "relegation": 30,
+          "conference_playoff": 3
+        },
+        "earliest_scored_date": "2025-08-01",
+        "latest_scored_date": "2026-05-25",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "AUT1/2026-27": {
+        "candidate_rows": 42,
+        "stage_declared_rows": 42,
+        "stage_undeclared_rows": 0,
+        "stages": {
+          "regular": 42
+        },
+        "earliest_scored_date": "2026-07-31",
+        "latest_scored_date": "2026-09-20",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "CHE1/2026-27": {
+        "candidate_rows": 54,
+        "stage_declared_rows": 54,
+        "stage_undeclared_rows": 0,
+        "stages": {
+          "regular": 54
+        },
+        "earliest_scored_date": "2026-07-25",
+        "latest_scored_date": "2026-09-20",
+        "score_witness_from_previous_different_source": 54,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "ENG3/2025-26": {
+        "candidate_rows": 256,
+        "stage_declared_rows": 88,
+        "stage_undeclared_rows": 168,
+        "stages": {
+          "undeclared": 168,
+          "other": 88
+        },
+        "earliest_scored_date": "2025-08-01",
+        "latest_scored_date": "2026-02-07",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "ENG4/2025-26": {
+        "candidate_rows": 176,
+        "stage_declared_rows": 8,
+        "stage_undeclared_rows": 168,
+        "stages": {
+          "undeclared": 168,
+          "other": 8
+        },
+        "earliest_scored_date": "2025-08-02",
+        "latest_scored_date": "2025-12-29",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "ENG5/2025-26": {
+        "candidate_rows": 296,
+        "stage_declared_rows": 296,
+        "stage_undeclared_rows": 0,
+        "stages": {
+          "other": 296
+        },
+        "earliest_scored_date": "2025-08-09",
+        "latest_scored_date": "2025-12-30",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "ESP2/2025-26": {
+        "candidate_rows": 131,
+        "stage_declared_rows": 16,
+        "stage_undeclared_rows": 115,
+        "stages": {
+          "undeclared": 115,
+          "other": 16
+        },
+        "earliest_scored_date": "2025-08-15",
+        "latest_scored_date": "2025-11-03",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "FRA2/2025-26": {
+        "candidate_rows": 116,
+        "stage_declared_rows": 9,
+        "stage_undeclared_rows": 107,
+        "stages": {
+          "undeclared": 107,
+          "other": 9
+        },
+        "earliest_scored_date": "2025-08-09",
+        "latest_scored_date": "2025-11-03",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "GER2/2025-26": {
+        "candidate_rows": 99,
+        "stage_declared_rows": 5,
+        "stage_undeclared_rows": 94,
+        "stages": {
+          "undeclared": 94,
+          "other": 5
+        },
+        "earliest_scored_date": "2025-08-01",
+        "latest_scored_date": "2025-11-02",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "GRE1/2025-26": {
+        "candidate_rows": 62,
+        "stage_declared_rows": 1,
+        "stage_undeclared_rows": 61,
+        "stages": {
+          "undeclared": 61,
+          "other": 1
+        },
+        "earliest_scored_date": "2025-08-23",
+        "latest_scored_date": "2025-11-03",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "GRE1/2026-27": {
+        "candidate_rows": 35,
+        "stage_declared_rows": 35,
+        "stage_undeclared_rows": 0,
+        "stages": {
+          "regular": 35
+        },
+        "earliest_scored_date": "2026-08-22",
+        "latest_scored_date": "2026-09-20",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "ITA2/2025-26": {
+        "candidate_rows": 309,
+        "stage_declared_rows": 26,
+        "stage_undeclared_rows": 283,
+        "stages": {
+          "undeclared": 283,
+          "other": 26
+        },
+        "earliest_scored_date": "2025-08-22",
+        "latest_scored_date": "2026-03-17",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "SCO1/2025-26": {
+        "candidate_rows": 58,
+        "stage_declared_rows": 58,
+        "stage_undeclared_rows": 0,
+        "stages": {
+          "other": 58
+        },
+        "earliest_scored_date": "2025-08-02",
+        "latest_scored_date": "2025-11-01",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      },
+      "SCO1/2026-27": {
+        "candidate_rows": 42,
+        "stage_declared_rows": 42,
+        "stage_undeclared_rows": 0,
+        "stages": {
+          "other": 42
+        },
+        "earliest_scored_date": "2026-07-31",
+        "latest_scored_date": "2026-09-20",
+        "score_witness_from_previous_different_source": 0,
+        "row_level_full_time_QA_for_others": "PENDING_NOT_REPEAT_OLD_CLOSED_CASES",
+        "training_admitted": 0
+      }
+    },
+    "current_season_recency_gates": {
+      "AUT1/2026-27": {
+        "last_recorded_result": "2026-09-20",
+        "calendar_lag_days_to_research_snapshot": 54,
+        "freshness": "SOURCE_COVERAGE_REVIEW_REQUIRED"
+      },
+      "CHE1/2026-27": {
+        "last_recorded_result": "2026-09-20",
+        "calendar_lag_days_to_research_snapshot": 54,
+        "freshness": "SOURCE_COVERAGE_REVIEW_REQUIRED"
+      },
+      "GRE1/2026-27": {
+        "last_recorded_result": "2026-09-20",
+        "calendar_lag_days_to_research_snapshot": 54,
+        "freshness": "SOURCE_COVERAGE_REVIEW_REQUIRED"
+      },
+      "SCO1/2026-27": {
+        "last_recorded_result": "2026-09-20",
+        "calendar_lag_days_to_research_snapshot": 54,
+        "freshness": "SOURCE_COVERAGE_REVIEW_REQUIRED"
+      }
+    },
+    "rights_review": "PUBLISHER_CC0_CLAIM_NOT_FULL_UPSTREAM_RIGHTS_OR_INDIVIDUAL_SCORE_PROOF",
+    "pre_kickoff_feature_vintage_status": "NOT_RECORDED_PER_MATCH",
+    "training_admitted": 0,
+    "new_model_tests_run": 0,
+    "M4_main_SHA_modified": false,
+    "source_match_files_modified": false,
+    "repeated_prior_scored_QA_tests": 0,
+    "new_GitHub_source_downloads": 0,
+    "next": "Resolve any same-day fixture anomalies and AUT1 stage labels separately; seek independently licensed FT witnesses for rows other than the prechecked CHE1 54. Source publication, feature vintage and time-ordered splits must pass before any shadow training."
+  },
+  "subsequent_new_195_Austrian_independent_verification": "experiments/263/league_expansion/aut1_2025_26_195_full_independent_ft_and_stage_evidence_20261114.json",
+  "addendum": "Initial 67 Austrian unlabeled early results were later independently assigned regular stage by the 195/195 RSSSF verification. Use newer evidence, no need to rerun this stage snapshot.",
+  "all_2396_research_source_files_unchanged": true,
+  "new_trainable_rows_approved": 0
+}
