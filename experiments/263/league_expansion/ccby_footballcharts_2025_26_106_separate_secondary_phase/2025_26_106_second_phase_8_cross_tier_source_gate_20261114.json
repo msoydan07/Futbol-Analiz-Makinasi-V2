@@ -1,0 +1,107 @@
+{
+  "status": "PASS_ARCHIVED_106_DISTINCT_2025_26_SECOND_PHASE_MATCH_IDENTITIES_8_CROSS_TIER_HOLD",
+  "snapshot_at_utc": "2026-11-14T12:34:34.557447+00:00",
+  "source": "Football Charts (Damir Devetak), one original CC BY 4.0 research source snapshot (existing GitHub pinned files only)",
+  "source_doi": "https://doi.org/10.5281/zenodo.22295583",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source_git_blob_pins": [
+    {
+      "league": "ENG3",
+      "pinned_original_CC_BY_source_git_blob": "d1d481c5ef5e73f4594f9d948bfe846796645c4e",
+      "expected_after_normal_source": 5,
+      "separate_stage_candidates": 5,
+      "outside_roster_HOLD": 0
+    },
+    {
+      "league": "ENG4",
+      "pinned_original_CC_BY_source_git_blob": "512f2a7e402b10ecd25336c9058a038320f962bd",
+      "expected_after_normal_source": 4,
+      "separate_stage_candidates": 4,
+      "outside_roster_HOLD": 0
+    },
+    {
+      "league": "ENG5",
+      "pinned_original_CC_BY_source_git_blob": "01aa70a635b67e91368f706d35ec7999362bcb79",
+      "expected_after_normal_source": 2,
+      "separate_stage_candidates": 2,
+      "outside_roster_HOLD": 0
+    },
+    {
+      "league": "ITA2",
+      "pinned_original_CC_BY_source_git_blob": "995d80a9faec5854252ca8eadb6563a230202652",
+      "expected_after_normal_source": 10,
+      "separate_stage_candidates": 10,
+      "outside_roster_HOLD": 0
+    },
+    {
+      "league": "FRA2",
+      "pinned_original_CC_BY_source_git_blob": "1b7fe8ad9dd8ece9da585bdc8717e91dcb9075ca",
+      "expected_after_normal_source": 3,
+      "separate_stage_candidates": 1,
+      "outside_roster_HOLD": 2
+    },
+    {
+      "league": "GRE1",
+      "pinned_original_CC_BY_source_git_blob": "81e6cf0f8d593fbc703f453e04dc96b22df0cb7f",
+      "expected_after_normal_source": 54,
+      "separate_stage_candidates": 54,
+      "outside_roster_HOLD": 0
+    },
+    {
+      "league": "SCO1",
+      "pinned_original_CC_BY_source_git_blob": "a11d301351f1350a156defa7d973da836c0a9444",
+      "expected_after_normal_source": 36,
+      "separate_stage_candidates": 30,
+      "outside_roster_HOLD": 6
+    }
+  ],
+  "seasons": [
+    "2025-26"
+  ],
+  "source_after_cutoff_scored_rows_considered": 114,
+  "new_2025_26_additional_stage_research_source_match_identities": 106,
+  "new_phase_by_name": {
+    "ENG3_EFL_PROMOTION_PLAYOFF": 5,
+    "ENG4_EFL_PROMOTION_PLAYOFF_PARTIAL": 4,
+    "ENG5_NATIONAL_LEAGUE_PROMOTION_PLAYOFF_PARTIAL": 2,
+    "ITA2_SERIE_B_PROMOTION_PLAYOFF": 8,
+    "ITA2_SERIE_B_PLAYOUT": 2,
+    "FRA2_LIGUE_2_PROMOTION_PLAYOFF_PARTIAL": 1,
+    "GRE1_RELEGATION_PLAYOUT_9_TO_14": 30,
+    "GRE1_EUROPE_PLAYOFF_5_TO_8": 12,
+    "GRE1_CHAMPIONSHIP_PLAYOFF_1_TO_4": 12,
+    "SCO1_PREMIERSHIP_POST_SPLIT_BOTTOM_6": 15,
+    "SCO1_PREMIERSHIP_POST_SPLIT_TOP_6": 15
+  },
+  "different_league_transition_playoff_HOLD": 8,
+  "different_league_transition_HOLD_breakdown": {
+    "FRA2": 2,
+    "SCO1": 6
+  },
+  "research_base_4391_original_identity_rows_untouched": true,
+  "other_source_separate_stage_identity_total_after_addition": 4497,
+  "old_one_source_original_FRA2_abandoned_Bastia_RedStar_0_0_still_held": true,
+  "one_old_National_League_abandoned_replay_and_awarded_event_retained_as_technical_no_goals": true,
+  "no_previous_1268_and_461_and_1775_score_fact_checks_reexecuted": true,
+  "stage_allocation_validated_by_source_round_robin": {
+    "GREEK_4_plus_4_plus_6_groups": "12 championship + 12 Europe + 30 relegation, complete group 2-leg source round-robin",
+    "SCOTTISH_TOP_AND_BOTTOM_SIX": "15+15, each club five games, full single round-robin"
+  },
+  "official_competition_stage_reference_urls": {
+    "ITA2": "https://d5rzfs5ck83rq.cloudfront.net/legab.it/documenti/2025-26/C.U._LNPB_n._176_del_09.05.2026_-_Accoppiamenti_gare_playoff_e_playout_Serie_BKT_2025-2026.pdf",
+    "GRE1": "https://www.rsssf.org/tablesg/grk2026.html",
+    "SCO1": "https://spfl.co.uk/news/press-release-post-split-fixtures-51159",
+    "ENG3": "https://www.efl.com/news/2026/march/24/sky-bet-efl-end-of-season-schedule--now-confirmed/",
+    "ENG4": "https://www.efl.com/news/2026/march/24/sky-bet-efl-end-of-season-schedule--now-confirmed/",
+    "ENG5": "https://eastleighfc.com/2025/06/2025-26-national-league-key-dates-confirmed/",
+    "FRA2": "https://www.lfp.fr/article/ligue-2-bkt-le-calendrier-de-la-saison-2025-2026"
+  },
+  "stage_ENG4_and_FRA2_are_partial_source_club_playoff_result_sets": true,
+  "not_model_training_or_normal_league_matches": true,
+  "fresh_independent_score_facts_verified": 0,
+  "source_upstream_rights_asof_gate_still_pending": true,
+  "new_training_rows_approved": 0,
+  "production_M4_and_10_league_signed_results_unchanged": true,
+  "user_manual_xg_workbook_unchanged": true,
+  "next_distinct_step": "Compare ONLY 106 new separate-stage fixture scores to second source; keep 8 interdivision source rows under HOLD pending explicit cross-competition identity and provenance, without changing original regular league score history."
+}
