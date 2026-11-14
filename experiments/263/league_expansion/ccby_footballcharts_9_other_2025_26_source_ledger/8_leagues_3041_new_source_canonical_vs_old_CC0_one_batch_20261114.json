@@ -1,0 +1,547 @@
+{
+  "status": "EIGHT_NEW_2025_26_CC_BY_SOURCE_FILES_3041_OFFLINE_CANONICAL_DEDUP_QA_COMPLETE_RESEARCH_ONLY",
+  "checked_on_utc": "2026-11-14T11:51:46.083207+00:00",
+  "source_license": "CC BY 4.0 Football Charts open source 2026.10",
+  "source_integrity_sha256": "08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10",
+  "only_previously_archived_local_source_files_read": true,
+  "new_network_or_remote_FT_source_requests": 0,
+  "older_source_2396_CSVs_changed": false,
+  "older_200_plus_96_holds_kept": true,
+  "older_871_plus_904_crosschecks_retested": 0,
+  "previous_Denmark_Swiss_259_source_qa_repeated": false,
+  "source_only_3041_rows_examined": 3041,
+  "source_identity_classification_counts": {
+    "OLD_IDENTITY_AND_FT_MATCH": 1324,
+    "NOVEL_SOURCE_IDENTITIES_STAGE_AND_SCORE_QA_PENDING": 1376,
+    "OLD_IDENTITY_BUT_FT_CONFLICT_HOLD": 260,
+    "DATE_NEAR_SAME_HOME_AWAY_SOURCE_CONFLICT_HOLD": 63,
+    "OUTSIDE_PREVIOUS_LEAGUE_ROSTER_OR_PLAYOFF_UNRESOLVED": 8,
+    "SOURCE_CANONICAL_DUPLICATE_HOLD": 10
+  },
+  "source_groups": {
+    "ENG3": {
+      "older_2025_26_pinned_research_source_rows": 356,
+      "new_CCBY_original_author_source_rows": 557,
+      "new_CCBY_git_blob_sha": "d1d481c5ef5e73f4594f9d948bfe846796645c4e",
+      "canonical_aliases_explicit_this_pass": {
+        "Plymouth": "Plymouth Argyle"
+      },
+      "counts": {
+        "OLD_IDENTITY_AND_FT_MATCH": 256,
+        "NOVEL_SOURCE_IDENTITIES_STAGE_AND_SCORE_QA_PENDING": 213,
+        "OLD_IDENTITY_BUT_FT_CONFLICT_HOLD": 85,
+        "DATE_NEAR_SAME_HOME_AWAY_SOURCE_CONFLICT_HOLD": 3
+      },
+      "older_existing_key_FT_disputes_status": {
+        "ALREADY_OLD_296_EXPLICIT_HOLD": 85
+      },
+      "still_unmapped_source_name_count": {},
+      "outside_previous_roster_team_names": [],
+      "discrepancy_examples_only": [
+        {
+          "date": "2025-11-06",
+          "home": "Reading FC",
+          "away": "Stevenage FC",
+          "old_score": "2-0",
+          "CCBY_source_score": "1-0",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Blackpool FC",
+          "away": "Cardiff City",
+          "old_score": "0-2",
+          "CCBY_source_score": "3-1",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Bolton Wanderers",
+          "away": "Port Vale FC",
+          "old_score": "3-0",
+          "CCBY_source_score": "4-0",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Bradford City",
+          "away": "Burton Albion",
+          "old_score": "1-0",
+          "CCBY_source_score": "1-2",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Exeter City",
+          "away": "Wigan Athletic",
+          "old_score": "0-1",
+          "CCBY_source_score": "1-1",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Huddersfield Town",
+          "away": "Plymouth Argyle",
+          "old_score": "2-0",
+          "CCBY_source_score": "3-1",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        }
+      ],
+      "date_shift_examples_only": [
+        {
+          "source_date": "2025-12-10",
+          "older_date": [
+            "2025-12-09"
+          ],
+          "home": "Rotherham United",
+          "away": "Blackpool FC"
+        },
+        {
+          "source_date": "2025-12-19",
+          "older_date": [
+            "2025-12-20"
+          ],
+          "home": "Northampton Town",
+          "away": "AFC Wimbledon"
+        },
+        {
+          "source_date": "2026-01-22",
+          "older_date": [
+            "2026-01-24"
+          ],
+          "home": "Lincoln City",
+          "away": "Burton Albion"
+        }
+      ],
+      "new_unique_research_count_PROMOTED": 0,
+      "stage_or_playoff_ready_for_training": false,
+      "source_FT_validated_independently_FOR_THE_NEW_IDENTITY_ROWS": false
+    },
+    "ENG4": {
+      "older_2025_26_pinned_research_source_rows": 276,
+      "new_CCBY_original_author_source_rows": 556,
+      "new_CCBY_git_blob_sha": "512f2a7e402b10ecd25336c9058a038320f962bd",
+      "canonical_aliases_explicit_this_pass": {
+        "Notts Co": "Notts County",
+        "Cambridge Utd": "Cambridge United",
+        "MK Dons": "Milton Keynes Dons",
+        "Crewe": "Crewe Alexandra"
+      },
+      "counts": {
+        "OLD_IDENTITY_AND_FT_MATCH": 176,
+        "OLD_IDENTITY_BUT_FT_CONFLICT_HOLD": 93,
+        "DATE_NEAR_SAME_HOME_AWAY_SOURCE_CONFLICT_HOLD": 6,
+        "NOVEL_SOURCE_IDENTITIES_STAGE_AND_SCORE_QA_PENDING": 281
+      },
+      "older_existing_key_FT_disputes_status": {
+        "ALREADY_OLD_296_EXPLICIT_HOLD": 93
+      },
+      "still_unmapped_source_name_count": {},
+      "outside_previous_roster_team_names": [],
+      "discrepancy_examples_only": [
+        {
+          "date": "2025-11-08",
+          "home": "Barnet FC",
+          "away": "Milton Keynes Dons",
+          "old_score": "1-3",
+          "CCBY_source_score": "2-2",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Barrow AFC",
+          "away": "Grimsby Town",
+          "old_score": "1-0",
+          "CCBY_source_score": "2-2",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Bristol Rovers",
+          "away": "Gillingham FC",
+          "old_score": "2-2",
+          "CCBY_source_score": "0-1",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Chesterfield FC",
+          "away": "Accrington Stanley",
+          "old_score": "2-1",
+          "CCBY_source_score": "3-3",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Colchester United",
+          "away": "Bromley FC",
+          "old_score": "1-1",
+          "CCBY_source_score": "0-2",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-08",
+          "home": "Crawley Town",
+          "away": "Fleetwood Town",
+          "old_score": "0-1",
+          "CCBY_source_score": "2-1",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        }
+      ],
+      "date_shift_examples_only": [
+        {
+          "source_date": "2025-11-27",
+          "older_date": [
+            "2025-11-29"
+          ],
+          "home": "Grimsby Town",
+          "away": "Tranmere Rovers"
+        },
+        {
+          "source_date": "2025-12-10",
+          "older_date": [
+            "2025-12-09"
+          ],
+          "home": "Crewe Alexandra",
+          "away": "Newport County"
+        },
+        {
+          "source_date": "2025-12-10",
+          "older_date": [
+            "2025-12-09"
+          ],
+          "home": "Oldham Athletic",
+          "away": "Walsall FC"
+        },
+        {
+          "source_date": "2025-12-19",
+          "older_date": [
+            "2025-12-20"
+          ],
+          "home": "Barrow AFC",
+          "away": "Cheltenham Town"
+        }
+      ],
+      "new_unique_research_count_PROMOTED": 0,
+      "stage_or_playoff_ready_for_training": false,
+      "source_FT_validated_independently_FOR_THE_NEW_IDENTITY_ROWS": false
+    },
+    "ENG5": {
+      "older_2025_26_pinned_research_source_rows": 296,
+      "new_CCBY_original_author_source_rows": 554,
+      "new_CCBY_git_blob_sha": "01aa70a635b67e91368f706d35ec7999362bcb79",
+      "canonical_aliases_explicit_this_pass": {
+        "Boston Utd": "Boston United"
+      },
+      "counts": {
+        "OLD_IDENTITY_AND_FT_MATCH": 200,
+        "OLD_IDENTITY_BUT_FT_CONFLICT_HOLD": 82,
+        "NOVEL_SOURCE_IDENTITIES_STAGE_AND_SCORE_QA_PENDING": 265,
+        "DATE_NEAR_SAME_HOME_AWAY_SOURCE_CONFLICT_HOLD": 7
+      },
+      "older_existing_key_FT_disputes_status": {
+        "ALREADY_OLD_296_EXPLICIT_HOLD": 82
+      },
+      "still_unmapped_source_name_count": {},
+      "outside_previous_roster_team_names": [],
+      "discrepancy_examples_only": [
+        {
+          "date": "2025-11-04",
+          "home": "Boreham Wood",
+          "away": "Aldershot Town",
+          "old_score": "1-1",
+          "CCBY_source_score": "1-0",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-04",
+          "home": "Hartlepool United",
+          "away": "Morecambe FC",
+          "old_score": "3-1",
+          "CCBY_source_score": "1-1",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-04",
+          "home": "Yeovil Town",
+          "away": "Wealdstone FC",
+          "old_score": "1-0",
+          "CCBY_source_score": "0-2",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-05",
+          "home": "Altrincham FC",
+          "away": "Boston United",
+          "old_score": "2-1",
+          "CCBY_source_score": "1-0",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-05",
+          "home": "Braintree Town",
+          "away": "Brackley Town",
+          "old_score": "0-0",
+          "CCBY_source_score": "0-1",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        },
+        {
+          "date": "2025-11-05",
+          "home": "Solihull Moors",
+          "away": "Truro City",
+          "old_score": "3-0",
+          "CCBY_source_score": "4-0",
+          "status": "ALREADY_OLD_296_EXPLICIT_HOLD"
+        }
+      ],
+      "date_shift_examples_only": [
+        {
+          "source_date": "2025-12-19",
+          "older_date": [
+            "2025-12-20"
+          ],
+          "home": "Altrincham FC",
+          "away": "Rochdale AFC"
+        },
+        {
+          "source_date": "2025-12-21",
+          "older_date": [
+            "2025-12-20"
+          ],
+          "home": "Boreham Wood",
+          "away": "Carlisle United"
+        },
+        {
+          "source_date": "2025-12-21",
+          "older_date": [
+            "2025-12-20"
+          ],
+          "home": "Brackley Town",
+          "away": "Morecambe FC"
+        },
+        {
+          "source_date": "2025-12-21",
+          "older_date": [
+            "2025-12-20"
+          ],
+          "home": "Braintree Town",
+          "away": "Hartlepool United"
+        }
+      ],
+      "new_unique_research_count_PROMOTED": 0,
+      "stage_or_playoff_ready_for_training": false,
+      "source_FT_validated_independently_FOR_THE_NEW_IDENTITY_ROWS": false
+    },
+    "ITA2": {
+      "older_2025_26_pinned_research_source_rows": 309,
+      "new_CCBY_original_author_source_rows": 390,
+      "new_CCBY_git_blob_sha": "995d80a9faec5854252ca8eadb6563a230202652",
+      "canonical_aliases_explicit_this_pass": {
+        "Avellino": "US Avellino",
+        "Bari": "SSC Bari",
+        "Carrarese": "Carrarese Calcio",
+        "Catanzaro": "US Catanzaro",
+        "Cesena": "Cesena FC",
+        "Empoli": "Empoli FC",
+        "Entella": "Virtus Entella",
+        "Frosinone": "Frosinone Calcio",
+        "Mantova": "Mantova 1911 SSD",
+        "Modena": "Modena FC",
+        "Monza": "AC Monza",
+        "Padova": "Calcio Padova",
+        "Palermo": "Palermo FC",
+        "Pescara": "Delfino Pescara",
+        "Reggiana": "AC Reggiana 1919",
+        "Spezia": "Spezia Calcio",
+        "Sudtirol": "FC Südtirol",
+        "Venezia": "Venezia FC"
+      },
+      "counts": {
+        "OLD_IDENTITY_AND_FT_MATCH": 261,
+        "NOVEL_SOURCE_IDENTITIES_STAGE_AND_SCORE_QA_PENDING": 82,
+        "DATE_NEAR_SAME_HOME_AWAY_SOURCE_CONFLICT_HOLD": 47
+      },
+      "older_existing_key_FT_disputes_status": {},
+      "still_unmapped_source_name_count": {},
+      "outside_previous_roster_team_names": [],
+      "discrepancy_examples_only": [],
+      "date_shift_examples_only": [
+        {
+          "source_date": "2026-01-11",
+          "older_date": [
+            "2026-01-10"
+          ],
+          "home": "Mantova 1911 SSD",
+          "away": "Palermo FC"
+        },
+        {
+          "source_date": "2026-01-11",
+          "older_date": [
+            "2026-01-10"
+          ],
+          "home": "Calcio Padova",
+          "away": "Modena FC"
+        },
+        {
+          "source_date": "2026-01-16",
+          "older_date": [
+            "2026-01-17"
+          ],
+          "home": "Sampdoria",
+          "away": "Virtus Entella"
+        },
+        {
+          "source_date": "2026-01-18",
+          "older_date": [
+            "2026-01-17"
+          ],
+          "home": "Palermo FC",
+          "away": "Spezia Calcio"
+        }
+      ],
+      "new_unique_research_count_PROMOTED": 0,
+      "stage_or_playoff_ready_for_training": false,
+      "source_FT_validated_independently_FOR_THE_NEW_IDENTITY_ROWS": false
+    },
+    "FRA2": {
+      "older_2025_26_pinned_research_source_rows": 116,
+      "new_CCBY_original_author_source_rows": 309,
+      "new_CCBY_git_blob_sha": "1b7fe8ad9dd8ece9da585bdc8717e91dcb9075ca",
+      "canonical_aliases_explicit_this_pass": {
+        "Amiens": "Amiens SC",
+        "Annecy": "FC Annecy",
+        "Bastia": "SC Bastia",
+        "Boulogne": "US Boulogne",
+        "Clermont": "Clermont Foot 63",
+        "Dunkerque": "USL Dunkerque",
+        "Grenoble": "Grenoble Foot 38",
+        "Guingamp": "EA Guingamp",
+        "Laval": "Stade Lavallois",
+        "Le Mans": "Le Mans FC",
+        "Montpellier": "Montpellier HSC",
+        "Nancy": "AS Nancy Lorraine",
+        "Red Star": "Red Star FC",
+        "Reims": "Stade de Reims",
+        "Rodez": "Rodez AF",
+        "St Etienne": "AS Saint-Étienne",
+        "Troyes": "ESTAC Troyes"
+      },
+      "counts": {
+        "OLD_IDENTITY_AND_FT_MATCH": 116,
+        "NOVEL_SOURCE_IDENTITIES_STAGE_AND_SCORE_QA_PENDING": 191,
+        "OUTSIDE_PREVIOUS_LEAGUE_ROSTER_OR_PLAYOFF_UNRESOLVED": 2
+      },
+      "older_existing_key_FT_disputes_status": {},
+      "still_unmapped_source_name_count": {
+        "Rouen": 2
+      },
+      "outside_previous_roster_team_names": [
+        "Rouen"
+      ],
+      "discrepancy_examples_only": [],
+      "date_shift_examples_only": [],
+      "new_unique_research_count_PROMOTED": 0,
+      "stage_or_playoff_ready_for_training": false,
+      "source_FT_validated_independently_FOR_THE_NEW_IDENTITY_ROWS": false
+    },
+    "GRE1": {
+      "older_2025_26_pinned_research_source_rows": 62,
+      "new_CCBY_original_author_source_rows": 246,
+      "new_CCBY_git_blob_sha": "81e6cf0f8d593fbc703f453e04dc96b22df0cb7f",
+      "canonical_aliases_explicit_this_pass": {
+        "AEK Athens": "AEK Athen",
+        "AEK Athens FC": "AEK Athen",
+        "AEL Larissa": "AE Lárissa",
+        "Aris": "Aris Saloniki",
+        "Kifisia": "AE Kifisias",
+        "OFI Crete": "OFI Heraklion",
+        "Olympiacos Piraeus": "Olympiakos Piraeus",
+        "PAOK": "PAOK Saloniki",
+        "Volos": "Volos NFC"
+      },
+      "counts": {
+        "OLD_IDENTITY_AND_FT_MATCH": 62,
+        "SOURCE_CANONICAL_DUPLICATE_HOLD": 10,
+        "NOVEL_SOURCE_IDENTITIES_STAGE_AND_SCORE_QA_PENDING": 174
+      },
+      "older_existing_key_FT_disputes_status": {},
+      "still_unmapped_source_name_count": {},
+      "outside_previous_roster_team_names": [],
+      "discrepancy_examples_only": [],
+      "date_shift_examples_only": [],
+      "new_unique_research_count_PROMOTED": 0,
+      "stage_or_playoff_ready_for_training": false,
+      "source_FT_validated_independently_FOR_THE_NEW_IDENTITY_ROWS": false
+    },
+    "SCO1": {
+      "older_2025_26_pinned_research_source_rows": 58,
+      "new_CCBY_original_author_source_rows": 234,
+      "new_CCBY_git_blob_sha": "a11d301351f1350a156defa7d973da836c0a9444",
+      "canonical_aliases_explicit_this_pass": {
+        "Aberdeen": "Aberdeen FC",
+        "Celtic": "Celtic FC",
+        "Dundee Utd": "Dundee United",
+        "Falkirk": "Falkirk FC",
+        "Hearts": "Heart of Midlothian",
+        "Hibernian": "Hibernian FC",
+        "Kilmarnock": "Kilmarnock FC",
+        "Livingston": "Livingston FC",
+        "Motherwell": "Motherwell FC",
+        "Rangers": "Rangers FC",
+        "St. Mirren": "St. Mirren FC"
+      },
+      "counts": {
+        "OLD_IDENTITY_AND_FT_MATCH": 58,
+        "NOVEL_SOURCE_IDENTITIES_STAGE_AND_SCORE_QA_PENDING": 170,
+        "OUTSIDE_PREVIOUS_LEAGUE_ROSTER_OR_PLAYOFF_UNRESOLVED": 6
+      },
+      "older_existing_key_FT_disputes_status": {},
+      "still_unmapped_source_name_count": {
+        "Dunfermline": 4,
+        "Arbroath": 2,
+        "Partick Thistle": 4
+      },
+      "outside_previous_roster_team_names": [
+        "Arbroath",
+        "Dunfermline",
+        "Partick Thistle"
+      ],
+      "discrepancy_examples_only": [],
+      "date_shift_examples_only": [],
+      "new_unique_research_count_PROMOTED": 0,
+      "stage_or_playoff_ready_for_training": false,
+      "source_FT_validated_independently_FOR_THE_NEW_IDENTITY_ROWS": false
+    },
+    "AUT1": {
+      "older_2025_26_pinned_research_source_rows": 195,
+      "new_CCBY_original_author_source_rows": 195,
+      "new_CCBY_git_blob_sha": "6a7eddd6210d0aab4a967a67af7ca0f88856f9fe",
+      "canonical_aliases_explicit_this_pass": {
+        "Altach": "SCR Altach",
+        "Austria Vienna": "Austria Wien",
+        "BW Linz": "FC Blau Weiß Linz",
+        "Hartberg": "TSV Hartberg",
+        "Ried": "SV Ried",
+        "SK Rapid": "Rapid Wien",
+        "Salzburg": "RB Salzburg",
+        "Tirol": "WSG Tirol"
+      },
+      "counts": {
+        "OLD_IDENTITY_AND_FT_MATCH": 195
+      },
+      "older_existing_key_FT_disputes_status": {},
+      "still_unmapped_source_name_count": {},
+      "outside_previous_roster_team_names": [],
+      "discrepancy_examples_only": [],
+      "date_shift_examples_only": [],
+      "new_unique_research_count_PROMOTED": 0,
+      "stage_or_playoff_ready_for_training": false,
+      "source_FT_validated_independently_FOR_THE_NEW_IDENTITY_ROWS": false
+    }
+  },
+  "old_distinct_research_fixture_count_unchanged": 3122,
+  "novel_candidates_NOT_ADDED_TO_COUNT_UNTIL_STAGES_AND_SOURCE_QA": 1376,
+  "training_rows_newly_approved": 0,
+  "model_M4_SHA_and_user_xG_touched": false,
+  "next": "Resolve only previously unmapped club identity and exact held source-score/date conflicts with NEW permitted corroboration; determine playoff/regular stage, then identify truly novel 2025/26 league fixtures. Never rerun completed 3041 source scope or old 871+904 QA."
+}
