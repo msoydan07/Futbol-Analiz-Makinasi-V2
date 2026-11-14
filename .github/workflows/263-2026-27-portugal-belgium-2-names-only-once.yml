@@ -1,0 +1,34 @@
+name: 263 Research - Close only two current league aliases Portugal Belgium names once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-2026-27-portugal-belgium-2-names-only-once.yml
+permissions:
+  contents: write
+jobs:
+  last_two_source_name_aliases_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: One current live source read only POR1 BEL1; no other 20 recheck
+        run: |
+          python experiments/263/league_expansion/probe_only_2026_27_por1_bel1_name_alias_count_once.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("experiments/263/league_expansion/2026_27_only_2_portugal_belgium_catalog_name_freshness_20261114.json").read_text())
+          assert d["status"]=="TWO_REMAINING_PORTUGAL_BELGIUM_LIVE_CATALOG_FRESHNESS_ONLY"
+          assert d["repeated_other_15_plus_previous_5_FT_source_reads"]==0
+          assert d["bulk_raw_score_records_committed"]==0
+          assert d["model_training_approved"]==0
+          PY
+      - name: Commit metadata only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/263/league_expansion/2026_27_only_2_portugal_belgium_catalog_name_freshness_20261114.json
+          git commit -m "research(263): catalog exact name and source coverage for only Portugal Belgium 2026-27"
+          git push origin HEAD:research/263-13-lig-22-havuz-20261113
