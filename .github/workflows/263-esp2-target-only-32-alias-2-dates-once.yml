@@ -1,0 +1,50 @@
+name: 263 Research - Only 32 unmatched Spain2 score QA gaps (30 Santander +2 official dates)
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-esp2-target-only-32-alias-2-dates-once.yml
+permissions:
+  contents: write
+jobs:
+  32_unmatched_only_prior_299_frozen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix only thirty Santander provider aliases and two official dates with secondary match result facts
+        run: |
+          python experiments/263/league_expansion/reconcile_esp2_targeted_only_32_new_source_witness.py > esp2_32_only_check.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("esp2_32_only_check.log").read_text()
+          r=json.loads(s.split("ESP2_32_TARGET_START",1)[1].split("ESP2_32_TARGET_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## Spanish Segunda 2025/26 new source: only remaining 32 source-FT exceptions\n")
+            f.write("- Status: "+r["status"]+"\n")
+            f.write("- New-only targeted confirmed: "+str(r.get("new_32_score_date_team_exact_after_correction",0))+"\n")
+            f.write("- Previous 299/331 and old 131 immutable, no model training.\n")
+          assert r["status"]=="ESP2_NEW_331_ALL_SECOND_SOURCE_FT_CONFIRMED_2_OFFICIAL_DATE_CORRECTIONS",r
+          assert r["new_32_score_date_team_exact_after_correction"]==32
+          assert r["previous_passed_299_new_only_score_checks_retested"]==0
+          assert r["new_model_training_rows_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-ESP2-32-remaining-new-only-scores-2-official-date-corrections
+          path: |
+            esp2_32_only_check.log
+            experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_target_only_32_unresolved_alias_and_two_official_dates_20261114.json
+          retention-days: 14
+      - name: Persist independent 331 verified new scores with 2 official reschedule dates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_target_only_32_unresolved_alias_and_two_official_dates_20261114.json experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_331_corrected_FT_independently_witnessed_RESEARCH_ONLY.csv
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): 331 new Spanish Segunda FT witnesses finished; 30 Santander aliases and two league-official reschedule dates"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
