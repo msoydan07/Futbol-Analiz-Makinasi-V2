@@ -30,32 +30,155 @@
   "by_league": {
     "ENG5": {
       "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
-      "candidate_code_count": 0,
+      "candidate_code_count": 3,
       "new_training_rows": 0
     },
     "ESP2": {
       "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
-      "candidate_code_count": 0,
+      "candidate_code_count": 6,
       "new_training_rows": 0
     },
     "ITA2": {
-      "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
-      "candidate_code_count": 0,
+      "status": "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
+      "provider_competition_code": "italy2",
+      "provider_competition_label": "Serie B      ",
+      "source_endpoint_no_key": "https://footballcharts-backend.onrender.com/api/v1/leagues/italy2/results/?season=2026-2027",
+      "derived_metadata_only": {
+        "raw_provider_rows": 110,
+        "date_outside_frozen_cutoff": 0,
+        "matched_completed_historical_result_field_rows": 0,
+        "missing_scored_fields_or_unparseable": 110,
+        "source_duplicate_historical_date_team_ids": 0,
+        "distinct_clubs_covered": 0,
+        "first_finished_date": null,
+        "last_finished_date": null
+      },
+      "raw_fixture_rows_written_to_GitHub": 0,
       "new_training_rows": 0
     },
     "FRA2": {
-      "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
-      "candidate_code_count": 0,
+      "status": "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
+      "provider_competition_code": "france2",
+      "provider_competition_label": "Ligue 2      ",
+      "source_endpoint_no_key": "https://footballcharts-backend.onrender.com/api/v1/leagues/france2/results/?season=2026-2027",
+      "derived_metadata_only": {
+        "raw_provider_rows": 108,
+        "date_outside_frozen_cutoff": 0,
+        "matched_completed_historical_result_field_rows": 0,
+        "missing_scored_fields_or_unparseable": 108,
+        "source_duplicate_historical_date_team_ids": 0,
+        "distinct_clubs_covered": 0,
+        "first_finished_date": null,
+        "last_finished_date": null
+      },
+      "raw_fixture_rows_written_to_GitHub": 0,
       "new_training_rows": 0
     },
     "DNK1": {
-      "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
-      "candidate_code_count": 0,
+      "status": "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
+      "provider_competition_code": "denmark1",
+      "provider_competition_label": "Superliga      ",
+      "source_endpoint_no_key": "https://footballcharts-backend.onrender.com/api/v1/leagues/denmark1/results/?season=2026-2027",
+      "derived_metadata_only": {
+        "raw_provider_rows": 85,
+        "date_outside_frozen_cutoff": 0,
+        "matched_completed_historical_result_field_rows": 0,
+        "missing_scored_fields_or_unparseable": 85,
+        "source_duplicate_historical_date_team_ids": 0,
+        "distinct_clubs_covered": 0,
+        "first_finished_date": null,
+        "last_finished_date": null
+      },
+      "raw_fixture_rows_written_to_GitHub": 0,
       "new_training_rows": 0
     }
   },
   "next_distinct_task": "If response supports verified current-season league scores, use a local personal-rights-aware volatile reader (not a public raw GitHub CSV archive). Preserve per-match source rights, league identity and pre-kickoff feature-vintage gates. If catalog is unavailable, switch to a different provider rather than replaying old sources.",
   "catalog_total_competitions": 98,
+  "catalog_item_field_names": [
+    "country",
+    "league",
+    "name",
+    "seasons",
+    "url"
+  ],
+  "catalog_target_name_probe_no_match_rows": [
+    {
+      "name": "Serie B",
+      "league": "brazil2",
+      "country": "Brazil"
+    },
+    {
+      "name": "Superliga",
+      "league": "denmark1",
+      "country": "Denmark"
+    },
+    {
+      "name": "1st Division",
+      "league": "denmark2",
+      "country": "Denmark"
+    },
+    {
+      "name": "Ligue 2",
+      "league": "france2",
+      "country": "France"
+    },
+    {
+      "name": "Serie B",
+      "league": "italy2",
+      "country": "Italy"
+    },
+    {
+      "name": "National League",
+      "league": "national",
+      "country": "England"
+    },
+    {
+      "name": "National League North",
+      "league": "north",
+      "country": "England"
+    },
+    {
+      "name": "Superliga",
+      "league": "romania1",
+      "country": "Romania"
+    },
+    {
+      "name": "Segunda RFEF - Group 1",
+      "league": "segunda1",
+      "country": "Spain"
+    },
+    {
+      "name": "Segunda RFEF - Group 2",
+      "league": "segunda2",
+      "country": "Spain"
+    },
+    {
+      "name": "Segunda RFEF - Group 3",
+      "league": "segunda3",
+      "country": "Spain"
+    },
+    {
+      "name": "Segunda RFEF - Group 4",
+      "league": "segunda4",
+      "country": "Spain"
+    },
+    {
+      "name": "Segunda RFEF - Group 5",
+      "league": "segunda5",
+      "country": "Spain"
+    },
+    {
+      "name": "National League South",
+      "league": "south",
+      "country": "England"
+    },
+    {
+      "name": "LaLiga2",
+      "league": "spain2",
+      "country": "Spain"
+    }
+  ],
   "available_personal_source_league_count": 0,
   "scored_source_rows_only_ephemeral": 0
 }
