@@ -1,0 +1,17 @@
+{
+  "status": "PASS_OFFICIAL_10_ALREADY_PRESENT_ONE_MISSING_IS_EARLIER_ROUND",
+  "source_current_local_ESP1_count": 119,
+  "source_lagged_new_provider_ESP1_count": 120,
+  "official_matchday12_total": 10,
+  "official_count_same_date_score_in_old": 10,
+  "official_matchday12_missing_eligible": [],
+  "official_only_matches_added": 0,
+  "old_4617_main_result_source_modified": false,
+  "source_old_ESP1_119_results_score_qa_repeated": false,
+  "new_model_training_admissions": 0,
+  "any_other_2026_27_21_leagues_queried_again": false,
+  "name_identity_not_forced_into_existing_uuid_registry": true,
+  "source": "https://www.laliga.com/en-GB/laliga-easports/results/2026-27/gameweek-12",
+  "independent": "https://fbref.com/en/comps/12/schedule/schedule-league-Stats",
+  "observation": "date + exact score uniquely identifies a target only when this round has no same-day same-score collision, no claim of licensing bulk API results"
+}
