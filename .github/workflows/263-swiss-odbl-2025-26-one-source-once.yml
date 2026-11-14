@@ -1,0 +1,56 @@
+name: 263 Research - Swiss 2025/26 one ODbL real-results archive
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-swiss-odbl-2025-26-one-source-once.yml
+permissions:
+  contents: write
+jobs:
+  only-swiss-2025-26-two-discovered-shortcuts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Score parsing and Swiss team alias synthetic guard
+        run: python experiments/263/league_expansion/archive_swiss_2025_26_two_odbl_candidates_once.py --self-test
+      - name: Two ODbL discovered Swiss sources, select exactly one if real football coverage
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/archive_swiss_2025_26_two_odbl_candidates_once.py --live | tee swiss_25_odbl_source_selection.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          t=Path("swiss_25_odbl_source_selection.log").read_text()
+          d=json.loads(t.split("SWISS_25_ARCHIVE_START",1)[1].split("SWISS_25_ARCHIVE_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Switzerland 2025/26 ODbL football source candidates\n")
+            f.write("- Status: "+d["status"]+"\n")
+            for s,info in d.get("source_diagnostics",{}).items():
+              f.write("- "+s+": "+str(info.get("final_extracted","not usable"))+" FT, "+
+                str(info.get("unique_clubs","?"))+" clubs, "+str(info.get("is_season_usable",False))+" accepted for research\n")
+            f.write("- No training, no retroactive as-of timestamp claims, 2396 original unchanged.\n")
+          assert d["status"]=="SWISS_2025_26_ORIGINAL_ODBL_RESEARCH_ARCHIVE_CREATED",d
+          assert d["selected_finished_source_rows"]>=170
+          assert d["training_rows_approved"]==0
+          assert d["original_2396_and_296_holds_unchanged"]==True
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-Swiss-2025-26-ODbL-selected-one-source
+          path: |
+            swiss_25_odbl_source_selection.log
+            experiments/263/league_expansion/odbl_openligadb_swiss1/
+          retention-days: 14
+      - name: Commit only selected Switzerland ODbL licensed research CSV, never both
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/odbl_openligadb_swiss1/
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): Swiss 2025/26 permitted one-source ODbL FT research-only historical archive"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
