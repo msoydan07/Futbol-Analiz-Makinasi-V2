@@ -13,6 +13,7 @@ from collections import Counter,defaultdict
 from datetime import date
 from pathlib import Path
 from urllib.request import Request,urlopen
+from audit_6_leagues_967_scores_one_batch_20261114 import exact_name_maps,match_name
 
 ROOT=Path("experiments/263/league_expansion")
 OUT=ROOT/"2026_27_FOUR_118_SCOPED_CROSS_SOURCE_FIXTURE_IDENTITY_METADATA_20261114.json"
@@ -109,7 +110,7 @@ def source_matches(code):
    continue
   fixtures[key]=(d,h,a,goals)
  return list(fixtures.values()),dict(counts)
-def reconcile(local,remote):
+def reconcile(local,remote,league):
  def key(r,fn):
   d,h,a=r[:3]
   return (d,fn(h),fn(a))
@@ -117,8 +118,28 @@ def reconcile(local,remote):
  srcs={key(r,strict_norm):r for r in remote}
  direct=set(olds)&set(srcs)
  conflicting_exact=sum(olds[k][3]!=srcs[k][3] for k in direct)
- # Remaining unpaired only; reduced club-name suffix/prefix is a CANDIDATE
- # that must also agree in date and FT to be credited as a plausible match.
+ # Existing, explicitly pinned season-club alias table (independent older
+ # model-free 967-match source QA). Every mapped club must be in local roster.
+ roster={team for _,h,a,_,_ in local for team in (h,a)}
+ canonical=exact_name_maps(league,roster)
+ mapped={};ambiguous_alias=0;score_conflicting_canonical=0
+ for r in remote:
+  d,h,a,score=r
+  ch=match_name(h,canonical);ca=match_name(a,canonical)
+  if not ch or not ca or ch==ca:
+   ambiguous_alias+=1;continue
+  k=(d,ch,ca)
+  if k in mapped and mapped[k][3]!=score:
+   raise ValueError("DIFFERENT_SCORES_SAME_CANONICAL_SOURCE_FIXTURE")
+  mapped[k]=r
+ canonical_exact=0
+ for r in local:
+  d,h,a,score,_=r
+  k=(d,h,a)
+  if k in mapped:
+   if score==mapped[k][3]:canonical_exact+=1
+   else:score_conflicting_canonical+=1
+ # Remaining unpaired: only strict spelling is unquestionably identical.
  ol=[r for k,r in olds.items() if k not in direct]
  re=[r for k,r in srcs.items() if k not in direct]
  oa=defaultdict(list);ra=defaultdict(list)
@@ -137,6 +158,12 @@ def reconcile(local,remote):
   "local":len(local),
   "source":len(remote),
   "strict_same_date_home_away":len(direct),
+  "known_pinned_roster_alias_same_date_FT_confirmed":canonical_exact,
+  "known_pinned_roster_alias_same_date_FT_conflicts_hold":score_conflicting_canonical,
+  "provider_teams_not_mappable_by_pinned_club_aliases":ambiguous_alias,
+  "provider_canonical_fixture_keys_total":len(mapped),
+  "source_not_covered_by_canonical_pinned_matches":len(remote)-canonical_exact,
+  "local_not_covered_by_canonical_pinned_matches":len(local)-canonical_exact,
   "strict_score_conflicts_hold":conflicting_exact,
   "additional_suffix_alias_same_date_FT_candidate_only":len(safe_alias),
   "suffix_alias_same_date_but_score_conflict_hold":score_conflict,
@@ -174,7 +201,7 @@ def run():
    raise ValueError("BASE_SOURCE_COUNTS_CHANGED:"+lg)
   try:
    live,qa=source_matches(spec["code"])
-   counts=reconcile(locally[lg],live)
+   counts=reconcile(locally[lg],live,lg)
    counts["source_qa_status"]=qa
    counts["source_league_code"]=spec["code"]
    counts["prior_count_only_gap"]=earlier["source_minus_local_count"]
@@ -191,7 +218,10 @@ def run():
  OUT.write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
  print(json.dumps({"status":report["status"],
    "successful":report["source_successful"],"blocked":report["source_access_blocked"],
-   "aggregate":{k:{q:v.get(q) for q in ("local","source","strict_same_date_home_away",
+   "aggregate":{k:{q:v.get(q) for q in ("local","source","strict_same_date_home_away","known_pinned_roster_alias_same_date_FT_confirmed",
+      "source_not_covered_by_canonical_pinned_matches",
+      "known_pinned_roster_alias_same_date_FT_conflicts_hold",
+      "provider_teams_not_mappable_by_pinned_club_aliases",
       "additional_suffix_alias_same_date_FT_candidate_only",
       "source_fixture_identities_not_accounted_for_after_candidate_alias",
       "source_count_matches_prior_snapshot","status")}
@@ -203,8 +233,8 @@ def selftest():
  assert reduced_norm("FC Thun")==reduced_norm("Thun FC")
  a=[("2026-10-01","FC Thun","Basel",(1,0),"src")]
  b=[("2026-10-01","Thun","Basel",(1,0))]
- q=reconcile(a,b)
- assert q["additional_suffix_alias_same_date_FT_candidate_only"]==1
+ q=reconcile(a,b,"CHE1")
+ assert q["known_pinned_roster_alias_same_date_FT_confirmed"]==1
  assert q["strict_same_date_home_away"]==0
  print("PASS 4 leagues 118 historical count gap, deterministic string and match-identity guard")
 if __name__=="__main__":
