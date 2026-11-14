@@ -1,0 +1,49 @@
+name: 263 Research - 346 GER2 FRA2 ESP2 2025-26 scores batch once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-ger2-fra2-esp2-2526-346-fulltime-source-qa-once.yml
+permissions:
+  contents: read
+jobs:
+  batch-new-346-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate 346 original immutable research matches, aliases and 0-0 handling
+        run: python experiments/263/league_expansion/verify_ger2_fra2_esp2_2526_346_ft_single_batch.py --self-test
+      - name: Single batch three historical CSV second-source score comparisons
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/verify_ger2_fra2_esp2_2526_346_ft_single_batch.py --live | tee three_league_346_qa.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          raw=Path("three_league_346_qa.log").read_text(encoding="utf-8")
+          a=raw.index("THREE_LEAGUE_346_START")+len("THREE_LEAGUE_346_START")
+          b=raw.index("THREE_LEAGUE_346_END")
+          d=json.loads(raw[a:b])
+          assert d["new_unchecked_research_score_keys"]==346
+          assert d["model_training_admissions"]==0
+          Path("ger2_fra2_esp2_2025_26_346_aggregate_evidence.json").write_text(
+             json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as s:
+            s.write("## 2025/26 GER2 FRA2 ESP2 346 independent FT research checks\n")
+            s.write("| League | Research | Identical FT | Missing | Score disagreement | Dates differ | Status |\n")
+            s.write("|---|---:|---:|---:|---:|---:|---|\n")
+            for r in d["leagues"]:
+              s.write("| {} | {} | {} | {} | {} | {} | {} |\n".format(
+                r["league"],r["expected_frozen_research_rows"],r.get("score_agreement","?"),
+                r.get("missing_identity_count","?"),r.get("score_conflict_count","?"),
+                r.get("dates_differ","?"),r["status"]))
+            s.write("\nExternal CSV results checked in memory; no third-party full tables republished; no approved training or main M4 changes.\n")
+          PY
+      - name: Archive source hash plus aggregate/short anomalies only
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-346-new-ger2-fra2-esp2-aggregate-qa
+          path: ger2_fra2_esp2_2025_26_346_aggregate_evidence.json
+          retention-days: 14
