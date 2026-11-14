@@ -1,0 +1,572 @@
+{
+  "status": "TARGET_ONLY_106_SEPARATE_SECOND_PHASE_FT_FACT_QA_FINISHED_PER_LEAGUE",
+  "checked_at_utc": "2026-11-14T12:37:18.920791+00:00",
+  "original_license": "CC BY 4.0 Football Charts (original 2025/26 season snapshot)",
+  "original_reference": "https://doi.org/10.5281/zenodo.22295583",
+  "new_only_second_phase_fixture_keys_checked": 106,
+  "new_only_second_source_exact_same_date_home_away_FT": 83,
+  "new_only_second_source_missing_different_or_unavailable_HOLD": 23,
+  "by_league": {
+    "ENG3": {
+      "new_targeted_keys": 5,
+      "fixture_classification": {
+        "SECONDARY_NO_EXACT_TARGET_KEY_HOLD": 5
+      },
+      "score_verified": 0,
+      "not_exactly_corrobated": 5,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 12
+      },
+      "unmapped_provider_team_names_top10": [
+        [
+          "Luton",
+          46
+        ],
+        [
+          "AFC Wimbledon",
+          46
+        ],
+        [
+          "Cardiff",
+          46
+        ],
+        [
+          "Peterboro",
+          46
+        ],
+        [
+          "Blackpool",
+          46
+        ],
+        [
+          "Wycombe",
+          46
+        ],
+        [
+          "Burton",
+          46
+        ],
+        [
+          "Mansfield",
+          46
+        ],
+        [
+          "Doncaster",
+          46
+        ],
+        [
+          "Exeter",
+          46
+        ]
+      ],
+      "only_unconfirmed_original_CC_BY_source_sample": [
+        {
+          "source_fixture": [
+            "2026-05-09",
+            "Bolton Wanderers",
+            "Bradford City"
+          ],
+          "source_CCBY_ft": "1-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-09",
+            "Stevenage FC",
+            "Stockport County"
+          ],
+          "source_CCBY_ft": "0-1",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-13",
+            "Stockport County",
+            "Stevenage FC"
+          ],
+          "source_CCBY_ft": "2-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-14",
+            "Bradford City",
+            "Bolton Wanderers"
+          ],
+          "source_CCBY_ft": "0-1",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-24",
+            "Bolton Wanderers",
+            "Stockport County"
+          ],
+          "source_CCBY_ft": "4-1",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        }
+      ],
+      "status": "SOURCE_FACT_CHECK_FINISHED_FOR_ONLY_NEW_PHASE_KEYS",
+      "pinned_original_Git_Blob": "9ae856cbabee7d11d97e870bf77ac68600ed13cb",
+      "second_result_source_url": "https://www.football-data.co.uk/mmz4281/2526/E2.csv",
+      "second_source_SHA256": "4c96eff8a2f20c5e26015af8609c4f90478ff055f58ab6e137cc3445bf4c67ee",
+      "second_source_raw_tables_archived": false,
+      "previously_certified_normal_source_match_ids_retested": 0
+    },
+    "ENG4": {
+      "new_targeted_keys": 4,
+      "fixture_classification": {
+        "SECONDARY_NO_EXACT_TARGET_KEY_HOLD": 4
+      },
+      "score_verified": 0,
+      "not_exactly_corrobated": 4,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 12
+      },
+      "unmapped_provider_team_names_top10": [
+        [
+          "Accrington",
+          46
+        ],
+        [
+          "Gillingham",
+          46
+        ],
+        [
+          "Barnet",
+          46
+        ],
+        [
+          "Fleetwood Town",
+          46
+        ],
+        [
+          "Bristol Rvs",
+          46
+        ],
+        [
+          "Harrogate",
+          46
+        ],
+        [
+          "Cambridge",
+          46
+        ],
+        [
+          "Cheltenham",
+          46
+        ],
+        [
+          "Barrow",
+          46
+        ],
+        [
+          "Colchester",
+          46
+        ]
+      ],
+      "only_unconfirmed_original_CC_BY_source_sample": [
+        {
+          "source_fixture": [
+            "2026-05-10",
+            "Chesterfield FC",
+            "Notts County"
+          ],
+          "source_CCBY_ft": "0-1",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-10",
+            "Grimsby Town",
+            "Salford City"
+          ],
+          "source_CCBY_ft": "1-2",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-15",
+            "Notts County",
+            "Chesterfield FC"
+          ],
+          "source_CCBY_ft": "0-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-25",
+            "Notts County",
+            "Salford City"
+          ],
+          "source_CCBY_ft": "3-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        }
+      ],
+      "status": "SOURCE_FACT_CHECK_FINISHED_FOR_ONLY_NEW_PHASE_KEYS",
+      "pinned_original_Git_Blob": "28a29e5f0782b2c72584a322a86bba78aad4afcd",
+      "second_result_source_url": "https://www.football-data.co.uk/mmz4281/2526/E3.csv",
+      "second_source_SHA256": "eff4fa15cb18857091d1f0666d0b8a6c61eda7a8374feef8f2d8a38244e0e45d",
+      "second_source_raw_tables_archived": false,
+      "previously_certified_normal_source_match_ids_retested": 0
+    },
+    "ENG5": {
+      "new_targeted_keys": 2,
+      "fixture_classification": {
+        "SECONDARY_NO_EXACT_TARGET_KEY_HOLD": 2
+      },
+      "score_verified": 0,
+      "not_exactly_corrobated": 2,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 6
+      },
+      "unmapped_provider_team_names_top10": [
+        [
+          "Altrincham",
+          46
+        ],
+        [
+          "Aldershot",
+          46
+        ],
+        [
+          "Boreham Wood",
+          46
+        ],
+        [
+          "Brackley Town",
+          46
+        ],
+        [
+          "Eastleigh",
+          46
+        ],
+        [
+          "Braintree Town",
+          46
+        ],
+        [
+          "Halifax",
+          46
+        ],
+        [
+          "Gateshead",
+          46
+        ],
+        [
+          "Solihull",
+          46
+        ],
+        [
+          "Forest Green",
+          46
+        ]
+      ],
+      "only_unconfirmed_original_CC_BY_source_sample": [
+        {
+          "source_fixture": [
+            "2026-04-28",
+            "Scunthorpe United",
+            "Southend United"
+          ],
+          "source_CCBY_ft": "1-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-03",
+            "Rochdale AFC",
+            "Scunthorpe United"
+          ],
+          "source_CCBY_ft": "2-1",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        }
+      ],
+      "status": "SOURCE_FACT_CHECK_FINISHED_FOR_ONLY_NEW_PHASE_KEYS",
+      "pinned_original_Git_Blob": "065c51d70960942fa8f328853d0f377a2aa2bded",
+      "second_result_source_url": "https://www.football-data.co.uk/mmz4281/2526/EC.csv",
+      "second_source_SHA256": "2372229d616a57f9df3d9a401cd942df8e1909ba67017b3793c6aceaf0becf76",
+      "second_source_raw_tables_archived": false,
+      "previously_certified_normal_source_match_ids_retested": 0
+    },
+    "ITA2": {
+      "new_targeted_keys": 10,
+      "fixture_classification": {
+        "SECONDARY_NO_EXACT_TARGET_KEY_HOLD": 10
+      },
+      "score_verified": 0,
+      "not_exactly_corrobated": 10,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 56
+      },
+      "unmapped_provider_team_names_top10": [
+        [
+          "Pescara",
+          38
+        ],
+        [
+          "Cesena",
+          38
+        ],
+        [
+          "Empoli",
+          38
+        ],
+        [
+          "Padova",
+          38
+        ],
+        [
+          "Virtus Entella",
+          38
+        ],
+        [
+          "Mantova",
+          38
+        ],
+        [
+          "Reggiana",
+          38
+        ],
+        [
+          "Spezia",
+          38
+        ],
+        [
+          "Carrarese",
+          38
+        ],
+        [
+          "Venezia",
+          38
+        ]
+      ],
+      "only_unconfirmed_original_CC_BY_source_sample": [
+        {
+          "source_fixture": [
+            "2026-05-12",
+            "Modena FC",
+            "Juve Stabia"
+          ],
+          "source_CCBY_ft": "0-1",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-12",
+            "US Catanzaro",
+            "US Avellino"
+          ],
+          "source_CCBY_ft": "3-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-15",
+            "SSC Bari",
+            "FC Südtirol"
+          ],
+          "source_CCBY_ft": "0-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-16",
+            "Juve Stabia",
+            "AC Monza"
+          ],
+          "source_CCBY_ft": "2-2",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-17",
+            "US Catanzaro",
+            "Palermo FC"
+          ],
+          "source_CCBY_ft": "3-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-19",
+            "AC Monza",
+            "Juve Stabia"
+          ],
+          "source_CCBY_ft": "2-1",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-20",
+            "Palermo FC",
+            "US Catanzaro"
+          ],
+          "source_CCBY_ft": "2-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-22",
+            "FC Südtirol",
+            "SSC Bari"
+          ],
+          "source_CCBY_ft": "0-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-24",
+            "US Catanzaro",
+            "AC Monza"
+          ],
+          "source_CCBY_ft": "0-2",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        },
+        {
+          "source_fixture": [
+            "2026-05-29",
+            "AC Monza",
+            "US Catanzaro"
+          ],
+          "source_CCBY_ft": "0-2",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        }
+      ],
+      "status": "SOURCE_FACT_CHECK_FINISHED_FOR_ONLY_NEW_PHASE_KEYS",
+      "pinned_original_Git_Blob": "1ced7c836d57f8cc2db3d85b51cf4415cfed4a37",
+      "second_result_source_url": "https://www.football-data.co.uk/mmz4281/2526/I2.csv",
+      "second_source_SHA256": "ed4bcece92bb8b09aa94768bc77d3529fa29339ec70fa7867a9fbc3ca0954731",
+      "second_source_raw_tables_archived": false,
+      "previously_certified_normal_source_match_ids_retested": 0
+    },
+    "FRA2": {
+      "new_targeted_keys": 1,
+      "fixture_classification": {
+        "SECONDARY_NO_EXACT_TARGET_KEY_HOLD": 1
+      },
+      "score_verified": 0,
+      "not_exactly_corrobated": 1,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 2
+      },
+      "unmapped_provider_team_names_top10": [
+        [
+          "Guingamp",
+          34
+        ],
+        [
+          "Le Mans",
+          34
+        ],
+        [
+          "Dunkerque",
+          34
+        ],
+        [
+          "Clermont",
+          34
+        ],
+        [
+          "Laval",
+          34
+        ],
+        [
+          "St Etienne",
+          34
+        ],
+        [
+          "Montpellier",
+          34
+        ],
+        [
+          "Pau FC",
+          34
+        ],
+        [
+          "Annecy",
+          34
+        ],
+        [
+          "Nancy",
+          34
+        ]
+      ],
+      "only_unconfirmed_original_CC_BY_source_sample": [
+        {
+          "source_fixture": [
+            "2026-05-12",
+            "Red Star FC",
+            "Rodez AF"
+          ],
+          "source_CCBY_ft": "2-3",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        }
+      ],
+      "status": "SOURCE_FACT_CHECK_FINISHED_FOR_ONLY_NEW_PHASE_KEYS",
+      "pinned_original_Git_Blob": "474815153537d43f660717a1a1c152baa52d7e55",
+      "second_result_source_url": "https://www.football-data.co.uk/mmz4281/2526/F2.csv",
+      "second_source_SHA256": "dcedf4dd66f3e0ac8efb8ccd2e5489882068e5630c041702b15c1d0fe70c6017",
+      "second_source_raw_tables_archived": false,
+      "previously_certified_normal_source_match_ids_retested": 0
+    },
+    "GRE1": {
+      "new_targeted_keys": 54,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 53,
+        "SAME_PAIR_DIFFERENT_DATE_NEAR_2_DAYS_HOLD": 1
+      },
+      "score_verified": 53,
+      "not_exactly_corrobated": 1,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 236
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [
+        {
+          "source_fixture": [
+            "2026-05-16",
+            "Panserraikos",
+            "Panetolikos"
+          ],
+          "source_CCBY_ft": "1-1",
+          "targeted_verdict": "SAME_PAIR_DIFFERENT_DATE_NEAR_2_DAYS_HOLD"
+        }
+      ],
+      "status": "SOURCE_FACT_CHECK_FINISHED_FOR_ONLY_NEW_PHASE_KEYS",
+      "pinned_original_Git_Blob": "7bd67debffc2c317b7fcce1bc06293f8d2b17c6c",
+      "second_result_source_url": "https://www.football-data.co.uk/mmz4281/2526/G1.csv",
+      "second_source_SHA256": "0f77e72cb9db8f5dcd298d16f20551a82d018b478fc12a67e065241f05810830",
+      "second_source_raw_tables_archived": false,
+      "previously_certified_normal_source_match_ids_retested": 0
+    },
+    "SCO1": {
+      "new_targeted_keys": 30,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 30
+      },
+      "score_verified": 30,
+      "not_exactly_corrobated": 0,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 228
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [],
+      "status": "SOURCE_FACT_CHECK_FINISHED_FOR_ONLY_NEW_PHASE_KEYS",
+      "pinned_original_Git_Blob": "90db060fb3e4ebf9dba087d88555c4e74a4244da",
+      "second_result_source_url": "https://www.football-data.co.uk/mmz4281/2526/SC0.csv",
+      "second_source_SHA256": "be3c45e08f09a327e3fd5289dd0b362b200f430ed5845cb18df1aca7e3ced2ee",
+      "second_source_raw_tables_archived": false,
+      "previously_certified_normal_source_match_ids_retested": 0
+    }
+  },
+  "earlier_4391_plus_new_106_separate_phase_research_identifiers": 4497,
+  "previous_result_fact_verifications_rerun": 0,
+  "old_FRA2_Bastia_abandoned_and_ENG5_technical_award_unaffected": true,
+  "eight_cross_tier_transition_matches_still_HOLD": true,
+  "full_external_source_match_table_republished": false,
+  "historic_feature_asof_and_upstream_rights_certified": false,
+  "model_training_rows_approved": 0,
+  "M4_10leagues_predictive_output_or_xG_excel_edited": false,
+  "next_distinct_task": "Resolve ONLY phase fixtures that have missing second-source confirmation; keep all exact source-witness successes frozen. Original five 2026/27 rights-clean missing groups remain on source-rights HOLD."
+}
