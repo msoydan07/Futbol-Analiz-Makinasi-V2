@@ -1,0 +1,50 @@
+name: "263 Research - Offline identity QA of pinned 9460 and old 200 corrected source refs"
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-9460-cross-source-identity-200-correction-once.yml
+      - experiments/263/league_expansion/audit_9460_200_cross_source_identity_without_refit_20261114.py
+permissions:
+  contents: write
+jobs:
+  source-identity-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pure-stdlib source identity self-test
+        run: python experiments/263/league_expansion/audit_9460_200_cross_source_identity_without_refit_20261114.py --self-test
+      - name: Rehydrate exactly 9460 SHA-locked source-row pointers and 200 verified correction pointers
+        run: python experiments/263/league_expansion/audit_9460_200_cross_source_identity_without_refit_20261114.py --run
+      - name: Independent count and training fail-closed assertions
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("experiments/263/league_expansion/CROSS_SOURCE_9460_200_IDENTITY_POINTERS_AUDIT_20261114.json")
+          j=json.loads(p.read_text())
+          assert j["total_source_rows_referenced"]==9460
+          assert j["verified_research_score_rows"]==4218
+          assert j["verified_old_source_correction_overlays_not_new_matches"]==200
+          assert j["verified_old_correction_subtypes"]=={"verified_wrong_FT_178":178,"verified_wrong_date_22":22}
+          assert j["new_training_admitted"]==0 and not j["main_M4_changed"]
+          assert j["source_rows_overwritten"]==0
+          print("PASS 9460 pinned source decisions, 200 nonadditive corrections, zero trained")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-9460-cross-source-normalized-identity-onepass-audit
+          path: experiments/263/league_expansion/CROSS_SOURCE_9460_200_IDENTITY_POINTERS_AUDIT_20261114.json
+          retention-days: 30
+      - name: Commit only the standalone research QA summary
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/CROSS_SOURCE_9460_200_IDENTITY_POINTERS_AUDIT_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): QA SHA-pinned 9460 row identities and 200 verified old error pointers"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
