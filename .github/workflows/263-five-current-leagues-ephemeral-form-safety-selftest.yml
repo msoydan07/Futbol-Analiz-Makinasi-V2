@@ -1,0 +1,23 @@
+name: 263 Research - Five 2026/27 personal research volatile results safety tests only
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-five-current-leagues-ephemeral-form-safety-selftest.yml
+permissions:
+  contents: read
+jobs:
+  only-synthetic-score-records-no-provider-raw-fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify results stay in RAM, duplicates held, no future match leak
+        run: python experiments/263/league_expansion/personal_research_only_current5_ephemeral_results_safe_form.py --self-test
+      - name: Document live API limits and non-redistribution
+        shell: bash
+        run: |
+          echo "## Rights-safe five-league historical in-memory research module" >> "$GITHUB_STEP_SUMMARY"
+          echo "Use one league per explicit personal call; no provider scores saved; derive only aggregate date-lag readiness." >> "$GITHUB_STEP_SUMMARY"
+          echo "Source-specific terms and public rehosting prohibition remain active; not model training or M4." >> "$GITHUB_STEP_SUMMARY"

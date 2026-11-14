@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "HISTORICAL ARCHIVE ONLY: 4505 distinct source-specific research match IDs (4391 original research IDs + 106 second-stage + 8 separate SCO/FRA transition identities). Only 22 playoff results and 8 original cross-tier/qualifying results verified against new provider/official sources this turn; old 83+Greek date, 1268, 1775, 461 external outcome QA frozen. Old one administrative false 0-0 excluded from scored matches. No 2025/26 second-phase result-score tasks remain, though time-vintage and upstream-rights remain. Remaining 2026/27 ENG5/ESP2/ITA2/FRA2/DNK1 open-source rights unresolved (632 compiled external matches not imported). 0 training approvals; no M4/prediction SHA/xG changes.",
+  "next_priority": "Historical research: existing source-specific GitHub database remains 4505 match identities, 0 new training approvals. New legitimate source PATH found for five 2026/27 competitions via Football Charts personal-research-only live API (ENG5 190, ESP2 141, ITA2 110, FRA2 108, DNK1 84 distinct in memory =633; one repeated DNK1 key skipped), but LIVE API explicitly forbids publication of raw/bulk result extracts. Metadata + rights-aware optional one-league ephemeral form runner committed; 0 raw 2026/27 matches copied to public GitHub. Need written redistribution permission or independently CC0/CC BY first-party dataset for permanent archive. Future data-vintage and independent FT QC gates remain, no M4/xG/old score QC changes.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -961,5 +961,28 @@
     "prior_632_compilation_provider_rows_rights_unsettled_and_not_imported": true,
     "original_2396_old_296_HOLD_M4_SHA_user_1855_manual_xg_unchanged": true,
     "next_distinct_task": "Five rights-clean 2026/27 historical played-fixture source archivals. Do not redownload Football Charts pinned 76,991-row 2025/26 snapshot, old 1,269 or 106 score files; do not conflate old historical scored labels with data actually available before kickoff."
+  },
+  "current_2026_27_five_leagues_personal_API_readiness_20261114": {
+    "status": "PASS_FIVE_2026_27_PERSONAL_RESEARCH_ONLY_LIVE_RESULTS_SOURCES_AVAILABLE__ZERO_PUBLIC_RAW_RESULT_ROWS",
+    "evidence": "experiments/263/league_expansion/current_2026_27_five_leagues_footballcharts_personal_research_API_rights_probe_20261114.json",
+    "safe_in_memory_module": "experiments/263/league_expansion/personal_research_only_current5_ephemeral_results_safe_form.py",
+    "provider": "Football Charts",
+    "rights": "FREE_PERSONAL_RESEARCH_ONLY_NOT_RAW_PUBLIC_REHOST_OR_BULK_REDISTRIBUTION",
+    "available_provider_league_results": {
+      "ENG5": 190,
+      "ESP2": 141,
+      "ITA2": 110,
+      "FRA2": 108,
+      "DNK1": 84
+    },
+    "in_memory_source_result_rows": 633,
+    "new_distinct_source_specific_research_fixture_identities_committed": 0,
+    "existing_2025_26_and_earlier_research_source_specific_identities_unchanged": 4505,
+    "one_DNK1_exact_date_club_duplicate_not_counted": true,
+    "old_external_compilation_632_not_imported": true,
+    "new_model_training_rows_approved": 0,
+    "not_a_prematch_asof_proof": true,
+    "source_rights_reference": "https://www.football-charts.com/terms",
+    "note": "A research-only ephemeral connection is not a persistent licensed archive. Public database creation requires a separate source redistributable license or express permission. No M4 or manual xG mutation."
   }
 }
