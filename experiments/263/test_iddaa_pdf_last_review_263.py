@@ -1,11 +1,12 @@
 """Offline contract tests: 5-match same-time Bundesliga batch; NO model or PDF input."""
 from __future__ import annotations
-import copy,unittest
+import copy,unittest,tempfile
+from pathlib import Path
 from datetime import datetime,timezone,timedelta
 from iddaa_pdf_first_quote_263 import sha256
 from iddaa_pdf_bulletin_263 import SCHEMA as BULLETIN
 from iddaa_pdf_session_263 import SCHEMA as MORNING,market_no_vig
-from iddaa_pdf_last_review_263 import build,summary_md
+from iddaa_pdf_last_review_263 import build,summary_md,render_pdf
 
 MOM="2026-11-21T09:10:00+00:00"
 OPEN="2026-11-21T08:55:00+00:00"
@@ -125,6 +126,16 @@ class TestReview(unittest.TestCase):
      "fact":"already known","observed_at_utc":"2026-11-21T11:00:00Z"}
   a=build(s,f,l,[d],NOW,resolver=resolve)
   self.assertFalse(a["rows"][0]["lineups"]["comments"])
+ def test_monochrome_phone_pdf_generated_once(self):
+  s,f,l,resolve=make()
+  review=build(s,f,l,[],NOW,resolver=resolve)
+  with tempfile.TemporaryDirectory() as tmp:
+   path=Path(tmp)/"review.pdf"
+   render_pdf(review,path)
+   self.assertTrue(path.read_bytes().startswith(b"%PDF"))
+   self.assertGreater(path.stat().st_size,1000)
+   with self.assertRaises(FileExistsError):render_pdf(review,path)
+
  def test_all_matches_can_be_no_opinion(self):
   s,f,l,resolve=make()
   result=build(s,f,l,[xi(s,False)],NOW,resolver=resolve)
