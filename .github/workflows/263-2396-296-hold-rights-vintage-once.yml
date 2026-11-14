@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-2396-296-hold-rights-vintage-once.yml
+      - experiments/263/league_expansion/check_2396_296_hold_and_feature_vintage_once.py
 permissions:
   contents: read
 jobs:

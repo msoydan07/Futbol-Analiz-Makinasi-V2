@@ -53,7 +53,8 @@ def historical_form_from_certified_past(target, observations):
         if "available_at_utc" not in row or not row["available_at_utc"]:
             raise ValueError("HISTORIC_OBSERVATION_VINTAGE_MISSING")
         available=datetime.fromisoformat(row["available_at_utc"].replace("Z","+00:00"))
-        if available.tzinfo is None or available>=kickoff:continue
+        if available.tzinfo is None:raise ValueError("HISTORIC_OBSERVATION_TIMEZONE_MISSING")
+        if available>=kickoff:continue
         permitted.append(row)
     teams={"home":target["home"],"away":target["away"]}
     result={}
