@@ -1,0 +1,42 @@
+name: 263 Research - ITA2 48 only date exceptions FT check
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-ita2-2025-26-48-original-date-exceptions-once.yml
+permissions:
+  contents: read
+jobs:
+  targeted-only-48:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic target 48 date gates and unchanged 309 baseline
+        run: python experiments/263/league_expansion/reconcile_ita2_2526_48_date_only_exceptions_once.py --self-test
+      - name: Compare only prior unmatched 48 score facts against pinned source in memory
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/reconcile_ita2_2526_48_date_only_exceptions_once.py --run | tee ita48_exceptions.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          r=Path("ita48_exceptions.log").read_text()
+          a=r.index("ITA48_DATE_START")+len("ITA48_DATE_START")
+          b=r.index("ITA48_DATE_END")
+          d=json.loads(r[a:b])
+          Path("ita2_48_date_exceptions_aggregate.json").write_text(json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## 48 Serie B 2025/26 mismatched-date fixture facts\n\n")
+            for k in ("status","same_home_away_FT_score_equal_after_pinned_date_reconcile",
+                      "same_home_away_FT_score_conflict","day_shift_distribution",
+                      "date_shift_longer_than_3_days"):
+              f.write("- "+k+": "+str(d.get(k))+"\n")
+            f.write("\nNo full external tables archived; no date overwrites or model training.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-ita2-2526-48-date-exception-aggregate
+          path: ita2_48_date_exceptions_aggregate.json
+          retention-days: 14
