@@ -1,0 +1,1095 @@
+{
+  "checked_on": "2026-11-14",
+  "batch_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43576073899",
+  "initial_status": "SIX_LEAGUES_EIGHT_SEASON_GROUPS_967_BASELINE_CLOSED_WITH_SOURCE_ANOMALIES",
+  "aggregated_real_runner_output": {
+    "run_at_utc": "2026-11-14T08:29:45.806574+00:00",
+    "scope": "SIX_LEAGUES_EIGHT_SEASON_GROUPS_967_NEW_CC0_CLAIMED_RESEARCH_FT_FACTS",
+    "six_leagues": [
+      "ENG3",
+      "ENG4",
+      "ENG5",
+      "GRE1",
+      "SCO1",
+      "AUT1"
+    ],
+    "source_group_count": 8,
+    "candidate_count": 967,
+    "original_source_distribution": {
+      "ENG3/2025-26": {
+        "training_2025_26_cc0_scored_QUARANTINE.csv": 168,
+        "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": 88
+      },
+      "ENG4/2025-26": {
+        "training_2025_26_cc0_scored_QUARANTINE.csv": 168,
+        "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": 8
+      },
+      "GRE1/2025-26": {
+        "training_2025_26_cc0_scored_QUARANTINE.csv": 61,
+        "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": 1
+      },
+      "ENG5/2025-26": {
+        "cc0_new_485_2526_2627_QUARANTINE_20261113.csv": 296
+      },
+      "SCO1/2025-26": {
+        "cc0_new_485_2526_2627_QUARANTINE_20261113.csv": 58
+      },
+      "GRE1/2026-27": {
+        "cc0_new_485_2526_2627_QUARANTINE_20261113.csv": 35
+      },
+      "SCO1/2026-27": {
+        "cc0_new_485_2526_2627_QUARANTINE_20261113.csv": 42
+      },
+      "AUT1/2026-27": {
+        "cc0_aut1_2026_27_42_QUARANTINE_20261113.csv": 42
+      }
+    },
+    "earlier_904_match_score_QA_repeated": 0,
+    "existing_200_ENG3_ENG4_original_problem_keys_excluded": true,
+    "new_training_admissions": 0,
+    "original_quarantine_modified": false,
+    "production_M4_prediction_SHA_changed": false,
+    "external_csv_rehosted": false,
+    "groups": [
+      {
+        "group": "ENG3/2025-26",
+        "league": "ENG3",
+        "season": "2025-26",
+        "research_candidates": 256,
+        "status": "ALL_DATE_TEAM_FT_PASS",
+        "exact_date_team_FT_confirmed": 256,
+        "score_matches_but_date_disagrees": 0,
+        "source_FT_disagreement": 0,
+        "second_source_fixture_not_identified": 0,
+        "zero_zero_independently_confirmed": 11,
+        "source_sha256": "4c96eff8a2f20c5e26015af8609c4f90478ff055f58ab6e137cc3445bf4c67ee",
+        "source_url": "https://www.football-data.co.uk/mmz4281/2526/E2.csv",
+        "source_diagnostics": {
+          "physical_source_rows_read": 552,
+          "unique_canonical_scored_pairs": 552,
+          "unique_canonical_clubs": 24,
+          "flags": {},
+          "issue_examples": {},
+          "confirmed_zero_zero_in_source": 33
+        },
+        "date_delta_distribution": {
+          "0": 256
+        },
+        "exceptions_sample_max10": {},
+        "source_training_rights": "NOT_APPROVED_FOR_MODEL_REUSE",
+        "training_admitted": 0
+      },
+      {
+        "group": "ENG4/2025-26",
+        "league": "ENG4",
+        "season": "2025-26",
+        "research_candidates": 176,
+        "status": "PARTIAL_OR_BLOCKED_DO_NOT_PROMOTE",
+        "exact_date_team_FT_confirmed": 148,
+        "score_matches_but_date_disagrees": 0,
+        "source_FT_disagreement": 0,
+        "second_source_fixture_not_identified": 28,
+        "zero_zero_independently_confirmed": 7,
+        "source_sha256": "eff4fa15cb18857091d1f0666d0b8a6c61eda7a8374feef8f2d8a38244e0e45d",
+        "source_url": "https://www.football-data.co.uk/mmz4281/2526/E3.csv",
+        "source_diagnostics": {
+          "physical_source_rows_read": 552,
+          "unique_canonical_scored_pairs": 462,
+          "unique_canonical_clubs": 22,
+          "flags": {
+            "unmapped_team_or_same": 90
+          },
+          "issue_examples": {
+            "unmapped": [
+              {
+                "home": "Bristol Rvs",
+                "away": "Harrogate",
+                "date": "2025-08-02"
+              },
+              {
+                "home": "Salford",
+                "away": "Crewe",
+                "date": "2025-08-02"
+              },
+              {
+                "home": "Crewe",
+                "away": "Accrington",
+                "date": "2025-08-09"
+              },
+              {
+                "home": "Fleetwood Town",
+                "away": "Bristol Rvs",
+                "date": "2025-08-09"
+              },
+              {
+                "home": "Chesterfield",
+                "away": "Bristol Rvs",
+                "date": "2025-08-16"
+              },
+              {
+                "home": "Crewe",
+                "away": "Crawley Town",
+                "date": "2025-08-16"
+              },
+              {
+                "home": "Bristol Rvs",
+                "away": "Oldham",
+                "date": "2025-08-19"
+              },
+              {
+                "home": "Fleetwood Town",
+                "away": "Crewe",
+                "date": "2025-08-19"
+              },
+              {
+                "home": "Bristol Rvs",
+                "away": "Cambridge",
+                "date": "2025-08-23"
+              },
+              {
+                "home": "Gillingham",
+                "away": "Crewe",
+                "date": "2025-08-23"
+              }
+            ]
+          },
+          "confirmed_zero_zero_in_source": 33
+        },
+        "date_delta_distribution": {
+          "0": 148
+        },
+        "exceptions_sample_max10": {
+          "absent": [
+            {
+              "home": "Bristol Rovers",
+              "away": "Harrogate Town"
+            },
+            {
+              "home": "Salford City",
+              "away": "Crewe Alexandra"
+            },
+            {
+              "home": "Crewe Alexandra",
+              "away": "Accrington Stanley"
+            },
+            {
+              "home": "Fleetwood Town",
+              "away": "Bristol Rovers"
+            },
+            {
+              "home": "Chesterfield FC",
+              "away": "Bristol Rovers"
+            },
+            {
+              "home": "Crewe Alexandra",
+              "away": "Crawley Town"
+            },
+            {
+              "home": "Fleetwood Town",
+              "away": "Crewe Alexandra"
+            },
+            {
+              "home": "Bristol Rovers",
+              "away": "Cambridge United"
+            },
+            {
+              "home": "Gillingham FC",
+              "away": "Crewe Alexandra"
+            }
+          ]
+        },
+        "source_training_rights": "NOT_APPROVED_FOR_MODEL_REUSE",
+        "training_admitted": 0
+      },
+      {
+        "group": "ENG5/2025-26",
+        "league": "ENG5",
+        "season": "2025-26",
+        "research_candidates": 296,
+        "status": "PARTIAL_OR_BLOCKED_DO_NOT_PROMOTE",
+        "exact_date_team_FT_confirmed": 182,
+        "score_matches_but_date_disagrees": 0,
+        "source_FT_disagreement": 89,
+        "second_source_fixture_not_identified": 25,
+        "zero_zero_independently_confirmed": 11,
+        "source_sha256": "2372229d616a57f9df3d9a401cd942df8e1909ba67017b3793c6aceaf0becf76",
+        "source_url": "https://www.football-data.co.uk/mmz4281/2526/EC.csv",
+        "source_diagnostics": {
+          "physical_source_rows_read": 552,
+          "unique_canonical_scored_pairs": 506,
+          "unique_canonical_clubs": 23,
+          "flags": {
+            "unmapped_team_or_same": 46
+          },
+          "issue_examples": {
+            "unmapped": [
+              {
+                "home": "Aldershot",
+                "away": "Boston Utd",
+                "date": "2025-08-16"
+              },
+              {
+                "home": "Boston Utd",
+                "away": "Halifax",
+                "date": "2025-08-19"
+              },
+              {
+                "home": "Eastleigh",
+                "away": "Boston Utd",
+                "date": "2025-08-23"
+              },
+              {
+                "home": "Boston Utd",
+                "away": "Wealdstone",
+                "date": "2025-08-25"
+              },
+              {
+                "home": "Truro",
+                "away": "Boston Utd",
+                "date": "2025-08-30"
+              },
+              {
+                "home": "Hartlepool",
+                "away": "Boston Utd",
+                "date": "2025-09-03"
+              },
+              {
+                "home": "Boston Utd",
+                "away": "Solihull",
+                "date": "2025-09-06"
+              },
+              {
+                "home": "Southend",
+                "away": "Boston Utd",
+                "date": "2025-09-13"
+              },
+              {
+                "home": "Boston Utd",
+                "away": "Boreham Wood",
+                "date": "2025-09-20"
+              },
+              {
+                "home": "Boston Utd",
+                "away": "Braintree Town",
+                "date": "2025-09-24"
+              }
+            ]
+          },
+          "confirmed_zero_zero_in_source": 25
+        },
+        "date_delta_distribution": {
+          "0": 257,
+          "1": 6,
+          "4": 1,
+          "10": 1,
+          "35": 1,
+          "59": 1,
+          "94": 2,
+          "105": 1,
+          "-1": 1
+        },
+        "exceptions_sample_max10": {
+          "absent": [
+            {
+              "home": "Aldershot Town",
+              "away": "Boston United"
+            },
+            {
+              "home": "Boston United",
+              "away": "Halifax Town"
+            },
+            {
+              "home": "Eastleigh FC",
+              "away": "Boston United"
+            },
+            {
+              "home": "Boston United",
+              "away": "Wealdstone FC"
+            },
+            {
+              "home": "Truro City",
+              "away": "Boston United"
+            },
+            {
+              "home": "Hartlepool United",
+              "away": "Boston United"
+            },
+            {
+              "home": "Boston United",
+              "away": "Solihull Moors"
+            },
+            {
+              "home": "Southend United",
+              "away": "Boston United"
+            },
+            {
+              "home": "Boston United",
+              "away": "Boreham Wood"
+            }
+          ],
+          "score_conflict": [
+            {
+              "home": "Boreham Wood",
+              "away": "Aldershot Town",
+              "date": "2025-11-04",
+              "primary_score": [
+                1,
+                1
+              ],
+              "independent_score": [
+                1,
+                0
+              ]
+            },
+            {
+              "home": "Hartlepool United",
+              "away": "Morecambe FC",
+              "date": "2025-11-04",
+              "primary_score": [
+                3,
+                1
+              ],
+              "independent_score": [
+                1,
+                1
+              ]
+            },
+            {
+              "home": "Rochdale AFC",
+              "away": "Scunthorpe United",
+              "date": "2025-11-04",
+              "primary_score": [
+                2,
+                2
+              ],
+              "independent_score": [
+                1,
+                1
+              ]
+            },
+            {
+              "home": "Yeovil Town",
+              "away": "Wealdstone FC",
+              "date": "2025-11-04",
+              "primary_score": [
+                1,
+                0
+              ],
+              "independent_score": [
+                0,
+                2
+              ]
+            },
+            {
+              "home": "Braintree Town",
+              "away": "Brackley Town",
+              "date": "2025-11-05",
+              "primary_score": [
+                0,
+                0
+              ],
+              "independent_score": [
+                0,
+                1
+              ]
+            },
+            {
+              "home": "Solihull Moors",
+              "away": "Truro City",
+              "date": "2025-11-05",
+              "primary_score": [
+                3,
+                0
+              ],
+              "independent_score": [
+                4,
+                0
+              ]
+            },
+            {
+              "home": "Sutton United",
+              "away": "Eastleigh FC",
+              "date": "2025-11-05",
+              "primary_score": [
+                1,
+                2
+              ],
+              "independent_score": [
+                2,
+                1
+              ]
+            },
+            {
+              "home": "Woking FC",
+              "away": "Southend United",
+              "date": "2025-11-05",
+              "primary_score": [
+                0,
+                1
+              ],
+              "independent_score": [
+                1,
+                1
+              ]
+            },
+            {
+              "home": "York City",
+              "away": "Gateshead FC",
+              "date": "2025-11-05",
+              "primary_score": [
+                2,
+                1
+              ],
+              "independent_score": [
+                4,
+                0
+              ]
+            },
+            {
+              "home": "Aldershot Town",
+              "away": "Forest Green Rovers",
+              "date": "2025-11-08",
+              "primary_score": [
+                0,
+                2
+              ],
+              "independent_score": [
+                2,
+                3
+              ]
+            }
+          ]
+        },
+        "source_training_rights": "NOT_APPROVED_FOR_MODEL_REUSE",
+        "training_admitted": 0
+      },
+      {
+        "group": "GRE1/2025-26",
+        "league": "GRE1",
+        "season": "2025-26",
+        "research_candidates": 62,
+        "status": "PARTIAL_OR_BLOCKED_DO_NOT_PROMOTE",
+        "exact_date_team_FT_confirmed": 53,
+        "score_matches_but_date_disagrees": 0,
+        "source_FT_disagreement": 0,
+        "second_source_fixture_not_identified": 9,
+        "zero_zero_independently_confirmed": 1,
+        "source_sha256": "0f77e72cb9db8f5dcd298d16f20551a82d018b478fc12a67e065241f05810830",
+        "source_url": "https://www.football-data.co.uk/mmz4281/2526/G1.csv",
+        "source_diagnostics": {
+          "physical_source_rows_read": 236,
+          "unique_canonical_scored_pairs": 156,
+          "unique_canonical_clubs": 13,
+          "flags": {
+            "unmapped_team_or_same": 32,
+            "duplicate_pair_with_date_or_score_difference": 48
+          },
+          "issue_examples": {
+            "unmapped": [
+              {
+                "home": "Levadeiakos",
+                "away": "Kifisia",
+                "date": "2025-08-25"
+              },
+              {
+                "home": "Panathinaikos",
+                "away": "Levadeiakos",
+                "date": "2025-08-31"
+              },
+              {
+                "home": "Levadeiakos",
+                "away": "AEK",
+                "date": "2025-09-14"
+              },
+              {
+                "home": "Levadeiakos",
+                "away": "OFI Crete",
+                "date": "2025-09-21"
+              },
+              {
+                "home": "Olympiakos",
+                "away": "Levadeiakos",
+                "date": "2025-09-27"
+              },
+              {
+                "home": "Levadeiakos",
+                "away": "Panetolikos",
+                "date": "2025-10-05"
+              },
+              {
+                "home": "Atromitos",
+                "away": "Levadeiakos",
+                "date": "2025-10-18"
+              },
+              {
+                "home": "Levadeiakos",
+                "away": "Aris",
+                "date": "2025-10-26"
+              },
+              {
+                "home": "Larisa",
+                "away": "Levadeiakos",
+                "date": "2025-11-02"
+              },
+              {
+                "home": "Levadeiakos",
+                "away": "Panserraikos",
+                "date": "2025-11-09"
+              }
+            ],
+            "duplicate": [
+              {
+                "home": "AE Kifisias",
+                "away": "Panserraikos",
+                "day": "2026-04-04",
+                "original_day": "2025-11-29",
+                "same_score": false
+              },
+              {
+                "home": "Asteras Tripolis",
+                "away": "AE Lárissa",
+                "day": "2026-04-04",
+                "original_day": "2025-09-14",
+                "same_score": false
+              },
+              {
+                "home": "Panetolikos",
+                "away": "Atromitos",
+                "day": "2026-04-04",
+                "original_day": "2025-08-23",
+                "same_score": false
+              },
+              {
+                "home": "Volos NFC",
+                "away": "OFI Heraklion",
+                "day": "2026-04-05",
+                "original_day": "2026-03-08",
+                "same_score": true
+              },
+              {
+                "home": "PAOK Saloniki",
+                "away": "Panathinaikos",
+                "day": "2026-04-05",
+                "original_day": "2025-12-21",
+                "same_score": false
+              },
+              {
+                "home": "Olympiakos Piraeus",
+                "away": "AEK Athen",
+                "day": "2026-04-05",
+                "original_day": "2025-10-26",
+                "same_score": false
+              },
+              {
+                "home": "AE Lárissa",
+                "away": "Panetolikos",
+                "day": "2026-04-08",
+                "original_day": "2026-02-07",
+                "same_score": false
+              },
+              {
+                "home": "Panserraikos",
+                "away": "Asteras Tripolis",
+                "day": "2026-04-08",
+                "original_day": "2025-10-04",
+                "same_score": false
+              }
+            ]
+          },
+          "confirmed_zero_zero_in_source": 14
+        },
+        "date_delta_distribution": {
+          "0": 53
+        },
+        "exceptions_sample_max10": {
+          "absent": [
+            {
+              "home": "Levadiakos",
+              "away": "AE Kifisias"
+            },
+            {
+              "home": "Panathinaikos",
+              "away": "Levadiakos"
+            },
+            {
+              "home": "Levadiakos",
+              "away": "AEK Athen"
+            },
+            {
+              "home": "Levadiakos",
+              "away": "OFI Heraklion"
+            },
+            {
+              "home": "Olympiakos Piraeus",
+              "away": "Levadiakos"
+            },
+            {
+              "home": "Levadiakos",
+              "away": "Panetolikos"
+            },
+            {
+              "home": "Atromitos",
+              "away": "Levadiakos"
+            },
+            {
+              "home": "Levadiakos",
+              "away": "Aris Saloniki"
+            },
+            {
+              "home": "AE Lárissa",
+              "away": "Levadiakos"
+            }
+          ]
+        },
+        "source_training_rights": "NOT_APPROVED_FOR_MODEL_REUSE",
+        "training_admitted": 0
+      },
+      {
+        "group": "GRE1/2026-27",
+        "league": "GRE1",
+        "season": "2026-27",
+        "research_candidates": 35,
+        "status": "PARTIAL_OR_BLOCKED_DO_NOT_PROMOTE",
+        "exact_date_team_FT_confirmed": 17,
+        "score_matches_but_date_disagrees": 0,
+        "source_FT_disagreement": 0,
+        "second_source_fixture_not_identified": 18,
+        "zero_zero_independently_confirmed": 0,
+        "source_sha256": "89a08b02b2bdec2c10472274a2e83d4f39aba5894c2ac952c2df8b24432ba3b5",
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/G1.csv",
+        "source_diagnostics": {
+          "physical_source_rows_read": 69,
+          "unique_canonical_scored_pairs": 34,
+          "unique_canonical_clubs": 10,
+          "flags": {
+            "unmapped_team_or_same": 35
+          },
+          "issue_examples": {
+            "unmapped": [
+              {
+                "home": "Kalamata",
+                "away": "Aris",
+                "date": "2026-08-22"
+              },
+              {
+                "home": "OFI Crete",
+                "away": "Volos NFC",
+                "date": "2026-08-23"
+              },
+              {
+                "home": "PAOK",
+                "away": "Levadeiakos",
+                "date": "2026-08-23"
+              },
+              {
+                "home": "Volos NFC",
+                "away": "Iraklis",
+                "date": "2026-08-29"
+              },
+              {
+                "home": "Aris",
+                "away": "OFI Crete",
+                "date": "2026-08-30"
+              },
+              {
+                "home": "Levadeiakos",
+                "away": "Panathinaikos",
+                "date": "2026-08-31"
+              },
+              {
+                "home": "Volos NFC",
+                "away": "Olympiakos",
+                "date": "2026-09-05"
+              },
+              {
+                "home": "AEK",
+                "away": "Aris",
+                "date": "2026-09-05"
+              },
+              {
+                "home": "OFI Crete",
+                "away": "Kifisia",
+                "date": "2026-09-06"
+              },
+              {
+                "home": "Levadeiakos",
+                "away": "Panetolikos",
+                "date": "2026-09-06"
+              }
+            ]
+          },
+          "confirmed_zero_zero_in_source": 0
+        },
+        "date_delta_distribution": {
+          "0": 17
+        },
+        "exceptions_sample_max10": {
+          "absent": [
+            {
+              "home": "Kalamata",
+              "away": "Aris Thessaloniki"
+            },
+            {
+              "home": "OFI",
+              "away": "Volos"
+            },
+            {
+              "home": "PAOK",
+              "away": "Levadiakos"
+            },
+            {
+              "home": "Volos",
+              "away": "Iraklis 1908"
+            },
+            {
+              "home": "Aris Thessaloniki",
+              "away": "OFI"
+            },
+            {
+              "home": "Levadiakos",
+              "away": "Panathinaikos"
+            },
+            {
+              "home": "AEK",
+              "away": "Aris Thessaloniki"
+            },
+            {
+              "home": "Volos",
+              "away": "Olympiakos Piraeus"
+            },
+            {
+              "home": "Levadiakos",
+              "away": "Panetolikos"
+            }
+          ]
+        },
+        "source_training_rights": "NOT_APPROVED_FOR_MODEL_REUSE",
+        "training_admitted": 0
+      },
+      {
+        "group": "SCO1/2025-26",
+        "league": "SCO1",
+        "season": "2025-26",
+        "research_candidates": 58,
+        "status": "PARTIAL_OR_BLOCKED_DO_NOT_PROMOTE",
+        "exact_date_team_FT_confirmed": 48,
+        "score_matches_but_date_disagrees": 0,
+        "source_FT_disagreement": 0,
+        "second_source_fixture_not_identified": 10,
+        "zero_zero_independently_confirmed": 0,
+        "source_sha256": "be3c45e08f09a327e3fd5289dd0b362b200f430ed5845cb18df1aca7e3ced2ee",
+        "source_url": "https://www.football-data.co.uk/mmz4281/2526/SC0.csv",
+        "source_diagnostics": {
+          "physical_source_rows_read": 228,
+          "unique_canonical_scored_pairs": 110,
+          "unique_canonical_clubs": 11,
+          "flags": {
+            "unmapped_team_or_same": 38,
+            "duplicate_pair_with_date_or_score_difference": 80
+          },
+          "issue_examples": {
+            "unmapped": [
+              {
+                "home": "Dundee",
+                "away": "Hibernian",
+                "date": "2025-08-03"
+              },
+              {
+                "home": "Rangers",
+                "away": "Dundee",
+                "date": "2025-08-09"
+              },
+              {
+                "home": "Kilmarnock",
+                "away": "Dundee",
+                "date": "2025-08-23"
+              },
+              {
+                "home": "Dundee",
+                "away": "Dundee United",
+                "date": "2025-08-31"
+              },
+              {
+                "home": "Dundee",
+                "away": "Motherwell",
+                "date": "2025-09-13"
+              },
+              {
+                "home": "Dundee",
+                "away": "Livingston",
+                "date": "2025-09-20"
+              },
+              {
+                "home": "St Mirren",
+                "away": "Dundee",
+                "date": "2025-09-27"
+              },
+              {
+                "home": "Aberdeen",
+                "away": "Dundee",
+                "date": "2025-10-05"
+              },
+              {
+                "home": "Dundee",
+                "away": "Celtic",
+                "date": "2025-10-19"
+              },
+              {
+                "home": "Falkirk",
+                "away": "Dundee",
+                "date": "2025-10-25"
+              }
+            ],
+            "duplicate": [
+              {
+                "home": "Aberdeen FC",
+                "away": "Livingston FC",
+                "day": "2026-01-24",
+                "original_day": "2025-09-13",
+                "same_score": false
+              },
+              {
+                "home": "Falkirk FC",
+                "away": "Hibernian FC",
+                "day": "2026-01-24",
+                "original_day": "2025-09-23",
+                "same_score": false
+              },
+              {
+                "home": "Motherwell FC",
+                "away": "Kilmarnock FC",
+                "day": "2026-01-24",
+                "original_day": "2025-08-30",
+                "same_score": false
+              },
+              {
+                "home": "Heart of Midlothian",
+                "away": "Celtic FC",
+                "day": "2026-01-25",
+                "original_day": "2025-10-26",
+                "same_score": false
+              },
+              {
+                "home": "Kilmarnock FC",
+                "away": "Aberdeen FC",
+                "day": "2026-01-31",
+                "original_day": "2025-10-29",
+                "same_score": false
+              },
+              {
+                "home": "Livingston FC",
+                "away": "Motherwell FC",
+                "day": "2026-01-31",
+                "original_day": "2025-10-25",
+                "same_score": false
+              },
+              {
+                "home": "Dundee United",
+                "away": "Heart of Midlothian",
+                "day": "2026-01-31",
+                "original_day": "2025-08-10",
+                "same_score": false
+              },
+              {
+                "home": "Hibernian FC",
+                "away": "Rangers FC",
+                "day": "2026-02-01",
+                "original_day": "2025-10-29",
+                "same_score": false
+              }
+            ]
+          },
+          "confirmed_zero_zero_in_source": 9
+        },
+        "date_delta_distribution": {
+          "0": 48
+        },
+        "exceptions_sample_max10": {
+          "absent": [
+            {
+              "home": "Dundee FC",
+              "away": "Hibernian FC"
+            },
+            {
+              "home": "Rangers FC",
+              "away": "Dundee FC"
+            },
+            {
+              "home": "Dundee FC",
+              "away": "Dundee United"
+            },
+            {
+              "home": "Dundee FC",
+              "away": "Motherwell FC"
+            },
+            {
+              "home": "Dundee FC",
+              "away": "Livingston FC"
+            },
+            {
+              "home": "St. Mirren FC",
+              "away": "Dundee FC"
+            },
+            {
+              "home": "Aberdeen FC",
+              "away": "Dundee FC"
+            },
+            {
+              "home": "Dundee FC",
+              "away": "Celtic FC"
+            },
+            {
+              "home": "Falkirk FC",
+              "away": "Dundee FC"
+            }
+          ]
+        },
+        "source_training_rights": "NOT_APPROVED_FOR_MODEL_REUSE",
+        "training_admitted": 0
+      },
+      {
+        "group": "SCO1/2026-27",
+        "league": "SCO1",
+        "season": "2026-27",
+        "research_candidates": 42,
+        "status": "PARTIAL_OR_BLOCKED_DO_NOT_PROMOTE",
+        "exact_date_team_FT_confirmed": 35,
+        "score_matches_but_date_disagrees": 0,
+        "source_FT_disagreement": 0,
+        "second_source_fixture_not_identified": 7,
+        "zero_zero_independently_confirmed": 2,
+        "source_sha256": "042594e2a58575ae3c029c8c8c235926e35dd04c4bcf7c0500ed905d4539bc03",
+        "source_url": "https://www.football-data.co.uk/mmz4281/2627/SC0.csv",
+        "source_diagnostics": {
+          "physical_source_rows_read": 75,
+          "unique_canonical_scored_pairs": 63,
+          "unique_canonical_clubs": 11,
+          "flags": {
+            "unmapped_team_or_same": 12
+          },
+          "issue_examples": {
+            "unmapped": [
+              {
+                "home": "Celtic",
+                "away": "Dundee",
+                "date": "2026-08-03"
+              },
+              {
+                "home": "Dundee",
+                "away": "Aberdeen",
+                "date": "2026-08-08"
+              },
+              {
+                "home": "Dundee United",
+                "away": "Dundee",
+                "date": "2026-08-22"
+              },
+              {
+                "home": "Dundee",
+                "away": "Hibernian",
+                "date": "2026-08-30"
+              },
+              {
+                "home": "Dundee",
+                "away": "St Johnstone",
+                "date": "2026-09-02"
+              },
+              {
+                "home": "Hearts",
+                "away": "Dundee",
+                "date": "2026-09-06"
+              },
+              {
+                "home": "Dundee",
+                "away": "Motherwell",
+                "date": "2026-09-19"
+              },
+              {
+                "home": "Falkirk",
+                "away": "Dundee",
+                "date": "2026-10-10"
+              },
+              {
+                "home": "Dundee",
+                "away": "Rangers",
+                "date": "2026-10-17"
+              },
+              {
+                "home": "St Mirren",
+                "away": "Dundee",
+                "date": "2026-10-24"
+              }
+            ]
+          },
+          "confirmed_zero_zero_in_source": 2
+        },
+        "date_delta_distribution": {
+          "0": 35
+        },
+        "exceptions_sample_max10": {
+          "absent": [
+            {
+              "home": "Celtic",
+              "away": "Dundee"
+            },
+            {
+              "home": "Dundee",
+              "away": "Aberdeen"
+            },
+            {
+              "home": "Dundee United",
+              "away": "Dundee"
+            },
+            {
+              "home": "Dundee",
+              "away": "Hibernian"
+            },
+            {
+              "home": "Dundee",
+              "away": "Saint Johnstone FC"
+            },
+            {
+              "home": "Heart of Midlothian",
+              "away": "Dundee"
+            },
+            {
+              "home": "Dundee",
+              "away": "Motherwell"
+            }
+          ]
+        },
+        "source_training_rights": "NOT_APPROVED_FOR_MODEL_REUSE",
+        "training_admitted": 0
+      },
+      {
+        "group": "AUT1/2026-27",
+        "league": "AUT1",
+        "season": "2026-27",
+        "research_candidates": 42,
+        "status": "FAIL_CLOSED_UNAVAILABLE_OR_UNPARSEABLE",
+        "source_url": "https://matchdaysync.com/api/public/csv/austrian-bundesliga/2026-27/matches",
+        "error_class": "ValueError",
+        "http_status": null,
+        "reason": "SECONDARY_SOURCE_HEADERS_UNKNOWN:['# Source: MatchdaySync.com: statistics only. austrian-bundesliga 2026-27', ' matches.']",
+        "training_admitted": 0
+      }
+    ],
+    "totals": {
+      "research_candidates": 967,
+      "exact_date_team_FT_confirmed": 739,
+      "score_matches_but_date_disagrees": 0,
+      "source_FT_disagreement": 89,
+      "second_source_fixture_not_identified": 97,
+      "zero_zero_independently_confirmed": 32,
+      "full_pass_groups": 1,
+      "unresolved_or_unchecked": 228,
+      "approved_training_rows": 0
+    }
+  },
+  "legitimate_independent_score_evidence_739_not_training_admission": true,
+  "eleven_hundred_old_openfootball_checks_repeated": 0,
+  "request": "Target only the 228 unmatched or score disagreements, and do not retest 739 successes. 89 ENG5 National League mismatches are score conflicts, not mere aliases.",
+  "manual_xg_data_unchanged": true,
+  "training_rows_admitted": 0,
+  "main_M4_unchanged": true
+}
