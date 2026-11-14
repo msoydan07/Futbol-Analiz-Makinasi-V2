@@ -1,0 +1,58 @@
+{
+  "status": "GER2_2025_2026_ONCE_ODBL_ARCHIVED_RESEARCH_ONLY",
+  "snapshot_utc": "2026-11-14T10:55:54.098211+00:00",
+  "source": "OpenLigaDB",
+  "source_api_endpoints": [
+    "https://api.openligadb.de/getmatchdata/bl2/2025",
+    "https://api.openligadb.de/getmatchdata/bl2/2026"
+  ],
+  "attribution": "Data from OpenLigaDB (www.openligadb.de), licensed under ODbL 1.0",
+  "source_license_url": "https://www.openligadb.de/en/license",
+  "api_terms_url": "https://www.openligadb.de/en/terms-of-use",
+  "source_retrieval_count": 2,
+  "seasons": {
+    "2025": {
+      "path": "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2025_2026_ODbL_research_quarantine.csv",
+      "row_count": 306,
+      "range": [
+        "2025-08-01",
+        "2026-05-17"
+      ],
+      "source_sha256": "80d7b806d0c96cd3e006f280a0e1838e9155ea75f23d8099e58587b90ab8ef5f",
+      "source_size_bytes": 589998,
+      "stats": {
+        "finished_archived": 306
+      },
+      "unique_match_ids": 306,
+      "finish_count": 306
+    },
+    "2026": {
+      "path": "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2026_2027_ODbL_research_quarantine.csv",
+      "row_count": 99,
+      "range": [
+        "2026-08-07",
+        "2026-11-08"
+      ],
+      "source_sha256": "f3d4bcf007fb59263909534d1758404ef81e4056a5e3448135be918bf7c11495",
+      "source_size_bytes": 377592,
+      "stats": {
+        "finished_archived": 99,
+        "future_or_current_excluded": 207
+      },
+      "unique_match_ids": 99,
+      "finish_count": 99
+    }
+  },
+  "total_source_ODbL_rows": 405,
+  "classification": "Separate original ODbL source archive. 2025-26 overlaps the prior CC0 99 rows; do NOT add both as distinct training matches. 2026-27 research season currently had zero pinned research rows.",
+  "season_2025_26_overlap_resolution": "PENDING_CANONICAL_TEAM_ALIAS_AND_INDEPENDENT_SCORE_COMPARISON",
+  "season_2026_27_score_confirmation": "PENDING_SECOND_INDEPENDENT_MATCH_FACT_WITNESS",
+  "source_historical_postgame_vintage": "NO_IMMUTABLE_ASOF_TIME; snapshot time is observation today not score availability before historic kickoff",
+  "training_rows_approved": 0,
+  "main_M4_and_10_leagues_unchanged": true,
+  "prior_2396_quarantine_unchanged": true,
+  "prior_296_holds_unchanged": true,
+  "no_old_871_904_score_verification_repeated": true,
+  "no_manual_1855_xg_spreadsheet_modified": true,
+  "next": "Separate canonical de-duplication of old GER2/2025-26 and independent score QA for new 2026-27; other missing sources via rights-clean providers."
+}
