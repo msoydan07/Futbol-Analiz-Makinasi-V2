@@ -1,0 +1,50 @@
+name: 263 Research - One first ESP2 original 2025/26 source 509 only
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-esp2-2025-26-original-ccby-one-new-source.yml
+permissions:
+  contents: write
+jobs:
+  only-original-Spain-Segunda-source-new-scope:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Original source SHA/source-usage safety
+        run: python experiments/263/league_expansion/archive_esp2_original_CC_BY_2025_26_new_scope_once.py --self-test
+      - name: Source author's ONE original 2025/26 Segunda scope, archive to research only
+        run: |
+          python experiments/263/league_expansion/archive_esp2_original_CC_BY_2025_26_new_scope_once.py --run > new_esp2_2025_26_509.log
+          python - <<'PY'
+          from pathlib import Path
+          import json,os
+          s=Path("new_esp2_2025_26_509.log").read_text()
+          d=json.loads(s.split("ESP2_SOURCE_START",1)[1].split("ESP2_SOURCE_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## One previously missing original license-permitted 2025/26 Segunda SOURCE scope\n")
+            f.write("- Status: "+d["status"]+"\n")
+            f.write("- Source 509 scored rows, pre-May31 "+str(d.get("source_form_tests",{}).get("through_2026_05_31"))+"\n")
+            f.write("- Do not count 509 new unique before reconciliation. Zero training.\n")
+          assert d["status"]=="PASS_ORIGINAL_ESP2_2025_26_CCBY_LICENSE_SOURCE_509_RESEARCH_ROWS_ARCHIVED_NOT_DEDUP_OR_TRAINING",d
+          assert d["new_model_training_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-only-new-esp2-original-ccby-509-scope
+          path: |
+            new_esp2_2025_26_509.log
+            experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/
+          retention-days: 14
+      - name: Persist only ESP2 unique scope under CC BY attribution research source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): original CC BY 2025-26 Spanish LaLiga2 509 source rows; stage/identity gate pending, no training"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
