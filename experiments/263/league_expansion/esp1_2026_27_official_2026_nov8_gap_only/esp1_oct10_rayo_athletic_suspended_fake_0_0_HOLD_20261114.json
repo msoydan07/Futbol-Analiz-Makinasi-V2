@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-14",
+  "status": "HOLD_SOURCE_LIVE_API_DISPLAYS_SUSPENDED_FIRST_HALF_0_0_AS_IF_COMPLETED__DO_NOT_ADD_MATCH_RESULT",
+  "competition": "ESP1 2026-27 LaLiga EA SPORTS",
+  "fixture_date_original": "2026-10-10",
+  "home": "Rayo Vallecano",
+  "away": "Athletic Club",
+  "source_claimed_score": "0-0",
+  "source_claimed_completed_FT": false,
+  "actual": "MATCH_SUSPENDED_AFTER_APPROX_13_PLAYED_MINUTES; NOT COMPLETED; NEW_DATE_SCHEDULED_DEC_9_2026",
+  "future_schedule_as_of_cutoff": "2026-12-09",
+  "cutoff": "2026-11-13",
+  "official_league_fixture_url": "https://www.laliga.com/partido/temporada-2026-2027-laliga-ea-sports-rayo-vallecano-athletic-club-8",
+  "independent_suspended_sources": [
+    "https://bbc.com.im/sport/football/live/c6x2wlljr18zt",
+    "https://www.mundodeportivo.com/futbol/laliga/20261010/1004236951/rayo-vallecano-athletic-club-partido-futbol-hoy-en-directo-laliga-ea-sports-ext-pau.html",
+    "https://www.esmadrid.com/agenda/rayo-vallecano-athletic-club-bilbao-laliga-ea-sports-estadio-vallecas"
+  ],
+  "old_119_completed_match_results_original_unchanged": true,
+  "live_API_scorable_count_120_including_uncompleted_false_FT": true,
+  "live_API_actually_completed_after_excluding_this_event": 119,
+  "source_vs_existing_main_ESP1_2026_27_count_parity_after_quality_exclusion": true,
+  "old_10_nov_matchday12_already_present": true,
+  "new_match_goals_as_training_label_allowed": false,
+  "added_match_identities": 0,
+  "main_M4_unchanged": true,
+  "critical_warning": "Research only. Neither the 0-0 at suspension nor future scheduled result can be counted as completed goal outcome. This is NOT 120 confirmed played matches."
+}
