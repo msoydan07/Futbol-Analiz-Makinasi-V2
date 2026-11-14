@@ -1,0 +1,48 @@
+{
+  "status": "SWISS_2025_26_ORIGINAL_ODBL_RESEARCH_ARCHIVE_CREATED",
+  "selected_source_shortcut": "bsl",
+  "selected_finished_source_rows": 161,
+  "source_diagnostics": {
+    "bsl": {
+      "source_total": 198,
+      "unplayed": 36,
+      "final_extracted": 161,
+      "outside_target_window": 1,
+      "unique_clubs": 12,
+      "swiss_club_keyword_hits": 12,
+      "club_name_examples": [
+        "BSC Young Boys",
+        "FC Basel 1893",
+        "FC Lausanne-Sport",
+        "FC Lugano",
+        "FC Luzern",
+        "FC Sion",
+        "FC St. Gallen",
+        "FC Thun",
+        "FC Winterthur",
+        "FC Zürich",
+        "Grasshopper Club Zürich",
+        "Servette FC"
+      ],
+      "source_sha256": "95a59496bf35327eb57b0d1816d9a25698f87a10c20715d056964206e5bdfab5",
+      "source_url": "https://api.openligadb.de/getmatchdata/bsl/2025",
+      "is_swiss_football_club_set": true,
+      "is_season_usable": true
+    }
+  },
+  "coverage_status": "PARTIAL_161_OF_PREVIOUS_228_INDEPENDENTLY_OBSERVED_SEASON_FACTS__NOT_COMPLETE",
+  "missing_from_this_ODbL_SOURCE_SINCE_PREVIOUS_228_SEASON_FACTS": 67,
+  "rejected_ch1_6_FT_source_not_refetched": true,
+  "source_year": "2025-26",
+  "odbl_compilation_attribution": "Data from OpenLigaDB (www.openligadb.de), licensed under ODbL 1.0",
+  "source_license": "https://www.openligadb.de/en/license",
+  "csv_path": "experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_football_scores_ODbL_research_quarantine.csv",
+  "source_2025_26_previous_independent_228_FT_verification_not_retested": true,
+  "training_rows_approved": 0,
+  "independent_per_match_score_QA_pending": true,
+  "historical_pre_kickoff_asof_timestamps_not_proven": true,
+  "original_2396_and_296_holds_unchanged": true,
+  "ger2_306_new_ODbL_archive_unchanged": true,
+  "production_main_M4_unchanged": true,
+  "source_shortcut_bsl_vs_ch1_only_selected_one": true
+}
