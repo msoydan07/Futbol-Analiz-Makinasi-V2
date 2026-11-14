@@ -1,0 +1,66 @@
+{
+  "status": "PASS_NAMED_COMPETITION_FORMAT_STAGE_GAPS_LOCALIZED__OR_HOLD",
+  "old_core_source_4617_SHA_untouched": true,
+  "old_BEL1_2025_26_scored_source_rows": 311,
+  "normal_stage_until_2026_03_22": 240,
+  "separately_grouped_2026_04_01_thru_2026_05_26": 71,
+  "after_group_or_cross_tier_in_core_after_2026_05_26": 0,
+  "source_month_counts": {
+    "2025-07": 8,
+    "2025-08": 37,
+    "2025-09": 27,
+    "2025-10": 25,
+    "2025-11": 31,
+    "2025-12": 32,
+    "2026-01": 20,
+    "2026-02": 32,
+    "2026-03": 28,
+    "2026-04": 38,
+    "2026-05": 33
+  },
+  "observed_playoff_component_sizes": [
+    6,
+    6,
+    4
+  ],
+  "components": [
+    {
+      "group_size": 6,
+      "count_actual": 30,
+      "expected_complete_double_round_robin": 30,
+      "missing_directed_fixture_count": 0,
+      "duplicate_directed_fixture_count": 0,
+      "missing_internal_team_uuid_hashes_not_real_names": []
+    },
+    {
+      "group_size": 6,
+      "count_actual": 30,
+      "expected_complete_double_round_robin": 30,
+      "missing_directed_fixture_count": 0,
+      "duplicate_directed_fixture_count": 0,
+      "missing_internal_team_uuid_hashes_not_real_names": []
+    },
+    {
+      "group_size": 4,
+      "count_actual": 11,
+      "expected_complete_double_round_robin": 12,
+      "missing_directed_fixture_count": 1,
+      "duplicate_directed_fixture_count": 0,
+      "missing_internal_team_uuid_hashes_not_real_names": [
+        {
+          "home_uuid_prefix": "3978e856-d49",
+          "away_uuid_prefix": "77e47d4e-eed"
+        }
+      ]
+    }
+  ],
+  "official_format_ref": "https://www.proleague.be/nieuws/grote-lijnen-van-seizoen-2025-2026-ligt-vast",
+  "season_results_ref": "https://www.rsssf.org/tablesb/belg2026.html",
+  "expected_playoff_group_games": 72,
+  "expected_regular_games": 240,
+  "special_european_final_Gent_Genk_2026_05_31_ref": "https://fbref.com/en/comps/37/2025-2026/schedule/2025-2026-Belgian-Pro-League-Scores-and-Fixtures",
+  "new_persisted_match_ids": 0,
+  "no_source_score_revalidation": true,
+  "new_model_training_approved": 0,
+  "note": "Only a stage/fixture-count graph, not a second score validation. Missing actual fixture gets HOLD, no fabricated match score; an extra Gent–Genk final not in standard group competition must be separately stage-tagged."
+}
