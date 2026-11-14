@@ -1,0 +1,324 @@
+{
+  "status": "17_CURRENT_LEAGUE_SOURCE_FRESHNESS_AGGREGATES_ONLY",
+  "scope": "ONLY 17 persisted groups; 5 live-only previously frozen were NOT called again",
+  "previous_five_frozen": [
+    "DNK1",
+    "ENG5",
+    "ESP2",
+    "ITA2",
+    "FRA2"
+  ],
+  "source": "Football Charts LIVE API personal research",
+  "source_terms": "https://www.football-charts.com/terms",
+  "cutoff": "2026-11-13",
+  "new_raw_provider_result_rows_published": 0,
+  "new_model_training_approved": 0,
+  "target_leagues": [
+    "ENG1",
+    "ENG2",
+    "GER1",
+    "ESP1",
+    "ITA1",
+    "FRA1",
+    "NED1",
+    "TUR1",
+    "POR1",
+    "BEL1",
+    "SCO1",
+    "CHE1",
+    "ENG3",
+    "ENG4",
+    "GER2",
+    "GRE1",
+    "AUT1"
+  ],
+  "source_identity_match_delta_not_score_label_validation": true,
+  "previous_5_live_only_counts": {
+    "DNK1": 84,
+    "ENG5": 190,
+    "ESP2": 141,
+    "ITA2": 110,
+    "FRA2": 108
+  },
+  "counts": {
+    "ENG1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "premier",
+      "source_league_name": "Premier League",
+      "persisted_research_or_core": 100,
+      "source_distinct_finished_count": 100,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 100,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "ENG2": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "cha",
+      "source_league_name": "Championship",
+      "persisted_research_or_core": 180,
+      "source_distinct_finished_count": 180,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 180,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-07"
+      }
+    },
+    "GER1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "germany1",
+      "source_league_name": "Bundesliga",
+      "persisted_research_or_core": 81,
+      "source_distinct_finished_count": 81,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 81,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "ESP1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "spain1",
+      "source_league_name": "LaLiga",
+      "persisted_research_or_core": 119,
+      "source_distinct_finished_count": 120,
+      "source_minus_local_count": 1,
+      "possible_unarchived_if_source_additional": 1,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 120,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "ITA1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "italy1",
+      "source_league_name": "Serie A",
+      "persisted_research_or_core": 110,
+      "source_distinct_finished_count": 110,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 110,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "FRA1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "france1",
+      "source_league_name": "Ligue 1",
+      "persisted_research_or_core": 90,
+      "source_distinct_finished_count": 90,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 90,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "NED1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "holland1",
+      "source_league_name": "Eredivisie",
+      "persisted_research_or_core": 108,
+      "source_distinct_finished_count": 108,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 108,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "TUR1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "turkey1",
+      "source_league_name": "Super Lig",
+      "persisted_research_or_core": 99,
+      "source_distinct_finished_count": 99,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 99,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "POR1": {
+      "status": "CATALOG_LEAGUE_UNRESOLVED_HOLD",
+      "persisted_research_or_core": 98,
+      "catalog_candidates": 0
+    },
+    "BEL1": {
+      "status": "CATALOG_LEAGUE_UNRESOLVED_HOLD",
+      "persisted_research_or_core": 99,
+      "catalog_candidates": 0
+    },
+    "SCO1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "scot-premier",
+      "source_league_name": "Premiership",
+      "persisted_research_or_core": 42,
+      "source_distinct_finished_count": 75,
+      "source_minus_local_count": 33,
+      "possible_unarchived_if_source_additional": 33,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 75,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "CHE1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "swiss1",
+      "source_league_name": "Super League",
+      "persisted_research_or_core": 57,
+      "source_distinct_finished_count": 78,
+      "source_minus_local_count": 21,
+      "possible_unarchived_if_source_additional": 21,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 78,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "ENG3": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "eng1",
+      "source_league_name": "League One",
+      "persisted_research_or_core": 158,
+      "source_distinct_finished_count": 158,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 158,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-04"
+      }
+    },
+    "ENG4": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "eng2",
+      "source_league_name": "League Two",
+      "persisted_research_or_core": 164,
+      "source_distinct_finished_count": 164,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 164,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-03"
+      }
+    },
+    "GER2": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "germany2",
+      "source_league_name": "2. Bundesliga",
+      "persisted_research_or_core": 99,
+      "source_distinct_finished_count": 99,
+      "source_minus_local_count": 0,
+      "possible_unarchived_if_source_additional": 0,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 99,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "GRE1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "greece1",
+      "source_league_name": "Super League",
+      "persisted_research_or_core": 35,
+      "source_distinct_finished_count": 69,
+      "source_minus_local_count": 34,
+      "possible_unarchived_if_source_additional": 34,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 69,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    },
+    "AUT1": {
+      "status": "SOURCE_COMPARABLE_COUNT_ONLY_NOT_LICENSED_REHOST",
+      "source_league_code": "austria1",
+      "source_league_name": "Bundesliga",
+      "persisted_research_or_core": 42,
+      "source_distinct_finished_count": 72,
+      "source_minus_local_count": 30,
+      "possible_unarchived_if_source_additional": 30,
+      "source_difference_warning": "Count parity is NOT proof same fixtures; no raw match data retained",
+      "quality_flags_without_match_rows": {
+        "unique_scored_finished_matches_through_2026_11_13": 72,
+        "duplicates_removed_in_RAM": 0,
+        "skipped_future_or_other_season": 0,
+        "unparseable_or_unscored": 0,
+        "latest_result_date": "2026-11-08"
+      }
+    }
+  },
+  "catalog_status": "AVAILABLE",
+  "catalog_entries": 98,
+  "league_coverage_resolved": 15,
+  "source_possible_new_unarchived_count_sum": 119,
+  "count_match_leagues": 10,
+  "source_more_than_persisted_leagues": [
+    "ESP1",
+    "SCO1",
+    "CHE1",
+    "GRE1",
+    "AUT1"
+  ],
+  "persisted_more_than_source_leagues": [],
+  "closing_rule": "No claim of complete 22/22 played-fixture matches until original licensed match identities, fixture stages and duplicates are checked. This probe never republishes source scores."
+}
