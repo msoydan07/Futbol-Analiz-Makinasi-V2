@@ -1,0 +1,55 @@
+name: 263 Research - 4391 historical fixture identity integrity once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-4391-research-distinct-identities-once.yml
+permissions:
+  contents: write
+jobs:
+  one_historical_source_integrity_no_new_match_forecast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check schema and 4391 source-disjoint ledger arithmetic
+        run: python experiments/263/league_expansion/verify_4391_research_source_integrity_once.py --self-test
+      - name: No-network 4391 cross-source canonical overlap and technical abandonment checks
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/verify_4391_research_source_integrity_once.py --run > archive_4391_check.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("archive_4391_check.log").read_text()
+          d=json.loads(s.split("4391_SOURCE_ACCOUNT_START",1)[1].split("4391_SOURCE_ACCOUNT_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## Verified 4391 distinct historical research fixture identities — NOT 4391 training rows\n")
+            f.write("- Status: "+d["status"]+"\n")
+            f.write("- Old pinned 2396 + new 1995 across license-specific archives, strictly no duplicate identifiers.\n")
+            f.write("- 1269 new normal-stage score rows have NO independent second-source FT verification yet.\n")
+          assert d["status"]=="PASS_4391_UNIQUE_HISTORIC_RESEARCH_FIXTURES_CROSS_SOURCE_QA",d
+          assert d["research_league_fixture_records"]==4391
+          assert d["unique_league_season_date_home_away_keys"]==4391
+          assert d["new_training_rows_approved"]==0
+          Path("experiments/263/league_expansion/research_historical_4391_distinct_source_accounting_20261114.json").write_text(json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-4391-unique-historical-source-identity-no-training
+          path: |
+            archive_4391_check.log
+            experiments/263/league_expansion/research_historical_4391_distinct_source_accounting_20261114.json
+          retention-days: 14
+      - name: Persist ONLY combined identity and source-rights evidence report
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/research_historical_4391_distinct_source_accounting_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): 4391 distinct historical source identities verified, 1269 new score QA pending; M4 untouched"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
