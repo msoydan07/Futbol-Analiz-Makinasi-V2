@@ -1,0 +1,149 @@
+{
+  "status": "PASS_4391_UNIQUE_HISTORIC_RESEARCH_FIXTURES_CROSS_SOURCE_QA",
+  "checked_at_utc": "2026-11-14T12:12:57.442841+00:00",
+  "research_league_fixture_records": 4391,
+  "unique_league_season_date_home_away_keys": 4391,
+  "old_research_rows_frozen": 2396,
+  "new_source_specific_research_rows": 1995,
+  "new_2025_26_normal_stage_source_score_ONLY": 1269,
+  "previous_research_rows_prior_to_new_normal": 3122,
+  "new_normal_stage_GER3_ENG4_ENG5_ITA2_FRA2_GRE1_SCO1": 1269,
+  "source_files": [
+    {
+      "source": "training_2025_26_cc0_scored_QUARANTINE.csv",
+      "rows": 1249,
+      "source_git_blob_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+      "license_class": "PUBLISHER_CC0_CLAIM"
+    },
+    {
+      "source": "cc0_new_485_2526_2627_QUARANTINE_20261113.csv",
+      "rows": 485,
+      "source_git_blob_sha": "2582e3ffa6e200b74704702dccc01ca19ad4750e",
+      "license_class": "PUBLISHER_CC0_CLAIM"
+    },
+    {
+      "source": "cc0_aut1_2026_27_42_QUARANTINE_20261113.csv",
+      "rows": 42,
+      "source_git_blob_sha": "a404b3a395b32c42ac4e6cfef724bdebd3cbecb9",
+      "license_class": "PUBLISHER_CC0_CLAIM"
+    },
+    {
+      "source": "score_shape_recovery_295_2526_QUARANTINE_20261113.csv",
+      "rows": 295,
+      "source_git_blob_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+      "license_class": "PUBLISHER_CC0_CLAIM"
+    },
+    {
+      "source": "eng3_eng4_2026_27_322_CCBY_QUARANTINE_20261113.csv",
+      "rows": 322,
+      "source_git_blob_sha": "22b909a504254bfd3c9013f27fdbf2736ffbf746",
+      "license_class": "CCBY_COMPILATION_UPSTREAM_UNCLEAR"
+    },
+    {
+      "source": "che1_2026_27_oct10_3_match_score_facts_QUARANTINE_20261114.csv",
+      "rows": 3,
+      "source_git_blob_sha": "7098dd60bde56f8dbcd5b16930308028f332b821",
+      "license_class": "THIRD_PARTY_REHOST_UNCLEARED"
+    },
+    {
+      "source": "odbl_openligadb_germany2/ger2_2025_2026_207_novel_only_quarantine.csv",
+      "rows": 207,
+      "source_git_blob_sha": "5a2f228fb9faa50626417262e2a6a798c346e18d",
+      "license_class": "ODbL-1.0"
+    },
+    {
+      "source": "odbl_openligadb_germany2/ger2_2026_2027_ODbL_research_quarantine.csv",
+      "rows": 99,
+      "source_git_blob_sha": "83f612c849c81591c3ee952d68be4d9e46f067d6",
+      "license_class": "ODbL-1.0"
+    },
+    {
+      "source": "odbl_openligadb_swiss1/che1_2025_26_161_ODbL_official_corrected_RESEARCH_ONLY.csv",
+      "rows": 161,
+      "source_git_blob_sha": "b907493671386dd81dff7b272e922272be512808",
+      "license_class": "ODbL-1.0"
+    },
+    {
+      "source": "ccby_footballcharts_historic_2025_26/dnk1_2025_26_192_CC_BY_historic_original_research_only.csv",
+      "rows": 192,
+      "source_git_blob_sha": "7fb613889d223530ec0b45e3daca52ac971dc2db",
+      "license_class": "CC-BY-4.0"
+    },
+    {
+      "source": "ccby_footballcharts_historic_2025_26/che1_2025_26_67_NOVEL_CC_BY_research_only.csv",
+      "rows": 67,
+      "source_git_blob_sha": "e950f59f949b24dcac049c9f4442349b555c5c13",
+      "license_class": "CC-BY-4.0"
+    },
+    {
+      "source": "ccby_footballcharts_2025_26_regular_stage_novel_only/eng3_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv",
+      "rows": 208,
+      "source_git_blob_sha": "25936108b009fb0003f56d269289dcdff37b9281",
+      "license_class": "CC-BY-4.0"
+    },
+    {
+      "source": "ccby_footballcharts_2025_26_regular_stage_novel_only/eng4_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv",
+      "rows": 277,
+      "source_git_blob_sha": "742d5ada75cd538ddcef8a47b5d371f1a9947f2a",
+      "license_class": "CC-BY-4.0"
+    },
+    {
+      "source": "ccby_footballcharts_2025_26_regular_stage_novel_only/eng5_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv",
+      "rows": 262,
+      "source_git_blob_sha": "85e62700a900c847941ae3c665ebb38efe32022c",
+      "license_class": "CC-BY-4.0"
+    },
+    {
+      "source": "ccby_footballcharts_2025_26_regular_stage_novel_only/ita2_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv",
+      "rows": 72,
+      "source_git_blob_sha": "fff8d8a9673d38141287ad32f0d5b474b0bd04d7",
+      "license_class": "CC-BY-4.0"
+    },
+    {
+      "source": "ccby_footballcharts_2025_26_regular_stage_novel_only/fra2_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv",
+      "rows": 190,
+      "source_git_blob_sha": "b12ba6b7fc11367894b07470edfa93b5d9c3ec59",
+      "license_class": "CC-BY-4.0"
+    },
+    {
+      "source": "ccby_footballcharts_2025_26_regular_stage_novel_only/gre1_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv",
+      "rows": 120,
+      "source_git_blob_sha": "10782d9b7a94a06fb113c09e3a327883d232880c",
+      "license_class": "CC-BY-4.0"
+    },
+    {
+      "source": "ccby_footballcharts_2025_26_regular_stage_novel_only/sco1_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv",
+      "rows": 140,
+      "source_git_blob_sha": "e9d938ae62e8b05158bdba3f518d21f2e2670372",
+      "license_class": "CC-BY-4.0"
+    }
+  ],
+  "by_league": {
+    "AUT1": 237,
+    "CHE1": 285,
+    "DNK1": 192,
+    "ENG3": 722,
+    "ENG4": 717,
+    "ENG5": 558,
+    "ESP2": 131,
+    "FRA2": 306,
+    "GER2": 405,
+    "GRE1": 217,
+    "ITA2": 381,
+    "SCO1": 240
+  },
+  "by_season": {
+    "2025-26": 3794,
+    "2026-27": 597
+  },
+  "old_296_HOLD_unchanged": true,
+  "old_871_plus_904_external_source_score_QA_rerun": 0,
+  "prior_306_GER2_and_Swiss_161_and_Danish_192_independent_fact_QA_rerun": 0,
+  "new_2025_26_regular_stage_source_ONLY_NOT_INDEPENDENTLY_FT_CHECKED": 1269,
+  "historic_published_at_pre_match_feature_vintage_missing": true,
+  "new_training_rows_approved": 0,
+  "production_10_league_M4_SHA_and_old_predictions_untouched": true,
+  "user_manual_1855_xG_untouched": true,
+  "excluded_abandoned_eng5_no_goal_technical_event": true,
+  "next_distinct_step": "New independent FT witness only on 1269 previously uncorroborated source-only scored research records, then find rights-clean 2026/27 remaining five leagues. Do not rerun prior 1,775/461 verified facts."
+}
