@@ -30,7 +30,7 @@ def check():
  qa=json.loads(QA.read_text())
  if len(witness)!=22 or qa["new_only_second_source_exact_same_date_home_away_FT"]!=83 or qa["new_only_second_source_missing_different_or_unavailable_HOLD"]!=23:
   raise ValueError("PRIOR_ONLY_83_23_SOURCE_FACT_GATE_CHANGED")
- if prev["other_no_secondary_playoff_coverage"]!=22 or prev["total_source_specific_research_match_identities"]!=4497:
+ if sum(prev["unmatched_22_by_league"].values())!=22 or prev["total_source_specific_research_match_identities"]!=4497:
   raise ValueError("PREVIOUS_22_HOLD_STATUS_CHANGED")
  if report["new_second_source_22_all_match_date_home_away_FT"]!=22 or report["new_model_training_approved"]!=0:
   raise ValueError("REPORT_CLAIMS_ARE_NOT_SAFE")

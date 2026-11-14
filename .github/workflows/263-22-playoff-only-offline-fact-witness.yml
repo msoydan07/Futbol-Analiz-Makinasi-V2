@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-22-playoff-only-offline-fact-witness.yml
+      - experiments/263/league_expansion/check_new22_playoff_source_witness_once.py
 permissions:
   contents: read
 jobs:
