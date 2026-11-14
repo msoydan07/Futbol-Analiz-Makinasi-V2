@@ -1,0 +1,44 @@
+name: 263 Research - Italy Serie B 2025-26 309 FT Source Crosscheck Once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-ita2-2025-26-309-second-source-standings-once.yml
+permissions:
+  contents: read
+jobs:
+  italy-309-source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify source SHA pins, team aliases and synthetic FT scores before network
+        run: python experiments/263/league_expansion/verify_ita2_2526_309_second_source_standings_once.py --self-test
+      - name: In-memory 309 match FT comparison and 380 game RSSSF standings check
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/verify_ita2_2526_309_second_source_standings_once.py --live | tee ita309_qa.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          raw=Path("ita309_qa.log").read_text(encoding="utf-8")
+          a=raw.index("SERIEB309_START")+len("SERIEB309_START")
+          b=raw.index("SERIEB309_END")
+          d=json.loads(raw[a:b])
+          Path("ita2_309_ft_and_standings_aggregate.json").write_text(json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## ITA2 2025/26 309 independent FT score comparisons\n\n")
+            for k in ("status","primary_rows","same_fixture_date_clubs_and_FT","original_zero_zero_rows",
+                      "zero_zero_independently_confirmed","exact_identity_source_score_disagreements",
+                      "possible_date_shifts_within_3_days","absent_even_within_3_days"):
+              f.write("- "+k+": "+str(d.get(k,"unknown"))+"\n")
+            f.write("\nFull season RSSSF standings control: "+
+              str(d.get("independent_RSSSF_full_season_standings",{}).get("full_season_380_20_club_19_home_19_away_pass","not verified"))+"\n")
+            f.write("\nNo third-party bulk CSV archived, training or production M4 changes.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-ita2-2025-26-309-score-evidence-aggregate
+          path: ita2_309_ft_and_standings_aggregate.json
+          retention-days: 14
