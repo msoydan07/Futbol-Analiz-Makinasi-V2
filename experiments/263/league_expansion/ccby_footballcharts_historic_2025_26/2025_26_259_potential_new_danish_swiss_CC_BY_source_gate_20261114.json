@@ -1,0 +1,90 @@
+{
+  "status": "PASS_ARCHIVED_NEW_192_DANISH_67_SWISS_CCBY",
+  "scanned_at_utc": "2026-11-14T11:35:53.205005+00:00",
+  "source": "Football Charts / Damir Devetak Hugging Face 2026.10",
+  "license_claim": "CC BY 4.0, author-declared original data",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "citation_DOI": "https://doi.org/10.5281/zenodo.22295583",
+  "source_csv_raw_not_rehosted": true,
+  "source_integrity": {
+    "source_rows": 76991,
+    "by_target_league": {
+      "DNK1": 192,
+      "CHE1": 229
+    },
+    "source_csv_bytes": 9800279,
+    "sha256": "08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10"
+  },
+  "source_country_league_and_competition_filters": {
+    "CHE1": {
+      "source_shape": {
+        "source_codes": {
+          "swiss1": 229
+        },
+        "out_of_competition_or_window": {
+          "NOT_CANONICAL_12_TEAM_LEAGUE": 1
+        },
+        "source_rows_rejected_by_schema": {},
+        "raw_fixture_rows": 229,
+        "canonical_valid_unambiguous_rows": 228,
+        "quarantine_excluded_examples": [
+          {
+            "reason": "NOT_CANONICAL_12_TEAM_LEAGUE",
+            "day": "2026-05-18",
+            "home": "Aarau",
+            "away": "Grasshoppers"
+          }
+        ]
+      },
+      "official_2025_26_standings_and_results": {
+        "status": "PASS",
+        "official_table_count": 228,
+        "source_score_and_club_checks": 228,
+        "mismatched_clubs": [],
+        "quarantine_reasons": {}
+      }
+    },
+    "DNK1": {
+      "source_shape": {
+        "source_codes": {
+          "denmark1": 192
+        },
+        "out_of_competition_or_window": {},
+        "source_rows_rejected_by_schema": {},
+        "raw_fixture_rows": 192,
+        "canonical_valid_unambiguous_rows": 192,
+        "quarantine_excluded_examples": []
+      },
+      "official_2025_26_standings_and_results": {
+        "status": "PASS",
+        "official_table_count": 192,
+        "source_score_and_club_checks": 192,
+        "mismatched_clubs": [],
+        "quarantine_reasons": {}
+      }
+    }
+  },
+  "swiss_161_to_novel_67_identity_and_FT_comparison": {
+    "ODbL_161_old_completed": 161,
+    "CCBY_same_date_club_FT_overlap": 161,
+    "CCBY_score_conflicts_vs_corrected_ODbL": [],
+    "CCBY_old_ODbL_identity_not_seen_in_this_source_count": 0,
+    "new_fixture_candidates": 67,
+    "expected_novel_if_complete_and_overlap_exact": 67
+  },
+  "new_historic_DNK1_2025_26_identity_rows_archived": 192,
+  "new_historic_CHE1_2025_26_identity_rows_archived": 67,
+  "new_unique_research_fixture_identities": 259,
+  "new_fixture_sources_new_2026_27": 0,
+  "previous_source_2863_research_identities_frozen": true,
+  "previous_161_SWISS_ODbL_sources_untouched": true,
+  "previous_420_Swiss_Danish_FT_QA_run_replayed": false,
+  "previous_306_GER2_score_QA_replayed": false,
+  "main_10league_M4_and_signed_SHA_untouched": true,
+  "original_2396_AND_296_HOLD_unchanged": true,
+  "new_training_rows_approved": 0,
+  "pre_kickoff_feature_asof_metadata_certified": false,
+  "source_upstream_lineage_and_database_rights_fully_audited": false,
+  "new_research_licensed_CCBY_files_added": true,
+  "note": "Even a 2025/26 results archive that passes season/standings totals requires licensed-source trust and pre-match source-vintage restrictions before model training. STRICT no historical match source repetition."
+}
