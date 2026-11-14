@@ -1,0 +1,52 @@
+name: 263 Research - Spain2 331 NEW only FT second provider plus six play-off evidence once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-esp2-331-new-ft-second-witness-once.yml
+permissions:
+  contents: write
+jobs:
+  one-only-331-new-regular-plus-6-playoff-independent:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: New only 331 club canonical aliases and six FBref promotion results
+        run: python experiments/263/league_expansion/verify_esp2_new331_second_FT_source_6playoff_once.py --self-test
+      - name: ONE external second-score CSV read; compare only 331 new original-author source fixtures
+        run: |
+          python experiments/263/league_expansion/verify_esp2_new331_second_FT_source_6playoff_once.py --run > esp2_new331_only.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("esp2_new331_only.log").read_text()
+          d=json.loads(s.split("ESP2_NEW_WITNESS_START",1)[1].split("ESP2_NEW_WITNESS_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Only NEW 331 Spain Segunda 2025/26 source match facts + 6 playoff evidence\n")
+            f.write("- Status: "+d["status"]+"\n")
+            f.write("- New regular FT matches date+score corroborated: "+str(d.get("normal_second_source_score_date_team_exact",0))+"\n")
+            f.write("- Remain unmatched HOLD: "+str(d.get("normal_second_source_unmapped_or_missing_hold",0))+"\n")
+            f.write("- Original 131 old source match identities not rechecked. Zero training.\n")
+          assert d["status"]=="ONE_PASS_331_NEW_ESP2_REGULAR_SECOND_SOURCE_FACT_CHECK_PLUS_6_PROMOTION_PLAYOFF_FACTS",d
+          assert d["prior_131_ESP2_source_matches_retested"]==0
+          assert d["new_training_rows_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-esp2-331-new-only-independent-ft-and-6-playoffs
+          path: |
+            esp2_new331_only.log
+            experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_NEW_331_reg_6_playoff_independent_score_QA_20261114.json
+          retention-days: 14
+      - name: Preserve only 331 targeted fact check report, no secondary raw provider data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_NEW_331_reg_6_playoff_independent_score_QA_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): verify only 331 new Spain2 regular results vs independent source; 6 separate playoff scoreboard facts"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
