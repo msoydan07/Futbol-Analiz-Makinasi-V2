@@ -1,0 +1,54 @@
+name: 263 Research - Once-only CC BY Danish Swiss 2025-26 licensed archive
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-2025-26-ccby-danish-swiss-archive-once.yml
+permissions:
+  contents: write
+jobs:
+  one_new_CC_BY_source_no_previous_score_reruns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confirm 161 Swiss ODbL original archive stays frozen
+        run: python experiments/263/league_expansion/archive_ccby_footballcharts_2025_26_danish_swiss_once.py --self-test
+      - name: One new CC-BY-4.0 public dataset read and targeted historical filter only
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/archive_ccby_footballcharts_2025_26_danish_swiss_once.py --run > footballcharts_gate_onepass.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("footballcharts_gate_onepass.log").read_text()
+          d=json.loads(s.split("CCBY_ARCHIVE_START",1)[1].split("CCBY_ARCHIVE_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## First-party CC BY historical source, Danish 2025/26 + Swiss 2025/26 gaps\n")
+              f.write("- Status: "+d["status"]+"\n")
+              for k in ("new_historic_DNK1_2025_26_identity_rows_archived","new_historic_CHE1_2025_26_identity_rows_archived",
+                        "new_unique_research_fixture_identities"):
+                  f.write("- "+k+": "+str(d.get(k,0))+"\n")
+              f.write("- Prior 420 FT QA not replayed; original 2396 and M4 unchanged; training approvals 0.\n")
+          assert d["status"] in ("PASS_ARCHIVED_NEW_192_DANISH_67_SWISS_CCBY","HOLD_SOURCE_OR_OVERLAP_NOT_PROVEN__NO_NEW_ARCHIVAL_FT"),d
+          assert d["new_training_rows_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-CB4-Danish-Swiss-2025-26-new-source-once
+          path: |
+            experiments/263/league_expansion/ccby_footballcharts_historic_2025_26/
+            footballcharts_gate_onepass.log
+          retention-days: 14
+      - name: Persist only licensed target-season results when every source gate passes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_historic_2025_26/
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): one new licensed CC BY historic Danish Swiss source + strict coverage, no M4 training"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
