@@ -1,0 +1,167 @@
+{
+  "date_local": "2026-11-14",
+  "status": "SIX_LEAGUE_BATCH_967_COMPLETED__871_VERIFIED_FT_DATE__96_NATIONAL_LEAGUE_SCORE_CONFLICTS_HOLD",
+  "scope": "967 previously uncorroborated CC0 research scored candidates, six leagues across eight league-season groups; not full league-season populations",
+  "six_leagues_summary": {
+    "ENG3": {
+      "total": 256,
+      "independent_score_date_matches": 256,
+      "score_conflicts_HOLD": 0
+    },
+    "ENG4": {
+      "total": 176,
+      "independent_score_date_matches": 176,
+      "score_conflicts_HOLD": 0
+    },
+    "ENG5": {
+      "total": 296,
+      "independent_score_date_matches": 200,
+      "score_conflicts_HOLD": 96
+    },
+    "GRE1": {
+      "total": 97,
+      "independent_score_date_matches": 97,
+      "score_conflicts_HOLD": 0
+    },
+    "SCO1": {
+      "total": 100,
+      "independent_score_date_matches": 100,
+      "score_conflicts_HOLD": 0
+    },
+    "AUT1": {
+      "total": 42,
+      "independent_score_date_matches": 42,
+      "score_conflicts_HOLD": 0
+    }
+  },
+  "eight_group_evidence": {
+    "ENG3/2025-26": {
+      "original_candidates": 256,
+      "initial_exact": 256,
+      "only_initial_unresolved_targeted": 0,
+      "newly_confirmed_in_targeted_alias_pass": 0,
+      "total_independent_same_date_home_away_FT": 256,
+      "source_FT_score_disagreements_still_held": 0,
+      "source_matching_missing_after_alias_fix": 0,
+      "source_sha256": "4c96eff8a2f20c5e26015af8609c4f90478ff055f58ab6e137cc3445bf4c67ee",
+      "original_stage_source_shaping": "SCORE_FACT_QA_ONLY_NO_TRAINING_PERMISSIONS"
+    },
+    "ENG4/2025-26": {
+      "original_candidates": 176,
+      "initial_exact": 148,
+      "only_initial_unresolved_targeted": 28,
+      "newly_confirmed_in_targeted_alias_pass": 28,
+      "total_independent_same_date_home_away_FT": 176,
+      "source_FT_score_disagreements_still_held": 0,
+      "source_matching_missing_after_alias_fix": 0,
+      "source_sha256": "eff4fa15cb18857091d1f0666d0b8a6c61eda7a8374feef8f2d8a38244e0e45d",
+      "original_stage_source_shaping": "SCORE_FACT_QA_ONLY_NO_TRAINING_PERMISSIONS"
+    },
+    "ENG5/2025-26": {
+      "original_candidates": 296,
+      "initial_exact": 182,
+      "only_initial_unresolved_targeted": 114,
+      "newly_confirmed_in_targeted_alias_pass": 18,
+      "total_independent_same_date_home_away_FT": 200,
+      "source_FT_score_disagreements_still_held": 96,
+      "source_matching_missing_after_alias_fix": 0,
+      "source_sha256": "2372229d616a57f9df3d9a401cd942df8e1909ba67017b3793c6aceaf0becf76",
+      "original_stage_source_shaping": "SCORE_FACT_QA_ONLY_NO_TRAINING_PERMISSIONS"
+    },
+    "GRE1/2025-26": {
+      "original_candidates": 62,
+      "initial_exact": 53,
+      "only_initial_unresolved_targeted": 9,
+      "newly_confirmed_in_targeted_alias_pass": 9,
+      "total_independent_same_date_home_away_FT": 62,
+      "source_FT_score_disagreements_still_held": 0,
+      "source_matching_missing_after_alias_fix": 0,
+      "source_sha256": "0f77e72cb9db8f5dcd298d16f20551a82d018b478fc12a67e065241f05810830",
+      "original_stage_source_shaping": "SCORE_FACT_QA_ONLY_NO_TRAINING_PERMISSIONS"
+    },
+    "GRE1/2026-27": {
+      "original_candidates": 35,
+      "initial_exact": 17,
+      "only_initial_unresolved_targeted": 18,
+      "newly_confirmed_in_targeted_alias_pass": 18,
+      "total_independent_same_date_home_away_FT": 35,
+      "source_FT_score_disagreements_still_held": 0,
+      "source_matching_missing_after_alias_fix": 0,
+      "source_sha256": "89a08b02b2bdec2c10472274a2e83d4f39aba5894c2ac952c2df8b24432ba3b5",
+      "original_stage_source_shaping": "SCORE_FACT_QA_ONLY_NO_TRAINING_PERMISSIONS"
+    },
+    "SCO1/2025-26": {
+      "original_candidates": 58,
+      "initial_exact": 48,
+      "only_initial_unresolved_targeted": 10,
+      "newly_confirmed_in_targeted_alias_pass": 10,
+      "total_independent_same_date_home_away_FT": 58,
+      "source_FT_score_disagreements_still_held": 0,
+      "source_matching_missing_after_alias_fix": 0,
+      "source_sha256": "be3c45e08f09a327e3fd5289dd0b362b200f430ed5845cb18df1aca7e3ced2ee",
+      "original_stage_source_shaping": "SCORE_FACT_QA_ONLY_NO_TRAINING_PERMISSIONS"
+    },
+    "SCO1/2026-27": {
+      "original_candidates": 42,
+      "initial_exact": 35,
+      "only_initial_unresolved_targeted": 7,
+      "newly_confirmed_in_targeted_alias_pass": 7,
+      "total_independent_same_date_home_away_FT": 42,
+      "source_FT_score_disagreements_still_held": 0,
+      "source_matching_missing_after_alias_fix": 0,
+      "source_sha256": "042594e2a58575ae3c029c8c8c235926e35dd04c4bcf7c0500ed905d4539bc03",
+      "original_stage_source_shaping": "SCORE_FACT_QA_ONLY_NO_TRAINING_PERMISSIONS"
+    },
+    "AUT1/2026-27": {
+      "original_candidates": 42,
+      "initial_exact": 0,
+      "only_initial_unresolved_targeted": 42,
+      "newly_confirmed_in_targeted_alias_pass": 42,
+      "total_independent_same_date_home_away_FT": 42,
+      "source_FT_score_disagreements_still_held": 0,
+      "source_matching_missing_after_alias_fix": 0,
+      "source_sha256": "fd6cf96fb740bd11d4dcd2ee3343226c6cefd9509cbc4b85faaf31f21da12059",
+      "original_stage_source_shaping": "SCORE_FACT_QA_ONLY_NO_TRAINING_PERMISSIONS"
+    }
+  },
+  "runs": {
+    "one_consolidated_six_league_batch": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43576073899",
+    "only_unresolved_228_targeted_alias_qa": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43576468945"
+  },
+  "results": {
+    "previously_witnessed_outside_six": 904,
+    "first_consolidated_pass": 739,
+    "new_alias_resolved_target_only": 132,
+    "final_six_league_confirmed_matches": 871,
+    "held_unresolved_ENG5_source_score_disagreements": 96,
+    "independent_source_match_witnesses_in_1871_CC0_after_six": 1775,
+    "remaining_1871_CC0_unheld_without_matching_independent_source_score": 96,
+    "source_match_identity_unmapped_after_alias_cleanup": 0
+  },
+  "eng5_discrepancies": {
+    "match_group": "ENG5/2025-26",
+    "first_base_research_rows": 296,
+    "passed_date_home_away_FT": 200,
+    "old_source_scores_disagree_with_football_data_2025_26_EC_CSV": 96,
+    "secondary_sha256": "2372229d616a57f9df3d9a401cd942df8e1909ba67017b3793c6aceaf0becf76",
+    "sample_conflicts_confirmed_from_first_two_sources": true,
+    "additional_independent_example": "https://fbref.com/en/comps/34/2025-2026/schedule/2025-2026-National-League-Scores-and-Fixtures",
+    "example": "Boreham Wood vs Aldershot 4 November 2025: original CC0 source 1-1 vs football-data and FBref 1-0",
+    "quality_gate": "RESEARCH_HOLD_DO_NOT_ASSUME_EXTERNAL_SOURCE_AUTHORITATIVELY_RIGHT_FOR_ALL_96",
+    "next": "Produce exact 96 original fixture-key hold manifest. Only those conflicts should undergo extra independent official/source adjudication; 871 prior successes frozen."
+  },
+  "current_sources": {
+    "Austria_2026_snapshot": "MatchDaySync 11 October backup, not a live current season source; 29 duplicate alias rows deduped and 42 original scores match by identity/date",
+    "Greece_2026": "football-data.co.uk 2627 G1 match outcomes, original 35 scored rows only",
+    "Scotland_2026": "football-data.co.uk 2627 SC0 match outcomes, original 42 scored rows only"
+  },
+  "immutable_constraints": {
+    "original_2396_scored_research_quarantine_rows_unmodified": true,
+    "original_200_ENG3_ENG4_quality_HOLD_unmodified": true,
+    "third_party_CSV_full_datasets_not_rehosted": true,
+    "new_trainable_rows_approved": 0,
+    "source_rights_for_model_training_and_feature_vintage_not_yet_approved": true,
+    "production_main_10_leagues_M4_and_historical_SHA_seals_untouched": true
+  },
+  "no_repeat": "Freeze all 871 source-date-score matches for these source SHA. Do not rerun six-league comparison. Next source quality job only investigate 96 ENG5 conflicting FT facts and prepare exact hold keys without revisiting 871."
+}
