@@ -96,16 +96,16 @@ def string_team(x):
   return ""
  return x if isinstance(x,str) else ""
 def scored(item):
- home=string_team(item.get("home_team") or item.get("home") or item.get("team1"))
- away=string_team(item.get("away_team") or item.get("away") or item.get("team2"))
+ home=string_team(item.get("homeTeam") or item.get("home_team") or item.get("home") or item.get("team1"))
+ away=string_team(item.get("awayTeam") or item.get("away_team") or item.get("away") or item.get("team2"))
  if not home or not away or norm(home)==norm(away):return None
  sh=next((item[k] for k in ("home_goals","home_score","score_home","ft_home","home_ft","goals_home","goals_for_home") if item.get(k) is not None),None)
  sa=next((item[k] for k in ("away_goals","away_score","score_away","ft_away","away_ft","goals_away","goals_for_away") if item.get(k) is not None),None)
  # Provider may publish a short full-time pair or a nested FT score;
  # never infer scores from goal events, minute values or predictions.
- pair=next((item[k] for k in ("result","ft_result","full_time","ft_score","fulltime_score") if isinstance(item.get(k),str)),None)
+ pair=next((item[k] for k in ("score","result","ft_result","full_time","ft_score","fulltime_score") if isinstance(item.get(k),str)),None)
  if pair and (sh is None or sa is None):
-  mm=re.fullmatch(r"\\s*(\\d{1,2})\\s*[-:]\\s*(\\d{1,2})\\s*",pair)
+  mm=re.fullmatch(r"\s*(\d{1,2})\s*[-:–]\s*(\d{1,2})\s*",pair)
   if mm:sh,sa=mm.group(1),mm.group(2)
  if isinstance(item.get("score"),dict):
   sc=item["score"]
