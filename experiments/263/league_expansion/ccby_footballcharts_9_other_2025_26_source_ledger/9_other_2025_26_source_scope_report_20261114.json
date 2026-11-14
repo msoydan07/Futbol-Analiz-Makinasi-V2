@@ -1,0 +1,199 @@
+{
+  "status": "HISTORICAL_CCBY_SOURCE_9_SCOPE_ONE_PASS_COMPLETED_RESEARCH_ONLY",
+  "fetched_at_utc": "2026-11-14T11:44:01.473899+00:00",
+  "source_original": "https://huggingface.co/datasets/Damir81/football-charts-results-goal-timing/resolve/main/football_charts_matches.csv",
+  "source_original_sha256": "08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10",
+  "source_rows_scanned_once": 76991,
+  "only_2025_26_season_filtered": true,
+  "excluded_old_2024_25_or_2026_27": true,
+  "requested_nine_other_leagues": [
+    "ENG3",
+    "ENG4",
+    "ENG5",
+    "ESP2",
+    "ITA2",
+    "FRA2",
+    "GRE1",
+    "SCO1",
+    "AUT1"
+  ],
+  "league_source_evidence": {
+    "ENG3": {
+      "available_source_scored_rows": 557,
+      "source_league_codes": [
+        "eng1"
+      ],
+      "clubs_in_source": 24,
+      "earliest": "2025-08-01",
+      "latest": "2026-05-24",
+      "shape_errors": {
+        "source_selected": 557
+      },
+      "expected_scope_bounds": [
+        400,
+        650
+      ],
+      "scope_plausible": true
+    },
+    "ENG4": {
+      "available_source_scored_rows": 556,
+      "source_league_codes": [
+        "eng2"
+      ],
+      "clubs_in_source": 24,
+      "earliest": "2025-08-02",
+      "latest": "2026-05-25",
+      "shape_errors": {
+        "source_selected": 556
+      },
+      "expected_scope_bounds": [
+        400,
+        650
+      ],
+      "scope_plausible": true
+    },
+    "ENG5": {
+      "available_source_scored_rows": 554,
+      "source_league_codes": [
+        "national"
+      ],
+      "clubs_in_source": 24,
+      "earliest": "2025-08-09",
+      "latest": "2026-05-03",
+      "shape_errors": {
+        "source_selected": 554
+      },
+      "expected_scope_bounds": [
+        400,
+        650
+      ],
+      "scope_plausible": true
+    },
+    "ESP2": {
+      "available_source_scored_rows": 0,
+      "source_league_codes": [],
+      "clubs_in_source": 0,
+      "earliest": null,
+      "latest": null,
+      "shape_errors": {},
+      "expected_scope_bounds": [
+        300,
+        500
+      ],
+      "scope_plausible": false
+    },
+    "ITA2": {
+      "available_source_scored_rows": 390,
+      "source_league_codes": [
+        "italy2"
+      ],
+      "clubs_in_source": 20,
+      "earliest": "2025-08-22",
+      "latest": "2026-05-29",
+      "shape_errors": {
+        "source_selected": 390
+      },
+      "expected_scope_bounds": [
+        300,
+        450
+      ],
+      "scope_plausible": true
+    },
+    "FRA2": {
+      "available_source_scored_rows": 309,
+      "source_league_codes": [
+        "france2"
+      ],
+      "clubs_in_source": 19,
+      "earliest": "2025-08-09",
+      "latest": "2026-05-24",
+      "shape_errors": {
+        "source_selected": 309
+      },
+      "expected_scope_bounds": [
+        250,
+        370
+      ],
+      "scope_plausible": true
+    },
+    "GRE1": {
+      "available_source_scored_rows": 246,
+      "source_league_codes": [
+        "greece1"
+      ],
+      "clubs_in_source": 15,
+      "earliest": "2025-08-23",
+      "latest": "2026-05-21",
+      "shape_errors": {
+        "source_selected": 246
+      },
+      "expected_scope_bounds": [
+        160,
+        330
+      ],
+      "scope_plausible": true
+    },
+    "SCO1": {
+      "available_source_scored_rows": 234,
+      "source_league_codes": [
+        "scot-premier"
+      ],
+      "clubs_in_source": 15,
+      "earliest": "2025-08-02",
+      "latest": "2026-05-25",
+      "shape_errors": {
+        "source_selected": 234
+      },
+      "expected_scope_bounds": [
+        190,
+        270
+      ],
+      "scope_plausible": true
+    },
+    "AUT1": {
+      "available_source_scored_rows": 195,
+      "source_league_codes": [
+        "austria1"
+      ],
+      "clubs_in_source": 12,
+      "earliest": "2025-08-01",
+      "latest": "2026-05-25",
+      "shape_errors": {
+        "source_selected": 195
+      },
+      "expected_scope_bounds": [
+        170,
+        270
+      ],
+      "scope_plausible": true
+    }
+  },
+  "plausible_source_archives_created": [
+    "ENG3",
+    "ENG4",
+    "ENG5",
+    "ITA2",
+    "FRA2",
+    "GRE1",
+    "SCO1",
+    "AUT1"
+  ],
+  "groups_not_archived_due_to_scope_quality_bounds": [
+    "ESP2"
+  ],
+  "source_row_sum_for_archived_groups": 3041,
+  "cross_source_duplicate_or_extra_playoff_outcome_resolved": false,
+  "new_unique_research_fixture_count_until_CANDIDATE_DEDUP": 0,
+  "previous_committed_research_unique_fixture_count_unchanged": 3122,
+  "previous_Danish192_and_Swiss67_CC_BY_source_pass_not_rechecked": true,
+  "previous_GER2_306_and_SWISS_161_ODbL_QA_not_rechecked": true,
+  "source_licence": "CC-BY-4.0",
+  "author_credit": "Data by football-charts.com / Damir Devetak",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "no_model_training_approved": true,
+  "new_training_rows_approved": 0,
+  "production_10league_M4_SHA_unchanged": true,
+  "user_manual_1855_xG_unchanged": true,
+  "archive_rights_and_provenance": "Publisher grants CC BY 4.0 for original open file; upstream database rights, club matching and historical as-of are separate verification requirements",
+  "next_distinct_action": "Offline canonical identity and same-date/FT reconciliation for ONLY these new league-source rows vs existing research baseline; do NOT re-fetch pinned 76,991-source snapshot or rerun the Danish/Swiss gates. Then resolve play-off stage before counting new distinct fixtures."
+}
