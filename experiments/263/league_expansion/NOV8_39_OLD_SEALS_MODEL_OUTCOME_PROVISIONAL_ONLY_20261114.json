@@ -1,0 +1,772 @@
+{
+  "status": "READONLY_ARCHIVED_NEW100_39_SEALS_RESEARCH_OUTCOMES_NOT_FULLY_OFFICIALLY_VERIFIED",
+  "model_or_forecasts_changed": false,
+  "retrained": false,
+  "future_pilot_created": false,
+  "new_training_admissions": 0,
+  "bookmaker_EV_or_betting_accuracy_claims": false,
+  "last_scored_event": "2026-11-08",
+  "score_archive_cutoff": "2026-11-12",
+  "archive_sha256": "5b2ff09c2c7bcbd8d614d0edd5c92fcd3acbdfe1b2e32bf6565e4058e372ea06",
+  "source_grade_counts": {
+    "TFF_NETWORK_VERIFIED": 3,
+    "scored": 39,
+    "all_four_available": 33,
+    "OFFICIAL_CLUB_WEB_RESEARCH": 13,
+    "OFFICIAL_LEAGUE_WEB_RESEARCH": 22,
+    "postponed_no_scoring": 1,
+    "EXTERNAL_FEDERATION_WEB_RESEARCH": 1
+  },
+  "all_39_provisional_inference": {
+    "match_count": 39,
+    "model_own_coverage": {
+      "B": {
+        "n": 34,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.617647,
+            "brier": 0.533573,
+            "logloss": 0.909909
+          },
+          "BTTS_YES": {
+            "accuracy": 0.617647,
+            "brier": 0.237444,
+            "logloss": 0.66743
+          },
+          "OVER_1.5": {
+            "accuracy": 0.823529,
+            "brier": 0.157103,
+            "logloss": 0.493261
+          },
+          "OVER_2.5": {
+            "accuracy": 0.470588,
+            "brier": 0.260184,
+            "logloss": 0.717008
+          },
+          "OVER_3.5": {
+            "accuracy": 0.735294,
+            "brier": 0.184703,
+            "logloss": 0.55188
+          }
+        }
+      },
+      "C2": {
+        "n": 38,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.552632,
+            "brier": 0.54441,
+            "logloss": 0.91664
+          },
+          "BTTS_YES": {
+            "accuracy": 0.657895,
+            "brier": 0.225852,
+            "logloss": 0.64525
+          },
+          "OVER_1.5": {
+            "accuracy": 0.815789,
+            "brier": 0.160262,
+            "logloss": 0.50714
+          },
+          "OVER_2.5": {
+            "accuracy": 0.578947,
+            "brier": 0.252027,
+            "logloss": 0.699359
+          },
+          "OVER_3.5": {
+            "accuracy": 0.736842,
+            "brier": 0.19115,
+            "logloss": 0.563946
+          }
+        }
+      },
+      "C3": {
+        "n": 39,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.641026,
+            "brier": 0.517322,
+            "logloss": 0.885233
+          },
+          "BTTS_YES": {
+            "accuracy": 0.487179,
+            "brier": 0.246367,
+            "logloss": 0.686763
+          },
+          "OVER_1.5": {
+            "accuracy": 0.820513,
+            "brier": 0.159505,
+            "logloss": 0.499716
+          },
+          "OVER_2.5": {
+            "accuracy": 0.512821,
+            "brier": 0.247555,
+            "logloss": 0.688972
+          },
+          "OVER_3.5": {
+            "accuracy": 0.794872,
+            "brier": 0.174528,
+            "logloss": 0.528783
+          }
+        }
+      },
+      "M4": {
+        "n": 39,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.641026,
+            "brier": 0.509959,
+            "logloss": 0.8753
+          },
+          "BTTS_YES": {
+            "accuracy": 0.512821,
+            "brier": 0.248164,
+            "logloss": 0.690207
+          },
+          "OVER_1.5": {
+            "accuracy": 0.820513,
+            "brier": 0.165231,
+            "logloss": 0.518731
+          },
+          "OVER_2.5": {
+            "accuracy": 0.538462,
+            "brier": 0.262744,
+            "logloss": 0.722278
+          },
+          "OVER_3.5": {
+            "accuracy": 0.717949,
+            "brier": 0.182749,
+            "logloss": 0.545154
+          }
+        }
+      }
+    },
+    "same_all_four_match_coverage": 33,
+    "four_way_paired": {
+      "B": {
+        "n": 33,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.606061,
+            "brier": 0.545981,
+            "logloss": 0.92726
+          },
+          "BTTS_YES": {
+            "accuracy": 0.636364,
+            "brier": 0.235623,
+            "logloss": 0.663762
+          },
+          "OVER_1.5": {
+            "accuracy": 0.818182,
+            "brier": 0.161174,
+            "logloss": 0.503254
+          },
+          "OVER_2.5": {
+            "accuracy": 0.484848,
+            "brier": 0.255127,
+            "logloss": 0.706617
+          },
+          "OVER_3.5": {
+            "accuracy": 0.727273,
+            "brier": 0.184591,
+            "logloss": 0.551355
+          }
+        }
+      },
+      "C2": {
+        "n": 33,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.575758,
+            "brier": 0.533836,
+            "logloss": 0.901142
+          },
+          "BTTS_YES": {
+            "accuracy": 0.666667,
+            "brier": 0.223872,
+            "logloss": 0.640458
+          },
+          "OVER_1.5": {
+            "accuracy": 0.818182,
+            "brier": 0.154971,
+            "logloss": 0.487725
+          },
+          "OVER_2.5": {
+            "accuracy": 0.606061,
+            "brier": 0.247125,
+            "logloss": 0.688458
+          },
+          "OVER_3.5": {
+            "accuracy": 0.757576,
+            "brier": 0.179852,
+            "logloss": 0.537746
+          }
+        }
+      },
+      "C3": {
+        "n": 33,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.606061,
+            "brier": 0.526883,
+            "logloss": 0.89686
+          },
+          "BTTS_YES": {
+            "accuracy": 0.515152,
+            "brier": 0.234712,
+            "logloss": 0.6619
+          },
+          "OVER_1.5": {
+            "accuracy": 0.818182,
+            "brier": 0.159383,
+            "logloss": 0.496075
+          },
+          "OVER_2.5": {
+            "accuracy": 0.545455,
+            "brier": 0.23951,
+            "logloss": 0.672934
+          },
+          "OVER_3.5": {
+            "accuracy": 0.757576,
+            "brier": 0.17505,
+            "logloss": 0.528951
+          }
+        }
+      },
+      "M4": {
+        "n": 33,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.606061,
+            "brier": 0.523029,
+            "logloss": 0.892151
+          },
+          "BTTS_YES": {
+            "accuracy": 0.545455,
+            "brier": 0.235394,
+            "logloss": 0.662899
+          },
+          "OVER_1.5": {
+            "accuracy": 0.818182,
+            "brier": 0.164009,
+            "logloss": 0.50878
+          },
+          "OVER_2.5": {
+            "accuracy": 0.575758,
+            "brier": 0.250321,
+            "logloss": 0.695708
+          },
+          "OVER_3.5": {
+            "accuracy": 0.727273,
+            "brier": 0.179022,
+            "logloss": 0.537079
+          }
+        }
+      }
+    }
+  },
+  "direct_network_3_only": {
+    "match_count": 3,
+    "model_own_coverage": {
+      "B": {
+        "n": 2,
+        "markets": {
+          "1X2": {
+            "accuracy": 1.0,
+            "brier": 0.323439,
+            "logloss": 0.614092
+          },
+          "BTTS_YES": {
+            "accuracy": 1.0,
+            "brier": 0.194648,
+            "logloss": 0.581541
+          },
+          "OVER_1.5": {
+            "accuracy": 1.0,
+            "brier": 0.068787,
+            "logloss": 0.304177
+          },
+          "OVER_2.5": {
+            "accuracy": 0.0,
+            "brier": 0.261883,
+            "logloss": 0.716918
+          },
+          "OVER_3.5": {
+            "accuracy": 1.0,
+            "brier": 0.07281,
+            "logloss": 0.314477
+          }
+        }
+      },
+      "C2": {
+        "n": 3,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.666667,
+            "brier": 0.403551,
+            "logloss": 0.703457
+          },
+          "BTTS_YES": {
+            "accuracy": 0.666667,
+            "brier": 0.195778,
+            "logloss": 0.58278
+          },
+          "OVER_1.5": {
+            "accuracy": 1.0,
+            "brier": 0.052779,
+            "logloss": 0.254115
+          },
+          "OVER_2.5": {
+            "accuracy": 0.666667,
+            "brier": 0.211313,
+            "logloss": 0.612608
+          },
+          "OVER_3.5": {
+            "accuracy": 0.666667,
+            "brier": 0.285173,
+            "logloss": 0.781468
+          }
+        }
+      },
+      "C3": {
+        "n": 3,
+        "markets": {
+          "1X2": {
+            "accuracy": 1.0,
+            "brier": 0.343148,
+            "logloss": 0.645407
+          },
+          "BTTS_YES": {
+            "accuracy": 0.0,
+            "brier": 0.354337,
+            "logloss": 0.919497
+          },
+          "OVER_1.5": {
+            "accuracy": 1.0,
+            "brier": 0.046459,
+            "logloss": 0.228016
+          },
+          "OVER_2.5": {
+            "accuracy": 0.666667,
+            "brier": 0.185973,
+            "logloss": 0.554681
+          },
+          "OVER_3.5": {
+            "accuracy": 1.0,
+            "brier": 0.123262,
+            "logloss": 0.424692
+          }
+        }
+      },
+      "M4": {
+        "n": 3,
+        "markets": {
+          "1X2": {
+            "accuracy": 1.0,
+            "brier": 0.331037,
+            "logloss": 0.626965
+          },
+          "BTTS_YES": {
+            "accuracy": 0.333333,
+            "brier": 0.322979,
+            "logloss": 0.847677
+          },
+          "OVER_1.5": {
+            "accuracy": 1.0,
+            "brier": 0.052562,
+            "logloss": 0.248078
+          },
+          "OVER_2.5": {
+            "accuracy": 0.666667,
+            "brier": 0.204824,
+            "logloss": 0.597398
+          },
+          "OVER_3.5": {
+            "accuracy": 0.666667,
+            "brier": 0.139355,
+            "logloss": 0.45443
+          }
+        }
+      }
+    },
+    "same_all_four_match_coverage": 2,
+    "four_way_paired": {
+      "B": {
+        "n": 2,
+        "markets": {
+          "1X2": {
+            "accuracy": 1.0,
+            "brier": 0.323439,
+            "logloss": 0.614092
+          },
+          "BTTS_YES": {
+            "accuracy": 1.0,
+            "brier": 0.194648,
+            "logloss": 0.581541
+          },
+          "OVER_1.5": {
+            "accuracy": 1.0,
+            "brier": 0.068787,
+            "logloss": 0.304177
+          },
+          "OVER_2.5": {
+            "accuracy": 0.0,
+            "brier": 0.261883,
+            "logloss": 0.716918
+          },
+          "OVER_3.5": {
+            "accuracy": 1.0,
+            "brier": 0.07281,
+            "logloss": 0.314477
+          }
+        }
+      },
+      "C2": {
+        "n": 2,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.5,
+            "brier": 0.380236,
+            "logloss": 0.658475
+          },
+          "BTTS_YES": {
+            "accuracy": 1.0,
+            "brier": 0.166556,
+            "logloss": 0.523374
+          },
+          "OVER_1.5": {
+            "accuracy": 1.0,
+            "brier": 0.039081,
+            "logloss": 0.214727
+          },
+          "OVER_2.5": {
+            "accuracy": 1.0,
+            "brier": 0.171919,
+            "logloss": 0.532156
+          },
+          "OVER_3.5": {
+            "accuracy": 1.0,
+            "brier": 0.144088,
+            "logloss": 0.472568
+          }
+        }
+      },
+      "C3": {
+        "n": 2,
+        "markets": {
+          "1X2": {
+            "accuracy": 1.0,
+            "brier": 0.30822,
+            "logloss": 0.600295
+          },
+          "BTTS_YES": {
+            "accuracy": 0.0,
+            "brier": 0.26265,
+            "logloss": 0.718452
+          },
+          "OVER_1.5": {
+            "accuracy": 1.0,
+            "brier": 0.065013,
+            "logloss": 0.291175
+          },
+          "OVER_2.5": {
+            "accuracy": 0.5,
+            "brier": 0.248143,
+            "logloss": 0.689341
+          },
+          "OVER_3.5": {
+            "accuracy": 1.0,
+            "brier": 0.085035,
+            "logloss": 0.340934
+          }
+        }
+      },
+      "M4": {
+        "n": 2,
+        "markets": {
+          "1X2": {
+            "accuracy": 1.0,
+            "brier": 0.304418,
+            "logloss": 0.589838
+          },
+          "BTTS_YES": {
+            "accuracy": 0.5,
+            "brier": 0.246524,
+            "logloss": 0.686172
+          },
+          "OVER_1.5": {
+            "accuracy": 1.0,
+            "brier": 0.071276,
+            "logloss": 0.306483
+          },
+          "OVER_2.5": {
+            "accuracy": 0.5,
+            "brier": 0.262857,
+            "logloss": 0.719244
+          },
+          "OVER_3.5": {
+            "accuracy": 1.0,
+            "brier": 0.079288,
+            "logloss": 0.325581
+          }
+        }
+      }
+    }
+  },
+  "other_36_web_research_only": {
+    "match_count": 36,
+    "model_own_coverage": {
+      "B": {
+        "n": 32,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.59375,
+            "brier": 0.546706,
+            "logloss": 0.928398
+          },
+          "BTTS_YES": {
+            "accuracy": 0.59375,
+            "brier": 0.240118,
+            "logloss": 0.672798
+          },
+          "OVER_1.5": {
+            "accuracy": 0.8125,
+            "brier": 0.162622,
+            "logloss": 0.505079
+          },
+          "OVER_2.5": {
+            "accuracy": 0.5,
+            "brier": 0.260078,
+            "logloss": 0.717014
+          },
+          "OVER_3.5": {
+            "accuracy": 0.71875,
+            "brier": 0.191696,
+            "logloss": 0.566717
+          }
+        }
+      },
+      "C2": {
+        "n": 35,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.542857,
+            "brier": 0.556483,
+            "logloss": 0.934913
+          },
+          "BTTS_YES": {
+            "accuracy": 0.657143,
+            "brier": 0.22843,
+            "logloss": 0.650604
+          },
+          "OVER_1.5": {
+            "accuracy": 0.8,
+            "brier": 0.169475,
+            "logloss": 0.528827
+          },
+          "OVER_2.5": {
+            "accuracy": 0.571429,
+            "brier": 0.255516,
+            "logloss": 0.706795
+          },
+          "OVER_3.5": {
+            "accuracy": 0.742857,
+            "brier": 0.183091,
+            "logloss": 0.545301
+          }
+        }
+      },
+      "C3": {
+        "n": 36,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.611111,
+            "brier": 0.531837,
+            "logloss": 0.905218
+          },
+          "BTTS_YES": {
+            "accuracy": 0.527778,
+            "brier": 0.237369,
+            "logloss": 0.667369
+          },
+          "OVER_1.5": {
+            "accuracy": 0.805556,
+            "brier": 0.168926,
+            "logloss": 0.522358
+          },
+          "OVER_2.5": {
+            "accuracy": 0.5,
+            "brier": 0.252687,
+            "logloss": 0.700163
+          },
+          "OVER_3.5": {
+            "accuracy": 0.777778,
+            "brier": 0.178801,
+            "logloss": 0.537458
+          }
+        }
+      },
+      "M4": {
+        "n": 36,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.611111,
+            "brier": 0.524869,
+            "logloss": 0.895994
+          },
+          "BTTS_YES": {
+            "accuracy": 0.527778,
+            "brier": 0.241929,
+            "logloss": 0.677084
+          },
+          "OVER_1.5": {
+            "accuracy": 0.805556,
+            "brier": 0.17462,
+            "logloss": 0.541285
+          },
+          "OVER_2.5": {
+            "accuracy": 0.527778,
+            "brier": 0.267571,
+            "logloss": 0.732685
+          },
+          "OVER_3.5": {
+            "accuracy": 0.722222,
+            "brier": 0.186365,
+            "logloss": 0.552715
+          }
+        }
+      }
+    },
+    "same_all_four_match_coverage": 31,
+    "four_way_paired": {
+      "B": {
+        "n": 31,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.580645,
+            "brier": 0.560339,
+            "logloss": 0.947464
+          },
+          "BTTS_YES": {
+            "accuracy": 0.612903,
+            "brier": 0.238266,
+            "logloss": 0.669067
+          },
+          "OVER_1.5": {
+            "accuracy": 0.806452,
+            "brier": 0.167134,
+            "logloss": 0.516098
+          },
+          "OVER_2.5": {
+            "accuracy": 0.516129,
+            "brier": 0.254691,
+            "logloss": 0.705953
+          },
+          "OVER_3.5": {
+            "accuracy": 0.709677,
+            "brier": 0.191803,
+            "logloss": 0.566637
+          }
+        }
+      },
+      "C2": {
+        "n": 31,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.580645,
+            "brier": 0.543745,
+            "logloss": 0.916797
+          },
+          "BTTS_YES": {
+            "accuracy": 0.645161,
+            "brier": 0.22757,
+            "logloss": 0.648011
+          },
+          "OVER_1.5": {
+            "accuracy": 0.806452,
+            "brier": 0.162448,
+            "logloss": 0.505338
+          },
+          "OVER_2.5": {
+            "accuracy": 0.580645,
+            "brier": 0.251977,
+            "logloss": 0.698542
+          },
+          "OVER_3.5": {
+            "accuracy": 0.741935,
+            "brier": 0.182159,
+            "logloss": 0.541951
+          }
+        }
+      },
+      "C3": {
+        "n": 31,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.580645,
+            "brier": 0.54099,
+            "logloss": 0.915993
+          },
+          "BTTS_YES": {
+            "accuracy": 0.548387,
+            "brier": 0.23291,
+            "logloss": 0.658251
+          },
+          "OVER_1.5": {
+            "accuracy": 0.806452,
+            "brier": 0.165471,
+            "logloss": 0.509294
+          },
+          "OVER_2.5": {
+            "accuracy": 0.548387,
+            "brier": 0.238953,
+            "logloss": 0.671876
+          },
+          "OVER_3.5": {
+            "accuracy": 0.741935,
+            "brier": 0.180858,
+            "logloss": 0.541081
+          }
+        }
+      },
+      "M4": {
+        "n": 31,
+        "markets": {
+          "1X2": {
+            "accuracy": 0.580645,
+            "brier": 0.537133,
+            "logloss": 0.911655
+          },
+          "BTTS_YES": {
+            "accuracy": 0.548387,
+            "brier": 0.234676,
+            "logloss": 0.661398
+          },
+          "OVER_1.5": {
+            "accuracy": 0.806452,
+            "brier": 0.169992,
+            "logloss": 0.521831
+          },
+          "OVER_2.5": {
+            "accuracy": 0.580645,
+            "brier": 0.249512,
+            "logloss": 0.694189
+          },
+          "OVER_3.5": {
+            "accuracy": 0.709677,
+            "brier": 0.185456,
+            "logloss": 0.550724
+          }
+        }
+      }
+    }
+  },
+  "evaluation_limitations": [
+    "The non-network 36 results are previously archived web research and NOT newly human-attested or live-network verified",
+    "N=39 is small; comparing these metrics does not certify forecasting superiority or expected betting returns",
+    "No after-kickoff forecast computed, no model selection or coefficient changes",
+    "No claim these 39 are the legacy96 cohort; 40 are independent new100 existing seals",
+    "This is score-only analysis, not permission to train on 4218 new research source matches"
+  ],
+  "no_repeat": "This report is built offline from existing SHA-locked pre-match JSONs and frozen postmatch archive; same old score sites were not re-queried."
+}
