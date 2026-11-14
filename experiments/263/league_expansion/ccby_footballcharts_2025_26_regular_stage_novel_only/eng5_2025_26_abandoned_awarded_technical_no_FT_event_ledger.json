@@ -1,0 +1,29 @@
+{
+  "status": "TWO_ABANDONED_MATCH_EVENTS_SCORED_FT_EXCLUDED",
+  "event_1": {
+    "date": "2025-12-06",
+    "home": "Rochdale AFC",
+    "away": "Southend United",
+    "listed_as_completed_ft": "2-1",
+    "official": "https://rochdaleafc.co.uk/match-abandoned-061225/",
+    "real_completed_replay": {
+      "date": "2026-01-27",
+      "home": "Rochdale AFC",
+      "away": "Southend United",
+      "ft": "2-1",
+      "official": "https://rochdaleafc.co.uk/fixtures-results-2025-2026/"
+    }
+  },
+  "event_2": {
+    "date": "2025-09-06",
+    "home": "Scunthorpe United",
+    "away": "Wealdstone FC",
+    "league_displayed_0_0_IS_NOT_SCORED_FT": true,
+    "no_goals_go_into_league_record": true,
+    "points_awarded_to_home": 3,
+    "official": "https://www.scunthorpe-united.co.uk/news/2025/september/club-statement-abandoned-games-v-eastleigh-and-wealdstone"
+  },
+  "note": "No fake 0-0 in model goals, no abandoned 2-1 as a completed match. 552 scheduled standings fixtures includes an awarded points-only game, 551 actual complete scored matches.",
+  "original_source_rows_modified": false,
+  "training_approved": 0
+}

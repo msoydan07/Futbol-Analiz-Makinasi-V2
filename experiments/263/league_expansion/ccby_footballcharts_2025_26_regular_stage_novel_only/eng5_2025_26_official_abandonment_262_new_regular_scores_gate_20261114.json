@@ -1,0 +1,61 @@
+{
+  "status": "ENG5_2025_26_262_NEW_COMPLETED_REGULAR_MATCH_RESEARCH_ARCHIVED__2_OFFICIAL_ABANDONMENT_EVENTS_EXCLUDED",
+  "checked_at_utc": "2026-11-14T12:08:11.977359+00:00",
+  "source": "Football Charts original CC BY 4.0",
+  "source_sha_pin": "01aa70a635b67e91368f706d35ec7999362bcb79",
+  "official_abandonment_documents": {
+    "last_normal_day": "2026-04-25",
+    "source_football_charts_archive_rows": 554,
+    "playoffs_after_cutoff": 2,
+    "noncompleted_abandoned_duplicate_of_replay": {
+      "date": "2025-12-06",
+      "home": "Rochdale AFC",
+      "away": "Southend United",
+      "listed_as_completed_ft": "2-1",
+      "official": "https://rochdaleafc.co.uk/match-abandoned-061225/",
+      "real_completed_replay": {
+        "date": "2026-01-27",
+        "home": "Rochdale AFC",
+        "away": "Southend United",
+        "ft": "2-1",
+        "official": "https://rochdaleafc.co.uk/fixtures-results-2025-2026/"
+      }
+    },
+    "administratively_awarded_NOT_fulltime_football_score": {
+      "date": "2025-09-06",
+      "home": "Scunthorpe United",
+      "away": "Wealdstone FC",
+      "league_displayed_0_0_IS_NOT_SCORED_FT": true,
+      "no_goals_go_into_league_record": true,
+      "points_awarded_to_home": 3,
+      "official": "https://www.scunthorpe-united.co.uk/news/2025/september/club-statement-abandoned-games-v-eastleigh-and-wealdstone"
+    },
+    "expected_completed_scored_regular_season": 551,
+    "expected_clubs": 24,
+    "source_blob_sha": "01aa70a635b67e91368f706d35ec7999362bcb79"
+  },
+  "source_rows_original": 554,
+  "post_normal_playoff_rows_excluded": 2,
+  "false_duplicate_abandoned_2025_12_06_excluded": 1,
+  "missing_0_0_administrative_2025_09_06_not_synthesized": true,
+  "genuinely_played_scored_90min_regular_rows": 551,
+  "complete_club_games_except_awarded": true,
+  "unique_directed_fixture_schedule_including_awarded_event": 552,
+  "old_base_original_ENG5_rows_not_modified": 296,
+  "old_quality_HOLD_296_not_modified": true,
+  "per_source_ENG5_old_QA_not_retested": true,
+  "old_source_vs_new_specific_counts": {
+    "OLD_FT_AGREES": 200,
+    "OLD_PREEXISTING_EXACT_HOLD": 82,
+    "NOVEL_RESEARCH_SOURCE_SCORE_ONLY": 262,
+    "OLD_DATE_SHIFT_SUSPECT_HOLD": 7
+  },
+  "new_distinct_research_ENG5_fixture_identities": 262,
+  "previous_stage_checked_unique_research_identities": 4129,
+  "new_source_specific_unique_research_identities": 4391,
+  "source_only_no_independent_fulltime_witness_yet": true,
+  "new_training_rows_approved": 0,
+  "main_M4_existing_10leagues_unmodified": true,
+  "user_1855_manual_xg_unmodified": true,
+  "next_distinct_step": "Independently corroborate ONLY newly archived 262 ENG5 completed matches if source rights permit; no reread of prior 871/904 or 1007 stage-passed rows."
+}
