@@ -1,0 +1,40 @@
+{
+  "status": "ESP2_NEW_331_ALL_SECOND_SOURCE_FT_CONFIRMED_2_OFFICIAL_DATE_CORRECTIONS",
+  "previous_passed_299_new_only_score_checks_retested": 0,
+  "previous_old_131_source_score_checks_retested": 0,
+  "targeted_new_only_32": 32,
+  "Racing_Santander_alias_targeted_30": 30,
+  "changed_official_date_targeted_2": 2,
+  "new_32_score_date_team_exact_after_correction": 32,
+  "remaining_new_32_unresolved": 0,
+  "unresolved_target_keys": [],
+  "two_official_date_correction_evidence": [
+    {
+      "original_date": "2026-02-07",
+      "official_date": "2026-02-08",
+      "home": "Cádiz CF",
+      "away": "UD Almería",
+      "FT": "1-2",
+      "official_league_evidence": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-hypermotion-cadiz-cf-ud-almeria-25",
+      "secondary_provider": "https://www.football-data.co.uk/mmz4281/2526/SP2.csv"
+    },
+    {
+      "original_date": "2026-03-01",
+      "official_date": "2026-03-02",
+      "home": "Sporting Gijón",
+      "away": "CD Leganés",
+      "FT": "0-0",
+      "official_league_evidence": "https://www.laliga.com/en-GB/match/temporada-2025-2026-laliga-hypermotion-real-sporting-cd-leganes-28",
+      "secondary_provider": "https://www.football-data.co.uk/mmz4281/2526/SP2.csv"
+    }
+  ],
+  "all_331_new_regular_independent_score_fact_WITNESSED": 331,
+  "six_promotion_playoffs_independent_scoreboard_previously_witnessed": 6,
+  "corrected_new_regular_331_research_derivative": "experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_331_corrected_FT_independently_witnessed_RESEARCH_ONLY.csv",
+  "prior_new_331_original_CCBY_source_sha": "b4a868a635c2c266219dd8aa7c13852add8542f0",
+  "old_131_original_still_immutable": true,
+  "source_CCBY_copyright_CC_BY_for_original_snapshot": true,
+  "no_pre_match_asof_feature_snapshots_proven": true,
+  "new_model_training_rows_approved": 0,
+  "M4_10league_and_user_1855_manual_xg_untouched": true
+}
