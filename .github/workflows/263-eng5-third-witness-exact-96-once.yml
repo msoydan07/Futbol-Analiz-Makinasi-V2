@@ -1,0 +1,43 @@
+name: 263 Research - Third witness only 96 ENG5 held original scores
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-eng5-third-witness-exact-96-once.yml
+permissions:
+  contents: read
+jobs:
+  one-batch-only-96-national-league-source-adjudication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: 96 immutable original-key checksum and parser offline self test
+        run: python experiments/263/league_expansion/adjudicate_eng5_96_third_witness_once.py --self-test
+      - name: Read two independent pages once, compare only 96 quarantined keys
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/adjudicate_eng5_96_third_witness_once.py --live | tee eng5_96_third_witness.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          t=Path("eng5_96_third_witness.log").read_text()
+          d=json.loads(t.split("ENG5_96_THIRD_START",1)[1].split("ENG5_96_THIRD_END",1)[0])
+          Path("eng5_96_third_witness_classification.json").write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## Only 96 original ENG5/2025-26 HOLD source disagreements\n")
+              f.write("Status: **"+d["status"]+"**\n\n")
+              for k,v in d.get("verdict_totals",{}).items():f.write("- "+k+": "+str(v)+"\n")
+              f.write("\n- Third-party raw scores not rehosted; no M4 changes; no training promotions.\n")
+          assert d["status"]=="THIRD_SOURCE_TARGETED_96_QA_COMPLETED",d
+          assert d["hold_keys_checked"]==96
+          assert d["previous_871_source_matches_retested"]==0
+          assert d["new_training_matches_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-exact-96-ENG5-third-witness-research-only
+          path: eng5_96_third_witness_classification.json
+          retention-days: 14
