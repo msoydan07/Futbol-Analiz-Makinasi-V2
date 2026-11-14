@@ -1,0 +1,46 @@
+name: 263 Research - Austria 2025-26 195 RSSSF Independent FT Once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-aut1-2025-26-195-independent-full-ft-once.yml
+permissions:
+  contents: read
+jobs:
+  independent-195-match-results:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check source pins, Austrian team aliases and synthetic RSSSF results
+        run: python experiments/263/league_expansion/verify_aut1_2526_195_rsssf_stage_ft_once.py --self-test
+      - name: Compare all 195 dated club/score/stage facts with independent RSSSF archive
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/verify_aut1_2526_195_rsssf_stage_ft_once.py --live | tee aut_195_qa.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          raw=Path("aut_195_qa.log").read_text()
+          a=raw.index("AUT195_AUDIT_START")+len("AUT195_AUDIT_START")
+          b=raw.index("AUT195_AUDIT_END")
+          d=json.loads(raw[a:b])
+          Path("aut1_195_score_stage_qa_aggregate.json").write_text(
+            json.dumps(d,indent=2,ensure_ascii=False)+'\n')
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Austria 2025/26 independent 195 fixture FT and stage check\n\n")
+            f.write("- Status: **"+d["status"]+"**\n")
+            f.write("- Primary rows: "+str(d.get("primary_rows","not read"))+"\n")
+            f.write("- RSSSF parsed results: "+str(d.get("rsssf_results","not found"))+"\n")
+            f.write("- Section counts: "+str(d.get("section_counts","not available"))+"\n")
+            f.write("- Differences: "+str(len(d.get("score_conflict_examples",[])))+
+                    " score, "+str(len(d.get("different_stage_examples",[])))+" stage\n")
+            f.write("\nThis proves match facts only if PASS; source rights and pre-kickoff features remain separate.\n")
+          PY
+      - name: Store only aggregate, no complete RSSSF table or downloaded HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-aut1-2526-195-independent-score-stage-qa
+          path: aut1_195_score_stage_qa_aggregate.json
+          retention-days: 14
