@@ -50,7 +50,12 @@ def value(row,col):
 def valid_date(v):
     if re.fullmatch(r"20\d\d-\d\d-\d\d",v):
         return DATE.fromisoformat(v)
-    raise ValueError("DATE_MUST_BE_ISO_TEXT")
+    if re.fullmatch(r"\d{5}(?:\.0+)?",v):
+        return DATE(1899,12,30)+datetime.timedelta(days=int(float(v)))
+    try:
+        return datetime.datetime.strptime(v,"%d.%m.%Y").date()
+    except ValueError:
+        raise ValueError("DATE_MUST_BE_ISO_OR_EXCEL_DATE")
 
 def xg(cell):
     s,formula,kind=cell
@@ -74,9 +79,11 @@ def audit(workbook):
             raise ValueError("ZIP_BOMB_GUARD")
         wb=ET.fromstring(z.read("xl/workbook.xml"))
         names=[x.attrib["name"] for x in wb.findall(".//"+N+"sheets/"+N+"sheet")]
-        if names!=["BASLA",*SHEETS]:raise ValueError("WORKBOOK_SHEET_NAMES_OR_ORDER_CHANGED")
-        shared=ET.fromstring(z.read("xl/sharedStrings.xml"))
-        strings=["".join(t.text or "" for t in si.iter(N+"t")) for si in shared.findall(N+"si")]
+        if names not in (["BASLA",*SHEETS],["BASLA",*SHEETS,"GOREV_PLANI"]):raise ValueError("WORKBOOK_SHEET_NAMES_OR_ORDER_CHANGED")
+        strings=[]
+        if "xl/sharedStrings.xml" in entries:
+            shared=ET.fromstring(z.read("xl/sharedStrings.xml"))
+            strings=["".join(t.text or "" for t in si.iter(N+"t")) for si in shared.findall(N+"si")]
         count=collections.Counter()
         by_league=collections.Counter()
         problems=[]
@@ -139,13 +146,15 @@ def audit(workbook):
                     p=urlsplit(u)
                     if r.get("G",("",False,""))[1]:
                         raise ValueError("URL_CELL_FORMULA")
-                    if p.scheme!="https" or p.hostname not in ("xg.football","www.xg.football") or p.path in ("","/"):
+                    if p.scheme!="https" or p.hostname not in ("xg.football","www.xg.football","xg-edge.com","www.xg-edge.com") or p.path in ("","/"):
                         raise ValueError("DIRECT_PROVIDER_URL_REQUIRED")
                     checked=valid_date(value(r,"H"))
                     if r.get("H",("",False,""))[1]:
                         raise ValueError("SOURCE_DATE_CELL_FORMULA")
                     if checked<day or checked>datetime.date.today():
                         raise ValueError("SOURCE_CHECK_DATE_INVALID")
+                    if tab!="ESKI_459_KONTROL" and value(r,"I").strip().upper()!="TAMAM":
+                        raise ValueError("INPUT_ROW_MUST_BE_MARKED_TAMAM")
                     count["structurally_complete_pairs"]+=1
                     by_league[league]+=1
                 except (ValueError,TypeError) as error:
@@ -176,6 +185,8 @@ def selftest():
         except ValueError:pass
         else:raise AssertionError("invalid input accepted")
     assert valid_date("2026-11-01")==DATE(2026,11,1)
+    assert valid_date("01.11.2026")==DATE(2026,11,1)
+    assert valid_date("46327").year==2026
     print("PASS synthetic: blank != zero, formula injection, comma string, outside xG range")
 
 if __name__=="__main__":
