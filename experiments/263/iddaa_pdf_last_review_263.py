@@ -89,10 +89,11 @@ def _xi_record(e,m,now,ko):
   compare=r.get("morning_comparison")
   if compare is None:
    freshness="SABAH_KIYASI_YOK_YENI_GELISME_DENEMEZ"
-  elif (isinstance(compare,dict) and source_url(compare.get("source_url")) and
-        isinstance(compare.get("fact"),str) and compare.get("fact") and
-        utc(compare.get("observed_at_utc"))<=utc(m["price_capture_utc"]) and
-        compare["observed_at_utc"]):
+  elif isinstance(compare,dict) and source_url(compare.get("source_url")) and isinstance(compare.get("fact"),str) and compare["fact"]:
+   try:
+    cmoment=utc(compare.get("observed_at_utc"))
+    if cmoment>utc(m["price_capture_utc"]):continue
+   except (ValueError,TypeError):continue
    freshness="SABAH_KAYNAK_ATFI_VAR_MANUEL_KIYAS_GEREKIR"
   else:continue
   # No numerical model adjustment, no causal inference from odds movement.
@@ -144,7 +145,9 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
      "home_id":m["home_id"],"away_id":m["away_id"],
      "match_date_tr":m["match_date_tr"],"kickoff_time_tr":m["kickoff_time_tr"],
      "kickoff_utc":ko.isoformat(),"morning_model_sha256":m["model_forecast_sha256"],
-     "morning_models_not_recalculated":True,"morning_odds":m.get("prices",{}),
+     "morning_models_not_recalculated":True,
+     "morning_model_probabilities":m.get("model_1x2_and_core_markets",{}),
+     "morning_odds":m.get("prices",{}),
      "latest_odds":None,"market_no_vig_change_pp":{},
      "lineups":{"status":"KADRO_KANITI_YOK","comments":[]},
      "status":"INCELEME_BEKLIYOR"}
@@ -200,6 +203,17 @@ def summary_md(review):
   status=r["lineups"]["status"]
   lines.append("| "+r["home"].replace("|","/")+" – "+r["away"].replace("|","/")+
    " | "+price(before)+" → "+price(after)+" | "+r["status"]+" | "+status+" |")
+ lines+=["","## Yedi pazarın ilk/son oranı ve donmuş M4 yüzdeleri",""]
+ for r in review["rows"]:
+  lines.append("### "+r["home"].replace("|","/")+" – "+r["away"].replace("|","/"))
+  m=r.get("morning_model_probabilities",{}).get("M4",{})
+  last=r.get("latest_odds") or {}
+  for label,k in (("MS1","MS1"),("MSX","MSX"),("MS2","MS2"),("KG Var","BTTS_YES"),("KG Yok","BTTS_NO"),("2.5 Üst","OVER_2.5"),("2.5 Alt","UNDER_2.5")):
+   p=m.get(k)
+   mp=("%.1f%%"%(100*p)) if isinstance(p,(int,float)) and not isinstance(p,bool) and 0<=p<=1 else "—"
+   lines.append("- "+label+": "+str(r["morning_odds"].get(k,"—"))+" → "+str(last.get(k,"—"))+"; mühürlü M4 "+mp)
+  pp=r.get("market_no_vig_change_pp") or {}
+  if pp:lines.append("- Marjsız piyasa yüzde puan farkı (son - sabah): "+", ".join(k+" "+str(v) for fam in pp.values() for k,v in fam.items()))
  lines+=["","## Kaynaklı notlar (yüzdeye dokunulmadı)",""]
  for r in review["rows"]:
   if r["lineups"].get("comments"):
@@ -240,9 +254,13 @@ def render_pdf(review,target):
   def fmt(v):return "%.2f"%v if isinstance(v,(int,float)) and not isinstance(v,bool) else "-"
   last=row.get("latest_odds") or {}
   parts=[Paragraph(escape(row["home"]+" - "+row["away"]),heading),
-   Paragraph("MS1 "+fmt(row["morning_odds"].get("MS1"))+" -> "+
-             fmt(last.get("MS1"))+" | "+escape(row["status"]),small),
+   Paragraph("Durum: "+escape(row["status"]),small),
    Paragraph("Kadro: "+escape(row["lineups"]["status"]),small)]
+  m4=row.get("morning_model_probabilities",{}).get("M4",{})
+  for label,key in (("MS 1","MS1"),("MS X","MSX"),("MS 2","MS2"),("2.5 Ust","OVER_2.5"),("2.5 Alt","UNDER_2.5"),("KG Var","BTTS_YES"),("KG Yok","BTTS_NO")):
+   q=m4.get(key)
+   pct=("%.1f%%"%(100*q)) if isinstance(q,(int,float)) and not isinstance(q,bool) and math.isfinite(q) and 0<=q<=1 else "-"
+   parts.append(Paragraph(escape(label+": "+fmt(row["morning_odds"].get(key))+" -> "+fmt(last.get(key))+" | sabit M4 "+pct),small))
   comments=row["lineups"].get("comments",[])
   if comments:
    for c in comments:
