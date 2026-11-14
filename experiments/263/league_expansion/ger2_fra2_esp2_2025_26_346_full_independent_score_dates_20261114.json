@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-14",
+  "status": "GER2_FRA2_ESP2_2025_26_346_FULL_INDEPENDENT_SCORE_AND_DATE_PASS",
+  "run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43574738237",
+  "job_id": 132386423661,
+  "verifier": "experiments/263/league_expansion/verify_ger2_fra2_esp2_2526_346_ft_single_batch.py",
+  "original_1249_source_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+  "original_295_recovery_source_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+  "groups": {
+    "GER2": {
+      "match_count": 99,
+      "date_home_away_FT_equal": 99,
+      "real_zero_zero": 5,
+      "score_conflicts": 0,
+      "date_disagreements": 0,
+      "source_url": "https://www.football-data.co.uk/mmz4281/2526/D2.csv",
+      "source_sha256": "8bfb275286d7d620c20c7fdb164e4447e114be3de94b8372b7ac3773d71581ef",
+      "second_source_total_fixtures": 306,
+      "old_research_source_filenames": {
+        "training_2025_26_cc0_scored_QUARANTINE.csv": 94,
+        "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": 5
+      }
+    },
+    "FRA2": {
+      "match_count": 116,
+      "date_home_away_FT_equal": 116,
+      "real_zero_zero": 9,
+      "score_conflicts": 0,
+      "date_disagreements": 0,
+      "source_url": "https://www.football-data.co.uk/mmz4281/2526/F2.csv",
+      "source_sha256": "dcedf4dd66f3e0ac8efb8ccd2e5489882068e5630c041702b15c1d0fe70c6017",
+      "second_source_total_fixtures": 306,
+      "old_research_source_filenames": {
+        "training_2025_26_cc0_scored_QUARANTINE.csv": 107,
+        "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": 9
+      }
+    },
+    "ESP2": {
+      "match_count": 131,
+      "date_home_away_FT_equal": 131,
+      "real_zero_zero": 16,
+      "score_conflicts": 0,
+      "date_disagreements": 0,
+      "source_url": "https://www.football-data.co.uk/mmz4281/2526/SP2.csv",
+      "source_sha256": "4986060e5c1d55626aef24c4bbeaaea2278b27a0b7696927405705aaa57405de",
+      "second_source_total_fixtures": 462,
+      "old_research_source_filenames": {
+        "training_2025_26_cc0_scored_QUARANTINE.csv": 115,
+        "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": 16
+      }
+    }
+  },
+  "total_matched": 346,
+  "zero_zero_independently_confirmed": 30,
+  "total_score_conflicts": 0,
+  "total_fixture_identity_absences": 0,
+  "total_date_discrepancies": 0,
+  "cc0_candidate_previous_independent_score_witnesses": 558,
+  "added_independent_score_witnesses": 346,
+  "cc0_candidate_current_independent_score_witnesses": 904,
+  "cc0_candidate_unheld_total": 1871,
+  "cc0_candidate_remaining_without_independent_score_witness": 967,
+  "no_old_finished_QA_repeated": true,
+  "no_bulk_external_source_CSV_rehosted": true,
+  "source_rights_for_training": "NOT ESTABLISHED",
+  "point_in_time_model_feature_gate": "NOT CERTIFIED",
+  "new_training_rows": 0,
+  "research_quarantine_count_unchanged": 2396,
+  "original_200_ENG3_ENG4_HOLD_unchanged": true,
+  "existing_M4_ten_league_SHA_untouched": true,
+  "next": "Potential new groups ENG3 256, ENG4 176, ENG5 296, GRE1 97, SCO1 100, AUT1 2026/27 42 = 967; not licenses or admission. Never redo these 346 unless source SHA or contradictory evidence changes."
+}
