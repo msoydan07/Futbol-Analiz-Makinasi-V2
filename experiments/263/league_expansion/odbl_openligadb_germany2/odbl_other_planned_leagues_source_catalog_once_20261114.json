@@ -1,0 +1,95 @@
+{
+  "status": "ODBL_OTHER_SEVEN_LEAGUES_METADATA_SOURCE_DISCOVERY_ONLY",
+  "captured_at_utc": "2026-11-14T11:06:07.207836+00:00",
+  "source": "https://api.openligadb.de/getavailableleagues/{year}",
+  "license": "ODbL-1.0",
+  "season_scans": 2,
+  "source_requests": 2,
+  "stats": {
+    "2025": {
+      "response_size_bytes": 7874,
+      "all_listed_leagues_count": 53,
+      "candidate_names_count": 4
+    },
+    "2026": {
+      "response_size_bytes": 12443,
+      "all_listed_leagues_count": 85,
+      "candidate_names_count": 4
+    }
+  },
+  "keyword_candidates_NOT_VALIDATED": {
+    "2025": [
+      {
+        "name": "2. Fußball-Bundesliga 2025/2026",
+        "shortcut": "bl2",
+        "match_targets": [
+          "GER2"
+        ],
+        "season": "2025"
+      },
+      {
+        "name": "Super League Schweiz 2025/2026",
+        "shortcut": "ch1",
+        "match_targets": [
+          "CHE1"
+        ],
+        "season": "2025"
+      },
+      {
+        "name": "Super League (Schweiz)",
+        "shortcut": "bsl",
+        "match_targets": [
+          "CHE1"
+        ],
+        "season": "2025"
+      },
+      {
+        "name": "2. Frauen-Bundesliga 2025",
+        "shortcut": "fbl2",
+        "match_targets": [
+          "GER2"
+        ],
+        "season": "2025"
+      }
+    ],
+    "2026": [
+      {
+        "name": "2. Fußball-Bundesliga 2026/2027",
+        "shortcut": "bl2",
+        "match_targets": [
+          "GER2"
+        ],
+        "season": "2026"
+      },
+      {
+        "name": "2. Bundesliga 2026/27 (Herren)",
+        "shortcut": "bl2h",
+        "match_targets": [
+          "GER2"
+        ],
+        "season": "2026"
+      },
+      {
+        "name": "2. Fußball-Bundesliga (Frauen)",
+        "shortcut": "ffb2",
+        "match_targets": [
+          "GER2"
+        ],
+        "season": "2026"
+      },
+      {
+        "name": "Swiss Darts Trophy 2026",
+        "shortcut": "PDCSDT",
+        "match_targets": [
+          "CHE1"
+        ],
+        "season": "2026"
+      }
+    ]
+  },
+  "warning": "Match by name is only candidate discovery, never evidence that a league contains the target competition/season or sufficient score rows. Always verify actual teams/season and finished results first.",
+  "original_2396_405_and_296_holds_unchanged": true,
+  "new_training_rows": 0,
+  "new_score_downloads": 0,
+  "no_main_M4_or_prior_SHA_changes": true
+}
