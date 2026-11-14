@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-eng5-third-witness-exact-96-once.yml
+      - experiments/263/league_expansion/adjudicate_eng5_96_third_witness_once.py
 permissions:
   contents: read
 jobs:
