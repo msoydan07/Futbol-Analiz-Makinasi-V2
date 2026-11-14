@@ -1,0 +1,72 @@
+{
+  "decision_date": "2026-11-15",
+  "decision_status": "USER_APPROVED_ENGINEERING_SCOPE_FROZEN_DATA_ONLY",
+  "scope_effective": "new experiments, research intake, future model evaluation eligibility; existing production not changed",
+  "previous_planned_analysis_leagues": 13,
+  "previous_planned_training_research_leagues": 9,
+  "active_analysis_count": 10,
+  "active_analysis_leagues": [
+    "ENG1",
+    "ENG2",
+    "GER1",
+    "ESP1",
+    "ITA1",
+    "FRA1",
+    "NED1",
+    "TUR1",
+    "POR1",
+    "BEL1"
+  ],
+  "training_research_count": 12,
+  "training_research_leagues": [
+    "ENG3",
+    "ENG4",
+    "ENG5",
+    "GER2",
+    "ESP2",
+    "ITA2",
+    "FRA2",
+    "GRE1",
+    "AUT1",
+    "SCO1",
+    "CHE1",
+    "DNK1"
+  ],
+  "three_downgraded_from_analysis_plans_to_research_only": [
+    "SCO1",
+    "CHE1",
+    "DNK1"
+  ],
+  "research_candidate_status": {
+    "SCO1": "POTENTIAL_FUTURE_ANALYSIS_NOT_APPROVED",
+    "CHE1": "POTENTIAL_FUTURE_ANALYSIS_NOT_APPROVED",
+    "DNK1": "CURRENT_2026_27_SCORE_COVERAGE_MISSING_NOT_APPROVED"
+  },
+  "conditions_for_any_future_analysis_promotion": [
+    "independently verified current and previous league fixture results",
+    "reusability and source provenance gates",
+    "as-of prematch feature and chronological evaluation without target leakage",
+    "evidence based prospective fair comparison without rewriting prior sealed forecasts",
+    "explicit user decision and separate production integration"
+  ],
+  "two_seasons": [
+    "2025-26",
+    "2026-27"
+  ],
+  "fixture_cutoff": "2026-11-13",
+  "freeze": {
+    "production_10_league_system": true,
+    "models_B_C2_C3_M4": true,
+    "sealed_96_and_39": true,
+    "original_xg_1855_workbook": true,
+    "historical_13_9_evidence_files": true,
+    "source_rows_9460": true,
+    "HOLD_625": true,
+    "excluded_751": true,
+    "train_research_new_auto_admissions": 0
+  },
+  "next_step": "USER_COMPLETES_1855_POSTMATCH_XG_VALUES_THEN_QA_THEN_SINGLE_COMPARISON_IF_ALL_DATA_ADMISSION_GATES_PASS",
+  "automatic_retraining": false,
+  "no_new_pilot": true,
+  "note": "Training/research league status means source pool only; no model-training admission implied. This current decision supersedes historical 13/9 scope as the forward-looking intended analysis league policy; older audit evidence remains immutable."
+}
