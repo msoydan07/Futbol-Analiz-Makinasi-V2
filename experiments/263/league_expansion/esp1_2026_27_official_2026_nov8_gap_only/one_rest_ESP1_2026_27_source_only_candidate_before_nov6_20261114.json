@@ -1,0 +1,22 @@
+{
+  "status": "ONE_EXACT_DATE_FT_SOURCE_CANDIDATE_PENDING_OFFICIAL",
+  "old_core_119_not_rewritten": true,
+  "provider_result_rows_counted": 120,
+  "old_119_source_same_date_score_counts_not_retested_with_other_provider": true,
+  "source_new_date_score_multiset_extra_count": 1,
+  "core_date_score_extra_count": 0,
+  "candidate_only_not_model_label": [
+    {
+      "date": "2026-10-10",
+      "home": "Rayo Vallecano",
+      "away": "Ath Bilbao",
+      "ft_home": 0,
+      "ft_away": 0
+    }
+  ],
+  "candidate_deduction_caveat": "Unique date+score only; name witness still needed",
+  "provider_source": "https://footballcharts-backend.onrender.com/api/v1/leagues/spain1/results/?season=2026-2027",
+  "publisher_terms": "https://www.football-charts.com/terms",
+  "raw_provider_result_rows_archived": 0,
+  "model_training_approved": 0
+}
