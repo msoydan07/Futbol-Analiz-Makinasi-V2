@@ -105,7 +105,8 @@ class TestReview(unittest.TestCase):
   a=build(s,f,l,[],NOW,resolver=resolve)
   self.assertEqual(a["rows"][1]["status"],"GUNCEL_PDF_CIFT_KAYIT")
   l["pdf_capture_utc"]="2026-11-21T14:35:00Z"
-  with self.assertRaises(ValueError):build(s,f,l,[],"2026-11-21T14:40:00Z",resolver=resolve)
+  late=build(s,f,l,[],"2026-11-21T14:40:00Z",resolver=resolve)
+  self.assertTrue(all(x["status"]=="MAC_BASLADI_VEYA_GUNCEL_PDF_GEC_KALDI" for x in late["rows"]))
  def test_morning_tamper_and_second_too_old(self):
   s,f,l,resolve=make()
   s["rows"][0]["prices"]["MS1"]=100
