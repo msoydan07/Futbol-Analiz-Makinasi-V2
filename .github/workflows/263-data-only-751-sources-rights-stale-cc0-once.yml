@@ -1,0 +1,52 @@
+name: "263 Data only - 751 rights source gate; no AI scrape, M4 or xG"
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-data-only-751-sources-rights-stale-cc0-once.yml
+      - experiments/263/league_expansion/verify_751_current_source_rights_hold_and_cc0_freshness_once.py
+permissions:
+  contents: write
+jobs:
+  source-rights-hold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Self-test 633 plus 118 source boundaries and four unchanged open source blobs
+        run: python experiments/263/league_expansion/verify_751_current_source_rights_hold_and_cc0_freshness_once.py --self-test
+      - name: Generate rights-and-provenance gate from existing sealed metadata only, no Internet source polling
+        run: python experiments/263/league_expansion/verify_751_current_source_rights_hold_and_cc0_freshness_once.py --run
+      - name: Hard block model use and unauthorized score publication
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path("experiments/263/league_expansion/2026_27_751_SOURCE_RIGHTS_AND_STALE_CC0_FINAL_GATE_20261114.json")
+          j=json.loads(path.read_text())
+          assert j["five_current_unarchived_total"]==633
+          assert j["four_current_not_yet_officially_witnessed_total"]==118
+          assert j["current_provider_new_fixture_candidates"]==751
+          assert j["eligible_new_match_rows_for_public_git_archive_from_these_sources"]==0
+          assert j["new_model_training_approval"]==0
+          assert j["licenses"]["extra_free_spreadsheet_compilation"]["may_recheck_by_automated_tools"] is False
+          assert j["new_automatic_external_requests_from_this_script"]==0
+          assert j["manual_xg_1855_user_workbook_unchanged"]
+          assert j["all_prior_seals_untouched"] and not j["model_math_changed"]
+          print("PASS 751 source-only candidates, 0 training/publishing/AI scraping")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-data-only-751-rights-and-stale-cc0-gate
+          path: experiments/263/league_expansion/2026_27_751_SOURCE_RIGHTS_AND_STALE_CC0_FINAL_GATE_20261114.json
+      - name: Persist only source eligibility / rights metadata, leave all datasets as-is
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/2026_27_751_SOURCE_RIGHTS_AND_STALE_CC0_FINAL_GATE_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(data only): enforce 751 rights and source-staleness gate, no math"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
