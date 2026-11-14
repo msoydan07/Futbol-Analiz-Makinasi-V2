@@ -1,0 +1,66 @@
+name: "263 Research - One-time 9460 immutable score fact selection, no new training"
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-final-9460-source-selection-closeout.yml
+permissions:
+  contents: write
+jobs:
+  final-9460-source-pointer-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check immutable 22x2 safety conditions
+        run: python experiments/263/league_expansion/final_9460_selection_closeout_20261114.py --self-test
+      - name: Build pinned core+expansion source pointer selection (no external requests)
+        run: python experiments/263/league_expansion/final_9460_selection_closeout_20261114.py --run
+      - name: Verify exact counts and no new model admissions
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,json,os
+          from pathlib import Path
+          p=Path("experiments/263/league_expansion")
+          m=json.loads((p/"FINAL_9460_RESEARCH_SCORE_FACTS_FILTERED_20261114.json").read_text())
+          assert m["source_rows"]==9460 and m["research_source_facts_4843"]==4843
+          assert m["research_score_fact_qa_pass_only"]==4218
+          assert m["research_excluded_quality_or_rights"]==625
+          assert m["model_training_admitted_new_rows"]==0
+          assert m["original_m4_unchanged"] and m["score_facts_only_not_a_features_snapshot"]
+          with (p/"FINAL_9460_SOURCE_ROW_DECISIONS_NO_SCORE_REHOST_20261114.csv").open() as f:
+            data=list(csv.DictReader(f))
+          assert len(data)==9460
+          assert not any("ft_home" in x or "home_team" in x for x in data[0].keys())
+          counts={}
+          for row in data:counts[row["decision"]]=counts.get(row["decision"],0)+1
+          assert counts["SCORE_FACT_RESEARCH_ONLY_QA_PASS"]==4218
+          assert counts["EXISTING_CORE_4617_FROZEN_RESULTS_ONLY"]==4617
+          assert sum(v for k,v in counts.items() if k.startswith("EXCLUDED_"))==625
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## Final 22x2 source-pointer closeout\n")
+            f.write("- Frozen 4617 original result rows; 4218 research score facts with quality-only pass\n")
+            f.write("- 625 rejected (296 legacy date/FT HOLD, 325 rights, 3 Austrian extra phase, 1 abandoned)\n")
+            f.write("- 0 newly approved model-training rows, no raw third-party scores republished\n")
+            f.write("- 633 live-only source facts and 118 possible new identities stay outside cutoff inventory\n")
+            f.write("- No repeat provider fetch or old result QA; no main M4 or xG changes\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-9460-score-fact-final-row-selection-and-excluded-reasons
+          path: |
+            experiments/263/league_expansion/FINAL_9460_SOURCE_ROW_DECISIONS_NO_SCORE_REHOST_20261114.csv
+            experiments/263/league_expansion/FINAL_9460_RESEARCH_SCORE_FACTS_FILTERED_20261114.json
+          retention-days: 30
+      - name: Commit only source pointers + reasons; no raw scores
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/FINAL_9460_SOURCE_ROW_DECISIONS_NO_SCORE_REHOST_20261114.csv experiments/263/league_expansion/FINAL_9460_RESEARCH_SCORE_FACTS_FILTERED_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): close 9460 original scores as 4218 research score-only, 625 exclusions, zero new training"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
