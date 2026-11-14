@@ -1,0 +1,19 @@
+{
+  "status": "PASS_200_OLD_WRONG_ENG3_ENG4_REPLACED_BY_VERIFIED_CC_BY_ORIGINAL_SOURCE_REFERENCES_RESEARCH_ONLY",
+  "original_200_BAD_CC0_HOLDS_STILL_EXCLUDED": true,
+  "source_pointer_corrections": 200,
+  "source_scored_178_independently_witnessed": 178,
+  "source_date_and_ft_22_individually_witnessed": 22,
+  "counts_are_nonadditive_to_9460": true,
+  "source_file_git_blobs": {
+    "ENG3": "d1d481c5ef5e73f4594f9d948bfe846796645c4e",
+    "ENG4": "512f2a7e402b10ecd25336c9058a038320f962bd"
+  },
+  "source_rows_modified": 0,
+  "outside_provider_downloads": 0,
+  "new_training_approvals": 0,
+  "main_M4_modified": false,
+  "prior_96_ENG5_HOLD_still_excluded": true,
+  "note": "Original 200 wrong source scores/dates remain excluded. Corrected original-author CC BY source pointers are available for score fact QA only, not model training. The 22 date-corrected matches may already occur among the 4218 source score candidates: never add them again blindly; 178 are correction overlays, not novel fixtures. New closed evidence did not require old external FT tests to be rerun.",
+  "output_file": "experiments/263/league_expansion/CORRECTED_200_ENG3_ENG4_SOURCE_POINTERS_NOT_ADDITIVE_20261114.csv"
+}
