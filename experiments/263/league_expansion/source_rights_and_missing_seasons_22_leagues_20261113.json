@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "Historical only: Swiss ODbL partial 161 all 161 source result facts reviewed (155 direct secondary +6 official corrections; 67 not in ODbL source); 306 GER2 new matches previously validated and frozen. Remaining six non-main league/season research archive gaps need rights-clean original sources, not noncommercial upstream repackaging. No training approvals or M4 changes.",
+  "next_priority": "Historical data completion ONLY: 2863 research-only distinct identities; GER2 306 new all independently checked, Swiss partial 161 has 155 secondary matches +6 official corrected with no added fixture identities, 67 Swiss games absent from licensed ODbL source. Five current-season external compiled sources expose 632 match rows but license only for informational/noncommercial and upstream rights unclear: metadata-only, zero ingested. Danish 2025/26 license-open first-party source remains missing. No reopening passed QC, no M4 changes.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -785,5 +785,47 @@
     "six_hold_entries_resolved_by_SFL_but_original_hold_ledger_retained": true,
     "additional_research_identities": 0,
     "training_approved": 0
+  },
+  "historical_2026_27_five_external_source_632_rights_metadata_20261114": {
+    "status": "FIVE_EXTERNAL_2026_27_SCORE_SOURCE_FILES_DISCOVERED_632_ROWS_METADATA_ONLY_RIGHTS_HOLD",
+    "report": "experiments/263/league_expansion/historical_2026_27_five_external_source_632_rights_coverage_only_20261114.json",
+    "discovered_sources": [
+      {
+        "league": "ENG5",
+        "source_git_blob": "2b8f0d91814b8beb0654902441bedb5692ba59dd",
+        "publisher": "ESPN",
+        "source_rows": 189
+      },
+      {
+        "league": "ESP2",
+        "source_git_blob": "be64efea396fea5ff578c7fb5d073eb21fcbc9c0",
+        "publisher": "ESPN",
+        "source_rows": 141
+      },
+      {
+        "league": "ITA2",
+        "source_git_blob": "a4cd750902d648640d2a7a829d339861b5b13dda",
+        "publisher": "ESPN",
+        "source_rows": 110
+      },
+      {
+        "league": "FRA2",
+        "source_git_blob": "de8579e1af4c6c65a541e271277d645749e45ec8",
+        "publisher": "fixturedownload",
+        "source_rows": 108
+      },
+      {
+        "league": "DNK1",
+        "source_git_blob": "17a0ea4008186f46a1dfd40fec2b2a504551fc0a",
+        "publisher": "Soccerway",
+        "source_rows": 84
+      }
+    ],
+    "not_imported_due_to_rights_and_independent_QA": 632,
+    "added_new_records": 0,
+    "approved_training_rows": 0,
+    "research_unique_match_identities_unchanged": 2863,
+    "freeze_old_461_second_score_witness_matches": true,
+    "not_repeat_unchanged_source_hashes": true
   }
 }

@@ -1,0 +1,136 @@
+{
+  "created_on": "2026-11-14",
+  "status": "FIVE_EXTERNAL_2026_27_SCORE_SOURCE_FILES_DISCOVERED_632_ROWS_METADATA_ONLY_RIGHTS_HOLD",
+  "scope": "Five still-unarchived 2026-27 non-production league-season cells, source discovery, structure counts, identity and source rights only",
+  "third_party_compilation": "oladeeayo/open-matchday",
+  "third_party_repository": "https://github.com/oladeeayo/open-matchday",
+  "third_party_terms": "https://github.com/oladeeayo/open-matchday/blob/master/DISCLAIMER.md",
+  "usage_terms_summary": "Noncommercial, informational compilation; upstream ESPN/Soccerway/fixturedownload terms remain effective; public copying and model-training rights not established.",
+  "source_files": [
+    {
+      "league": "ENG5",
+      "season": "2026-27",
+      "rows": 189,
+      "clubs": 24,
+      "last_date": "2026-10-31",
+      "first_date": "2026-08-08",
+      "provider": "ESPN",
+      "sha": "2b8f0d91814b8beb0654902441bedb5692ba59dd",
+      "path": "data/ENG_5_national-league/results_2627.csv",
+      "source_url": "https://github.com/oladeeayo/open-matchday/blob/master/data/ENG_5_national-league/results_2627.csv",
+      "direct_source_provider_row_license_not_cleared": true,
+      "no_rehosting_no_model_training": true,
+      "coverage_status": "SOURCE_SNAPSHOT_METADATA_ONLY__NO_FT_SECOND_WITNESS_PER_ROW"
+    },
+    {
+      "league": "ESP2",
+      "season": "2026-27",
+      "rows": 141,
+      "clubs": 22,
+      "last_date": "2026-11-13",
+      "first_date": "2026-08-14",
+      "provider": "ESPN",
+      "sha": "be64efea396fea5ff578c7fb5d073eb21fcbc9c0",
+      "path": "data/ESP_2_segunda-division/results_2627.csv",
+      "source_url": "https://github.com/oladeeayo/open-matchday/blob/master/data/ESP_2_segunda-division/results_2627.csv",
+      "direct_source_provider_row_license_not_cleared": true,
+      "no_rehosting_no_model_training": true,
+      "coverage_status": "SOURCE_SNAPSHOT_METADATA_ONLY__NO_FT_SECOND_WITNESS_PER_ROW"
+    },
+    {
+      "league": "ITA2",
+      "season": "2026-27",
+      "rows": 110,
+      "clubs": 20,
+      "last_date": "2026-11-08",
+      "first_date": "2026-08-21",
+      "provider": "ESPN",
+      "sha": "a4cd750902d648640d2a7a829d339861b5b13dda",
+      "path": "data/ITA_2_serie-b/results_2627.csv",
+      "source_url": "https://github.com/oladeeayo/open-matchday/blob/master/data/ITA_2_serie-b/results_2627.csv",
+      "direct_source_provider_row_license_not_cleared": true,
+      "no_rehosting_no_model_training": true,
+      "coverage_status": "SOURCE_SNAPSHOT_METADATA_ONLY__NO_FT_SECOND_WITNESS_PER_ROW"
+    },
+    {
+      "league": "FRA2",
+      "season": "2026-27",
+      "rows": 108,
+      "clubs": 18,
+      "last_date": "2026-11-07",
+      "first_date": "2026-08-08",
+      "provider": "fixturedownload",
+      "sha": "de8579e1af4c6c65a541e271277d645749e45ec8",
+      "path": "data/FRA_2_ligue-2/results_2627.csv",
+      "source_url": "https://github.com/oladeeayo/open-matchday/blob/master/data/FRA_2_ligue-2/results_2627.csv",
+      "direct_source_provider_row_license_not_cleared": true,
+      "no_rehosting_no_model_training": true,
+      "coverage_status": "SOURCE_SNAPSHOT_METADATA_ONLY__NO_FT_SECOND_WITNESS_PER_ROW"
+    },
+    {
+      "league": "DNK1",
+      "season": "2026-27",
+      "rows": 84,
+      "clubs": 12,
+      "last_date": "2026-11-08",
+      "first_date": "2026-07-24",
+      "provider": "Soccerway",
+      "sha": "17a0ea4008186f46a1dfd40fec2b2a504551fc0a",
+      "path": "data/DEN_1_superliga/results_2627.csv",
+      "source_url": "https://github.com/oladeeayo/open-matchday/blob/master/data/DEN_1_superliga/results_2627.csv",
+      "direct_source_provider_row_license_not_cleared": true,
+      "no_rehosting_no_model_training": true,
+      "coverage_status": "SOURCE_SNAPSHOT_METADATA_ONLY__NO_FT_SECOND_WITNESS_PER_ROW"
+    }
+  ],
+  "source_row_aggregate": 632,
+  "duplicate_exact_date_home_away_keys_found_within_each_source": 0,
+  "invalid_syntax_or_out_of_2025_26_2026_27_season_rows_found": 0,
+  "source_file_SHA_GitHub_blobs_current_snapshot": [
+    {
+      "league": "ENG5",
+      "git_blob_sha": "2b8f0d91814b8beb0654902441bedb5692ba59dd"
+    },
+    {
+      "league": "ESP2",
+      "git_blob_sha": "be64efea396fea5ff578c7fb5d073eb21fcbc9c0"
+    },
+    {
+      "league": "ITA2",
+      "git_blob_sha": "a4cd750902d648640d2a7a829d339861b5b13dda"
+    },
+    {
+      "league": "FRA2",
+      "git_blob_sha": "de8579e1af4c6c65a541e271277d645749e45ec8"
+    },
+    {
+      "league": "DNK1",
+      "git_blob_sha": "17a0ea4008186f46a1dfd40fec2b2a504551fc0a"
+    }
+  ],
+  "archived_fixture_score_rows_from_these_five": 0,
+  "independent_date_home_away_FT_fact_checks_completed_against_other_source_for_these_five": 0,
+  "training_approved_from_these_five": 0,
+  "previous_unique_historical_research_pool_unchanged": 2863,
+  "previous_461_new_second_source_witnesses_unchanged": true,
+  "previous_swiss_6_official_data_corrections_unchanged": true,
+  "season_missing_from_this_source": "DNK1/2025-26 historical source NOT in this 2026/27 compilation",
+  "remaining_history_gaps_count": 6,
+  "missing_licensed_own_archive_cells": [
+    "ENG5/2026-27",
+    "ESP2/2026-27",
+    "ITA2/2026-27",
+    "FRA2/2026-27",
+    "DNK1/2026-27",
+    "DNK1/2025-26"
+  ],
+  "safeguards": [
+    "A current CSV with final scores is not by itself proof that facts are correct or training rights exist.",
+    "Do not copy ESPN or Soccerway-derived bulk fixture data into the user GitHub repository without direct upstream licensing or explicit permission.",
+    "Only date, full-time score field shape, same source exact-key uniqueness and past-date range were tested. NO team-level secondary score verification, source-independent identity, pre-kickoff feature timestamps or legality certifications were performed.",
+    "Skip these five unchanged hashes in future searches; only resume if permissions granted, a new independently licensed provider found, or file hashes change. Do not recheck existing 461 passed match keys.",
+    "No model fitting, production M4, old QA or xG workbook changed."
+  ],
+  "source_priority_recommendation": "Next productive distinct work: source owner permission for data provider rights or CC0/ODbL original competition results for five current-season tiers and historical Danish Superliga. Do not promote this candidate list as training.",
+  "legal_review_note": "An engineering rights gate rather than legal opinion. Source labels are not a guarantee of rights or score accuracy."
+}
