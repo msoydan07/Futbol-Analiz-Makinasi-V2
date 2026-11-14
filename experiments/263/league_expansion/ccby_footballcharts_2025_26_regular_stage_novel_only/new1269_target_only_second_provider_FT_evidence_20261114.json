@@ -1,0 +1,161 @@
+{
+  "status": "ONE_PASS_ONLY_NEW_1269_RESULTS_7_SECOND_PROVIDER_FACT_WITNESSES_DONE__OR_FAIL_CLOSED_BY_GROUP",
+  "when_utc": "2026-11-14T12:18:15.701944+00:00",
+  "scope": "Only 1269 novel historical 2025/26 regular-season result keys, NOT previous 1775+461 or original 296 hold records",
+  "new_1269_targeted": 1269,
+  "two_provider_FT_exact_date_home_away": 1268,
+  "FT_unmatched_or_conflicting_or_source_unavailable": 1,
+  "source_by_league": {
+    "ENG3": {
+      "new_targeted_keys": 208,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 208
+      },
+      "score_verified": 208,
+      "not_exactly_corrobated": 0,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 552
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [],
+      "status": "SECOND_SOURCE_FETCH_AND_NEW_ONLY_COMPARE_COMPLETED",
+      "source_CCBY_git_blob_sha": "25936108b009fb0003f56d269289dcdff37b9281",
+      "secondary_source_url": "https://www.football-data.co.uk/mmz4281/2526/E2.csv",
+      "secondary_source_SHA256": "4c96eff8a2f20c5e26015af8609c4f90478ff055f58ab6e137cc3445bf4c67ee",
+      "secondary_rehosted": false,
+      "old_prevalidated_fixture_keys_checked_again": 0
+    },
+    "ENG4": {
+      "new_targeted_keys": 277,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 277
+      },
+      "score_verified": 277,
+      "not_exactly_corrobated": 0,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 552
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [],
+      "status": "SECOND_SOURCE_FETCH_AND_NEW_ONLY_COMPARE_COMPLETED",
+      "source_CCBY_git_blob_sha": "742d5ada75cd538ddcef8a47b5d371f1a9947f2a",
+      "secondary_source_url": "https://www.football-data.co.uk/mmz4281/2526/E3.csv",
+      "secondary_source_SHA256": "eff4fa15cb18857091d1f0666d0b8a6c61eda7a8374feef8f2d8a38244e0e45d",
+      "secondary_rehosted": false,
+      "old_prevalidated_fixture_keys_checked_again": 0
+    },
+    "ENG5": {
+      "new_targeted_keys": 262,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 262
+      },
+      "score_verified": 262,
+      "not_exactly_corrobated": 0,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 552
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [],
+      "status": "SECOND_SOURCE_FETCH_AND_NEW_ONLY_COMPARE_COMPLETED",
+      "source_CCBY_git_blob_sha": "85e62700a900c847941ae3c665ebb38efe32022c",
+      "secondary_source_url": "https://www.football-data.co.uk/mmz4281/2526/EC.csv",
+      "secondary_source_SHA256": "2372229d616a57f9df3d9a401cd942df8e1909ba67017b3793c6aceaf0becf76",
+      "secondary_rehosted": false,
+      "old_prevalidated_fixture_keys_checked_again": 0
+    },
+    "ITA2": {
+      "new_targeted_keys": 72,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 72
+      },
+      "score_verified": 72,
+      "not_exactly_corrobated": 0,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 380
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [],
+      "status": "SECOND_SOURCE_FETCH_AND_NEW_ONLY_COMPARE_COMPLETED",
+      "source_CCBY_git_blob_sha": "fff8d8a9673d38141287ad32f0d5b474b0bd04d7",
+      "secondary_source_url": "https://www.football-data.co.uk/mmz4281/2526/I2.csv",
+      "secondary_source_SHA256": "ed4bcece92bb8b09aa94768bc77d3529fa29339ec70fa7867a9fbc3ca0954731",
+      "secondary_rehosted": false,
+      "old_prevalidated_fixture_keys_checked_again": 0
+    },
+    "FRA2": {
+      "new_targeted_keys": 190,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 189,
+        "SECONDARY_NO_EXACT_TARGET_KEY_HOLD": 1
+      },
+      "score_verified": 189,
+      "not_exactly_corrobated": 1,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 305
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [
+        {
+          "source_fixture": [
+            "2025-12-05",
+            "SC Bastia",
+            "Red Star FC"
+          ],
+          "source_CCBY_ft": "0-0",
+          "targeted_verdict": "SECONDARY_NO_EXACT_TARGET_KEY_HOLD"
+        }
+      ],
+      "status": "SECOND_SOURCE_FETCH_AND_NEW_ONLY_COMPARE_COMPLETED",
+      "source_CCBY_git_blob_sha": "b12ba6b7fc11367894b07470edfa93b5d9c3ec59",
+      "secondary_source_url": "https://www.football-data.co.uk/mmz4281/2526/F2.csv",
+      "secondary_source_SHA256": "dcedf4dd66f3e0ac8efb8ccd2e5489882068e5630c041702b15c1d0fe70c6017",
+      "secondary_rehosted": false,
+      "old_prevalidated_fixture_keys_checked_again": 0
+    },
+    "GRE1": {
+      "new_targeted_keys": 120,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 120
+      },
+      "score_verified": 120,
+      "not_exactly_corrobated": 0,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 236
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [],
+      "status": "SECOND_SOURCE_FETCH_AND_NEW_ONLY_COMPARE_COMPLETED",
+      "source_CCBY_git_blob_sha": "10782d9b7a94a06fb113c09e3a327883d232880c",
+      "secondary_source_url": "https://www.football-data.co.uk/mmz4281/2526/G1.csv",
+      "secondary_source_SHA256": "0f77e72cb9db8f5dcd298d16f20551a82d018b478fc12a67e065241f05810830",
+      "secondary_rehosted": false,
+      "old_prevalidated_fixture_keys_checked_again": 0
+    },
+    "SCO1": {
+      "new_targeted_keys": 140,
+      "fixture_classification": {
+        "SECONDARY_SAME_DATE_CLUBS_FT_CONFIRMED": 140
+      },
+      "score_verified": 140,
+      "not_exactly_corrobated": 0,
+      "secondary_only_stat_counts": {
+        "mapped_secondary_scored_fixtures": 228
+      },
+      "unmapped_provider_team_names_top10": [],
+      "only_unconfirmed_original_CC_BY_source_sample": [],
+      "status": "SECOND_SOURCE_FETCH_AND_NEW_ONLY_COMPARE_COMPLETED",
+      "source_CCBY_git_blob_sha": "e9d938ae62e8b05158bdba3f518d21f2e2670372",
+      "secondary_source_url": "https://www.football-data.co.uk/mmz4281/2526/SC0.csv",
+      "secondary_source_SHA256": "be3c45e08f09a327e3fd5289dd0b362b200f430ed5845cb18df1aca7e3ced2ee",
+      "secondary_rehosted": false,
+      "old_prevalidated_fixture_keys_checked_again": 0
+    }
+  },
+  "old_GitHub_source_2396_blobs_rewritten": false,
+  "second_source_full_score_CSVs_redistributed": false,
+  "previous_sources_FT_QA_871_904_306_161_192_redone": false,
+  "new_training_approved": 0,
+  "new_model_training_or_predictions": 0,
+  "source_rights_original_and_historical_publication_time_gates_pending": true,
+  "next_distinct_task": "Only unresolved new result source keys, never redo exact matches. After result witness, pursue licensed 2026/27 gaps and evidence-of-availability for historical pre-match features."
+}
