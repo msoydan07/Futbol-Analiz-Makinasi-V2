@@ -10,7 +10,7 @@ regular-stage section (not inferred solely by calendar).
 from __future__ import annotations
 from collections import Counter
 from datetime import date,datetime,timezone
-import hashlib,json,re,sys,unicodedata
+import argparse,hashlib,json,re,sys,unicodedata
 from urllib.request import Request,urlopen
 
 from prepare_2396_provenance_rights_quality_gate_20261114 import EXPECTED,read_csv
