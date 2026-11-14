@@ -49,6 +49,12 @@
       "scope": "Only 1269 NEW 2025/26 seven-league normal-stage FT second-provider result facts, and single abandoned Bastia–Red Star exception",
       "state": "1268_SECOND_PROVIDER_DATE_HOME_AWAY_FT_EXACT__ONE_OFFICIAL_NON_COMPLETED_0_0_AS_GOALS_LABEL_HOLD__NO_TRAINING",
       "key": "ccby_footballcharts_2025_26_regular_stage_novel_only/new1269_target_only_second_provider_FT_evidence_20261114.json GitHub Actions 43594124042; exception official Red Star Dec22. Do not rerun 1268 exact. Original 190 FRA2 source remains preserved; curated 189 + single HOLD."
+    },
+    {
+      "scope": "2025/26 106 *new* phase source fixture identity checks / 8 cross-tier HOLD, 83 second-provider exact, one corrected Greek fixture 17 May",
+      "state": "PASS_PHASE_RESEARCH_SOURCE_QA__22_NO_SECOND_PROVIDER_PLAYOFF_COVERAGE__NOT_TRAINING",
+      "key": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/2025_26_106_second_phase_8_cross_tier_source_gate_20261114.json | experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/new106_only_playoffs_and_second_phase_FT_second_witness_20261114.json | experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/new106_fact_witness_83_exact_one_date_fix_22_uncovered_HOLD_20261114.json | experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/gre1_2025_26_54_SECOND_PHASE_CORRECTED_DATE_RESEARCH_ONLY.csv",
+      "no_repeat": "Do not rerun 83 known-good second source exact matches or request football-data regular-season files again for the 22 playoff noncoverage cases."
     }
   ],
   "explicitly_open": [
@@ -101,5 +107,15 @@
     "unique_source_rows": 4391,
     "nonadministrative_candidate_rows": 4390,
     "training_new": 0
+  },
+  "second_stage_106_20261114": {
+    "report": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/new106_fact_witness_83_exact_one_date_fix_22_uncovered_HOLD_20261114.json",
+    "source_specific_total": 4497,
+    "new_stage": 106,
+    "witnessed_exact": 83,
+    "one_date_corrected": 1,
+    "unmatched_no_playoff_provider": 22,
+    "training_approved": 0,
+    "previous_1268_verified_facts_frozen": true
   }
 }

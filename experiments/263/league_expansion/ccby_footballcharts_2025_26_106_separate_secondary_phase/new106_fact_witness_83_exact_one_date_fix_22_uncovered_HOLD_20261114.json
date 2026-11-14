@@ -1,0 +1,46 @@
+{
+  "created_on": "2026-11-14",
+  "status": "2025_26_106_SEPARATE_STAGE_RESEARCH_83_PROVIDER_EXACT_1_GREEK_DATE_CORRECTED_22_PLAYOFF_PROVIDER_NOT_COVERED",
+  "prior_research_source_rows": 4391,
+  "new_separate_stage_source_rows": 106,
+  "total_source_specific_research_match_identities": 4497,
+  "prior_all_match_identity_and_stage_QA_frozen": true,
+  "source_second_provider_date_teams_FT_exact": 83,
+  "Greek_original_date_incorrect_and_fixed": {
+    "original_date": "2026-05-16",
+    "actual_played_date": "2026-05-17",
+    "home": "Panserraikos",
+    "away": "Panetolikos",
+    "FT": "1-1",
+    "original_CC_BY_git_blob": "7bd67debffc2c317b7fcce1bc06293f8d2b17c6c",
+    "corrected_research_derivative_csv": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/gre1_2025_26_54_SECOND_PHASE_CORRECTED_DATE_RESEARCH_ONLY.csv",
+    "evidence": [
+      "https://www.sofascore.com/football/match/gfs-panetolikos-mgs-panserraikos/XBcsePc",
+      "https://www.fotmob.com/en-GB/matches/panserraikos-fc-vs-panetolikos/gedsnqq",
+      "https://www.shotifystats.com/match/panserraikos-fc-vs-panetolikos-2026-05-17/report"
+    ],
+    "source_file_preserved": true,
+    "score_changed": false,
+    "historic_pubtime_not_fabricated": true
+  },
+  "unmatched_cause": "Other secondary provider file does not cover playoff match facts; this does not establish a score contradiction.",
+  "unmatched_22_by_league": {
+    "ENG3": 5,
+    "ENG4": 4,
+    "ENG5": 2,
+    "ITA2": 10,
+    "FRA2": 1
+  },
+  "new_match_outcomes_with_exact_second_witness_or_corrobated_date": 84,
+  "separate_eight_cross_tier_playoff_HOLD_unchanged": true,
+  "source_licensed_publisher": "Damir Devetak / Football Charts, CC BY 4.0; stage-separated research only",
+  "source_doi": "https://doi.org/10.5281/zenodo.22295583",
+  "source_fact_report": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/new106_only_playoffs_and_second_phase_FT_second_witness_20261114.json",
+  "source_stage_report": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/2025_26_106_second_phase_8_cross_tier_source_gate_20261114.json",
+  "already_checked_1268_older_regular_results_rerun": 0,
+  "already_checked_461_1775_previous_sources_rerun": 0,
+  "M4_and_original_2396_and_user_xG_unchanged": true,
+  "new_training_rows_approved": 0,
+  "source_rights_asof_available_before_original_kickoff_proven": false,
+  "next_distinct_work": "22 playoff keys require new provider that genuinely covers playoffs, not another download of same normal-season football-data CSV. 2026/27 five source licensing gaps remain outstanding."
+}
