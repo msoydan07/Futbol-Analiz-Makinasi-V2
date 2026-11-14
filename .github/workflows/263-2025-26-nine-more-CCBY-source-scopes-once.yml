@@ -1,0 +1,56 @@
+name: 263 Research - Other nine 2025/26 historical CC BY source scopes only
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-2025-26-nine-more-CCBY-source-scopes-once.yml
+permissions:
+  contents: write
+jobs:
+  only-new-nine-scope-no-old-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline source filtering scope and season selftest
+        run: python experiments/263/league_expansion/archive_CC_BY_nine_other_2025_26_historic_leagues_once.py --self-test
+      - name: Pinned CC BY source read once, new nine groups only, no older QA
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/archive_CC_BY_nine_other_2025_26_historic_leagues_once.py --live > nine_2025_26_source_scope.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          t=Path("nine_2025_26_source_scope.log").read_text()
+          d=json.loads(t.split("OTHER_NINE_SOURCE_START",1)[1].split("OTHER_NINE_SOURCE_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## New scope: other nine historical 2025/26 leagues, CC BY-licensed publisher data\n")
+            f.write("- Status: "+d["status"]+"\n")
+            for k,v in d.get("league_source_evidence",{}).items():
+              f.write("- "+k+": "+str(v["available_source_scored_rows"])+" raw source rows, plausible="+str(v["scope_plausible"])+"\n")
+            f.write("- Archive only source-specific QA candidates; no canonical dedup or increment to 3122 yet.\n")
+            f.write("- Previous Danish/Swiss source tests not rerun, zero training, production unchanged.\n")
+          assert d["status"]=="HISTORICAL_CCBY_SOURCE_9_SCOPE_ONE_PASS_COMPLETED_RESEARCH_ONLY",d
+          assert d["source_rows_scanned_once"]==76991
+          assert d["new_unique_research_fixture_count_until_CANDIDATE_DEDUP"]==0
+          assert d["new_training_rows_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-CCBY-nine-other-2025-26-source-scopes
+          path: |
+            nine_2025_26_source_scope.log
+            experiments/263/league_expansion/ccby_footballcharts_9_other_2025_26_source_ledger/
+          retention-days: 14
+      - name: Commit ONLY source-specific new league research files and attribution
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_9_other_2025_26_source_ledger/
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): one pass 9 other 2025/26 CC BY original league result candidate archives; no 3122 inflation"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
