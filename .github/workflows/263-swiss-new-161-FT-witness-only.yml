@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-swiss-new-161-FT-witness-only.yml
+      - experiments/263/league_expansion/reconcile_swiss_new161_against_old228_once.py
 permissions:
   contents: write
 jobs:

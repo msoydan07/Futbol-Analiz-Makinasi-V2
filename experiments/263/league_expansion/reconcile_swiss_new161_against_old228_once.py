@@ -40,7 +40,7 @@ def run():
     canon=name_map("CHE1")
     witness={};source_total=0
     for r in source:
-        if r.get("status","").strip().lower()!="finished":continue
+        if r.get("status","").strip().lower() not in ("finished","completed","ft","full-time","full time"):continue
         date=r["date"][:10]
         h=canon.get(norm(r["home"]));a=canon.get(norm(r["away"]))
         if not h or not a or h==a:raise ValueError("INDEPENDENT_TEAM_ALIAS_UNEXPECTED")
