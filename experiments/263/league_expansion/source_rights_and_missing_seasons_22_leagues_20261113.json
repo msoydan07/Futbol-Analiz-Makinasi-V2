@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "HISTORICAL only: 4391 old source-specific research IDs plus 106 distinctly staged CC BY 2025/26 playoff/post-split results (4497 total). New 106 stages: 83 second-source exact, 1 Greek fixture Panserraikos-Panetolikos 1-1 corrected from wrong 16 to 17 May based on match reports, 22 playoff source coverage pending, 8 interdivision fixtures HOLD. First-party permissively licensed 2026/27 five leagues remain missing; Football Charts 2026.10 CC BY snapshot ends Jul 2026; 632 compiled external source rows remain rights hold. 0 training approvals. No M4 changes, preserve previous full tests.",
+  "next_priority": "HISTORICAL ARCHIVE ONLY: 4505 distinct source-specific research match IDs (4391 original research IDs + 106 second-stage + 8 separate SCO/FRA transition identities). Only 22 playoff results and 8 original cross-tier/qualifying results verified against new provider/official sources this turn; old 83+Greek date, 1268, 1775, 461 external outcome QA frozen. Old one administrative false 0-0 excluded from scored matches. No 2025/26 second-phase result-score tasks remain, though time-vintage and upstream-rights remain. Remaining 2026/27 ENG5/ESP2/ITA2/FRA2/DNK1 open-source rights unresolved (632 compiled external matches not imported). 0 training approvals; no M4/prediction SHA/xG changes.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -924,5 +924,42 @@
     "eight_cross_tier_HOLD_unchanged": true,
     "new_training_approved": 0,
     "main_M4_and_xG_untouched": true
+  },
+  "historical_2025_26_22_plus_8_separate_stage_closure_20261114": {
+    "status": "PASS_2025_26_HISTORICAL_22_PLAYOFF_PLUS_8_TRANSITION_MATCH_FACTS_CLOSED_NO_TRAINING",
+    "research_branch": "research/263-13-lig-22-havuz-20261113",
+    "verified_new_this_turn": 30,
+    "new_22_playoff_score_facts_verified": 22,
+    "new_8_transition_score_facts_verified": 8,
+    "prior_83_exact_plus_1_Greek_date_correction_frozen": true,
+    "old_1268_normal_score_witness_frozen": true,
+    "old_4391_and_106_research_archive_not_recomputed": true,
+    "previous_distinct_research_match_identity_count": 4497,
+    "new_8_cross_competition_identity_additions": 8,
+    "distinct_research_fixture_identities_now": 4505,
+    "source_readiness": "Source-specific match identities + finished match score facts verified; some earlier records are held. NOT eligible for training yet.",
+    "known_one_abandoned_FRA2_Bastia_RedStar_source_0_0_excluded_from_completed_scored_results": true,
+    "training_rows_newly_approved": 0,
+    "new_independent_score_sources": {
+      "playoffs": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/new106_second_phase_106_all_results_witnessed_20261114.json",
+      "transitional": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/2025_26_eight_transition_stage_reclassified_and_facts_QA_20261114.json",
+      "playoff_github_workflow": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43596755731",
+      "transitional_github_workflow": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43597022065"
+    },
+    "separate_competition_buckets": {
+      "SCO_CHAMPIONSHIP_ONLY_PROMOTION_PLAYOFF_QUALIFYING": 4,
+      "SCO_CHAMPIONSHIP_PREMIERSHIP_PROMOTION_RELEGATION_FINAL": 2,
+      "FRA_NATIONAL_LIGUE2_PROMOTION_RELEGATION_BRIDGE": 2
+    },
+    "priority_still_missing_rights_clean_2026_27_original_match_archives": [
+      "ENG5/2026-27",
+      "ESP2/2026-27",
+      "ITA2/2026-27",
+      "FRA2/2026-27",
+      "DNK1/2026-27"
+    ],
+    "prior_632_compilation_provider_rows_rights_unsettled_and_not_imported": true,
+    "original_2396_old_296_HOLD_M4_SHA_user_1855_manual_xg_unchanged": true,
+    "next_distinct_task": "Five rights-clean 2026/27 historical played-fixture source archivals. Do not redownload Football Charts pinned 76,991-row 2025/26 snapshot, old 1,269 or 106 score files; do not conflate old historical scored labels with data actually available before kickoff."
   }
 }
