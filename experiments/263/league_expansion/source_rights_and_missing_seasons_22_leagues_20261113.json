@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "DATA FIRST. New one-report experiments/263/league_expansion/TEK_RAPOR_22_LIG_2_SEZON_VERI_ENVANTERI_20261114.md: 22 leagues x2, 9459 distinct source-match identities = 4617 core ten + 4842 expansion twelve, 337 new licensed Spanish 2025/26 records (331 FT independently corroborated, 6 playoffs; 41 alias duplicates discarded). 39/44 cells persisted, remaining 5 current season live personal-API only (633 results, public raw rehost forbidden). 2026/27 cutoff freshness and legacy source HOLD remain; manual xG 1855. Do NOT do models, pilots or redo finished score QA until data completion.",
+  "next_priority": "DATA COLLECTION priority remains. 9460 source-specific match IDs (4617 main +4842 expansion +1 Belgian), 17 current source count checks, suspended LaLiga false 0-0 held. Five live-only league seasons 633 need raw rights license or permitted source, four current leagues source count gap 118, previous 296 holds. User handoff ready: 1855 xG manual workbook. NO M4/model/pilot changes.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -1031,5 +1031,29 @@
     "old_core_snapshot_is_2026_11_10": true,
     "current_cutoff_date": "2026-11-13",
     "model_code_or_seals_changed": false
+  },
+  "final_22x2_after_2026_freshness_20261114": {
+    "status": "SOURCE_RESEARCH_COMPLETE_TO_RIGHTS_LIMITS_NOT_44_FULLY_ARCHIVED",
+    "report": "experiments/263/league_expansion/TEK_RAPOR_22_LIG_IKI_SEZON_GUNCEL_KAPANIS_20261114.md",
+    "oldMain": 4617,
+    "otherResearch": 4842,
+    "oneBelgianNew": 1,
+    "totalSourceIdentities": 9460,
+    "season25": 7779,
+    "season26": 1681,
+    "persistentCells": 39,
+    "liveOnlyCells": 5,
+    "liveOnlySourceScored": 633,
+    "fourLeaguesCountGap": 118,
+    "missingSourceUnclear": {
+      "SCO1": 33,
+      "CHE1": 21,
+      "GRE1": 34,
+      "AUT1": 30
+    },
+    "suspendedRayoOctoberFalseFTExcluded": true,
+    "handToUserManualXG": 1855,
+    "trainingAdmissions": 0,
+    "M4Unchanged": true
   }
 }

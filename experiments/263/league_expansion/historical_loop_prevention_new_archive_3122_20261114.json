@@ -79,6 +79,12 @@
       "state": "ONE_FINAL_REPORT_9459_SOURCE_IDENTITIES__39_OF_44_PERSISTED__5_SOURCE_ONLY",
       "key": "experiments/263/league_expansion/TEK_RAPOR_22_LIG_2_SEZON_VERI_ENVANTERI_20261114.md",
       "no_repeat": "No repeated original 4505 source checksum QA or Spanish 337 identity/FT checks on unchanged inputs."
+    },
+    {
+      "scope": "Last source count and official historical Belgian 240+72 stage, LaLiga deferred false result, user data gap report",
+      "state": "CONFIRMED_9460_SOURCE_IDENTITIES__39OF44_PERSISTED_NOT_FULL_DATA_COMPLETE",
+      "key": "experiments/263/league_expansion/TEK_RAPOR_22_LIG_IKI_SEZON_GUNCEL_KAPANIS_20261114.md",
+      "no_repeat": "No rerun of 17 2026/27 source count snapshot or initial 4505/Spain331/Belgium311 score QA. Reopen only genuinely rights-cleared new original fixtures."
     }
   ],
   "explicitly_open": [
@@ -192,5 +198,19 @@
     "live_only_633_not_persisted": true,
     "no_new_model_training": true,
     "no_repeat": "Do not repeat original 509 Spanish source fetch, 41 alias dedup or 331+6 score QA. Reopen only on real new match IDs or altered rights/source version."
+  },
+  "final_22x2_after_2026_freshness_20261114": {
+    "report": "experiments/263/league_expansion/TEK_RAPOR_22_LIG_IKI_SEZON_GUNCEL_KAPANIS_20261114.md",
+    "sourceOnlyIdentityCount": 9460,
+    "spain331new6playoffsVerifiedBefore": true,
+    "oneBelgiansResultAdded": true,
+    "sourceCutoffCounts17Resolved": true,
+    "RayoSuspended0_0Held": true,
+    "persistent39of44": true,
+    "liveOnly633RightsBlocked": true,
+    "remaining4LeagueCountGap118": true,
+    "old296HoldUntouched": true,
+    "newTrainingApproved": 0,
+    "manualXgPending": 1855
   }
 }
