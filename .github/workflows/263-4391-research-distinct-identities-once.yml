@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-4391-research-distinct-identities-once.yml
+      - experiments/263/league_expansion/verify_4391_research_source_integrity_once.py
 permissions:
   contents: write
 jobs:

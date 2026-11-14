@@ -34,6 +34,11 @@ def blob_sha(data):
  return hashlib.sha1(b"blob "+str(len(data)).encode()+b"\0"+data).hexdigest()
 def canon(x):
  league,season,d,h,a=match_key(x)
+ if league=="CHE1" and season=="2026-27":
+  # The 2026/27 roster/source naming is independent of the 2025/26
+  # full-season 12-team roster. Normalize accents/spelling only here.
+  # Never force a real 2026/27 club into the previous season's team list.
+  return (league,season,d,norm(h),norm(a))
  if league=="CHE1":
   look=name_map("CHE1")
   hc=look.get(norm(h));ac=look.get(norm(a))
