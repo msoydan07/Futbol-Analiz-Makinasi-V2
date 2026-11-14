@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-14",
+  "status": "ALL_309_FT_FACTS_EQUAL_INDEPENDENT_SOURCE__48_ORIGINAL_DATE_MISMATCHES_NOT_AUTOCORRECTED",
+  "scope": "ITA2 2025/26: original 283 CC0 +26 score-shape recovered research rows; not production",
+  "primary_original_research_records": 309,
+  "original_sources": [
+    {
+      "path": "experiments/263/league_expansion/training_2025_26_cc0_scored_QUARANTINE.csv",
+      "source_blob_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+      "ITA2": 283
+    },
+    {
+      "path": "experiments/263/league_expansion/score_shape_recovery_295_2526_QUARANTINE_20261113.csv",
+      "source_blob_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+      "ITA2": 26
+    }
+  ],
+  "independent_result_source": {
+    "URL": "https://matchdaysync.com/api/public/csv/serie-b/2025-26/matches",
+    "archived_snapshot_380_2025_26_scores": true,
+    "SHA256": "47c7834f1ce997ed406975ee290cb0eda4d88a343cbacb3f4c3f1f2c86515934",
+    "raw_csv_rehosted": false,
+    "live_updates_restored_snapshot": "Source explicitly states restored 11 Oct backup, current updates disconnected"
+  },
+  "full_season_independent_season_statistics": {
+    "independent_source_fulltime_fixtures": 380,
+    "teams": 20,
+    "home_per_team": 19,
+    "away_per_team": 19,
+    "total_goals": 973,
+    "independent_RSSSF_standings_all_twenty_clubs_match": true,
+    "RSSSF_reference": "https://www.rsssf.org/tablesi/ital2026.html"
+  },
+  "exact_date_home_away_FT_all_agree": 261,
+  "source_FT_agrees_despite_date_discrepancy": 48,
+  "result_goals_verified_by_different_source": 309,
+  "exact_same_fixture_score_disagreements": 0,
+  "all_FT_0_0_confirmed": 26,
+  "original_date_discrepancy_count": 48,
+  "original_date_difference_distribution_days": {
+    "1": 39,
+    "36": 1,
+    "-1": 8
+  },
+  "original_date_plus_or_minus_1_day_differences": 47,
+  "historical_original_date_36_days_before_actual_one": {
+    "fixture": "Juve Stabia vs Bari",
+    "original_round_schedule_date": "2025-10-29",
+    "actual_fixture_date": "2025-12-04",
+    "score": "0-0",
+    "postponed_according_to_federation": "https://www.legab.it/news/rinviata-juve-stabia-bari",
+    "official_reschedule": "https://www.legab.it/news/juve-stabia-bari-si-recupera-il-4-dicembre",
+    "post_match_result": "https://www.ansa.it/sito/notizie/sport/calcio/2025/12/04/calcio-juve-stabia-bari_1b04b8fb-a105-4b23-9f3d-00515201a399.html",
+    "original_CC0_file_modified": false
+  },
+  "remaining_other_date_discrepancies_awaiting_original_match_day_independent_adjudication": 47,
+  "automatic_date_overlays_promoted_into_original_source": 0,
+  "reason_for_hold": "OpenFootball's round date can differ from actual kick-off day. Training on wrong observed game date risks chronology leakage and misordered records.",
+  "experiment_use_gate": "Do not use 48 source mismatched original date rows for chronological training absent independently verified true event date overlay; original file untouched",
+  "existing_200_legacy_ENG3_ENG4_HOLD_keys_unchanged": true,
+  "source_rights_before_AI_training": "Still requires source/upstream rights review and point-in-time feature validation. Verification of results is not broad training permission.",
+  "previous_261_exact_date_score_cases_repeated_in_target_48_audit": 0,
+  "external_match_table_rehosted": false,
+  "accepted_into_training": 0,
+  "research_quarantine_rows_added": 0,
+  "base_research_quarantine": 2396,
+  "prior_Austria_2025_195_and_Swiss_2026_54_CC0_independent_score_witnesses": 249,
+  "all_CC0_unheld_score_witnesses_to_date": 558,
+  "CC0_unheld_score_witnesses_without_source_2nd_FT_match": 1313,
+  "main_M4_ten_league_predictions_and_SHA_modified": false,
+  "batch_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43573281028",
+  "exception_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43573462702",
+  "first_checker": "experiments/263/league_expansion/verify_ita2_2526_309_second_source_standings_once.py",
+  "exception_checker": "experiments/263/league_expansion/reconcile_ita2_2526_48_date_only_exceptions_once.py",
+  "next": "Resolve the remaining 47 Italian date differences with independent official kickoff calendar dates, preserving separate correction overlays. Do not repeat all 309 historical score QA for pinned source SHA. No direct M4 integration."
+}
