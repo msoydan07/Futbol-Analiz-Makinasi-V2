@@ -50,7 +50,7 @@ def catalog_candidates(j):
   if isinstance(j.get(key),list):return [x for x in j[key] if isinstance(x,dict)]
  raise ValueError("LEAGUE_CATALOG_NO_LIST")
 def recognized_code(x):
- for key in ("code","slug","league_code","id"):
+ for key in ("code","slug","league_code","league_slug","key","league_key","shortcode","short_code","api_code","league","id"):
   if isinstance(x.get(key),str) and re.fullmatch(r"[a-zA-Z0-9_-]+",x[key]):
    return x[key]
  return ""
@@ -58,7 +58,7 @@ def match_catalog(items,lg):
  t=TARGET[lg];chosen=[]
  for entry in items:
   code=recognized_code(entry)
-  textname=" ".join(str(entry.get(key) or "") for key in ("name","league_name","title","competition","display_name"))
+  textname=" ".join(str(entry.get(key) or "") for key in ("name","league_name","label","title","competition","display_name","display"))
   country=" ".join(str(entry.get(key) or "") for key in ("country","country_name","region"))
   nn=norm(textname);cc=norm(country)
   code_is_target=code in t["code"]
@@ -167,6 +167,16 @@ def run():
  try:
   catalog=catalog_candidates(get_json(API+"/leagues/"))
   report["catalog_total_competitions"]=len(catalog)
+  report["catalog_item_field_names"]=sorted(catalog[0])[:28] if catalog else []
+  # Only competition names/keys, not match results; help catch incompatible
+  # schema without revealing or republishing any provider score records.
+  select_terms=("national","segunda","serie b","ligue 2","superliga","la liga 2","italy2","france2","spain2","denmark")
+  probe=[]
+  for item in catalog:
+   z=" ".join(str(v) for v in item.values() if isinstance(v,(str,int)))
+   if any(t in norm(z) for t in select_terms):
+    probe.append({k:str(item.get(k))[:95] for k in ("name","league_name","label","league","code","slug","key","country","country_name") if item.get(k) is not None})
+  report["catalog_target_name_probe_no_match_rows"]=probe[:22]
  except Exception as e:
   catalog=[]
   report["catalog_status"]="UNAVAILABLE__FAIL_CLOSED"

@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-2026-27-five-gaps-original-live-api-metadata-once.yml
+      - experiments/263/league_expansion/probe_five_2026_27_personal_API_rights_no_raw_20261114.py
 permissions:
   contents: write
 jobs:
