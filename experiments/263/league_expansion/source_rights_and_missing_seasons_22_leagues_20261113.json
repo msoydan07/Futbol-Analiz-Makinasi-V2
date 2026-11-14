@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "HISTORICAL-ONLY: Archived 306 distinct licensed GER2 games (207 old season, 99 current) plus 161 CHE1 2025/26 ODbL games; 461/467 independent source FT matched, 6 Swiss source FT/identity discrepancies held. 2863 distinct research fixture identities (not training-ready); remaining 6 nonproduction league-season cells unarchived, 67 Swiss missing from ODbL partial source. No production changes; do not replay completed old tests.",
+  "next_priority": "Historical only: Swiss ODbL partial 161 all 161 source result facts reviewed (155 direct secondary +6 official corrections; 67 not in ODbL source); 306 GER2 new matches previously validated and frozen. Remaining six non-main league/season research archive gaps need rights-clean original sources, not noncommercial upstream repackaging. No training approvals or M4 changes.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -772,5 +772,18 @@
     "ODbL_separate_license_and_training_unchanged": true,
     "new_training_approved": 0,
     "production_M4_SHA_and_user_manual_xg_untouched": true
+  },
+  "swiss_2025_26_six_official_reconciliation_20261114": {
+    "status": "SWISS_NEW_161_ALL_FACT_IDENTITIES_RESOLVED_155_SECOND_SOURCE_AND_6_OFFICIAL_CORRECTIONS",
+    "evidence": "experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_161_official_six_corrections_20261114.json",
+    "corrected_ODbL_licensed_research_CSV": "experiments/263/league_expansion/odbl_openligadb_swiss1/che1_2025_26_161_ODbL_official_corrected_RESEARCH_ONLY.csv",
+    "source_errors_corrected": 6,
+    "score_errors": 4,
+    "date_errors": 3,
+    "corrected_witness_facts": 161,
+    "original_source_preserved": true,
+    "six_hold_entries_resolved_by_SFL_but_original_hold_ledger_retained": true,
+    "additional_research_identities": 0,
+    "training_approved": 0
   }
 }
