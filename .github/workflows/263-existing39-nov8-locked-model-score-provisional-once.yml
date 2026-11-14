@@ -1,0 +1,50 @@
+name: "263 Research - Existing Nov8 39 SHA locked outcomes, no refit or new pilot"
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-existing39-nov8-locked-model-score-provisional-once.yml
+      - experiments/263/score_existing_nov8_39_sealed_forecasts_no_refit.py
+permissions:
+  contents: write
+jobs:
+  score-old39-readonly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test market scoring shapes without user results
+        run: python experiments/263/score_existing_nov8_39_sealed_forecasts_no_refit.py --self-test
+      - name: Score ONLY old 39 sealed forecast SHA against their already-archived results
+        run: python experiments/263/score_existing_nov8_39_sealed_forecasts_no_refit.py --run
+      - name: Verify exact archive grade and no unofficial upgrade
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("experiments/263/league_expansion/NOV8_39_OLD_SEALS_MODEL_OUTCOME_PROVISIONAL_ONLY_20261114.json")
+          q=json.loads(p.read_text())
+          assert q["all_39_provisional_inference"]["match_count"]==39
+          assert q["direct_network_3_only"]["match_count"]==3
+          assert q["other_36_web_research_only"]["match_count"]==36
+          assert q["source_grade_counts"]["postponed_no_scoring"]==1
+          assert q["new_training_admissions"]==0
+          assert not q["retrained"] and not q["future_pilot_created"] and not q["model_or_forecasts_changed"]
+          print("PASS locked39, direct-network3, web-research36, postponed1, all research only")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-existing-nov8-39-paired-model-scores-provisional
+          path: experiments/263/league_expansion/NOV8_39_OLD_SEALS_MODEL_OUTCOME_PROVISIONAL_ONLY_20261114.json
+          retention-days: 30
+      - name: Commit only aggregated score report; no forecasts or raw scores
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/NOV8_39_OLD_SEALS_MODEL_OUTCOME_PROVISIONAL_ONLY_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): existing 39 sealed pre-match outcomes grade-aware M4 B C2 C3 research comparison"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
