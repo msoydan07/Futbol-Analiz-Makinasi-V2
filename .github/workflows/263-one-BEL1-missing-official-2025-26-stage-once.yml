@@ -1,0 +1,33 @@
+name: 263 Research - Only 1 missing 2025-26 Belgian relegation match official club sources
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-one-BEL1-missing-official-2025-26-stage-once.yml
+permissions:
+  contents: write
+jobs:
+  exactly_one_official_BEL1_playoff_missing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add ONLY missing Dender RAAL first-party team witnessed score to SEPARATE research archive
+        run: |
+          python experiments/263/league_expansion/fill_only_one_belgium_2025_26_relegation_stage_factual_result.py
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          x=json.loads(Path("experiments/263/league_expansion/bel1_2025_26_one_official_missing/bel1_2025_26_312_source_stage_identity_completion_20261114.json").read_text())
+          assert x["status"]=="PASS_BEL1_2025_26_REGULAR_240_PLUS_GROUP_PLAYOFF_72_SOURCE_IDS_COMPLETED"
+          assert x["additional_research_source_fixture_ids"]==1 and x["total_standard_BEL1_season_2025_26_known"]==312
+          assert x["original_main_core_4617_untouched"] and x["training_approved"]==0
+          PY
+      - name: Commit one fully cited public result fact and QA, no original core edits
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/263/league_expansion/bel1_2025_26_one_official_missing/
+          git commit -m "research(263): only one official missing Dender–RAAL 2-1, 2025-26 BEL1 240+72 stage completed, core untouched"
+          git push origin HEAD:research/263-13-lig-22-havuz-20261113
