@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-only-one-ESP1-2026-27-source-match-candidate.yml
+      - experiments/263/league_expansion/probe_only_one_remaining_ESP1_2026_27_identity_candidate.py
 permissions:
   contents: write
 jobs:

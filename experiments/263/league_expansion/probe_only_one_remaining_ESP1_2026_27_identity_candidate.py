@@ -29,7 +29,18 @@ def run():
  req=Request(URL,headers={"Accept":"application/json","User-Agent":"OnePrivateLaLigaResultCandidateOutsideNov8/1.0"})
  with urlopen(req,timeout=28) as f:blob=f.read(4000001)
  if len(blob)>4000000:raise ValueError("SOURCE_RESPONSE_TOO_LARGE")
- j=json.loads(blob);raw=j.get("results") if isinstance(j,dict) else j
+ j=json.loads(blob)
+ if isinstance(j,list):raw=j
+ elif isinstance(j,dict):
+  raw=None
+  for field in ("results","matches","data","items"):
+   v=j.get(field)
+   if isinstance(v,list):raw=v;break
+   if isinstance(v,dict):
+    for inner in ("results","matches","data","items"):
+     if isinstance(v.get(inner),list):raw=v[inner];break
+    if raw is not None:break
+ else:raw=None
  if not isinstance(raw,list):raise ValueError("LIVE_SCHEMA")
  source=Counter();examples={}
  for r in raw:
