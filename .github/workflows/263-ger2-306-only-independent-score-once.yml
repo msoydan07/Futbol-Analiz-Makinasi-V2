@@ -1,0 +1,57 @@
+name: 263 Research - Target only 306 novel GER2 ODbL result witnesses
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-ger2-306-only-independent-score-once.yml
+permissions:
+  contents: write
+jobs:
+  only-new-207-plus-99-no-prior-99-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline 306 frozen ODbL input and schema tests
+        run: python experiments/263/league_expansion/check_ger2_odbl_306_new_second_source_once.py --self-test
+      - name: Request one D2 season witness per season only in memory
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/check_ger2_odbl_306_new_second_source_once.py --live | tee german_new_306_qa.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          t=Path("german_new_306_qa.log").read_text()
+          d=json.loads(t.split("GER2_NEW_306_START",1)[1].split("GER2_NEW_306_END",1)[0])
+          out=Path("experiments/263/league_expansion/odbl_openligadb_germany2/ger2_306_novel_only_second_source_fact_QA_20261114.json")
+          if d["status"]=="GER2_NOVEL_306_TARGETED_SECOND_FT_FACT_WITNESS_COMPLETE":
+            assert d["only_207_new_2025_and_99_new_2026"]==306
+            assert d["new_training_rows_approved"]==0
+            assert d["earlier_99_2025_CC0_overlap_not_retested"]==True
+            out.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Novel German2 ODbL 306 against second independent FT witness only\n")
+            f.write("- Status: "+d["status"]+"\n")
+            for k,v in d.get("totals",{}).items():f.write("- "+k+": "+str(v)+"\n")
+            f.write("- Older 99 German2 match results not replayed. No M4 and no training.\n")
+          assert d["status"]=="GER2_NOVEL_306_TARGETED_SECOND_FT_FACT_WITNESS_COMPLETE",d
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-GER2-only-306-independent-FT-QA
+          path: |
+            german_new_306_qa.log
+            experiments/263/league_expansion/odbl_openligadb_germany2/ger2_306_novel_only_second_source_fact_QA_20261114.json
+          retention-days: 14
+      - name: Commit only the new comparison report, never raw secondary CSV
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/odbl_openligadb_germany2/ger2_306_novel_only_second_source_fact_QA_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): source-QA only 207+99 new German2 ODbL scores; no old replay or training"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
