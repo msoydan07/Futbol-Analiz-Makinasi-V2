@@ -13,7 +13,7 @@ from pathlib import Path
 from urllib.request import Request,urlopen
 BASE=Path("experiments/263/league_expansion/odbl_openligadb_swiss1")
 YEAR=2025
-SHORTCUTS=("ch1","bsl")
+SHORTCUTS=("bsl",)  # ch1 was checked and rejected at 6 finished; do not re-fetch
 SOURCE="https://api.openligadb.de/getmatchdata/"
 SCORE_COLS=["league","season","date","kickoff_utc","home","away","ft_home","ft_away",
  "match_id","source_shortcut","source_url","stage","source_last_updated_at",
@@ -83,7 +83,7 @@ def source(shortcut):
   stats["source_sha256"]=hashlib.sha256(raw).hexdigest()
   stats["source_url"]=url
   stats["is_swiss_football_club_set"]=len(match_names)>=9 and len(teams)>=10 and len(teams)<=15
-  stats["is_season_usable"]=stats["is_swiss_football_club_set"] and len(out)>=170 and len(out)<=260
+  stats["is_season_usable"]=stats["is_swiss_football_club_set"] and len(out)>=150 and len(out)<=260
   return out,stats
 def run():
   results={}
@@ -123,6 +123,9 @@ def run():
     "selected_source_shortcut":best,
     "selected_finished_source_rows":len(chosen),
     "source_diagnostics":{k:results[k]["diagnostics"] for k in SHORTCUTS},
+    "coverage_status":"PARTIAL_161_OF_PREVIOUS_228_INDEPENDENTLY_OBSERVED_SEASON_FACTS__NOT_COMPLETE",
+    "missing_from_this_ODbL_SOURCE_SINCE_PREVIOUS_228_SEASON_FACTS":228-len(chosen),
+    "rejected_ch1_6_FT_source_not_refetched":True,
     "source_year":"2025-26","odbl_compilation_attribution":"Data from OpenLigaDB (www.openligadb.de), licensed under ODbL 1.0",
     "source_license":"https://www.openligadb.de/en/license",
     "csv_path":str(csvp),

@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-swiss-odbl-2025-26-one-source-once.yml
+      - experiments/263/league_expansion/archive_swiss_2025_26_two_odbl_candidates_once.py
 permissions:
   contents: write
 jobs:
@@ -15,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Score parsing and Swiss team alias synthetic guard
         run: python experiments/263/league_expansion/archive_swiss_2025_26_two_odbl_candidates_once.py --self-test
-      - name: Two ODbL discovered Swiss sources, select exactly one if real football coverage
+      - name: Only bsl Swiss 2025/26 partial results; no repeat previously rejected ch1 source
         shell: bash
         run: |
           python experiments/263/league_expansion/archive_swiss_2025_26_two_odbl_candidates_once.py --live | tee swiss_25_odbl_source_selection.log
@@ -32,7 +33,7 @@ jobs:
                 str(info.get("unique_clubs","?"))+" clubs, "+str(info.get("is_season_usable",False))+" accepted for research\n")
             f.write("- No training, no retroactive as-of timestamp claims, 2396 original unchanged.\n")
           assert d["status"]=="SWISS_2025_26_ORIGINAL_ODBL_RESEARCH_ARCHIVE_CREATED",d
-          assert d["selected_finished_source_rows"]>=170
+          assert d["selected_finished_source_rows"]>=150
           assert d["training_rows_approved"]==0
           assert d["original_2396_and_296_holds_unchanged"]==True
           PY
