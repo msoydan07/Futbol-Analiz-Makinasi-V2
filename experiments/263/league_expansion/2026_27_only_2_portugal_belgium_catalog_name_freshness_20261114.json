@@ -1,0 +1,50 @@
+{
+  "status": "TWO_REMAINING_PORTUGAL_BELGIUM_LIVE_CATALOG_FRESHNESS_ONLY",
+  "by_league": {
+    "POR1": {
+      "catalog_names_and_codes": [
+        {
+          "name": "Liga Portugal",
+          "code": "portugal1"
+        },
+        {
+          "name": "Liga Portugal 2",
+          "code": "portugal2"
+        }
+      ],
+      "existing": 98,
+      "status": "SOURCE_COUNT_READ_METADATA_ONLY",
+      "provider_code": "portugal1",
+      "count_through_cutoff": 98,
+      "duplicate_input_keys_skipped": 0,
+      "provider_minus_persisted": 0
+    },
+    "BEL1": {
+      "catalog_names_and_codes": [
+        {
+          "name": "Jupiler Pro League",
+          "code": "belgium1"
+        },
+        {
+          "name": "Challenger Pro League",
+          "code": "belgium2"
+        },
+        {
+          "name": "Super League Women",
+          "code": "wbelgium1"
+        }
+      ],
+      "existing": 99,
+      "status": "SOURCE_COUNT_READ_METADATA_ONLY",
+      "provider_code": "belgium1",
+      "count_through_cutoff": 99,
+      "duplicate_input_keys_skipped": 0,
+      "provider_minus_persisted": 0
+    }
+  },
+  "repeated_other_15_plus_previous_5_FT_source_reads": 0,
+  "bulk_raw_score_records_committed": 0,
+  "model_training_approved": 0,
+  "cutoff": "2026-11-13",
+  "source_terms": "https://www.football-charts.com/terms"
+}
