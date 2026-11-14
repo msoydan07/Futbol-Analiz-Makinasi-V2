@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-14",
+  "status": "PASS_22_ORIGINALLY_PROVIDER_UNCOVERED_PLAYOFF_FT_INDEPENDENT_FACT_WITNESSES_RESOLVED",
+  "source_original": "Damir Devetak Football Charts CC BY 4.0 historical separate-stage research source",
+  "scope": "Only 22 previously uncovered 2025/26 playoff fixtures from ENG3, ENG4, ENG5, ITA2 and FRA2; the previously verified 83 and 1 date-corrected Greek records are frozen and not rechecked.",
+  "original_106_stage_rows": 106,
+  "old_83_secondary_same_date_home_away_FT_unchanged": 83,
+  "previous_1_Greek_date_corrected_with_public_reports_unchanged": 1,
+  "new_second_source_22_all_match_date_home_away_FT": 22,
+  "remaining_phase_results_without_witness": 0,
+  "source_current_rows_verified_by_league": {
+    "ENG3": 5,
+    "ENG4": 4,
+    "ENG5": 2,
+    "ITA2": 10,
+    "FRA2": 1
+  },
+  "new_22_evidence_CSV": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/new22_playoff_specific_independent_FT_facts_20261114.csv",
+  "original_git_source_blob_sha": {
+    "ENG3": "9ae856cbabee7d11d97e870bf77ac68600ed13cb",
+    "ENG4": "28a29e5f0782b2c72584a322a86bba78aad4afcd",
+    "ENG5": "065c51d70960942fa8f328853d0f377a2aa2bded",
+    "ITA2": "1ced7c836d57f8cc2db3d85b51cf4415cfed4a37",
+    "FRA2": "474815153537d43f660717a1a1c152baa52d7e55"
+  },
+  "do_not_rehost_sources": "Only 22 match facts, two source URLs and evidence status per target; no third-party complete league table data imported or republished.",
+  "reported_separate_stage_total_research_identities": 4497,
+  "old_4391_regular_and_other_source_identities_unmodified": true,
+  "prior_8_cross_tier_source_records_HOLD_unchanged": true,
+  "prior_one_admin_awarded_0_0_FRA2_excluded_unchanged": true,
+  "exception_RSSSF_date_typos": {
+    "league_one_final": "RSSSF renders 'May 254'; official EFL confirms Bolton-Stockport final 2026-05-24.",
+    "serie_B_final_first_leg": "RSSSF labels [May 20] for Catanzaro–Monza, but official Lega B match and Monza club state 2026-05-24."
+  },
+  "no_old_result_QA_reruns": true,
+  "new_model_training_approved": 0,
+  "first_source_historical_asof_pre_kickoff_data_time_proven": false,
+  "upstream_rights_complete_model_training_legal_clearance": false,
+  "user_manual_1855_xg_untouched": true,
+  "main_10leagues_M4_original_SHA_predictions_untouched": true,
+  "next_distinct_task": "Official / independent fact-source check ONLY the 8 cross-tier transitional matches if needed, then focus on actual rights-clear 2026-27 five missing competition-season data sources. Never rerun 22, 83, or 1268 result fact checks."
+}

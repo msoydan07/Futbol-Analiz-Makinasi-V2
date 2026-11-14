@@ -1,0 +1,24 @@
+name: 263 Research - 22 only playoff FT fact witnesses from new sources once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-22-playoff-only-offline-fact-witness.yml
+permissions:
+  contents: read
+jobs:
+  only_22_new_phase_uncovered_results:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exactly 22 new independent playoff-result witness facts and immutable original source hashes
+        run: python experiments/263/league_expansion/check_new22_playoff_source_witness_once.py
+      - name: Document zero changed production or old fact checks
+        shell: bash
+        run: |
+          echo "## Only 22 new 2025/26 play-off score identities" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 22/22 independently corroborated through targeted public match-result witness URLs" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Previous 83 + 1 corrected Greek date, old 1268 and 2396 are frozen" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Only research source result facts; pre-kickoff as-of and training-rights missing" >> "$GITHUB_STEP_SUMMARY"
