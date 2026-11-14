@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "Austrian 2025/26 195 FT-score and exact stage results independently confirmed, initial 67 no-stage regular rows resolved via separate RSSSF, 3 conference playoffs excluded from domestic league. With earlier Swiss 54 different-source matches, 249 of 1871 unheld CC0 research candidates have independent FT corroboration; 1622 remain without this level of proof. ALL 2396 still research quarantine, 200 original ENG3/4 FT/identity holds unchanged; 0 training approved. Four CC0 current 2026/27 league snapshots end 2026-09-20, not current as of 2026-11-13. Next new scored QA must target another league-season and separate rights/as-of gate; no repeat of 195 Austria or existing 178/22/472,420/50 audits. Main and SHA untouched.",
+  "next_priority": "ITA2 2025/26 309 CC0 research matches fulltime score matches 309/309 with 380-game second source (RSSSF aggregate season standings support). Original dates exactly correct 261; the 47 one-day mismatches now independently verified actual kickoff dates by La Repubblica, and the 36-day Juve Stabia-Bari reschedule is officially confirmed by Lega B. Do not silently edit source timestamps; maintain separate overlay and as-of proof before training. Prior Austria 195 and Swiss 54 score proofs -> 558 of 1871 unheld CC0 candidates now independent FT checked, 1313 still without match-level corroboration. All 2396 original research candidates quarantined and training admissions 0; 200 ENG3/4 holds intact. Next new work target different league-season (not Italy 309, Austria 195, Swiss54) and rights+as-of closure, preserving immutable main M4 / 10 leagues / SHA seals.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -525,5 +525,32 @@
     "training_rows_added": 0,
     "existing_main_M4_SHA_unchanged": true,
     "do_not_repeat": "Do not re-run these 195 RSSSF independently confirmed match scores if source hashes unchanged; also do not repeat previous 178/22/472,420/50 verified cases."
+  },
+  "ita2_2025_26_independent_309_FT_date_closure_20261114": {
+    "status": "309_OF_309_SECOND_SOURCE_FULLTIME_SCORES_VERIFIED__48_ACTUAL_KICKOFF_DATE_CORRECTIONS_INDEPENDENTLY_ADJUDICATED",
+    "final_evidence": "experiments/263/league_expansion/ita2_2025_26_309_complete_independent_FT_real_date_evidence_20261114.json",
+    "score_full_batch_action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43573281028",
+    "date_48_reconciliation_action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43573462702",
+    "independent_47_true_date_action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43573832795",
+    "original_scored_research_match_rows": 309,
+    "second_source_FT_and_home_away_equal_total": 309,
+    "original_date_exact": 261,
+    "source_round_day_vs_true_kickoff_day_disagree": 48,
+    "one_day_differences_date_verified_by_third_source": 47,
+    "postponed_36_days_date_and_0_0_confirmed_by_league_federation": 1,
+    "independent_second_source_full_season_380_vs_RSSSF_standings": "20 CLUBS 38 MATCHES EACH 19 HOME 19 AWAY, FULL MATCH",
+    "all_26_0_0_source_scores_validated": true,
+    "source_training_and_rehost_license": "NOT VERIFIED",
+    "original_date_rows_patched": 0,
+    "data_licence_review_and_asof_feature_timestamps_outstanding": true,
+    "original_2396_research_quarantine_rows_byte_intact": true,
+    "new_research_rows_added": 0,
+    "new_training_rows": 0,
+    "prior_CH_54_plus_Austria_195_independent_score_witnesses": 249,
+    "new_Italy_309_independent_score_witnesses": 309,
+    "current_1871_unheld_CC0_independently_score_witnessed": 558,
+    "current_1871_unheld_CC0_remaining_to_independently_score_witness": 1313,
+    "main_M4_and_original_SHA_seals_untouched": true,
+    "no_repeat": "No more source FT and actual date rechecks for same pinned 309 original source rows and three supporting sources absent new contradictory evidence or SHA change."
   }
 }
