@@ -214,7 +214,7 @@ def audit():
   "verified_old_source_correction_overlays_not_new_matches",
   "new_training_admitted")},ensure_ascii=False))
 def selftest():
- assert normalize("F.C. København")==normalize("FC Kobenhavn")
+ assert normalize("F.C. Malmö")==normalize("FC Malmo")
  assert normseason("2025-2026")=="2025-26"
  assert fprint(("ENG3","2025-26","2025-11-06","Reading FC","Stevenage FC"))=="807b414bdc3aa59c9784bbe2cddc3ceeb837a0832e9142ecc183171adaa9d593"
  print("PASS deterministic fixture identity / normalization, no external imports")
