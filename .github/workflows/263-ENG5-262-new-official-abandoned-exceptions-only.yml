@@ -1,0 +1,53 @@
+name: 263 Research - ENG5 only two official abandoned stage exceptions once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-ENG5-262-new-official-abandoned-exceptions-only.yml
+permissions:
+  contents: write
+jobs:
+  two-official-exceptions-no-repeat-other-six-leagues:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate official abandoned-vs-admin-score policy
+        run: python experiments/263/league_expansion/eng5_262_official_abandoned_2025_26_stage_once.py --self-test
+      - name: Check ONLY ENG5 remaining first-source keys, no old score download
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/eng5_262_official_abandoned_2025_26_stage_once.py --run > eng5_262_only.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          txt=Path("eng5_262_only.log").read_text()
+          d=json.loads(txt.split("ENG5_ADMIN_STAGE_START",1)[1].split("ENG5_ADMIN_STAGE_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## ENG5 source quality: exclude 2 abandoned fixtures (1 official award + 1 replay) and 2 playoffs\n")
+            f.write("- Status: "+d["status"]+"\n")
+            f.write("- Newly archived research-only genuine normal matches: "+str(d.get("new_distinct_research_ENG5_fixture_identities",0))+"\n")
+            f.write("- Do NOT treat awarded 0-0 or abandoned Dec 2-1 as true FT. No model fitting.\n")
+          assert d["status"]=="ENG5_2025_26_262_NEW_COMPLETED_REGULAR_MATCH_RESEARCH_ARCHIVED__2_OFFICIAL_ABANDONMENT_EVENTS_EXCLUDED",d
+          assert d["new_distinct_research_ENG5_fixture_identities"]==262
+          assert d["new_training_rows_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-ENG5-262-scored-normal-only-admin-award-separated
+          path: |
+            eng5_262_only.log
+            experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/eng5_2025_26*
+          retention-days: 14
+      - name: Commit only newly checked 262 research records and exceptional ledger
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/eng5_2025_26*
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): ENG5 262 genuine FT research-only after two official abandoned/awarded exceptions"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
