@@ -1,0 +1,74 @@
+{
+  "created_on": "2026-11-14",
+  "status": "INDEPENDENT_195_OF_195_DATE_CLUB_SCORE_AND_STAGE_QA_PASS__NO_TRAINING_ADMISSION",
+  "league": "AUT1",
+  "season": "2025-26",
+  "source_score_repository": "https://github.com/openfootball/football.json",
+  "source_publisher_license": "CC0-1.0 as published; upstream-rights review separate",
+  "independent_source": "https://www.rsssf.org/tableso/oost2026.html",
+  "independent_page_sha256": "4a4791b0700b097128041a4bf5ce67442b0c16741e335f7dc0095d008818f47b",
+  "github_actions_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43572573475",
+  "job_id": 132379922817,
+  "verifier": "experiments/263/league_expansion/verify_aut1_2526_195_rsssf_stage_ft_once.py",
+  "frozen_input_sources": [
+    {
+      "path": "experiments/263/league_expansion/training_2025_26_cc0_scored_QUARANTINE.csv",
+      "git_blob_sha": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+      "AUT1_2025_26_rows": 67
+    },
+    {
+      "path": "experiments/263/league_expansion/score_shape_recovery_295_2526_QUARANTINE_20261113.csv",
+      "git_blob_sha": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+      "AUT1_2025_26_rows": 128
+    }
+  ],
+  "checks": {
+    "all_independent_scores_equal": 195,
+    "scores_differ": 0,
+    "unrecognized_teams": 0,
+    "incorrect_match_dates": 0,
+    "wrong_home_away": 0,
+    "stage_conflicts": 0,
+    "only_in_research": 0,
+    "only_in_independent_source": 0
+  },
+  "independent_competition_stages": {
+    "regular_season": 132,
+    "championship_round": 30,
+    "relegation_round": 30,
+    "conference_league_qualifying_playoffs": 3
+  },
+  "previously_unlabeled_67_match_stages": {
+    "source_metadata_missing": 67,
+    "independent_result_section_verified_as_regular": 67,
+    "source_match_rows_rewritten": 0,
+    "stage_label_allowed_as_research_only_overlay": "regular; no direct training until complete acceptance"
+  },
+  "stage_specific_guard": {
+    "standard_domestic_league_training_exclude_exactly_3_conference_playoff_results": true,
+    "allowed_separate_competition_stage_only_after_legal_and_asof_checks": true,
+    "event_key_facts": [
+      {
+        "date": "2026-05-19",
+        "home": "SV Ried",
+        "away": "Wolfsberger AC"
+      },
+      {
+        "date": "2026-05-22",
+        "home": "SV Ried",
+        "away": "Rapid Wien"
+      },
+      {
+        "date": "2026-05-25",
+        "home": "Rapid Wien",
+        "away": "SV Ried"
+      }
+    ]
+  },
+  "source_independent_scores_rehosted": false,
+  "new_scored_research_quarantine_rows": 0,
+  "match_result_score_witness_passes_but_training_rights_and_vintage_open": true,
+  "training_rows_approved": 0,
+  "production_main_M4_and_old_SHA_changed": false,
+  "loop_prevention": "Do not repeat independent score QA for same pinned 195 research rows and RSSSF sha; progress only to source rights and historical pre-kickoff feature availability/chronological shadow training."
+}
