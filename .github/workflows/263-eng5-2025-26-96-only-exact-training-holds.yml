@@ -1,0 +1,47 @@
+name: 263 Research - Only 96 ENG5 FT mismatch HOLD keys
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-eng5-2025-26-96-only-exact-training-holds.yml
+permissions:
+  contents: read
+jobs:
+  preserve-200-existing-confirm-96-new-HOLD-identities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Frozen original ENG5 296 and exact new HOLD schema tests
+        run: python experiments/263/league_expansion/extract_eng5_96_exact_FT_discrepancy_hold_only.py --self-test
+      - name: Identify ONLY 96 discrepant CC0 source keys against SHA-pinned second source
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/extract_eng5_96_exact_FT_discrepancy_hold_only.py --live | tee eng5_96_hold.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          r=Path("eng5_96_hold.log").read_text(encoding="utf-8")
+          a=r.index("ENG5_HOLD_96_START")+len("ENG5_HOLD_96_START")
+          b=r.index("ENG5_HOLD_96_END")
+          d=json.loads(r[a:b])
+          assert d["status"]=="EXACT_96_NATIONAL_LEAGUE_SCORE_OR_DATE_DISCREPANCY_KEYS_ON_HOLD"
+          assert d["hold_count"]==96
+          assert len(d["held_original_research_match_keys"])==96
+          assert d["prior_200_second_source_FT_date_passes_not_retested"]==200
+          assert d["training_rows_admitted"]==0
+          Path("eng5_96_original_source_only_training_holds.json").write_text(json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## Research-only National League (2025/26) FT/date quality exclusions\n")
+            f.write("- 96 exact original CC0 source match identities on HOLD.\n")
+            f.write("- 200 previously verified ENG5 results not retested or modified.\n")
+            f.write("- Source-file hash guard passed. No third-party full score tables published.\n")
+            f.write("- No model training, no M4 or sealed forecast modifications.\n")
+          PY
+      - name: Retain original source HOLD keys as aggregate private research action artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-eng5-96-source-match-keys-HOLD
+          path: eng5_96_original_source_only_training_holds.json
+          retention-days: 14
