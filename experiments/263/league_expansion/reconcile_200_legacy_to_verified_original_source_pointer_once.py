@@ -61,7 +61,7 @@ def run():
   lg=item["league"];dt=item["date"];home=item["home"];away=item["away"]
   assert lg in ("ENG3","ENG4")
   identity=(lg,dt,home,away)
-  assert identity in other_hold
+  assert (lg,"2025-26",dt,home,away) in other_hold
   orig=original_by[lg].get((dt,home,away))
   assert orig is not None
   reason=item["quality_hold_reason"]
