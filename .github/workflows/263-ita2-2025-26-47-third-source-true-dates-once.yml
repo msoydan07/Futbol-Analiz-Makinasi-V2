@@ -1,0 +1,42 @@
+name: 263 Research - ITA2 47 Real Date Third-source Reconciliation
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-ita2-2025-26-47-third-source-true-dates-once.yml
+permissions:
+  contents: read
+jobs:
+  real-47-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify independent Italian calendar parser, exact dates and frozen 309 research baseline
+        run: python experiments/263/league_expansion/verify_ita2_2526_47_other_real_kickoff_dates_once.py --self-test
+      - name: Compare only 47 historical kickoff dates to third source
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/verify_ita2_2526_47_other_real_kickoff_dates_once.py --run | tee ita47_third_date.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          raw=Path("ita47_third_date.log").read_text()
+          a=raw.index("ITA47_THIRD_DATE_START")+len("ITA47_THIRD_DATE_START")
+          b=raw.index("ITA47_THIRD_DATE_END")
+          d=json.loads(raw[a:b])
+          Path("ita47_real_date_third_source_aggregate.json").write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as s:
+            s.write("## Serie B 47 actual kickoff dates vs third published calendar\n\n")
+            for k in ("status","corrected_kickoff_date_equal_second_vs_third_source",
+                      "missing_count","previous_exact_date_cases_not_rechecked",
+                      "previous_postponed_36_day_case_not_rechecked"):
+              s.write("- "+k+": "+str(d.get(k))+"\n")
+            s.write("\nOriginal 309 source rows left byte-identical; no training, only aggregate evidence.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-ita2-47-real-date-third-source-aggregate
+          path: ita47_real_date_third_source_aggregate.json
+          retention-days: 14
