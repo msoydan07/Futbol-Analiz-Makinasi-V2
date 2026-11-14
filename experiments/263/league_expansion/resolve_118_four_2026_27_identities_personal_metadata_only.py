@@ -203,6 +203,32 @@ def reconcile(local,remote,league):
 def run():
  before=json.loads(PREVIOUS.read_text())
  locally=old()
+ # No repeat query once 4/4 source identity comparison has a frozen,
+ # same-cutoff successful aggregate report. The raw source was not archived.
+ if OUT.exists():
+  prior=json.loads(OUT.read_text(encoding="utf-8"))
+  oldby=prior.get("league_results",{})
+  if (prior.get("cutoff")==CUTOFF and set(oldby)==set(SPECS) and
+      all(oldby[lg].get("local")==spec["local_expected"] and
+          oldby[lg].get("source")==spec["source_expected"] and
+          oldby[lg].get("curated_team_roster_date_score_matches")==spec["local_expected"] and
+          oldby[lg].get("curated_team_roster_source_date_or_FT_conflicts_hold")==0 and
+          oldby[lg].get("source_missing_identity_candidates_after_curated_aliases")==
+              spec["source_expected"]-spec["local_expected"]
+          for lg,spec in SPECS.items())):
+   prior["status"]="FOUR_LEAGUE_176_OF_176_MATCHED_118_SOURCE_ONLY_CANDIDATES_RIGHTS_HOLD"
+   prior["source_successful"]=4
+   prior["source_access_blocked"]=0
+   prior["source_only_candidate_count_after_canonical_match"]=118
+   prior["identities_known_present_in_old_archive_and_source"]=176
+   prior["reuse_existing_successful_identity_evidence_without_source_requests"]=True
+   prior["new_public_fixture_rows"]=0
+   prior["new_model_training_rows"]=0
+   OUT.write_text(json.dumps(prior,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+   print(json.dumps({"status":prior["status"],"old_exactly_matched":176,
+      "source_only_candidates":118,"source_requests_this_run":0,
+      "new_public_fixture_rows":0,"new_model_training_rows":0}))
+   return
  report={
   "date":"2026-11-14","cutoff":"2026-11-13",
   "status":"FOUR_SOURCE_IDENTITY_RECONCILIATION_VOLATILE_METADATA_ONLY",
@@ -262,8 +288,14 @@ def run():
      "previous_source_count_only":spec["source_expected"],
      "previous_local_count":spec["local_expected"],
      "no_new_match_approved":True}
- report["source_successful"]=sum("strict_same_date_home_away" in x for x in report["league_results"].values())
+ report["source_successful"]=sum("curated_team_roster_date_score_matches" in x for x in report["league_results"].values())
  report["source_access_blocked"]=4-report["source_successful"]
+ report["source_only_candidate_count_after_canonical_match"]=sum(
+  x.get("source_missing_identity_candidates_after_curated_aliases",0)
+  for x in report["league_results"].values())
+ report["identities_known_present_in_old_archive_and_source"]=sum(
+  x.get("curated_team_roster_date_score_matches",0)
+  for x in report["league_results"].values())
  OUT.write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
  print(json.dumps({"status":report["status"],
    "successful":report["source_successful"],"blocked":report["source_access_blocked"],
