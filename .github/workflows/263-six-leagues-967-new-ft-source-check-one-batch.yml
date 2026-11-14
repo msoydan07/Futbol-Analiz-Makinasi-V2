@@ -1,0 +1,52 @@
+name: 263 Research - Six leagues 967 new FT scores one batch
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-six-leagues-967-new-ft-source-check-one-batch.yml
+permissions:
+  contents: read
+jobs:
+  six-leagues-eight-season-groups:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact frozen 967 scores, 200 holds, aliases and synthetic 0-0 QA
+        run: python experiments/263/league_expansion/audit_6_leagues_967_scores_one_batch_20261114.py --self-test
+      - name: One combined eight-source crosscheck with fail-closed group statuses
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/audit_6_leagues_967_scores_one_batch_20261114.py --live | tee six_league_967_results.log
+          python - <<'PY'
+          from pathlib import Path
+          import json,os
+          s=Path("six_league_967_results.log").read_text(encoding="utf-8")
+          a=s.index("SIX_LEAGUE_967_START")+len("SIX_LEAGUE_967_START")
+          b=s.index("SIX_LEAGUE_967_END")
+          data=json.loads(s[a:b])
+          assert data["candidate_count"]==967
+          assert data["source_group_count"]==8
+          assert data["new_training_admissions"]==0
+          assert data["totals"]["research_candidates"]==967
+          Path("six_leagues_967_eight_groups_qa_aggregate.json").write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Six leagues, eight league-seasons, 967 new research score facts\n")
+            f.write("| Group | Scoped | Exact date + FT | Score same, date different | Score conflict | Unmatched | Status |\n")
+            f.write("|---|---:|---:|---:|---:|---:|---|\n")
+            for g in data["groups"]:
+              f.write("| {} | {} | {} | {} | {} | {} | {} |\n".format(
+                g["group"],g["research_candidates"],g.get("exact_date_team_FT_confirmed","?"),
+                g.get("score_matches_but_date_disagrees","?"),g.get("source_FT_disagreement","?"),
+                g.get("second_source_fixture_not_identified","?"),g["status"]))
+            f.write("\n- **Total exact matches:** "+str(data["totals"]["exact_date_team_FT_confirmed"])+"/967\n")
+            f.write("- **NOT independently verified or date-adjudicated:** "+str(data["totals"]["unresolved_or_unchecked"])+"\n")
+            f.write("- **Training admissions:** 0; prior 200 holds, production M4 and sealed predictions untouched.\n")
+          PY
+      - name: Store aggregate only, never bulk rehost third-party source
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-six-leagues-967-new-score-QA-aggregate
+          path: six_leagues_967_eight_groups_qa_aggregate.json
+          retention-days: 14
