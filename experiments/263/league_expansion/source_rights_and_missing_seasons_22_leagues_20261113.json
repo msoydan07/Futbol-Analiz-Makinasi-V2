@@ -684,5 +684,19 @@
     "browser_source": "https://www.nonleaguematters.co.uk/divisions/1/16/",
     "evidence_caveat": "Browser comparison with third-result page, not successful GitHub HTTP programmatic scrape; source lineage independent status unproven; no M4 integration",
     "do_not_repeat": "Avoid the blocked CI third-source endpoint. Only fresh and justified licensed source/feature-vintage adjudication remains, not the same November-December match review."
+  },
+  "final_2396_296_hold_rights_feature_vintage_gate_20261114": {
+    "status": "PASSED_GITHUB_ACTIONS_RESEARCH_ONLY__296_EXACT_HOLDS__NO_TRAINING_ADMISSION",
+    "evidence": "experiments/263/league_expansion/2396_296_hold_rights_and_feature_vintage_final_20261114.json",
+    "successful_action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43585761695",
+    "exact_quality_holds": 296,
+    "producer_CC0_source_witnesses_outside_holds": 1775,
+    "separated_Austrian_non_regular_playoffs": 3,
+    "CC0_regular_match_asof_timestamps_missing": 1772,
+    "other_license_uncleared": 325,
+    "training_rows_approved": 0,
+    "previous_match_results_not_retested": true,
+    "production_M4_or_sha_seals_modified": false,
+    "future_work": "Timestamped independent data-vintage snapshots and permission checks; no 96-match reruns"
   }
 }

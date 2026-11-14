@@ -1,0 +1,66 @@
+{
+  "checked_on": "2026-11-14",
+  "status": "PASSED_GITHUB_ACTIONS_RESEARCH_ONLY__296_EXACT_HOLDS__NO_TRAINING_ADMISSION",
+  "github_actions_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43585761695",
+  "implementation": "experiments/263/league_expansion/check_2396_296_hold_and_feature_vintage_once.py",
+  "research_branch": "research/263-13-lig-22-havuz-20261113",
+  "season_scope": [
+    "2025-26",
+    "2026-27"
+  ],
+  "pool_scored_quarantine": 2396,
+  "disjoint_partitions": {
+    "prior_eng3_eng4_source_quality_holds": 200,
+    "new_eng5_original_score_date_quality_holds": 96,
+    "rights_unclear_322_ccby_compilation_plus_3_third_party": 325,
+    "austrian_conference_playoff_outside_regular_league": 3,
+    "openfootball_CC0_score_witnessed_but_missing_asof_vintage": 1772
+  },
+  "cc0_publisher_claim_total": 2071,
+  "cc0_publisher_claim_outside_explicit_296_holds": 1775,
+  "cc0_ordinary_league_not_held": 1772,
+  "asof_metadata_missing_count": 1772,
+  "asof_missing_fields": [
+    "kickoff_at_utc",
+    "available_at_utc",
+    "source_observed_at_utc"
+  ],
+  "synthetic_timestamped_feature_gate": "PASS; strict earlier date, publication earlier than kickoff, reject naive timestamps, exclude target, same-day, future and cross-season/leagues",
+  "result_features_policy": "ft_home/ft_away/ht_home/ht_away/xG from target fixture MUST never be input features. Labels may reflect outcome only, after fixture completion, and cannot be passed into input columns.",
+  "rights_sources": [
+    {
+      "source": "https://github.com/openfootball/football.json/blob/master/LICENSE.md",
+      "scope": "CC0 published dataset",
+      "interpretation": "Publisher license supports reuse of the publisher's rights; third-party rights and source accuracy not warranted."
+    },
+    {
+      "source": "https://github.com/openfootball/football.json/blob/master/README.md",
+      "scope": "Generated football.json from upstream Football.TXT; manual upstream updates",
+      "interpretation": "Do not assume a daily JSON build guarantees current football facts."
+    },
+    {
+      "source": "https://football-data.co.uk/contact.php",
+      "scope": "Free match result CSV website",
+      "interpretation": "Private individual/academic research with light automated access only; no heavy commercial or data-training scrapes; second-source QA only, not authorized bulk M4 training."
+    },
+    {
+      "source": "https://wiki.creativecommons.org/wiki/CC0_FAQ",
+      "scope": "CC0 third-party limits",
+      "interpretation": "CC0 does not remove unrelated third-party rights."
+    }
+  ],
+  "proof_summaries": {
+    "completed_old_QA_rechecks": 0,
+    "score_sources_refetched": 0,
+    "manual_xg_1855_workbook_mutated": false,
+    "old_871_plus_904_score_checks_unchanged": true,
+    "source_original_2396_CSV_blobs_modified": false,
+    "old_200_plus_96_HOLD_CSV_modified": false,
+    "production_M4_SHA_and_signed_predictions_mutated": false,
+    "new_training_rows_promoted": 0,
+    "shadow_model_fits_run": 0
+  },
+  "next_step": "A future immutable source-vintage snapshot registry for permitted match facts, with timestamps and strict chronological feature assembly; separate license/quality promotion before shadow backtest.",
+  "no_repeat": "Do not rerun this unchanged pinned-source classification, 96 disputed match browser review or prior 871/904 scored-result QA. Only re-evaluate after source SHA changes, new permission/provenance proof, or newly timestamped snapshots.",
+  "notes": "This is a source-rights engineering risk gate, not a legal opinion; a missing timestamp in the current research records cannot be retroactively fabricated."
+}
