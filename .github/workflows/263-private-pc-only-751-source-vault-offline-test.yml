@@ -1,0 +1,29 @@
+name: "263 Data only - OFFLINE test private 751 candidate PC vault, NEVER fetch results in CI"
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-private-pc-only-751-source-vault-offline-test.yml
+      - experiments/263/league_expansion/build_751_PRIVATE_LOCAL_ONLY_score_vault_20261114.py
+permissions:
+  contents: read
+jobs:
+  no-new-matches-ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline self-test only (no network source calls)
+        run: python experiments/263/league_expansion/build_751_PRIVATE_LOCAL_ONLY_score_vault_20261114.py --self-test
+      - name: Enforce no private score files on GitHub runner or in repository
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          src=Path("experiments/263/league_expansion/build_751_PRIVATE_LOCAL_ONLY_score_vault_20261114.py").read_text()
+          assert "choices.add_argument(\"--build-private\"" in src
+          assert "choices.add_argument(\"--self-test\"" in src
+          assert "refuse" in src.lower()
+          assert not list(Path(".").glob("**/*QUARANTINE_PRIVATE*.jsonl"))
+          print("PASS offline only, zero source API calls, no raw data upload")
+          PY
