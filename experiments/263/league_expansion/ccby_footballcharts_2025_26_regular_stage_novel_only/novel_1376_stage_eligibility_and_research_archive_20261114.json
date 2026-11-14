@@ -1,0 +1,215 @@
+{
+  "status": "2025_26_REGULAR_SEASON_GATED_NOVEL_RESEARCH_ARCHIVE_COMPLETE",
+  "ran_at_utc": "2026-11-14T12:03:52.290062+00:00",
+  "data_source": "Damir Devetak Football Charts Results and Goal Timing CC BY 4.0",
+  "source_DOI": "https://doi.org/10.5281/zenodo.22295583",
+  "source_license": "https://creativecommons.org/licenses/by/4.0/",
+  "official_regular_round_sources": [
+    "https://www.efl.com/news/2026/march/24/sky-bet-efl-end-of-season-schedule--now-confirmed/",
+    "https://www.efl.com/news/2026/march/24/sky-bet-efl-end-of-season-schedule--now-confirmed/",
+    "https://eastleighfc.com/2025/06/2025-26-national-league-key-dates-confirmed/",
+    "https://statz.ai/competitions/serie-b?season=2025-2026",
+    "https://www.lfp.fr/article/ligue-2-bkt-le-calendrier-de-la-saison-2025-2026",
+    "https://www.rsssf.org/tablesg/grk2026.html",
+    "https://clublogin.spfl.co.uk/news/202526-post-split-fixtures-qa"
+  ],
+  "groups": {
+    "ENG3": {
+      "stage_gate": "PASS_COMPLETE_REGULAR_SEASON",
+      "official_last_normal_round": "2026-05-02",
+      "official_rule": "https://www.efl.com/news/2026/march/24/sky-bet-efl-end-of-season-schedule--now-confirmed/",
+      "source_rows": 557,
+      "canonical_unique_through_cutoff": 552,
+      "required_normal_fixture_count": 552,
+      "roster_size": 24,
+      "all_club_games_expected": 46,
+      "per_club_appearances_complete": true,
+      "round_robin_complete": true,
+      "new_candidate_source_only": 208,
+      "new_unique_historic_RESEARCH_ROWS_EXPORTED": 208,
+      "exclude_counts": {
+        "POST_REGULAR_SEASON_EXCLUDED": 5
+      },
+      "old_source_identity_diagnostic": {
+        "EXACT_OLD_SOURCE_DUPLICATE": 256,
+        "NEW_CANDIDATE_REGULAR_STAGE": 208,
+        "OLD_IDENTITY_FT_CONFLICT_HOLD": 85,
+        "DATE_NEAR_OLD_PAIR_HOLD": 3
+      },
+      "hold_examples_capped": [],
+      "source_status": "Old main CC0 and 296 HOLD kept, no old score QA reruns, new source-only scores still need independent FT crosscheck.",
+      "CC_BY_source_blob_sha": "d1d481c5ef5e73f4594f9d948bfe846796645c4e",
+      "research_CSV": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/eng3_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv"
+    },
+    "ENG4": {
+      "stage_gate": "PASS_COMPLETE_REGULAR_SEASON",
+      "official_last_normal_round": "2026-05-02",
+      "official_rule": "https://www.efl.com/news/2026/march/24/sky-bet-efl-end-of-season-schedule--now-confirmed/",
+      "source_rows": 556,
+      "canonical_unique_through_cutoff": 552,
+      "required_normal_fixture_count": 552,
+      "roster_size": 24,
+      "all_club_games_expected": 46,
+      "per_club_appearances_complete": true,
+      "round_robin_complete": true,
+      "new_candidate_source_only": 277,
+      "new_unique_historic_RESEARCH_ROWS_EXPORTED": 277,
+      "exclude_counts": {
+        "POST_REGULAR_SEASON_EXCLUDED": 4
+      },
+      "old_source_identity_diagnostic": {
+        "EXACT_OLD_SOURCE_DUPLICATE": 176,
+        "OLD_IDENTITY_FT_CONFLICT_HOLD": 93,
+        "DATE_NEAR_OLD_PAIR_HOLD": 6,
+        "NEW_CANDIDATE_REGULAR_STAGE": 277
+      },
+      "hold_examples_capped": [],
+      "source_status": "Old main CC0 and 296 HOLD kept, no old score QA reruns, new source-only scores still need independent FT crosscheck.",
+      "CC_BY_source_blob_sha": "512f2a7e402b10ecd25336c9058a038320f962bd",
+      "research_CSV": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/eng4_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv"
+    },
+    "ENG5": {
+      "stage_gate": "HOLD_NOT_PROVEN_COMPLETE_NORMAL_SCHEDULE",
+      "official_last_normal_round": "2026-04-25",
+      "official_rule": "https://eastleighfc.com/2025/06/2025-26-national-league-key-dates-confirmed/",
+      "source_rows": 554,
+      "canonical_unique_through_cutoff": 552,
+      "required_normal_fixture_count": 552,
+      "roster_size": 24,
+      "all_club_games_expected": 46,
+      "per_club_appearances_complete": false,
+      "round_robin_complete": false,
+      "new_candidate_source_only": 263,
+      "new_unique_historic_RESEARCH_ROWS_EXPORTED": 0,
+      "exclude_counts": {
+        "POST_REGULAR_SEASON_EXCLUDED": 2
+      },
+      "old_source_identity_diagnostic": {
+        "EXACT_OLD_SOURCE_DUPLICATE": 200,
+        "OLD_IDENTITY_FT_CONFLICT_HOLD": 82,
+        "NEW_CANDIDATE_REGULAR_STAGE": 263,
+        "DATE_NEAR_OLD_PAIR_HOLD": 7
+      },
+      "hold_examples_capped": [],
+      "source_status": "Old main CC0 and 296 HOLD kept, no old score QA reruns, new source-only scores still need independent FT crosscheck.",
+      "CC_BY_source_blob_sha": "01aa70a635b67e91368f706d35ec7999362bcb79"
+    },
+    "ITA2": {
+      "stage_gate": "PASS_COMPLETE_REGULAR_SEASON",
+      "official_last_normal_round": "2026-05-08",
+      "official_rule": "https://statz.ai/competitions/serie-b?season=2025-2026",
+      "source_rows": 390,
+      "canonical_unique_through_cutoff": 380,
+      "required_normal_fixture_count": 380,
+      "roster_size": 20,
+      "all_club_games_expected": 38,
+      "per_club_appearances_complete": true,
+      "round_robin_complete": true,
+      "new_candidate_source_only": 72,
+      "new_unique_historic_RESEARCH_ROWS_EXPORTED": 72,
+      "exclude_counts": {
+        "POST_REGULAR_SEASON_EXCLUDED": 10
+      },
+      "old_source_identity_diagnostic": {
+        "EXACT_OLD_SOURCE_DUPLICATE": 261,
+        "NEW_CANDIDATE_REGULAR_STAGE": 72,
+        "DATE_NEAR_OLD_PAIR_HOLD": 47
+      },
+      "hold_examples_capped": [],
+      "source_status": "Old main CC0 and 296 HOLD kept, no old score QA reruns, new source-only scores still need independent FT crosscheck.",
+      "CC_BY_source_blob_sha": "995d80a9faec5854252ca8eadb6563a230202652",
+      "research_CSV": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/ita2_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv"
+    },
+    "FRA2": {
+      "stage_gate": "PASS_COMPLETE_REGULAR_SEASON",
+      "official_last_normal_round": "2026-05-09",
+      "official_rule": "https://www.lfp.fr/article/ligue-2-bkt-le-calendrier-de-la-saison-2025-2026",
+      "source_rows": 309,
+      "canonical_unique_through_cutoff": 306,
+      "required_normal_fixture_count": 306,
+      "roster_size": 18,
+      "all_club_games_expected": 34,
+      "per_club_appearances_complete": true,
+      "round_robin_complete": true,
+      "new_candidate_source_only": 190,
+      "new_unique_historic_RESEARCH_ROWS_EXPORTED": 190,
+      "exclude_counts": {
+        "POST_REGULAR_SEASON_EXCLUDED": 3
+      },
+      "old_source_identity_diagnostic": {
+        "EXACT_OLD_SOURCE_DUPLICATE": 116,
+        "NEW_CANDIDATE_REGULAR_STAGE": 190
+      },
+      "hold_examples_capped": [],
+      "source_status": "Old main CC0 and 296 HOLD kept, no old score QA reruns, new source-only scores still need independent FT crosscheck.",
+      "CC_BY_source_blob_sha": "1b7fe8ad9dd8ece9da585bdc8717e91dcb9075ca",
+      "research_CSV": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/fra2_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv"
+    },
+    "GRE1": {
+      "stage_gate": "PASS_COMPLETE_REGULAR_SEASON",
+      "official_last_normal_round": "2026-03-22",
+      "official_rule": "https://www.rsssf.org/tablesg/grk2026.html",
+      "source_rows": 246,
+      "canonical_unique_through_cutoff": 182,
+      "required_normal_fixture_count": 182,
+      "roster_size": 14,
+      "all_club_games_expected": 26,
+      "per_club_appearances_complete": true,
+      "round_robin_complete": true,
+      "new_candidate_source_only": 120,
+      "new_unique_historic_RESEARCH_ROWS_EXPORTED": 120,
+      "exclude_counts": {
+        "CANONICAL_DUPLICATE_SAME_SCORE_SKIPPED": 10,
+        "POST_REGULAR_SEASON_EXCLUDED": 54
+      },
+      "old_source_identity_diagnostic": {
+        "EXACT_OLD_SOURCE_DUPLICATE": 62,
+        "NEW_CANDIDATE_REGULAR_STAGE": 120
+      },
+      "hold_examples_capped": [],
+      "source_status": "Old main CC0 and 296 HOLD kept, no old score QA reruns, new source-only scores still need independent FT crosscheck.",
+      "CC_BY_source_blob_sha": "81e6cf0f8d593fbc703f453e04dc96b22df0cb7f",
+      "research_CSV": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/gre1_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv"
+    },
+    "SCO1": {
+      "stage_gate": "PASS_COMPLETE_REGULAR_SEASON",
+      "official_last_normal_round": "2026-04-12",
+      "official_rule": "https://clublogin.spfl.co.uk/news/202526-post-split-fixtures-qa",
+      "source_rows": 234,
+      "canonical_unique_through_cutoff": 198,
+      "required_normal_fixture_count": 198,
+      "roster_size": 12,
+      "all_club_games_expected": 33,
+      "per_club_appearances_complete": true,
+      "round_robin_complete": true,
+      "new_candidate_source_only": 140,
+      "new_unique_historic_RESEARCH_ROWS_EXPORTED": 140,
+      "exclude_counts": {
+        "POST_REGULAR_SEASON_EXCLUDED": 36
+      },
+      "old_source_identity_diagnostic": {
+        "EXACT_OLD_SOURCE_DUPLICATE": 58,
+        "NEW_CANDIDATE_REGULAR_STAGE": 140
+      },
+      "hold_examples_capped": [],
+      "source_status": "Old main CC0 and 296 HOLD kept, no old score QA reruns, new source-only scores still need independent FT crosscheck.",
+      "CC_BY_source_blob_sha": "a11d301351f1350a156defa7d973da836c0a9444",
+      "research_CSV": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/sco1_2025_26_NEW_REGULAR_SOURCE_ONLY_QA_PENDING.csv"
+    }
+  },
+  "new_research_rows_only_from_schedule_complete_groups": 1007,
+  "base_original_3122_pinned_research_fixture_identities": 3122,
+  "candidate_unique_research_fixture_identities": 4129,
+  "the_1376_previous_source_candidate_only_count": 1376,
+  "remaining_prior_candidate_stage_or_2day_ambiguity_not_admitted": 369,
+  "independent_new_fulltime_score_confirmation_count": 0,
+  "new_model_training_approved": 0,
+  "no_previous_complete_score_qa_batches_repeated": true,
+  "no_2026_27_new_fixture_or_betting_analysis": true,
+  "original_2396_and_old_296_HOLD_data_untouched": true,
+  "previous_DNK192_Swiss228_GER2_306_unmodified": true,
+  "production_M4_10leagues_signed_SHA_untouched": true,
+  "user_1855_manual_xG_untouched": true,
+  "IMPORTANT_CAVEAT": "Stage-tested and deduped research archive only, NOT independently confirmed score facts, publisher vintage evidence, upstream complete rights review or model training clearance.",
+  "next_distinct_step": "Use only fresh permitted independent match-result witnesses for the newly archived and stage-cleared fixture keys, ideally by league batch; do not repeat prior source-fact QA. For held stage groups do not fill missing games with synthetic results."
+}
