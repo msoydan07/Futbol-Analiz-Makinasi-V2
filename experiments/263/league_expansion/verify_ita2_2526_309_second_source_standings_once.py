@@ -205,8 +205,6 @@ def evaluate(raw):
         any(abs((date.fromisoformat(otherdate)-date.fromisoformat(k[0])).days)<=3
             for otherdate,ft in by_pair[k[1:]]))
     missing_all=unmatched_exact-drift_all
-    complete=diagnostics["scored_unique"]==380 and not diagnostics["exclusions"] and
-      as_table["full_season_380_20_club_19_home_19_away_pass"] if False else False
     complete=(diagnostics["rows"]==380 and diagnostics["scored_unique"]==380 and
               not diagnostics["exclusions"] and
               as_table["full_season_380_20_club_19_home_19_away_pass"] and
