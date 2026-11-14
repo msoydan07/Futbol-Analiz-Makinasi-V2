@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "Rights classification completed for all 2396 research quarantine records: 2071 publisher-claimed CC0, including 200 hard legacy FT/identity holds; 1871 without these specific holds STILL need independent row accuracy and upstream rights review, 322 CC BY upstream unclear and 3 other third-party unclear. 0 training approved. Chronological shadow prereg frozen, not executed. 1855 manual xG values not filled; source postgame xG as-of/vintage unconfirmed. Next distinct work: validate accuracy/rights for specific admitted subset without repeating closed historical QA, then chronological shadow experiment. Main M4/10-league sealed records unchanged.",
+  "next_priority": "Austrian 2025/26 195 FT-score and exact stage results independently confirmed, initial 67 no-stage regular rows resolved via separate RSSSF, 3 conference playoffs excluded from domestic league. With earlier Swiss 54 different-source matches, 249 of 1871 unheld CC0 research candidates have independent FT corroboration; 1622 remain without this level of proof. ALL 2396 still research quarantine, 200 original ENG3/4 FT/identity holds unchanged; 0 training approved. Four CC0 current 2026/27 league snapshots end 2026-09-20, not current as of 2026-11-13. Next new scored QA must target another league-season and separate rights/as-of gate; no repeat of 195 Austria or existing 178/22/472,420/50 audits. Main and SHA untouched.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -485,5 +485,45 @@
     "source_CCO_not_entire_quality_approval": true,
     "chronology_prereg_only_no_backtest_yet": true,
     "loop_policy": "No repeats of 178/22/472 English or 420/50 Swiss-Danish completed FT checks. Future work must independently validate source-specific accuracy/rights and point-in-time split for possible 1871 candidate subset; do not auto promote."
+  },
+  "aut1_2025_26_independent_195_and_1871_stage_gate_20261114": {
+    "status": "AUT1_2025_26_195_MATCH_FT_STAGE_QA_PASS_RESEARCH_ONLY",
+    "independent_austria_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43572573475",
+    "independent_austria_proof": "experiments/263/league_expansion/aut1_2025_26_195_full_independent_ft_and_stage_evidence_20261114.json",
+    "stage_and_asof_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43572112472",
+    "stage_1871_snapshot": "experiments/263/league_expansion/1871_CC0_season_stage_and_asof_readiness_20261114.json",
+    "CC0_unheld_candidates": 1871,
+    "Swiss_2026_prior_two_source_score_matches": 54,
+    "newly_Austria_2025_independent_score_and_stage_matches": 195,
+    "Austria_2025_domestic_normal_and_split_games": 192,
+    "Austrian_conference_playoff_separate_stage": 3,
+    "prior_plus_new_distinct_source_score_witness_total": 249,
+    "CC0_candidates_without_this_level_of_fulltime_witness": 1622,
+    "old_200_original_quality_HOLD_preserved": true,
+    "Austria_67_unlabeled_early_games_confirmed_regular": true,
+    "Austrian_stage_distribution": {
+      "regular": 132,
+      "championship": 30,
+      "relegation": 30,
+      "conference_playoff": 3
+    },
+    "current_source_2026_27_last_scored_date": {
+      "CHE1": "2026-09-20",
+      "AUT1": "2026-09-20",
+      "SCO1": "2026-09-20",
+      "GRE1": "2026-09-20"
+    },
+    "source_cutoff": "2026-11-13",
+    "lag_days": 54,
+    "notes": [
+      "Source score corroboration is not complete training rights or pre-kickoff feature vintage proof.",
+      "Three Austrian Conference League qualifiers are not normal domestic league; exclude from ordinary league shadow by default.",
+      "No same-day double-scored club collision within 1871 exact research records; alias variants remain separate issue.",
+      "Current season CC0 source last dates are not the independently discovered latest fixtures, and other Swiss checked score facts stay separate.",
+      "Original 2396 research match rows remain byte identical."
+    ],
+    "training_rows_added": 0,
+    "existing_main_M4_SHA_unchanged": true,
+    "do_not_repeat": "Do not re-run these 195 RSSSF independently confirmed match scores if source hashes unchanged; also do not repeat previous 178/22/472,420/50 verified cases."
   }
 }
