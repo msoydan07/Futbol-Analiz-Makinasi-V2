@@ -1,0 +1,33 @@
+name: 263 Research - One 2026 27 LaLiga official MD12 result fixture gap
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-esp1-current-only-1-official-nov8-possible-FT-once.yml
+permissions:
+  contents: write
+jobs:
+  one_ESP1_nov8_official_MD12_not_119_old_score_QA:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Match only source gap among LaLiga official Nov6 Nov7 Nov8 ten fixtures
+        run: |
+          python experiments/263/league_expansion/esp1_2026_27_one_official_matchday12_missing_source_only.py
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          d=json.loads(Path("experiments/263/league_expansion/esp1_2026_27_official_2026_nov8_gap_only/esp1_2026_27_nov8_source_gap_cannot_guess_20261114.json").read_text())
+          assert d["old_4617_main_result_source_modified"] is False
+          assert d["new_model_training_admissions"]==0
+          assert d["any_other_2026_27_21_leagues_queried_again"] is False
+          PY
+      - name: Preserve new single official fact if source-gap confidently localized, else hold report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/263/league_expansion/esp1_2026_27_official_2026_nov8_gap_only/
+          git commit -m "research(263): isolate only one new LaLiga Nov8 official fixture if unambiguous, no original core modification"
+          git push origin HEAD:research/263-13-lig-22-havuz-20261113
