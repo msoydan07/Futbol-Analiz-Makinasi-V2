@@ -1,0 +1,54 @@
+name: 263 Research - Offline only 3041 source candidate dedup, 8 leagues once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-3041-only-offline-source-dedup-eight-leagues-once.yml
+permissions:
+  contents: write
+jobs:
+  no-network-no-previous-fact-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Frozen base 2396 and old 296 holds plus new aliases
+        run: python experiments/263/league_expansion/reconcile_3041_CC_BY_eight_history_vs_old_once.py --self-test
+      - name: One offline 3041-source identity classification (no remote requests)
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/reconcile_3041_CC_BY_eight_history_vs_old_once.py --run > ccbby_3041_vs_old_identity.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("ccbby_3041_vs_old_identity.log").read_text()
+          d=json.loads(s.split("OFFLINE_EIGHT_3041_START",1)[1].split("OFFLINE_EIGHT_3041_END",1)[0])
+          assert d["source_only_3041_rows_examined"]==3041
+          assert d["old_distinct_research_fixture_count_unchanged"]==3122
+          assert d["training_rows_newly_approved"]==0
+          assert d["older_871_plus_904_crosschecks_retested"]==0
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Historical ONLY: eight licensed CC BY source groups vs old pinned 2396\n")
+            for k,v in d["source_identity_classification_counts"].items():
+              f.write("- "+k+": "+str(v)+"\n")
+            f.write("- All prior fact QA frozen; not a training-data admission.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-3041-CCBY-eight-new-source-vs-old-2396-offline
+          path: |
+            ccbby_3041_vs_old_identity.log
+            experiments/263/league_expansion/ccby_footballcharts_9_other_2025_26_source_ledger/8_leagues_3041_new_source_canonical_vs_old_CC0_one_batch_20261114.json
+          retention-days: 14
+      - name: Persist only one research-only alias/discrepancy report
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_9_other_2025_26_source_ledger/8_leagues_3041_new_source_canonical_vs_old_CC0_one_batch_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): one offline 3041 CC BY source identity dedup; old 2396 pinned, no source score reruns"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
