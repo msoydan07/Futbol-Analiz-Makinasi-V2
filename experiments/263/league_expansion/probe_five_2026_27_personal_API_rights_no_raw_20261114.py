@@ -67,7 +67,7 @@ def match_catalog(items,lg):
   # An exact known code can be used in lieu of a missing catalog country
   # field. Explicitly reject potential women's and youth competitions.
   women_youth=any(s in nn for s in ("women","woman","femenin","under 21","under 19","u19","u21","girls","ladies"))
-  if code and not women_youth and (code_is_target or (name_matches and (country_matches or not cc))):
+  if code and not women_youth and code_is_target and (country_matches or not cc):
    chosen.append({"code":code,"catalog_name":textname or None})
  # Do not report the full catalog and never choose ambiguously.
  if len({x["code"] for x in chosen})!=1:return None,{"candidate_code_count":len({x["code"] for x in chosen})}
@@ -99,8 +99,14 @@ def scored(item):
  home=string_team(item.get("home_team") or item.get("home") or item.get("team1"))
  away=string_team(item.get("away_team") or item.get("away") or item.get("team2"))
  if not home or not away or norm(home)==norm(away):return None
- sh=item.get("home_goals",item.get("home_score",item.get("score_home")))
- sa=item.get("away_goals",item.get("away_score",item.get("score_away")))
+ sh=next((item[k] for k in ("home_goals","home_score","score_home","ft_home","home_ft","goals_home","goals_for_home") if item.get(k) is not None),None)
+ sa=next((item[k] for k in ("away_goals","away_score","score_away","ft_away","away_ft","goals_away","goals_for_away") if item.get(k) is not None),None)
+ # Provider may publish a short full-time pair or a nested FT score;
+ # never infer scores from goal events, minute values or predictions.
+ pair=next((item[k] for k in ("result","ft_result","full_time","ft_score","fulltime_score") if isinstance(item.get(k),str)),None)
+ if pair and (sh is None or sa is None):
+  mm=re.fullmatch(r"\\s*(\\d{1,2})\\s*[-:]\\s*(\\d{1,2})\\s*",pair)
+  if mm:sh,sa=mm.group(1),mm.group(2)
  if isinstance(item.get("score"),dict):
   sc=item["score"]
   sh=sh if sh is not None else sc.get("home")
@@ -194,7 +200,11 @@ def run():
    url=API+"/leagues/"+code+"/results/?season=2026-2027"
    try:
     data=get_json(url)
-    counts=aggregate(match_list(data))
+    source_match_rows=match_list(data)
+    counts=aggregate(source_match_rows)
+    # Schema keys and TYPES only, never result row values or full-score rows.
+    counts["provider_result_row_schema_keys"]=sorted(source_match_rows[0].keys()) if source_match_rows else []
+    counts["provider_result_row_value_types_only"]={k:type(v).__name__ for k,v in (source_match_rows[0].items() if source_match_rows else [])}
     report["by_league"][lg]={
      "status":"PERSONAL_RESEARCH_SOURCE_METADATA_AVAILABLE_NO_RAW_ARCHIVAL" if counts["matched_completed_historical_result_field_rows"]>0 else "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
      "provider_competition_code":code,
