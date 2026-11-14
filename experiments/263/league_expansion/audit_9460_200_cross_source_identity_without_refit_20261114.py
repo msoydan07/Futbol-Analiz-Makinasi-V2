@@ -44,6 +44,8 @@ def result(r):
  a=r.get("ft_away")
  if h in ("",None):h=r.get("home_goals")
  if a in ("",None):a=r.get("away_goals")
+ if h in ("",None):h=r.get("source_ft_home")
+ if a in ("",None):a=r.get("source_ft_away")
  if h in ("",None) or a in ("",None):raise ValueError("MISSING_SCORED_RESULT")
  return (int(h),int(a))
 def fprint(t):
