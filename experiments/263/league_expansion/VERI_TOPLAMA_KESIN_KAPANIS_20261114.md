@@ -35,3 +35,17 @@
 Eski 1.775/461/1.268/106/8 doğrulamalarını ve eski 296 HOLD denetimlerini **aynı kaynak SHA ile yeniden çalıştırma**. Önceki kaynakları yeniden indirme, `main` dalına otomatik birleşme yapma, yeni pilot başlatma, M4'ü veya mühürleri değiştirme. Veri toplama projesi bu kesit için **KAPALI**; model mühendisliği ayrı sonraki aşamadır. Haklar/kimlikler onaylanmadan 13 analitik lig üretime alınmaz.
 
 **Kapanış kararı:** Kullanılabilen sonuç kaynaklarını sakla ve karar manifestinden seç; uygun olmayanları görünümden çıkar; erişim veya hak engeli olanları dürüstçe dışarıda bırak; kaynak toplama için aynı döngüyü tekrarlama.
+
+## 14 Kasım ek mühendislik denetimi — düzeltme / gerçek kapanış sınırı
+
+Bir önceki kapanıştaki 625 dışlanan kaynak satırının **200'ünde** (ENG3 + ENG4, 2025/26) daha önce bağımsız olgusal teyidi yapılmış doğru kaynak karşılığı vardı. Salt kötü eski satırı filtreleyip düzeltmeyi kaybetmek sakıncalıdır. Bu nedenle:
+- **178 yanlış FT skorunun** tarih ve takım kimliği aynı kalmak üzere, üçüncü kaynakça teyit edilen CC BY özgün yayıncı kaynağına birebir karşılıkları bulundu.
+- **22 yanlış maç tarihinin** daha önce tek tek editoryal veya resmî karşılaşma sayfasıyla doğrulanmış doğru tarih ve skor kaynağına birebir karşılığı bulundu.
+- [200 doğrulanmış düzeltme için kaynak satırı işaretçileri](./CORRECTED_200_ENG3_ENG4_SOURCE_POINTERS_NOT_ADDITIVE_20261114.csv) ve [makinece okunabilir kontrol raporu](./CORRECTED_200_ENG3_ENG4_RESEARCH_ONLY_NOT_TRAINING_20261114.json) eklendi. Önceki 200 hatalı kaynak satırı HOLD kalır; kaynak değeri üstüne yazılmaz. **Düzeltmeler 200 yeni maç değildir ve eski 9.460 kaynak satırına otomatik eklenmez.** Doğru kaynağa erişim ayrı karar nesnesiyle sağlanır.
+- İngiltere National League'in geriye kalan 96 uyuşmazlık HOLD'u üçüncü kaynağın bağımsızlığı ve haklar tam kanıtlı olmadığı için düzeltilmiş eğitim verisine alınmaz.
+- 4.617 ana bazın, 4.218 araştırma olgusu seçiminin ve yeni modele **0** kabul kararının sayıları değişmedi.
+- [Düzeltme Github Actions kalite testi](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43621178442) başarılıdır.
+
+**Kritik nitelik ayrımı:** Kaynak skor olgusu güvenilirliği, kaynak/yeniden kullanım hakkı, kronolojik bilgi güvenliği ve yeni modellerde performans kazanımı dört ayrı kabul kapısıdır. 4.218 araştırma olgusuna `SCORE_FACT_RESEARCH_ONLY_QA_PASS` yazılması diğer üç kapıyı geçmiş oldukları anlamına gelmez. Mevcut çalışma yalnız skor-olgusu arşivine ilişkin *koşullu kapanıştır*, 22 ligin tüm kayıtları için tam kalite sertifikası değildir.
+
+**Bir sonraki mühendislik işi:** Yeni toplu kaynak hasadı değil; mevcut 4.617 geçmiş çekirdek sonucu, 4.218 araştırma skor-olgusu kaynak seçimini ve 200 düzeltme işaretçisini ayrı tutarak kronolojik tahmin/özellik kullanım kurallarını sağlamlaştırmak. Kaynak hakları veya gerçek geçmiş `available_at` kanıtı bulunmadan yeni eğitim satırlarını üretime sokmamak. Elle yapılacak 1.855 xG girişi bağımsız devam edebilir.
