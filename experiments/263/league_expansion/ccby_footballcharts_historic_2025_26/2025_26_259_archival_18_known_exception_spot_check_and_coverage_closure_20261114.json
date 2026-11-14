@@ -1,0 +1,122 @@
+{
+  "report_date": "2026-11-14",
+  "status": "PASS_259_NEW_LICENSED_2025_26_HISTORICAL_MATCH_IDENTITIES__18_OLD_EXCEPTION_SPOT_CHECKS_PASS",
+  "scope": "Only new CC BY dataset for 2025-26 Denmark Superliga and Swiss Super League; exactly one 76,991-row public source scan, filtered to 192 Danish and 229 raw Swiss; no previous completed match-score workflows repeated",
+  "github_actions_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43590781634",
+  "licensed_dataset": {
+    "author": "Damir Devetak (Football Charts)",
+    "name": "Football Charts: Match Results and Goal Timing",
+    "license": "CC BY 4.0",
+    "url": "https://huggingface.co/datasets/Damir81/football-charts-results-goal-timing",
+    "doi": "https://doi.org/10.5281/zenodo.22295583",
+    "source_sha256": "08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10",
+    "source_rows_scanned": 76991,
+    "raw_source_bytes": 9800279,
+    "attribution_file": "experiments/263/league_expansion/ccby_footballcharts_historic_2025_26/ATTRIBUTION_LICENSE.md"
+  },
+  "accepted_research_source_results": {
+    "DNK1_2025_26": {
+      "new": 192,
+      "source_raw": 192,
+      "completed_season": 192,
+      "official_standings_reconstruction": "PASS",
+      "new_data_git_blob": "7fb613889d223530ec0b45e3daca52ac971dc2db"
+    },
+    "CHE1_2025_26": {
+      "new": 67,
+      "source_raw": 229,
+      "after_excluded_Aarau_v_Grasshoppers_playoff": 228,
+      "exact_overlap_with_existing_corrected_ODbL": 161,
+      "additional_missing_before": 67,
+      "completed_season": 228,
+      "official_standings_reconstruction": "PASS",
+      "new_data_git_blob": "e950f59f949b24dcac049c9f4442349b555c5c13"
+    }
+  },
+  "prior_known_specific_exception_checks_only": {
+    "DNK1_2025_26": {
+      "checked": 6,
+      "passed": 6,
+      "keys": [
+        {
+          "date": "2025-11-09",
+          "home": "Brondby",
+          "away": "Nordsjaelland",
+          "ft": "2-0",
+          "reason": "prior official date/FT exception"
+        },
+        {
+          "date": "2026-02-23",
+          "home": "Brondby",
+          "away": "Sonderjyske",
+          "ft": "0-0",
+          "reason": "prior official date/FT exception"
+        },
+        {
+          "date": "2026-04-06",
+          "home": "Odense",
+          "away": "Fredericia",
+          "ft": "1-0",
+          "reason": "prior official date/FT exception"
+        },
+        {
+          "date": "2025-08-17",
+          "home": "Vejle",
+          "away": "Midtjylland",
+          "ft": "0-2",
+          "reason": "previous independent source erroneous 1-3; official 0-2"
+        },
+        {
+          "date": "2026-05-10",
+          "home": "Brondby",
+          "away": "AGF",
+          "ft": "0-2",
+          "reason": "previous independent source missing FT"
+        },
+        {
+          "date": "2026-05-10",
+          "home": "Nordsjaelland",
+          "away": "Midtjylland",
+          "ft": "0-0",
+          "reason": "previous independent source missing FT"
+        }
+      ]
+    },
+    "CHE1_2025_26": {
+      "checked": 12,
+      "passed": 12,
+      "source_prior_exception_ledger": "experiments/263/league_expansion/che1_2526_12_official_exception_score_witnesses_20261114.json",
+      "note": "Twelve previously documented specific Swiss official error cases match assembled 161 corrected ODbL + 67 new CC BY, after canonicalizing team aliases. No old 228 bulk independent-score verification rerun."
+    }
+  },
+  "count_reconciliation": {
+    "original_20261113_2396_research_quarantine": 2396,
+    "previous_novel_separate_GER2_ODbL": 306,
+    "previous_partial_CHE1_ODbL": 161,
+    "this_DNK1_2025_26_licensed_CC_BY": 192,
+    "this_unique_CHE1_2025_26_licensed_CC_BY": 67,
+    "total_distinct_historic_research_fixture_identities": 3122,
+    "previous_296_original_HOLD_unchanged": 296,
+    "original_6_Swiss_source_disputes_officially_resolved_before_and_immutably_documented": true
+  },
+  "remaining_unarchived_target_nonproduction_cells": [
+    "ENG5/2026-27",
+    "ESP2/2026-27",
+    "ITA2/2026-27",
+    "FRA2/2026-27",
+    "DNK1/2026-27"
+  ],
+  "additional_not_imported_source_narrow_scope": "632 previously discovered open-matchday compilation rows across five 2026/27 leagues have upstream provider rights unclear; no file rows rehosted, no distinct research addition",
+  "restrictions": {
+    "model_training_newly_approved": 0,
+    "old_2396_CSV_blobs_mutated": false,
+    "source_155_plus_6_SWISS_witness_old_QA_rerun": false,
+    "source_DNK1_192_previous_crosscheck_rerun": false,
+    "source_GER2_306_previous_crosscheck_rerun": false,
+    "production_10_league_M4_and_signed_sha_touched": false,
+    "xg_manual_1855_workbook_touched": false,
+    "source_historical_available_at_original_kickoff_proven": false,
+    "underlying_source_rights_beyond_published_CC_BY_grant_fully_audited": false
+  },
+  "next_productive_archive_goal": "Resolve five 2026/27 missing league-season original rights-clean source feeds; preserve previous CC-BY source SHA and 18 known-exception checks, never rescan this unmodified 2025/26 snapshot."
+}

@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "Historical data completion ONLY: 2863 research-only distinct identities; GER2 306 new all independently checked, Swiss partial 161 has 155 secondary matches +6 official corrected with no added fixture identities, 67 Swiss games absent from licensed ODbL source. Five current-season external compiled sources expose 632 match rows but license only for informational/noncommercial and upstream rights unclear: metadata-only, zero ingested. Danish 2025/26 license-open first-party source remains missing. No reopening passed QC, no M4 changes.",
+  "next_priority": "Historical ONLY 22 leagues x seasons. Research 3122 distinct source-specific fixture identities: baseline 2396 + GER2 306 novel (all independent-score-witnessed) + Swiss ODbL 161 (155 corroborated +6 official corrected) + Danish 2025/26 new CC BY 192 + Swiss 2025/26 additional CC BY 67. Reconstruct official 2025/26 standings PASS for Danish192 and Switzerland228; 18 known historical error-event checks PASS without rerunning full source QA. Five original rights-cleared 2026/27 research archives remain missing; 632 externally compiled rows on source-rights hold, not imported. Zero new training approval. Consult no-repeat lock before next work; never tamper with main M4 or xG workbook.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -827,5 +827,25 @@
     "research_unique_match_identities_unchanged": 2863,
     "freeze_old_461_second_score_witness_matches": true,
     "not_repeat_unchanged_source_hashes": true
+  },
+  "historical_CC_BY_DNK1_CHE1_259_20261114": {
+    "status": "PASS_259_NEW_LICENSED_2025_26_HISTORICAL_MATCH_IDENTITIES__18_OLD_EXCEPTION_SPOT_CHECKS_PASS",
+    "source_snapshot_sha256": "08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10",
+    "evidence": "experiments/263/league_expansion/ccby_footballcharts_historic_2025_26/2025_26_259_archival_18_known_exception_spot_check_and_coverage_closure_20261114.json",
+    "action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43590781634",
+    "licensed_CCBY_DNK1_2025_26_new": 192,
+    "licensed_CCBY_CHE1_2025_26_new": 67,
+    "total_new_distinct_research": 259,
+    "aggregate_3122": 3122,
+    "official_standings_reconstruction_both_PASS": true,
+    "old_fault_examples_targeted_18_of_18_PASS": true,
+    "original_source_2396_and_M4_unchanged": true,
+    "training_new_approved": 0
+  },
+  "historical_loop_guard_20261114": {
+    "report": "experiments/263/league_expansion/historical_loop_prevention_new_archive_3122_20261114.json",
+    "status": "NO_REPEAT_SOURCE_AND_WORKFLOW_LOCK_FOR_HISTORICAL_DATA_ARCHIVE",
+    "source_sha256": "08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10",
+    "no_repeat_old_verified": true
   }
 }
