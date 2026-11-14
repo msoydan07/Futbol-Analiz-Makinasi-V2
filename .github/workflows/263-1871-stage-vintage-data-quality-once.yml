@@ -1,0 +1,46 @@
+name: 263 Research - Stage and Vintage for 1871 CC0 candidates
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-1871-stage-vintage-data-quality-once.yml
+permissions:
+  contents: read
+jobs:
+  classify-stage-vintage-once:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic match stage, playoffs and as-of boundary tests
+        run: python experiments/263/league_expansion/check_1871_stage_vintage_shadow_gates_once.py --self-test
+      - name: Offline all 1871 source records, no third-party download or old-score QA repeat
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/check_1871_stage_vintage_shadow_gates_once.py --run | tee new_stage_qa.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          raw=Path("new_stage_qa.log").read_text(encoding="utf-8")
+          start=raw.index("NEW_STAGE_QA_START")+len("NEW_STAGE_QA_START")
+          end=raw.index("NEW_STAGE_QA_END")
+          d=json.loads(raw[start:end])
+          assert d["CC0_not_explicitly_held"]==1871
+          assert d["old_200_held_source_identities_unchanged"]==200
+          assert d["training_admitted"]==0
+          assert d["competition_stage_separation"]["AUT1_2025_26"]["extra_conference_league_playoffs_not_normal_league"]==3
+          Path("research_1871_stage_vintage_aggregate.json").write_text(json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## Distinct new QA: competition stage and pre-kickoff vintage\n\n")
+              f.write("- 1871 source CC0-published research candidates, 0 new training admissions\n")
+              f.write("- Austrian 2025/26 season: 132 league regular candidates, 60 group games, 3 Conference League play-offs held separate\n")
+              f.write("- Same-club same-day suspect pairs: "+str(d["same_club_two_scored_games_on_same_day"]["potential_anomaly_count"])+"\n")
+              f.write("- Recency and stage evidence is NOT an independent score check, license, or point-in-time feature guarantee\n")
+          PY
+      - name: Store aggregate only (no row-level third-party scoreboard)
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-1871-research-stage-vintage-aggregate
+          path: research_1871_stage_vintage_aggregate.json
+          retention-days: 14
