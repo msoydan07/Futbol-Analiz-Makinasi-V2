@@ -1,0 +1,51 @@
+name: 263 Research - Only 228 unresolved of six leagues, no rerun 739
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-six-leagues-228-unresolved-targeted-only.yml
+permissions:
+  contents: read
+jobs:
+  only-228-unresolved-alias-date-and-score-exceptions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Freeze 739 prior successes, 228 new exceptions, source alias selftest
+        run: python experiments/263/league_expansion/reconcile_six_leagues_228_exceptions_no_repeat_20261114.py --self-test
+      - name: Reconcile only 228 unresolved (not 739 prior successes) using SHA pins
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/reconcile_six_leagues_228_exceptions_no_repeat_20261114.py --live | tee targeted_228.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          data=Path("targeted_228.log").read_text()
+          a=data.index("SIX_228_TARGETED_START")+len("SIX_228_TARGETED_START")
+          b=data.index("SIX_228_TARGETED_END")
+          report=json.loads(data[a:b])
+          assert report["initial_228_unresolved"]==228
+          assert report["prior_739_proof_not_retested_or_mutated"]==739
+          assert report["new_training_rows"]==0
+          assert report["cumulative_exact_FT_date_witness"]+report["unresolved_score_or_identity_or_access"]==967
+          Path("six_leagues_228_only_new_qa_aggregate.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Targeted remaining 228 from six leagues (not retesting 739)\n")
+            f.write("| Group | Existing prior pass | Targeted exceptions | New exact | Conflicting score | Remaining unmatched | Status |\n")
+            f.write("|---|---:|---:|---:|---:|---:|---|\n")
+            for r in report["group_results"]:
+              f.write("| {} | {} | {} | {} | {} | {} | {} |\n".format(
+                r["group"],r.get("prior_confirmed_unchanged",r.get("prior_confirmed",0)),
+                r.get("unresolved_initial",0),r.get("targeted_new_verified",0),
+                r.get("targeted_old_score_conflicts","?"),
+                r.get("targeted_still_unmatched","?"),r["status"]))
+            f.write("\n- **Cumulative source date+score matches:** "+str(report["cumulative_exact_FT_date_witness"])+"/967\n")
+            f.write("- Source conflicts DO NOT equal success. No training admissions, no M4 changes.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-six-leagues-228-only-targeted-exceptions
+          path: six_leagues_228_only_new_qa_aggregate.json
+          retention-days: 14
