@@ -1,0 +1,55 @@
+name: 263 Research - 106 NEW 2025-26 stage matches separate, 8 cross-tier HOLD
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-106-secondary-phase-only-from-old-source-once.yml
+permissions:
+  contents: write
+jobs:
+  new_phase_only_no_4391_old_checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate exact 106+8 stage separation and no old FT recheck
+        run: python experiments/263/league_expansion/archive_106_stage_only_from_older_CC_BY_source_once.py --self-test
+      - name: OFFLINE only licensed stage-scoped result source, zero remote downloads
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/archive_106_stage_only_from_older_CC_BY_source_once.py --run > stage_106.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("stage_106.log").read_text()
+          d=json.loads(s.split("STAGE_106_START",1)[1].split("STAGE_106_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## 2025/26 Phase-2 match research archive, separate from normal league\n")
+            f.write("- Status: "+d["status"]+"\n")
+            f.write("- In-league distinct phase-2 research rows: "+str(d.get("new_2025_26_additional_stage_research_source_match_identities",0))+"\n")
+            f.write("- Other-tier promotion/relegation source rows on HOLD: "+str(d.get("different_league_transition_playoff_HOLD",0))+"\n")
+            f.write("- Zero source-rights/as-of training approval; old 4391 not rechecked.\n")
+          assert d["status"]=="PASS_ARCHIVED_106_DISTINCT_2025_26_SECOND_PHASE_MATCH_IDENTITIES_8_CROSS_TIER_HOLD",d
+          assert d["new_2025_26_additional_stage_research_source_match_identities"]==106
+          assert d["different_league_transition_playoff_HOLD"]==8
+          assert d["new_training_rows_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-106-new-phase-8-interdivision-source-hold
+          path: |
+            stage_106.log
+            experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/
+          retention-days: 14
+      - name: Commit only stage-separated new licensed research sources and 8 HOLD keys
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): archive 106 new 2025-26 separate stage source results, quarantine 8 cross-tier, no training"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
