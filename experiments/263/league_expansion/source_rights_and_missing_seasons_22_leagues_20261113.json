@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "HISTORICAL ONLY: unique source-specific research match IDs remain 3122 after newly verified CC BY 259 (DNK1 192 + CHE1 67). Additionally archived eight 2025/26 source-original CC BY groups totaling 3041 match records, offline separated: 1324 exact prior matches, 260 conflicting records all within prior 296 existing quality holds, 63 near-date exceptions, 10 Greek duplicate canonical keys, 8 outsiders/playoff identity, and 1376 source-only candidate new match identities with stage+score QA pending; zero novel IDs added to 3122 until independently verified. ESP2/2025-26 new-source candidate not found by first-name filter; do not assume zero games. No rerun old 871+904 FT checks or new source already pinned; other five 2026/27 source-rights unresolved. No M4/xG changes.",
+  "next_priority": "HISTORICAL research archive: 4391 distinct rows verified in one offline cross-source gate (2396 pinned original plus 1995 licensed new source records). New 1269 source-only 2025/26 completed regular league scores added across ENG3/4/5, ITA2, FRA2, GRE1, SCO1; 107 extra-stage/playoff/abandoned candidate fixtures remain separated. New 1269 need new-only independent FT corroboration; all new still require as-of historic timestamp provenance before model training. Five 2026/27 analysis/research league-season sources rights pending; do not copy 632 upstream-uncleared rows. Never rerun old QA; no M4/xG modification.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -864,5 +864,38 @@
     "retained_old_3122_research_unique": 3122,
     "added_new_training": 0,
     "note": "No previous completed league result QA re-executed; offline name-map/dedup against immutable old 2396 + frozen 296 held keys. Second-source facts for 1376 novel IDs, explicit league stage, and vintage gates still pending."
+  },
+  "historical_4391_normal_stage_new_1269_20261114": {
+    "status": "PASS_4391_UNIQUE_RESEARCH_SOURCE_RECORDS_WITH_ZERO_TRAINING_APPROVAL",
+    "integrity_report": "experiments/263/league_expansion/research_historical_4391_distinct_source_accounting_20261114.json",
+    "integrity_workflow": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43593689077",
+    "regular_season_source_stage_report": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/novel_1376_stage_eligibility_and_research_archive_20261114.json",
+    "national_league_official_abandoned_exception": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/eng5_2025_26_official_abandonment_262_new_regular_scores_gate_20261114.json",
+    "first_3122_prior_research": 3122,
+    "new_regular_stage_source_only": 1269,
+    "new_regular_by_league": {
+      "ENG3": 208,
+      "ENG4": 277,
+      "ENG5": 262,
+      "ITA2": 72,
+      "FRA2": 190,
+      "GRE1": 120,
+      "SCO1": 140
+    },
+    "source_specific_research_total": 4391,
+    "pending_107_extra_phase_or_abandoned": {
+      "ENG3_playoffs": 5,
+      "ENG4_playoffs": 4,
+      "ENG5_playoffs_or_abandoned": 3,
+      "ITA2_playoffs": 10,
+      "FRA2_playoff": 1,
+      "GRE1_qualifying_second_phase": 54,
+      "SCO1_after_split": 30
+    },
+    "old_HOLD_preserved": 296,
+    "new_independent_score_verifications_for_new_1269": 0,
+    "no_M4_training_or_original_2396_source_changes": true,
+    "no_old_871_or_904_QA_repeated": true,
+    "no_manual_xg_workbook_change": true
   }
 }

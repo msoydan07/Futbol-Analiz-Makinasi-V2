@@ -39,6 +39,11 @@
       "scope": "Eight other 2025/26 CC BY source-specific league archives 3041 and ONE offline canonical comparison against old 2396",
       "state": "PASS_SOURCE_ARCHIVED_AND_OFFLINE_DEDUP_CANDIDATE_CLASSIFIED; NOT TRAINING NOR FINAL_STAGE_ADMISSION",
       "key": "Pinned Football Charts SHA 08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10. Offline identity-only report experiments/263/league_expansion/ccby_footballcharts_9_other_2025_26_source_ledger/8_leagues_3041_new_source_canonical_vs_old_CC0_one_batch_20261114.json; GitHub Actions run 43592010418. Skip same unchanged source scopes and prior matched 1324. Do not increment 3122 until 1376 candidates obtain stage/score gates."
+    },
+    {
+      "scope": "2025/26 seven NEW regular stage source-only research files, 1269 unique fixtures; official abandoned ENG5 exceptions and 4391 full cross-source identity accounting",
+      "state": "PASS_OFFLINE_IDENTITY_AND_SCHEDULE_STAGE__NEW_1269_INDEPENDENT_SOURCE_FT_PENDING__ZERO_TRAINING_APPROVAL",
+      "key": "Stage source report experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/novel_1376_stage_eligibility_and_research_archive_20261114.json, ENG5 official exception experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/eng5_2025_26_official_abandonment_262_new_regular_scores_gate_20261114.json, full 4391 source integrity experiments/263/league_expansion/research_historical_4391_distinct_source_accounting_20261114.json. Github Actions 43592943033 (other six) 43593302920 ENG5 and 43593689077 full identity. 1269 source-only FT still needs independent QA, not old 871+904 reruns."
     }
   ],
   "explicitly_open": [
@@ -51,7 +56,9 @@
     "user manual xG completion remains separate, never overwrite workbook",
     "Stage and playoffs resolution for 1376 candidate novel matches in eight 2025/26 CC BY source groups; only then count verified identity additions",
     "63 old-vs-new near-date source identity holds, 10 Greek alias duplicates, 8 out-of-roster or playoff team records (new 260 score disagreements already included in existing 296 HOLD—do not reopen without fresh evidence)",
-    "ESP2/2025-26 CC BY source league-name mapping exception; inspect metadata only, avoid re-download of unchanged 76991-row snapshot"
+    "ESP2/2025-26 CC BY source league-name mapping exception; inspect metadata only, avoid re-download of unchanged 76991-row snapshot",
+    "Independently verify only 1269 NEW source-only 2025/26 regular fixture scores; no reruns of prior verified 1775, 306 Germany, 161 Swiss, or 192 Danish",
+    "Resolve remaining 107 playoff/split/abandoned match candidates only as separate phase with provenance, not normal league archive"
   ],
   "allowed_next_behavior": "Fetch a new original licensed provider or update coverage only if actual source SHA differs and historical results are genuinely new. Keep original source rows, rights and point-in-time feature gates separate.",
   "new_fixture_prediction_work_requested": false,
@@ -68,5 +75,17 @@
     "outside": 8,
     "no_old_finished_QA_repeat": true,
     "new_training_rows_approved": 0
+  },
+  "latest_4391_research_source_integrity_20261114": {
+    "count": 4391,
+    "source_original": 2396,
+    "new_total": 1995,
+    "new_2025_26_7_regular": 1269,
+    "verified_identity_report": "experiments/263/league_expansion/research_historical_4391_distinct_source_accounting_20261114.json",
+    "lock_these_existing_source_file_SHAs": true,
+    "no_new_legacy_source_changes": true,
+    "remaining_new_1269_independent_FT_checks": true,
+    "pending_107_nonregular_or_abandoned": true,
+    "trainable_new": 0
   }
 }
