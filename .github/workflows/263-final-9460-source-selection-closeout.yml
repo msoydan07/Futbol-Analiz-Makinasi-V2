@@ -5,6 +5,7 @@ on:
       - research/263-13-lig-22-havuz-20261113
     paths:
       - .github/workflows/263-final-9460-source-selection-closeout.yml
+      - experiments/263/league_expansion/final_9460_selection_closeout_20261114.py
 permissions:
   contents: write
 jobs:
