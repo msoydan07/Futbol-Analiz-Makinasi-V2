@@ -1,0 +1,78 @@
+{
+  "status": "PASS_ORIGINAL_ESP2_2025_26_CCBY_LICENSE_SOURCE_509_RESEARCH_ROWS_ARCHIVED_NOT_DEDUP_OR_TRAINING",
+  "snapshot_sha256": "08d1a0863d703550fe6e7fb1ef9faed4ea3cea95c664012373b1a1e1f159be10",
+  "license": "CC BY 4.0",
+  "attribution": "Football Charts / Damir Devetak",
+  "source_doi": "https://doi.org/10.5281/zenodo.22295583",
+  "source_url": "https://huggingface.co/datasets/Damir81/football-charts-results-goal-timing/resolve/main/football_charts_matches.csv",
+  "new_source_specific_esp2_rows": 509,
+  "source_filename": "experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_509_CC_BY_original_source_QUIET_RESEARCH.csv",
+  "full_source_not_rehosted": true,
+  "source_form_tests": {
+    "source_509_scorable_rows": 509,
+    "through_2026_05_31": 503,
+    "after_2026_05_31": 6,
+    "distinct_clubs_in_pre_cutoff": 23,
+    "club_appearance_min_max_pre_cutoff": [
+      41,
+      48
+    ],
+    "all_source_exact_date_team_duplicates": 0,
+    "pre_cutoff_duplicate_directed_fixture_pairs": 0,
+    "pre_cutoff_462_regular_round_robin_verified": false,
+    "post_cutoff_date_counts": {
+      "2026-06-06": 1,
+      "2026-06-07": 1,
+      "2026-06-09": 1,
+      "2026-06-10": 1,
+      "2026-06-14": 1,
+      "2026-06-20": 1
+    },
+    "source_monthly_counts": {
+      "2025-08": 33,
+      "2025-09": 51,
+      "2025-10": 48,
+      "2025-11": 60,
+      "2025-12": 36,
+      "2026-01": 54,
+      "2026-02": 47,
+      "2026-03": 59,
+      "2026-04": 56,
+      "2026-05": 59,
+      "2026-06": 6
+    },
+    "source_competition_distinct_names": {
+      "La Liga2": 509
+    },
+    "source_team_names": [
+      "Albacete",
+      "Almeria",
+      "Andorra",
+      "Burgos CF",
+      "Cadiz CF",
+      "Castellon",
+      "Ceuta",
+      "Cordoba",
+      "Cultural Leonesa",
+      "Dep. A Coruna",
+      "Dep. La Coruna",
+      "Eibar",
+      "Gijon",
+      "Granada CF",
+      "Huesca",
+      "Las Palmas",
+      "Leganes",
+      "Malaga",
+      "Mirandes",
+      "Racing Santander",
+      "Real Sociedad B",
+      "Valladolid",
+      "Zaragoza"
+    ],
+    "note": "509 original source rows are NOT 509 distinct regular games, and aren't auto-added to 4505 until stage, identity and second-source QA."
+  },
+  "old_131_ESp2_existing_research_IDs_not_changed": true,
+  "old_4505_research_unique_identities_not_incremented": true,
+  "new_model_training_approved": 0,
+  "next_distinct": "Reconcile new source 509 with old 131; identify 462 true regular season using exact team/date schedule; separately handle six promotion playoffs and any source duplicates/nonmatches. Only then count new novel identities."
+}
