@@ -1,0 +1,48 @@
+name: 263 Research - 2396 source rights and 296 HOLD time-vintage gate
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-2396-296-hold-rights-vintage-once.yml
+permissions:
+  contents: read
+jobs:
+  source-provenance-and-asof-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic point-in-time and 296 exact immutable source hold tests
+        run: python experiments/263/league_expansion/check_2396_296_hold_and_feature_vintage_once.py --self-test
+      - name: Offline final rights/vintage audit - no outside result source fetched
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/check_2396_296_hold_and_feature_vintage_once.py --run | tee rights_vintage_2396.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("rights_vintage_2396.log").read_text()
+          d=json.loads(s.split("FINAL_GATE_START",1)[1].split("FINAL_GATE_END",1)[0])
+          assert d["raw_research_rows"]==2396
+          assert d["exact_holds"]["total"]==296
+          assert d["publisher_CC0_unheld_source_score_witnessed"]==1775
+          assert d["ordinary_league_aut_conference_playoff_excluded"]==3
+          assert d["remaining_CC0_normal_stage_asof_unapproved"]==1772
+          assert d["asof_timestamp_missing_in_this_subset"]==1772
+          assert d["other_rights_unclear_rows"]==325
+          assert d["training_rows_newly_approved"]==0
+          assert d["prior_871_and_904_score_QA_retested"]==0
+          Path("final_rights_vintage_2396.json").write_text(json.dumps(d,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## Research quarantine: 2396 source records, 296 held exact identities\n")
+            f.write("- 1775 published CC0 rows outside source-quality holds; three conference play-offs separate.\n")
+            f.write("- Remaining 1772 ordinary-league CC0 candidates have no point-in-time feature timestamps.\n")
+            f.write("- Other source rights uncleared: 325. New training approvals: 0.\n")
+            f.write("- No old result checks rerun, no production M4 changes.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-2396-296-hold-rights-vintage-gate-research
+          path: final_rights_vintage_2396.json
+          retention-days: 14
