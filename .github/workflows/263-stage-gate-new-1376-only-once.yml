@@ -1,0 +1,56 @@
+name: 263 Research - New 1376 candidate normal stage gating and archive only
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-stage-gate-new-1376-only-once.yml
+permissions:
+  contents: write
+jobs:
+  fresh_regular_stage_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline stage-source selftests, 296 previous HOLD identities
+        run: python experiments/263/league_expansion/stage_gate_1376_novel_2025_26_match_candidates_once.py --self-test
+      - name: First source stage audit & new research fixture CSV creation only
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/stage_gate_1376_novel_2025_26_match_candidates_once.py --run > new_1376_stage.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          s=Path("new_1376_stage.log").read_text()
+          d=json.loads(s.split("NEW_STAGE_ARCHIVE_START",1)[1].split("NEW_STAGE_ARCHIVE_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## ONE regular-season 2025/26 gate for novel 1,376 research identities\n")
+            f.write("- Status: "+d["status"]+"\n")
+            for k,v in d.get("groups",{}).items():
+              f.write("- "+k+": "+v["stage_gate"]+", source only novel "+str(v["new_candidate_source_only"])+", added research "+str(v["new_unique_historic_RESEARCH_ROWS_EXPORTED"])+"\n")
+            f.write("- Zero new model training approvals, no prior FT audits repeated.\n")
+          assert d["status"]=="2025_26_REGULAR_SEASON_GATED_NOVEL_RESEARCH_ARCHIVE_COMPLETE",d
+          assert d["new_model_training_approved"]==0
+          assert d["new_research_rows_only_from_schedule_complete_groups"]<=1376
+          assert d["candidate_unique_research_fixture_identities"]==3122+d["new_research_rows_only_from_schedule_complete_groups"]
+          assert d["no_previous_complete_score_qa_batches_repeated"]
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-1376-new-2025-26-normal-stage-archive-proof
+          path: |
+            new_1376_stage.log
+            experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/
+          retention-days: 14
+      - name: Commit strictly separated CC BY research archives, NOT original pinned sources
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): regular-stage only new historic CC BY fixture research archive; zero training"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
