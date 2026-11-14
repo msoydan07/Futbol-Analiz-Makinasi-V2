@@ -1,0 +1,21 @@
+name: 263 Research - Verify eight cross-league and qualifying matches once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-eight-transitional-match-stage-and-FT-once.yml
+permissions:
+  contents: read
+jobs:
+  eight_old_HOLD_source_keys_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline 8 exact previously held source identities and officially confirmed scores
+        run: python experiments/263/league_expansion/check_eight_transition_source_only.py
+      - name: Note no old result QA reruns or new training
+        run: |
+          echo "## 8 originally held matches: 4 Scotland second-tier qualifier, 2 Scotland cross-tier final, 2 France cross-tier final" >> "$GITHUB_STEP_SUMMARY"
+          echo "All 8 match result facts corroborated, source original unchanged. Research-only, not trainable." >> "$GITHUB_STEP_SUMMARY"

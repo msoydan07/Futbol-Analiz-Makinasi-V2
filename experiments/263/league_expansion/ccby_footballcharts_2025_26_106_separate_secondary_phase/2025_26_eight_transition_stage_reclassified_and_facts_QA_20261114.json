@@ -1,0 +1,32 @@
+{
+  "checked_on": "2026-11-14",
+  "status": "PASS_8_PREVIOUS_SOURCE_HOLD_RECLASSIFIED_COMPETITION_STAGE_AND_OFFICIAL_FT_FACTS_CONFIRMED_RESEARCH_ONLY",
+  "previous_main_research_source_identities": 4391,
+  "previous_distinct_second_stage_source_identities": 106,
+  "previous_total_source_specific_research_matches": 4497,
+  "only_new_distinct_transition_match_identities": 8,
+  "new_source_specific_match_identities_all_2025_26": 4505,
+  "stage_buckets": {
+    "FRA_NATIONAL_LIGUE2_PROMOTION_RELEGATION_BRIDGE": 2,
+    "SCO_CHAMPIONSHIP_INTRA_TIER_PREMIERSHIP_PLAYOFF_QUALIFIER": 4,
+    "SCO_CHAMPIONSHIP_PREMIERSHIP_CROSS_TIER_FINAL": 2
+  },
+  "original_8_HOLD_ledger_preserved": "experiments/263/league_expansion/ccby_footballcharts_2025_26_106_separate_secondary_phase/eight_interdivision_playoff_2025_26_HOLD_source_only.csv",
+  "original_8_HOLD_git_blob_SHA": "a1c5b6c75c3dbf43a960d17d7bdbe10252846099",
+  "source_license": "Football Charts original CC BY 4.0, attribution: Damir Devetak / Football Charts",
+  "first_hand_competition_evidence": "Scottish SPFL and French Ligue 2 organizer published outcomes",
+  "second_witness_evidence": "RSSSF Scotland 2026 and France 2026",
+  "match_fact_8_all_exact_date_teams_scores": 8,
+  "independently_confirmed_2025_26_second_phase_total_before_this": 106,
+  "original_83_plus_22_plus_one_Greek_date_corrected_FT_gate_frozen": true,
+  "never_mix_8_with_regular_league_results": true,
+  "old_HOLD_means_not_training_status_still_applies": true,
+  "nomenclature_correction": "Earlier 8 were called 'cross-tier'. More precisely, 4 Scottish Championship-only qualifying ties +2 Scottish top-tier crossover final +2 French National-Ligue2 crossover.",
+  "newly_training_approved": 0,
+  "original_2396_old_296_holds_protected": true,
+  "main_M4_old_10league_SHA_unmodified": true,
+  "user_1855_xg_workbook_unmodified": true,
+  "historic_asof_access_timestamps_not_validated": true,
+  "source_upstream_training_rights_gate_open": true,
+  "next_distinct_work": "Five research-only 2026/27 league-season source coverage gaps remain rights blocked; do not repeat any 2025/26 106+8 score facts. Seek original permissive licensed 2026/27 sources or upstream written permission, then capture original source metadata."
+}
