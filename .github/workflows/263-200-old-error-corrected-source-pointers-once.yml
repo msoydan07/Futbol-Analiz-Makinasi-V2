@@ -1,0 +1,52 @@
+name: 263 Research - 200 old wrong FT-date corrected source pointers once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-200-old-error-corrected-source-pointers-once.yml
+      - experiments/263/league_expansion/reconcile_200_legacy_to_verified_original_source_pointer_once.py
+permissions:
+  contents: write
+jobs:
+  corrected-source-pointer-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check frozen independent evidence without fetching or rechecking source
+        run: python experiments/263/league_expansion/reconcile_200_legacy_to_verified_original_source_pointer_once.py --self-test
+      - name: Check SHA-pinned author source exactly and emit 200 nonadditive correction pointers
+        run: python experiments/263/league_expansion/reconcile_200_legacy_to_verified_original_source_pointer_once.py --run
+      - name: Verify no training approval and no raw source-score rehosting
+        run: |
+          python - <<'PY'
+          import csv,json
+          from pathlib import Path
+          root=Path("experiments/263/league_expansion")
+          report=json.loads((root/"CORRECTED_200_ENG3_ENG4_RESEARCH_ONLY_NOT_TRAINING_20261114.json").read_text())
+          with (root/"CORRECTED_200_ENG3_ENG4_SOURCE_POINTERS_NOT_ADDITIVE_20261114.csv").open() as f:
+            records=list(csv.DictReader(f))
+          assert len(records)==200
+          assert report["source_scored_178_independently_witnessed"]==178
+          assert report["source_date_and_ft_22_individually_witnessed"]==22
+          assert report["original_200_BAD_CC0_HOLDS_STILL_EXCLUDED"]
+          assert report["new_training_approvals"]==0 and report["counts_are_nonadditive_to_9460"]
+          assert "ft_home" not in records[0] and "ft_away" not in records[0]
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-200-old-hold-proven-correction-pointers-only
+          path: |
+            experiments/263/league_expansion/CORRECTED_200_ENG3_ENG4_SOURCE_POINTERS_NOT_ADDITIVE_20261114.csv
+            experiments/263/league_expansion/CORRECTED_200_ENG3_ENG4_RESEARCH_ONLY_NOT_TRAINING_20261114.json
+      - name: Commit corrected source pointers only to research branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/CORRECTED_200_ENG3_ENG4_SOURCE_POINTERS_NOT_ADDITIVE_20261114.csv experiments/263/league_expansion/CORRECTED_200_ENG3_ENG4_RESEARCH_ONLY_NOT_TRAINING_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): preserve 200 bad old scores/dates while pointing to verified corrected-source counterparts"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
