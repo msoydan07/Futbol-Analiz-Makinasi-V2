@@ -29,19 +29,19 @@
   "network_metadata_failure_must_not_pretend_historical_data_ingested": true,
   "by_league": {
     "ENG5": {
-      "status": "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
+      "status": "PERSONAL_RESEARCH_SOURCE_METADATA_AVAILABLE_NO_RAW_ARCHIVAL",
       "provider_competition_code": "national",
       "provider_competition_label": "National League      ",
       "source_endpoint_no_key": "https://footballcharts-backend.onrender.com/api/v1/leagues/national/results/?season=2026-2027",
       "derived_metadata_only": {
         "raw_provider_rows": 190,
         "date_outside_frozen_cutoff": 0,
-        "matched_completed_historical_result_field_rows": 0,
-        "missing_scored_fields_or_unparseable": 190,
+        "matched_completed_historical_result_field_rows": 190,
+        "missing_scored_fields_or_unparseable": 0,
         "source_duplicate_historical_date_team_ids": 0,
-        "distinct_clubs_covered": 0,
-        "first_finished_date": null,
-        "last_finished_date": null,
+        "distinct_clubs_covered": 24,
+        "first_finished_date": "2026-08-08",
+        "last_finished_date": "2026-10-31",
         "provider_result_row_schema_keys": [
           "awayTeam",
           "date",
@@ -77,19 +77,19 @@
       "new_training_rows": 0
     },
     "ESP2": {
-      "status": "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
+      "status": "PERSONAL_RESEARCH_SOURCE_METADATA_AVAILABLE_NO_RAW_ARCHIVAL",
       "provider_competition_code": "spain2",
       "provider_competition_label": "LaLiga2      ",
       "source_endpoint_no_key": "https://footballcharts-backend.onrender.com/api/v1/leagues/spain2/results/?season=2026-2027",
       "derived_metadata_only": {
         "raw_provider_rows": 141,
         "date_outside_frozen_cutoff": 0,
-        "matched_completed_historical_result_field_rows": 0,
-        "missing_scored_fields_or_unparseable": 141,
+        "matched_completed_historical_result_field_rows": 141,
+        "missing_scored_fields_or_unparseable": 0,
         "source_duplicate_historical_date_team_ids": 0,
-        "distinct_clubs_covered": 0,
-        "first_finished_date": null,
-        "last_finished_date": null,
+        "distinct_clubs_covered": 22,
+        "first_finished_date": "2026-08-14",
+        "last_finished_date": "2026-11-13",
         "provider_result_row_schema_keys": [
           "awayTeam",
           "date",
@@ -125,19 +125,19 @@
       "new_training_rows": 0
     },
     "ITA2": {
-      "status": "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
+      "status": "PERSONAL_RESEARCH_SOURCE_METADATA_AVAILABLE_NO_RAW_ARCHIVAL",
       "provider_competition_code": "italy2",
       "provider_competition_label": "Serie B      ",
       "source_endpoint_no_key": "https://footballcharts-backend.onrender.com/api/v1/leagues/italy2/results/?season=2026-2027",
       "derived_metadata_only": {
         "raw_provider_rows": 110,
         "date_outside_frozen_cutoff": 0,
-        "matched_completed_historical_result_field_rows": 0,
-        "missing_scored_fields_or_unparseable": 110,
+        "matched_completed_historical_result_field_rows": 110,
+        "missing_scored_fields_or_unparseable": 0,
         "source_duplicate_historical_date_team_ids": 0,
-        "distinct_clubs_covered": 0,
-        "first_finished_date": null,
-        "last_finished_date": null,
+        "distinct_clubs_covered": 20,
+        "first_finished_date": "2026-08-21",
+        "last_finished_date": "2026-11-08",
         "provider_result_row_schema_keys": [
           "awayTeam",
           "date",
@@ -173,19 +173,19 @@
       "new_training_rows": 0
     },
     "FRA2": {
-      "status": "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
+      "status": "PERSONAL_RESEARCH_SOURCE_METADATA_AVAILABLE_NO_RAW_ARCHIVAL",
       "provider_competition_code": "france2",
       "provider_competition_label": "Ligue 2      ",
       "source_endpoint_no_key": "https://footballcharts-backend.onrender.com/api/v1/leagues/france2/results/?season=2026-2027",
       "derived_metadata_only": {
         "raw_provider_rows": 108,
         "date_outside_frozen_cutoff": 0,
-        "matched_completed_historical_result_field_rows": 0,
-        "missing_scored_fields_or_unparseable": 108,
+        "matched_completed_historical_result_field_rows": 108,
+        "missing_scored_fields_or_unparseable": 0,
         "source_duplicate_historical_date_team_ids": 0,
-        "distinct_clubs_covered": 0,
-        "first_finished_date": null,
-        "last_finished_date": null,
+        "distinct_clubs_covered": 18,
+        "first_finished_date": "2026-08-08",
+        "last_finished_date": "2026-11-07",
         "provider_result_row_schema_keys": [
           "awayTeam",
           "date",
@@ -221,19 +221,19 @@
       "new_training_rows": 0
     },
     "DNK1": {
-      "status": "SOURCE_RESPONSE_HAS_NO_VALID_SCORABLE_MATCHES_HOLD",
+      "status": "PERSONAL_RESEARCH_SOURCE_METADATA_AVAILABLE_NO_RAW_ARCHIVAL",
       "provider_competition_code": "denmark1",
       "provider_competition_label": "Superliga      ",
       "source_endpoint_no_key": "https://footballcharts-backend.onrender.com/api/v1/leagues/denmark1/results/?season=2026-2027",
       "derived_metadata_only": {
         "raw_provider_rows": 85,
         "date_outside_frozen_cutoff": 0,
-        "matched_completed_historical_result_field_rows": 0,
-        "missing_scored_fields_or_unparseable": 85,
-        "source_duplicate_historical_date_team_ids": 0,
-        "distinct_clubs_covered": 0,
-        "first_finished_date": null,
-        "last_finished_date": null,
+        "matched_completed_historical_result_field_rows": 84,
+        "missing_scored_fields_or_unparseable": 0,
+        "source_duplicate_historical_date_team_ids": 1,
+        "distinct_clubs_covered": 12,
+        "first_finished_date": "2026-07-24",
+        "last_finished_date": "2026-11-08",
         "provider_result_row_schema_keys": [
           "awayTeam",
           "date",
@@ -355,6 +355,6 @@
       "country": "Spain"
     }
   ],
-  "available_personal_source_league_count": 0,
-  "scored_source_rows_only_ephemeral": 0
+  "available_personal_source_league_count": 5,
+  "scored_source_rows_only_ephemeral": 633
 }
