@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-14",
+  "scope": "PINNED 9460 SOURCE-ROW DECISIONS AND 200 VERIFIED NONADDITIVE CORRECTION POINTERS",
+  "status": "INDEPENDENT_SOURCE_POINTER_STRUCTURAL_QA_COMPLETE_NO_NEW_TRAINING",
+  "files_rehydrated_with_sha_pin": 32,
+  "total_source_rows_referenced": 9460,
+  "selection_decision_counts": {
+    "EXISTING_CORE_4617_FROZEN_RESULTS_ONLY": 4617,
+    "SCORE_FACT_RESEARCH_ONLY_QA_PASS": 4218,
+    "EXCLUDED_LEGACY_SCORE_OR_DATE_HOLD": 296,
+    "EXCLUDED_NONLEAGUE_CONFERENCE_PLAYOFF": 3,
+    "EXCLUDED_UNCLEARED_UPSTREAM_RIGHTS": 325,
+    "EXCLUDED_ABANDONED_NOT_FT": 1
+  },
+  "verified_research_score_rows": 4218,
+  "exact_cross_source_fixture_duplicates_in_pass": 0,
+  "same_day_normalized_club_name_collisions_in_pass": 0,
+  "same_day_potential_score_disagreements": 0,
+  "same_day_collision_examples_max25": [],
+  "near_date_1_or_2_day_same_pair_research_candidates": 0,
+  "near_date_examples_max25": [],
+  "same_pair_repeated_different_dates_by_league_not_automatically_errors": {
+    "ENG4": 3,
+    "ESP2": 6,
+    "ITA2": 11,
+    "FRA2": 1,
+    "GRE1": 54,
+    "AUT1": 60,
+    "SCO1": 89,
+    "CHE1": 30,
+    "DNK1": 60,
+    "ENG3": 3,
+    "ENG5": 2
+  },
+  "verified_old_source_correction_overlays_not_new_matches": 200,
+  "verified_old_correction_subtypes": {
+    "verified_wrong_FT_178": 178,
+    "verified_wrong_date_22": 22
+  },
+  "corrected_target_matches_already_passed_research_source_digest": 13,
+  "new_training_admitted": 0,
+  "main_M4_changed": false,
+  "source_rows_overwritten": 0,
+  "note": "A match may recur in league split groups/playoffs; near-date pair is a flag only. Normalized key strips only punctuation/diacritics; it does NOT prove club alias equivalence or 44-cell completeness. Old core uses stable team UUIDs, so no cross-source name-matching with the old 10 leagues is claimed. Verified correction overlays never add 200 fixtures.",
+  "action_required": "Review only newly discovered same-day conflicting scores or 1–2 day pair-date candidates; do not repeat earlier third-party match-QA or assume a renamed source is legal to rehost."
+}
