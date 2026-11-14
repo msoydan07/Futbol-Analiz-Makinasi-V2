@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "ITA2 2025/26 309 CC0 research matches fulltime score matches 309/309 with 380-game second source (RSSSF aggregate season standings support). Original dates exactly correct 261; the 47 one-day mismatches now independently verified actual kickoff dates by La Repubblica, and the 36-day Juve Stabia-Bari reschedule is officially confirmed by Lega B. Do not silently edit source timestamps; maintain separate overlay and as-of proof before training. Prior Austria 195 and Swiss 54 score proofs -> 558 of 1871 unheld CC0 candidates now independent FT checked, 1313 still without match-level corroboration. All 2396 original research candidates quarantined and training admissions 0; 200 ENG3/4 holds intact. Next new work target different league-season (not Italy 309, Austria 195, Swiss54) and rights+as-of closure, preserving immutable main M4 / 10 leagues / SHA seals.",
+  "next_priority": "GER2/FRA2/ESP2 2025/26 three leagues batch VERIFIED 346/346 date/team/FT, with 30 zero-zero results and zero disagreements. Earlier CC0 match score witness 558 +346=904 of 1871 unheld candidate scores; remaining 967 across ENG3/ENG4/ENG5/GRE1/SCO1/AUT1_2026-27. No source rights/promotions or feature vintage complete; all 2396 research quarantine unchanged, 200 legacy holds retained. No repeat on 346, 309 Italy, 195 Austria, old Swiss/Denmark/England work. Main M4 and 10 leagues SHA unchanged.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -552,5 +552,54 @@
     "current_1871_unheld_CC0_remaining_to_independently_score_witness": 1313,
     "main_M4_and_original_SHA_seals_untouched": true,
     "no_repeat": "No more source FT and actual date rechecks for same pinned 309 original source rows and three supporting sources absent new contradictory evidence or SHA change."
+  },
+  "ger2_fra2_esp2_2025_26_346_batch_20261114": {
+    "status": "346_OF_346_DATE_HOME_AWAY_AND_FT_SCORE_VERIFIED_ONE_BATCH",
+    "proof": "experiments/263/league_expansion/ger2_fra2_esp2_2025_26_346_full_independent_score_dates_20261114.json",
+    "successful_action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43574738237",
+    "three_separate_leagues_one_action": {
+      "GER2": {
+        "candidate_rows": 99,
+        "fulltime_and_date_match": 99,
+        "zero_zero": 5,
+        "source_division": "D2",
+        "source_SHA256": "8bfb275286d7d620c20c7fdb164e4447e114be3de94b8372b7ac3773d71581ef"
+      },
+      "FRA2": {
+        "candidate_rows": 116,
+        "fulltime_and_date_match": 116,
+        "zero_zero": 9,
+        "source_division": "F2",
+        "source_SHA256": "dcedf4dd66f3e0ac8efb8ccd2e5489882068e5630c041702b15c1d0fe70c6017"
+      },
+      "ESP2": {
+        "candidate_rows": 131,
+        "fulltime_and_date_match": 131,
+        "zero_zero": 16,
+        "source_division": "SP2",
+        "source_SHA256": "4986060e5c1d55626aef24c4bbeaaea2278b27a0b7696927405705aaa57405de"
+      }
+    },
+    "new_independent_FT_and_date_matches": 346,
+    "total_true_0_0_FT_second_source_confirmed": 30,
+    "old_finished_score_QA_repeated": 0,
+    "prior_independent_CC0_source_score_witnesses": 558,
+    "cumulative_independent_CC0_source_score_witnesses": 904,
+    "CC0_claimed_unheld_total": 1871,
+    "CC0_without_independent_match_score_witnesses_remaining": 967,
+    "original_research_source_matches_mutated": false,
+    "external_CSV_bulk_source_rehosted": false,
+    "new_training_rows_approved": 0,
+    "source_use_rights_and_chronological_model_feature_asof": "UNVERIFIED_FOR_TRAINING",
+    "original_main_M4_and_ten_league_SHA_seals_unmodified": true,
+    "next_new_score_QA_groups": {
+      "ENG3": 256,
+      "ENG4": 176,
+      "ENG5": 296,
+      "GRE1": 97,
+      "SCO1": 100,
+      "AUT1_2026_27": 42
+    },
+    "no_repeat": "Freeze D2/F2/SP2 2025/26 second source SHA; do not repeat 346 match score QA unless source SHA or independent contradiction changes."
   }
 }
