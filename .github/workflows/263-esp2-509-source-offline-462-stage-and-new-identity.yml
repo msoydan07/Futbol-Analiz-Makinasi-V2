@@ -1,0 +1,53 @@
+name: 263 Research - Dedup only new Spanish source 41 aliases 462 season 6 playoffs
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-esp2-509-source-offline-462-stage-and-new-identity.yml
+permissions:
+  contents: write
+jobs:
+  no-provider-requests-offline-only-Spain2-new:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Team aliases & old 131 pin source proof
+        run: python experiments/263/league_expansion/reconcile_esp2_2025_26_509_to_462_6_131_old_one_pass.py --self-test
+      - name: Offline 509 source original to 462 regular plus 6 playoff & new-only source IDs
+        run: |
+          python experiments/263/league_expansion/reconcile_esp2_2025_26_509_to_462_6_131_old_one_pass.py --run > esp2_462_check.log
+          python - <<'PY'
+          from pathlib import Path
+          import json,os
+          s=Path("esp2_462_check.log").read_text()
+          d=json.loads(s.split("ESP2_462_START",1)[1].split("ESP2_462_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## Spain Segunda 2025/26 source-only original 509 dedup 41 => 462 regular + 6 playoffs\n")
+            f.write("- Status "+d["status"]+"\n")
+            f.write("- New regular source-only "+str(d.get("novel_regular_source_research_rows_only",0))+"\n")
+            f.write("- Existing 131 independent match IDs preserved, old FT conflicts held\n")
+            f.write("- 0 model training admissions\n")
+          assert d["status"]=="ESP2_2025_26_FULL_462_SEASON_PAIR_COVERAGE_PASS_41_SOURCE_ALIAS_DUPLICATES_REMOVED_6_PLAYOFFS",d
+          assert d["source_regular_full_exact"]==462 and d["source_playoffs_distinct"]==6
+          assert d["old_exact_date_clubs_FT_match"]+d["old_same_match_FT_conflict_count"]+d["nearby_date_old_pair_HOLD_count"]+d["novel_regular_source_research_rows_only"]==462
+          assert d["new_training_rows_approved"]==0
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-esp2-462-season-41-dupes-6-playoffs-new-only
+          path: |
+            esp2_462_check.log
+            experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/
+          retention-days: 14
+      - name: Only new Spanish source-specific historical identities and stage proofs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): 2025-26 Segunda 462 source stage + 6 playoffs, 41 alias duplicate collapse, novel IDs research only"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
