@@ -1,0 +1,55 @@
+name: 263 Research - One-shot GER2 ODbL past results two seasons
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-ger2-odbl-history-2seasons-once.yml
+permissions:
+  contents: write
+jobs:
+  fetch-only-two-permitted-past-season-result-endpoints:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Safety test FT selection and no live fixtures
+        run: python experiments/263/league_expansion/archive_ger2_odbl_history_once.py --self-test
+      - name: Two source-season ODbL original results reads, no third party table scrape
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/archive_ger2_odbl_history_once.py --run | tee german_2season_odbl_once.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          t=Path("german_2season_odbl_once.log").read_text()
+          d=json.loads(t.split("ODBL_GER2_START",1)[1].split("ODBL_GER2_END",1)[0])
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## One-time German 2. Bundesliga ODbL historical archival (not training)\n")
+            f.write("- Status: "+d["status"]+"\n")
+            f.write("- Rows 2025/26: "+str(d.get("seasons",{}).get("2025",{}).get("row_count","blocked"))+"\n")
+            f.write("- Rows 2026/27 played through 13 Nov: "+str(d.get("seasons",{}).get("2026",{}).get("row_count","blocked"))+"\n")
+            f.write("- Old 2396 original files, old 296 holds, M4 and SHA unchanged.\n")
+          assert d["status"]=="GER2_2025_2026_ONCE_ODBL_ARCHIVED_RESEARCH_ONLY",d
+          assert d["source_retrieval_count"]==2
+          assert d["training_rows_approved"]==0
+          assert d["main_M4_and_10_leagues_unchanged"]==True
+          PY
+      - name: Upload only research ODbL licensed archive evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-ger2-ODbL-2season-historical-results
+          path: experiments/263/league_expansion/odbl_openligadb_germany2/
+          retention-days: 14
+      - name: Commit only ODbL licensed historical research archive to existing research branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/odbl_openligadb_germany2/
+          if git diff --cached --quiet; then
+            echo "No new archival research files to commit"
+          else
+            git commit -m "research(263): archive 2025-26 and played 2026-27 German2 ODbL results in separate licensed quarantine"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
