@@ -1,0 +1,2 @@
+league,season,date,home,away,source_original_ft_home,source_original_ft_away,event_type,ended_at_minute,official_points_award,score_is_90min_completed_FT,use_as_goal_label,official_abandonment_source,official_decision_source,original_source_git_blob_SHA
+FRA2,2025-26,2025-12-05,SC Bastia,Red Star FC,0,0,ABANDONED_57MIN_FORFEIT_AWARDED,57,SC BASTIA LOST BY PENALTY; RED STAR AWARDED MATCH,false,false,https://www.redstar.fr/live/?ID=1237093,https://www.redstar.fr/2025-12-22/communique-officiel-2/communique-officiel-85/,b12ba6b7fc11367894b07470edfa93b5d9c3ec59

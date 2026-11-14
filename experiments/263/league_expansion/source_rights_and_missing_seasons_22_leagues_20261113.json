@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "HISTORICAL research archive: 4391 distinct rows verified in one offline cross-source gate (2396 pinned original plus 1995 licensed new source records). New 1269 source-only 2025/26 completed regular league scores added across ENG3/4/5, ITA2, FRA2, GRE1, SCO1; 107 extra-stage/playoff/abandoned candidate fixtures remain separated. New 1269 need new-only independent FT corroboration; all new still require as-of historic timestamp provenance before model training. Five 2026/27 analysis/research league-season sources rights pending; do not copy 632 upstream-uncleared rows. Never rerun old QA; no M4/xG modification.",
+  "next_priority": "HISTORICAL: 4391 unique source match identities, of which one NEW FRA2 2025-12-05 Bastia–Red Star 0-0 is OFFICIALLY ABANDONED (57') and forfeited; exclude it from scored goal labels, giving 4390 non-administrative source identities before additional quality/rights exclusions. Among NEW 1269 2025/26 regular source records, 1268 have exact second-provider FT score witness and the one aborted FRA2 is held. M4 training approval 0 until source rights and as-of gates; next find original provider rights-clean 2026/27 five lagging league-seasons. Never rerun successful score comparisons, 1775/461 old QA, or prior 296 holds.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -897,5 +897,19 @@
     "no_M4_training_or_original_2396_source_changes": true,
     "no_old_871_or_904_QA_repeated": true,
     "no_manual_xg_workbook_change": true
+  },
+  "new_1269_FT_witness_and_Bastia_award_exclusion_20261114": {
+    "status": "1269_NEW_RESEARCH_MATCH_FACTS_SECOND_PROVIDER_QA_COMPLETE__1268_FT_EXACT__ONE_OFFICIAL_ABANDONMENT_HOLD",
+    "evidence": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/source_FT_1268_verified_1_official_award_HOLD_20261114.json",
+    "source_witness_action": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43594124042",
+    "new_source_1269_report": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/new1269_target_only_second_provider_FT_evidence_20261114.json",
+    "new_scored_FT_confirmed": 1268,
+    "one_abandoned_FRA2_0_0_HOLD": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/fra2_2025_12_05_bastia_redstar_abandoned_awarded_no_FT_HOLD_20261114.csv",
+    "curated_FRA2_189_cleaned_FT_only": "experiments/263/league_expansion/ccby_footballcharts_2025_26_regular_stage_novel_only/fra2_2025_26_189_COMPLETED_FT_SECOND_PROVIDER_CONFIRMED_RESEARCH_ONLY.csv",
+    "previous_distinct_source_identities": 4391,
+    "accounted_scored_candidate_ids_excluding_one_administrative": 4390,
+    "no_promotion_to_training": true,
+    "previous_1775_461_and_296_hold_source_checks_not_reexecuted": true,
+    "M4_and_1855_xg_unchanged": true
   }
 }
