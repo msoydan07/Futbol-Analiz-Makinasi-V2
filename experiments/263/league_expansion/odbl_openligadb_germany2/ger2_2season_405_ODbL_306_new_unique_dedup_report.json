@@ -1,0 +1,41 @@
+{
+  "checked_on": "2026-11-14",
+  "status": "GER2_405_ODBL_SOURCE_ROWS_99_PRIOR_OVERLAP_FT_CONFIRMED_306_DISTINCT_NEW_RESEARCH_IDENTITIES",
+  "licensed_provider": "OpenLigaDB",
+  "source_license": "ODbL-1.0",
+  "attribution": "Data from OpenLigaDB (www.openligadb.de), licensed under ODbL 1.0",
+  "source_license_url": "https://www.openligadb.de/en/license",
+  "source_match_counts": {
+    "GER2_2025_26": 306,
+    "GER2_2026_27": 99,
+    "source_total": 405
+  },
+  "prior_2025_26_CC0_count": 99,
+  "old_CC0_source_overlap_date_home_away_match_count": 99,
+  "overlapping_match_score_disagreement": 0,
+  "explicit_team_alias": {
+    "Arminia Bielefeld": "DSC Arminia Bielefeld"
+  },
+  "novel_match_counts": {
+    "GER2_2025_26": 207,
+    "GER2_2026_27": 99,
+    "total": 306
+  },
+  "old_original_quarantine_count_unchanged": 2396,
+  "distinct_research_candidate_fixture_identities_separate_source_envelopes": 2702,
+  "source_blob_checks": {
+    "cc0_old_1": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+    "cc0_old_2": "46071b306d6f73be71d27b0a6c5f4480630b73a0",
+    "odbl_2025_26": "29d7141618bb8aef40ba867ff06dd06e0d126e25",
+    "odbl_2026_27": "83f612c849c81591c3ee952d68be4d9e46f067d6"
+  },
+  "only_207_new_oldseason_archive": "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2025_2026_207_novel_only_quarantine.csv",
+  "new_2026_27_all_99_archive": "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2026_2027_ODbL_research_quarantine.csv",
+  "caution": "ODbL and prior publisher-claimed CC0 source files remain separate; 2702 is a research identity counter, not trainable data or a fused training table. 207/99 new ODbL results still need independent corroboration. Post-match source snapshot is NOT historic pre-kickoff availability.",
+  "no_new_training_promotions": true,
+  "training_rows_newly_approved": 0,
+  "main_M4_or_old_SHA_modified": false,
+  "original_2396_or_296_HOLD_modified": false,
+  "xg_workbook_modified": false,
+  "no_earlier_871_904_scores_rerun": true
+}

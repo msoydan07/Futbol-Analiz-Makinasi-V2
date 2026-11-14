@@ -122,7 +122,7 @@
     "copy xG site rows without user manual workflow",
     "inflate 2393 by also adding the 1104 overlapping 2025/26 Sean rows"
   ],
-  "next_priority": "HISTORICAL_ONLY: Finish 2025-26 & played-to-date 2026-27 archive; 5 no-source-witness groups (ENG5 GER2 ESP2 ITA2 FRA2 current season), 3 Swiss/Danish fact-witness-only groups without licensed ingestion; preserve prior 871/904 validation and 296 hold; no new future fixture predictions.",
+  "next_priority": "HISTORICAL ONLY: GER2 ODbL 405 historical score records archived; 99 old source overlaps verified identical FT, 207 new 2025-26 +99 new 2026-27 records quarantined, 306 novel research identities. Independent corroboration of novel scores and other seven unpinned league-seasons remains. Main 10 leagues/M4 undisturbed.",
   "new_source_findings": [
     {
       "date": "2026-11-13",
@@ -711,5 +711,16 @@
     "date_only_both_teams_ge5_prior": 1166,
     "trainable_new_rows": 0,
     "no_future_match_work_until_history_closed": true
+  },
+  "additional_ger2_odbl_2season_archive_20261114": {
+    "report": "experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2season_405_ODbL_306_new_unique_dedup_report.json",
+    "status": "GER2_405_ODBL_SOURCE_ROWS_99_PRIOR_OVERLAP_FT_CONFIRMED_306_DISTINCT_NEW_RESEARCH_IDENTITIES",
+    "odbl_raw_405": 405,
+    "old_CC0_overlap_99": 99,
+    "new_2025_26": 207,
+    "new_2026_27": 99,
+    "unique_research_addition": 306,
+    "cross_source_research_candidate_count": 2702,
+    "training_approved": 0
   }
 }
