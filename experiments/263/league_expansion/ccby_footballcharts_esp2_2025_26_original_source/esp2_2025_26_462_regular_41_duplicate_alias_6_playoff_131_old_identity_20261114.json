@@ -1,0 +1,33 @@
+{
+  "status": "ESP2_2025_26_FULL_462_SEASON_PAIR_COVERAGE_PASS_41_SOURCE_ALIAS_DUPLICATES_REMOVED_6_PLAYOFFS",
+  "source_original_509_rows": 509,
+  "source_alias_duplicate_exact_same_date_teams_score_collapsed": 41,
+  "source_regular_full_exact": 462,
+  "source_playoffs_distinct": 6,
+  "clubs": 22,
+  "each_club_regular_matches": 42,
+  "previous_research_ESP2_2025_26_distinct_ids_unchanged": 131,
+  "old_131_sources_sha_pinned": {
+    "training_2025_26_cc0_scored_QUARANTINE.csv": "82593a87cec5aa9deea3802ea31b86dd4ac8573c",
+    "score_shape_recovery_295_2526_QUARANTINE_20261113.csv": "46071b306d6f73be71d27b0a6c5f4480630b73a0"
+  },
+  "old_exact_date_clubs_FT_match": 131,
+  "old_same_match_FT_conflict_count": 0,
+  "old_conflict_samples": [],
+  "nearby_date_old_pair_HOLD_count": 0,
+  "novel_regular_source_research_rows_only": 331,
+  "novel_playoff_source_research_rows_only": 6,
+  "safe_incremental_source_specific_research_fixture_identities": 337,
+  "prior_pinned_source_identity_count": 4505,
+  "cumulative_source_specific_research_after_new_ESP2": 4842,
+  "source_doi": "https://doi.org/10.5281/zenodo.22295583",
+  "license": "CC BY 4.0 source publisher original historical dataset; upstream training rights separately gated",
+  "full_raw_publisher_dataset_NOT_rehosted": true,
+  "normal_reference_only_filepath": "experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_462_FULL_CCBY_SEASON_REFERENCED_ONLY.csv",
+  "new_ESP2_regular_only_filepath": "experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_NOVEL_331_ONLY_RESEARCH_NOT_TRAINING.csv",
+  "new_ESP2_playoffs_only_filepath": "experiments/263/league_expansion/ccby_footballcharts_esp2_2025_26_original_source/esp2_2025_26_6_PROMOTION_PLAYOFFS_RESEARCH_ONLY.csv",
+  "score_second_source_FT_verification_pending_for_new": 337,
+  "new_training_rows_approved": 0,
+  "main_M4_and_user_xG_untouched": true,
+  "next_distinct": "Verify new only ESP2 regular matches against 2025/26 football-data SP2 results; verify six playoffs with league published records. Do not repeat old 131."
+}
