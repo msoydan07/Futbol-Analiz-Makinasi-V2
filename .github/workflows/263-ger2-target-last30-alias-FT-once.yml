@@ -1,0 +1,56 @@
+name: 263 Research - Only last 30 German2 alias gaps once
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-ger2-target-last30-alias-FT-once.yml
+permissions:
+  contents: write
+jobs:
+  last30-only-no276-repeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify frozen 30 original ODbL IDs, not 276 successes
+        run: python experiments/263/league_expansion/reconcile_ger2_remaining_30_2026_only.py --self-test
+      - name: One pinned current-season external fact check, exactly 30 new aliases
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/reconcile_ger2_remaining_30_2026_only.py --live | tee ger2_last30.log
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          t=Path("ger2_last30.log").read_text()
+          d=json.loads(t.split("GER2_LAST30_START",1)[1].split("GER2_LAST30_END",1)[0])
+          if d["status"]=="GER2_2026_27_LAST_30_ALIASES_CHECK_COMPLETE":
+            Path("experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2026_27_30_new_alias_frozen_fact_QA_20261114.json").write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n")
+            assert d["prior_independent_FT_confirmed_frozen_not_retested"]==276
+            assert d["targeted_30_independent_exact"]+d["targeted_30_not_found"]+d["targeted_30_conflicting_score"]==30
+            assert d["new_training_rows_approved"]==0
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+            f.write("## Only 30 German2/2026/27 previously unidentifiable team aliases\n")
+            f.write("- Status: "+d["status"]+"\n")
+            f.write("- Newly exact: "+str(d.get("targeted_30_independent_exact","FAIL"))+"\n")
+            f.write("- Prior exact 276 not retested; no training, no production changes.\n")
+          assert d["status"]=="GER2_2026_27_LAST_30_ALIASES_CHECK_COMPLETE",d
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 263-GER2-only-last-30-identity-exceptions
+          path: |
+            ger2_last30.log
+            experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2026_27_30_new_alias_frozen_fact_QA_20261114.json
+          retention-days: 14
+      - name: Commit only compact verdicts no external results
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- experiments/263/league_expansion/odbl_openligadb_germany2/ger2_2026_27_30_new_alias_frozen_fact_QA_20261114.json
+          if ! git diff --cached --quiet; then
+            git commit -m "research(263): one pass only remaining 30 German2/2026-27 name aliases"
+            git push origin HEAD:research/263-13-lig-22-havuz-20261113
+          fi
