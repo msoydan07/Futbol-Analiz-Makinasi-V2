@@ -45,9 +45,12 @@ def rows(path):
 def gitsha(b):
  return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
 def sourceid(r):
- return (r.get("league","").strip(), r.get("season","").strip(),
-         r.get("date","").strip(), (r.get("home") or r.get("source_home") or "").strip(),
-         (r.get("away") or r.get("source_away") or "").strip())
+ season=str(r.get("season","")).strip()
+ season={"2025-2026":"2025-26","2026-2027":"2026-27"}.get(season,season)
+ return (str(r.get("league","")).strip(),season,
+         str(r.get("date") or r.get("match_date") or "").strip()[:10],
+         str(r.get("home") or r.get("source_home") or r.get("home_id") or "").strip(),
+         str(r.get("away") or r.get("source_away") or r.get("away_id") or "").strip())
 def is_false_fra2(r):
  k=sourceid(r)
  return k[0]=="FRA2" and k[1]=="2025-26" and k[2]=="2025-12-05" and "Bastia" in k[3] and "Red Star" in k[4]
@@ -60,7 +63,8 @@ def validate(r):
  if d>CUT or k[3]=="" or k[4]=="" or k[3]==k[4]:
   raise ValueError("INVALID_OR_FUTURE_MATCH: "+str(k))
  try:
-  a=int(r.get("ft_home",""));b=int(r.get("ft_away",""))
+  a=int(r.get("ft_home") if r.get("ft_home") not in (None,"") else r.get("home_goals",""))
+  b=int(r.get("ft_away") if r.get("ft_away") not in (None,"") else r.get("away_goals",""))
  except ValueError: raise ValueError("UNSCORED_MATCH: "+str(k))
  if min(a,b)<0 or max(a,b)>25:raise ValueError("IMPLAUSIBLE_RESULT: "+str(k))
  return k
@@ -87,11 +91,14 @@ def execute():
  pass_season=Counter()
  selected_ids=set()
  core_fixture_ids=set()
+ core_bel1_ids=set()
  for i,r in enumerate(original,2):
   k=validate(r)
   core_key=(k[0],k[1],k[2],k[3],k[4])
   if core_key in core_fixture_ids:raise ValueError("CORE_DUPLICATE_EXACT_KEY")
   core_fixture_ids.add(core_key)
+  if k[0]=="BEL1":
+   core_bel1_ids.add((k[1],k[2],str(r["home_id"]),str(r["away_id"])))
   if k[0] not in ANALYSIS[:10]: raise ValueError("CORE_LEAGUE_NOT_OLD_TEN")
   audit.append(ref_entry(CORE,i,r,"PINNED_SHA256:"+prov["source_snapshot_sha256"],
      "EXISTING_CORE_4617_FROZEN_RESULTS_ONLY",
@@ -172,6 +179,8 @@ def execute():
   raise ValueError("BEL_OFFICIAL_FACT_CHANGED")
  key=validate(m)
  if key in core_fixture_ids or key in selected_ids:raise ValueError("BEL1_DUPLICATED")
+ if (key[1],key[2],str(m["home_id"]),str(m["away_id"])) in core_bel1_ids:
+  raise ValueError("BEL1_DUPLICATED_BY_CANONICAL_CLUB_IDS")
  selected_ids.add(key)
  extras.append(ref_entry(BEL.relative_to(Path(".")),1,m,
     "SHA256:"+hashlib.sha256(BEL.read_bytes()).hexdigest(),
