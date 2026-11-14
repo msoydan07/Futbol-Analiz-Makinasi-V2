@@ -1,0 +1,33 @@
+name: 263 Research - one BEL1 2025/26 311 source stage completeness graph
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-bel1-2025-26-source-stage-311-once.yml
+permissions:
+  contents: write
+jobs:
+  belgium_2025_one_stage_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: One-time Belgian 311 stage graph and season group completeness, no score QA replay
+        run: |
+          python experiments/263/league_expansion/bel1_2025_26_311_existing_core_only_stage_graph.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path("experiments/263/league_expansion/bel1_2025_26_311_core_stage_graph_missing_fixtures_20261114.json").read_text())
+          assert x["old_BEL1_2025_26_scored_source_rows"]==311
+          assert x["new_model_training_approved"]==0
+          assert x["no_source_score_revalidation"]
+          PY
+      - name: Commit stage count report only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/263/league_expansion/bel1_2025_26_311_core_stage_graph_missing_fixtures_20261114.json
+          git commit -m "research(263): Belgian 311 core source playoffs group completion graph, no FT reruns"
+          git push origin HEAD:research/263-13-lig-22-havuz-20261113
