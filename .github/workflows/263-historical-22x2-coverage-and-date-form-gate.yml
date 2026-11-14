@@ -1,0 +1,47 @@
+name: 263 Research - Historical only 22x2 archive and prior-form audit
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-historical-22x2-coverage-and-date-form-gate.yml
+      - experiments/263/league_expansion/audit_historical_22x2_archive_and_lagged_form_once.py
+permissions:
+  contents: read
+jobs:
+  historical-only-one-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Safety selftest of strictly earlier match date lag (no outcome input)
+        run: python experiments/263/league_expansion/audit_historical_22x2_archive_and_lagged_form_once.py --self-test
+      - name: Offline only 22x2 archive audit, no source re-downloads
+        shell: bash
+        run: |
+          python experiments/263/league_expansion/audit_historical_22x2_archive_and_lagged_form_once.py --run > historical_one_batch.log
+          python - <<'PY'
+          import os,json
+          from pathlib import Path
+          raw=Path("historical_one_batch.log").read_text()
+          data=json.loads(raw.split("HISTORICAL_ARCHIVE_START",1)[1].split("HISTORICAL_ARCHIVE_END",1)[0])
+          assert data["league_season_cells"]==44
+          assert data["research_quarantine_rows"]==2396
+          assert data["exact_source_quality_holds"]==296
+          assert data["CC0_unheld_ordinary_league_date_only_candidates"]==1772
+          assert data["new_rows_added_to_training"]==0
+          assert data["new_match_score_sources_rechecked"]==0
+          assert data["production_10league_M4_SHA_touched"]==False
+          Path("historical_22x2_archive_one_batch.json").write_text(json.dumps(data,indent=2,ensure_ascii=False)+"\n")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+            f.write("## Historical-only 22 leagues / 2 seasons coverage\n")
+            f.write("- 44 cells; research-only scope 24 non-main cells, with 16 pinned and 8 not pinned.\n")
+            f.write("- Research 2396 pinned rows; 296 explicit holds, 325 rights-uncleared, 3 playoffs, 1772 CC0 date-only normal league candidates.\n")
+            f.write("- Same-day/future outcomes excluded by design. Date-only lag form is **NOT** certified as-of training evidence.\n")
+            f.write("- No new match predictions or training; production M4 unchanged.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 263-historical-only-22x2-coverage-and-date-lag
+          path: historical_22x2_archive_one_batch.json
+          retention-days: 14
