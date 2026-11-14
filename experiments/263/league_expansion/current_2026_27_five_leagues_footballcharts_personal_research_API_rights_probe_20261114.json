@@ -1,0 +1,61 @@
+{
+  "report_day": "2026-11-14",
+  "status": "FIVE_2026_27_FIRST_PARTY_LIVE_PERSONAL_RESEARCH_API_RIGHTS_AND_COVERAGE_PROBE",
+  "provider": "Football Charts",
+  "developer_terms": "https://www.football-charts.com/developers",
+  "rights_terms": "https://www.football-charts.com/terms",
+  "provider_credit_required": "Data by football-charts.com",
+  "rights_classification": "FREE_PERSONAL_RESEARCH_USE_ONLY_NO_RAW_DATA_REDISTRIBUTION_OR_SUBSTANTIAL_EXTRACT_PUBLICATION",
+  "historical_CC_BY_snapshot_license_NOT_applied_to_LIVE_API": true,
+  "research_use_context": "Single personal private research computation, public GitHub receives metadata statistics only",
+  "frozen_scored_match_cutoff": "2026-11-13",
+  "season_requested": "2026-2027",
+  "target_groups": [
+    "ENG5",
+    "ESP2",
+    "ITA2",
+    "FRA2",
+    "DNK1"
+  ],
+  "original_rights_uncleared_632_provider_compilation_rows_imported": 0,
+  "new_raw_source_match_rows_rehosted": 0,
+  "new_model_training_rows_approved": 0,
+  "old_pinned_4505_research_fixture_rows_unchanged": true,
+  "old_1775_461_1268_and_106_historical_result_score_QA_replayed": 0,
+  "old_10league_M4_SHA_and_user_xG_unchanged": true,
+  "source_publisher_declares_current_prev_season_data_access": true,
+  "source_daily_keyless_requests_target_max": 6,
+  "provider_results_are_ephemeral_no_raw_logs_and_no_store": true,
+  "network_metadata_failure_must_not_pretend_historical_data_ingested": true,
+  "by_league": {
+    "ENG5": {
+      "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
+      "candidate_code_count": 0,
+      "new_training_rows": 0
+    },
+    "ESP2": {
+      "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
+      "candidate_code_count": 0,
+      "new_training_rows": 0
+    },
+    "ITA2": {
+      "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
+      "candidate_code_count": 0,
+      "new_training_rows": 0
+    },
+    "FRA2": {
+      "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
+      "candidate_code_count": 0,
+      "new_training_rows": 0
+    },
+    "DNK1": {
+      "status": "TARGET_LEAGUE_CODE_NOT_UNAMBIGUOUS_HOLD",
+      "candidate_code_count": 0,
+      "new_training_rows": 0
+    }
+  },
+  "next_distinct_task": "If response supports verified current-season league scores, use a local personal-rights-aware volatile reader (not a public raw GitHub CSV archive). Preserve per-match source rights, league identity and pre-kickoff feature-vintage gates. If catalog is unavailable, switch to a different provider rather than replaying old sources.",
+  "catalog_total_competitions": 98,
+  "available_personal_source_league_count": 0,
+  "scored_source_rows_only_ephemeral": 0
+}
