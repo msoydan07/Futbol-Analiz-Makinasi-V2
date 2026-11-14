@@ -1,0 +1,95 @@
+{
+  "review_date": "2026-11-14",
+  "status": "ALL_96_ENG5_ORIGINAL_HOLD_KEYS_THIRD_WITNESS_FACTUAL_CONFLICT_TRIAGED__TRAINING_STILL_HOLD",
+  "scope": "ENG5/2025-26 original 96 score/date discrepancies ONLY; original 200 ENG3/ENG4 HOLD and verified 871 score-date checks frozen",
+  "original_hold_path": "experiments/263/league_expansion/eng5_2025_26_96_exact_original_FT_conflict_training_HOLD_20261114.csv",
+  "original_hold_git_blob_sha": "0a422d9e0a68b6e714852addcb3ec9cf4602a7f6",
+  "original_fixture_keys_sha256": "0fc4455beea8089ce8fca68d575af424f5bc3a3be3efe2a06e41fe8403191f90",
+  "third_witness_page": "https://www.nonleaguematters.co.uk/divisions/1/16/",
+  "third_witness_page_type": "2025/26 National League results page, read through web browsing; site blocked HTTP request from GitHub Actions; browser-visible public match facts compared without persisting raw third-party season table",
+  "third_witness_lineage_independence": "NOT_ESTABLISHED",
+  "comparison_scope": "105 results visible for November-December 2025 from third website, matched home-away to EXACT 96 original HOLD fixture keys; 96 keys were previously documented as disagreeing with SHA-pinned football-data.co.uk 2025/26 EC secondary source",
+  "research_original_hold_count": 96,
+  "november_hold_count": 54,
+  "december_hold_count": 42,
+  "third_witness_same_home_away_in_nov_dec": 91,
+  "same_date_and_home_away_but_original_FT_conflicts": 82,
+  "home_away_matches_but_original_date_and_FT_both_conflict": 9,
+  "not_in_original_nov_dec_matchday_results_because_eventually_played_later": 5,
+  "untouched_correct_prior_matches": 871,
+  "remaining_no_third_witness_coverage": 0,
+  "five_moved_fixtures_individual_authoritative_sources": [
+    {
+      "original_date": "2025-11-04",
+      "home": "Rochdale AFC",
+      "away": "Scunthorpe United",
+      "original_FT": "2-2",
+      "played_date": "2026-02-17",
+      "actual_FT": "1-1",
+      "result_url": "https://www.bbc.co.uk/sport/football/live/cpq15xdp734t"
+    },
+    {
+      "original_date": "2025-12-06",
+      "home": "Eastleigh FC",
+      "away": "Brackley Town",
+      "original_FT": "1-0",
+      "played_date": "2026-03-10",
+      "actual_FT": "2-1",
+      "result_url": "https://eastleighfc.com/2026/01/new-date-for-brackley-town-confirmed/"
+    },
+    {
+      "original_date": "2025-12-06",
+      "home": "Rochdale AFC",
+      "away": "Boreham Wood",
+      "original_FT": "1-0",
+      "played_date": "2026-02-03",
+      "actual_FT": "4-1",
+      "result_url": "https://www.borehamwoodfootballclub.co.uk/fixtures-and-results/rochdale-v-boreham-wood/"
+    },
+    {
+      "original_date": "2025-12-06",
+      "home": "Southend United",
+      "away": "Gateshead FC",
+      "original_FT": "2-0",
+      "played_date": "2026-03-10",
+      "actual_FT": "1-1",
+      "result_url": "https://www.bbc.co.uk/sport/football/live/cnvgze9v14nt"
+    },
+    {
+      "original_date": "2025-12-06",
+      "home": "Sutton United",
+      "away": "York City",
+      "original_FT": "1-3",
+      "played_date": "2026-01-10",
+      "actual_FT": "1-2",
+      "result_url": "https://www.suttonunited.net/match/sutton-united-1-2-york-city-enterprise-national-league-january-2026/"
+    }
+  ],
+  "source_reconciliation_limitations": [
+    "All 91 original source FTs conflict with third webpage, but its provenance independence from secondary source has NOT been established; matching of the external witness against each secondary FT was not completed in GitHub Actions.",
+    "The five rescheduled records have individually checked final dates and scores at official club or BBC match pages.",
+    "Browser-side review is a manual factual comparison, not an automatic successful CI certificate. Original research rows and original third-party raw result tables were not overwritten or rehosted.",
+    "The 96 match keys remain explicitly held. Do not silently replace original facts, backfill timestamps, or promote rows before licensing, source lineage and pre-kickoff feature vintage gates."
+  ],
+  "automation_attempts": [
+    {
+      "run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43577603189",
+      "status": "FAILED_PIN_CONSTANT_TYPO",
+      "note": "Local code guard typed wrong hash; corrected in next commit; not evidence of upstream source drift"
+    },
+    {
+      "run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/43577665804",
+      "status": "THIRD_SITE_HTTP_BLOCKED",
+      "note": "GitHub runner could not access third website. Do not rerun same blocked endpoint; researched through web-browsed public page instead"
+    }
+  ],
+  "no_repeat": {
+    "previous_871_FT_date_results_reverified": 0,
+    "previous_904_other_results_reverified": 0,
+    "prior_200_ENG3_ENG4_holds_modified": false,
+    "original_96_CC0_research_rows_modified": false,
+    "production_10_league_M4_or_historical_SHA_mutated": false,
+    "new_training_rows_approved": 0
+  },
+  "next_distinct_task": "Keep all 296 explicit CC0 quality HOLD and rights/vintage gates; for 91 third-browser observed contradictions, further independent lineage / official adjudication only if planned to correct for research training. No repeat of completed browser side 96 dispute review absent source change."
+}
