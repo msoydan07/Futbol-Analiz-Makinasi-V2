@@ -1,0 +1,32 @@
+name: 263 One mathematical seal, one pre-kickoff football review (no models)
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - .github/workflows/263-single-seal-second-pdf-lineup-review-once.yml
+      - experiments/263/iddaa_pdf_last_review_263.py
+      - experiments/263/test_iddaa_pdf_last_review_263.py
+permissions:
+  contents: read
+jobs:
+  offline-five-fixture-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic five-match same kickoff test and fail-closed source controls
+        run: |
+          PYTHONPATH=experiments/263 python -m unittest -v test_iddaa_pdf_last_review_263
+      - name: Never create a second model seal or change production
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('experiments/263/iddaa_pdf_last_review_263.py').read_text()
+          assert 'second_model_seal_created":False' in s
+          assert 'forecast_shas_replaced":False' in s
+          assert 'math_refitted":False' in s
+          assert 'bookmaker_network_calls":0' in s
+          assert 'with Path(p).open("x"' in s
+          print('PASS - no extra model seal, overwrite, fit or odds lookup')
+          PY
