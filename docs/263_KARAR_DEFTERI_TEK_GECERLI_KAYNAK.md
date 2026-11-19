@@ -149,3 +149,17 @@ Açık engel:
 **Gerçek sınır:** Resmî sonuç takvimini baştan sona çekip eksiksizliğini bağımsız kontrol eden adaptör, 4.618 özel dosyanın canlı forecast kaynak kabulü ve mevcut `forward_quad.py` içindeki 10 gün şartının yeni güvenli kanıtla uyumlu bağlantısı **henüz yok**. İlgili envanter: [maç sabahı takvim kapısı raporu](263_4618_MATCHDAY_CALENDAR_PREFLIGHT_20261119.md).
 
 **Durum:** (A) Yapılacak teknik iş kapsamı kilitli. (B) Güvenli araştırma *ön kapısı* kodlandı ve yerelde test edildi. (C) **Canlı maç sabahı kabulü yok**. Gelecek adım yalnız resmî sonuç adaptörü ve 4.618 özel kaynağın as-of model/ilk PDF bağlantısı; geçmişte çözülmüş oran kuralı tekrar tartışılmaz.
+
+
+## D-READY-009 — 10 lig resmî maç arası ve eksik skor kaynak kontrolü (19 Kasım 2026)
+
+**Kilitli iş akışı değişmedi:** D-ODDS-001 (ilk iddaa PDF ile TEK tahmin ve mühür, ikinci PDF yalnız futbol analisti yorumu), D-MARKET-006 (oran yalnız MARKET beşinci referansı) geçerli. Yeni fiyat tabanlı tercih veya ikinci mühür açılmadı.
+
+**Araştırma kodu/kanıt:**
+- [10 ligin resmî sonraki normal maç hafta başlangıçları](263_OFFICIAL_NOVEMBER_2026_CALENDAR_SOURCE_SUMMARY.md): boşluğun millî maç arasıyla uyumlu olduğunu gösterir; arada tek maçlık erteleme olmadığını kapsamlı sonuç listesi olmadan ispatlamaz.
+- `experiments/263/official_full_season_gap_guard_263.py`: sadece tam sezon resmî fikstür kapsamı varsa takvim boşluğu adayı üretir; tek tur/kulüp haberini tam kapsama saymaz.
+- `experiments/263/public_provider_2627_gap_audit_263.py`: mevcut 10 Football-Data sezon kaynağından son kabul sonrası bitmiş maçları salt-okunur **ikincil** kontrol eder; federasyon resmî sonucu yerine geçmez.
+- KNVB `knvb.nl` Eredivisie izin listesine eklendi.
+- **33/33 yerel sentetik test** başarılı (16 + 9 + 8); ilgili research CI dosyası güncellendi. GitHub Actions çalışmasının başarı sonucu ve resmî tam kapsam canlı kabulü **henüz yok**.
+
+**Durum A — DEĞİŞMEDİ:** Oran ve mühür kararları sabit. **Durum B — ARAŞTIRMA KODU VAR:** Veri SHA, takvim ve provider ön denetimleri research dalında. **Durum C — CANLI ONAY YOK:** Eski modeldeki 10 gün engeli, 4.618 özel dosyanın canlı kaynak kabulü ve ilk PDF'den uçtan uca model bağlantısı hâlâ açık. Sonraki iş bu üçü; eski kararları yeniden tartışma.
