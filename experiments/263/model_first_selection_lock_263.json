@@ -1,0 +1,33 @@
+{
+  "schema": "263_MODEL_FIRST_RESEARCH_LOCK_V1",
+  "family_anchors": {
+    "KG": "M4",
+    "MS": "M4",
+    "O25": "M4"
+  },
+  "frozen_family_anchors": {
+    "KG": "M4",
+    "MS": "M4",
+    "O25": "M4"
+  },
+  "historical_selection_period": "2026-09-01/2026-09-30",
+  "m4_joint_calibration_august": [
+    0.05206617557187415,
+    0.10909064506028164,
+    1.0154151566181202
+  ],
+  "market_reference_only": true,
+  "min_available_models": 2,
+  "min_lift": 0.025,
+  "min_probability": 0.6,
+  "min_support_models": 2,
+  "no_odds_input_to_selection": true,
+  "officially_approved": false,
+  "payload_sha256": "7aa20dcada100ee7158fff103c5e4bcc1c686d857d162e991557b73eab67820a",
+  "rank_basis": "model_probability_minus_empirical_league_base_standardized",
+  "research_only": true,
+  "research_source_prediction_sha256": "e6e0f1caedbe3b1574760a6e99081ec1ac34b1eb57cab3561fec3e5ac832364d",
+  "retrospective_evaluation_reused_not_independent": true,
+  "selection_basis": "AUG_2026_CALIBRATION_SEP_2026_PRESELECTION",
+  "support_lift": 0.02
+}
