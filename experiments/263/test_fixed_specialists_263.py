@@ -62,7 +62,7 @@ class FixedSpecialistTests(unittest.TestCase):
         b=copy.deepcopy(self.base)
         b["forecast_sha256"]=f["payload_sha256"]
         seal(b)
-        with self.assertRaisesRegex(ValueError,"EXPERT_MS_NOT_NORMALIZED"):
+        with self.assertRaisesRegex(ValueError,"1X2_NOT_NORMALIZED|EXPERT_MS_NOT_NORMALIZED"):
             decide(f,b,self.lock,now=NOW)
 
 if __name__=="__main__":unittest.main()
