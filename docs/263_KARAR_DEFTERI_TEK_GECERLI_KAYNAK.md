@@ -201,3 +201,14 @@ Açık engel:
 **Dosya ve kanıt:** [19 Kasım resmî kaynak / eski PDF düzen raporu](263_19KASIM_RESMI_LIG_GAP_VE_GERCEK_PDF_DUZEN_DENETIM.md). 4.618 özel skor SHA: `54250bb6107250d0623b74ad9c56f90731f02d10dab3bf386deefb27aae487ea`. **Kaynakların normal lig arası oluşunu, erteleme dahil mutlak sıfır sonuç kabulüne dönüştürme.** İddaa oranları yalnız beşinci referans; ana M4/96 pilot/otomasyon/önceki SHA mühürleri değiştirilmedi.
 
 **Takip işi:** Aynı veri-açığı ve model kararı baştan tartışılmaz. Seçili maç günü geldiğinde tam resmî sonuç yeniliği + **yeni kullanıcı ilk iddaa PDF'siyle tek uçtan uca kabul**; kullanıcı ikinci PDF gönderdiğinde yalnız append-only futbol yorumu. Geçmiş %69,5 vs %62,6 örneğinden kaynaklanan kalibrasyon ihtiyatı hâlâ açık; kanıtsız kalibrasyon terfisi yok.
+
+## D-READY-013 — ESP1/POR1 tamamlanmamış iki maçın gerçek nedeni tespit edildi (19 Kasım 2026)
+
+**Yeni olgu, eski kararı yeniden açmıyor:** 4.618 özel skor projeksiyonunun 2026/27 ESP1=119 ve POR1=98 olması **veri aktarım hatası değildir**. Takım maç sayıları üzerinden iki eksik karşılaşmanın kimliği bulundu ve kaynaklarla teyit edildi:
+
+- **ESP1 Rayo Vallecano–Athletic Club:** 10 Ekim 2026'da saha olayları nedeniyle yarım kalmış maç; LaLiga resmî sonuç ekranına göre 9 Aralık 2026'da tamamlanacak. 119 toplam bitmiş maç; **eksik final skorunu şimdi oluşturma veya tahmin eğitimine sokma**.
+- **POR1 Estoril Praia–Marítimo:** 8 Kasım 2026'da kötü hava nedeniyle ertelendi; resmî kulüp açıklaması mevcut, Liga Portugal'a dayanan RTP haberinde 4 Ocak 2027 yeni tarih. 98 tamamlanmış maç; **sonuç yokken arşive skor ekleme**.
+
+İki maçın kanıt/ID/gelecek yeniden kontrol tarihleri [evidence JSON](../experiments/263/evidence/263_UNFINISHED_ESP1_POR1_MATCHES_20261119.json) dosyasında. [Resmî veri/gerçek tarihî PDF denetimi](263_19KASIM_RESMI_LIG_GAP_VE_GERCEK_PDF_DUZEN_DENETIM.md) bu keşifle eklenerek güncellendi. **D-READY-011/012'deki iki birer-maç farkının nedeni belirsiz notu bu iki karşılaşma için artık superseded.**
+
+**Durum:** A = önceden kilitlenen model-first, odds fifth-reference, iki PDF / tek SHA kuralı aynı. B = 4.618 maç ve açıklanmış iki tamamlanmamış maçın resmi kaynak/kimlik araştırma tutanağı hazır; eski 4.413, M4, 96 mühürlü pilot ve üretim otomasyonları değişmedi. C = gerçek 10 lig ilk iddaa PDF'nin kendi güncel sabahında uçtan uca kabulü hâlâ YOK. Millî ara kaynaklarında 9–19 Kasım'da bitmiş eksik maç tespit edilmedi; bu **10 ligin tüm resmî canlı sonuçlarının eksiksiz sertifikası değil**. Resmî sonuçlar ve tek-mühür PDF akışı gerçek tarihte yeniden doğrulanmalı.
