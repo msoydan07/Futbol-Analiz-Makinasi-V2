@@ -33,7 +33,7 @@ jobs:
             experiments/263/test_four_model_value_policy_263.py \
             experiments/263/test_fixed_specialists_263.py
           git diff --exit-code
-      - name: Read-only replay of 40 actual Nov8 SHA forecasts: coherent MS and no-odds PAS
+      - name: "Read-only replay of 40 actual Nov8 SHA forecasts - coherent MS and no-odds PAS"
         env:
           PYTHONPATH: .:experiments/263
         run: |
