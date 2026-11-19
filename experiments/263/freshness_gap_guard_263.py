@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import math
 import urllib.request
 from urllib.parse import urlsplit
 from urllib.error import HTTPError
@@ -146,10 +145,12 @@ def _compute(rows,league,target_date,now,raw_rows,source_sha,url,resolver=None):
             # Same-day or future scores cannot train the prematch model.
             continue
         completed.append((day,h,a,hg,ag))
-    if not completed or upcoming<1:
-        # Explicit future fixtures provide a small guard against empty/truncated
-        # season pages. Still NOT proof of complete federation coverage.
-        raise StaleLeagueData("SOURCE_NO_SCHEDULE_OR_RESULTS")
+    if not completed:
+        # Season CSVs are results-only on many leagues: a missing future
+        # fixture section is expected and must not be treated as stale data.
+        # Coverage is established only by the accepted latest result-day
+        # overlap and a complete-enough current-season completed-score count.
+        raise StaleLeagueData("SOURCE_NO_COMPLETED_RESULTS")
     if len(completed)<len(hist):
         raise StaleLeagueData("SOURCE_SHORTER_THAN_ACCEPTED_CURRENT_SEASON")
     provider_latest=max(r[0] for r in completed)
