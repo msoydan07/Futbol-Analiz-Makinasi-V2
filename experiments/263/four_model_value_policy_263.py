@@ -294,6 +294,15 @@ def render(result):
     for m in MODELS:
         p=result["model_1x2"].get(m)
         lines.append("| "+m+" | "+(" | ".join(f"%{p[k]*100:.1f}" for k in ("MS1","MSX","MS2")) if p else "— | — | —")+" |")
+    specialist=result.get("fixed_market_specialists_research_only",{})
+    if specialist:
+        lines.append("Pazar uzmanı (araştırma): "+", ".join(
+            f"{fam}={item['model']}" for fam,item in specialist.items()))
+        ms=specialist.get("MS",{}).get("dev_shrunken_probability_vector")
+        if ms:
+            lines.append("Tek modelden tutarlı MS 1/X/2: "+
+                         " / ".join(f"%{ms[k]*100:.1f}" for k in ("MS1","MSX","MS2"))+
+                         " (toplam %100; resmî bahis onayı değil)")
     lines.append("Ana tercih (deneysel): "+(result["main_candidate"]["market"] if result["main_candidate"] else "PAS"))
     lines.append("Alternatif (ayrı aile): "+(result["alternative_candidate"]["market"] if result["alternative_candidate"] else "YOK"))
     if result["alternative_candidate"]:
