@@ -115,19 +115,24 @@ def _fixed_family_experts(raw,base,lock):
         _validate_family(model_vec,fam)
         _validate_family(base_vec,fam)
         calibration=lock["calibration"][model]
+        # Use the most conservative DEV weight among POSITIVE-SKILL
+        # members. Negative-skill markets NEVER qualify for value, but
+        # all family probabilities still receive this SAME weight.
+        # This preserves %100 even when one goal line lacks skill.
         weights=[]
         for m in members:
             skill=calibration[m]
-            w=skill.get("weight")
+            brier=skill.get("development_brier_skill")
             if (skill.get("available") is not True or skill.get("n",0)<120
-                or not isinstance(w,(float,int)) or isinstance(w,bool)
+                or not isinstance(brier,(float,int)) or isinstance(brier,bool)
+                or not math.isfinite(brier) or brier<=0):
+                continue
+            w=skill.get("weight")
+            if (not isinstance(w,(float,int)) or isinstance(w,bool)
                 or not math.isfinite(w) or not 0<=w<=1):
-                # No dev evidence: keep raw vector for description but do NOT
-                # issue priced value decisions for this family.
-                weights=[]
-                break
+                raise ValueError("INVALID_EXPERT_DEV_WEIGHT")
             weights.append(w)
-        common=min(weights) if len(weights)==len(members) else None
+        common=min(weights) if weights else None
         softened=({m:base_vec[m]+common*(model_vec[m]-base_vec[m])
                    for m in members} if common is not None else None)
         if softened is not None:_validate_family(softened,fam)
