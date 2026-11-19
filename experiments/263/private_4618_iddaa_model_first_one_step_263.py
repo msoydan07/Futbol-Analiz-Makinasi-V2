@@ -27,6 +27,7 @@ from private_4618_pdf_session_263 import run_session
 from private_4618_provider_bundle_263 import create_witnesses
 from private_4618_matchday_preflight_263 import verify_private_projection
 from private_4618_retry_guard_263 import select_attempt
+from private_4618_first_pdf_day_guard_263 import verify_current_first_pdf, claim_single_first_pdf
 from model_first_iddaa_bridge_263 import calibrate_session
 from iddaa_pdf_report_263 import build as report_pdf
 
@@ -75,11 +76,15 @@ def one_step(pdf,*,history,output_root,
         raise ValueError("FROZEN_ORIGINAL_4413_CSV_REQUIRED")
     if source_acceptance is not None:
         raise ValueError("MANUALLY_SUPPLIED_ACCEPTANCE_CANNOT_REPLACE_LIVE_PROVIDER_FETCH")
-    # Do the full SHA + 4,413 unchanged + 205 added record check BEFORE
-    # creating an immutable single-PDF session folder.
-    verify_private_projection(source_baseline,history)
+    # A historical user PDF, even one with correct-looking prices, cannot
+    # trigger today's model or second seal. Do this BEFORE any network fetch
+    # or source session folder creation.
     bulletin=parse_pdf(source)
+    first_preflight=verify_current_first_pdf(bulletin,now=now)
+    # Verify fixed source BEFORE claiming today's one-and-only first PDF.
+    verify_private_projection(source_baseline,history)
     pdf_sha=bulletin["pdf_sha256"]
+    first_pdf_day_claim=claim_single_first_pdf(output_root,first_preflight)
     # A network failure with ZERO signed forecasts must not permanently
     # strand this same PDF. Preserve that failed attempt and retry in a new
     # append-only directory. Existing SHA forecast => NO second seal.
@@ -128,6 +133,9 @@ def one_step(pdf,*,history,output_root,
         "research_pas_or_blocked":calibrated["n_pdf_first_pas_or_blocked"],
         "no_bookmaker_api_calls":True,
         "no_old_pilot_changes":True,
+        "first_pdf_local_date":first_preflight["first_pdf_local_date"],
+        "first_pdf_day_lock_status":first_pdf_day_claim["status"],
+        "second_pdf_resealing_allowed":False,
         "attempt_number":plan["attempt"],
         "prior_unsealed_attempts_preserved":plan["attempt"]-1,
         "private_4618_history_sha256":"54250bb6107250d0623b74ad9c56f90731f02d10dab3bf386deefb27aae487ea",
