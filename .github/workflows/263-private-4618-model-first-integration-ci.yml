@@ -7,6 +7,7 @@ on:
       - "experiments/263/private_4618_*.py"
       - "experiments/263/test_private_4618_live_integration_contract_263.py"
       - "experiments/263/test_private_4618_retry_guard_263.py"
+      - "experiments/263/test_private_4618_first_pdf_day_guard_263.py"
       - ".github/workflows/263-private-4618-model-first-integration-ci.yml"
   workflow_dispatch:
 permissions:
@@ -28,12 +29,13 @@ jobs:
             experiments/263/private_4618_empirical_baseline_263.py \
             experiments/263/private_4618_pdf_session_263.py \
             experiments/263/private_4618_iddaa_model_first_one_step_263.py \
-            experiments/263/private_4618_retry_guard_263.py
+            experiments/263/private_4618_retry_guard_263.py \
+            experiments/263/private_4618_first_pdf_day_guard_263.py
       - name: Run source/receipt/model isolation tests
         env:
           PYTHONPATH: experiments/263
         run: |
-          python -m unittest -v test_private_4618_live_integration_contract_263 test_private_4618_retry_guard_263
+          python -m unittest -v test_private_4618_live_integration_contract_263 test_private_4618_retry_guard_263 test_private_4618_first_pdf_day_guard_263
       - name: Import actual original math functions and private 4618 adapter
         run: |
           python -m pip install "numpy>=1.26,<3" "scipy>=1.11,<2" "reportlab>=4,<5" "pymupdf>=1.24,<2"
@@ -42,9 +44,10 @@ jobs:
           from private_4618_empirical_baseline_263 import produce
           from private_4618_pdf_session_263 import run_session
           from private_4618_iddaa_model_first_one_step_263 import one_step
+          from private_4618_first_pdf_day_guard_263 import verify_current_first_pdf
           from m4_integrated import fit_m4, predict_m4
           assert all(callable(x) for x in (
-              predict_quad_from_verified_gate,produce,run_session,one_step,fit_m4,predict_m4))
+              predict_quad_from_verified_gate,produce,run_session,one_step,fit_m4,predict_m4,verify_current_first_pdf))
           print("RESEARCH IMPORTS LINKED; NO REAL PRIVATE DATA OR PDF RUN")
           PY
       - name: Verify original production model source untouched in this change
