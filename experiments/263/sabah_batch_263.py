@@ -159,6 +159,13 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
      evidence=m4_xg_sidecar(path,history,xg_snapshot,evidence_path)
      item["xg_status"]=evidence["xg"]["status"]
      item["xg_evidence_path"]=evidence_path.as_posix()
+     if evidence["xg"].get("markets"):
+      original=evidence["xg"]["markets"]["M4_original"]
+      modified=evidence["xg"]["markets"]["M4_with_xg"]
+      item["m4_xg_research_probabilities"]={
+       "OVER_2.5":modified["OVER_2.5"],"BTTS_YES":modified["BTTS_YES"],
+       "MS1":modified["1X2"]["H"],"MSX":modified["1X2"]["D"],"MS2":modified["1X2"]["A"],
+       "old_OVER_2.5":original["OVER_2.5"],"old_BTTS_YES":original["BTTS_YES"]}
     except (ValueError,OSError,KeyError,TypeError) as xg_exc:
      item["xg_status"]="XG_UNAVAILABLE_OR_INVALID_M4_UNCHANGED"
      item["xg_reason"]=str(xg_exc)[:180]
@@ -190,7 +197,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
                   "decision_status","decision_sha256","rotation",
                   "rotation_evidence","rotation_applied_to_model_probabilities"):
      item.pop(field,None)
-    item.pop("xg_status",None);item.pop("xg_evidence_path",None);item.pop("xg_reason",None)
+    item.pop("xg_status",None);item.pop("xg_evidence_path",None);item.pop("xg_reason",None);item.pop("m4_xg_research_probabilities",None)
    item["status"]="BLOCKED_NO_FORECAST"
    item["reason"]=str(exc)[:200]
   outcomes.append(item)
@@ -241,6 +248,11 @@ def mobile(report):
             "Karar: "+x.get("decision_status","MODEL_ONLY"),
             "Rotasyon: "+", ".join(x.get("rotation",{}).values())]
    if "xg_status" in x:lines.append("M4 xG veri katkısı: "+x["xg_status"])
+   if "m4_xg_research_probabilities" in x:
+    m=x["m4_xg_research_probabilities"]
+    lines.append("2.5 Üst (M4 → xG’li M4): %%.1f → %%.1f" % (100*m["old_OVER_2.5"],100*m["OVER_2.5"]))
+    lines.append("KG Var (M4 → xG’li M4): %%.1f → %%.1f" % (100*m["old_BTTS_YES"],100*m["BTTS_YES"]))
+    lines.append("xG yüzdeleri yalnız araştırma; asıl mühür/değer kararı değişmedi.")
   else:lines.append("Neden: "+x.get("reason","Önceden kaydedilmiş olabilir"))
   lines.append("")
  return "\n".join(lines)
