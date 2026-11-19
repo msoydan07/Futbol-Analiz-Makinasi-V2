@@ -114,6 +114,8 @@ def select(forecast, baseline, lock, *, now):
     for name,m in mods.items():
         raw[name]=canonical(m["goals"]["markets"]) if m.get("status")=="AVAILABLE" else None
     if raw["M4"] is None: raise EvidenceError("ANCHOR_M4_UNAVAILABLE")
+    if sum(p is not None for p in raw.values()) < lock["min_available_models"]:
+        raise EvidenceError("REQUIRED_MODEL_COVERAGE_MISSING")
     goals=mods["M4"]["goals"]
     theta=lock["m4_joint_calibration_august"]
     if len(theta)!=3 or any(not isinstance(x,(int,float)) or not math.isfinite(x) for x in theta):
