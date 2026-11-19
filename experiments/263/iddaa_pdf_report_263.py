@@ -53,6 +53,39 @@ def _render_pick(row,session):
     Actual file SHA + official forecast SHA + as-of baseline SHA are verified
     upstream by iddaa_pdf_value_bridge_263; here require sealed result identity.
     """
+    # D-MARKET-006: new research route; ONLY model decision may choose a market.
+    # Legacy price-driven records remain readable for historical audit, but
+    # are never produced by iddaa_pdf_model_first_one_step_263.py.
+    if "model_first_decision" in row or "model_only_decision_status" in row:
+        if row.get("model_only_decision_status")=="TECHNICAL_BLOCKED_NOT_PAS":
+            return "ANA: TEKNIK ENGEL | Neden: "+str(row.get("model_only_technical_reason") or "kanit eksik")[:130]
+        from model_first_decision_263 import verified as model_verified, SCHEMA as model_schema, REF_SCHEMA as ref_schema, EvidenceError
+        try:
+            d=model_verified(row["model_first_decision"],model_schema)
+            ref=model_verified(row["market_fifth_reference"],ref_schema)
+            if (d["forecast_sha256"]!=row.get("model_forecast_sha256")
+                or d["baseline_sha256"]!=row.get("empirical_baseline_sha256")
+                or d["model_policy_sha256"]!=session.get("policy_dev_lock_sha256")
+                or ref["decision_sha256"]!=d["payload_sha256"]
+                or ref["source_pdf_sha256"]!=session.get("pdf_sha256")
+                or ref["odds_used_for_model_selection"] is not False
+                or d["price_used_in_decision"] is not False
+                or d["betting_authorized"] is not False):
+                raise EvidenceError("SOURCE_CHAIN_CHANGED")
+            labels={"MS1":"MS 1","MSX":"MS X","MS2":"MS 2",
+                    "BTTS_YES":"KG Var","BTTS_NO":"KG Yok",
+                    "OVER_2.5":"2.5 Ust","UNDER_2.5":"2.5 Alt"}
+            def describe(x):
+                return labels[x["market"]]+" "+_pct(x["calibrated_probability"])+" [M4, model guveni]"
+            main=d.get("main_candidate");alt=d.get("alternative_candidate")
+            if not main:
+                return "ANA: PAS (YALNIZ MODEL KURALLARI) | Neden: "+str(d.get("reason"))
+            if alt and alt["family"]==main["family"]:raise EvidenceError("ALT_SAME_FAMILY")
+            return ("ANA (ORANDAN BAGIMSIZ): "+describe(main)+
+                    (" | ALTERNATIF: "+describe(alt) if alt else " | ALTERNATIF: YOK")+
+                    " | IDDAA SADECE 5. REFERANS, TERCIHI DEGISTIRMEZ")
+        except (KeyError,TypeError,ValueError) as exc:
+            return "ANA: TEKNIK ENGEL | Model karari veya SHA baglantisi gecersiz: "+str(exc)[:80]
     from iddaa_pdf_first_quote_263 import sha256 as sha
     d=row.get("pdf_linked_policy_decision")
     snap=row.get("pdf_first_price_snapshot")
