@@ -23,7 +23,7 @@
 **Kesin algoritma:**
 
 - **Sabah (1. PDF):** Kullanıcı `iddaa.com` kaynağından maç sabahı PDF gönderir. Yalnız 10 mevcut kapsam ligi uygun maçları ele alınır. PDF'deki **MS 1/X/2, KG Var/Yok, 2.5 Alt/Üst** (7 fiyat) alınır. Orijinal PDF ve SHA saklanır; resmî fikstür/kimlik karşılaştırılır.
-- **Tek sabah matematiği:** B, C2, C3 ve M4 uygun mevcut tarihsel veriden hesaplanır; kalibrasyon/karar mekanizması ilk PDF'nin o anki oranlarına göre **ana tercih / en fazla bir alternatif / PAS** üretir. Tahmin/karar SHA ile **bir kez** mühürlenir. Matematiğe sonradan aynı maçın sonucu veya xG'si girmez.
+- **Tek sabah matematiği:** B, C2, C3 ve M4 uygun geçmiş verilerle hesaplanır; geçmiş kalibrasyon, modellerin MS/KG/Alt-Üst pazarlarındaki güvenilirliği ve önceden tanımlı model-içi karar kuralları ile **oranlardan BAĞIMSIZ olarak** ana tercih / en fazla bir alternatif / PAS üretilir. Tahmin ve tercih SHA ile **bir kez** mühürlenir. İlk PDF oranları aynı anda yalnız bağımsız piyasa referans karşılaştırmasına bağlanır; **oran, marjsız piyasa olasılığı, EV veya piyasa hareketi model tercihini, model yüzdesini ve PAS kararını yönetemez**. Matematiğe sonradan aynı maçın sonucu veya xG'si girmez.
 - **İlk 11 sonrası (2. PDF):** Kullanıcı **aynı iddaa.com kaynağından** yeni PDF yollar. Bu **ikinci analiz, ikinci model hesabı, yeni piyasa-değeri kararı veya tahmin güncellemesi değildir**. Yalnız sabah ve son fiyatlar (ve marjsız piyasa olasılığı farkı) karşılaştırılır. Yeni PDF'nin maç/eşleşme/zaman kontrolü yapılır.
 - **Futbol içi YORUM:** İlk 11, sürpriz yedekler, kaleci/sakatlık, rotasyon, diziliş, ceza, taktik vb. **kanıtlanabilir** değişiklikler varsa oran hareketiyle **olası ilişki** yorumlanır. Sebep kanıtlı değilse “neden belirsiz” yazılır; oran değişimini otomatik olarak şu oyuncuya mal etme. Yorum kaynağı ve saatiyle **ayrı, ekleme-only** arşivlenir.
 - **DEĞİŞTİRME YASAĞI:** İkinci PDF sonrasında sabah tahmini, model yüzdeleri, ana tercih, alternatif, PAS, sabah fiyatı, mühür/SHA ve seçim gerekçesi değişmez. **Sadece maç öncesi gözlem ve yorum eki** oluşur.
@@ -56,7 +56,7 @@
 - xG/xGA **ayrı bir bahis tahmin makinesi hedefi değildir**. Var olan matematik modellerine fayda kanıtlanırsa geçmiş pozisyon kalitesi girdisi olarak katılacak; mevcut M4 bu alanı henüz ana kodunda kullanmaz.
 - M4+xG araştırma adayı özellikle 2.5 Üst için umut verici ama **üretime terfi etmedi**. Elo katkısının M4'e otomatik eklenmesi **onaylanmadı**.
 - Dört modelden ana tercih seçen karar araştırması ayrı; kalibrasyonun hedef döneme sızması, tek modelin yüksek yüzdesini doğrudan en iyi bahis ilan etme ve tutarsız market olasılıkları yasak.
-- Tek maç ekranı ana tercih, en fazla bir farklı pazar ailesi alternatifi veya **gerekçeli PAS** verebilir; geçerli oran yoksa EV hesaplanmış gibi davranılmaz.
+- Tek maç ekranı **oranlardan bağımsız** ana tercih, en fazla bir farklı pazar ailesi alternatifi veya **model güvenirliği gerekçeli PAS** verebilir. Oran yoksa piyasa karşılaştırması `VERİ_YOK` olarak işaretlenir; bu durum sırf kendi başına matematiksel seçimi değiştirmez. İstenirse EV yalnız **ayrı betimsel karşılaştırma** olarak gösterilir, karar eşiği değildir.
 
 **Durum:** (A) KİLİTLİ araştırma sınırları. (B) Model ve karar kodlarının bazı parçaları var. (C) Son araştırma karar adaptörünün gerçek ilk PDF ve model akışına tümüyle entegre edildiği kanıtlanmadı.
 
@@ -107,3 +107,23 @@ Açık engel:
 **Durumlar:** (A) Tek mühür iki PDF kuralı KİLİTLİ; (B) 4.618 skor-şema köprüsü yerel ve 7 bütünlük testi başarılı, GitHub canlı veri bağı/uygun kaynak kabulü TAMAMLANMADI; (C) ilk gerçek PDF'den son yoruma operasyon dalı uçtan uca kabulü YOK. Mevcut 10 günlük stale kodu, 96 vs 100 sınırı, operasyon dalındaki ikinci PDF modül farkı ve eski DEV kalibrasyon bağlantısı da henüz açık.
 
 **Bir sonraki teknik işlem:** Eski dondurulmuş matematik ve mühürleri değiştirmeden yukarıdaki P0 engellerini **research dalında** çöz/test et; ancak gerçek maç günü kanıtıyla canlı kabul yap. Eksik kod/kanıt sebebiyle oluşan **teknik engeli** modelin değer bulamaması sonucu oluşan **PAS** ile karıştırma.
+
+## D-MARKET-006 — Piyasa BEŞİNCİ REFERANS, karar verici DEĞİL (KİLİTLİ, 2026-11-19)
+
+**Kullanıcı teyidi:** 2026-11-19: “Oran bizim tahminimizi yönetmesini istemiyoruz. Oranda bir modül; güçlü tahmin yüzdesi yüksek bir modül, biz onu kendi modülümüzle karşılaştırma amaçlı yapmıştık.”
+
+**Önceden zaten alınmış kararın geri kazanımı:** `docs/263_bahis_piyasasi_besinci_referans_2026_11_04.md` ve `docs/263_piyasa_referansi.md` kaynaklı piyasa beşinci referans sözleşmesi. **Bu yepyeni tartışma konusu DEĞİL**, yanlışlıkla sonraki koda/karar notuna yansıtılmamış eski anlaşmanın düzeltmesidir.
+
+**Kesin davranış sözleşmesi:**
+1. **Dört model B/C2/C3/M4** kendi geçmiş matematiğiyle hedef maç için MS1/MSX/MS2, KG Var/Yok, 2.5 Alt/Üst olasılıklarını hesaplar. Daha fazla xG girdisi ancak doğrulanmış ayrı model geliştirmeyle mümkündür.
+2. **Tek seçim motoru yalnız dört modelin geçmişte ölçülen, sızıntısız, kalibre güvenilirlik verisi ve sabit matematiksel kuralı** ile ana sonuç + en fazla bir alternatif veya model-gerekçeli PAS belirler. **Piyasa olasılığına benzerlik de tek başına seçim ölçütü değildir.**
+3. **İlk iddaa PDF'sindeki oranlar ve aynı maçın marjsız piyasa yüzdeleri yalnız MARKET / 5. referans karşılaştırmasına girer.** İstatistiksel uzaklık, farklılık, oran ve istenirse betimsel EV *sonradan ayrı raporlanabilir*. Bunlar **model yüzdesini, model sırasını, ana/alternatif seçimini, PAS sonucunu değiştiremez**. İlk PDF hiç yoksa ticari piyasa karşılaştırması eksik görünür; model hesabı veri/fikstür elveriyorsa yapılabilir. Ancak kullanıcının sabah işlem başlangıç yöntemi hâlâ ilk iddaa PDF'sidir.
+4. **İkinci iddaa PDF'si** yalnız sabah-son oran hareketi ve gerçek futbol içi olası nedenleri kontrol eder. **Tahmin, ana tercih, alternatif, PAS ve SHA hiçbir aşamada değişmez**. Yorum ayrı append-only not olarak kalır.
+5. **Maç sonrası:** Mühürlü ilk tercih, modeller ve MARKET beşinci referans **aynı maçlarda** ayrı ayrı Brier/log-loss/isabet karşılaştırmasına alınabilir. Piyasayı modelin içine sessizce katma, sadece piyasanın fikrini kopyalama veya sonuca bakarak seçimi geriye dönük değiştirme yasaktır.
+
+**Düzeltmeyle geçersiz kalan önceki yanlış ifade:** “İlk PDF oranı / no-vig edge / beklenen değer, ana tahminin veya PAS'ın şartı olsun.” Hem bu defterdeki önceki D-ODDS-001 cümlesini hem ilerideki kararlarda EV-merkezli seçim tavsiyesini **D-MARKET-006 supersede eder**.
+
+**Kod/uygulama farkı (gizlenemez):** `experiments/263/four_model_value_policy_263.py` halen `ev<.05`, `edge<.03`, `NO_SYNCHRONIZED_ODDS` / `NO_VALID_PDF_QUOTE` gibi **oranı seçim/PAS kapısı yapan** kurallar içeriyor. `experiments/263/iddaa_pdf_value_bridge_263.py` de bu aday çıktısını sabah PDF raporuna bağlıyor. Yalnız belgeyi değiştirmek **bu davranışı değiştirmez**. Araştırma dalında model seçimini ayrıştırıp referans oran alanlarını yalnız okuyan bir adaptör/test hazırlamak gerekir; ana M4 ve mühürlü tahminler aynen korunacak.
+
+**Durum:** (A) KARAR KİLİTLİ ve önceki tarihsel kayıttan doğrulandı. (B) Karar defteri D-ODDS-001 uyumlu düzeltildi; **mevcut seçici kod uyumsuz, henüz düzeltilmedi**. (C) Canlı ilk PDF → model seçimi → beşinci referans → ikinci PDF yoru﻿mu bütünsel kabulü **YOK**.
+
