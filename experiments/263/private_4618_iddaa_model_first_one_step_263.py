@@ -8,11 +8,14 @@ frozen dev calibration, research-conditional main/alt or PAS.
 Example:
   PYTHONPATH=experiments/263 python experiments/263/private_4618_iddaa_model_first_one_step_263.py \
     --pdf /path/to/user-iddaa.pdf \
-    --history /path/to/accepted-history.csv \
-    --out-dir /tmp/iddaa-263-sessions
+    --history /private/path/263_4618_MATCHDAY_SCORES_RESEARCH_PRIVATE_20261119.csv \
+    --source-baseline /private/path/historical_results_original.csv \
+    --out-dir /private/path/iddaa-263-sessions
 
-Optional source admission inputs exactly as already required by the 2.6.3
-historical data gate: --source-baseline, --source-acceptance.
+Source witness bytes are fetched once from the public secondary provider and
+stored in the private session. Manual source-acceptance injection is FORBIDDEN.
+Official full-result calendar verification and live production acceptance
+are not established by this research workflow.
 """
 from __future__ import annotations
 import argparse,hashlib,json,shutil
@@ -23,6 +26,7 @@ from iddaa_pdf_bulletin_263 import parse_pdf
 from private_4618_pdf_session_263 import run_session
 from private_4618_provider_bundle_263 import create_witnesses
 from private_4618_matchday_preflight_263 import verify_private_projection
+from private_4618_retry_guard_263 import select_attempt
 from model_first_iddaa_bridge_263 import calibrate_session
 from iddaa_pdf_report_263 import build as report_pdf
 
@@ -76,11 +80,13 @@ def one_step(pdf,*,history,output_root,
     verify_private_projection(source_baseline,history)
     bulletin=parse_pdf(source)
     pdf_sha=bulletin["pdf_sha256"]
-    folder=Path(output_root)/pdf_sha[:20]
-    # Exactly one immutable session per original user PDF. Duplicate finished
-    # upload is a cache hit with ZERO repeat official/model/quote calls.
-    if folder.exists():
-        return _prior_completed_session(folder,pdf_sha)
+    # A network failure with ZERO signed forecasts must not permanently
+    # strand this same PDF. Preserve that failed attempt and retry in a new
+    # append-only directory. Existing SHA forecast => NO second seal.
+    plan=select_attempt(output_root,pdf_sha,verify_completed=_prior_completed_session)
+    if plan["action"]=="REUSE_SEALED":
+        return plan["existing"]
+    folder=plan["folder"]
     folder.mkdir(parents=True,exist_ok=False)
     copied=folder/"iddaa_original_user.pdf"
     with copied.open("xb") as handle:
@@ -118,10 +124,12 @@ def one_step(pdf,*,history,output_root,
         "potential_ten_league_rows":bulletin["potential_ten_league_rows"],
         "official_confirmed_rows":session["n_official"],
         "signed_four_model_forecasts":session["n_forecast"],
-        "calibrated_price_decisions":calibrated["n_pdf_first_decisions"],
+        "model_first_decisions":calibrated["n_pdf_first_decisions"],
         "research_pas_or_blocked":calibrated["n_pdf_first_pas_or_blocked"],
         "no_bookmaker_api_calls":True,
         "no_old_pilot_changes":True,
+        "attempt_number":plan["attempt"],
+        "prior_unsealed_attempts_preserved":plan["attempt"]-1,
         "private_4618_history_sha256":"54250bb6107250d0623b74ad9c56f90731f02d10dab3bf386deefb27aae487ea",
         "provider_leagues_checked":provider_receipts["sources"],
         "provider_only_not_official_results_verified":True,
