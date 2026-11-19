@@ -40,6 +40,13 @@ jobs:
         run: |
           set -euo pipefail
           python -m unittest -v experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_last_review_263.py
+      - name: Real 40 old SHA morning forecasts no-price decision read-only replay
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/audit_existing_40_model_first_263.py
+          git diff --exit-code
       - name: Original models, archives and forecasts untouched
         run: |
           set -euo pipefail
