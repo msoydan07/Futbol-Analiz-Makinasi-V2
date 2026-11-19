@@ -5,7 +5,7 @@ morning manifest. Live official fixture verification is always required.
 The original B/C2/C3/M4 calculation and DEV lock are not modified.
 """
 from __future__ import annotations
-import argparse,hashlib,json,re
+import argparse,hashlib,json,re,os,tempfile
 from datetime import datetime,timezone,timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -62,8 +62,35 @@ def keys_in(*dirs):
  return keys
 
 def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
-        lookup=None,predictor=None,baseline_fn=None,decision_fn=None,dev_lock_path='experiments/263/forward_dev_calibration_lock_263.json'):
+        lookup=None,predictor=None,baseline_fn=None,decision_fn=None,dev_lock_path='experiments/263/forward_dev_calibration_lock_263.json',
+        xg_snapshot=None,xg_expected_sha=None,xg_private_dir=None):
  fixed_clock=now is not None
+ # Read xG only from an audited PRIVATE local file; never publish data to GitHub.
+ # The 19-Nov frozen 4618-row file is pinned until a new audited SHA is accepted.
+ xg_source=xg_snapshot or os.environ.get("M4_XG_PRIVATE_CSV")
+ xg_hash=xg_expected_sha or os.environ.get("M4_XG_PRIVATE_SHA256") or (
+  "3b13921daafab70aa121fe807fea0a74e0c72f0fc2381366b183f621edea762c")
+ xg_error=None;private_xg_path=None;private_xg_root=None
+ if xg_source:
+  try:
+   from m4_xg_support_263 import _sha as xg_file_sha
+   p=Path(xg_source).resolve()
+   root_resolved=Path(root).resolve()
+   if p.is_relative_to(root_resolved):
+    raise Blocked("PRIVATE_XG_MUST_NOT_LIVE_IN_PUBLIC_REPOSITORY")
+   if not p.is_file() or not re.fullmatch(r"[a-f0-9]{64}",str(xg_hash)):
+    raise Blocked("PRIVATE_XG_FILE_OR_EXPECTED_SHA_INVALID")
+   if xg_file_sha(p)!=xg_hash:
+    raise Blocked("PRIVATE_XG_SHA256_MISMATCH")
+   private_xg_path=p
+   private_xg_root=Path(xg_private_dir or os.environ.get("M4_XG_PRIVATE_OUTPUT_DIR")
+                        or tempfile.mkdtemp(prefix="m4_xg_private_")).resolve()
+   if private_xg_root.is_relative_to(root_resolved):
+    raise Blocked("PRIVATE_XG_OUTPUT_MUST_BE_OUTSIDE_REPOSITORY")
+   private_xg_root.mkdir(parents=True,exist_ok=True)
+  except (OSError,ValueError) as xg_exc:
+   xg_error=str(xg_exc)[:140]
+   private_xg_path=None;private_xg_root=None
  now=now or datetime.now(timezone.utc)
  if now.tzinfo is None:raise Blocked("AWARE_TIME_REQUIRED")
  now=now.astimezone(timezone.utc)
@@ -97,6 +124,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
  for request in rows:
   observed_now=now if fixed_clock else datetime.now(timezone.utc)
   item={**request,"status":"BLOCKED_NO_FORECAST"}
+  private_evidence_path=None
   try:
    gate=lookup(request["league"],request["home"],request["away"])
    if gateway is not None:
@@ -150,6 +178,24 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     if cohort in ("acceptance3","new100"):
      raise Blocked("RESEARCH_DECISION_MUST_NOT_FAIL:"+type(exc).__name__)
     item["decision_status"]="UNAVAILABLE_MODEL_ONLY";item["decision_error"]=str(exc)[:140]
+   # Extra xG evidence is computed AFTER original M4 forecast was SHA-sealed.
+   # Its private probability sidecar is NEVER staged in the public repository.
+   if private_xg_path is None:
+    item["xg_status"]=("PRIVATE_XG_SOURCE_REJECTED_M4_UNCHANGED" if xg_error
+                       else "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED")
+    if xg_error:item["xg_reason"]=xg_error
+   else:
+    try:
+     from m4_xg_support_263 import sidecar as m4_xg_sidecar
+     private_evidence_path=private_xg_root/cohort/day/(path.stem+".json")
+     evidence=m4_xg_sidecar(path,history,private_xg_path,private_evidence_path)
+     item["xg_status"]=evidence["xg"]["status"]
+     item["xg_source_quality_status"]=evidence["xg"].get("reason")
+     item["xg_private_evidence_created"]=True
+     item["xg_probs_saved_only_outside_repo"]=True
+    except (OSError,ValueError,KeyError,TypeError) as xg_exc:
+     item["xg_status"]="XG_EVIDENCE_FAILED_M4_UNCHANGED"
+     item["xg_reason"]=type(xg_exc).__name__
    adjacent=gateway.adjacent_for(gate) if gateway is not None else []
    rotation=rotation_from_official_inputs(gate,adjacent,observed_now)
    item["rotation"]={k:v["rotation_label"] for k,v in rotation["teams"].items()}
@@ -164,6 +210,8 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
    # A forecast written before a sidecar/rotation failure is NOT a completed
    # acceptance record. Clean newly created files and fail closed.
    if item.get("status")=="REGISTERED_FOUR_MODELS_EXPERIMENTAL":
+    if private_evidence_path is not None:
+     private_evidence_path.unlink(missing_ok=True)
     rel=item.get("forecast_path","")
     if isinstance(rel,str) and rel.startswith(DIRS[cohort]+"/"):
      (root/rel).unlink(missing_ok=True)
@@ -177,6 +225,9 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
                   "decision_status","decision_sha256","rotation",
                   "rotation_evidence","rotation_applied_to_model_probabilities"):
      item.pop(field,None)
+    for field in ("xg_status","xg_reason","xg_source_quality_status",
+                  "xg_private_evidence_created","xg_probs_saved_only_outside_repo"):
+     item.pop(field,None)
    item["status"]="BLOCKED_NO_FORECAST"
    item["reason"]=str(exc)[:200]
   outcomes.append(item)
@@ -186,6 +237,9 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
          "blocked":sum(x["status"]=="BLOCKED_NO_FORECAST" for x in outcomes),
          "already_sealed":sum(x["status"]=="ALREADY_SEALED_UNCHANGED" for x in outcomes),
          "outcomes":outcomes,"official_source_page_coverage":gateway.coverage() if gateway is not None else None,
+         "m4_xg_support_private_only":True,
+         "xg_source_configured":private_xg_path is not None,
+         "xg_private_results":sum(x.get("xg_private_evidence_created",False) for x in outcomes),
          "odds_api_calls":0,
          "official_S1_S2_approved":False,"betting_authorized":False}
  result["payload_sha256"]=sha(result)
@@ -226,6 +280,9 @@ def mobile(report):
             "Başlama UTC: "+x["kickoff_utc"],
             "Karar: "+x.get("decision_status","MODEL_ONLY"),
             "Rotasyon: "+", ".join(x.get("rotation",{}).values())]
+   lines.append("xG parçası: "+x.get("xg_status","HENÜZ HESAPLANMADI"))
+   if x.get("xg_private_evidence_created"):
+    lines.append("xG'li yüzdeler özel çıktıda; GitHub'a yazılmadı.")
   else:lines.append("Neden: "+x.get("reason","Önceden kaydedilmiş olabilir"))
   lines.append("")
  return "\n".join(lines)
@@ -239,12 +296,16 @@ def main():
  p.add_argument("--m4-lock",default="experiments/263/m4_lock.json")
  p.add_argument("--dev-lock",default="experiments/263/forward_dev_calibration_lock_263.json")
  p.add_argument("--report",required=True);p.add_argument("--mobile",required=True)
+ p.add_argument("--xg-snapshot",help="Private CSV outside checkout, research only")
+ p.add_argument("--xg-expected-sha256",help="Audit-locked private data SHA256")
+ p.add_argument("--xg-private-out",help="Private xG results dir outside checkout")
  p.add_argument("--verify-precommit",action="store_true")
  a=p.parse_args()
  if a.verify_precommit:
   x=json.loads(Path(a.report).read_text(encoding="utf-8"))
   precommit(x);print("PRECOMMIT_OK",x["new_forecasts"]);return
- x=run(a.cohort,a.day,a.input,a.history,a.baseline,a.source_acceptance,a.m4_lock,dev_lock_path=a.dev_lock)
+ x=run(a.cohort,a.day,a.input,a.history,a.baseline,a.source_acceptance,a.m4_lock,dev_lock_path=a.dev_lock,
+       xg_snapshot=a.xg_snapshot,xg_expected_sha=a.xg_expected_sha256,xg_private_dir=a.xg_private_out)
  save_new(a.report,x);save_new(a.mobile,mobile(x))
  print(json.dumps({"new":x["new_forecasts"],"blocked":x["blocked"],"already":x["already_sealed"]}))
 if __name__=="__main__":main()
