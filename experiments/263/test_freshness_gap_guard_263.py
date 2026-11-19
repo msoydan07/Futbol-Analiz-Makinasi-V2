@@ -71,7 +71,7 @@ class GapSafety(unittest.TestCase):
 
     def test_missing_provider_previous_matches_rejected(self):
         h,fetch,resolver=prepare(missing=True)
-        with self.assertRaisesRegex(StaleLeagueData,"SOURCE_MISSING_ACCEPTED_OVERLAP_RESULTS"):
+        with self.assertRaisesRegex(StaleLeagueData,"SOURCE_SHORTER_THAN_ACCEPTED_CURRENT_SEASON|SOURCE_MISSING_ACCEPTED_OVERLAP_RESULTS"):
             review_gap(h,"ENG1",TARGET,now=NOW,fetcher=fetch,resolver=resolver)
 
     def test_no_future_fixture_source_is_untrusted(self):
