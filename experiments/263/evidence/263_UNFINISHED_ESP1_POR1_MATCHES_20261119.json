@@ -1,0 +1,55 @@
+{
+  "schema": "263_KNOWN_UNFINISHED_SCORE_GAPS_2026_11_19_V1",
+  "as_of_date": "2026-11-19",
+  "scope": "TEN_LEAGUE_2026_27_ONLY",
+  "private_score_projection_sha256": "54250bb6107250d0623b74ad9c56f90731f02d10dab3bf386deefb27aae487ea",
+  "status": "RESEARCH_ONLY_KNOWN_NON_FINAL_FIXTURES_NOT_OFFICIAL_FULL_RESULTS_COVERAGE",
+  "entries": [
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "85146ecc-4e9b-5294-b887-3dfa8fbf4a43",
+      "away_id": "81715b99-691b-599e-bd2e-245163ce9a67",
+      "home": "Rayo Vallecano",
+      "away": "Athletic Club",
+      "matchday": 8,
+      "original_date": "2026-10-10",
+      "scheduled_resumption_date": "2026-12-09",
+      "fixture_state": "SUSPENDED_AFTER_KICKOFF_FULL_TIME_NOT_FINAL",
+      "source_urls": [
+        "https://www.athletic-club.eus/en/news/2026/10/10/the-athletic-club-squad-returns-to-bilbao/",
+        "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-8"
+      ],
+      "do_not_add_as_completed_score": true,
+      "recheck_not_before": "2026-12-09",
+      "source_claim": "LaLiga shows match unfinished and rescheduled on 9 Dec; original 10 Oct match interrupted"
+    },
+    {
+      "league": "POR1",
+      "season": "2026-2027",
+      "home_id": "c0de225d-26d1-5bc2-906b-96f007527679",
+      "away_id": "d67876ca-188a-550c-94ef-6b377d9f9bc6",
+      "home": "Estoril Praia",
+      "away": "Marítimo M.",
+      "matchday": 11,
+      "original_date": "2026-11-08",
+      "scheduled_resumption_date": "2027-01-04",
+      "fixture_state": "POSTPONED_BEFORE_KICKOFF_NOT_PLAYED",
+      "source_urls": [
+        "https://estorilpraia.pt/blog/jogo-com-o-cs-maritimo-adiado",
+        "https://www.rtp.pt/noticias/1a-liga/jornada-11-da-liga-so-fecha-em-janeiro_d1778268",
+        "https://www.ligaportugal.pt/comunicados"
+      ],
+      "do_not_add_as_completed_score": true,
+      "recheck_not_before": "2027-01-04",
+      "source_claim": "Official club announced weather postponement; league's new 4 Jan date reported by RTP"
+    }
+  ],
+  "safe_actions": {
+    "no_new_prediction_or_seal": true,
+    "not_a_live_federation_gap_completion_approval": true,
+    "do_not_backfill_future_scores": true,
+    "leave_4618_snapshot_immutable": true,
+    "after_resumption_only_append_completed_verified_full_time_result": true
+  }
+}
