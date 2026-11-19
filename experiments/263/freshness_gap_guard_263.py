@@ -15,6 +15,8 @@ import hashlib
 import json
 import math
 import urllib.request
+from urllib.parse import urlsplit
+from urllib.error import HTTPError
 from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
@@ -42,16 +44,25 @@ def _source(league, *, now, fetcher=None):
             req=urllib.request.Request(u,headers={"User-Agent":
                 "FootballResearchAudit/263 (gap-check; no-odds; no-login)"})
             with urllib.request.urlopen(req,timeout=15) as r:
-                if getattr(r,"status",None)!=200 or r.geturl()!=u:
+                effective=urlsplit(r.geturl())
+                required=urlsplit(u)
+                if (getattr(r,"status",None)!=200
+                    or effective.scheme!="https"
+                    or (effective.hostname or "").lower() not in
+                        ("football-data.co.uk","www.football-data.co.uk")
+                    or effective.path!=required.path
+                    or effective.query or effective.fragment or effective.username):
                     raise StaleLeagueData("SOURCE_REDIRECT_OR_STATUS_REJECTED")
                 data=r.read(MAX_CSV_BYTES+1)
             return data
     if not callable(fetcher):
         raise StaleLeagueData("SOURCE_FETCHER_INVALID")
-    if fetcher is None: # unreachable but prevents accidentally treating a missing source as evidence
-        raise StaleLeagueData("NO_PUBLIC_SOURCE")
     try:
         data=fetcher(url)
+    except StaleLeagueData:
+        raise
+    except HTTPError as exc:
+        raise StaleLeagueData("SOURCE_HTTP_"+str(exc.code)) from exc
     except (OSError,TimeoutError,ValueError) as exc:
         raise StaleLeagueData("FRESH_SOURCE_UNAVAILABLE_"+type(exc).__name__) from exc
     if not isinstance(data,bytes) or not 1000 <= len(data) <= MAX_CSV_BYTES:
