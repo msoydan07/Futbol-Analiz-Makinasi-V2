@@ -127,3 +127,13 @@ Açık engel:
 
 **Durum:** (A) KARAR KİLİTLİ ve önceki tarihsel kayıttan doğrulandı. (B) Karar defteri D-ODDS-001 uyumlu düzeltildi; **mevcut seçici kod uyumsuz, henüz düzeltilmedi**. (C) Canlı ilk PDF → model seçimi → beşinci referans → ikinci PDF yoru﻿mu bütünsel kabulü **YOK**.
 
+
+## D-READY-008 — Model-only piyasa karşılaştırma uygulama aşaması (19 Kasım 2026)
+
+**D-MARKET-006 KİLİTLİ kuralı DEĞİŞMEDİ:** iddaa oranı beşinci referanstır; ana/alternatif/PAS'ı yönetemez. Sabah tek mühür, ikinci PDF yalnız futbol içi gözlem.
+
+**Kod karşılığı:** [Yeni model-first GitHub araştırma dosyaları, testler, retrospektif risk ve blokajlar](263_MODEL_FIRST_FIFTH_REFERENCE_RESEARCH_STATUS_20261119.md) kapsamlı biçimde kaydedildi. Yeni `model_first_decision_263.py` ve `iddaa_pdf_model_first_one_step_263.py`, eski EV-merkezli karar rotasını **silmeden** ayrı model-first yol sağlıyor. Eski `four_model_value_policy_263.py` hâlâ fiyat/EV'yi seçim eşiği olarak kullanır; eski giriş noktası güncel kararımızın yerine geçmez.
+
+**Durum A — KİLİTLİ:** Fiyat yönetsin önerisi İPTAL. **Durum B — KISMEN KODLANDI:** Araştırma dalında bağımsız modüller/PDF köprüsü ve sentetik testler eklendi, çalışan operasyon dalına geçirilmedi. **Durum C — YOK:** GitHub CI sonucu ve gerçek ilk iddaa PDF uçtan uca maç sabahı kabulü doğrulanmadı.
+
+**Kritik matematik uyarısı:** 496 geçmiş maçtaki 286 adayın ortalama model güveni %69,53 fakat gerçekleşmesi %62,59. Bu yüzden yeni seçici üretime terfi etmedi; geçmiş sonuçlara bakıp sessizce eşik ayarı yapılmayacak. Eski kaynak/10 günlük güncellik engelleri de açıktır.
