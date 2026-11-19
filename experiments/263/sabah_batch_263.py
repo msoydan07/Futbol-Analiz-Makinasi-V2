@@ -5,7 +5,7 @@ morning manifest. Live official fixture verification is always required.
 The original B/C2/C3/M4 calculation and DEV lock are not modified.
 """
 from __future__ import annotations
-import argparse,hashlib,json,re
+import argparse,hashlib,json,re,os
 from datetime import datetime,timezone,timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -64,6 +64,8 @@ def keys_in(*dirs):
 def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
         lookup=None,predictor=None,baseline_fn=None,decision_fn=None,dev_lock_path='experiments/263/forward_dev_calibration_lock_263.json',xg_snapshot=None):
  fixed_clock=now is not None
+ # Detect the local private xG data automatically; do not store licensed rows in GitHub.
+ xg_snapshot=xg_snapshot or os.environ.get("M4_XG_PRIVATE_CSV")
  now=now or datetime.now(timezone.utc)
  if now.tzinfo is None:raise Blocked("AWARE_TIME_REQUIRED")
  now=now.astimezone(timezone.utc)
@@ -150,9 +152,11 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     if cohort in ("acceptance3","new100"):
      raise Blocked("RESEARCH_DECISION_MUST_NOT_FAIL:"+type(exc).__name__)
     item["decision_status"]="UNAVAILABLE_MODEL_ONLY";item["decision_error"]=str(exc)[:140]
-   # Optional research-only M4 xG feature: no change to the sealed forecast.
-   # A failed/missing xG source must never invalidate the original M4 output.
-   if xg_snapshot is not None:
+   # xG is a supporting M4 input, not a fifth model. Preserve the SHA-sealed
+   # original. A missing private file is reported rather than silently ignored.
+   if xg_snapshot is None:
+    item["xg_status"]="PRIVATE_XG_SNAPSHOT_NOT_CONFIGURED_M4_UNCHANGED"
+   else:
     try:
      from m4_xg_support_263 import sidecar as m4_xg_sidecar
      evidence_path=root/"experiments/263/sabah_research"/cohort/day/path.stem/"m4_xg_evidence.json"
