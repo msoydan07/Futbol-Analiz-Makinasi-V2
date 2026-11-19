@@ -246,6 +246,24 @@ def build(session,output):
                   _table_for(row,None,bold,font),
                   Spacer(1,9),
                   Paragraph(escape(_render_pick(row,session)),small)]
+        shadow=row.get("c3_calibration_shadow")
+        if shadow:
+            from model_first_decision_263 import verified as verify_shadow
+            from c3_calibration_shadow_263 import SCHEMA as SHADOW_SCHEMA
+            verify_shadow(shadow,SHADOW_SCHEMA)
+            d=row.get("model_first_decision") or {}
+            if (shadow.get("model_decision_sha256")!=d.get("payload_sha256")
+                or shadow.get("forecast_sha256")!=row.get("model_forecast_sha256")
+                or shadow.get("do_not_use_to_pick") is not True
+                or shadow.get("selection_changed") is not False):
+                raise ValueError("C3_CALIBRATION_SHADOW_IDENTITY_CHANGED")
+            pairs=shadow.get("families",{})
+            if set(pairs)=={"KG","O25"}:
+                kg,goal=pairs["KG"],pairs["O25"]
+                line=("C3 GÖLGE KALİBRASYON (KARARI DEĞİŞTİRMEZ): "
+                      "KG Var ham "+_pct(kg["raw_positive"])+" / aday "+_pct(kg["frozen_shrunken_positive"])+
+                      " | 2.5 Üst ham "+_pct(goal["raw_positive"])+" / aday "+_pct(goal["frozen_shrunken_positive"]))
+                segments+=[Spacer(1,6),Paragraph(escape(line),small)]
         if row.get("model_1x2_and_core_markets"):
             modelbits=[]
             for m in ("B","C2","C3","M4"):
@@ -259,8 +277,9 @@ def build(session,output):
             segments+=[Spacer(1,6),Paragraph(
                 escape("  |  ".join(modelbits)),small)]
         segments+=[Spacer(1,5),Paragraph(
-            "Fark = M4 ham % − piyasa marjsız %. Pozitif fark tek başına "
-            "kalibre bahis avantajı değildir.",small),Spacer(1,20)]
+            ("Fark = seçili uzman modelin ham % − piyasa marjsız %. " if row.get("model_first_decision")
+             else "Fark = M4 ham % − piyasa marjsız %. ")+
+            "Pozitif fark tek başına kalibre bahis avantajı değildir.",small),Spacer(1,20)]
         story.append(KeepTogether(segments))
     if not any(r.get("status")!="SKIPPED_OUT_OF_10_LEAGUES"
                for r in session["rows"]):
