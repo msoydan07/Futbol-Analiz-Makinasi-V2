@@ -163,3 +163,17 @@ Açık engel:
 - **33/33 yerel sentetik test** başarılı (16 + 9 + 8); ilgili research CI dosyası güncellendi. GitHub Actions çalışmasının başarı sonucu ve resmî tam kapsam canlı kabulü **henüz yok**.
 
 **Durum A — DEĞİŞMEDİ:** Oran ve mühür kararları sabit. **Durum B — ARAŞTIRMA KODU VAR:** Veri SHA, takvim ve provider ön denetimleri research dalında. **Durum C — CANLI ONAY YOK:** Eski modeldeki 10 gün engeli, 4.618 özel dosyanın canlı kaynak kabulü ve ilk PDF'den uçtan uca model bağlantısı hâlâ açık. Sonraki iş bu üçü; eski kararları yeniden tartışma.
+
+## D-READY-010 — 4.618 veriden sabah PDF araştırma entegrasyonu (19 Kasım 2026)
+
+**Değişmeyen kilitli kararlar:** D-ODDS-001 (sabah 1 PDF = B/C2/C3/M4 tahmini + tek SHA; ilk 11 sonrası 2 PDF = yalnız oran hareketi ve futbol yorumu), D-MARKET-006 (oran asla ana/alternatif/PAS tercihini yönetmez), D-MODEL-003 (M4, önceki 96 pilot ve tarihsel SHA'lar dokunulmaz).
+
+**Gerçekten kodlandı:** Ayrı `private_4618_quad_forward_263.py`, `private_4618_empirical_baseline_263.py`, `private_4618_provider_bundle_263.py`, `private_4618_pdf_session_263.py`, `private_4618_iddaa_model_first_one_step_263.py`, `private_4618_retry_guard_263.py`. Kaynaklar 4.618 özel skor SHA ve orijinal 4.413 koruma kapısı üstünden birleştirildi. Model matematiği mevcut modüllerden türetilerek, eski çalıştırıcı değiştirilmeden kullanıldı. Bu bir **research-only alternate entrypoint**; orijinal otomatik sabah workflow'u kendiliğinden bu koda yönlendirilmiş DEĞİL.
+
+**İkincil güncellik kontrolü:** Kullanıcı PDF'sindeki her lig için `football-data.co.uk` 2026/27 sezon sonuçları oturumda kayda alınır; hedef maçtan önce tamamlanmış ancak dondurulan 4.618 veri kaynağına girmemiş skor görünürse o lig bloke edilir. Bu **resmî lig takvimi tam kapsama tasdiki değildir**, `production_approved=False`.
+
+**Yeni mühürsüz tekrar deneme:** Ağ kesilmesi veya kaynak sorunu sonucunda hiç tahmin mührü oluşmamışsa önceki denemeye dokunulmaz; aynı ilk PDF SHA için ayrı `-retry-N` klasörü açılabilir. Herhangi bir önceki SHA'lı tahmin varsa ikinci üretim yasaktır.
+
+**Test/beyan:** Gerçek özel dosya SHA kontrolü ve ilgili 46 yerel güvenlik/bütünlük testi başarılı. GitHub'da ilave 13 entegrasyon sözleşmesi + 6 mühür güvenliği testi ile CI import/compile workflow'u eklendi; bunların **başarılı GitHub run'ı henüz doğrulanmadı**. Gerçek 10-lig iddaa PDF'siyle canlı uçtan uca kabul henüz YOK; yeni kalibre yüzdeler geçmiş veride olduğundan fazla güvenli olabilir.
+
+**Durum:** A = önceden alınmış kararlar korundu; B = araştırma entegrasyonu GitHub'da yazıldı; C = canlı maç sabahı onayı yok. Ayrıntılar: [4618 araştırma entegrasyonu raporu](263_PRIVATE_4618_MODEL_FIRST_PIPELINE_20261119.md). **Sonraki iş:** gerçek kaynak/gerçek PDF/gerçek ilk 11 sonrası ek yorum ve CI teyidi; fiyat yönetimli seçime, yeni 96 pilotuna veya M4 matematiğini değiştirerek eskiye dönülmez.
