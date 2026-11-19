@@ -212,3 +212,15 @@ Açık engel:
 İki maçın kanıt/ID/gelecek yeniden kontrol tarihleri [evidence JSON](../experiments/263/evidence/263_UNFINISHED_ESP1_POR1_MATCHES_20261119.json) dosyasında. [Resmî veri/gerçek tarihî PDF denetimi](263_19KASIM_RESMI_LIG_GAP_VE_GERCEK_PDF_DUZEN_DENETIM.md) bu keşifle eklenerek güncellendi. **D-READY-011/012'deki iki birer-maç farkının nedeni belirsiz notu bu iki karşılaşma için artık superseded.**
 
 **Durum:** A = önceden kilitlenen model-first, odds fifth-reference, iki PDF / tek SHA kuralı aynı. B = 4.618 maç ve açıklanmış iki tamamlanmamış maçın resmi kaynak/kimlik araştırma tutanağı hazır; eski 4.413, M4, 96 mühürlü pilot ve üretim otomasyonları değişmedi. C = gerçek 10 lig ilk iddaa PDF'nin kendi güncel sabahında uçtan uca kabulü hâlâ YOK. Millî ara kaynaklarında 9–19 Kasım'da bitmiş eksik maç tespit edilmedi; bu **10 ligin tüm resmî canlı sonuçlarının eksiksiz sertifikası değil**. Resmî sonuçlar ve tek-mühür PDF akışı gerçek tarihte yeniden doğrulanmalı.
+
+## D-READY-014 — İlk gerçek PDF günlük SHA kilidi, tarihi geçmiş PDF engeli (19 Kasım 2026)
+
+**Durum:** Yeni `private_4618_first_pdf_day_guard_263.py` + 14 sentetik negatif/pozitif kontrol testi araştırma dalına eklendi; `private_4618_iddaa_model_first_one_step_263.py` akışına **maç/lig ve PDF tarihi kontrolünden sonra, piyasa/veri indirme ve model hesaplamasından önce** bağlandı.
+
+**Kesin sözleşme:** Kullanıcının ilk iddaa PDF'si bugüne ait olmalı ve en az bir okunabilir kapsam içi maç içermeli. Aynı gün ilk PDF SHA farklı bir dosyayla değiştirilemez; ikinci iddaa PDF yalnız önceki sabah SHA'ya ek yorum yapabilir. Aynı SHA için sadece *hiç mühür oluşmamışsa* önceki denemeyi koruyarak yeniden deneme yolu açık. D-MARKET-006: fiyatlar tercihi yönetmez. Eski M4, 96 pilot ve üretim akışı aynı.
+
+**Test:** GitHub Actions [44565761699](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/44565761699) **SUCCESS**; komutlar Python compile, otomatik sözleşme testleri ve eski model fonksiyonu içe alma kontrollerini içeriyor. **Gerçek eski PDF salt okunur kontrol:** 11 Kasım 2026 iddaa bülteni (3 sayfa; 30 satır; 28 tam / 2 hizası belirsiz; 10 ligde uygun satır = 0) 19 Kasım için **ESKİ**. Bu dosyadan bugüne ait model kararı veya SHA **üretilmedi**. Bu PDF'nin kodda reddedileceği, sentetik eski gün testleriyle de kapsandı. Eski gerçek bültenin içeriği GitHub'a konmadı.
+
+**Açık:** 19 Kasım için yeni kullanıcı ilk iddaa PDF'si arşivde yok; **gerçek uçtan uca kabul / ilk 11 sonrası ikinci PDF yoru﻿mu henüz yapılmadı**. 4.618 sonrasındaki tamamlanmış lig maçları için yeni append-only kaynak sürümü gerekebilir. Ayrıntı: [son ilk PDF güvenlik/kabul raporu](263_GERCEK_PDF_GUNLUK_TEK_MUHUR_KABUL_20261119.md).
+
+**Sıradaki zorunlu kullanıcı girdisi:** Güncel günün ilk iddaa.com program PDF'si; bunu almadan gerçek SHA'lı maç sabahı tahmini çalıştırılmış gibi iddia edilmez.
