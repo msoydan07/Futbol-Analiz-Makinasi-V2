@@ -40,3 +40,12 @@ Kullanıcının daha önce yüklediği `iddaa Programı - iddaa Bülteni _ iddaa
 3. Eski 496 maçın yüzde güvenilirliği uyarısı geçerlidir; ham yüzdeyi değiştiren öneriler mevcut bağımsız test olmadan M4'e/kararlara terfi ettirilmez.
 
 **Değişmezler:** Ana M4, 96 mühürlü pilot, otomasyonlar, geçmiş SHA, D-MARKET-006 ve D-ODDS-001 kararları **değişmedi**.
+## EK KANIT — İki 2026/27 lig sayımı farkı açıklandı (19 Kasım 2026, önceki belirsizliği geçersiz kılar)
+
+**ESP1 119/120 (Rayo Vallecano–Athletic Club, 8. hafta):** İki takımın maç sayısı 11, diğer 18 takımın 12; 10 Ekim 2026 maçındaki saha olayları nedeniyle müsabaka durdu. [Athletic Club resmî açıklaması](https://www.athletic-club.eus/en/news/2026/10/10/the-athletic-club-squad-returns-to-bilbao/) ve [LaLiga'nın 8. hafta sonuç ekranı](https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-8) müsabakanın **9 Aralık 2026** için programlandığını doğrular. **Tam maç sonucu henüz yok; mevcut 119 satıra eklenmez.**
+
+**POR1 98/99 (Estoril Praia–Marítimo, 11. hafta):** İki takım 10, diğer 16 takım 11 maç oynamış. [Estoril Praia resmî kulüp açıklaması](https://estorilpraia.pt/blog/jogo-com-o-cs-maritimo-adiado) 8 Kasım tarihli karşılaşmanın kötü hava koşulları nedeniyle ertelendiğini doğrular. [RTP'nin Liga Portugal açıklamasına dayanan haberi](https://www.rtp.pt/noticias/1a-liga/jornada-11-da-liga-so-fecha-em-janeiro_d1778268) yeni maç tarihini **4 Ocak 2027** olarak bildiriyor. **Bu da henüz tamamlanmış sonuç değil; 98 satır doğru.**
+
+Her iki maç, özel 4.618 skor CSV'sindeki `home_id`/`away_id` ile eşleştirildi. Günün gelmesi **otomatik sonuç ekleme yetkisi vermez**; müsabaka gerçekten tamamlandıktan sonra resmi skor doğrulanarak *yeni append-only sürüme* alınır. Önceki “ESP1/POR1 nedeni bilinmeyen eksik” notu bu iki özel maç için **GEÇERSİZ KALDI**; erteleme dışında başka maçın eksik olmadığı iddiası ise resmî tam sonuç kapsamına tabidir. Makine-okunur kaynak kaydı: [bilinen tamamlanmamış maçlar](../experiments/263/evidence/263_UNFINISHED_ESP1_POR1_MATCHES_20261119.json).
+
+**Sonuç:** Önceden saptanan iki birer-maçlık toplam farkın ikisi de **oynanıp bitmemiş** fikstürden kaynaklanıyor. 19 Kasım itibarıyla tamamlanmış 9–19 Kasım lig maçı eksiği bulunduğuna dair eldeki kaynaklarda pozitif kanıt yok. Bu, bütün 10 ligin resmî güncel sonuç listesi için otomatik tam kapsama onayı değildir.
