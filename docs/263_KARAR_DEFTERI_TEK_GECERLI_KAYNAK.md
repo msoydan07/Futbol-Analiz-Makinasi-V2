@@ -191,3 +191,13 @@ Açık engel:
 **Üç durum:** A=eski iki PDF / fiyat beşinci referans kuralı KİLİTLİ. B=veri bütünlüğü, ikinci kaynak karşılaştırması ve kalibrasyon araştırma denetimi tamamlandı; CI başarıyla doğrulandı. C=**resmî tam 9–19 Kasım sonuç aralığı + gerçek iddaa PDF ve ilk 11 yorumuyla tam canlı kabul HÂLÂ YOK**. Ayrıntı: [19 Kasım sade rapor](263_KALAN_ISLER_GUNCELLIK_KALIBRASYON_CI_20261119.md).
 
 **Devam:** Yeni test pilotu veya yüzde değişikliği değil; yalnız resmî kalan tam sonuç kanıtı ve ilk gerçek PDF geldiğinde bir kez gerçek maç günü kabulü. Eski M4/96 kayıtları değiştirilmeyecek.
+
+## D-READY-012 — 19 Kasım resmî tablo sayımı + kullanıcının eski gerçek PDF'si düzen incelemesi
+
+**Son durum (A/B/C):** A: D-ODDS-001 ve D-MARKET-006 kilitli, değiştirilmedi. B: 4.618 özel skor SHA'sı ve 10 liglik 2026/27 sayımı yeniden doğrulandı; **GER1 81 / NED1 108 / TUR1 99 / BEL1 99** resmî güncel puan tablolarıyla eşleşti. Diğer liglerde normal 9–19 Kasım arası resmî programın millî ara olduğu doğrulandı ancak tüm ertelenen maçların tam resmî FT satırları henüz kontrol edilmedi. **ESP1=119 ve POR1=98**, ilgili tam haftanın 120/99 teorik maç sayısından birer az olduğu için erteleme durumu seçili maç günü öncesi kaynaktan doğrulanmalı. C: gerçek yeni tarihli 10-lig iddaa PDF → SHA → maç sonrası tam canlı kabul henüz **YOK**.
+
+**Gerçek PDF biçim kanıtı (geçmiş, 11 Kasım):** Kullanıcının daha önce yüklediği gerçek iddaa PDF'si salt okunur kontrol edildi: 3 sayfa, 30 tanınan fikstür satırı, **28 adet 14-sütunla uyumlu** ve **2 adet 13-sütun hizası eksik**; bu iki satır kesinlikle fiyat satırı olarak tahmin edilmemeli. 10 üretim ligi kapsamına düşen maç yok, eski PDF'den yeni maç tahmini/mühür üretilmedi. PDF baytları GitHub'a konmadı.
+
+**Dosya ve kanıt:** [19 Kasım resmî kaynak / eski PDF düzen raporu](263_19KASIM_RESMI_LIG_GAP_VE_GERCEK_PDF_DUZEN_DENETIM.md). 4.618 özel skor SHA: `54250bb6107250d0623b74ad9c56f90731f02d10dab3bf386deefb27aae487ea`. **Kaynakların normal lig arası oluşunu, erteleme dahil mutlak sıfır sonuç kabulüne dönüştürme.** İddaa oranları yalnız beşinci referans; ana M4/96 pilot/otomasyon/önceki SHA mühürleri değiştirilmedi.
+
+**Takip işi:** Aynı veri-açığı ve model kararı baştan tartışılmaz. Seçili maç günü geldiğinde tam resmî sonuç yeniliği + **yeni kullanıcı ilk iddaa PDF'siyle tek uçtan uca kabul**; kullanıcı ikinci PDF gönderdiğinde yalnız append-only futbol yorumu. Geçmiş %69,5 vs %62,6 örneğinden kaynaklanan kalibrasyon ihtiyatı hâlâ açık; kanıtsız kalibrasyon terfisi yok.
