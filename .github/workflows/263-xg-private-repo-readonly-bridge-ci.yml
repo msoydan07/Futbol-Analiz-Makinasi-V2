@@ -27,15 +27,16 @@ jobs:
         run: |
           python -m unittest -v experiments/263/test_xg_private_repo_fetch_263.py
           python -m unittest -v experiments/263/test_m4_xg_operational_gate_263.py
-      - name: Assert production workflows keep confidential data outside Git
+      - name: Verify original M4-only production workflow does not use xG or private token
         run: |
           python - <<'PY'
           from pathlib import Path
           p=Path(".github/workflows/263-sabah-new100-on-request.yml").read_text()
-          assert "secrets.XG_PRIVATE_REPO_READ_TOKEN" in p
-          assert "--target \"$PRIVATE_XG_ROOT/" in p
-          assert "M4_XG_PRIVATE_CSV" in p
-          assert "M4_XG_PRIVATE_OUTPUT_DIR" in p
-          assert "steps.intake.outputs.kind == 'real_named_request'" in p
-          print("PUBLIC_WORKFLOW_REFERENCES_ONLY_PRIVATE_RUNNER_TEMP_AND_READ_TOKEN")
+          assert "secrets.XG_PRIVATE_REPO_READ_TOKEN" not in p
+          assert "PRIVATE_XG_ROOT" not in p
+          assert "M4_XG_PRIVATE_CSV" not in p
+          assert "xg_private_repo_fetch_263.py" not in p
+          assert "--history data/results_only_263/2026-11-10_completed_4617_scores_only.csv" in p
+          assert "experiments/263/sabah_batch_263.py" in p
+          print("ORIGINAL_M4_ONLY_IN_SABAH_WORKFLOW_NO_PRIVATE_DATA_FETCH")
           PY
