@@ -9,6 +9,9 @@ on:
       - 'experiments/263/test_m4_xg_support_263.py'
       - 'experiments/263/test_m4_xg_sidecar_io_263.py'
       - '.github/workflows/263_m4_xg_bridge_ci.yml'
+  pull_request:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
   workflow_dispatch:
 permissions:
   contents: read
