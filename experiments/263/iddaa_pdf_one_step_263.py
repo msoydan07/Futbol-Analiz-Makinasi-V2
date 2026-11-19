@@ -130,7 +130,7 @@ def main():
     p.add_argument("--m4-lock",default="experiments/263/m4_lock.json")
     p.add_argument("--source-baseline")
     p.add_argument("--source-acceptance")
-    p.add_argument("--dev-lock",default="experiments/263/forward_dev_calibration_lock_263.json")
+    p.add_argument("--dev-lock",default="experiments/263/model_first_selection_lock_20261120.json")
     p.add_argument("--repo-root",default=".")
     args=p.parse_args()
     result=one_step(args.pdf,history=args.history,
