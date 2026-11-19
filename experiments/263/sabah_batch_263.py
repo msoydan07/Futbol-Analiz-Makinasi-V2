@@ -62,7 +62,7 @@ def keys_in(*dirs):
  return keys
 
 def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
-        lookup=None,predictor=None,baseline_fn=None,decision_fn=None,dev_lock_path='experiments/263/forward_dev_calibration_lock_263.json'):
+        lookup=None,predictor=None,baseline_fn=None,decision_fn=None,dev_lock_path='experiments/263/forward_dev_calibration_lock_263.json',xg_snapshot=None):
  fixed_clock=now is not None
  now=now or datetime.now(timezone.utc)
  if now.tzinfo is None:raise Blocked("AWARE_TIME_REQUIRED")
@@ -150,6 +150,18 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     if cohort in ("acceptance3","new100"):
      raise Blocked("RESEARCH_DECISION_MUST_NOT_FAIL:"+type(exc).__name__)
     item["decision_status"]="UNAVAILABLE_MODEL_ONLY";item["decision_error"]=str(exc)[:140]
+   # Optional research-only M4 xG feature: no change to the sealed forecast.
+   # A failed/missing xG source must never invalidate the original M4 output.
+   if xg_snapshot is not None:
+    try:
+     from m4_xg_support_263 import sidecar as m4_xg_sidecar
+     evidence_path=root/"experiments/263/sabah_research"/cohort/day/path.stem/"m4_xg_evidence.json"
+     evidence=m4_xg_sidecar(path,history,xg_snapshot,evidence_path)
+     item["xg_status"]=evidence["xg"]["status"]
+     item["xg_evidence_path"]=evidence_path.as_posix()
+    except (ValueError,OSError,KeyError,TypeError) as xg_exc:
+     item["xg_status"]="XG_UNAVAILABLE_OR_INVALID_M4_UNCHANGED"
+     item["xg_reason"]=str(xg_exc)[:180]
    adjacent=gateway.adjacent_for(gate) if gateway is not None else []
    rotation=rotation_from_official_inputs(gate,adjacent,observed_now)
    item["rotation"]={k:v["rotation_label"] for k,v in rotation["teams"].items()}
@@ -171,12 +183,14 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
      side=root/"experiments/263/sabah_research"/cohort/day/stem
      (side/"baseline.json").unlink(missing_ok=True)
      (side/"decision.json").unlink(missing_ok=True)
+     (side/"m4_xg_evidence.json").unlink(missing_ok=True)
     if count>0:count-=1
     seen.discard(key);own_keys.discard(key)
     for field in ("forecast_path","forecast_sha256","kickoff_utc",
                   "decision_status","decision_sha256","rotation",
                   "rotation_evidence","rotation_applied_to_model_probabilities"):
      item.pop(field,None)
+    item.pop("xg_status",None);item.pop("xg_evidence_path",None);item.pop("xg_reason",None)
    item["status"]="BLOCKED_NO_FORECAST"
    item["reason"]=str(exc)[:200]
   outcomes.append(item)
@@ -226,6 +240,7 @@ def mobile(report):
             "Başlama UTC: "+x["kickoff_utc"],
             "Karar: "+x.get("decision_status","MODEL_ONLY"),
             "Rotasyon: "+", ".join(x.get("rotation",{}).values())]
+   if "xg_status" in x:lines.append("M4 xG veri katkısı: "+x["xg_status"])
   else:lines.append("Neden: "+x.get("reason","Önceden kaydedilmiş olabilir"))
   lines.append("")
  return "\n".join(lines)
@@ -239,12 +254,13 @@ def main():
  p.add_argument("--m4-lock",default="experiments/263/m4_lock.json")
  p.add_argument("--dev-lock",default="experiments/263/forward_dev_calibration_lock_263.json")
  p.add_argument("--report",required=True);p.add_argument("--mobile",required=True)
+ p.add_argument("--xg-snapshot",help="Private xG CSV path, optional; research sidecar only")
  p.add_argument("--verify-precommit",action="store_true")
  a=p.parse_args()
  if a.verify_precommit:
   x=json.loads(Path(a.report).read_text(encoding="utf-8"))
   precommit(x);print("PRECOMMIT_OK",x["new_forecasts"]);return
- x=run(a.cohort,a.day,a.input,a.history,a.baseline,a.source_acceptance,a.m4_lock,dev_lock_path=a.dev_lock)
+ x=run(a.cohort,a.day,a.input,a.history,a.baseline,a.source_acceptance,a.m4_lock,dev_lock_path=a.dev_lock,xg_snapshot=a.xg_snapshot)
  save_new(a.report,x);save_new(a.mobile,mobile(x))
  print(json.dumps({"new":x["new_forecasts"],"blocked":x["blocked"],"already":x["already_sealed"]}))
 if __name__=="__main__":main()
