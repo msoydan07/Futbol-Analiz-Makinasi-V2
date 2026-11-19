@@ -9,7 +9,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from iddaa_pdf_first_quote_263 import verify_original_pdf
+from iddaa_pdf_first_quote_263 import verify_original_pdf, build_snapshot
 from iddaa_pdf_value_bridge_263 import _load
 from model_first_decision_263 import select, market_reference, digest, verified, EvidenceError, SCHEMA
 
@@ -41,11 +41,18 @@ def calibrate_session(bulletin, session, *, original_pdf, repo_root=".",
             clock=now or datetime.now(timezone.utc)
             if clock.tzinfo is None:raise EvidenceError("CLOCK_MUST_BE_AWARE")
             d=select(f,b,lock,now=clock)
-            ref=market_reference(d,r.get("market_no_vig") or {},source_pdf_sha256=sha)
+            # Reconcile market prices with ORIGINAL re-parsed PDF once:
+            # no mutable session-price map may impersonate the market.
+            original_price_snapshot=build_snapshot(bulletin,session,
+                session["rows"][r["index"]],f,verified_pdf_sha=sha)
+            trusted_groups={group:{"status":"FULL_MARKET_QUOTE_AVAILABLE",**payload}
+                for group,payload in original_price_snapshot["groups"].items()}
+            ref=market_reference(d,trusted_groups,source_pdf_sha256=sha)
             verified(d,SCHEMA)
             if (ref["decision_sha256"]!=d["payload_sha256"]
                 or ref["forecast_sha256"]!=f["payload_sha256"]):
                 raise EvidenceError("MARKET_WRONG_MODEL_DECISION")
+            r["pdf_first_price_snapshot"]=original_price_snapshot
             r["model_first_decision"]=d
             r["market_fifth_reference"]=ref
             r["model_only_decision_status"]=d["status"]
