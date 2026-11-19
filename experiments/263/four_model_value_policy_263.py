@@ -71,6 +71,72 @@ def _odds(obs,f,now):
     return prices,("ODDSPAPI_AGGREGATOR_SOURCED_NOT_DIRECT_BOOKMAKER_VERIFIED" if is_provider
                    else "HUMAN_ATTESTED_NOT_NETWORK_REVERIFIED"),obs["payload_sha256"]
 
+# Chosen from the two read-only historical comparisons on 20 Nov 2026.
+# This is a fixed EXPERIMENTAL decision policy, not automatic model promotion.
+# Never mix mutually exclusive 1/X/2 outcomes or complementary goal markets
+# from different model vectors. All original B/C2/C3/M4 remain recorded.
+FAMILY_EXPERTS={"MS":"M4","KG":"C3","GOALS":"C3"}
+FAMILY_MEMBERS={
+    "MS":("MS1","MSX","MS2"),
+    "KG":("BTTS_YES","BTTS_NO"),
+    "GOALS":("OVER_1.5","UNDER_1.5","OVER_2.5","UNDER_2.5","OVER_3.5","UNDER_3.5"),
+}
+
+def _validate_family(prob,family):
+    if any(not isinstance(prob.get(m),(float,int)) or isinstance(prob.get(m),bool)
+           or not math.isfinite(prob[m]) or not 0<=prob[m]<=1
+           for m in FAMILY_MEMBERS[family]):
+        raise ValueError("EXPERT_FAMILY_INVALID_PROBABILITY")
+    if family=="MS" and abs(sum(prob[m] for m in FAMILY_MEMBERS["MS"])-1)>1e-7:
+        raise ValueError("EXPERT_MS_NOT_NORMALIZED")
+    if family=="KG" and abs(prob["BTTS_YES"]+prob["BTTS_NO"]-1)>1e-7:
+        raise ValueError("EXPERT_KG_NOT_COMPLEMENTARY")
+    if family=="GOALS":
+        for line in ("1.5","2.5","3.5"):
+            if abs(prob["OVER_"+line]+prob["UNDER_"+line]-1)>1e-7:
+                raise ValueError("EXPERT_GOAL_LINE_NOT_COMPLEMENTARY")
+        if not prob["OVER_1.5"]+1e-7>=prob["OVER_2.5"]>=prob["OVER_3.5"]-1e-7:
+            raise ValueError("EXPERT_GOAL_LINES_NOT_MONOTONIC")
+
+def _fixed_family_experts(raw,base,lock):
+    """Fixed family routing with a single conservative frozen-dev shrinkage
+    factor per COMPLETE family. This preserves MS sum=1, KG opposites and
+    all three Over/Under complementary pairs. No fitted new parameters.
+    Negative per-market skill can still block an EV/value candidate.
+    """
+    out={}
+    for fam,preferred in FAMILY_EXPERTS.items():
+        model=next((m for m in (preferred,"C3" if preferred=="M4" else "M4")
+                    if m in raw),None)
+        if model is None:continue
+        members=FAMILY_MEMBERS[fam]
+        model_vec={m:raw[model][m] for m in members}
+        base_vec={m:base["markets"][m] for m in members}
+        _validate_family(model_vec,fam)
+        _validate_family(base_vec,fam)
+        calibration=lock["calibration"][model]
+        weights=[]
+        for m in members:
+            skill=calibration[m]
+            w=skill.get("weight")
+            if (skill.get("available") is not True or skill.get("n",0)<120
+                or not isinstance(w,(float,int)) or isinstance(w,bool)
+                or not math.isfinite(w) or not 0<=w<=1):
+                # No dev evidence: keep raw vector for description but do NOT
+                # issue priced value decisions for this family.
+                weights=[]
+                break
+            weights.append(w)
+        common=min(weights) if len(weights)==len(members) else None
+        softened=({m:base_vec[m]+common*(model_vec[m]-base_vec[m])
+                   for m in members} if common is not None else None)
+        if softened is not None:_validate_family(softened,fam)
+        out[fam]={"model":model,"raw":model_vec,
+                  "conservative_dev_family_weight":common,
+                  "frozen_dev_shrunken":softened,
+                  "eligible_for_further_value_gate":softened is not None}
+    return out
+
 def decide(f,base,lock,observation=None,*,morning_snapshot=None,pdf_first_snapshot=None,now=None):
     now=now or datetime.now(timezone.utc)
     if now.tzinfo is None:raise ValueError("AWARE_CLOCK_REQUIRED")
@@ -110,6 +176,7 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,pdf_first_snapsh
             raw[name]=canonical_markets(m["goals"]["markets"])
             scores[name]=m["goals"].get("top_scores",{})
         else:scores[name]={}
+    experts=_fixed_family_experts(raw,base,lock)
     out=[];qualified=[];alerts=[]
     allowed=("MS1","MSX","MS2","OVER_2.5","UNDER_2.5","BTTS_YES","BTTS_NO") if pdf_first_snapshot is not None else MARKETS
     for market in allowed:
@@ -119,18 +186,19 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,pdf_first_snapsh
         support=sum(v>=b+.02 for v in vals.values())
         high=sum(v>=.75 for v in vals.values())>=3 and max(vals.values())-min(vals.values())<=.10
         if high:alerts.append({"market":market,"descriptive_raw_median":median(vals.values()),"not_a_bet":True})
-        options=[]
-        for model in ("M4","C3"):
-            if model not in vals:continue
-            skill=lock["calibration"][model][market]
-            brier=skill.get("development_brier_skill")
-            w=skill.get("weight")
-            if skill.get("available") is True and skill.get("n",0)>=120 and isinstance(brier,(int,float)) and math.isfinite(brier) and brier>0:
-                if not isinstance(w,(int,float)) or not 0<=w<=1:raise ValueError("INVALID_DEV_WEIGHT")
-                options.append((brier,model,w))
-        selected=max(options,key=lambda v:(v[0],v[1]=="M4")) if options else None
-        anchor=selected[1] if selected else None
-        q=b+selected[2]*(vals[anchor]-b) if selected else None
+        # Every market within a family uses the same expert, rather than
+        # independently switching for 1, X and 2 (which broke normalization).
+        fam=family(market)
+        expert=experts.get(fam)
+        anchor=expert["model"] if expert else None
+        skill=lock["calibration"][anchor][market] if anchor else None
+        brier=skill.get("development_brier_skill") if skill else None
+        valid_dev=(skill is not None and skill.get("available") is True
+                   and skill.get("n",0)>=120 and isinstance(brier,(float,int))
+                   and not isinstance(brier,bool) and math.isfinite(brier)
+                   and brier>0 and expert["frozen_dev_shrunken"] is not None)
+        selected=(brier,anchor,expert["conservative_dev_family_weight"]) if valid_dev else None
+        q=expert["frozen_dev_shrunken"][market] if selected else None
         price=prices.get(market)
         ev=q*price["odds"]-1 if price is not None and q is not None else None
         edge=q-price["fair"] if price is not None and q is not None else None
@@ -145,6 +213,10 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,pdf_first_snapsh
              "model_spread_pp":100*(max(vals.values())-min(vals.values())),"support_count":support,
              "strict_S1_75pct_3models_10pp_alert":high,"historical_base":b,
              "anchor_model":anchor,"dev_brier_skill":selected[0] if selected else None,
+             "fixed_specialist_model":anchor,
+             "fixed_specialist_raw_probability":expert["raw"][market] if expert else None,
+             "fixed_specialist_common_family_weight":expert["conservative_dev_family_weight"] if expert else None,
+             "specialist_family_coherent":True if expert else False,
              "calibrated_probability":q,"observed_odds":price["odds"] if price else None,
              "EV":ev,"no_vig_advantage_pp":100*edge if edge is not None else None,
              "quote_source":price["source"] if price else None,
@@ -184,6 +256,14 @@ def decide(f,base,lock,observation=None,*,morning_snapshot=None,pdf_first_snapsh
       "iddaa_pdf_pre_forecast_not_live":pdf_first_snapshot is not None,
       "current_bookmaker_odds_not_reverified":pdf_first_snapshot is not None,
       "quote_status":price_status,"quote_reverified_by_code":False,
+      "fixed_market_specialists_research_only":{f:{"model":e["model"],
+          "raw_probabilities":e["raw"],
+          "common_dev_family_weight":e["conservative_dev_family_weight"],
+          "dev_shrunken_probability_vector":e["frozen_dev_shrunken"]}
+          for f,e in experts.items()},
+      "MS_three_outcomes_single_expert_normalized":bool("MS" in experts),
+      "fixed_market_specialists_not_meta_learner":True,
+      "not_officially_promoted":True,
       "model_1x2":{k:{s:v[s] for s in ("MS1","MSX","MS2")} for k,v in raw.items()},
       "descriptive_most_likely_1x2_by_model_median":leader,"model_top_scores":scores,
       "high_probability_alerts_not_bets":alerts,"all_market_diagnostics":out,
