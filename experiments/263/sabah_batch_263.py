@@ -250,8 +250,8 @@ def mobile(report):
    if "xg_status" in x:lines.append("M4 xG veri katkısı: "+x["xg_status"])
    if "m4_xg_research_probabilities" in x:
     m=x["m4_xg_research_probabilities"]
-    lines.append("2.5 Üst (M4 → xG’li M4): %%.1f → %%.1f" % (100*m["old_OVER_2.5"],100*m["OVER_2.5"]))
-    lines.append("KG Var (M4 → xG’li M4): %%.1f → %%.1f" % (100*m["old_BTTS_YES"],100*m["BTTS_YES"]))
+    lines.append("2.5 Üst (M4 → xG’li M4): %%%.1f → %%%.1f" % (100*m["old_OVER_2.5"],100*m["OVER_2.5"]))
+    lines.append("KG Var (M4 → xG’li M4): %%%.1f → %%%.1f" % (100*m["old_BTTS_YES"],100*m["BTTS_YES"]))
     lines.append("xG yüzdeleri yalnız araştırma; asıl mühür/değer kararı değişmedi.")
   else:lines.append("Neden: "+x.get("reason","Önceden kaydedilmiş olabilir"))
   lines.append("")
