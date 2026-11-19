@@ -28,3 +28,24 @@
 4. Testten bağımsız gerçek resmî adaptör kabulü olmadan 20 Kasım maçlarına “sorunsuz hazır” dememek.
 
 **Çıktı kapsamı:** Veri bütünlüğü kapısı, takvim sözleşmesi, testler, CI dosyası ve bu araştırma raporu. **Çıktıda üretilmiş gerçek maç tahmini, canlı kaynak kabulü, oran değişikliği veya ikinci mühür yoktur.**
+
+## Sayısal durum — 19 Kasım 2026
+
+Özel 4.618 skor projeksiyonunun en son 10 lig tarihinden bugüne gün sayısı:
+
+| Lig | Arşiv son maçı | Gün farkı | Mevcut kör 10 gün kuralı |
+|---|---|---:|---|
+| BEL1 | 8 Kasım | 11 | BLOKE |
+| ENG1 | 8 Kasım | 11 | BLOKE |
+| ENG2 | 7 Kasım | 12 | BLOKE |
+| ESP1 | 8 Kasım | 11 | BLOKE |
+| FRA1 | 8 Kasım | 11 | BLOKE |
+| GER1 | 8 Kasım | 11 | BLOKE |
+| ITA1 | 8 Kasım | 11 | BLOKE |
+| NED1 | 8 Kasım | 11 | BLOKE |
+| POR1 | 8 Kasım | 11 | BLOKE |
+| TUR1 | 8 Kasım | 11 | BLOKE |
+
+Bu **10/10 teknik risk** anlamına gelir; 10 ligin tümünde gerçekten eksik maç var anlamına **gelmez**. Tam resmî sonuç penceresi olmadan takvim boşluğu kanıtı ilan edilmez.
+
+**Güvenlik ayrımı:** Model değeri açısından `PAS` ile `OFFICIAL_RESULTS_ADAPTER_NOT_PROVIDED` / `BLOCKED_NEW_COMPLETED_MATCH_MISSING` gibi teknik veri blokları ayrı gösterilecek; kararlaştırılan ilk PDF seçiminde oranı yöneten EV kapısı **eklenmeyecek**.
