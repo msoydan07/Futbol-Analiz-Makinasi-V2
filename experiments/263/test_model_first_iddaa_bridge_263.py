@@ -39,7 +39,7 @@ class TestModelFirstIddaa(unittest.TestCase):
     def build(self,price=1.8):
         f,b,pdf,session=pair(price)
         with patch("model_first_iddaa_bridge_263.verify_original_pdf",return_value="c"*64):
-            with patch("model_first_iddaa_bridge_263._load",side_effect=[f,b]):
+            with patch("model_first_iddaa_bridge_263._load",side_effect=[f,b]), patch("model_first_iddaa_bridge_263.build_snapshot",return_value={"groups":{"MS":{"prices":{"MS1":price,"MSX":4.0,"MS2":5.0},"no_vig":{"MS1":.55,"MSX":.25,"MS2":.20}}}}):
                 return calibrate_session(pdf,session,original_pdf="synthetic.pdf",
                     repo_root=str(ROOT),now=NOW)
     def test_no_price_dependent_decision(self):
@@ -66,7 +66,7 @@ class TestModelFirstIddaa(unittest.TestCase):
         session["rows"][0]["model_forecast_sha256"]=f["payload_sha256"]
         session["rows"][0]["empirical_baseline_sha256"]=b["payload_sha256"]
         with patch("model_first_iddaa_bridge_263.verify_original_pdf",return_value="c"*64):
-            with patch("model_first_iddaa_bridge_263._load",side_effect=[f,b]):
+            with patch("model_first_iddaa_bridge_263._load",side_effect=[f,b]), patch("model_first_iddaa_bridge_263.build_snapshot",return_value={"groups":{"MS":{"prices":{"MS1":1.8,"MSX":4.0,"MS2":5.0},"no_vig":{"MS1":.55,"MSX":.25,"MS2":.20}}}}):
                 result=calibrate_session(pdf,session,original_pdf="synthetic.pdf",
                      repo_root=str(ROOT),now=NOW)
         self.assertEqual(result["n_technical_blocked_not_pas"],1)
