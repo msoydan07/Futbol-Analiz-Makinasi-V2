@@ -6,6 +6,10 @@ on:
     paths:
       - experiments/263/c3_kg_o25_calibration_review_263.py
       - experiments/263/test_c3_kg_o25_calibration_review_263.py
+      - experiments/263/c3_calibration_shadow_263.py
+      - experiments/263/test_c3_calibration_shadow_263.py
+      - experiments/263/model_first_iddaa_bridge_263.py
+      - experiments/263/iddaa_pdf_report_263.py
       - .github/workflows/263-c3-kg-o25-calibration-research.yml
 permissions:
   contents: read
@@ -31,6 +35,8 @@ jobs:
           set -euo pipefail
           python -m unittest -v experiments/263/test_c3_kg_o25_calibration_review_263.py
           python -m unittest -v experiments/263/test_model_first_decision_263.py
+          python -m unittest -v experiments/263/test_c3_calibration_shadow_263.py
+          python -m unittest -v experiments/263/test_model_first_iddaa_bridge_263.py
       - name: Download ORIGINAL 4413 accepted source used by 880 asof retrospective
         env:
           GH_TOKEN: ${{ github.token }}
@@ -65,6 +71,13 @@ jobs:
           retention-days: 45
           if-no-files-found: ignore
           path: /tmp/263-c3-kg-o25-calibration-review.json
+      - name: Original model-first PDF and second-PDF regressions remain green
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_report_263.py experiments/263/test_iddaa_pdf_last_review_263.py
+          git diff --exit-code
       - name: Original M4 and old SHA archives untouched
         run: |
           set -euo pipefail
