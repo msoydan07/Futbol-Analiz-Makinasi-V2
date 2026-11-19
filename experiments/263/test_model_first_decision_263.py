@@ -108,10 +108,10 @@ class TestNoOddsDecision(unittest.TestCase):
             select(f,b,LOCK,now=NOW)
 
     def test_low_confidence_is_actual_model_pas(self):
-        f,b=scenario();p=joint_poisson(1.1,1.1)
+        f,b=scenario();p=joint_poisson(1.3,1.3)
         for name in ("M4","C3","B"):
             g=f["model_predictions"][name]["goals"]
-            g["lambda_home"]=1.1;g["lambda_away"]=1.1
+            g["lambda_home"]=1.3;g["lambda_away"]=1.3
             g["markets"]["1X2"]={"H":p["MS1"],"D":p["MSX"],"A":p["MS2"]}
             for k in ("BTTS_YES","BTTS_NO","OVER_2.5","UNDER_2.5"):
                 g["markets"][k]=p[k]
