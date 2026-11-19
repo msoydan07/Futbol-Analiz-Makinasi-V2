@@ -97,3 +97,13 @@ Açık engel:
 ```
 
 **Yeni sohbet başlatma kontrolü:** “Mevcut kararları kontrol ettim: D-ODDS-001, D-SCOPE-002, D-MODEL-003. Şu an gündemdeki konu bu kayıtlarda çözülmüş mü? Çözülmüşse yalnız yapılmamış teknik kısmı konuş.”
+
+## D-READY-005 — Maç sabahı teknik hazırlık durumu (19 Kasım 2026)
+
+**Karar değişmedi:** D-ODDS-001 iki PDF / tek mühür kesinlikle aynen geçerli. Oran kaynaklarını yeniden seçme veya ikinci fiyatla tahmin güncelleme işi **AÇILMAZ**.
+
+**Yeni teknik denetim:** [Ayrıntılı kanıt ve açık engeller](263_MAC_SABAHI_HAZIRLIK_KONTROL_20261119.md). 4.618 kabul edilmiş özel maç kaydı ile 4.413 özgün skor kaydı birebir karşılaştırıldı; özgün 4.413 değişmeden ve 205 yeni skor eklenerek **yalnız özel araştırma alanında** 4.618 satırlık eski şemayla uyumlu skor projeksiyonu üretildi. Özel xG satırları kamu GitHub'a yüklenmedi.
+
+**Durumlar:** (A) Tek mühür iki PDF kuralı KİLİTLİ; (B) 4.618 skor-şema köprüsü yerel ve 7 bütünlük testi başarılı, GitHub canlı veri bağı/uygun kaynak kabulü TAMAMLANMADI; (C) ilk gerçek PDF'den son yoruma operasyon dalı uçtan uca kabulü YOK. Mevcut 10 günlük stale kodu, 96 vs 100 sınırı, operasyon dalındaki ikinci PDF modül farkı ve eski DEV kalibrasyon bağlantısı da henüz açık.
+
+**Bir sonraki teknik işlem:** Eski dondurulmuş matematik ve mühürleri değiştirmeden yukarıdaki P0 engellerini **research dalında** çöz/test et; ancak gerçek maç günü kanıtıyla canlı kabul yap. Eksik kod/kanıt sebebiyle oluşan **teknik engeli** modelin değer bulamaması sonucu oluşan **PAS** ile karıştırma.
