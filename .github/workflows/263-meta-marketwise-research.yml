@@ -1,0 +1,76 @@
+name: "263 meta karar: M4 MS, C3 KG/Gol vs gecmis performansli dinamik - salt okuma"
+on:
+  push:
+    branches:
+      - research/263-meta-decision-marketwise-20261120
+    paths:
+      - experiments/263/meta_market_selector_263.py
+      - experiments/263/meta_market_selector_nov8_263.py
+      - experiments/263/test_meta_market_selector_263.py
+      - .github/workflows/263-meta-marketwise-research.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  retrospective-meta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install same pinned scientific libraries as existing M4 acceptance
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Synthetic strict as-of and normalized market-family invariants
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_meta_market_selector_263.py
+      - name: Download EXACT original 4413-match immutable accepted snapshot (not xG)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" \
+            -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: Reproduce existing B C2 C3 M4 chronological 880-match probabilities
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/chrono_goal_decision_263.py \
+            --source m4_quad_base/historical_results.csv \
+            --report /tmp/263-unchanged-880-report.json \
+            --predictions /tmp/263-unchanged-880-predictions.csv
+      - name: Compare fixed specialist M4-MS C3-KG-GOALS vs earlier-history dynamic on 293 October games
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/meta_market_selector_263.py \
+            --predictions /tmp/263-unchanged-880-predictions.csv \
+            --output /tmp/263-meta-marketwise-293-report.json
+          git diff --exit-code
+      - name: Apply earlier-history selector to 39 PREVIOUSLY SHA-sealed Nov 8 matches, score only after match
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/meta_market_selector_nov8_263.py \
+            --predictions /tmp/263-unchanged-880-predictions.csv \
+            --output /tmp/263-meta-nov8-existing-sha-report.json
+          git diff --exit-code
+      - name: Store only research METRICS, never third-party raw data or source predictions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-meta-marketwise-research-summary-only
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            /tmp/263-meta-marketwise-293-report.json
+            /tmp/263-meta-nov8-existing-sha-report.json
