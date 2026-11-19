@@ -117,6 +117,15 @@ class GateTests(unittest.TestCase):
             inspect_official_interval(league='ENG1',last_result_day='2026-11-08',
                 target_day='2026-11-19',now_utc=NOW,fetch_official_window=fetch)
 
+    def test_16_official_knvb_eredivisie_host_is_accepted_research_only(self):
+        def fetch(league,start,end):
+            return window(league,start,end,source_url='https://www.knvb.nl/competities/eredivisie/programma')
+        result=inspect_official_interval(league='NED1',last_result_day='2026-11-08',
+             target_day='2026-11-19',now_utc=NOW,fetch_official_window=fetch)
+        self.assertTrue(result['can_study_frozen_snapshot'])
+        self.assertFalse(result['production_forecast_allowed'])
+        self.assertFalse(result['calendar_verified_by_code'])
+
     def test_15_duplicate_fixture_in_window_rejected(self):
         fixture={'match_date':'2026-11-14','home_id':'h','away_id':'a','status':'POSTPONED'}
         def fetch(league,start,end):return window(league,start,end,matches=[fixture,fixture])
