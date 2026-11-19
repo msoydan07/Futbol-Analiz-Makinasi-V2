@@ -1,0 +1,37 @@
+name: 263 Research model-first odds-independent selection checks
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - 'experiments/263/model_first_decision_263.py'
+      - 'experiments/263/model_first_selection_lock_263.json'
+      - 'experiments/263/test_model_first_decision_263.py'
+      - '.github/workflows/263-model-first-odds-independent-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frozen_model_first_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Model-only rule, price invariance, SHA consistency (no network/bookmakers)
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v test_model_first_decision_263
+      - name: Do not mutate production M4 or existing seals
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("experiments/263/model_first_decision_263.py").read_text()
+          assert "def select(forecast, baseline, lock, *, now)" in p
+          assert "def market_reference(decision, market_groups, *, source_pdf_sha256)" in p
+          assert "price_used_in_decision" in p
+          assert "production_modified" in p
+          print("RESEARCH_ONLY; NO LIVE FORECAST OR ODDS CALL")
+          PY
