@@ -71,6 +71,18 @@ def render_compact(data):
     else:
         lines.append("**Karar:** Geçerli geçmiş xG katkısı bulunamadı; M4 orijinal hesabı korundu.")
         lines.append("Neden: " + str(x.get("reason", "kaynak/rol geçmişi yetersiz")))
+    marketwise = data.get("marketwise_research_policy")
+    if marketwise:
+        sources=marketwise["market_source"]
+        lines.extend(["", "**Pazar bazlı araştırma seçimi:**",
+                      "- MS 1-X-2: "+sources["MS"],
+                      "- KG Var/Yok: "+sources["KG"],
+                      "- 2.5 Alt/Üst: "+sources["GOALS_2_5"]])
+        chosen=marketwise.get("selected_probability")
+        if chosen:
+            lines.append("**Seçilen 2.5 Üst/Alt araştırma yüzdeleri:** %{:.2f} / %{:.2f}".format(
+                100*chosen["UST_2_5"],100*chosen["ALT_2_5"]))
+        lines.append("Bu seçim yalnız araştırma raporundadır; resmî M4 veya bahis kararı değiştirilmedi.")
     lines.extend([
         "",
         "**Güvenlik:** xG yalnızca geçmiş maçlardan; orijinal SHA tahmini ve mevcut fiyat/PAS kararı değişmedi.",

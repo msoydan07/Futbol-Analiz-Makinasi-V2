@@ -1,0 +1,38 @@
+name: "263 M4 xG marketwise scientific acceptance"
+on:
+  push:
+    branches:
+      - research/263-m4-xg-marketwise-engineering-20261119
+  pull_request:
+    branches:
+      - experiment/263-toplu-karsilastirma
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  marketwise-m4-xg:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install locked numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Compile research modules
+        run: |
+          python -m py_compile experiments/263/m4_xg_support_263.py
+          python -m py_compile experiments/263/m4_xg_market_policy_263.py
+          python -m py_compile experiments/263/m4_xg_private_report_263.py
+      - name: Validate marketwise choice, no-leakage, SHA and existing morning and PDF compatibility
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python -m unittest -v \
+            experiments/263/test_m4_xg_market_policy_263.py \
+            experiments/263/test_m4_xg_private_report_263.py \
+            experiments/263/test_m4_xg_private_morning_263.py \
+            experiments/263/test_iddaa_pdf_private_xg_263.py
+          python experiments/263/test_m4_xg_support_263.py
+          python experiments/263/test_m4_xg_sidecar_io_263.py
