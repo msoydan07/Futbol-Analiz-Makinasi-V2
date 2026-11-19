@@ -6,7 +6,6 @@ from pathlib import Path
 from c3_calibration_shadow_263 import make_shadow, SCHEMA
 from model_first_decision_263 import select,verified,digest
 from test_model_first_decision_263 import scenario,LOCK,NOW,seal
-from test_model_first_iddaa_bridge_263 import TestModelFirstIddaa
 
 ROOT=Path(__file__).resolve().parents[2]
 DEV=json.loads((ROOT/"experiments/263/forward_dev_calibration_lock_263.json").read_text())
@@ -32,6 +31,20 @@ class ShadowSafety(unittest.TestCase):
                 z["asof_league_positive"]+
                 z["source_dev_weight"]*(z["raw_positive"]-z["asof_league_positive"]))
         self.assertEqual(d["main_candidate"]["market"],"MS1")
+
+    def test_first_pdf_model_choice_stays_same_when_odds_change_and_shadow_is_present(self):
+        from test_model_first_iddaa_bridge_263 import TestModelFirstIddaa
+        builder=TestModelFirstIddaa()
+        left=builder.build(price=1.8)
+        right=builder.build(price=2.5)
+        l,r=left["rows"][0],right["rows"][0]
+        self.assertEqual(l["model_first_decision"]["payload_sha256"],
+                         r["model_first_decision"]["payload_sha256"])
+        self.assertEqual(l["c3_calibration_shadow"]["payload_sha256"],
+                         r["c3_calibration_shadow"]["payload_sha256"])
+        self.assertNotEqual(l["market_fifth_reference"]["payload_sha256"],
+                            r["market_fifth_reference"]["payload_sha256"])
+        self.assertTrue(l["c3_calibration_shadow"]["do_not_use_to_pick"])
 
     def test_source_brier_future_results_are_not_inputs(self):
         f,b=scenario();d=select(f,b,LOCK,now=NOW)
