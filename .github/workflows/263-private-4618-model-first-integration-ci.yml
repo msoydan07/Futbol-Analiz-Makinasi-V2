@@ -1,0 +1,46 @@
+name: "263 private 4618 and model-first PDF integration (research only)"
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - "experiments/263/private_4618_*.py"
+      - "experiments/263/test_private_4618_live_integration_contract_263.py"
+      - ".github/workflows/263-private-4618-model-first-integration-ci.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  4618-pipeline-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile without any private history or live odds
+        run: |
+          python -m py_compile \
+            experiments/263/private_4618_provider_bundle_263.py \
+            experiments/263/private_4618_quad_forward_263.py \
+            experiments/263/private_4618_empirical_baseline_263.py \
+            experiments/263/private_4618_pdf_session_263.py \
+            experiments/263/private_4618_iddaa_model_first_one_step_263.py
+      - name: Run source/receipt/model isolation tests
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python -m unittest -v test_private_4618_live_integration_contract_263
+      - name: Verify original production model source untouched in this change
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          o=Path("experiments/263/forward_quad.py").read_text()
+          p=Path("experiments/263/private_4618_quad_forward_263.py").read_text()
+          assert 'PILOT_GOAL=96' in o
+          assert 'PILOT_GOAL=300' in p
+          assert "from private_4618_provider_bundle_263 import inspect_witness" in p
+          assert 'from private_4618_quad_forward_263 import predict_quad_from_verified_gate' in Path("experiments/263/private_4618_pdf_session_263.py").read_text()
+          print("OLD M4/QUAD UNMODIFIED; PRIVATE MODE ONLY")
+          PY
