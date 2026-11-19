@@ -1,5 +1,8 @@
 """One user action, one iddaa PDF, one black-white analysis PDF.
 
+D-MARKET-006: the current operational FIRST-PDF entry routes to model-first
+M4/MS and C3/KG/O25. Original quote is independent fifth reference only.
+
 Never re-scrape prices. Local original PDF remains in private processing
 directory; it is NOT committed to GitHub. One official lookup per resolvable
 fixture, existing signed B/C2/C3/M4 forecast plus accepted-history baseline,
@@ -21,7 +24,7 @@ from pathlib import Path
 
 from iddaa_pdf_bulletin_263 import parse_pdf
 from iddaa_pdf_session_263 import run_session
-from iddaa_pdf_value_bridge_263 import calibrate_session
+from model_first_iddaa_bridge_263 import calibrate_session
 from iddaa_pdf_report_263 import build as report_pdf
 
 def _write_once(destination,data):
@@ -58,7 +61,7 @@ def _prior_completed_session(folder,original_sha):
 def one_step(pdf,*,history,output_root,
              m4_lock="experiments/263/m4_lock.json",
              source_baseline=None,source_acceptance=None,
-             dev_lock="experiments/263/forward_dev_calibration_lock_263.json",
+             dev_lock="experiments/263/model_first_selection_lock_20261120.json",
              repo_root=".",now=None,official_lookup=None):
     source=Path(pdf)
     if not source.is_file() or not source.suffix.lower()==".pdf":
@@ -102,6 +105,8 @@ def one_step(pdf,*,history,output_root,
         "official_confirmed_rows":session["n_official"],
         "signed_four_model_forecasts":session["n_forecast"],
         "calibrated_price_decisions":calibrated["n_pdf_first_decisions"],
+        "model_only_decisions":calibrated["n_pdf_first_decisions"],
+        "decision_policy":"D_MARKET_006_MODEL_FIRST_M4_MS_C3_KG_O25",
         "research_pas_or_blocked":calibrated["n_pdf_first_pas_or_blocked"],
         "no_bookmaker_api_calls":True,
         "no_old_pilot_changes":True,
@@ -125,7 +130,7 @@ def main():
     p.add_argument("--m4-lock",default="experiments/263/m4_lock.json")
     p.add_argument("--source-baseline")
     p.add_argument("--source-acceptance")
-    p.add_argument("--dev-lock",default="experiments/263/forward_dev_calibration_lock_263.json")
+    p.add_argument("--dev-lock",default="experiments/263/model_first_selection_lock_20261120.json")
     p.add_argument("--repo-root",default=".")
     args=p.parse_args()
     result=one_step(args.pdf,history=args.history,

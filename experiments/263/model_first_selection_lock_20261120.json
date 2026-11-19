@@ -1,0 +1,35 @@
+{
+  "schema": "263_MODEL_FIRST_RESEARCH_LOCK_V2",
+  "family_anchors": {
+    "MS": "M4",
+    "KG": "C3",
+    "O25": "C3"
+  },
+  "historical_20261119_family_anchors": {
+    "MS": "M4",
+    "KG": "M4",
+    "O25": "M4"
+  },
+  "expert_selection_evidence": "2026-11-20: 293 Oct as-of + 39 Nov8 SHA; C3 KG/O25 lower Brier, M4 MS operational preference not independently proven",
+  "historical_selection_period": "2026-09-01/2026-09-30",
+  "m4_joint_calibration_august": [
+    0.05206617557187415,
+    0.10909064506028164,
+    1.0154151566181202
+  ],
+  "market_reference_only": true,
+  "min_available_models": 2,
+  "min_lift": 0.025,
+  "min_probability": 0.6,
+  "min_support_models": 2,
+  "no_odds_input_to_selection": true,
+  "officially_approved": false,
+  "rank_basis": "expert_probability_minus_empirical_league_base_standardized",
+  "research_only": true,
+  "retrospective_evaluation_reused_not_independent": true,
+  "selection_basis": "M4_MS_CALIBRATED_AUG2026__C3_KG_O25_RAW_EXPERIMENTAL__NOV20_FIXED",
+  "support_lift": 0.02,
+  "price_may_not_be_gate": true,
+  "frozen_m4_calibration_only_applies_to_MS": true,
+  "payload_sha256": "b453d263d1a98090bad695176569f922bf6bcaee01d7456e64e852b9f486b9a4"
+}

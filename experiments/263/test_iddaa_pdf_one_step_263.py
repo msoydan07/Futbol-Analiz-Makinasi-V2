@@ -26,7 +26,7 @@ class OneStepTests(unittest.TestCase):
                         "retrieved_at_utc":"2026-11-06T16:02:00+00:00",
                         "source_url":"https://www.tff.org/fikstur"}
             with patch("iddaa_pdf_one_step_263.parse_pdf",return_value=bulletin):
-                with patch("iddaa_pdf_value_bridge_263.verify_original_pdf",
+                with patch("model_first_iddaa_bridge_263.verify_original_pdf",
                            return_value=digest):
                     output=one_step(src,history=history,
                        output_root=root/"results",official_lookup=official,
@@ -74,6 +74,14 @@ class OneStepTests(unittest.TestCase):
         import json,fitz
         from iddaa_pdf_value_bridge_263 import _load
         f,b,lock,bulletin,session=sample()
+        # Preserve the original regression fixture identity and forecast time,
+        # but add the existing M4 lambdas required by the model-only selector.
+        from test_four_model_value_policy_263 import seal
+        f["model_predictions"]["M4"]["goals"].update(
+            lambda_home=2.8,lambda_away=.6)
+        seal(f)
+        b["forecast_sha256"]=f["payload_sha256"]
+        seal(b)
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp)
             original=root/"fake-iddaa.pdf"
@@ -97,12 +105,14 @@ class OneStepTests(unittest.TestCase):
                 baseline_path.write_text(json.dumps(b),encoding="utf-8")
                 result["rows"][0]["model_forecast_path"]=str(forecast_path)
                 result["rows"][0]["empirical_baseline_path"]=str(baseline_path)
+                result["rows"][0]["model_forecast_sha256"]=f["payload_sha256"]
+                result["rows"][0]["empirical_baseline_sha256"]=b["payload_sha256"]
                 result["n_official"]=1
                 result["n_forecast"]=1
                 return result
             with patch("iddaa_pdf_one_step_263.parse_pdf",return_value=bulletin):
                 with patch("iddaa_pdf_one_step_263.run_session",side_effect=batch):
-                    with patch("iddaa_pdf_value_bridge_263.verify_original_pdf",
+                    with patch("model_first_iddaa_bridge_263.verify_original_pdf",
                                return_value=digest):
                         done=one_step(original,history=history,
                             output_root=root/"safe-absolute-results",now=NOW,
@@ -112,7 +122,7 @@ class OneStepTests(unittest.TestCase):
             self.assertEqual(done["official_confirmed_rows"],1)
             with fitz.open(done["pdf_report_path"]) as generated:
                 text=" ".join(page.get_text() for page in generated)
-            self.assertIn("ANA KOŞULLU (PDF)",text)
+            self.assertIn("ANA (ORANDAN BAGIMSIZ)",text)
             self.assertNotIn("1.5 Üst",text)
             self.assertNotIn("3.5 Alt",text)
             # Traversal/symlink access via untrusted row JSON is prohibited.
