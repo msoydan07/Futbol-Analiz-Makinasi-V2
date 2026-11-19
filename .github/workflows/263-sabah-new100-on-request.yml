@@ -68,6 +68,36 @@ jobs:
           echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
           echo '1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9  data/quad_accepted_263/extended_history.csv' | sha256sum -c -
           echo '637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89  data/results_only_263/2026-11-10_completed_4617_scores_only.csv' | sha256sum -c -
+      # Private xG is research-only. No secret or file = baseline M4.
+      # Retrieved data and sidecars stay outside the public checkout.
+      - name: Private xG input - fixed-repo read-only token, no public artifacts
+        if: steps.intake.outputs.kind == 'real_named_request'
+        shell: bash
+        env:
+          XG_PRIVATE_REPO_READ_TOKEN: ${{ secrets.XG_PRIVATE_REPO_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          PRIVATE_XG_ROOT="${RUNNER_TEMP}/m4-xg-private-input"
+          mkdir -p "$PRIVATE_XG_ROOT"
+          export PRIVATE_XG_ROOT
+          python experiments/263/xg_private_repo_fetch_263.py \
+            --target "$PRIVATE_XG_ROOT/FUTBOL_263_4618_XG_KILITLI_20261119.csv" \
+            --public-checkout "." \
+            --status-json "$PRIVATE_XG_ROOT/readiness.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          root=Path(os.environ["PRIVATE_XG_ROOT"])
+          state=json.loads((root/"readiness.json").read_text(encoding="utf-8"))
+          if state["status"]=="PRIVATE_XG_SHA_AND_SCOPE_VERIFIED":
+              with open(os.environ["GITHUB_ENV"],"a",encoding="utf-8") as env:
+                  env.write("M4_XG_PRIVATE_CSV="+str(root/"FUTBOL_263_4618_XG_KILITLI_20261119.csv")+"\n")
+                  env.write("M4_XG_PRIVATE_SHA256=3b13921daafab70aa121fe807fea0a74e0c72f0fc2381366b183f621edea762c\n")
+                  env.write("M4_XG_PRIVATE_OUTPUT_DIR="+os.environ["RUNNER_TEMP"]+"/m4-xg-private-evidence\n")
+              print("PRIVATE_XG_RESEARCH_INPUT_VERIFIED_AND_TEMP_ONLY")
+          else:
+              print("PRIVATE_XG_INPUT_NOT_READY_OR_UNAVAILABLE_BASELINE_M4_ONLY")
+          PY
       - name: Run actual named user matches through live official gate and original B C2 C3 M4
         if: steps.intake.outputs.kind == 'real_named_request'
         shell: bash

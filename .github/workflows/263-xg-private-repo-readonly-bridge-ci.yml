@@ -1,0 +1,41 @@
+name: "263 private xG repo token-scoped bridge safety"
+on:
+  push:
+    branches:
+      - research/263-private-xg-repo-readonly-bridge-20261119
+  pull_request:
+    branches:
+      - experiment/263-toplu-karsilastirma
+permissions:
+  contents: read
+jobs:
+  fake-data-bridge-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile private transport and safety gates without token
+        run: |
+          python -m py_compile experiments/263/xg_private_repo_fetch_263.py
+          python -m py_compile experiments/263/m4_xg_operational_gate_263.py
+      - name: Run fixed-size SHA mismatch, missing secret, no-leak and namespace tests
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python -m unittest -v experiments/263/test_xg_private_repo_fetch_263.py
+          python -m unittest -v experiments/263/test_m4_xg_operational_gate_263.py
+      - name: Assert production workflows keep confidential data outside Git
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path(".github/workflows/263-sabah-new100-on-request.yml").read_text()
+          assert "secrets.XG_PRIVATE_REPO_READ_TOKEN" in p
+          assert "--target \"$PRIVATE_XG_ROOT/" in p
+          assert "M4_XG_PRIVATE_CSV" in p
+          assert "M4_XG_PRIVATE_OUTPUT_DIR" in p
+          assert "steps.intake.outputs.kind == 'real_named_request'" in p
+          print("PUBLIC_WORKFLOW_REFERENCES_ONLY_PRIVATE_RUNNER_TEMP_AND_READ_TOKEN")
+          PY
