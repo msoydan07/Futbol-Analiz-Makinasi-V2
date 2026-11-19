@@ -1,0 +1,47 @@
+name: "263 D-MARKET-006 model-only decision and iddaa fifth-reference regression"
+on:
+  push:
+    branches:
+      - research/263-model-first-odds-fifth-20261120
+permissions:
+  contents: read
+jobs:
+  model-first:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned math and PDF dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab pymupdf
+      - name: Compile all new and operational modules
+        run: |
+          python -m py_compile experiments/263/model_first_decision_263.py experiments/263/model_first_iddaa_bridge_263.py experiments/263/iddaa_pdf_one_step_263.py experiments/263/iddaa_pdf_report_263.py
+      - name: Price independence, specialist market probabilities and SHA validity
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_model_first_decision_263.py experiments/263/test_model_first_iddaa_bridge_263.py
+      - name: Legacy value-code historic tests stay unchanged (not used by new PDF entrypoint)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_four_model_value_policy_263.py experiments/263/test_fixed_specialists_263.py experiments/263/test_iddaa_pdf_report_263.py
+      - name: Existing one-step PDF operational and second-PDF regression
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_last_review_263.py
+      - name: Original models, archives and forecasts untouched
+        run: |
+          set -euo pipefail
+          test "$(git diff --name-only origin/experiment/263-toplu-karsilastirma HEAD -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/analysis_math_core.py forward_morning_263 forward_quad_263 data/results_only_263 | wc -l)" -eq 0
+          git diff --exit-code
