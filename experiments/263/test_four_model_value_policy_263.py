@@ -57,8 +57,11 @@ class TestAgreedResult(unittest.TestCase):
         self.assertTrue(any(x["market"]=="OVER_1.5" for x in d["high_probability_alerts_not_bets"]))
     def test_value_main_and_unrelated_alternative(self):
         d=decide(self.f,self.b,self.lock,odds(self.f),now=NOW)
-        self.assertEqual(d["main_candidate"]["market"],"MS1")
-        self.assertEqual(d["alternative_candidate"]["market"],"UNDER_3.5")
+        # With conservative whole-family MS calibration, the stronger
+        # synthetic EV now belongs to UNDER_3.5, not MS1.
+        # Ranking by actual EV is preserved; no arbitrary MS priority.
+        self.assertEqual(d["main_candidate"]["market"],"UNDER_3.5")
+        self.assertEqual(d["alternative_candidate"]["market"],"MS1")
         self.assertNotEqual(d["main_candidate"]["family"],d["alternative_candidate"]["family"])
         self.assertTrue(d["main_candidate"]["EV"]>=.05)
         self.assertFalse(d["betting_authorized"])
