@@ -6,7 +6,7 @@ official fixture or model input only blocks THAT row, never the full batch.
 Live adapter one per match, executed concurrently to avoid sequential delays.
 """
 from __future__ import annotations
-import argparse,hashlib,importlib,json,math
+import argparse,hashlib,importlib,json,math,os,re,tempfile
 from concurrent.futures import ThreadPoolExecutor,as_completed
 from datetime import datetime,timezone
 from pathlib import Path
@@ -198,6 +198,34 @@ def analyze_one(n,row,*,index,team_names,pdf_time,now,
         except (ValueError,KeyError,AssertionError,OSError,ImportError) as baseline_exc:
             output["empirical_baseline_status"]="BASELINE_RESEARCH_PROVENANCE_BLOCKED"
             output["empirical_baseline_reason"]=str(baseline_exc)[:160]
+        # Private xG evidence is an ADDITION to M4, never a replacement for the
+        # original SHA-sealed model or the price/decision calculation.
+        source=forecast_options.get("xg_snapshot")
+        if source:
+            try:
+                from m4_xg_support_263 import _sha as xg_sha,sidecar as xg_sidecar
+                xg_path=Path(source).resolve()
+                safe_root=Path.cwd().resolve()
+                expected=forecast_options.get("xg_expected_sha256") or (
+                    "3b13921daafab70aa121fe807fea0a74e0c72f0fc2381366b183f621edea762c")
+                if (xg_path.is_relative_to(safe_root) or not xg_path.is_file()
+                    or not re.fullmatch(r"[a-f0-9]{64}",str(expected))
+                    or xg_sha(xg_path)!=expected):
+                    raise ValueError("PRIVATE_XG_PATH_OR_SHA_REJECTED")
+                private_dir=Path(forecast_options.get("xg_private_dir")
+                                 or tempfile.mkdtemp(prefix="iddaa_private_m4_xg_")).resolve()
+                if private_dir.is_relative_to(safe_root):
+                    raise ValueError("PRIVATE_XG_OUTPUT_INSIDE_PUBLIC_REPO")
+                private_out=private_dir/forecast["fixture"]["match_local_date"]/(target.stem+".json")
+                evidence=xg_sidecar(target,forecast_options["history"],xg_path,private_out)
+                output["m4_xg_status"]=evidence["xg"]["status"]
+                output["m4_xg_private_only"]=True
+                output["m4_xg_seal_preserved"]=True
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as xg_exc:
+                output["m4_xg_status"]="PRIVATE_XG_REJECTED_M4_UNCHANGED"
+                output["m4_xg_error_type"]=type(xg_exc).__name__
+        else:
+            output["m4_xg_status"]="PRIVATE_XG_NOT_CONFIGURED_M4_UNCHANGED"
     except (ValueError,KeyError,AssertionError,OSError,ImportError) as exc:
         output["status"]="ONE_ROW_FOUR_MODEL_EVIDENCE_BLOCKED"
         output["model_error_type"]=type(exc).__name__
@@ -258,6 +286,9 @@ def main():
     p.add_argument("--m4-lock",default="experiments/263/m4_lock.json")
     p.add_argument("--baseline")
     p.add_argument("--source-acceptance")
+    p.add_argument("--xg-snapshot",help="Local private 4618-match xG CSV, outside checkout")
+    p.add_argument("--xg-expected-sha256")
+    p.add_argument("--xg-private-out",help="Private xG sidecars outside the GitHub checkout")
     p.add_argument("--forecast-out-dir",default="experiments/263/iddaa_pdf_forecasts_263")
     args=p.parse_args()
     bulletin=json.loads(Path(args.intake_json).read_text(encoding="utf-8"))
@@ -268,6 +299,9 @@ def main():
         options={"history":args.history,"lock":args.m4_lock,
                  "baseline":args.baseline,"source_acceptance":args.source_acceptance,
                  "out_dir":str(Path(args.forecast_out_dir)/pdf_short),
+                 "xg_snapshot":args.xg_snapshot or os.environ.get("M4_XG_PRIVATE_CSV"),
+                 "xg_expected_sha256":args.xg_expected_sha256 or os.environ.get("M4_XG_PRIVATE_SHA256"),
+                 "xg_private_dir":args.xg_private_out or os.environ.get("M4_XG_PRIVATE_OUTPUT_DIR"),
                  "empirical_baseline_out_dir":str(
                     Path("experiments/263/iddaa_pdf_empirical_baselines_263")/pdf_short)}
     result=run_session(bulletin,forecast_options=options)
