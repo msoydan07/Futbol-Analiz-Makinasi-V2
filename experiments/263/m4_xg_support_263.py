@@ -189,6 +189,8 @@ def sidecar(forecast_file, history_file, xg_file, output_file):
             'm4_frozen_unmodified':True,'xg_dataset_sha256':_sha(xg_file),
             'xg_private_values_not_in_output':True,'use':'RESEARCH_SIDECAR_NOT_PRODUCTION',
             'xg':out}
+    from m4_xg_market_policy_263 import choose_market_families
+    result['marketwise_research_policy']=choose_market_families(result)
     content=json.dumps(result,ensure_ascii=False,sort_keys=True,indent=2,allow_nan=False)+'\n'
     Path(output_file).parent.mkdir(parents=True,exist_ok=True)
     with open(output_file,'x',encoding='utf-8') as f:f.write(content)
