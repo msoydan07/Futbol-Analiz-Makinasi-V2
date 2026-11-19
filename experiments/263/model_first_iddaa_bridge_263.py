@@ -48,20 +48,18 @@ def calibrate_session(bulletin, session, *, original_pdf, repo_root=".",
             r["model_first_decision"]=d
             r["model_only_decision_status"]=d["status"]
             r["odds_affected_selection"]=False
-            # Prices are the separate, signed descriptive fifth reference only.
-            # The uploaded PDF SHA must be genuine, but a missing/incomplete
-            # price group should never force a fresh model calculation.
-            try:
-                original_price_snapshot=build_snapshot(bulletin,session,
-                    session["rows"][r["index"]],f,verified_pdf_sha=sha)
-                trusted_groups={group:{"status":"FULL_MARKET_QUOTE_AVAILABLE",**payload}
-                    for group,payload in original_price_snapshot["groups"].items()}
-                ref=market_reference(d,trusted_groups,source_pdf_sha256=sha)
-                r["pdf_first_price_snapshot"]=original_price_snapshot
-            except (OSError,ValueError,KeyError,TypeError,AssertionError) as price_exc:
-                ref=market_reference(d,{},source_pdf_sha256=sha)
-                r["market_reference_status"]="PRICE_OBSERVATION_UNAVAILABLE_DECISION_UNCHANGED"
-                r["market_reference_reason"]=(type(price_exc).__name__+":"+str(price_exc))[:140]
+            # Verify the original PDF row, BOTH teams, official kickoff and
+            # source SHA BEFORE accepting a model decision for this PDF row.
+            # Missing price groups are safe: build_snapshot returns groups={} or
+            # a subset, and never raises for missing odds. A mismatched fixture,
+            # shifted PDF row, rewritten price or forged source is a TECHNICAL
+            # BLOCK and must never be silently degraded into an empty reference.
+            original_price_snapshot=build_snapshot(bulletin,session,
+                session["rows"][r["index"]],f,verified_pdf_sha=sha)
+            trusted_groups={group:{"status":"FULL_MARKET_QUOTE_AVAILABLE",**payload}
+                for group,payload in original_price_snapshot["groups"].items()}
+            ref=market_reference(d,trusted_groups,source_pdf_sha256=sha)
+            r["pdf_first_price_snapshot"]=original_price_snapshot
             if (ref["decision_sha256"]!=d["payload_sha256"]
                 or ref["forecast_sha256"]!=f["payload_sha256"]):
                 raise EvidenceError("MARKET_WRONG_MODEL_DECISION")
@@ -69,6 +67,9 @@ def calibrate_session(bulletin, session, *, original_pdf, repo_root=".",
             success+=1
             if d["main_candidate"] is None:model_pas+=1
         except (OSError,ValueError,KeyError,TypeError,AssertionError,ImportError,AttributeError) as e:
+            r.pop("model_first_decision",None)
+            r.pop("market_fifth_reference",None)
+            r.pop("pdf_first_price_snapshot",None)
             r["model_only_decision_status"]="TECHNICAL_BLOCKED_NOT_PAS"
             r["model_only_technical_reason"]=(type(e).__name__+":"+str(e))[:180]
             technical+=1
