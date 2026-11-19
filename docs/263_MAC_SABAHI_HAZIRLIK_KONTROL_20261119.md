@@ -19,6 +19,7 @@
 | P0 | Maç önü workflow hâlâ `2026-11-10_completed_4617_scores_only.csv` kullanıyor ve 4.413 baseline'ı PIN'liyor | `.github/workflows/263-sabah-new100-on-request.yml`, `forward_quad.verify_snapshot` | 4.618 özel kabul anlık analize **otomatik bağlı değil** |
 | P0 | `MAX_DATA_AGE_DAYS=10`; donmuş lig son skorları çoğu 8 Kasım, ENG2 7 Kasım; 20 Kasım'da 12/13 gün fark | `forward_c3.py`, `forward_quad.py` | Kaynak aslında eksiksiz olsa bile `stale_history_refresh_required` engeli verebilir. **10 günü körlemesine yükseltme/kaldırma**; resmi bitmiş maç denetimi gerekir |
 | P0 | Resmi fixture, takım alias, saat, ilk PDF'yi gerçek 10 lig maçlarıyla birlikte uctan uca kabul etme kanıtı henüz yok | `iddaa_pdf_one_step_263.py` + ilgili araştırma belge/testleri | İlk gerçek PDF'de satır bazlı BLOKE riski var |
+| P0 | **Oran kendi modelimizin tercihini yönetmemeli**, ama mevcut `four_model_value_policy_263.py` içinde EV, no-vig edge ve oran yokluğu seçim/PAS kapısı olarak kullanılıyor | `docs/263_KARAR_DEFTERI_TEK_GECERLI_KAYNAK.md` D-MARKET-006; `four_model_value_policy_263.py` | **Daha önce kilitlenen MARKET=5. referans kararına aykırı.** Model seçimi ve yalnız karşılaştırma amaçlı fiyat raporu ayrıştırılmalı; ikinci PDF asla kararı değiştirmemeli |
 | P0 | Son 2026-11-19 kalibrasyon/model seçimi araştırma kodu canlı tahmin ve ilk PDF ile entegre değil | `four_model_value_policy_263.py` hâlâ eski C3/M4 DEV kilidini kullanıyor | Yeni karar sistemi kendiliğinden devreye girmez; eski araştırma kararını yeni sonuç gibi sunma |
 | P1 | `new100` akışı en az 3 model + C3/M4 şart koşuyor; C2 sezona erken başladığında eksik kalabilir | `sabah_batch_263.py` | Teknik blok ile geçerli PAS ayrı raporlanmalı |
 | P1 | new100 kabul kapasitesi 100, `forward_quad.py` içindeki `PILOT_GOAL=96` | `sabah_batch_263.py` / `forward_quad.py` | Ayrı yeni kohortta dosya sayısı 97–100 olursa sınır engeli olabilir; eski 96 kayıt kesinlikle değiştirilmez |
@@ -27,7 +28,7 @@
 
 ## Önceden karara bağlanmış oran iş akışı — **DEĞİŞMİYOR**
 
-**Sabah:** Kullanıcının iddaa PDF'si → yedi pazar (MS 1/X/2; KG Var/Yok; 2.5 Alt/Üst) → fixture/alias/sonuç tarihi kontrolü → B/C2/C3/M4 mevcut orijinal matematiksiz değişiklikle hesap → bir adet SHA'lı sabah tahmin ve tercih/PAS mührü.
+**Sabah:** Kullanıcının iddaa PDF'si → yedi pazar (MS 1/X/2; KG Var/Yok; 2.5 Alt/Üst) → fixture/alias/sonuç tarihi kontrolü → B/C2/C3/M4 mevcut matematikle hesap → **model güvenilirliğiyle oranlardan BAĞIMSIZ ana/alternatif/PAS** → bir adet SHA'lı sabah tahmin ve tercih/PAS mührü. **MARKET beşinci referanstır**: aynı maçın iddaa marjsız piyasa olasılıkları ayrı karşılaştırma alanıdır; ana/alternatif/PAS'ı değiştirmez.
 
 **İlk 11 sonrası:** İkinci kullanıcı iddaa PDF'si → aynı maça bağlanan iki fiyatın farkı → ilk 11/sakat/rotasyon/taktik ve kanıt varsa olası futbol gerekçesi → **ayrı ekleme-only yorum dosyası**; yeni tahmin, yeni EV/ana tercih, ikinci mühür **YOK**.
 
