@@ -5,6 +5,7 @@ on:
       - experiment/263-toplu-karsilastirma
     paths:
       - .github/workflows/263-xg-private-repo-live-acceptance.yml
+      - experiments/263/xg_private_repo_fetch_263.py
 permissions:
   contents: read
 
