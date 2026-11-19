@@ -70,9 +70,17 @@ class TestReadOnlyBridge(unittest.TestCase):
     def test_absent_remote_file_degrades_to_m4(self,get):
         get.side_effect=HTTPError("https://api.github.com",404,"not found",None,None)
         out=bridge.retrieve(**self.kw)
-        self.assertEqual(out["status"],"PRIVATE_REPO_READ_UNAVAILABLE_KEEP_M4")
+        self.assertEqual(out["status"],"PRIVATE_REPO_CONTENTS_METADATA_HTTP_404_KEEP_M4")
         self.assertFalse(self.target.exists())
         self.assertNotIn("SUPER_PRIVATE_TOKEN",str(out))
+
+    @patch.object(bridge,"_get_json")
+    def test_scope_403_returns_only_safe_class_no_token(self,get):
+        get.side_effect=HTTPError("https://api.github.com",403,"forbidden",None,None)
+        out=bridge.retrieve(**self.kw)
+        self.assertEqual(out["status"],"PRIVATE_REPO_CONTENTS_METADATA_HTTP_403_KEEP_M4")
+        self.assertNotIn("SUPER_PRIVATE_TOKEN",str(out))
+        self.assertFalse(self.target.exists())
 
     @patch.object(bridge,"_get_json")
     def test_wrong_provider_blob_sha_fails_closed(self,get):
