@@ -148,7 +148,13 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
         [r for r in rows if r['league']==league])
     if not league_rows:raise ValueError('missing_league_history')
     latest=max(r['match_date'] for r in league_rows)
-    if (datetime.fromisoformat(local_date).date()-datetime.fromisoformat(latest).date()).days>MAX_DATA_AGE_DAYS:
+    # A 10-day calendar gap may be a fixture break rather than missing games.
+    # Do NOT weaken the original limit without a just-fetched, exact-league
+    # completed-result cross-check against the accepted 2026-27 history.
+    from freshness_gap_guard_263 import review_gap
+    freshness=review_gap(league_rows,league,local_date,now=now)
+    if freshness['age_days']>MAX_DATA_AGE_DAYS and freshness['status']!=(
+            'BOUNDED_GAP_NO_MISSING_RESULTS_IN_PUBLIC_FEED_RESEARCH_ONLY'):
         raise ValueError('stale_history_refresh_required')
     past=[r for r in league_rows if r['match_date']<local_date]
     if len(past)<60:raise ValueError('m4_minimum_historical_sample_missing')
@@ -198,6 +204,7 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
                   'league_history_rows':len(past),'league_latest_result_date':latest,
                   'training_excluded_partial_match_ids':excluded_partial,
                   'full_match_policy_sha256':eligibility_sha,
+                  'current_season_gap_check':freshness,
                   'cutoff_rule':'strictly_before_local_kickoff_date'},
           'code':{'B_C2_C3':'FROZEN_EXISTING_MODEL_FUNCTIONS',
                   'frozen_batch_sha256':sha256_file(Path(__file__).with_name('exp_263_batch.py')),
