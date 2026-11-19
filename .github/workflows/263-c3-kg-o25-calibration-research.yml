@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install same pinned historical math dependencies
-        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab pymupdf
       - name: Frozen Aug-Sep weights and synthetic calibration integrity tests
         env:
           PYTHONPATH: .:experiments/263
