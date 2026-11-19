@@ -1,0 +1,38 @@
+name: "263 M4 xG supporting-input checks"
+on:
+  push:
+    branches:
+      - research/263-m4-xg-evidence-20261119
+    paths:
+      - 'experiments/263/m4_xg_support_263.py'
+      - 'experiments/263/sabah_batch_263.py'
+      - 'experiments/263/test_m4_xg_support_263.py'
+      - 'experiments/263/test_m4_xg_sidecar_io_263.py'
+      - '.github/workflows/263_m4_xg_bridge_ci.yml'
+  pull_request:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  m4-xg-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install math dependencies
+        run: python -m pip install --disable-pip-version-check numpy scipy
+      - name: Static syntax verification
+        run: |
+          python -m py_compile experiments/263/m4_xg_support_263.py
+          python -m py_compile experiments/263/sabah_batch_263.py
+          python -m py_compile experiments/263/test_m4_xg_support_263.py
+          python -m py_compile experiments/263/test_m4_xg_sidecar_io_263.py
+      - name: Leakage, provider, source and fallback checks
+        run: python experiments/263/test_m4_xg_support_263.py
+      - name: Signed forecast and real M4 scorer sidecar check
+        run: python experiments/263/test_m4_xg_sidecar_io_263.py
