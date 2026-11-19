@@ -224,3 +224,15 @@ Açık engel:
 **Açık:** 19 Kasım için yeni kullanıcı ilk iddaa PDF'si arşivde yok; **gerçek uçtan uca kabul / ilk 11 sonrası ikinci PDF yoru﻿mu henüz yapılmadı**. 4.618 sonrasındaki tamamlanmış lig maçları için yeni append-only kaynak sürümü gerekebilir. Ayrıntı: [son ilk PDF güvenlik/kabul raporu](263_GERCEK_PDF_GUNLUK_TEK_MUHUR_KABUL_20261119.md).
 
 **Sıradaki zorunlu kullanıcı girdisi:** Güncel günün ilk iddaa.com program PDF'si; bunu almadan gerçek SHA'lı maç sabahı tahmini çalıştırılmış gibi iddia edilmez.
+
+## D-XG-015 — M4 ve M4+xG pazar ailesi bazlı ayrı seçim; 1.083 maç yeniden sayıldı (19 Kasım 2026)
+
+**Önceden kararlaştırılmış M4 ve mühürler değişmedi.** Mevcut 2025/26 xG katsayı geliştirme + 2026/27 geri testinden üretilmiş `263_M4_TUTARLI_KALIBRASYON_MAC_MAC_20261119.csv` sabit SHA `466dff472fc3bbac753033747f2667c077d127235ea55c265666e647b3028305` üzerinden **aynı 1.083 maçın** pazar bazlı Brier/log-loss sonuçları ayrıca tekrar hesaplandı. Bu, **yeni bağımsız tahmin pilotu değildir**.
+
+**Kalibre eşleşmiş Brier:** MS (1-X-2, birlikte) M4 **0,197318** ve M4+xG **0,196632** (fark kesin değil); **2.5 Alt/Üst** M4 **0,242678** ve M4+xG **0,240067** (xG araştırma lehine, tarihe göre kümeli fark aralığı 0'dan küçük); **KG Var/Yok** M4 **0,243176**, M4+xG **0,242951** (fark kesin değil). Kalibrasyonsuz çiftte MS M4 az farkla iyi, 2.5 xG daha iyi, KG xG çok küçük farkla iyi ama kesin değil. Sayılar ve belirsizlik: [Pazar ailesi karar dosyası](263_M4_XG_PAZAR_AILESI_KARSILASTIRMA_KARARI_20261119.md).
+
+**Çalışma sözleşmesi:** Bütün pazarlar için tek model zorunlu değil. MS1–X–2 tek bir ailenin normalize 3 olasılığıdır; 2.5 Alt+Üst tamamlayıcı çift ve KG Var+Yok tamamlayıcı çifttir. Aile modelini **geçmiş testte daha yüksek yüzde veren değil**, önceden sabitlenmiş ve güvenilir pazar-aile hata ölçüsü belirler. **Varsayımsal** olarak MS M4, 2.5 ve KG M4+xG kanıtlanırsa ayrı modellerden alınabilir. Ancak farklı ailelerin yüzdeleri tek Poisson ortak dağılımı olarak sunulamaz ve olası çelişkiler kontrol edilmelidir. 1.5 ve 3.5 için ayrıca kanıt gerekir.
+
+**Bugünkü somut araştırma yönü:** MS=M4 (mevcut korunur), 2.5 Alt/Üst=M4+xG **aday**, KG=M4 (mevcut korunur). Eski dört-model 242 karşılaştırması KG'de C3'ün daha düşük hata verdiğine işaret ediyor ama terfi kanıtı yok. Özel xG tarihsel yayımlanma sürümü as-of teyidi ve kör sonraki-maç kanıtı olmadığı için bu karar **üretime otomatik terfi değildir**.
+
+**Kilitli piyasa sözleşmesi:** D-MARKET-006 uyarınca oranlar beşinci bağımsız referanstır; model-aile seçiminde, ana/alternatif/PAS'ta hiçbir etkisi yoktur. Önceki araştırma dosyasındaki EV şartı yürürlükten kalkmıştır.
