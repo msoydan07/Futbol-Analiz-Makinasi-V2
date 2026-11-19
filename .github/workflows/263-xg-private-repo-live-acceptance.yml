@@ -1,0 +1,56 @@
+name: "263 private xG owner-token real access acceptance"
+on:
+  push:
+    branches:
+      - experiment/263-toplu-karsilastirma
+    paths:
+      - .github/workflows/263-xg-private-repo-live-acceptance.yml
+permissions:
+  contents: read
+
+jobs:
+  private-read-gate:
+    # Deliberately a trusted push only. Never expose private repository
+    # credentials to pull_request code or third-party branches.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/experiment/263-toplu-karsilastirma'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test scoped read-only access and locked data outside checkout
+        shell: bash
+        env:
+          XG_PRIVATE_REPO_READ_TOKEN: ${{ secrets.XG_PRIVATE_REPO_READ_TOKEN }}
+          PYTHONPATH: experiments/263
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p "$RUNNER_TEMP/263-xg-live-acceptance"
+          python experiments/263/xg_private_repo_fetch_263.py \
+            --target "$RUNNER_TEMP/263-xg-live-acceptance/FUTBOL_263_4618_XG_KILITLI_20261119.csv" \
+            --public-checkout "." \
+            --status-json "$RUNNER_TEMP/263-xg-live-acceptance/private-status.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          directory=Path(os.environ['RUNNER_TEMP'])/"263-xg-live-acceptance"
+          state=json.loads((directory/"private-status.json").read_text(encoding="utf-8"))
+          assert state["schema"]=="263_XG_PRIVATE_REPO_BRIDGE_V1"
+          if state["status"]!="PRIVATE_XG_SHA_AND_SCOPE_VERIFIED":
+              print("PRIVATE_XG_ACCESS_TEST_FAILED_STATUS="+state["status"])
+              raise SystemExit(2)
+          assert state["record_count"]==4618
+          assert (directory/"FUTBOL_263_4618_XG_KILITLI_20261119.csv").is_file()
+          assert state["official_m4_modified"] is False
+          print("PRIVATE_XG_ACCESS_SHA_SCOPE_CONFIRMED_4618")
+          print("M4_UNMODIFIED_PRIVATE_DATA_NEVER_UPLOADED")
+          PY
+      - name: No public data upload
+        if: always()
+        shell: bash
+        run: echo "NO_PRIVATE_XG_DATA_IN_ARTIFACTS_OR_PUBLIC_GIT"
