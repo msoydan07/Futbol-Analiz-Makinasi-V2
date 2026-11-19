@@ -13,7 +13,7 @@ from unittest.mock import patch
 from test_model_first_decision_263 import scenario
 from model_first_iddaa_bridge_263 import calibrate_session
 from iddaa_pdf_report_263 import _render_pick
-from iddaa_pdf_model_first_one_step_263 import one_step
+from iddaa_pdf_one_step_263 import one_step
 
 NOW=datetime(2026,11,21,10,5,tzinfo=timezone.utc)
 ROOT=Path(__file__).resolve().parents[2]
@@ -79,7 +79,7 @@ class TestModelFirstIddaa(unittest.TestCase):
                      repo_root=str(ROOT),now=NOW)
     def test_cloned_entrypoint_does_not_call_legacy_decider(self):
         import inspect
-        from iddaa_pdf_model_first_one_step_263 import one_step
+        from iddaa_pdf_one_step_263 import one_step
         source=inspect.getsource(inspect.getmodule(one_step))
         self.assertIn("from model_first_iddaa_bridge_263 import calibrate_session",source)
         self.assertNotIn("from iddaa_pdf_value_bridge_263 import calibrate_session",source)
