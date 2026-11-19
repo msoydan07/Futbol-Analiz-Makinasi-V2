@@ -6,6 +6,8 @@ on:
     paths:
       - 'experiments/263/private_4618_matchday_preflight_263.py'
       - 'experiments/263/test_private_4618_matchday_preflight_263.py'
+      - 'experiments/263/official_full_season_gap_guard_263.py'
+      - 'experiments/263/test_official_full_season_gap_guard_263.py'
       - '.github/workflows/263-private-4618-matchday-preflight-ci.yml'
   workflow_dispatch:
 permissions:
@@ -19,10 +21,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Exact 15 synthetic negative and positive controls
+      - name: Exact 25 synthetic controls (10-league official season gap and private 4618)
         env:
           PYTHONPATH: experiments/263
-        run: python -m unittest -v test_private_4618_matchday_preflight_263
+        run: python -m unittest -v test_private_4618_matchday_preflight_263 test_official_full_season_gap_guard_263
       - name: Fail closed - NEVER mark private data as live admitted
         run: |
           python - <<'PY'
