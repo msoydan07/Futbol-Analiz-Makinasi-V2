@@ -7,6 +7,10 @@ on:
       - 'experiments/263/model_first_decision_263.py'
       - 'experiments/263/model_first_selection_lock_263.json'
       - 'experiments/263/test_model_first_decision_263.py'
+      - 'experiments/263/model_first_iddaa_bridge_263.py'
+      - 'experiments/263/iddaa_pdf_model_first_one_step_263.py'
+      - 'experiments/263/iddaa_pdf_report_263.py'
+      - 'experiments/263/test_model_first_iddaa_bridge_263.py'
       - '.github/workflows/263-model-first-odds-independent-ci.yml'
   workflow_dispatch:
 permissions:
@@ -20,10 +24,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install dependencies needed by legacy imports (NO bookmaker requests)
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 PyMuPDF reportlab
       - name: Model-only rule, price invariance, SHA consistency (no network/bookmakers)
         env:
           PYTHONPATH: experiments/263
-        run: python -m unittest -v test_model_first_decision_263
+        run: python -m unittest -v test_model_first_decision_263 test_model_first_iddaa_bridge_263
       - name: Do not mutate production M4 or existing seals
         run: |
           python - <<'PY'
