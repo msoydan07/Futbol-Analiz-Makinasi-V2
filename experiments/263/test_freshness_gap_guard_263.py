@@ -74,10 +74,11 @@ class GapSafety(unittest.TestCase):
         with self.assertRaisesRegex(StaleLeagueData,"SOURCE_SHORTER_THAN_ACCEPTED_CURRENT_SEASON|SOURCE_MISSING_ACCEPTED_OVERLAP_RESULTS"):
             review_gap(h,"ENG1",TARGET,now=NOW,fetcher=fetch,resolver=resolver)
 
-    def test_no_future_fixture_source_is_untrusted(self):
+    def test_results_only_source_does_not_require_unplayed_fixture_rows(self):
         h,fetch,resolver=prepare(no_future=True)
-        with self.assertRaisesRegex(StaleLeagueData,"SOURCE_NO_SCHEDULE_OR_RESULTS"):
-            review_gap(h,"ENG1",TARGET,now=NOW,fetcher=fetch,resolver=resolver)
+        e=review_gap(h,"ENG1",TARGET,now=NOW,fetcher=fetch,resolver=resolver)
+        self.assertEqual(e["next_unplayed_provider_fixtures"],0)
+        self.assertEqual(e["status"],"BOUNDED_GAP_NO_MISSING_RESULTS_IN_PUBLIC_FEED_RESEARCH_ONLY")
 
     def test_over21_days_blocks_before_network_request(self):
         h,fetch,resolver=prepare()
