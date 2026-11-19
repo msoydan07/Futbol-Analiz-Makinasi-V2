@@ -25,7 +25,7 @@ OFFICIAL_HOSTS = {
     'ESP1': frozenset(('laliga.com',)),
     'ITA1': frozenset(('legaseriea.it',)),
     'FRA1': frozenset(('ligue1.com','lfp.fr')),
-    'NED1': frozenset(('eredivisie.nl',)),
+    'NED1': frozenset(('eredivisie.nl','knvb.nl')),
     'POR1': frozenset(('ligaportugal.pt',)),
     'BEL1': frozenset(('proleague.be',)),
     'TUR1': frozenset(('tff.org',)),
