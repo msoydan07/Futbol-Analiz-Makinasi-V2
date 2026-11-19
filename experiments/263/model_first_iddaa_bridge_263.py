@@ -64,6 +64,21 @@ def calibrate_session(bulletin, session, *, original_pdf, repo_root=".",
                 or ref["forecast_sha256"]!=f["payload_sha256"]):
                 raise EvidenceError("MARKET_WRONG_MODEL_DECISION")
             r["market_fifth_reference"]=ref
+            # Optional frozen C3 calibration SHADOW: a SECOND diagnostic,
+            # never a second forecast or decision. Main/alternative/PAS
+            # remain those already SHA-signed in d above.
+            try:
+                from c3_calibration_shadow_263 import make_shadow
+                candidate_lock=json.loads((Path(repo_root)/
+                    "experiments/263/forward_dev_calibration_lock_263.json").read_text(
+                        encoding="utf-8"))
+                sidecar=make_shadow(f,b,d,candidate_lock)
+                if sidecar["model_decision_sha256"]!=d["payload_sha256"]:
+                    raise EvidenceError("SHADOW_CHANGED_MODEL_SELECTION")
+                r["c3_calibration_shadow"]=sidecar
+            except (OSError,ValueError,KeyError,TypeError,ImportError) as shadow_exc:
+                r["c3_calibration_shadow_status"]="RESEARCH_SHADOW_UNAVAILABLE_NO_DECISION_IMPACT"
+                r["c3_calibration_shadow_reason"]=(type(shadow_exc).__name__+":"+str(shadow_exc))[:140]
             success+=1
             if d["main_candidate"] is None:model_pas+=1
         except (OSError,ValueError,KeyError,TypeError,AssertionError,ImportError,AttributeError) as e:

@@ -1,9 +1,23 @@
 # Futbol Maç Analiz Makinası 2.6.3 — KARAR DEFTERİ (tek geçerli karar özeti)
 
-**Sürüm:** 2026-11-20 / v2 (eklemeli, eski kayıtlar saklı)  
+**Sürüm:** 2026-11-20 / v3 (eklemeli, eski kayıtlar saklı)  
 **Dal:** `experiment/263-toplu-karsilastirma` (aktif deney dalı; tarihsel 19 Kasım kaydı research dalından taşındı)  
 **Amaç:** Kullanıcıyla karara bağlanan konuları unutup yeniden “açık soru” gibi sunmamak; konuşma kararı, kod uygulaması ve canlı doğrulamayı birbirinden ayırmak.  
 **Bu dosya:** Kural kayıt ve yorumlama belgesidir; çalışan kodu kendiliğinden değiştirmez, otomatik ajan belleği değildir.
+
+## SON GÜNCELLEME — 20 Kasım 2026 / D-C3-CAL-010 — KG/Üst 2.5 TESTİ KAPANDI (önceki kayıtları silmez)
+
+**Geçerli karar değişmedi:** MS uzmanı **M4**, KG Var/Yok ve 2.5 Alt/Üst uzmanı **C3**; iddaa oranı beşinci referans, **tek sabah SHA mühürü / ikinci PDF yalnız gözlem**. M4/C3 model denklemleri ve eski 96/40 mühürlü kayıtlar dokunulmaz.
+
+**A — KARAR / KALİBRASYON TERFİSİ:** C3'ün Ağustos–Eylül 2026'da **önceden donmuş** iki kalibrasyon adayı (KG `0.5083407177`; Üst/Alt 2.5 `0.3113038451`) sonuca bakılarak yeniden fit edilmedi. Ekim 293 retrospektif maçta ve Kasım 39 önceden SHA mühürlü maçta hem KG hem 2.5 Brier ve log-loss düştü. Fakat Ekim'in eşleşmiş maç günü blok bootstrap %95 fark aralığı her iki pazarda sıfırı kapsadı; Kasım yalnız bir maç günü ve Ekim daha önce araştırılmıştı. **Sabitlenen ön-terfi kanıt eşiği sağlanmadı. Karar: C3 mevcut ham yüzdeleri ana seçimde KALIR. Bu sonuçlar kesin başarı üstünlüğü değildir.**
+
+**B — KODA İŞLENDİ / DOĞRULANDI:** Yalnız araştırma amaçlı, mevcut sabah ilk PDF'nin tek forecast SHA'sına referans veren ve ayrı SHA taşıyan `c3_calibration_shadow_263.py` gölge kalibrasyon bilgisi `model_first_iddaa_bridge_263.py` üzerinden eklenir. KG Var ve 2.5 Üst ham ve frozen aday yüzdeleri PDF'de **kararı değiştirmeyen araştırma** satırı olarak gösterilir. `selection_changed=false`, `pas_changed=false`, `do_not_use_to_pick=true`; hiçbir oranın varlığı veya yokluğu kararı etkilemez. Bu **ikinci tahmin mührü, yeni pilot, eski SHA güncellemesi değildir.** Hem eski ilk/ikinci PDF, hem SHA ve C3 frozen kaynak testleri başarılı.
+
+**C — CANLI:** İlk gerçek yeni kapsam ligi sabah iddaa PDF'si + aynı gün ikinci PDF uçtan uca henüz saha kabulü görmedi. Gölge kalibrasyon adayının performansı **mevcut** SHA maç-sonu kayıtlarında zamanla ölçülebilir; yeni pilot açılmaz. Sonuca bakarak gizli ağırlık/eşik ayarı YASAK.
+
+**Kaynak, tam sayılar, belirsizlik ve testler:** `experiments/263/C3_KG_O25_CALIBRATION_DECISION_20261120.md`. Oran kaynağı, model uzmanı, PAS ve mevcut kalibrasyonun terfi kararı **yeniden açık soru değildir**. Yeni veri kanıtı oluşmadıkça bu karara geri dönme.
+
+---
 
 ## SON GÜNCELLEME — 20 Kasım 2026 / D-MARKET-009 (önceki kayıtları silmez)
 

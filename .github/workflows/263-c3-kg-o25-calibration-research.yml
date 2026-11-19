@@ -1,0 +1,84 @@
+name: "263 C3 KG and 2.5 percent calibration frozen asof research"
+on:
+  push:
+    branches:
+      - research/263-c3-kg-over25-calibration-20261120
+    paths:
+      - experiments/263/c3_kg_o25_calibration_review_263.py
+      - experiments/263/test_c3_kg_o25_calibration_review_263.py
+      - experiments/263/c3_calibration_shadow_263.py
+      - experiments/263/test_c3_calibration_shadow_263.py
+      - experiments/263/model_first_iddaa_bridge_263.py
+      - experiments/263/iddaa_pdf_report_263.py
+      - .github/workflows/263-c3-kg-o25-calibration-research.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  retrospective-and-original-shas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install same pinned historical math dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab pymupdf
+      - name: Frozen Aug-Sep weights and synthetic calibration integrity tests
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_c3_kg_o25_calibration_review_263.py
+          python -m unittest -v experiments/263/test_model_first_decision_263.py
+          python -m unittest -v experiments/263/test_c3_calibration_shadow_263.py
+          python -m unittest -v experiments/263/test_model_first_iddaa_bridge_263.py
+      - name: Download ORIGINAL 4413 accepted source used by 880 asof retrospective
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: Reconstruct exact historical 880 strictly asof B C2 C3 M4 without model change
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/chrono_goal_decision_263.py \
+            --source m4_quad_base/historical_results.csv \
+            --report /tmp/263-c3-frozen-880-report.json \
+            --predictions /tmp/263-c3-frozen-880-preds.csv
+      - name: Compare frozen C3 raw vs calibrator on October 293 and original Nov8 39 SHAs
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/c3_kg_o25_calibration_review_263.py \
+            --predictions /tmp/263-c3-frozen-880-preds.csv \
+            --output /tmp/263-c3-kg-o25-calibration-review.json
+          git diff --exit-code
+      - name: Save RESEARCH results only, no forecasts or private data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: c3-kg-o25-20261120-calibration-summary-only
+          retention-days: 45
+          if-no-files-found: ignore
+          path: /tmp/263-c3-kg-o25-calibration-review.json
+      - name: Original model-first PDF and second-PDF regressions remain green
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_report_263.py experiments/263/test_iddaa_pdf_last_review_263.py
+          git diff --exit-code
+      - name: Original M4 and old SHA archives untouched
+        run: |
+          set -euo pipefail
+          test "$(git diff --name-only origin/experiment/263-toplu-karsilastirma HEAD -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/analysis_math_core.py experiments/263/model_first_decision_263.py experiments/263/model_first_selection_lock_20261120.json data/results_only_263 forward_morning_263 forward_quad_263 | wc -l)" -eq 0
