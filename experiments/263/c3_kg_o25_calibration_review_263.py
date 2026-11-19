@@ -47,7 +47,7 @@ def _record(day,league,market,p,b,y,source):
 def _accepted_lock(path):
     d=json.loads(Path(path).read_text(encoding="utf-8"))
     from model_first_decision_263 import digest
-    if (d.get("schema")!="263_frozen_development_calibration_lock_v1"
+    if (d.get("schema")!="263_forward_dev_calibration_lock_v1"
         or d.get("official_approval") is not False
         or d.get("development_period")!="2026-08-01/2026-09-30"
         or d.get("evaluation_period_not_used_for_weights")!="2026-10-01/2026-10-29"
