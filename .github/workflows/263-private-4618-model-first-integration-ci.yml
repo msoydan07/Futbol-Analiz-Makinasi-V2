@@ -12,7 +12,7 @@ on:
 permissions:
   contents: read
 jobs:
-  4618-pipeline-contract:
+  private-4618-pipeline-contract:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
