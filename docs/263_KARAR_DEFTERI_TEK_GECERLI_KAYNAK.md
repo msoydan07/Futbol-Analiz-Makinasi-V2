@@ -137,3 +137,15 @@ Açık engel:
 **Durum A — KİLİTLİ:** Fiyat yönetsin önerisi İPTAL. **Durum B — KISMEN KODLANDI:** Araştırma dalında bağımsız modüller/PDF köprüsü ve sentetik testler eklendi, çalışan operasyon dalına geçirilmedi. **Durum C — YOK:** GitHub CI sonucu ve gerçek ilk iddaa PDF uçtan uca maç sabahı kabulü doğrulanmadı.
 
 **Kritik matematik uyarısı:** 496 geçmiş maçtaki 286 adayın ortalama model güveni %69,53 fakat gerçekleşmesi %62,59. Bu yüzden yeni seçici üretime terfi etmedi; geçmiş sonuçlara bakıp sessizce eşik ayarı yapılmayacak. Eski kaynak/10 günlük güncellik engelleri de açıktır.
+
+## D-READY-007 — 4.618 özel skor SHA + takvim güncelliği araştırma kapısı (19 Kasım 2026)
+
+**Karar değişmedi:** D-ODDS-001 (iki iddaa PDF / tek mühür) ve D-MARKET-006 (piyasa yalnız beşinci referans) aynen geçerli. **Eski M4, 96 pilot, mühürlü tahmin ve çalışan otomasyonlar değiştirilmedi.**
+
+**Kodlandı:** `experiments/263/private_4618_matchday_preflight_263.py` — eski 4.413 satırın birebir korunması, özel 4.618 skor projeksiyonu SHA denetimi ve 10 günlük yapay tarih sınırı yerine tamamlanmış maçlar için **tam resmî takvim kapsama sözleşmesi**. Tamamlanmış aradaki bir maç kaynakta yoksa başarısız, takvim gerçekten boşsa yalnız *araştırma adayı*; doğrulanmamış resmî kaynak URL'si üretim onayı sayılmaz. xG/özel CSV GitHub'a yüklenmedi.
+
+**Yerel test:** 15/15 sentetik durum ve gerçek dosyanın SHA/4.413+205 bütünlük kontrolü başarılı. GitHub test workflow'u eklendi; CI'nin çalışıp başarılı olduğu **ayrı henüz onaylanmadı**.
+
+**Gerçek sınır:** Resmî sonuç takvimini baştan sona çekip eksiksizliğini bağımsız kontrol eden adaptör, 4.618 özel dosyanın canlı forecast kaynak kabulü ve mevcut `forward_quad.py` içindeki 10 gün şartının yeni güvenli kanıtla uyumlu bağlantısı **henüz yok**. İlgili envanter: [maç sabahı takvim kapısı raporu](263_4618_MATCHDAY_CALENDAR_PREFLIGHT_20261119.md).
+
+**Durum:** (A) Yapılacak teknik iş kapsamı kilitli. (B) Güvenli araştırma *ön kapısı* kodlandı ve yerelde test edildi. (C) **Canlı maç sabahı kabulü yok**. Gelecek adım yalnız resmî sonuç adaptörü ve 4.618 özel kaynağın as-of model/ilk PDF bağlantısı; geçmişte çözülmüş oran kuralı tekrar tartışılmaz.
