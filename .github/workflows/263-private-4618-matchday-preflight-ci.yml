@@ -1,0 +1,36 @@
+name: "263 4618 private score and official calendar preflight - research only"
+on:
+  push:
+    branches:
+      - research/263-13-lig-22-havuz-20261113
+    paths:
+      - 'experiments/263/private_4618_matchday_preflight_263.py'
+      - 'experiments/263/test_private_4618_matchday_preflight_263.py'
+      - '.github/workflows/263-private-4618-matchday-preflight-ci.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-integrity-and-calendar-logic-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact 15 synthetic negative and positive controls
+        env:
+          PYTHONPATH: experiments/263
+        run: python -m unittest -v test_private_4618_matchday_preflight_263
+      - name: Fail closed - NEVER mark private data as live admitted
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('experiments/263/private_4618_matchday_preflight_263.py').read_text()
+          assert "'data_accepted_for_production':False" in s
+          assert "'production_forecast_allowed':False" in s
+          assert "'live_model_pipeline_updated':False" in s
+          assert "OFFICIAL_RESULTS_ADAPTER_NOT_PROVIDED" in s
+          print('RESEARCH_ONLY_NO_PRIVATE_CSV_NO_FORECAST_NO_BETTING')
+          PY
