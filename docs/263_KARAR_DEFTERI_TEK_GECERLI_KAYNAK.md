@@ -177,3 +177,17 @@ Açık engel:
 **Test/beyan:** Gerçek özel dosya SHA kontrolü ve ilgili 46 yerel güvenlik/bütünlük testi başarılı. GitHub'da ilave 13 entegrasyon sözleşmesi + 6 mühür güvenliği testi ile CI import/compile workflow'u eklendi; bunların **başarılı GitHub run'ı henüz doğrulanmadı**. Gerçek 10-lig iddaa PDF'siyle canlı uçtan uca kabul henüz YOK; yeni kalibre yüzdeler geçmiş veride olduğundan fazla güvenli olabilir.
 
 **Durum:** A = önceden alınmış kararlar korundu; B = araştırma entegrasyonu GitHub'da yazıldı; C = canlı maç sabahı onayı yok. Ayrıntılar: [4618 araştırma entegrasyonu raporu](263_PRIVATE_4618_MODEL_FIRST_PIPELINE_20261119.md). **Sonraki iş:** gerçek kaynak/gerçek PDF/gerçek ilk 11 sonrası ek yorum ve CI teyidi; fiyat yönetimli seçime, yeni 96 pilotuna veya M4 matematiğini değiştirerek eskiye dönülmez.
+
+## D-READY-011 — 19 Kasım doğrulama: kaynak sayımı, yüzde güvenilirliği ve CI
+
+**Mevcut kilitli kararlar değiştirilmedi:** D-ODDS-001 ve D-MARKET-006 gereği fiyat yalnız beşinci referanstır; ikinci PDF yalnız futbol yorumu, sabah SHA ve model kararı değişmez. M4 matematiği ve eski mühürler korunmuştur.
+
+**(1) Kaynak karşılaştırması:** 4.618 özel skor SHA'sı ve 4.413 eski skor SHA'sı yerelde doğrulandı. 2026/27'nin **10 liginde 10/10 sayılar**, ayrı `oladeeayo/open-matchday` ikincil GitHub skor kaynağıyla **8 Kasım'a kadar** aynı; on ligde toplam kaynak sayıları tek tek eşleşti. Ancak dokuz kaynak son kez 10 Kasım, Portekiz kaynağı 16 Kasım güncellenmiş; **9–19 Kasım'ın hiçbirinde ertelenmiş lig maçı oynanmadığının tam ve güncel resmî tasdiki YOK**. Bu kapı açık; uluslararası ara varsayımıyla otomatik kabul yapılmaz.
+
+**(2) Tarih-sıralı güvenilirlik:** Aynı eski 496 maçlık araştırma örneğinde 286 ana aday, 210 PAS; genel aday %69,5 ortalama olasılık vs %62,6 gerçekleşme. 9–25 Ekim (161 aday) ile eğitilen tek sabit logit kalibrasyon düzeltmesi 26–31 Ekim (47) ve 1–8 Kasım (78) sonraki gözlemlerde **Brier'i kötüleştirdi**; bu yüzden otomatik genel yüzde düzeltmesi canlıya terfi ettirilmez. Özellikle **2.5 Alt: 30 adayı 11 isabet ve tahmin ort. %65,1** önemli kalibrasyon alarmı. Bu, geçmişte tekrar kullanılan seçimli test kohortudur; bağımsız 2026/27 son holdout sayılmaz; yeni model/PAS eşikleri sessizce değiştirilmez.
+
+**(3) GitHub CI hatası düzeltildi:** Yeni `.github/workflows/263-private-4618-model-first-integration-ci.yml` işinin geçersiz sayıyla başlayan iş kimliği araştırma dalında düzeltilerek `private-4618-pipeline-contract` yapıldı. Gerçek GitHub Actions run [44560118778](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/44560118778) **SUCCESS**: Python derleme, kontrat testleri, matematik modül importları ve eski model koruma adımları başarılı. Bu **gerçek maç öncesi PDF uçtan uca kabulü** anlamına gelmez.
+
+**Üç durum:** A=eski iki PDF / fiyat beşinci referans kuralı KİLİTLİ. B=veri bütünlüğü, ikinci kaynak karşılaştırması ve kalibrasyon araştırma denetimi tamamlandı; CI başarıyla doğrulandı. C=**resmî tam 9–19 Kasım sonuç aralığı + gerçek iddaa PDF ve ilk 11 yorumuyla tam canlı kabul HÂLÂ YOK**. Ayrıntı: [19 Kasım sade rapor](263_KALAN_ISLER_GUNCELLIK_KALIBRASYON_CI_20261119.md).
+
+**Devam:** Yeni test pilotu veya yüzde değişikliği değil; yalnız resmî kalan tam sonuç kanıtı ve ilk gerçek PDF geldiğinde bir kez gerçek maç günü kabulü. Eski M4/96 kayıtları değiştirilmeyecek.
