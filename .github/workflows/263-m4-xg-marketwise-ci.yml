@@ -33,6 +33,6 @@ jobs:
             experiments/263/test_m4_xg_market_policy_263.py \
             experiments/263/test_m4_xg_private_report_263.py \
             experiments/263/test_m4_xg_private_morning_263.py \
-            experiments/263/test_m4_xg_private_pdf_263.py
+            experiments/263/test_iddaa_pdf_private_xg_263.py
           python experiments/263/test_m4_xg_support_263.py
           python experiments/263/test_m4_xg_sidecar_io_263.py
