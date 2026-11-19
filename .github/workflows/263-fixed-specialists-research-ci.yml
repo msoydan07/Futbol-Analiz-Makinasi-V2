@@ -6,6 +6,7 @@ on:
     paths:
       - experiments/263/four_model_value_policy_263.py
       - experiments/263/test_fixed_specialists_263.py
+      - experiments/263/verify_fixed_specialists_existing_40.py
       - experiments/263/test_four_model_value_policy_263.py
       - .github/workflows/263-fixed-specialists-research-ci.yml
 permissions:
@@ -31,6 +32,13 @@ jobs:
           python -m unittest -v \
             experiments/263/test_four_model_value_policy_263.py \
             experiments/263/test_fixed_specialists_263.py
+          git diff --exit-code
+      - name: Read-only replay of 40 actual Nov8 SHA forecasts: coherent MS and no-odds PAS
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/verify_fixed_specialists_existing_40.py
           git diff --exit-code
       - name: Do not ever change frozen models, historical hashes, live forecast seals or xG
         run: |
