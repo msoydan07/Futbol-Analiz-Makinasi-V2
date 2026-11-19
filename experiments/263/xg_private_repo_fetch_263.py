@@ -74,6 +74,8 @@ def retrieve(*, token, target, public_checkout, expected_sha=EXPECTED_SHA,
         raise ValueError("PRIVATE_XG_TARGET_ALREADY_EXISTS")
 
     # Contents metadata gives the Git blob SHA even for files above 1 MiB.
+    # Only constant stages and a numeric HTTP category are ever printed.
+    stage = "CONTENTS_METADATA"
     try:
         metadata = _get_json(
             "/repos/" + PRIVATE_REPO + "/contents/" + PRIVATE_FILE + "?ref=" + PRIVATE_REF,
@@ -85,11 +87,13 @@ def retrieve(*, token, target, public_checkout, expected_sha=EXPECTED_SHA,
             return _status("PRIVATE_REPO_XG_FILE_MISSING_OR_DIFFERENT_SIZE")
 
         blob_sha = metadata["sha"]
+        stage = "GIT_BLOB"
         blob = _get_json("/repos/" + PRIVATE_REPO + "/git/blobs/" + blob_sha, token)
         if (blob.get("encoding") != "base64" or
             blob.get("sha") != blob_sha or
             blob.get("size") != expected_size):
             return _status("PRIVATE_REPO_BLOB_METADATA_MISMATCH")
+        stage = "BLOB_DECODE"
         data = base64.b64decode(blob["content"], validate=False)
         if len(data) != expected_size or len(data) > MAX_BYTES:
             return _status("PRIVATE_REPO_XG_SIZE_INVALID")
@@ -98,6 +102,7 @@ def retrieve(*, token, target, public_checkout, expected_sha=EXPECTED_SHA,
         if hashlib.sha256(data).hexdigest() != expected_sha:
             return _status("PRIVATE_REPO_XG_LOCKED_SHA_MISMATCH")
 
+        stage = "LOCAL_SCOPE"
         path.parent.mkdir(parents=True, exist_ok=True)
         fd, temp_path = tempfile.mkstemp(dir=path.parent, prefix=".xg-private-")
         try:
@@ -115,11 +120,16 @@ def retrieve(*, token, target, public_checkout, expected_sha=EXPECTED_SHA,
                 Path(temp_path).unlink()
         return _status(READY, record_count=expected_rows,
                        dataset_sha256=expected_sha)
-    except (HTTPError, URLError, OSError, ValueError, KeyError, TypeError,
+    except HTTPError as exc:
+        # Only fixed stage and numeric HTTP category; never print private
+        # request/response metadata, provider data, URL or token.
+        safe_code = exc.code if exc.code in (400, 401, 403, 404, 409, 422, 429, 500, 502, 503) else 0
+        return _status("PRIVATE_REPO_" + stage + "_HTTP_" + str(safe_code) + "_KEEP_M4")
+    except URLError:
+        return _status("PRIVATE_REPO_" + stage + "_NETWORK_UNAVAILABLE_KEEP_M4")
+    except (OSError, ValueError, KeyError, TypeError,
             binascii.Error, json.JSONDecodeError):
-        # Never include exception or API response in public logs: it may
-        # include private metadata. M4 must run unchanged on any failure.
-        return _status("PRIVATE_REPO_READ_UNAVAILABLE_KEEP_M4")
+        return _status("PRIVATE_REPO_" + stage + "_LOCAL_OR_FORMAT_ERROR_KEEP_M4")
 
 
 def main():
