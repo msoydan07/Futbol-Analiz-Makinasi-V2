@@ -106,6 +106,30 @@ class FeaturedMobilePdf(unittest.TestCase):
         no_official=_render_pick({"status":"ONE_ROW_OFFICIAL_TIME_INVALID"},{})
         self.assertIn("TEKNIK ENGEL (PAS DEGIL)",no_official)
 
+    def test_report_expert_column_is_signed_decision_not_raw_m4_or_wrong_specialist(self):
+        from iddaa_pdf_report_263 import _table_for,_font
+        font,bold=_font()
+        details=[
+            {"market":"MS1","anchor_model":"M4","calibrated_probability":.657},
+            {"market":"MSX","anchor_model":"M4","calibrated_probability":.203},
+            {"market":"MS2","anchor_model":"M4","calibrated_probability":.140},
+            {"market":"UNDER_2.5","anchor_model":"C3","calibrated_probability":.39},
+            {"market":"OVER_2.5","anchor_model":"C3","calibrated_probability":.61},
+            {"market":"BTTS_YES","anchor_model":"C3","calibrated_probability":.72},
+            {"market":"BTTS_NO","anchor_model":"C3","calibrated_probability":.28},
+        ]
+        row={"model_first_decision":{"model_market_diagnostics":details},
+            "model_1x2_and_core_markets":{
+               "M4":{"MS1":.333,"OVER_2.5":.444,"BTTS_YES":.555},
+               "C3":{"OVER_2.5":.612,"BTTS_YES":.721}},
+            "prices":{},"market_no_vig":{}}
+        t=_table_for(row,None,bold,font)
+        cells=t._cellvalues
+        self.assertEqual(cells[0][2],"Uzman model %")
+        self.assertEqual(cells[1][2],"%65,7") # M4 calibrated, not raw .333
+        self.assertEqual(cells[5][2],"%61,0") # C3, not M4 .444
+        self.assertEqual(cells[6][2],"%72,0") # C3, not M4 .555
+
     def test_only_existing_espanol_and_athletic_identity_ids(self):
         lookup,names,membership=index_registry()
         for league,label in (("FRA1","Troyes"),("FRA1","Le Havre"),
