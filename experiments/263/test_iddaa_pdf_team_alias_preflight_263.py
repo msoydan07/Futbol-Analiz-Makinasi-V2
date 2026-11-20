@@ -1,12 +1,13 @@
 """One coherent batch of read-only team label tests for user supplied iddaa PDF.
 
 The 86 historical external labels are PINNACLE snapshots, NOT iddaa verified.
-This catches existing 20 spelling gaps before actual iddaa PDF arrives.
+Twenty curated aliases came from those snapshots; two further observed
+spellings are user-iddaa PDF labels. Keep provenance separate; test all 22.
 """
 import json,unittest
 from pathlib import Path
 from iddaa_pdf_team_alias_preflight_263 import (
- ROOT,LEAGUES,KNOWN_EXTERNAL_VARIANTS,index_registry,
+ ROOT,LEAGUES,KNOWN_EXTERNAL_VARIANTS,KNOWN_IDDAA_PDF_VARIANTS,index_registry,
  resolve_label,normal,match_pdf_row,preflight_batch
 )
 
@@ -23,6 +24,46 @@ class IdDaaPdfTeamNameSafety(unittest.TestCase):
             self.assertTrue(self.members[league])
             self.assertGreaterEqual(len(self.index[league]),len(self.members[league]))
             self.assertTrue(set(self.index[league].values()).issubset(self.members[league]))
+
+    def test_all_22_curated_labels_exact_same_canonical_identity_no_collision(self):
+        registry=json.loads((ROOT/"experiments/263/evidence/identity_index_263.json")
+                            .read_text(encoding="utf-8"))
+        self.assertEqual(len(registry["teams"]),215)
+        self.assertEqual(sum(map(len,KNOWN_EXTERNAL_VARIANTS.values())),20)
+        self.assertEqual(sum(map(len,KNOWN_IDDAA_PDF_VARIANTS.values())),2)
+        self.assertEqual(KNOWN_IDDAA_PDF_VARIANTS,{
+            "ESP1":{"Athletic Bilbao":"Athletic Club",
+                    "Espanyol":"RCD Espanyol de Barcelona"}})
+        total=0
+        for origin,collection in (("NOV8_EXTERNAL_SPELLING",KNOWN_EXTERNAL_VARIANTS),
+                                  ("NOV20_USER_IDDAA_PDF",KNOWN_IDDAA_PDF_VARIANTS)):
+            for league,pairs in collection.items():
+                self.assertIn(league,LEAGUES)
+                encountered=set()
+                for label,canonical in pairs.items():
+                    with self.subTest(source=origin,league=league,label=label):
+                        normalized=normal(label)
+                        self.assertTrue(normalized)
+                        self.assertNotIn(normalized,encountered)
+                        encountered.add(normalized)
+                        alias=resolve_label(league,label,self.index)
+                        source=resolve_label(league,canonical,self.index)
+                        self.assertEqual(alias["status"],"MAPPED")
+                        self.assertEqual(source["status"],"MAPPED")
+                        self.assertEqual(alias["team_id"],source["team_id"])
+                        self.assertIn(alias["team_id"],self.members[league])
+                        t=registry["teams"][alias["team_id"]]
+                        self.assertEqual(t["verification"],"FEDERATION_VERIFIED")
+                        self.assertTrue(t["official_name_evidence_url"].startswith("https://"))
+                        total+=1
+        self.assertEqual(total,22)
+
+    def test_iddaa_athletic_and_espanyol_are_distinct_clubs_not_swapped(self):
+        athletic=resolve_label("ESP1","Athletic Bilbao",self.index)["team_id"]
+        espanyol=resolve_label("ESP1","Espanyol",self.index)["team_id"]
+        self.assertNotEqual(athletic,espanyol)
+        self.assertEqual(athletic,resolve_label("ESP1","Athletic Club",self.index)["team_id"])
+        self.assertEqual(espanyol,resolve_label("ESP1","RCD Espanyol de Barcelona",self.index)["team_id"])
 
     def test_real_archived_86_external_names_resolve_even_if_old_20_failed(self):
         # Only actual in-repo November 8 The Odds API/Pinnacle labels, not
