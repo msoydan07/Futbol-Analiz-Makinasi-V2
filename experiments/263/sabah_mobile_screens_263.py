@@ -74,14 +74,27 @@ def single(row,f,d):
                labels[alt["market"]]+" "+fmt(alt["calibrated_probability"])+" (DENEYSEL / ONAYSIZ)"
                if alt else "YOK"))
   if pick:
-   ref=pick.get("historical_reliability") or {}
-   lines.append("**Geçmiş tahmin-sonuç referansı:** "+str(ref.get("n",0))+
-                " benzer kayıt; model "+fmt(pick["calibrated_probability"])+
-                "; tarihsel destekli gerçekleşme tahmini "+
-                fmt(pick.get("estimated_realization_probability"))+
-                (" (istatistiksel doğrulama sınırlı)" if not
-                 ref.get("independent_holdout_verified") else "") )
-  lines.append("**Uzmanlar:** MS=M4, KG/2.5=C3 ham; B/C2 model desteği.")
+   if d.get("selection_policy_version")=="20261121_C3_2025_FROZEN_V4":
+    lines.append("**Kalibrasyon:** MS=M4 Ağustos, KG/2.5=C3-2025 donmuş.")
+    if d.get("top_two_probability_gap_pp") is not None:
+     if d.get("near_tie_within_two_percentage_points"):
+      lines.append("**YAKIN ADAYLAR:** İlk iki olasılık farkı "+
+                   str(d["top_two_probability_gap_pp"])+
+                   " yüzde puanı. Kesin üstünlük kabul edilmez.")
+     else:
+      lines.append("**İlk iki aday farkı:** "+str(d["top_two_probability_gap_pp"])+" yüzde puanı.")
+    lines.append("**Veri kanıtı:** C3 geçmiş 2.898 eğitim örneği; yeni v4 için canlı aynı-sürüm SHA isabet referansı henüz yok.")
+   else:
+    ref=pick.get("historical_reliability") or {}
+    lines.append("**Geçmiş tahmin-sonuç referansı:** "+str(ref.get("n",0))+
+                 " benzer kayıt; model "+fmt(pick["calibrated_probability"])+
+                 "; tarihsel destekli gerçekleşme tahmini "+
+                 fmt(pick.get("estimated_realization_probability"))+
+                 (" (istatistiksel doğrulama sınırlı)" if not
+                  ref.get("independent_holdout_verified") else ""))
+  lines.append("**Uzmanlar:** MS=M4, KG/2.5=C3"+
+               (" (2025 kalibre)" if d.get("selection_policy_version")=="20261121_C3_2025_FROZEN_V4"
+                else " ham")+"; B/C2 model desteği.")
   lines.append("**Oran:** Sadece 5. karşılaştırma; eksikliği PAS sebebi değil.")
  elif d:
   diag={x["market"]:x for x in d.get("all_market_diagnostics",[])}
