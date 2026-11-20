@@ -14,7 +14,7 @@ from iddaa_pdf_value_bridge_263 import _load
 from model_first_decision_263 import select, market_reference, digest, verified, EvidenceError, SCHEMA
 
 def calibrate_session(bulletin, session, *, original_pdf, repo_root=".",
-                      dev_lock_path="experiments/263/model_first_selection_lock_20261120.json",
+                      dev_lock_path="experiments/263/model_first_selection_lock_20261120_normal_v3.json",
                       now=None, session_dir=None):
     sha=verify_original_pdf(original_pdf,bulletin)
     if session.get("pdf_sha256")!=sha or session.get("source_bookmaker")!="iddaa.com":
