@@ -316,9 +316,16 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
       report.get("morning_pdf_sha256")!=original_sha or
       not (target/"summary.md").is_file() or not (target/"review.pdf").is_file()):
    raise ValueError("SECOND_REVIEW_ALREADY_DONE_OR_INCOMPLETE_NO_REPEAT")
+  ready=[x for x in report["rows"] if x.get("status")=="GUNCEL_ORAN_KAYDI_VE_KADRO_DURUMU_HAZIR"]
+  paths=sorted((target/"tekli").glob("tekli_*.pdf"))
+  if paths and len(paths)!=len(ready):
+   raise ValueError("APPROVED_SINGLE_PDF_COUNT_MISMATCH")
   return {"status":"EXISTING_SAME_SECOND_PDF_REVIEW","already_reviewed":True,
           "pdf_report":str(target/"review.pdf"),"summary":str(target/"summary.md"),
-          "approved_single_pdf_paths":[str(x) for x in sorted((target/"tekli").glob("tekli_*.pdf"))]}
+          "approved_single_pdf_paths":[str(x) for x in paths],
+          "approved_match_index":[{"home":r["home"],"away":r["away"],
+             "kickoff_time_tr":r["kickoff_time_tr"],"pdf_path":str(p)}
+             for r,p in zip(ready,paths)]}
  last=parse_pdf(second)  # real user's second PDF; no synthetic quote source
  if last["pdf_sha256"]!=actual_second_sha:raise ValueError("SECOND_PDF_BYTES_CHANGED")
  evidence=_read(xi_json) if xi_json else []
@@ -338,8 +345,12 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
  with (target/"summary.md").open("x",encoding="utf-8") as f:f.write(summary_md(review))
  render_pdf(review,target/"review.pdf")
  singles=approved_single_pdfs(review,target/"tekli")
+ ready=[x for x in review["rows"] if x.get("status")=="GUNCEL_ORAN_KAYDI_VE_KADRO_DURUMU_HAZIR"]
  return {"status":"ONE_FINAL_REVIEW_ATTACHED_TO_ORIGINAL_SEAL","already_reviewed":False,
          "approved_single_pdf_paths":[str(x) for x in singles],
+         "approved_match_index":[{"home":r["home"],"away":r["away"],
+             "kickoff_time_tr":r["kickoff_time_tr"],"pdf_path":str(p)}
+             for r,p in zip(ready,singles)],
          "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
          "matches":review["matches_reviewed"],
          "pdf_report":str(target/"review.pdf"),
