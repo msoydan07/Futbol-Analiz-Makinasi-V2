@@ -60,7 +60,7 @@ def _render_pick(row,session):
         reason=(row.get("model_reason") or row.get("team_identity_reason")
                 or row.get("model_error_type") or row.get("status"))
         return "ANA: TEKNIK ENGEL (PAS DEGIL) | Neden: "+str(reason)[:145]
-    # D-MARKET-006: new research route; ONLY model decision may choose a market.
+    # D-MARKET-007: new versioned route; ONLY model decision may choose a market.
     # Legacy price-driven records remain readable for historical audit, but
     # are never produced by iddaa_pdf_model_first_one_step_263.py.
     if "model_first_decision" in row or "model_only_decision_status" in row:
@@ -85,6 +85,15 @@ def _render_pick(row,session):
             def describe(x):
                 history=x.get("historical_reliability") or {}
                 estimate=x.get("estimated_realization_probability")
+                if d.get("selection_policy_version")=="20261121_C3_2025_FROZEN_V4":
+                    # 2025/26 logistic training is NOT 39 same-version SHA
+                    # reliability observations; never print fictitious n=0
+                    # "past-supported" probability as if another calibration.
+                    version="C3-2025 kalibre" if x.get("probability_type")==\
+                        "C3_2025_FROZEN_BINARY_LOGIT" else (
+                        "M4 Agustos MS kalibre" if x["family"]=="MS" else "M4 ham yedek")
+                    return (labels[x["market"]]+" "+_pct(x["calibrated_probability"])+
+                            " ["+version+"]")
                 return (labels[x["market"]]+" model "+_pct(x["calibrated_probability"])+
                         " ["+x["anchor_model"]+", "+
                         ("ham %" if "UNCALIBRATED" in x["probability_type"] else "kalibre %")+"]"+
