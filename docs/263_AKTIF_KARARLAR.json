@@ -1,6 +1,6 @@
 {
   "schema": "263_ACTIVE_DECISIONS_V1",
-  "effective_date_tr": "2026-11-20",
+  "effective_date_tr": "2026-11-21",
   "scope": "Futbol Mac Analiz Makinasi 2.6.3 - yeni 10 lig ilk Id daa PDF ve yeni kullanici adlandirilmis new100 sabah analiz rotalari",
   "authority": "Kullanicinin en son acik onayli karari; bu dosya o kararlarin kisa ve tek aktif indeksidir. Sohbette yeni acik karar alinirsa bu dosya ve guard birlikte guncellenmeden eski koda donulmez.",
   "owner_branch": "experiment/263-toplu-karsilastirma",
@@ -18,7 +18,8 @@
     "new100_pdf": "experiments/263/sabah_mobile_model_only_263.py",
     "new100_price_reference": "experiments/263/iddaa_pdf_one_step_263.py",
     "normal_historical_reference": "experiments/263/normal_historical_reference_263.py",
-    "model_selection_lock": "experiments/263/model_first_selection_lock_20261120_normal_v3.json"
+    "model_selection_lock": "experiments/263/model_first_selection_lock_20261121_v4.json",
+    "c3_binary_calibrator": "experiments/263/model_first_frozen_c3_calibration_263.py"
   },
   "active": [
     {
@@ -37,17 +38,17 @@
     },
     {
       "topic": "fixed_market_experts",
-      "decision_id": "D-EXPERT-20261120",
-      "effective_date_tr": "2026-11-20",
+      "decision_id": "D-EXPERT-20261121",
+      "effective_date_tr": "2026-11-21",
       "status": "ACTIVE",
-      "rule": "MS1/MSX/MS2 = tek M4 ortak ve Agustos-joint-kalibre olasilik vektoru; KG Var/Yok = ham C3, 2.5 Alt/Ust = ham C3; C3 yoksa bu iki ailede M4 fallback. B/C2 diger modellerle anlasma kontrolunde yer alir. C3 gol/KG kalibrasyonu yalniz ayri research shadow; ana yuzdelere terfi etmedi."
+      "rule": "MS1/MSX/MS2: M4'ün Ağustos 2026'da dondurulmuş joint Poisson kalibrasyonlu tek vektörü. KG Var/Yok ve 2.5 Alt/Üst: C3'ün 2025/26'daki 2898 geçmiş as-of maçta öğrenilmiş ve sürüm v4 kilidinde SHA ile dondurulmuş ikili lojistik kalibrasyonu. C3 eksikse M4 ham ikili olasılık fallback olarak açık etiketli. B/C2 uyum teşhisi; M4/C3 gol motorlarına, xG'ye veya eski tahmin SHA'larına dokunulmaz."
     },
     {
       "topic": "model_selection",
-      "decision_id": "D-MARKET-006",
-      "effective_date_tr": "2026-11-20",
+      "decision_id": "D-MARKET-007",
+      "effective_date_tr": "2026-11-21",
       "status": "ACTIVE",
-      "rule": "Makinenin BASLANGICTAKI asil amaci gerceklesme ihtimali en yuksek tahmini bulmaktir. Bu, mevcut normal model-first secim mekanizmasinin isleyisidir; ayri/yeni karar katmani degildir. M4 MS ortak olasiliklari ve C3 KG/2.5 (C3 yoksa M4 yedek) kullanilir. 7 secenegin model yuzdeleri hesaplanir. Sabit %60 / herhangi bir sabit olasilik baraji, lig bazindan lift, oynanabilir oran/EV veya model destegi ana secimi otomatik PAS yapmaz. 8 Kasim mac ONCESI 40 SHA kaydindan biten 39 macin skor-sonuc kayitlari degismeden, ayni pazar ve ayni model/kalibrasyon turunde benzer olasiliklar icin gerceklesen oranlari referans alinir; az ornekte model olasiligina konservatif kaydirma yapilir, belirsizlik ve ornek sayisi ayri etiketlenir. En yuksek tahmini gerceklesme olasiligi ANA, farkli aileden ikinci secenek ALTERNATIF olur. Destekleyici modeller ve ham lig bazlari sadece teshis; kaynak verisi eksikliginde gecmis isabet UYDURULMAZ, gecici model yonu verilir. Oran karari asla etkilemez; yalniz kullanicinin orijinal iddaa PDFsi besinci referanstir. Eski B C2 C3 M4 ve gecmis SHA degistirilemez; bu yaklasimin istatistiksel ustunlugu gelecekte bagimsiz takipte olculecektir."
+      "rule": "Amac gerceklesme ihtimali en yuksek tahmini bulmaktir. Yalniz v4 SHA kilidiyle M4 ortak kalibre MS ve donmus 2025/26-C3 lojistik kalibre KG/2.5 olasiliklari birinci kez hesaplanir ve 7 olaydan en yuksek model olasiligi ANA tercih olur. Ayni aile disindan ikinci alternatif secilir. Ilk iki olay arasi fark 2 yuzde puani veya daha az ise YAKIN ADAYLAR / BELIRSIZLIK yazilir, otomatik PAS degildir. Ayni tarihin mac sonuclari hicbir secimde kullanilmaz. Eski 8 Kasim 39 gerçek SHA sonucunun ham-C3 tarihcesi yeni kalibre C3'nin guvenilirlik siralamasina uygulanmaz. Sabit %60, odds, EV, model destek veya lig-lift gate YOK. Fiyat yalniz iddaa PDF 5. referans; 2. PDF ana secimi degistirmez. Eski v3 SHA forecast ve karar lock'i aynen muhafaza edilir; v4 bagimsiz canli ustunluk kaniti degildir."
     },
     {
       "topic": "pdf_sequence",
@@ -58,10 +59,10 @@
     },
     {
       "topic": "c3_calibration",
-      "decision_id": "D-C3-CAL-010",
-      "effective_date_tr": "2026-11-20",
+      "decision_id": "D-C3-CAL-011",
+      "effective_date_tr": "2026-11-21",
       "status": "ACTIVE",
-      "rule": "C3 KG/2.5 frozen kalibrasyon sonucu yeterli terfi kaniti saglamadi; ana karar ham C3 ile surer, frozen kalibre deger yalniz shadow / tanisal gorunur."
+      "rule": "2025/26 2898 geçmiş as-of C3 tahminiyle öğrenilip sabitlenen KG ve 2.5 lojistik katsayiları v4 karar katmaninda kullanilacak. 2026 873 asof macta eski %57.617 - yeni %62.543, MS kalibrasyonu canliya yakin 615 asof macta %56.423 - %59.512, 39 gerçek SHA tek gun isabet %69.231 - %69.231; coklu yontem arastirmasi ve yeni kor test eksikligi acik kayitli. Kalibrasyon yalniz karar katmanidir, C3 temel matematigi degismez."
     },
     {
       "topic": "reporting_and_seals",
@@ -102,6 +103,12 @@
       "former_code": "experiments/263/sabah_pinnacle_new100_bridge_263.py",
       "superseded_by": "D-ODDS-SOURCE-20261120",
       "status": "HISTORICAL_ONLY_NO_NEW_AUTOMATED_QUOTES"
+    },
+    {
+      "former_decision": "20.11.2026 D-MARKET-006 ham C3 ve 39 SHA tarihsel kayma",
+      "former_code": "experiments/263/model_first_selection_lock_20261120_normal_v3.json",
+      "superseded_by": "D-MARKET-007",
+      "status": "V3_LOCK_AND_SEALS_REPLAY_ONLY"
     }
   ],
   "research_only": [
@@ -112,15 +119,15 @@
     },
     {
       "topic": "c3_shadow",
-      "status": "NOT_PROMOTED_TO_DECISION",
-      "note": "C3 frozen kalibrasyon sadece arastirma/diagnostik shadow."
+      "status": "LEGACY_C3_SHADOW_V3_ONLY",
+      "note": "Eski C3 shadow tani kaydi aynen korunur, yeni v4 C3 kalibrasyonu karar katmanina SHA ile aktarildi."
     }
   ],
   "validation_status": {
     "decision": "A_ACTIVE",
-    "implementation": "B_NORMAL_CORE_36_TESTS_AND_SABAH_OFFLINE_INTEGRATION_AND_PDF_UI_PASSED",
+    "implementation": "B_V4_CODE_PENDING_TARGETED_CI",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED",
-    "historical_reliability": "B_REAL_NOV8_39_ORIGINAL_SHA_273_MARKET_PAIRS_CONNECTED_NO_INDEPENDENT_HOLDOUT_C"
+    "historical_reliability": "2025_26_2898_C3_ASOF_TRAIN_2026_615_ASOF_SHADOW_AND_39_NOV8_ORIGINAL_SHA_NO_BLIND_FORWARD_C"
   },
   "change_process": [
     "Yeni karar oldugu zaman konu, kapsam, karar ID, tarih ve eski ID->yeni ID (supersedes) tek dosyaya kaydedilir.",
