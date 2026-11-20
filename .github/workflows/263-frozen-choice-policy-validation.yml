@@ -72,3 +72,4 @@ jobs:
           git commit -m "research(263): pass frozen primary pick model and original seal clock contract [skip ci]"
           git push origin HEAD:research/263-independent-math-audit
 # Re-run after separating the two normalized binary event families.
+# Re-run with original 11-event prior snapshot containing seven target markets.
