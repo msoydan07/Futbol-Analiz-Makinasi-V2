@@ -125,7 +125,7 @@
   ],
   "validation_status": {
     "decision": "A_ACTIVE",
-    "implementation": "B_V4_CODE_PENDING_TARGETED_CI",
+    "implementation": "B_V4_ORIGINAL_V3_SHA_AND_NEW_PDF_NEW100_OFFLINE_REGRESSION_CI_PASSED",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED",
     "historical_reliability": "2025_26_2898_C3_ASOF_TRAIN_2026_615_ASOF_SHADOW_AND_39_NOV8_ORIGINAL_SHA_NO_BLIND_FORWARD_C"
   },
