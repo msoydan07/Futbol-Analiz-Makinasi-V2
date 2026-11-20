@@ -1,0 +1,69 @@
+name: "263 separated MS raw and KG/O25 shadow ablation"
+on:
+  push:
+    branches: [research/263-independent-math-audit]
+    paths:
+      - ".github/workflows/263-independent-decision-ablation.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  shadow-ablation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Research dependencies and syntax
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 scikit-learn==1.7.2
+          python -m py_compile research/263_independent_audit/audit_decision_ablation.py
+      - name: Verify exactly original research source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: Reconstruct exactly historical 880 asof predictions
+        run: |
+          set -euo pipefail
+          PYTHONPATH=.:experiments/263 python experiments/263/chrono_goal_decision_263.py \
+            --source m4_quad_base/historical_results.csv \
+            --report /tmp/263_shadow_source.json \
+            --predictions /tmp/263_shadow_predictions.csv
+      - name: Evaluate raw MS with frozen KG/2.5 alternatives and matched day uncertainty
+        run: |
+          set -euo pipefail
+          PYTHONPATH=.:experiments/263:research/263_independent_audit python research/263_independent_audit/audit_decision_ablation.py \
+            --predictions /tmp/263_shadow_predictions.csv \
+            --outdir research/263_independent_audit
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-market-weights-ablation
+          retention-days: 45
+          if-no-files-found: ignore
+          path: |
+            research/263_independent_audit/09_decision_ablation_result.json
+            research/263_independent_audit/10_decision_ablation_report.md
+      - name: Safety assert production unchanged
+        run: |
+          set -euo pipefail
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/model_first_decision_263.py experiments/263/model_first_selection_lock_20261120_normal_v3.json data/results_only_263 forward_morning_263 forward_quad_263
+      - name: Commit only isolated research results
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/263_independent_audit/09_decision_ablation_result.json research/263_independent_audit/10_decision_ablation_report.md
+          git commit -m "research(263): matched uncertainty for market-only shadow weights [skip ci]"
+          git push origin HEAD:research/263-independent-math-audit
