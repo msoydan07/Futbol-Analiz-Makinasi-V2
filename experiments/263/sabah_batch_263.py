@@ -95,7 +95,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
    private_xg_path=None;private_xg_root=None
  if cohort=="new100":
   from check_active_decisions_263 import verify_active_policy
-  verify_active_policy(root)
+  verify_active_policy()
   if dev_lock_path=="experiments/263/forward_dev_calibration_lock_263.json":
    dev_lock_path="experiments/263/model_first_selection_lock_20261120.json"
  now=now or datetime.now(timezone.utc)
