@@ -18,6 +18,7 @@ from iddaa_pdf_bulletin_263 import parse_pdf,SCHEMA as PDF_SCHEMA
 from iddaa_pdf_session_263 import SCHEMA as MORNING_SCHEMA,market_no_vig,PDF_TO_MARKET
 from iddaa_pdf_team_alias_preflight_263 import index_registry,resolve_label
 from iddaa_pdf_first_quote_263 import sha256,utc
+from iddaa_pdf_approved_layout_263 import render_singles as approved_single_pdfs
 
 SCHEMA="263_SINGLE_MORNING_SEAL_ONE_PREKO_REVIEW_V1"
 FIELDS=("MS1","MSX","MS2","OVER_2.5","UNDER_2.5","BTTS_YES","BTTS_NO")
@@ -141,6 +142,16 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
   key=_id(m);ko=utc(m["official"]["kickoff_utc"])
   if not utc(m["price_capture_utc"])<ko:
    raise ValueError("MORNING_TIME_NOT_PRE_MATCH")
+  # Carry through only the already verified/SEALED morning decision.
+  # No second computation changes any original model probability.
+  frozen=m.get("model_first_decision")
+  if frozen is not None:
+   from model_first_decision_263 import verified as verify_decision,SCHEMA as MODEL_SCHEMA
+   verify_decision(frozen,MODEL_SCHEMA)
+   if (frozen.get("forecast_sha256")!=m.get("model_forecast_sha256") or
+       frozen.get("baseline_sha256")!=m.get("empirical_baseline_sha256") or
+       frozen.get("price_used_in_decision") is not False):
+    raise ValueError("MORNING_FROZEN_MODEL_DECISION_UNLINKED")
   r={"league":m["league"],"home":m["pdf_home"],"away":m["pdf_away"],
      "home_id":m["home_id"],"away_id":m["away_id"],
      "match_date_tr":m["match_date_tr"],"kickoff_time_tr":m["kickoff_time_tr"],
@@ -148,7 +159,12 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
      "morning_models_not_recalculated":True,
      "morning_model_probabilities":m.get("model_1x2_and_core_markets",{}),
      "morning_odds":m.get("prices",{}),
-     "latest_odds":None,"market_no_vig_change_pp":{},
+     "morning_market_no_vig":m.get("market_no_vig") or {},
+     "morning_main_choice":(frozen.get("main_candidate") if frozen else None),
+     "morning_alternative_choice":(frozen.get("alternative_candidate") if frozen else None),
+     "morning_decision_sha256":(frozen.get("payload_sha256") if frozen else None),
+     "latest_odds":None,"latest_market_no_vig":{},
+     "market_no_vig_change_pp":{},
      "lineups":{"status":"KADRO_KANITI_YOK","comments":[]},
      "status":"INCELEME_BEKLIYOR"}
   if now>=ko or late>=ko:
@@ -164,6 +180,7 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
   r["latest_odds"]={name:p["odds"][pdfkey] for pdfkey,name in PDF_TO_MARKET.items()
                     if p["odds"] is not None and p["odds"].get(pdfkey) is not None}
   newfair=market_no_vig(p);oldfair=m.get("market_no_vig") or {}
+  r["latest_market_no_vig"]=newfair
   for group in FAMILY:
    a=oldfair.get(group,{})
    b=newfair.get(group,{})
@@ -300,7 +317,8 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
       not (target/"summary.md").is_file() or not (target/"review.pdf").is_file()):
    raise ValueError("SECOND_REVIEW_ALREADY_DONE_OR_INCOMPLETE_NO_REPEAT")
   return {"status":"EXISTING_SAME_SECOND_PDF_REVIEW","already_reviewed":True,
-          "pdf_report":str(target/"review.pdf"),"summary":str(target/"summary.md")}
+          "pdf_report":str(target/"review.pdf"),"summary":str(target/"summary.md"),
+          "approved_single_pdf_paths":[str(x) for x in sorted((target/"tekli").glob("tekli_*.pdf"))]}
  last=parse_pdf(second)  # real user's second PDF; no synthetic quote source
  if last["pdf_sha256"]!=actual_second_sha:raise ValueError("SECOND_PDF_BYTES_CHANGED")
  evidence=_read(xi_json) if xi_json else []
@@ -319,7 +337,10 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
  _write_once(target/"review.json",review)
  with (target/"summary.md").open("x",encoding="utf-8") as f:f.write(summary_md(review))
  render_pdf(review,target/"review.pdf")
+ singles=approved_single_pdfs(review,target/"tekli")
  return {"status":"ONE_FINAL_REVIEW_ATTACHED_TO_ORIGINAL_SEAL","already_reviewed":False,
+         "approved_single_pdf_paths":[str(x) for x in singles],
+         "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
          "matches":review["matches_reviewed"],
          "pdf_report":str(target/"review.pdf"),
          "summary":str(target/"summary.md")}
