@@ -1,0 +1,57 @@
+{
+  "schema": "263_INDEPENDENT_MATH_AUDIT_PREREG_V1",
+  "created": "2026-11-20",
+  "status": "EXPLORATORY_PRIOR_PERIODS_ALREADY_SEEN_NO_BLIND_CLAIM",
+  "original_branch": "experiment/263-toplu-karsilastirma",
+  "research_branch": "research/263-independent-math-audit",
+  "frozen_source_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "dataset": "2026-08/09 dev 587; 2026-10 evaluation 293; 2026-11-08 39 SHA outcome observation separate",
+  "models": [
+    "LEAGUE_ASOF_RATE",
+    "B",
+    "C2",
+    "C3",
+    "M4",
+    "ENSEMBLE_50_50_C3_M4",
+    "M4_DIXON_COLES_RHO_-0.1",
+    "M4_DIXON_COLES_RHO_+0.1",
+    "M4_BIVARIATE_SHARED_0.15",
+    "M4_NEGATIVE_BINOMIAL_K3",
+    "M4_NEGATIVE_BINOMIAL_K8",
+    "M4_FAMILY_SHRINK_DEV",
+    "C3_FAMILY_SHRINK_DEV",
+    "ENSEMBLE_FAMILY_SHRINK_DEV",
+    "DIRECT_REGULARIZED_LOGIT_FIXED_C0.5"
+  ],
+  "calibration_grid": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "decision_rules": [
+    "max_predicted_prob_MSandKGandO25_7_events",
+    "frozen_family_M4_MS_C3_KG_O25",
+    "ensemble_50_50",
+    "family_dev_shrunk",
+    "direct_logit"
+  ],
+  "metrics": [
+    "MS_sum_3_Brier",
+    "MS_logloss",
+    "MS_top1_accuracy",
+    "KG_yes_binary_Brier_logloss",
+    "O25_over_binary_Brier_logloss",
+    "coverage",
+    "selected_hit_rate",
+    "selected_predicted_mean",
+    "selected_brier",
+    "selection_market_distribution",
+    "PAS_at_65pct"
+  ],
+  "paired_uncertainty": "Ekim 2026 match-day cluster bootstrap 1600 replicates; only shared matches; multiple searches exploratory",
+  "seed": 26320261120,
+  "protection": "No change to current main, live branch, seals, policies, or PDF; no betting authorization; no new pilot",
+  "promotion": "No automatic promotion, even if October wins; past research seen and Nov one day, independent forward evidence insufficient"
+}
