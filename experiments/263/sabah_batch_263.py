@@ -67,7 +67,9 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
  fixed_clock=now is not None
  # Read xG only from an audited PRIVATE local file; never publish data to GitHub.
  # The 19-Nov frozen 4618-row file is pinned until a new audited SHA is accepted.
- xg_source=xg_snapshot or os.environ.get("M4_XG_PRIVATE_CSV")
+ # Operational new100 never reads private xG. Historical cohorts retain
+ # their optional private research sidecar; M4 is always xG-free.
+ xg_source=None if cohort=="new100" else (xg_snapshot or os.environ.get("M4_XG_PRIVATE_CSV"))
  xg_hash=xg_expected_sha or os.environ.get("M4_XG_PRIVATE_SHA256") or (
   "3b13921daafab70aa121fe807fea0a74e0c72f0fc2381366b183f621edea762c")
  xg_error=None;private_xg_path=None;private_xg_root=None
@@ -91,6 +93,11 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
   except (OSError,ValueError) as xg_exc:
    xg_error=str(xg_exc)[:140]
    private_xg_path=None;private_xg_root=None
+ if cohort=="new100":
+  from check_active_decisions_263 import verify_active_policy
+  verify_active_policy(root)
+  if dev_lock_path=="experiments/263/forward_dev_calibration_lock_263.json":
+   dev_lock_path="experiments/263/model_first_selection_lock_20261120.json"
  now=now or datetime.now(timezone.utc)
  if now.tzinfo is None:raise Blocked("AWARE_TIME_REQUIRED")
  now=now.astimezone(timezone.utc)
@@ -113,7 +120,11 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
  if baseline_fn is None:
   from forward_empirical_baseline_263 import produce as baseline_fn
  if decision_fn is None:
-  from four_model_value_policy_263 import decide as decision_fn
+  if cohort=="new100":
+   from model_first_decision_263 import select as decision_fn
+  else:
+   # Historical cohorts retain their original policy only for old records.
+   from four_model_value_policy_263 import decide as decision_fn
  lock=json.loads(Path(dev_lock_path).read_text(encoding="utf-8"))
  out_dir=root/DIRS[cohort];count=len(list(out_dir.glob("*/*.json")))
  own_keys=keys_in(root/DIRS[cohort])
@@ -168,9 +179,20 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
      raise Blocked("MISSING_C2_UNAVAILABLE_REASON")
    try:
     b=baseline_fn(forecast,history,now=observed_now)
-    d=decision_fn(forecast,b,lock,observation=None,now=observed_now)
-    if d["quote_sha256"] is not None or d["main_candidate"] is not None or d["status"]!="RESEARCH_PAS":
-     raise Blocked("NO_PRICE_MUST_BE_PAS")
+    if cohort=="new100":
+     # MODEL-FIRST: no odds argument. Missing odds never forces PAS.
+     d=decision_fn(forecast,b,lock,now=observed_now)
+     from model_first_decision_263 import SCHEMA as NEW_SCHEMA,verified
+     verified(d,NEW_SCHEMA)
+     if (d["price_used_in_decision"] is not False
+         or d["odds_affected_selection"] is not False
+         or d["status"] not in ("RESEARCH_PAS_MODEL_ONLY","RESEARCH_CANDIDATE_NOT_APPROVED")
+         or d["forecast_sha256"]!=forecast["payload_sha256"]):
+      raise Blocked("CURRENT_MODEL_FIRST_DECISION_INVALID")
+    else:
+     d=decision_fn(forecast,b,lock,observation=None,now=observed_now)
+     if d["quote_sha256"] is not None or d["main_candidate"] is not None or d["status"]!="RESEARCH_PAS":
+      raise Blocked("NO_PRICE_MUST_BE_PAS")
     prefix=root/"experiments/263/sabah_research"/cohort/day/path.stem
     save_new(prefix/"baseline.json",b);save_new(prefix/"decision.json",d)
     item["decision_status"]=d["status"];item["decision_sha256"]=d["payload_sha256"]
