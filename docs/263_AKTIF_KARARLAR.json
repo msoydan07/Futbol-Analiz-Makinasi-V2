@@ -15,8 +15,8 @@
     "new100_named": "experiments/263/sabah_batch_263.py",
     "new100_receipt": "experiments/263/sabah_new100_commit_guard_263.py",
     "new100_mobile": "experiments/263/sabah_mobile_screens_263.py",
-    "new100_pdf": "experiments/263/sabah_mobile_approved_pdf_263.py",
-    "new100_price_reference": "experiments/263/sabah_pinnacle_new100_bridge_263.py"
+    "new100_pdf": "experiments/263/sabah_mobile_model_only_263.py",
+    "new100_price_reference": "experiments/263/iddaa_pdf_one_step_263.py"
   },
   "active": [
     {
@@ -45,14 +45,14 @@
       "decision_id": "D-MARKET-006",
       "effective_date_tr": "2026-11-20",
       "status": "ACTIVE",
-      "rule": "Yeni PDF ve new100 sabah analizinde ana/alternatif/PAS sadece model olasiligi, gecmis as-of lig frekansi, en az iki model destegi ve kilitli model esikleriyle secilir; odds/EV/no-vig fiyat secimini etkilemez. Eski fiyat-gated modullu karar yeni kayitta aktif degil; oranlar sonradan besinci arastirma referansidir."
+      "rule": "Ana/alternatif/PAS B C2 C3 M4 model-only matemağiyle üretilir; piyasa oranı/EV/Pinnacle/başka bookmaker modelleri ya da PAS'i etkilemez. Piyasa yalnız kullanıcıdan gelen orijinal iddaa.com PDF üzerinden, karar sonrasında beşinci referans olarak alınır."
     },
     {
       "topic": "pdf_sequence",
       "decision_id": "D-ODDS-001",
       "effective_date_tr": "2026-11-19",
       "status": "ACTIVE",
-      "rule": "Ilk iddaa PDF -> tek as-of dort model ve SHA tercih muhrü; ikinci ayni-gun PDF -> yalniz fiyat farki ve kanitli futbol yorumu, yeni tahmin/muhur/model karar degil."
+      "rule": "Sadece kullanıcının iddaa.com kaynaklı PDF'si oran gözlem kaynağıdır. İlk PDF -> as-of B/C2/C3/M4 ve SHA tek mühür + ilk oran karşılaştırması. İkinci PDF -> yalnız oran farkı / doğrulanmış futbol yorumu, hiçbir yeni tahmin ya da ana karar yok."
     },
     {
       "topic": "c3_calibration",
@@ -67,6 +67,13 @@
       "effective_date_tr": "2026-11-20",
       "status": "ACTIVE",
       "rule": "Teknik bloke != model PAS. Karar alindi(A), koda uygulandi(B), canli akista dogrulandi(C) ayri tutulur. Eski 96/40 SHA, main, diger projeler ve tum gecmis tahminler degistirilmez."
+    },
+    {
+      "topic": "exclusive_odds_source",
+      "decision_id": "D-ODDS-SOURCE-20261120",
+      "effective_date_tr": "2026-11-20",
+      "status": "ACTIVE",
+      "rule": "Yeni analizlerde TEK oran kaynağı kullanıcının iddaa.com bülten PDF dosyasıdır. Pinnacle, The Odds API, Nesine, Bilyoner, otomatik bookmaker fiyat çağrısı ve alternatif fiyat kaynağı yeni kayıtlarda YASAK. Kullanıcı PDF göndermediyse model-only rapor üret; piyasa fiyatını VERİ YOK yaz; alternatif sağlayıcıya düşme."
     }
   ],
   "superseded_for_pdf_first": [
@@ -87,6 +94,12 @@
       "former_code": "experiments/263/meta_market_selector_263.py",
       "superseded_by": "D-EXPERT-20261120",
       "status": "RESEARCH_ONLY_NOT_ACTIVE_SELECTOR"
+    },
+    {
+      "former_decision": "Pinnacle h2h günlük canlı API, tek kredilik fiyat kilidi ve modellerden sonra otomatik fiyat ekleme",
+      "former_code": "experiments/263/sabah_pinnacle_new100_bridge_263.py",
+      "superseded_by": "D-ODDS-SOURCE-20261120",
+      "status": "HISTORICAL_ONLY_NO_NEW_AUTOMATED_QUOTES"
     }
   ],
   "research_only": [
@@ -103,7 +116,7 @@
   ],
   "validation_status": {
     "decision": "A_ACTIVE",
-    "implementation": "B_EXPERIMENT_BRANCH_TESTED_PDF_AND_NEW100",
+    "implementation": "B_EXPERIMENT_BRANCH_PDF_FIRST_AND_NEW100_NOBK_API_CODE_UPDATED_CI_PENDING",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED"
   },
   "change_process": [
@@ -111,6 +124,7 @@
     "Bir topic icin ayni tarihte ve ayni scope icinde yalniz bir ACTIVE kural olabilir; eski belge silinmez, ama executable rotada referans olmaktan cikar.",
     "Kod kullanmadan once policy gate calistirilir; bilinmeyen/duble aktif konu varsa GUESS yerine BLOCK + rapor.",
     "Eski kod tarihsel test icin tutulabilir; yeni PDF-first karar rota secicisi olarak kullanilamaz.",
-    "A / B / C onayi ayrica kanitlanmadan tumu bitti denmez; yeni sohbetlerde en once bu dosya okunur."
+    "A / B / C onayi ayrica kanitlanmadan tumu bitti denmez; yeni sohbetlerde en once bu dosya okunur.",
+    "Sadece iddaa.com USER PDF: yeni sabah workflow'unda API/env secret/reserve/quote lookup/price cache tetikleme yasak."
   ]
 }
