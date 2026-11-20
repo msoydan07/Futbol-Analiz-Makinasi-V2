@@ -37,7 +37,13 @@ def load_row(root,row):
 def decision(root,cohort,day,stem,f):
  p=Path(root)/"experiments/263/sabah_research"/cohort/day/stem/"decision.json"
  if not p.is_file():return None
- d=read(p);sealed_payload(d,"263_four_model_value_decision_research_v1")
+ d=read(p)
+ if d.get("schema")=="263_four_model_value_decision_research_v1":
+  if cohort=="new100":raise ScreenError("SUPERSEDED_PRICE_GATED_DECISION_IN_NEW100")
+  sealed_payload(d,"263_four_model_value_decision_research_v1")
+ else:
+  from model_first_decision_263 import verified,SCHEMA as CURRENT_SCHEMA
+  verified(d,CURRENT_SCHEMA)
  if d.get("forecast_sha256")!=f["payload_sha256"] or d.get("betting_authorized") is not False:
   raise ScreenError("DECISION_NOT_LINKED_OR_BETTING_AUTHORIZED")
  return d
@@ -51,7 +57,25 @@ def single(row,f,d):
         "## 1. Karar",
         ""]
  diag={}
- if d:
+ if d and d.get("schema")=="263_MODEL_FIRST_FOUR_MODEL_DECISION_RESEARCH_V2":
+  labels={"MS1":"MS 1","MSX":"MS X","MS2":"MS 2",
+          "BTTS_YES":"KG Var","BTTS_NO":"KG Yok",
+          "OVER_2.5":"2.5 Üst","UNDER_2.5":"2.5 Alt"}
+  diag={x["market"]:x for x in d["model_market_diagnostics"]}
+  lines.append("**M4 ortak MS (Ağustos kalibre):** "+
+               " / ".join(k+" "+fmt(diag[k]["calibrated_probability"])
+                          for k in ("MS1","MSX","MS2")))
+  pick=d.get("main_candidate")
+  lines.append("**Model-first ana:** "+(
+               labels[pick["market"]]+" "+fmt(pick["calibrated_probability"])+" (DENEYSEL / ONAYSIZ)"
+               if pick else "PAS (model güven eşikleri sağlanmadı)"))
+  alt=d.get("alternative_candidate")
+  lines.append("**Alternatif:** "+(
+               labels[alt["market"]]+" "+fmt(alt["calibrated_probability"])+" (DENEYSEL / ONAYSIZ)"
+               if alt else "YOK"))
+  lines.append("**Uzmanlar:** MS=M4, KG/2.5=C3 ham; B/C2 model desteği.")
+  lines.append("**Oran:** Sadece 5. karşılaştırma; eksikliği PAS sebebi değil.")
+ elif d:
   diag={x["market"]:x for x in d.get("all_market_diagnostics",[])}
   cal=[(key,diag.get(key,{}).get("calibrated_probability")) for key,_ in MS]
   valid=[(k,v) for k,v in cal if isinstance(v,(int,float)) and not isinstance(v,bool) and math.isfinite(v)]
@@ -104,15 +128,20 @@ def build(root,report):
    singles[Path(row["forecast_path"]).stem]=s
    calibrated="—"
    if d:
-    relevant=[(x["market"],x.get("calibrated_probability")) for x in d.get("all_market_diagnostics",[])
+    current=d.get("schema")=="263_MODEL_FIRST_FOUR_MODEL_DECISION_RESEARCH_V2"
+   relevant=[(x["market"],x.get("calibrated_probability")) for x in d.get(
+                "model_market_diagnostics" if current else "all_market_diagnostics",[])
               if x.get("market") in ("MS1","MSX","MS2") and isinstance(x.get("calibrated_probability"),(int,float))]
     if relevant:
      key,p=max(relevant,key=lambda a:a[1])
-     calibrated=key.replace("MS","MS ")+": "+fmt(p)+" (tek pazar)"
+     calibrated=key.replace("MS","MS ")+": "+fmt(p)+(
+                  " (ortak M4)" if current else " (eski tek pazar)")
    ko=read_aware(f["fixture"]["kickoff_utc"]).astimezone(TR)
    available_count=sum(f["model_predictions"][m].get("status")=="AVAILABLE" for m in MODELS)
+   choose=("DENEYSEL "+str(d["main_candidate"]["market"]) if d and current and d.get("main_candidate")
+           else "MODEL PAS" if d and current else "TARİHSEL / ONAYSIZ")
    rows.append("| "+ko.strftime("%H:%M")+" | "+safe(row["home"])+" – "+safe(row["away"])+
-               " | "+calibrated+" | PAS/ONAYSIZ | "+
+               " | "+calibrated+" | "+choose+" | "+
                str(available_count)+"/4 model · "+safe(row.get("decision_status","MODEL_ONLY"))+" |")
   else:
    rows.append("| — | "+safe(row["home"])+" – "+safe(row["away"])+
@@ -123,7 +152,9 @@ def build(root,report):
           str(report["already_sealed"])+" önceden kayıtlı · "+
           str(report["blocked"])+" engelli","",
           "Bu özet, tekli ekranlarla aynı değişmez tahmin SHA'sını kullanır.",
-          "Bahis onayı yok. Oran ve EV yoksa S2 = PAS.","* DEV MS1/MSX/MS2 ayrı pazar kalibrasyonlarıdır; toplamları %100 olmak zorunda değildir, tam 1X2 olasılık vektörü diye yorumlanamaz.","",
+          ("Güncel model-first: MS=M4 ortak %100; KG/2.5=C3. Oran sadece 5. referans; model PAS fiyattan bağımsız."
+           if report["cohort"]=="new100" else "Tarihsel ekran: eski kararları yeni tahmine taşımayın."),
+          "",
           "| Saat TSİ | Maç | DEV tek-MS* | S2 | Kanıt |",
           "|---|---|---:|---|---|",*rows,"",
           "*İlgili DEV kalibrasyonu varsa görüntülenir; dört modelin ortalaması değildir.*","",
