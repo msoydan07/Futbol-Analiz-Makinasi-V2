@@ -9,7 +9,6 @@ available and a walk-forward holdout validates selection.
 """
 from __future__ import annotations
 import math
-from collections import defaultdict
 from datetime import datetime, timezone
 
 FAMILIES={"MS1":"MS","MSX":"MS","MS2":"MS",
@@ -33,6 +32,9 @@ def validate(records, *, asof):
     for r in records:
         market=r["market"]
         if market not in FAMILIES:raise ValueError("UNKNOWN_MARKET")
+        if r.get("model_identity") not in ("M4_AUG_JOINT_CALIBRATED",
+            "C3_RAW_UNCALIBRATED","M4_RAW_FALLBACK_UNCALIBRATED"):
+            raise ValueError("UNIDENTIFIED_OR_MIXED_MODEL_CALIBRATION")
         fixture=str(r["fixture_id"]);league=str(r["league"])
         key=(fixture,market)
         if key in seen:raise ValueError("DUPLICATE_FIXTURE_MARKET")
@@ -51,7 +53,8 @@ def validate(records, *, asof):
         out.append({**r,"model_probability":p})
     return out
 
-def similar(records, *, league, market, probability, asof, half_width=.05, min_samples=20):
+def similar(records, *, league, market, probability, asof, model_identity=None,
+            half_width=.05, min_samples=20):
     """Historical outcomes for the same market and probability neighborhood.
 
     An empty or sparse group is UNKNOWN, not zero accuracy and not a PAS
@@ -63,7 +66,9 @@ def similar(records, *, league, market, probability, asof, half_width=.05, min_s
     if not 0<half_width<=.15:raise ValueError("BAD_WINDOW")
     if min_samples<1:raise ValueError("BAD_SAMPLE_MINIMUM")
     rows=validate(records,asof=asof)
-    matched=[r for r in rows if r["market"]==market and r["league"]==league
+    matched=[r for r in rows if r["market"]==market
+             and (league is None or r["league"]==league)
+             and (model_identity is None or r["model_identity"]==model_identity)
              and abs(r["model_probability"]-p)<=half_width]
     n=len(matched);wins=sum(r["occurred"] for r in matched)
     if n<min_samples:
@@ -82,30 +87,50 @@ def similar(records, *, league, market, probability, asof, half_width=.05, min_s
             "observed_hit_rate":round(hit,6),
             "wilson_lower95":round(max(0,center-half),6)}
 
-def rank_candidates(candidates, records, *, league, asof, min_samples=20):
-    """Rank the most likely realized outcome; evidence labels verified vs unverified.
+def rank_candidates(candidates, records, *, league, asof, min_samples=20,
+                    min_local_samples=8, prior_strength=20):
+    """NORMAL objective: highest estimated chance the selected event happens.
 
-    Do NOT silently equate raw C3 probabilities with calibrated hit rates.
-    No fixed 60% or any other model-probability acceptance threshold.
+    Same market and same expert/calibration model only; prefer local league
+    examples when reasonably represented, otherwise 10-league pooled evidence.
+    The score-only league base and odds NEVER enter this ranking. With sparse
+    evidence use shrunk observation vs model probability; do not pretend that
+    a small 39-match cohort calibrates seven independent market probabilities.
     """
+    if not 0<prior_strength<=100:raise ValueError("INVALID_PRIOR_STRENGTH")
     ranked=[]
     for c in candidates:
+        p=_okprob(c["calibrated_probability"])
+        model_identity=c.get("probability_type")
+        if model_identity not in ("M4_AUG_JOINT_CALIBRATED",
+                                  "C3_RAW_UNCALIBRATED",
+                                  "M4_RAW_FALLBACK_UNCALIBRATED"):
+            raise ValueError("CANDIDATE_EXPERT_IDENTITY_REQUIRED")
         e=similar(records,league=league,market=c["market"],
-                  probability=c["calibrated_probability"],asof=asof,
+                  model_identity=model_identity,probability=p,asof=asof,
                   min_samples=min_samples)
+        scope="SAME_LEAGUE"
+        if e["n"]<min_local_samples:
+            e=similar(records,league=None,market=c["market"],
+                      model_identity=model_identity,probability=p,asof=asof,
+                      min_samples=min_samples)
+            scope="SAME_EXPERT_ALL_TEN_LEAGUES"
+        n=e["n"];wins=e["wins"]
+        # Beta-prior style shrinkage to the PREMATCH model percentage.
+        # Honest sample-supported estimate, not a fitted calibration model.
+        estimate=(prior_strength*p+wins)/(prior_strength+n)
+        e={**e,"scope":scope,"model_identity":model_identity,
+           "prior_model_probability":round(p,6),
+           "shrinkage_prior_strength":prior_strength,
+           "estimated_realization_probability":round(estimate,8),
+           "historical_archive_provenance":"NOV8_40_SIGNED_39_ARCHIVED_RESULTS",
+           "independent_holdout_verified":False}
         ranked.append({**c,"historical_reliability":e,
-                       "decision_evidence_status":("HISTORICALLY_EVALUATED" if
-                          e["status"]=="HISTORICAL_PREMATCH_REFERENCE_AVAILABLE"
-                          else "PROVISIONAL_MODEL_DIRECTION")})
-    # User's original objective is MAXIMUM ESTIMATED CHANCE OF OCCURRENCE.
-    # Wilson lower bound is an uncertainty display, NOT a value/edge filter
-    # or the primary rank target. Verified same-market historical success
-    # estimates rank first; provisional raw probability ranks only when there
-    # is not yet a validated similar-match sample.
+                       "estimated_realization_probability":round(estimate,8),
+                       "decision_evidence_status":("HISTORICALLY_EVALUATED"
+                         if e["status"]=="HISTORICAL_PREMATCH_REFERENCE_AVAILABLE"
+                         else "PROVISIONAL_MODEL_DIRECTION")})
     return sorted(ranked,key=lambda x:(
-        x["historical_reliability"]["observed_hit_rate"] is None,
-        -(x["historical_reliability"]["observed_hit_rate"]
-          if x["historical_reliability"]["observed_hit_rate"] is not None
-          else x["calibrated_probability"]),
+        -x["estimated_realization_probability"],
         -x["historical_reliability"]["n"],
         -x["calibrated_probability"],x["market"]))
