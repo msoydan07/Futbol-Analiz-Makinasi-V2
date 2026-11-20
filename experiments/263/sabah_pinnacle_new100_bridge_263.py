@@ -65,7 +65,8 @@ def validate_inputs(report,receipt,root):
         fixture=f.get("fixture",{})
         if (fixture.get("fixture_verification")!="VERIFIED_BY_LIVE_OFFICIAL_GATE"
             or fixture.get("match_local_date")!=report["day_turkey"]
-            or row.get("decision_status")!="RESEARCH_PAS"):
+            or row.get("decision_status") not in
+               ("RESEARCH_PAS_MODEL_ONLY","RESEARCH_CANDIDATE_NOT_APPROVED")):
             raise PriceBridgeBlocked("SOURCE_OR_PAS_POLICY_INVALID")
         statuses={m:f.get("model_predictions",{}).get(m,{}).get("status") for m in MODELS}
         if (sum(s=="AVAILABLE" for s in statuses.values())<3
@@ -147,32 +148,30 @@ def validate_snapshot(obj,league,day):
     return obj
 
 def calibrated_sidecar(root,report,forecast,row,reference):
+    """M4 calibrated MS triple against Pinnacle: fifth reference, never selection."""
+    from model_first_decision_263 import verified,SCHEMA as MODEL_SCHEMA
     day=report["day_turkey"];stem=Path(row["forecast_path"]).stem
     path=root/"experiments/263/sabah_research/new100"/day/stem/"decision.json"
-    d=read(path);sealed_payload(d,"263_four_model_value_decision_research_v1")
+    d=verified(read(path),MODEL_SCHEMA)
     if (d.get("forecast_sha256")!=forecast["payload_sha256"]
         or d.get("payload_sha256")!=row.get("decision_sha256")
-        or d.get("status")!="RESEARCH_PAS" or d.get("quote_sha256") is not None
-        or d.get("main_candidate") is not None or d.get("betting_authorized") is not False):
-        raise PriceBridgeBlocked("ORIGINAL_CALIBRATED_PAS_DECISION_MODIFIED")
-    accepted={}
+        or d.get("status") not in ("RESEARCH_PAS_MODEL_ONLY","RESEARCH_CANDIDATE_NOT_APPROVED")
+        or d.get("price_used_in_decision") is not False
+        or d.get("odds_affected_selection") is not False
+        or d.get("betting_authorized") is not False):
+        raise PriceBridgeBlocked("MODEL_FIRST_DECISION_OR_SOURCE_SHA_CHANGED")
+    diags={x["market"]:x for x in d["model_market_diagnostics"]}
     fair=reference["pinnacle_no_vig_probabilities"]
     odds=reference["odds"]
-    for diag in d.get("all_market_diagnostics",[]):
-        market=diag.get("market")
-        if market not in SIDES:continue
-        prob=diag.get("calibrated_probability")
-        support=diag.get("support_count",0)
-        dev=diag.get("dev_brier_skill")
-        anchor=diag.get("anchor_model")
+    accepted={}
+    for market,side in SIDES.items():
+        diag=diags[market]
+        prob=diag["calibrated_probability"]
         if (not isinstance(prob,(int,float)) or isinstance(prob,bool)
             or not math.isfinite(prob) or not 0<=prob<=1
-            or anchor not in ("C3","M4")
-            or not isinstance(dev,(int,float)) or not math.isfinite(dev) or dev<=0
-            or not isinstance(support,int) or support<3):
-            accepted[market]={"status":"NO_SUPPORTED_DEV_CALIBRATION","calibrated_probability":None}
-            continue
-        side=SIDES[market]
+            or diag.get("anchor_model")!="M4"
+            or diag.get("probability_type")!="M4_AUG_JOINT_CALIBRATED"):
+            raise PriceBridgeBlocked("ONLY_COHERENT_M4_MS_PRICE_REFERENCE_ALLOWED")
         accepted[market]={
             "status":"DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH",
             "calibrated_probability":prob,
@@ -180,7 +179,8 @@ def calibrated_sidecar(root,report,forecast,row,reference):
             "difference_percentage_points":round(100*(prob-fair[side]),4),
             "illustrative_EV_percent":round(100*(prob*odds[side]-1),4),
             "pinnacle_decimal_odds":odds[side],
-            "anchor_model":anchor,"support_count":support,
+            "anchor_model":"M4",
+            "not_model_selection_input":True,
             "never_an_approved_bet":True}
     return accepted,d["payload_sha256"]
 
@@ -217,7 +217,7 @@ def render(report,receipt,root,snapshots):
                                       reason=None,
                                       comparison=matched,
                                       calibrated_MS_research=q,
-                                      original_PAS_decision_sha256=original_decision_sha,
+                                      original_model_only_decision_sha256=original_decision_sha,
                                       odds_status="PINNACLE_API_OBSERVED_NOT_DIRECT_BOOKMAKER_VERIFIED")
                     else:result["reason"]=matched.get("reason","NOT_MATCHED")
         items.append(result)
@@ -256,7 +256,7 @@ def mobile(data):
             "Sadece sabah 05:00–14:59 TSİ alınan fiyatlar; tahmin-fiyat arası 10 dakikayı aşarsa kıyas yok.",
             "Pinnacle sabah fiyatı maç saatinde yeniden sorgulanmaz. KG ve gol çizgilerinde oran alınmadı; yalnız MS h2h.",
             "EV yüzdesi yalnız açıklayıcı senaryo, sistemin ana/alternatif bahis seçimi değildir.",
-            "Orijinal karar **RESEARCH_PAS** ve yeni100 pilot sayacı değişmez."]
+            "Orijinal model-first ANA/ALT/PAS kararı ve yeni100 pilot sayacı değişmez."]
     return "\n".join(lines)+"\n"
 
 def write_new(path,content):
