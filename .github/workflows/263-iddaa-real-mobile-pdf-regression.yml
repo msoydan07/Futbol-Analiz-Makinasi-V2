@@ -3,6 +3,13 @@ on:
   push:
     branches:
       - fix/263-iddaa-featured-pdf-layout-20261120
+      - experiment/263-toplu-karsilastirma
+    paths:
+      - experiments/263/iddaa_pdf_bulletin_263.py
+      - experiments/263/iddaa_pdf_team_alias_preflight_263.py
+      - experiments/263/iddaa_pdf_report_263.py
+      - experiments/263/test_iddaa_pdf_highlighted_rows_263.py
+      - .github/workflows/263-iddaa-real-mobile-pdf-regression.yml
 permissions:
   contents: read
 jobs:
@@ -32,16 +39,6 @@ jobs:
           set -euo pipefail
           python -m unittest -v experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_last_review_263.py experiments/263/test_model_first_iddaa_bridge_263.py experiments/263/test_c3_calibration_shadow_263.py
           git diff --exit-code
-      - name: Package public source for private local original-PDF replay
-        run: |
-          set -euo pipefail
-          zip -qr /tmp/263-iddaa-pdf-codepack.zip experiments/263
-      - uses: actions/upload-artifact@v4
-        with:
-          name: 263-iddaa-20nov-source-only-codepack
-          path: /tmp/263-iddaa-pdf-codepack.zip
-          retention-days: 5
-          if-no-files-found: error
       - name: Forbidden changes excluded
         run: |
           set -euo pipefail
