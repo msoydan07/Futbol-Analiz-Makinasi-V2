@@ -1,0 +1,42 @@
+{
+  "schema": "263_MODEL_FIRST_RESEARCH_LOCK_V2",
+  "family_anchors": {
+    "MS": "M4",
+    "KG": "C3",
+    "O25": "C3"
+  },
+  "historical_20261119_family_anchors": {
+    "MS": "M4",
+    "KG": "M4",
+    "O25": "M4"
+  },
+  "expert_selection_evidence": "2026-11-20: 293 Oct as-of + 39 Nov8 SHA; C3 KG/O25 lower Brier, M4 MS operational preference not independently proven",
+  "historical_selection_period": "2026-09-01/2026-09-30",
+  "m4_joint_calibration_august": [
+    0.05206617557187415,
+    0.10909064506028164,
+    1.0154151566181202
+  ],
+  "market_reference_only": true,
+  "min_available_models": 2,
+  "no_odds_input_to_selection": true,
+  "officially_approved": false,
+  "rank_basis": "highest_estimated_realization_probability_same_market_model_version_historical_reference",
+  "research_only": true,
+  "retrospective_evaluation_reused_not_independent": true,
+  "selection_basis": "M4_MS_AUG_JOINT_C3_KG_O25_RAW_NOV8_SHA_RESULTS_NO_FIXED_PERCENT_CUTOFF",
+  "price_may_not_be_gate": true,
+  "frozen_m4_calibration_only_applies_to_MS": true,
+  "historical_reference": {
+    "origin": "NOV8_PREKICKOFF_SHA_AND_NOV12_TERMINAL_SCORE_ARCHIVE",
+    "available_from_utc": "2026-11-13T00:00:00+00:00",
+    "similar_probability_half_width": 0.05,
+    "min_historical_report_n": 20,
+    "min_same_league_n": 8,
+    "prior_strength": 20,
+    "fall_back_when_sparse": "MODEL_PROBABILITY_WITH_EVIDENCE_LABEL",
+    "ranking": "HIGHEST_ESTIMATED_REALIZATION",
+    "price_influence": false
+  },
+  "payload_sha256": "27fc90af7cf7a736bb0647b7033df65bf44cc45f697672bbf3f018026736b8ac"
+}
