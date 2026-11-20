@@ -67,6 +67,27 @@ class UserApprovedReports(unittest.TestCase):
                     self.assertAlmostEqual(r.x0,big[0].x0,places=1)
                     self.assertAlmostEqual(r.x1,big[0].x1,places=1)
             with self.assertRaises(FileExistsError):render_singles(review,output)
+    def test_second_pdf_unmatched_match_has_no_single_report(self):
+        morning,first,last,resolver=make()
+        last["rows"][0]["home_label"]="Wrong team"
+        review=review_build(morning,first,last,[],NOW,resolver=resolver)
+        self.assertEqual(review["rows"][0]["status"],"GUNCEL_PDF_MAC_ESLESMEDI")
+        with tempfile.TemporaryDirectory() as d:
+            outputs=render_singles(review,Path(d)/"tekli")
+            self.assertEqual(len(outputs),4)
+            import fitz
+            all_text=""
+            for path in outputs:
+                with fitz.open(path) as pdf:all_text+=pdf[0].get_text()
+            self.assertNotIn("Ev Takimi 0 - Dep Takimi 0",all_text)
+    def test_second_pdf_no_match_is_fail_closed_not_an_empty_report(self):
+        morning,first,last,resolver=make()
+        last["rows"]=[]
+        review=review_build(morning,first,last,[],NOW,resolver=resolver)
+        with tempfile.TemporaryDirectory() as d:
+            with self.assertRaisesRegex(ValueError,"NO_VERIFIED_SECOND_PDF"):
+                render_singles(review,Path(d)/"tekli")
+
     def test_unsigned_choice_does_not_become_real_pick(self):
         # A market price alone can never manufacture a main prediction.
         s={"schema":MORNING_SCHEMA,"rows":[self._row(0)]}
