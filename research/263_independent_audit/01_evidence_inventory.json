@@ -1,0 +1,87 @@
+{
+  "schema": "263_INDEPENDENT_AUDIT_EVIDENCE_INVENTORY_V1",
+  "date": "2026-11-20",
+  "audit_branch": "research/263-independent-math-audit",
+  "original_untouched_branches": [
+    "main",
+    "experiment/263-toplu-karsilastirma"
+  ],
+  "source_snapshots": [
+    {
+      "kind": "ORIGINAL_SIGNED",
+      "games": 4413,
+      "league_count": 10,
+      "season_breakdown": {
+        "2025/26": 3533,
+        "2026/27": 880
+      },
+      "sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+      "retrieval": "GitHub Actions #41251343847 team-source-audit artifact historical_results.csv",
+      "role": "Original asof forecast reconstruction"
+    },
+    {
+      "kind": "QUAD_ACCEPTED",
+      "games": 4518,
+      "sha256": "1170ecf9bdc31426e80a069cfc63d7112d0ab0c0c7d527e3bb5daf9b3841ece9",
+      "path": "data/quad_accepted_263/extended_history.csv",
+      "role": "Other snapshot NOT mixed into 4413 original"
+    },
+    {
+      "kind": "RESEARCH_RESULTS_ONLY",
+      "games": 4617,
+      "sha256": "637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89",
+      "path": "data/results_only_263/2026-11-10_completed_4617_scores_only.csv",
+      "note": "Not official per-match ID verified; scored-only, 1 abandoned/awarded excludes full-time fit; source 28+28+43 grades",
+      "role": "Provenance-only; NOT mixed"
+    },
+    {
+      "kind": "XG_MARKETWISE_RESEARCH",
+      "games": 4618,
+      "sha256": "3b13921daafab70aa121fe807fea0a74e0c72f0fc2381366b183f621edea762c",
+      "note": "Private xG availability/vintage unverified; prior 1083 asof retrospective only",
+      "role": "Prior research report, NOT added to this challenge"
+    }
+  ],
+  "cohorts": [
+    {
+      "status": "DEV_CHRONOLOGICAL_PREVIOUSLY_RESEARCHED",
+      "dates": "2026-08/09",
+      "n": 587
+    },
+    {
+      "status": "RETROSPECTIVE_PREVIOUSLY_RESEARCHED_NOT_BLIND",
+      "dates": "2026-10",
+      "n": 293,
+      "distinct_match_days": 19
+    },
+    {
+      "status": "PREMATCH_SEALED_POSTMATCH_REVIEW_SINGLE_DAY_NOT_BLIND",
+      "date": "2026-11-08",
+      "registered": 40,
+      "scored": 39,
+      "postponed": 1,
+      "distinct_match_days": 1,
+      "source": "data/results_only_263/nov8_new100_terminal_archive_20261112.json"
+    }
+  ],
+  "methods_preregistered": 15,
+  "primary_market_families": [
+    "MS three-way summed Brier",
+    "KG binary Brier",
+    "2.5 goals binary Brier"
+  ],
+  "uncertainty": "1600 draw matched day-cluster bootstrap on 19 Oct match days; exploratory, no multiplicity adjustment",
+  "known_limits": [
+    "Retrospective October previously seen",
+    "Nov8 one day cannot validly be re-used as blinded final",
+    "Not all Nov scores independently matched to official federation fixture IDs",
+    "Not a full ablation of xG/venue/opponent and no timestamped xG provider vintage",
+    "Exploratory fixed distribution corrections use inferred M4 lambdas, do not refit alternate goal models",
+    "Baseline family shrinkage can violate cross-market joint-score coherence",
+    "Expert routing fixed M4 MS, C3 others tested raw; production M4 Aug joint MS calibration and dynamic reference selection are not exact replicated",
+    "No market odds/EV/ROI measurement",
+    "No model promotion authorized"
+  ],
+  "action_run": "https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/44808068394",
+  "production_changed": false
+}
