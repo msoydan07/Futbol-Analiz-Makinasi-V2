@@ -43,7 +43,7 @@ def load(*,asof,root=ROOT,lock=None):
     if len(rows)!=40:raise HistoricalEvidenceError("TERMINAL_ARCHIVE_NOT_40")
     for r in rows:
         path=r["forecast_path"]
-        if not re.fullmatch(r"forward_morning_263/2026-11-08/[0-9a-f]{24}\\.json",path):
+        if not re.fullmatch(r"forward_morning_263/2026-11-08/[0-9a-f]{24}\.json",path):
             raise HistoricalEvidenceError("UNSAFE_HISTORICAL_FORECAST_PATH")
         f=json.loads((root/path).read_text(encoding="utf-8"))
         verified(f,"quad_forward_263_v1")
