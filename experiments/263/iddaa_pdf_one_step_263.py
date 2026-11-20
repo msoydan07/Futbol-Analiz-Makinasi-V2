@@ -62,7 +62,7 @@ def _prior_completed_session(folder,original_sha):
 def one_step(pdf,*,history,output_root,
              m4_lock="experiments/263/m4_lock.json",
              source_baseline=None,source_acceptance=None,
-             dev_lock="experiments/263/model_first_selection_lock_20261120.json",
+             dev_lock="experiments/263/model_first_selection_lock_20261120_normal_v3.json",
              repo_root=".",now=None,official_lookup=None):
     # Fail closed before parsing the PDF or creating any model / SHA artifact.
     # The history stays readable; only the active operational route is accepted.
@@ -134,7 +134,7 @@ def main():
     p.add_argument("--m4-lock",default="experiments/263/m4_lock.json")
     p.add_argument("--source-baseline")
     p.add_argument("--source-acceptance")
-    p.add_argument("--dev-lock",default="experiments/263/model_first_selection_lock_20261120.json")
+    p.add_argument("--dev-lock",default="experiments/263/model_first_selection_lock_20261120_normal_v3.json")
     p.add_argument("--repo-root",default=".")
     args=p.parse_args()
     result=one_step(args.pdf,history=args.history,
