@@ -114,7 +114,7 @@ def row_data(report,price,root):
                          home=r["home"],away=r["away"],direction=choice[1],
                          model=choice[2],market=fair,
                          delta=(100*(choice[2]-fair)) if fair is not None and choice[2] is not None else None,
-                         goals=median,models=f["model_predictions"],
+                         goals=goals,models=f["model_predictions"],
                          forecast_sha=f["payload_sha256"],
                          decision_sha=d["payload_sha256"] if d else None,
                          locked_at=f["created_at_utc"],
