@@ -21,6 +21,7 @@ REQUIRED = {
     "exclusive_odds_source":"D-ODDS-SOURCE-20261120",
     "c3_calibration":"D-C3-CAL-010",
     "reporting_and_seals":"D-OPER-004",
+    "historical_probability_reliability":"D-HIST-PROB-20261120",
 }
 EXPECTED = {"MS":"M4", "KG":"C3", "O25":"C3"}
 
@@ -50,6 +51,11 @@ def verify_active_policy(root=ROOT):
         by_topic[topic]=item
     _require({k:v.get("decision_id") for k,v in by_topic.items()}==REQUIRED,
              "ACTIVE_DECISION_ID_CONFLICT")
+    _require(by_topic["historical_probability_reliability"].get("implementation_status")==
+             "RESEARCH_MODULE_ONLY_NOT_IN_LIVE_SELECTOR",
+             "HISTORICAL_RELIABILITY_NOT_YET_LIVE_MUST_BE_EXPLICIT")
+    _require((root/"experiments/263/historical_probability_reliability_263.py").is_file(),
+             "HISTORICAL_REFERENCE_RESEARCH_MODULE_MISSING")
     paths=p.get("canonical_entrypoints",{})
     _require(paths.get("first_pdf")=="experiments/263/iddaa_pdf_one_step_263.py",
              "FIRST_PDF_ROUTE_CHANGED")
