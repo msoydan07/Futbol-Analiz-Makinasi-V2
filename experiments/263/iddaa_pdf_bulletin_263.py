@@ -135,6 +135,44 @@ def _markets_from_words(page,b):
             return None,{"status":"INVALID_QUOTE_VALUE","column":key,"value":val}
     return result,{"status":"PRICE_COLUMNS_READ","found_slots":14}
 
+def _featured_highlight_row(page, b):
+    """Mobile iddaa highlighted rows split clock, teams and quote into 3 blocks.
+
+    E.g. page text:
+      clock block  : "Bugün\\n22:45"
+      team block   : "Troyes\\nLe Havre"
+      price words  : 14 separate x-positioned tokens
+    Matches only unique aligned blocks and named league headings. No guessed
+    team names or slot shifts. Normal two-team " - " rows still use old code.
+    """
+    lines=b[4].splitlines()
+    if (not 95 <= b[0] <= 124 or len(lines)!=2
+        or lines[0] not in ("Bugün","Yarın") or not TIME.fullmatch(lines[1])):
+        return None
+    blocks=page.get_text("blocks")
+    teams=[x for x in blocks if x is not b and 125<=x[0]<=205
+           and abs(x[1]-b[1])<=2.0 and len(x[4].splitlines())==2
+           and all(part.strip() and not part.startswith(("Bugün","Yarın"))
+                   and not re.search(r"\\d\\d:\\d\\d",part)
+                   for part in x[4].splitlines())]
+    if len(teams)!=1:return None
+    first,second=(part.strip() for part in teams[0][4].splitlines())
+    # Truncated club labels are preserved verbatim and quarantined by the
+    # existing TRUNCATED_TEAM_NAME_SINGLE_ROW status later in parse_pdf.
+    headings=[]
+    for x in blocks:
+        if not 70<=x[0]<100 or not 3<=b[1]-x[1]<=70:continue
+        title=x[4].splitlines()[0].strip() if x[4].strip() else ""
+        # Exclude the "1 / CANLI" and bookmaker price blocks.
+        if len(title)<5 or not any(letter.isalpha() for letter in title):
+            continue
+        if title in ("CANLI","Bugün","Yarın","Öne Çıkanlar"):
+            continue
+        headings.append((x[1],title))
+    if not headings:return None
+    headings.sort()
+    return lines[0],lines[1],headings[-1][1],first,second,teams[0]
+
 def parse_pdf(pdf_path,observed_at_utc=None):
     """Generate an auditable JSON payload, never a betting recommendation."""
     try:import fitz
@@ -171,6 +209,26 @@ def parse_pdf(pdf_path,observed_at_utc=None):
             rows.append({"page":page_number,"league_label":heading,
                          "league":league,"match_date_tr":fixture_date,
                          "kickoff_time_tr":lines[0],"home_label":home,
+                         "away_label":away,"odds":odds,
+                         "price_parse":price_state,"status":state})
+    # Only ADD mobile featured layout rows; preserve existing ordinary
+    # single-block parser and its strict 14-slot market requirements.
+    for page_number,page in enumerate(doc,1):
+        for b in page.get_text("blocks"):
+            featured=_featured_highlight_row(page,b)
+            if featured is None:continue
+            day,time,heading,home,away,team_block=featured
+            fixture_date=(local.date()+timedelta(days=day=="Yarın")).isoformat()
+            league=league_lookup(heading)
+            odds,price_state=_markets_from_words(page,team_block)
+            clipped=any(marker in home+away for marker in ("…","..."))
+            state=("OUT_OF_SCOPE_OR_UNMAPPED_LEAGUE" if league is None else
+                   "TRUNCATED_TEAM_NAME_SINGLE_ROW" if clipped else
+                   price_state["status"] if odds is None else
+                   "PDF_ROW_READY_FOR_ONE_OFFICIAL_FIXTURE_CHECK")
+            rows.append({"page":page_number,"league_label":heading,
+                         "league":league,"match_date_tr":fixture_date,
+                         "kickoff_time_tr":time,"home_label":home,
                          "away_label":away,"odds":odds,
                          "price_parse":price_state,"status":state})
     report={"schema":SCHEMA,"source_url":SOURCE,"source_domain":"iddaa.com",

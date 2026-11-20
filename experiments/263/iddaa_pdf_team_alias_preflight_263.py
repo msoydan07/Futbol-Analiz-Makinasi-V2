@@ -30,7 +30,10 @@ KNOWN_EXTERNAL_VARIANTS={
     "Sint Truiden":"STVV"},
   "ENG1":{"Brighton and Hove Albion":"Brighton & Hove Albion"},
   "ESP1":{"Celta Vigo":"Celta",
-          "Atlético Madrid":"Atlético de Madrid"},
+          "Atlético Madrid":"Atlético de Madrid",
+          # Observed verbatim in the user-provided 20 Nov iddaa PDF.
+          "Athletic Bilbao":"Athletic Club",
+          "Espanyol":"RCD Espanyol de Barcelona"},
   "GER1":{"Bayer Leverkusen":"Bayer 04 Leverkusen",
           "SC Freiburg":"Sport-Club Freiburg"},
   "ITA1":{"AC Milan":"Milan","Atalanta BC":"Atalanta",
@@ -46,7 +49,7 @@ KNOWN_EXTERNAL_VARIANTS={
           "Besiktas JK":"BEŞİKTAŞ A.Ş.",
           "Genclerbirligi SK":"GENÇLERBİRLİĞİ"},
 }
-assert sum(len(x) for x in KNOWN_EXTERNAL_VARIANTS.values())==20
+assert sum(len(x) for x in KNOWN_EXTERNAL_VARIANTS.values())==22
 
 def normal(s):
     if not isinstance(s,str):return ""

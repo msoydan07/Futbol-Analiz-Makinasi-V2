@@ -1,0 +1,45 @@
+name: "263 real mobile PDF layout 20-Nov regression"
+on:
+  push:
+    branches:
+      - fix/263-iddaa-featured-pdf-layout-20261120
+      - experiment/263-toplu-karsilastirma
+    paths:
+      - experiments/263/iddaa_pdf_bulletin_263.py
+      - experiments/263/iddaa_pdf_team_alias_preflight_263.py
+      - experiments/263/iddaa_pdf_report_263.py
+      - experiments/263/test_iddaa_pdf_highlighted_rows_263.py
+      - .github/workflows/263-iddaa-real-mobile-pdf-regression.yml
+permissions:
+  contents: read
+jobs:
+  mobile-iddaa-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install existing math and PDF-only dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab pymupdf
+      - name: Actual 20-Nov structure, exact market slots and canonical 2026/27 identities
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_iddaa_pdf_highlighted_rows_263.py
+      - name: Existing PDF parsing, first source PDF, model-first and second-PDF regressions
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_iddaa_pdf_bulletin_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_last_review_263.py experiments/263/test_model_first_iddaa_bridge_263.py experiments/263/test_c3_calibration_shadow_263.py
+          git diff --exit-code
+      - name: Forbidden changes excluded
+        run: |
+          set -euo pipefail
+          test "$(git diff --name-only origin/experiment/263-toplu-karsilastirma HEAD -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/analysis_math_core.py experiments/263/model_first_decision_263.py experiments/263/model_first_selection_lock_20261120.json forward_morning_263 data/results_only_263 | wc -l)" -eq 0

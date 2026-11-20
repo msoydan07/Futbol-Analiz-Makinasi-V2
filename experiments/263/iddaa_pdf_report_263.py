@@ -53,6 +53,13 @@ def _render_pick(row,session):
     Actual file SHA + official forecast SHA + as-of baseline SHA are verified
     upstream by iddaa_pdf_value_bridge_263; here require sealed result identity.
     """
+    # A real PDF row with no model calculation is a technical/data hold,
+    # NEVER a legitimate probability-driven model PAS. Keep the distinction
+    # obvious even when no decision/seal exists yet.
+    if isinstance(row.get("status"),str) and row["status"].startswith("ONE_ROW_"):
+        reason=(row.get("model_reason") or row.get("team_identity_reason")
+                or row.get("model_error_type") or row.get("status"))
+        return "ANA: TEKNIK ENGEL (PAS DEGIL) | Neden: "+str(reason)[:145]
     # D-MARKET-006: new research route; ONLY model decision may choose a market.
     # Legacy price-driven records remain readable for historical audit, but
     # are never produced by iddaa_pdf_model_first_one_step_263.py.
@@ -165,7 +172,10 @@ def _table_for(row,norm,bold,font):
             diag=next((d for d in row["model_first_decision"]["model_market_diagnostics"]
                       if d.get("market")==market),None)
             selected=diag["anchor_model"] if diag else selected
-            p=(models.get(selected) or {}).get(market)
+            # Show the SAME market-specific probability that the signed
+            # decision layer actually used (M4 August-calibrated MS,
+            # C3 raw KG/O25), not the raw historical M4 column.
+            p=diag.get("calibrated_probability") if diag else None
         else:
             p=m4.get(market)
         if not isinstance(p,(int,float)) or isinstance(p,bool):p=None
@@ -277,7 +287,7 @@ def build(session,output):
             segments+=[Spacer(1,6),Paragraph(
                 escape("  |  ".join(modelbits)),small)]
         segments+=[Spacer(1,5),Paragraph(
-            ("Fark = seçili uzman modelin ham % − piyasa marjsız %. " if row.get("model_first_decision")
+            ("Fark = karar katmanında kullanılan uzman % − piyasa marjsız %. " if row.get("model_first_decision")
              else "Fark = M4 ham % − piyasa marjsız %. ")+
             "Pozitif fark tek başına kalibre bahis avantajı değildir.",small),Spacer(1,20)]
         story.append(KeepTogether(segments))
