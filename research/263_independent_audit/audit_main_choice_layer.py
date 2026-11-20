@@ -55,9 +55,9 @@ def build(r,theta,lam):
     lg0,lg1=lam
     rawp=score_markets(lg0,lg1)
     original=r["p"]["M4"]
-    assert abs(rawp["1X2"]["H"]-original["MS1"])<.0000015
-    assert abs(rawp["BTTS_YES"]-original["BTTS_YES"])<.0000015
-    assert abs(rawp["OVER_2.5"]-original["OVER_2.5"])<.0000015
+    assert abs(rawp["markets"]["1X2"]["H"]-original["MS1"])<.0000015
+    assert abs(rawp["markets"]["BTTS_YES"]-original["BTTS_YES"])<.0000015
+    assert abs(rawp["markets"]["OVER_2.5"]-original["OVER_2.5"])<.0000015
     newlh=max(.05,min(5.,math.exp(theta[0]+theta[2]*math.log(lg0))))
     newla=max(.05,min(5.,math.exp(theta[1]+theta[2]*math.log(lg1))))
     live_ms=joint_poisson(newlh,newla)
@@ -221,7 +221,7 @@ def main():
     assert len(novlambda)==len(sealed)
     for r,(lh,la,original) in zip(sealed,novlambda):
         assert r["league"]==original["fixture"]["league"]
-        assert abs(score_markets(lh,la)["1X2"]["H"]-r["p"]["M4"]["MS1"])<.0000015
+        assert abs(score_markets(lh,la)["markets"]["1X2"]["H"]-r["p"]["M4"]["MS1"])<.0000015
         build(r,theta,(lh,la))
     september=[r for r in rows if r["date"][:7]=="2026-09"]
     october=[r for r in rows if r["date"][:7]=="2026-10"]
