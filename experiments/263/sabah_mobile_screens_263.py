@@ -129,7 +129,7 @@ def build(root,report):
    calibrated="—"
    if d:
     current=d.get("schema")=="263_MODEL_FIRST_FOUR_MODEL_DECISION_RESEARCH_V2"
-   relevant=[(x["market"],x.get("calibrated_probability")) for x in d.get(
+    relevant=[(x["market"],x.get("calibrated_probability")) for x in d.get(
                 "model_market_diagnostics" if current else "all_market_diagnostics",[])
               if x.get("market") in ("MS1","MSX","MS2") and isinstance(x.get("calibrated_probability"),(int,float))]
     if relevant:
