@@ -98,7 +98,7 @@ def decide(*,m4_joint_ms,c3_binary=None,league_asof,asof_utc,
     m=validate(m4_joint_ms,MS)
     # Separate families share only top-level seven-event ranking, never mix
     # 1X2 probabilities from different anchor models.
-    if not isinstance(league_asof,dict) or set(league_asof)!=set(EVENTS):
+    if not isinstance(league_asof,dict) or not set(EVENTS).issubset(league_asof):
         raise ValueError("BASELINE_ALL_SEVEN_REQUIRED")
     b={k:bounded(league_asof[k]) for k in EVENTS}
     for family in (MS,KG,O25):
