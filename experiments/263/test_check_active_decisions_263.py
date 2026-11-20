@@ -13,6 +13,9 @@ NEEDED = (
     "experiments/263/model_first_iddaa_bridge_263.py",
     "experiments/263/model_first_decision_263.py",
     "experiments/263/model_first_selection_lock_20261120_normal_v3.json",
+    "experiments/263/model_first_selection_lock_20261121_v4.json",
+    "experiments/263/model_first_frozen_c3_calibration_263.py",
+    "experiments/263/sabah_batch_263.py",
     "experiments/263/normal_historical_reference_263.py",
     "experiments/263/m4_integrated.py",
     ".github/workflows/263-sabah-new100-on-request.yml",
@@ -50,7 +53,7 @@ class Contract(unittest.TestCase):
         with self.assertRaises(ActiveDecisionConflict):
             verify_active_policy(self.root)
     def test_wrong_expert_policy_blocks(self):
-        path=self.root/"experiments/263/model_first_selection_lock_20261120_normal_v3.json"
+        path=self.root/"experiments/263/model_first_selection_lock_20261121_v4.json"
         d=json.loads(path.read_text(encoding="utf-8"))
         d["family_anchors"]["KG"]="M4"
         path.write_text(json.dumps(d),encoding="utf-8")

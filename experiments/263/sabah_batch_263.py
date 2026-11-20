@@ -97,7 +97,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
   from check_active_decisions_263 import verify_active_policy
   verify_active_policy()
   if dev_lock_path=="experiments/263/forward_dev_calibration_lock_263.json":
-   dev_lock_path="experiments/263/model_first_selection_lock_20261120_normal_v3.json"
+   dev_lock_path="experiments/263/model_first_selection_lock_20261121_v4.json"
  now=now or datetime.now(timezone.utc)
  if now.tzinfo is None:raise Blocked("AWARE_TIME_REQUIRED")
  now=now.astimezone(timezone.utc)

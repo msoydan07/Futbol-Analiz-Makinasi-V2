@@ -15,11 +15,11 @@ POLICY = ROOT / "docs/263_AKTIF_KARARLAR.json"
 REQUIRED = {
     "league_scope":"D-SCOPE-002",
     "model_math":"D-MODEL-003",
-    "fixed_market_experts":"D-EXPERT-20261120",
-    "model_selection":"D-MARKET-006",
+    "fixed_market_experts":"D-EXPERT-20261121",
+    "model_selection":"D-MARKET-007",
     "pdf_sequence":"D-ODDS-001",
     "exclusive_odds_source":"D-ODDS-SOURCE-20261120",
-    "c3_calibration":"D-C3-CAL-010",
+    "c3_calibration":"D-C3-CAL-011",
     "reporting_and_seals":"D-OPER-004",
 }
 EXPECTED = {"MS":"M4", "KG":"C3", "O25":"C3"}
@@ -82,15 +82,46 @@ def verify_active_policy(root=ROOT):
     _require(args==["forecast","baseline","lock"] and
              [arg.arg for arg in named["select"].args.kwonlyargs]==["now"],
              "ODDS_PASSED_TO_MODEL_SELECTION")
-    active_lock_rel="experiments/263/model_first_selection_lock_20261120_normal_v3.json"
+    active_lock_rel="experiments/263/model_first_selection_lock_20261121_v4.json"
     _require(paths.get("model_selection_lock")==active_lock_rel,
              "NORMAL_SELECTION_LOCK_NOT_ACTIVE")
     lock=json.loads((root/active_lock_rel).read_text(encoding="utf-8"))
     _require("min_probability" not in lock and "min_lift" not in lock,
              "ARBITRARY_PROBABILITY_OR_LIFT_GATE_RETURNED")
-    _require(lock.get("historical_reference",{}).get("ranking")=="HIGHEST_ESTIMATED_REALIZATION"
+    _require(lock.get("historical_reference",{}).get("ranking")=="DIAGNOSTIC_ONLY_NOT_USED_FOR_V4_CALIBRATED_MARKET_SELECTION"
              and lock.get("historical_reference",{}).get("price_influence") is False,
-             "HISTORICAL_REALIZATION_NORMAL_RANKING_NOT_ACTIVE")
+             "V4_MUST_NOT_MIX_RAW_39_SHA_INTO_CALIBRATED_RANKING")
+    # The research-selected C3 transformation is a new versioned decision
+    # policy, never a silent mutation of the original v3 lock.
+    from model_first_decision_263 import digest
+    _require(lock.get("payload_sha256")==digest({k:v for k,v in lock.items() if k!="payload_sha256"}),
+             "V4_MODEL_LOCK_SHA_INVALID")
+    _require((root/"experiments/263/model_first_selection_lock_20261120_normal_v3.json").is_file(),
+             "V3_REPLAY_LOCK_REMOVED")
+    calibration=lock.get("calibration_v4")
+    # Read source from this root rather than importing active installation,
+    # so temporary-copy negative tests also fail closed.
+    calibration_path=paths.get("c3_binary_calibrator")
+    _require(calibration_path=="experiments/263/model_first_frozen_c3_calibration_263.py",
+             "V4_CALIBRATION_ROUTE_CHANGED")
+    module_source=(root/calibration_path).read_text(encoding="utf-8")
+    _require("def calibrated_binary_pair(" in module_source and "TRAIN_N = 2898" in module_source,
+             "V4_C3_CALIBRATION_IMPLEMENTATION_MISSING")
+    _require(isinstance(calibration,dict) and calibration.get("train_n")==2898
+             and calibration.get("method")=="C3_2025_26_TWO_BINARY_LOGIT_FROZEN_V1"
+             and calibration.get("train_season")=="2025-2026"
+             and calibration.get("odds_not_used") is True,
+             "V4_BINARY_CALIBRATION_LOCK_MISSING")
+    _require(calibration.get("coefficients")=={
+        "BTTS_YES":{"intercept":0.120946,"c3_logit":0.2643173,
+                    "previous_league_logit":0.5012377},
+        "OVER_2.5":{"intercept":0.1100003,"c3_logit":0.2639998,
+                    "previous_league_logit":0.2514675}},
+        "V4_COEFFICIENTS_UNEXPECTED")
+    _require(active_lock_rel in one and active_lock_rel in bridge,
+             "V4_PDF_ROUTE_NOT_ACTIVE")
+    morning=(root/"experiments/263/sabah_batch_263.py").read_text(encoding="utf-8")
+    _require(active_lock_rel in morning,"V4_MORNING_ROUTE_NOT_ACTIVE")
 
     _require(lock.get("family_anchors")==EXPECTED and
              lock.get("no_odds_input_to_selection") is True and
