@@ -1,0 +1,60 @@
+name: "263 v4 frozen primary choice controlled promotion"
+on:
+  push:
+    branches: [feature/263-frozen-c3-choice-v4-20261121, experiment/263-toplu-karsilastirma]
+    paths:
+      - ".github/workflows/263-v4-primary-choice-acceptance.yml"
+      - "experiments/263/model_first_decision_263.py"
+      - "experiments/263/model_first_frozen_c3_calibration_263.py"
+      - "experiments/263/model_first_selection_lock_20261121_v4.json"
+      - "experiments/263/model_first_iddaa_bridge_263.py"
+      - "experiments/263/iddaa_pdf_one_step_263.py"
+      - "experiments/263/sabah_batch_263.py"
+      - "experiments/263/iddaa_pdf_report_263.py"
+      - "experiments/263/check_active_decisions_263.py"
+      - "experiments/263/test_model_first_decision_v4_263.py"
+      - "docs/263_AKTIF_KARARLAR.json"
+  pull_request:
+    branches: [experiment/263-toplu-karsilastirma]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  safety-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install known original 2.6.3 dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab==4.4.5 pymupdf
+      - name: V4 new seal policy and old V3 immutable replay
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m py_compile experiments/263/model_first_frozen_c3_calibration_263.py experiments/263/model_first_decision_263.py experiments/263/model_first_iddaa_bridge_263.py experiments/263/iddaa_pdf_report_263.py
+          python -m unittest -v experiments/263/test_model_first_decision_263.py experiments/263/test_model_first_decision_v4_263.py
+      - name: Exact active policy, 39 old seals, PDF bridge and new100 batch regression
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python experiments/263/check_active_decisions_263.py
+          python -m unittest -v experiments/263/test_check_active_decisions_263.py experiments/263/test_historical_probability_reliability_263.py experiments/263/test_normal_historical_reference_263.py
+          python -m unittest -v experiments/263/test_model_first_iddaa_bridge_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_sabah_workflow_263.py
+      - name: Confirm core maths, old SHA source and original 2025/26 historical reference unchanged
+        run: |
+          set -euo pipefail
+          git fetch origin experiment/263-toplu-karsilastirma --quiet
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- \
+            experiments/263/m4_integrated.py experiments/263/m4_lock.json \
+            experiments/263/exp_263_batch.py \
+            experiments/263/historical_probability_reliability_263.py \
+            experiments/263/normal_historical_reference_263.py \
+            experiments/263/model_first_selection_lock_20261120_normal_v3.json \
+            data/results_only_263 forward_morning_263 forward_quad_263
