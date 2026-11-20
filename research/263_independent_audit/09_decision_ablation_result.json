@@ -1,0 +1,1210 @@
+{
+  "does_not_change_main": true,
+  "market_prices_available": false,
+  "no_blind_claim": true,
+  "nov_single_day_score_id_limit": true,
+  "old_forecast_seals_unchanged": true,
+  "original_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "periods": {
+    "aug_sep": {
+      "FIXED_RAW_M4_MS_C3_OTHERS": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2437321,
+            "classification_accuracy": 0.56552,
+            "days": 41,
+            "logloss": 0.6803874,
+            "n": 580
+          },
+          "MS": {
+            "brier": 0.6011326,
+            "classification_accuracy": 0.49655,
+            "days": 41,
+            "logloss": 1.0068802,
+            "n": 580
+          },
+          "O25": {
+            "brier": 0.2451611,
+            "classification_accuracy": 0.56379,
+            "days": 41,
+            "logloss": 0.683616,
+            "n": 580
+          }
+        },
+        "p65": {
+          "PAS": 430,
+          "coverage_pct": 26.75,
+          "hit_pct": 71.97,
+          "market_counts": {
+            "BTTS_NO": 2,
+            "BTTS_YES": 10,
+            "MS1": 58,
+            "MS2": 15,
+            "OVER_2.5": 42,
+            "UNDER_2.5": 30
+          },
+          "n": 157,
+          "predicted_mean_pct": 71.4,
+          "selected_event_brier": 0.201796
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "same_event": 580,
+            "same_family": 580
+          },
+          "days": 41,
+          "hit_advantage_candidate_percentage_points": 0.0,
+          "hit_advantage_ci95_pp": [
+            0.0,
+            0.0
+          ],
+          "n": 580,
+          "same_event_brier_gain_vs_league": 0.0165045,
+          "same_event_vs_league_ci95": [
+            0.0039224,
+            0.0306929
+          ],
+          "selected_brier_gain_candidate": 0.0,
+          "selected_brier_gain_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "single_event": {
+          "PAS": 7,
+          "coverage_pct": 98.81,
+          "hit_pct": 57.59,
+          "market_counts": {
+            "BTTS_NO": 4,
+            "BTTS_YES": 177,
+            "MS1": 105,
+            "MS2": 38,
+            "OVER_2.5": 69,
+            "UNDER_2.5": 187
+          },
+          "n": 580,
+          "predicted_mean_pct": 61.68,
+          "selected_event_brier": 0.238125
+        }
+      },
+      "MS_M4_RAW_KG_C3_025_O25_C3_025": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2426112,
+            "classification_accuracy": 0.54483,
+            "days": 41,
+            "logloss": 0.6781291,
+            "n": 580
+          },
+          "MS": {
+            "brier": 0.6011326,
+            "classification_accuracy": 0.49655,
+            "days": 41,
+            "logloss": 1.0068802,
+            "n": 580
+          },
+          "O25": {
+            "brier": 0.2399376,
+            "classification_accuracy": 0.56897,
+            "days": 41,
+            "logloss": 0.6726823,
+            "n": 580
+          }
+        },
+        "p65": {
+          "PAS": 490,
+          "coverage_pct": 16.52,
+          "hit_pct": 77.32,
+          "market_counts": {
+            "MS1": 64,
+            "MS2": 18,
+            "OVER_2.5": 15
+          },
+          "n": 97,
+          "predicted_mean_pct": 71.68,
+          "selected_event_brier": 0.17984
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 245,
+            "different_family": 234,
+            "same_event": 335,
+            "same_family": 346
+          },
+          "days": 41,
+          "hit_advantage_candidate_percentage_points": 2.931,
+          "hit_advantage_ci95_pp": [
+            -0.866,
+            6.316
+          ],
+          "n": 580,
+          "same_event_brier_gain_vs_league": 0.0258973,
+          "same_event_vs_league_ci95": [
+            0.0151491,
+            0.0382925
+          ],
+          "selected_brier_gain_candidate": 0.0073763,
+          "selected_brier_gain_ci95": [
+            0.0006026,
+            0.0133328
+          ]
+        },
+        "single_event": {
+          "PAS": 7,
+          "coverage_pct": 98.81,
+          "hit_pct": 60.52,
+          "market_counts": {
+            "BTTS_NO": 22,
+            "BTTS_YES": 254,
+            "MS1": 117,
+            "MS2": 50,
+            "OVER_2.5": 84,
+            "UNDER_2.5": 53
+          },
+          "n": 580,
+          "predicted_mean_pct": 59.03,
+          "selected_event_brier": 0.230749
+        }
+      },
+      "MS_M4_RAW_KG_C3_050_O25_C3_025": {
+        "market_scores": {
+          "KG": {
+            "n": 0
+          },
+          "MS": {
+            "n": 0
+          },
+          "O25": {
+            "n": 0
+          }
+        },
+        "p65": {
+          "PAS": 587,
+          "coverage_pct": 0.0,
+          "hit_pct": null,
+          "market_counts": {},
+          "n": 0,
+          "predicted_mean_pct": null,
+          "selected_event_brier": null
+        },
+        "paired_vs_raw": {
+          "n": 0
+        },
+        "single_event": {
+          "PAS": 587,
+          "coverage_pct": 0.0,
+          "hit_pct": null,
+          "market_counts": {},
+          "n": 0,
+          "predicted_mean_pct": null,
+          "selected_event_brier": null
+        }
+      },
+      "MS_M4_RAW_KG_LEAGUE_O25_LEAGUE": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2438549,
+            "classification_accuracy": 0.55172,
+            "days": 41,
+            "logloss": 0.6806864,
+            "n": 580
+          },
+          "MS": {
+            "brier": 0.6011326,
+            "classification_accuracy": 0.49655,
+            "days": 41,
+            "logloss": 1.0068802,
+            "n": 580
+          },
+          "O25": {
+            "brier": 0.2407591,
+            "classification_accuracy": 0.58966,
+            "days": 41,
+            "logloss": 0.6743252,
+            "n": 580
+          }
+        },
+        "p65": {
+          "PAS": 496,
+          "coverage_pct": 15.5,
+          "hit_pct": 76.92,
+          "market_counts": {
+            "MS1": 65,
+            "MS2": 18,
+            "OVER_2.5": 8
+          },
+          "n": 91,
+          "predicted_mean_pct": 71.97,
+          "selected_event_brier": 0.180079
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 315,
+            "different_family": 273,
+            "same_event": 265,
+            "same_family": 307
+          },
+          "days": 41,
+          "hit_advantage_candidate_percentage_points": 3.103,
+          "hit_advantage_ci95_pp": [
+            -2.045,
+            7.895
+          ],
+          "n": 580,
+          "same_event_brier_gain_vs_league": 0.0274721,
+          "same_event_vs_league_ci95": [
+            0.0171095,
+            0.0389442
+          ],
+          "selected_brier_gain_candidate": 0.008309,
+          "selected_brier_gain_ci95": [
+            -0.0006306,
+            0.0161967
+          ]
+        },
+        "single_event": {
+          "PAS": 7,
+          "coverage_pct": 98.81,
+          "hit_pct": 60.69,
+          "market_counts": {
+            "BTTS_NO": 31,
+            "BTTS_YES": 290,
+            "MS1": 115,
+            "MS2": 46,
+            "OVER_2.5": 98
+          },
+          "n": 580,
+          "predicted_mean_pct": 59.42,
+          "selected_event_brier": 0.229816
+        }
+      }
+    },
+    "nov8_sha": {
+      "FIXED_RAW_M4_MS_C3_OTHERS": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2463668,
+            "classification_accuracy": 0.48718,
+            "days": 1,
+            "logloss": 0.686763,
+            "n": 39
+          },
+          "MS": {
+            "brier": 0.5099587,
+            "classification_accuracy": 0.64103,
+            "days": 1,
+            "logloss": 0.8752999,
+            "n": 39
+          },
+          "O25": {
+            "brier": 0.247555,
+            "classification_accuracy": 0.51282,
+            "days": 1,
+            "logloss": 0.688972,
+            "n": 39
+          }
+        },
+        "p65": {
+          "PAS": 26,
+          "coverage_pct": 33.33,
+          "hit_pct": 76.92,
+          "market_counts": {
+            "BTTS_YES": 3,
+            "MS1": 5,
+            "MS2": 2,
+            "OVER_2.5": 2,
+            "UNDER_2.5": 1
+          },
+          "n": 13,
+          "predicted_mean_pct": 71.4,
+          "selected_event_brier": 0.193061
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "same_event": 39,
+            "same_family": 39
+          },
+          "days": 1,
+          "hit_advantage_candidate_percentage_points": 0.0,
+          "hit_advantage_ci95_pp": null,
+          "n": 39,
+          "same_event_brier_gain_vs_league": 0.0488394,
+          "same_event_vs_league_ci95": null,
+          "selected_brier_gain_candidate": 0.0,
+          "selected_brier_gain_ci95": null
+        },
+        "single_event": {
+          "PAS": 0,
+          "coverage_pct": 100.0,
+          "hit_pct": 66.67,
+          "market_counts": {
+            "BTTS_NO": 1,
+            "BTTS_YES": 15,
+            "MS1": 8,
+            "MS2": 3,
+            "OVER_2.5": 5,
+            "UNDER_2.5": 7
+          },
+          "n": 39,
+          "predicted_mean_pct": 62.67,
+          "selected_event_brier": 0.212814
+        }
+      },
+      "MS_M4_RAW_KG_C3_025_O25_C3_025": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2453977,
+            "classification_accuracy": 0.4359,
+            "days": 1,
+            "logloss": 0.6835143,
+            "n": 39
+          },
+          "MS": {
+            "brier": 0.5099587,
+            "classification_accuracy": 0.64103,
+            "days": 1,
+            "logloss": 0.8752999,
+            "n": 39
+          },
+          "O25": {
+            "brier": 0.2388232,
+            "classification_accuracy": 0.48718,
+            "days": 1,
+            "logloss": 0.6703337,
+            "n": 39
+          }
+        },
+        "p65": {
+          "PAS": 32,
+          "coverage_pct": 17.95,
+          "hit_pct": 85.71,
+          "market_counts": {
+            "MS1": 5,
+            "MS2": 2
+          },
+          "n": 7,
+          "predicted_mean_pct": 72.98,
+          "selected_event_brier": 0.156774
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 13,
+            "different_family": 12,
+            "same_event": 26,
+            "same_family": 27
+          },
+          "days": 1,
+          "hit_advantage_candidate_percentage_points": -5.128,
+          "hit_advantage_ci95_pp": null,
+          "n": 39,
+          "same_event_brier_gain_vs_league": 0.0480419,
+          "same_event_vs_league_ci95": null,
+          "selected_brier_gain_candidate": 0.0009349,
+          "selected_brier_gain_ci95": null
+        },
+        "single_event": {
+          "PAS": 0,
+          "coverage_pct": 100.0,
+          "hit_pct": 61.54,
+          "market_counts": {
+            "BTTS_NO": 3,
+            "BTTS_YES": 13,
+            "MS1": 7,
+            "MS2": 3,
+            "OVER_2.5": 12,
+            "UNDER_2.5": 1
+          },
+          "n": 39,
+          "predicted_mean_pct": 59.47,
+          "selected_event_brier": 0.211879
+        }
+      },
+      "MS_M4_RAW_KG_C3_050_O25_C3_025": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2447006,
+            "classification_accuracy": 0.53846,
+            "days": 1,
+            "logloss": 0.6822212,
+            "n": 39
+          },
+          "MS": {
+            "brier": 0.5099587,
+            "classification_accuracy": 0.64103,
+            "days": 1,
+            "logloss": 0.8752999,
+            "n": 39
+          },
+          "O25": {
+            "brier": 0.2388232,
+            "classification_accuracy": 0.48718,
+            "days": 1,
+            "logloss": 0.6703337,
+            "n": 39
+          }
+        },
+        "p65": {
+          "PAS": 32,
+          "coverage_pct": 17.95,
+          "hit_pct": 85.71,
+          "market_counts": {
+            "MS1": 5,
+            "MS2": 2
+          },
+          "n": 7,
+          "predicted_mean_pct": 72.98,
+          "selected_event_brier": 0.156774
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 15,
+            "different_family": 13,
+            "same_event": 24,
+            "same_family": 26
+          },
+          "days": 1,
+          "hit_advantage_candidate_percentage_points": -2.564,
+          "hit_advantage_ci95_pp": null,
+          "n": 39,
+          "same_event_brier_gain_vs_league": 0.0464445,
+          "same_event_vs_league_ci95": null,
+          "selected_brier_gain_candidate": -0.0010127,
+          "selected_brier_gain_ci95": null
+        },
+        "single_event": {
+          "PAS": 0,
+          "coverage_pct": 100.0,
+          "hit_pct": 64.1,
+          "market_counts": {
+            "BTTS_NO": 4,
+            "BTTS_YES": 17,
+            "MS1": 7,
+            "MS2": 3,
+            "OVER_2.5": 7,
+            "UNDER_2.5": 1
+          },
+          "n": 39,
+          "predicted_mean_pct": 60.07,
+          "selected_event_brier": 0.213827
+        }
+      },
+      "MS_M4_RAW_KG_LEAGUE_O25_LEAGUE": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2471151,
+            "classification_accuracy": 0.46154,
+            "days": 1,
+            "logloss": 0.6869153,
+            "n": 39
+          },
+          "MS": {
+            "brier": 0.5099587,
+            "classification_accuracy": 0.64103,
+            "days": 1,
+            "logloss": 0.8752999,
+            "n": 39
+          },
+          "O25": {
+            "brier": 0.2387669,
+            "classification_accuracy": 0.53846,
+            "days": 1,
+            "logloss": 0.6701277,
+            "n": 39
+          }
+        },
+        "p65": {
+          "PAS": 32,
+          "coverage_pct": 17.95,
+          "hit_pct": 85.71,
+          "market_counts": {
+            "MS1": 5,
+            "MS2": 2
+          },
+          "n": 7,
+          "predicted_mean_pct": 72.98,
+          "selected_event_brier": 0.156774
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 17,
+            "different_family": 12,
+            "same_event": 22,
+            "same_family": 27
+          },
+          "days": 1,
+          "hit_advantage_candidate_percentage_points": -2.564,
+          "hit_advantage_ci95_pp": null,
+          "n": 39,
+          "same_event_brier_gain_vs_league": 0.0479055,
+          "same_event_vs_league_ci95": null,
+          "selected_brier_gain_candidate": -0.0013307,
+          "selected_brier_gain_ci95": null
+        },
+        "single_event": {
+          "PAS": 0,
+          "coverage_pct": 100.0,
+          "hit_pct": 64.1,
+          "market_counts": {
+            "BTTS_NO": 5,
+            "BTTS_YES": 11,
+            "MS1": 9,
+            "MS2": 3,
+            "OVER_2.5": 11
+          },
+          "n": 39,
+          "predicted_mean_pct": 59.46,
+          "selected_event_brier": 0.214145
+        }
+      }
+    },
+    "october": {
+      "FIXED_RAW_M4_MS_C3_OTHERS": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2467515,
+            "classification_accuracy": 0.56314,
+            "days": 19,
+            "logloss": 0.6870755,
+            "n": 293
+          },
+          "MS": {
+            "brier": 0.5855418,
+            "classification_accuracy": 0.54949,
+            "days": 19,
+            "logloss": 0.984403,
+            "n": 293
+          },
+          "O25": {
+            "brier": 0.2470892,
+            "classification_accuracy": 0.54608,
+            "days": 19,
+            "logloss": 0.6882603,
+            "n": 293
+          }
+        },
+        "p65": {
+          "PAS": 199,
+          "coverage_pct": 32.08,
+          "hit_pct": 65.96,
+          "market_counts": {
+            "BTTS_YES": 2,
+            "MS1": 36,
+            "MS2": 8,
+            "OVER_2.5": 35,
+            "UNDER_2.5": 13
+          },
+          "n": 94,
+          "predicted_mean_pct": 71.93,
+          "selected_event_brier": 0.229975
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "same_event": 293,
+            "same_family": 293
+          },
+          "days": 19,
+          "hit_advantage_candidate_percentage_points": 0.0,
+          "hit_advantage_ci95_pp": [
+            0.0,
+            0.0
+          ],
+          "n": 293,
+          "same_event_brier_gain_vs_league": 0.0163352,
+          "same_event_vs_league_ci95": [
+            -0.0048475,
+            0.0355352
+          ],
+          "selected_brier_gain_candidate": 0.0,
+          "selected_brier_gain_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "single_event": {
+          "PAS": 0,
+          "coverage_pct": 100.0,
+          "hit_pct": 57.68,
+          "market_counts": {
+            "BTTS_NO": 1,
+            "BTTS_YES": 86,
+            "MS1": 52,
+            "MS2": 18,
+            "OVER_2.5": 49,
+            "UNDER_2.5": 87
+          },
+          "n": 293,
+          "predicted_mean_pct": 62.77,
+          "selected_event_brier": 0.242331
+        }
+      },
+      "MS_M4_RAW_KG_C3_025_O25_C3_025": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2440215,
+            "classification_accuracy": 0.5529,
+            "days": 19,
+            "logloss": 0.6809897,
+            "n": 293
+          },
+          "MS": {
+            "brier": 0.5855418,
+            "classification_accuracy": 0.54949,
+            "days": 19,
+            "logloss": 0.984403,
+            "n": 293
+          },
+          "O25": {
+            "brier": 0.2436595,
+            "classification_accuracy": 0.57338,
+            "days": 19,
+            "logloss": 0.6802736,
+            "n": 293
+          }
+        },
+        "p65": {
+          "PAS": 231,
+          "coverage_pct": 21.16,
+          "hit_pct": 66.13,
+          "market_counts": {
+            "MS1": 39,
+            "MS2": 9,
+            "OVER_2.5": 14
+          },
+          "n": 62,
+          "predicted_mean_pct": 71.64,
+          "selected_event_brier": 0.226766
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 113,
+            "different_family": 103,
+            "same_event": 180,
+            "same_family": 190
+          },
+          "days": 19,
+          "hit_advantage_candidate_percentage_points": 0.683,
+          "hit_advantage_ci95_pp": [
+            -5.578,
+            10.16
+          ],
+          "n": 293,
+          "same_event_brier_gain_vs_league": 0.024346,
+          "same_event_vs_league_ci95": [
+            0.0108423,
+            0.0373166
+          ],
+          "selected_brier_gain_candidate": 0.0033542,
+          "selected_brier_gain_ci95": [
+            -0.0115322,
+            0.0237424
+          ]
+        },
+        "single_event": {
+          "PAS": 0,
+          "coverage_pct": 100.0,
+          "hit_pct": 58.36,
+          "market_counts": {
+            "BTTS_NO": 3,
+            "BTTS_YES": 105,
+            "MS1": 65,
+            "MS2": 26,
+            "OVER_2.5": 64,
+            "UNDER_2.5": 30
+          },
+          "n": 293,
+          "predicted_mean_pct": 59.96,
+          "selected_event_brier": 0.238977
+        }
+      },
+      "MS_M4_RAW_KG_C3_050_O25_C3_025": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2440702,
+            "classification_accuracy": 0.55973,
+            "days": 19,
+            "logloss": 0.6811566,
+            "n": 293
+          },
+          "MS": {
+            "brier": 0.5855418,
+            "classification_accuracy": 0.54949,
+            "days": 19,
+            "logloss": 0.984403,
+            "n": 293
+          },
+          "O25": {
+            "brier": 0.2436595,
+            "classification_accuracy": 0.57338,
+            "days": 19,
+            "logloss": 0.6802736,
+            "n": 293
+          }
+        },
+        "p65": {
+          "PAS": 231,
+          "coverage_pct": 21.16,
+          "hit_pct": 69.35,
+          "market_counts": {
+            "BTTS_YES": 5,
+            "MS1": 39,
+            "MS2": 9,
+            "OVER_2.5": 9
+          },
+          "n": 62,
+          "predicted_mean_pct": 71.75,
+          "selected_event_brier": 0.215669
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 128,
+            "different_family": 114,
+            "same_event": 165,
+            "same_family": 179
+          },
+          "days": 19,
+          "hit_advantage_candidate_percentage_points": 1.024,
+          "hit_advantage_ci95_pp": [
+            -4.632,
+            10.0
+          ],
+          "n": 293,
+          "same_event_brier_gain_vs_league": 0.0235986,
+          "same_event_vs_league_ci95": [
+            0.0107874,
+            0.0353489
+          ],
+          "selected_brier_gain_candidate": 0.0052689,
+          "selected_brier_gain_ci95": [
+            -0.0074793,
+            0.0244344
+          ]
+        },
+        "single_event": {
+          "PAS": 0,
+          "coverage_pct": 100.0,
+          "hit_pct": 58.7,
+          "market_counts": {
+            "BTTS_NO": 24,
+            "BTTS_YES": 111,
+            "MS1": 64,
+            "MS2": 25,
+            "OVER_2.5": 50,
+            "UNDER_2.5": 19
+          },
+          "n": 293,
+          "predicted_mean_pct": 60.03,
+          "selected_event_brier": 0.237062
+        }
+      },
+      "MS_M4_RAW_KG_LEAGUE_O25_LEAGUE": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2448339,
+            "classification_accuracy": 0.55631,
+            "days": 19,
+            "logloss": 0.682609,
+            "n": 293
+          },
+          "MS": {
+            "brier": 0.5855418,
+            "classification_accuracy": 0.54949,
+            "days": 19,
+            "logloss": 0.984403,
+            "n": 293
+          },
+          "O25": {
+            "brier": 0.2455098,
+            "classification_accuracy": 0.55973,
+            "days": 19,
+            "logloss": 0.684079,
+            "n": 293
+          }
+        },
+        "p65": {
+          "PAS": 226,
+          "coverage_pct": 22.87,
+          "hit_pct": 62.69,
+          "market_counts": {
+            "MS1": 41,
+            "MS2": 9,
+            "OVER_2.5": 17
+          },
+          "n": 67,
+          "predicted_mean_pct": 70.9,
+          "selected_event_brier": 0.236941
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 160,
+            "different_family": 132,
+            "same_event": 133,
+            "same_family": 161
+          },
+          "days": 19,
+          "hit_advantage_candidate_percentage_points": 1.365,
+          "hit_advantage_ci95_pp": [
+            -5.81,
+            12.432
+          ],
+          "n": 293,
+          "same_event_brier_gain_vs_league": 0.0250301,
+          "same_event_vs_league_ci95": [
+            0.0111422,
+            0.0372058
+          ],
+          "selected_brier_gain_candidate": 0.002277,
+          "selected_brier_gain_ci95": [
+            -0.0140252,
+            0.0256003
+          ]
+        },
+        "single_event": {
+          "PAS": 0,
+          "coverage_pct": 100.0,
+          "hit_pct": 59.04,
+          "market_counts": {
+            "BTTS_NO": 22,
+            "BTTS_YES": 113,
+            "MS1": 70,
+            "MS2": 24,
+            "OVER_2.5": 64
+          },
+          "n": 293,
+          "predicted_mean_pct": 60.26,
+          "selected_event_brier": 0.240054
+        }
+      }
+    },
+    "original_880": {
+      "FIXED_RAW_M4_MS_C3_OTHERS": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2447455,
+            "classification_accuracy": 0.56472,
+            "days": 60,
+            "logloss": 0.6826321,
+            "n": 873
+          },
+          "MS": {
+            "brier": 0.5958999,
+            "classification_accuracy": 0.51432,
+            "days": 60,
+            "logloss": 0.9993363,
+            "n": 873
+          },
+          "O25": {
+            "brier": 0.2458082,
+            "classification_accuracy": 0.55785,
+            "days": 60,
+            "logloss": 0.6851747,
+            "n": 873
+          }
+        },
+        "p65": {
+          "PAS": 629,
+          "coverage_pct": 28.52,
+          "hit_pct": 69.72,
+          "market_counts": {
+            "BTTS_NO": 2,
+            "BTTS_YES": 12,
+            "MS1": 94,
+            "MS2": 23,
+            "OVER_2.5": 77,
+            "UNDER_2.5": 43
+          },
+          "n": 251,
+          "predicted_mean_pct": 71.6,
+          "selected_event_brier": 0.212349
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "same_event": 873,
+            "same_family": 873
+          },
+          "days": 60,
+          "hit_advantage_candidate_percentage_points": 0.0,
+          "hit_advantage_ci95_pp": [
+            0.0,
+            0.0
+          ],
+          "n": 873,
+          "same_event_brier_gain_vs_league": 0.0164477,
+          "same_event_vs_league_ci95": [
+            0.0050569,
+            0.027642
+          ],
+          "selected_brier_gain_candidate": 0.0,
+          "selected_brier_gain_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "single_event": {
+          "PAS": 7,
+          "coverage_pct": 99.2,
+          "hit_pct": 57.62,
+          "market_counts": {
+            "BTTS_NO": 5,
+            "BTTS_YES": 263,
+            "MS1": 157,
+            "MS2": 56,
+            "OVER_2.5": 118,
+            "UNDER_2.5": 274
+          },
+          "n": 873,
+          "predicted_mean_pct": 62.05,
+          "selected_event_brier": 0.239537
+        }
+      },
+      "MS_M4_RAW_KG_C3_025_O25_C3_025": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2430845,
+            "classification_accuracy": 0.54754,
+            "days": 60,
+            "logloss": 0.6790892,
+            "n": 873
+          },
+          "MS": {
+            "brier": 0.5958999,
+            "classification_accuracy": 0.51432,
+            "days": 60,
+            "logloss": 0.9993363,
+            "n": 873
+          },
+          "O25": {
+            "brier": 0.2411868,
+            "classification_accuracy": 0.57045,
+            "days": 60,
+            "logloss": 0.6752302,
+            "n": 873
+          }
+        },
+        "p65": {
+          "PAS": 721,
+          "coverage_pct": 18.07,
+          "hit_pct": 72.96,
+          "market_counts": {
+            "MS1": 103,
+            "MS2": 27,
+            "OVER_2.5": 29
+          },
+          "n": 159,
+          "predicted_mean_pct": 71.67,
+          "selected_event_brier": 0.198138
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 358,
+            "different_family": 337,
+            "same_event": 515,
+            "same_family": 536
+          },
+          "days": 60,
+          "hit_advantage_candidate_percentage_points": 2.176,
+          "hit_advantage_ci95_pp": [
+            -1.099,
+            6.117
+          ],
+          "n": 873,
+          "same_event_brier_gain_vs_league": 0.0253766,
+          "same_event_vs_league_ci95": [
+            0.0168592,
+            0.0339222
+          ],
+          "selected_brier_gain_candidate": 0.0060264,
+          "selected_brier_gain_ci95": [
+            -0.0011029,
+            0.0139784
+          ]
+        },
+        "single_event": {
+          "PAS": 7,
+          "coverage_pct": 99.2,
+          "hit_pct": 59.79,
+          "market_counts": {
+            "BTTS_NO": 25,
+            "BTTS_YES": 359,
+            "MS1": 182,
+            "MS2": 76,
+            "OVER_2.5": 148,
+            "UNDER_2.5": 83
+          },
+          "n": 873,
+          "predicted_mean_pct": 59.34,
+          "selected_event_brier": 0.23351
+        }
+      },
+      "MS_M4_RAW_KG_C3_050_O25_C3_025": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2440702,
+            "classification_accuracy": 0.55973,
+            "days": 19,
+            "logloss": 0.6811566,
+            "n": 293
+          },
+          "MS": {
+            "brier": 0.5855418,
+            "classification_accuracy": 0.54949,
+            "days": 19,
+            "logloss": 0.984403,
+            "n": 293
+          },
+          "O25": {
+            "brier": 0.2436595,
+            "classification_accuracy": 0.57338,
+            "days": 19,
+            "logloss": 0.6802736,
+            "n": 293
+          }
+        },
+        "p65": {
+          "PAS": 818,
+          "coverage_pct": 7.05,
+          "hit_pct": 69.35,
+          "market_counts": {
+            "BTTS_YES": 5,
+            "MS1": 39,
+            "MS2": 9,
+            "OVER_2.5": 9
+          },
+          "n": 62,
+          "predicted_mean_pct": 71.75,
+          "selected_event_brier": 0.215669
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 128,
+            "different_family": 114,
+            "same_event": 165,
+            "same_family": 179
+          },
+          "days": 19,
+          "hit_advantage_candidate_percentage_points": 1.024,
+          "hit_advantage_ci95_pp": [
+            -4.632,
+            10.0
+          ],
+          "n": 293,
+          "same_event_brier_gain_vs_league": 0.0235986,
+          "same_event_vs_league_ci95": [
+            0.0107874,
+            0.0353489
+          ],
+          "selected_brier_gain_candidate": 0.0052689,
+          "selected_brier_gain_ci95": [
+            -0.0074793,
+            0.0244344
+          ]
+        },
+        "single_event": {
+          "PAS": 587,
+          "coverage_pct": 33.3,
+          "hit_pct": 58.7,
+          "market_counts": {
+            "BTTS_NO": 24,
+            "BTTS_YES": 111,
+            "MS1": 64,
+            "MS2": 25,
+            "OVER_2.5": 50,
+            "UNDER_2.5": 19
+          },
+          "n": 293,
+          "predicted_mean_pct": 60.03,
+          "selected_event_brier": 0.237062
+        }
+      },
+      "MS_M4_RAW_KG_LEAGUE_O25_LEAGUE": {
+        "market_scores": {
+          "KG": {
+            "brier": 0.2441835,
+            "classification_accuracy": 0.55326,
+            "days": 60,
+            "logloss": 0.6813316,
+            "n": 873
+          },
+          "MS": {
+            "brier": 0.5958999,
+            "classification_accuracy": 0.51432,
+            "days": 60,
+            "logloss": 0.9993363,
+            "n": 873
+          },
+          "O25": {
+            "brier": 0.2423535,
+            "classification_accuracy": 0.57961,
+            "days": 60,
+            "logloss": 0.6775988,
+            "n": 873
+          }
+        },
+        "p65": {
+          "PAS": 722,
+          "coverage_pct": 17.95,
+          "hit_pct": 70.89,
+          "market_counts": {
+            "MS1": 106,
+            "MS2": 27,
+            "OVER_2.5": 25
+          },
+          "n": 158,
+          "predicted_mean_pct": 71.51,
+          "selected_event_brier": 0.204191
+        },
+        "paired_vs_raw": {
+          "choice_changes": {
+            "different_event": 475,
+            "different_family": 405,
+            "same_event": 398,
+            "same_family": 468
+          },
+          "days": 60,
+          "hit_advantage_candidate_percentage_points": 2.52,
+          "hit_advantage_ci95_pp": [
+            -1.598,
+            7.02
+          ],
+          "n": 873,
+          "same_event_brier_gain_vs_league": 0.0266525,
+          "same_event_vs_league_ci95": [
+            0.0187024,
+            0.0352132
+          ],
+          "selected_brier_gain_candidate": 0.0062845,
+          "selected_brier_gain_ci95": [
+            -0.0024302,
+            0.0158464
+          ]
+        },
+        "single_event": {
+          "PAS": 7,
+          "coverage_pct": 99.2,
+          "hit_pct": 60.14,
+          "market_counts": {
+            "BTTS_NO": 53,
+            "BTTS_YES": 403,
+            "MS1": 185,
+            "MS2": 70,
+            "OVER_2.5": 162
+          },
+          "n": 873,
+          "predicted_mean_pct": 59.7,
+          "selected_event_brier": 0.233252
+        }
+      }
+    }
+  },
+  "research_only": true,
+  "schema": "263_ONE_EVENT_MS_RAW_KG_O25_SHRINK_ABLATION_V1",
+  "weights_2025_frozen": {
+    "KG_C3": 0.25,
+    "MS_M4": 1,
+    "O25_C3": 0.25
+  },
+  "weights_2026_augsep_frozen": {
+    "KG_C3": 0.5,
+    "MS_M4": 1,
+    "O25_C3": 0.25
+  }
+}
