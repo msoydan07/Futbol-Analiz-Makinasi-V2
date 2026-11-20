@@ -12,7 +12,8 @@ NEEDED = (
     "experiments/263/iddaa_pdf_one_step_263.py",
     "experiments/263/model_first_iddaa_bridge_263.py",
     "experiments/263/model_first_decision_263.py",
-    "experiments/263/model_first_selection_lock_20261120.json",
+    "experiments/263/model_first_selection_lock_20261120_normal_v3.json",
+    "experiments/263/normal_historical_reference_263.py",
     "experiments/263/m4_integrated.py",
     ".github/workflows/263-sabah-new100-on-request.yml",
     "experiments/263/historical_probability_reliability_263.py",
@@ -31,7 +32,7 @@ class Contract(unittest.TestCase):
     def test_current_single_source_passes(self):
         result=verify_active_policy(self.root)
         self.assertEqual(result["status"],"ACTIVE_DECISIONS_OK")
-        self.assertEqual(result["active_topics"],9)
+        self.assertEqual(result["active_topics"],8)
         self.assertEqual(result["market"],"USER_IDDAA_PDF_ONLY_FIFTH_REFERENCE")
     def test_same_topic_two_active_decisions_blocks(self):
         path=self.root/NEEDED[0]
@@ -49,7 +50,7 @@ class Contract(unittest.TestCase):
         with self.assertRaises(ActiveDecisionConflict):
             verify_active_policy(self.root)
     def test_wrong_expert_policy_blocks(self):
-        path=self.root/"experiments/263/model_first_selection_lock_20261120.json"
+        path=self.root/"experiments/263/model_first_selection_lock_20261120_normal_v3.json"
         d=json.loads(path.read_text(encoding="utf-8"))
         d["family_anchors"]["KG"]="M4"
         path.write_text(json.dumps(d),encoding="utf-8")
