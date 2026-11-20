@@ -12,6 +12,12 @@ on:
       - experiments/263/model_first_decision_263.py
       - experiments/263/model_first_selection_lock_20261120.json
       - experiments/263/m4_integrated.py
+      - experiments/263/sabah_batch_263.py
+      - experiments/263/sabah_mobile_screens_263.py
+      - experiments/263/sabah_new100_commit_guard_263.py
+      - experiments/263/sabah_pinnacle_new100_bridge_263.py
+      - experiments/263/sabah_mobile_approved_pdf_263.py
+      - experiments/263/test_current_new100_263.py
       - .github/workflows/263-active-decision-guard.yml
   pull_request:
     paths:
@@ -23,6 +29,12 @@ on:
       - experiments/263/model_first_decision_263.py
       - experiments/263/model_first_selection_lock_20261120.json
       - experiments/263/m4_integrated.py
+      - experiments/263/sabah_batch_263.py
+      - experiments/263/sabah_mobile_screens_263.py
+      - experiments/263/sabah_new100_commit_guard_263.py
+      - experiments/263/sabah_pinnacle_new100_bridge_263.py
+      - experiments/263/sabah_mobile_approved_pdf_263.py
+      - experiments/263/test_current_new100_263.py
       - .github/workflows/263-active-decision-guard.yml
   workflow_dispatch:
 permissions:
@@ -36,7 +48,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install existing model / mobile dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab==4.4.5
       - name: Check exactly one active decision per topic and current PDF route
         run: python experiments/263/check_active_decisions_263.py
       - name: Fail-closed supersession regression (5 tests)
         run: python -m unittest discover -s experiments/263 -p 'test_check_active_decisions_263.py' -v
+      - name: Active model-first decision maths (no odds as selector)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_model_first_decision_263.py
+      - name: Current new100 real operational route (synthetic fixture and no API)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_current_new100_263.py
