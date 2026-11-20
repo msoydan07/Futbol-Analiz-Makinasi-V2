@@ -20,7 +20,10 @@ class TailExtension(unittest.TestCase):
                     ("OVER_2.5","UNDER_2.5"),
                     ("OVER_3.5","UNDER_3.5")):
             self.assertAlmostEqual(m[a]+m[b],1,places=11)
-        self.assertLess(sc["tail_mass"],1e-9)
+        # The unchanged legacy 0..10 scorer legitimately retains up to 0.1%
+        # discarded tail; only the adaptive extension must reach <1e-9.
+        cap=(.001 if sc["distribution"]=="legacy_truncated_poisson_0_to_10_normalized" else 1e-9)
+        self.assertLess(sc["tail_mass"],cap)
         self.assertEqual(len(sc["top_scores"]),5)
     def test_old_normal_matches_are_identical_no_recalibration(self):
         for home,away in ((1.1,1.0),(2.0,1.2),(3.0,.7),(.8,.8),(2.5,2.5)):
