@@ -1,0 +1,37 @@
+name: "263 user-approved mobile batch and single PDF live routes"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/iddaa_pdf_approved_layout_263.py
+      - experiments/263/iddaa_pdf_one_step_263.py
+      - experiments/263/iddaa_pdf_last_review_263.py
+      - experiments/263/test_iddaa_pdf_approved_layout_263.py
+      - experiments/263/test_iddaa_pdf_one_step_263.py
+      - .github/workflows/263-approved-user-report-layout.yml
+permissions:
+  contents: read
+jobs:
+  report-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Frozen existing numerical and PDF dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab pymupdf
+      - name: Approved visual layouts and immutable real first/last iddaa PDF paths
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_iddaa_pdf_approved_layout_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_last_review_263.py
+      - name: Mathematical engines and already sealed prediction trees untouched
+        run: |
+          set -euo pipefail
+          git diff --exit-code
+          test "$(git diff --name-only HEAD~5 HEAD -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/analysis_math_core.py experiments/263/model_first_decision_263.py forward_morning_263 forward_quad_263 | wc -l)" -eq 0
