@@ -169,8 +169,20 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
     outputs={}
     b=c1(past,home,away)
     bl=_b_lambdas(past,home,away)
-    if (b is None)!=(bl is None):raise ValueError('frozen_b_compatibility_failed')
-    outputs['B']={'status':'AVAILABLE','goals':_legacy_joint(*bl,b[0])} if b else {'status':'UNAVAILABLE_INSUFFICIENT_CONTEXT'}
+    # The untouched frozen C1/B returns None when its 0..10 Poisson
+    # truncation tail exceeds 0.001. Its lambda adapter can still be
+    # computable: this is model unavailability, NOT altered mathematics.
+    if b is None and bl is not None:
+        if scores(*bl) is not None:
+            raise ValueError('frozen_b_compatibility_failed')
+        outputs['B']={'status':'UNAVAILABLE_LEGACY_POISSON_TAIL',
+                      'reason':'frozen_B_tail_mass_above_0.001'}
+    elif b is None and bl is None:
+        outputs['B']={'status':'UNAVAILABLE_INSUFFICIENT_CONTEXT'}
+    elif b is not None and bl is not None:
+        outputs['B']={'status':'AVAILABLE','goals':_legacy_joint(*bl,b[0])}
+    else:
+        raise ValueError('frozen_b_compatibility_failed')
     current=[r for r in past if r['season']=='2026-2027']
     previous=[r for r in past if r['season']=='2025-2026']
     c2,reason=canonical_c2_lambda(current,previous,home,away)
