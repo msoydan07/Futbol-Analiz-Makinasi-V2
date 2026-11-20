@@ -6,6 +6,8 @@ on:
       - experiments/263/forward_quad.py
       - experiments/263/test_quad_poisson_tail_extension_263.py
       - experiments/263/diagnose_bayern_b_c3_20261120.py
+      - .github/workflows/263-sabah-new100-on-request.yml
+      - .github/workflows/263-quad-forward-on-request.yml
       - .github/workflows/263-poisson-tail-extension-acceptance.yml
 permissions:
   contents: read
@@ -32,5 +34,16 @@ jobs:
         env:
           PYTHONPATH: .:experiments/263
         run: python -m unittest -v experiments/263/test_model_first_decision_263.py experiments/263/test_normal_historical_reference_263.py experiments/263/test_historical_probability_reliability_263.py
+      - name: Both operational four-model entrypoints enforce the same integrated numerical safety guard
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for f in (".github/workflows/263-sabah-new100-on-request.yml",
+                    ".github/workflows/263-quad-forward-on-request.yml"):
+              code=Path(f).read_text(encoding="utf-8")
+              assert code.count("python -m unittest -v experiments/263/test_quad_poisson_tail_extension_263.py")==1,f
+              assert "B-C3 adaptive Poisson is part of the normal calculation" in code,f
+          print("NORMAL_PREMATCH_ROUTES_ENFORCE_B_C3_NUMERICAL_REPAIR")
+          PY
       - name: No previous historic seal, original B/C3 or M4 engine mutated
         run: git diff --exit-code
