@@ -2,7 +2,7 @@
 
 Uses EXISTING live official named-match gate (no supplied JSON on CLI), and
 existing frozen B/C2/C3 formula functions without editing them.
-Legacy 0..10 Poisson tails are kept explicitly for B and C3.
+Legacy 0..10 results are preserved exactly; when their discarded tail is too\nlarge, only the numerical Poisson scoring support is adaptively expanded.
 """
 from __future__ import annotations
 import argparse
@@ -45,6 +45,40 @@ def _legacy_joint(lh,la,original):
     top=sorted(((float(matrix[i,j]),f'{i}-{j}') for i in range(11) for j in range(11)),reverse=True)[:5]
     return {'lambda_home':lh,'lambda_away':la,'markets':m,'top_scores':{name:p for p,name in top},
             'tail_mass':tail,'distribution':'legacy_truncated_poisson_0_to_10_normalized'}
+
+
+def _safe_legacy_poisson_joint(lh,la,original=None):
+    """Numerical scoring adapter for frozen B/C3 goal lambdas.
+
+    Where the old 0..10 mass is acceptable, return the EXACT legacy scorer
+    and same SHA-compatible vectors. On formerly rejected high-scoring
+    fixtures, use the ALREADY EXISTING accurate independent Poisson scorer
+    (the same math, with dynamically extended finite support). Never modify
+    frozen B/C3 fitting, lambda formulas, or previously stored predictions.
+    """
+    if not all(isinstance(x,(int,float)) and math.isfinite(x)
+               and .05<=x<=5 for x in (lh,la)):
+        raise ValueError('b_c3_lambda_outside_original_valid_range')
+    old=scores(lh,la)
+    if old is not None:
+        if original is not None and max(abs(old[0][i]-original[i]) for i in range(3))>1e-10:
+            raise ValueError('frozen_b_c3_legacy_formula_changed')
+        return _legacy_joint(lh,la,old[0]),False
+    # Frozen 0..10 scorer returned None. Only the discarded tail may be
+    # recovered here; a different failure is a hard technical block.
+    one=lambda mu:sum(math.exp(-mu)*mu**i/math.factorial(i) for i in range(11))
+    old_tail=1-one(lh)*one(la)
+    if not old_tail>0.001:
+        raise ValueError('unexpected_legacy_poisson_scorer_failure')
+    result=score_markets(lh,la)
+    if (result['tail_mass']>1e-9
+        or abs(sum(result['markets']['1X2'].values())-1)>1e-10):
+        raise ValueError('extended_poisson_probability_mass_not_controlled')
+    result['distribution']='independent_poisson_adaptive_extended_from_legacy_0_10'
+    result['legacy_0_10_tail_mass']=old_tail
+    result['scoring_adapter']='FROZEN_B_C3_NUMERICAL_TAIL_EXTENSION_V1'
+    result['lambda_formula_unchanged']=True
+    return result,True
 
 
 def _b_lambdas(past,home,away):
@@ -169,20 +203,16 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
     outputs={}
     b=c1(past,home,away)
     bl=_b_lambdas(past,home,away)
-    # The untouched frozen C1/B returns None when its 0..10 Poisson
-    # truncation tail exceeds 0.001. Its lambda adapter can still be
-    # computable: this is model unavailability, NOT altered mathematics.
-    if b is None and bl is not None:
-        if scores(*bl) is not None:
-            raise ValueError('frozen_b_compatibility_failed')
-        outputs['B']={'status':'UNAVAILABLE_LEGACY_POISSON_TAIL',
-                      'reason':'frozen_B_tail_mass_above_0.001'}
-    elif b is None and bl is None:
+    # Keep frozen B/C1 untouched: its None can mean the old 0..10
+    # grid rejected a mathematically valid lambda. Recover ONLY that case.
+    if bl is None:
+        if b is not None:raise ValueError('frozen_b_compatibility_failed')
         outputs['B']={'status':'UNAVAILABLE_INSUFFICIENT_CONTEXT'}
-    elif b is not None and bl is not None:
-        outputs['B']={'status':'AVAILABLE','goals':_legacy_joint(*bl,b[0])}
     else:
-        raise ValueError('frozen_b_compatibility_failed')
+        b_goals,b_extended=_safe_legacy_poisson_joint(*bl,b[0] if b is not None else None)
+        if (b is None)!=b_extended:
+            raise ValueError('frozen_b_compatibility_failed')
+        outputs['B']={'status':'AVAILABLE','goals':b_goals}
     current=[r for r in past if r['season']=='2026-2027']
     previous=[r for r in past if r['season']=='2025-2026']
     c2,reason=canonical_c2_lambda(current,previous,home,away)
@@ -196,8 +226,13 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
         outputs['C2']={'status':'UNAVAILABLE','reason':reason}
     fit3=fit_c3(past)
     lam3=predict_c3(fit3,home,away) if fit3 else None
-    s3=scores(*lam3) if lam3 else None
-    outputs['C3']={'status':'AVAILABLE','goals':_legacy_joint(*lam3,s3[0])} if s3 else {'status':'UNAVAILABLE_FIT_OR_TAIL'}
+    if lam3 is not None:
+        c3_goals,_c3_extended=_safe_legacy_poisson_joint(*lam3)
+        outputs['C3']={'status':'AVAILABLE','goals':c3_goals}
+    else:
+        outputs['C3']={'status':'UNAVAILABLE_FIT_OR_TAIL',
+                       'reason':('C3_FIT_FAILED' if fit3 is None
+                                 else 'C3_LAMBDA_OUT_OF_VALID_RANGE')}
     mfit=fit_m4(past,league,local_date,setting)
     mlam=predict_m4(mfit,home,away)
     outputs['M4']={'status':'AVAILABLE','goals':score_markets(*mlam),'train_rows':mfit[3]} if mlam else {'status':'UNAVAILABLE_FIT_OR_RANGE'}
