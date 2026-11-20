@@ -1,0 +1,36 @@
+name: "263 NORMAL highest realization selector 39 signed scores acceptance"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/model_first_decision_263.py
+      - experiments/263/historical_probability_reliability_263.py
+      - experiments/263/normal_historical_reference_263.py
+      - experiments/263/test_normal_historical_reference_263.py
+      - experiments/263/test_historical_probability_reliability_263.py
+      - experiments/263/test_model_first_decision_263.py
+      - experiments/263/model_first_selection_lock_20261120_normal_v3.json
+      - experiments/263/model_first_iddaa_bridge_263.py
+      - experiments/263/iddaa_pdf_one_step_263.py
+      - experiments/263/sabah_batch_263.py
+      - docs/263_AKTIF_KARARLAR.json
+      - .github/workflows/263-normal-selection-acceptance.yml
+permissions:
+  contents: read
+jobs:
+  normal-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check historic core policy and both operational entrypoints
+        env:
+          PYTHONPATH: experiments/263
+        run: |
+          python experiments/263/check_active_decisions_263.py
+          python -m unittest -v experiments/263/test_normal_historical_reference_263.py experiments/263/test_historical_probability_reliability_263.py experiments/263/test_model_first_decision_263.py experiments/263/test_check_active_decisions_263.py
+      - name: No past forecasts or sealed decisions were rewritten
+        run: git diff --exit-code
