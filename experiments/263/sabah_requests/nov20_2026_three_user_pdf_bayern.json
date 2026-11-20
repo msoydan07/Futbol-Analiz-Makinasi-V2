@@ -1,0 +1,21 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-20",
+  "matches": [
+    {
+      "league": "GER1",
+      "home": "FC Bayern München",
+      "away": "1. FC Köln"
+    },
+    {
+      "league": "FRA1",
+      "home": "ESTAC Troyes",
+      "away": "Havre AC"
+    },
+    {
+      "league": "ESP1",
+      "home": "Athletic Club",
+      "away": "RCD Espanyol de Barcelona"
+    }
+  ]
+}
