@@ -74,6 +74,13 @@
       "effective_date_tr": "2026-11-20",
       "status": "ACTIVE",
       "rule": "Yeni analizlerde TEK oran kaynağı kullanıcının iddaa.com bülten PDF dosyasıdır. Pinnacle, The Odds API, Nesine, Bilyoner, otomatik bookmaker fiyat çağrısı ve alternatif fiyat kaynağı yeni kayıtlarda YASAK. Kullanıcı PDF göndermediyse model-only rapor üret; piyasa fiyatını VERİ YOK yaz; alternatif sağlayıcıya düşme."
+    },
+    {
+      "topic": "historical_probability_reliability",
+      "decision_id": "D-HIST-PROB-20261120",
+      "effective_date_tr": "2026-11-20",
+      "status": "ACTIVE_POLICY_RESEARCH_IMPLEMENTATION_NOT_LIVE",
+      "rule": "Kullanıcı sabit %60 model olasılığı kapısını kaldırmayı onayladı. Yeni karar mantığı her maçın tüm pazar model yönünü gösterir, ardından yalnız gerçek maç öncesi SHA ile kaydedilmiş eski model tahminlerinin aynı pazar ve benzer yüzde aralığındaki gerçekleşme sıklığını esas alır. MS/KG/2.5 pazarları ayrı değerlendirilir; benzer kayıt yoksa tarihsel isabet UYDURULMAZ, geçici model yönü olarak gösterilir. Bağımsız walk-forward doğrulama ve gerçek veri arşivi sağlanmadan eski aktif selector otomatik değiştirilmez. Oran karar girdisi değildir."
     }
   ],
   "superseded_for_pdf_first": [
@@ -112,12 +119,18 @@
       "topic": "c3_shadow",
       "status": "NOT_PROMOTED_TO_DECISION",
       "note": "C3 frozen kalibrasyon sadece arastirma/diagnostik shadow."
+    },
+    {
+      "topic": "historical_probability_reliability",
+      "status": "MODULE_AND_SYNTHETIC_TESTS_ADDED_NOT_CONNECTED_TO_LIVE_SELECTOR",
+      "note": "experiments/263/historical_probability_reliability_263.py; no real sealed forecast+result evidence index validated yet; fixed 60 remains in existing operational selector until evidence-backed cutover"
     }
   ],
   "validation_status": {
     "decision": "A_ACTIVE",
     "implementation": "B_EXPERIMENT_BRANCH_USER_IDDAA_PDF_ONLY_GUARD_CI_PASSED",
-    "real_matchday_end_to_end": "C_NOT_YET_VERIFIED"
+    "real_matchday_end_to_end": "C_NOT_YET_VERIFIED",
+    "historical_reliability": "A_POLICY_APPROVED_B_RESEARCH_MODULE_COMMITTED_C_LIVE_NOT_IMPLEMENTED"
   },
   "change_process": [
     "Yeni karar oldugu zaman konu, kapsam, karar ID, tarih ve eski ID->yeni ID (supersedes) tek dosyaya kaydedilir.",
