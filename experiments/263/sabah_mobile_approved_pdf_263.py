@@ -20,8 +20,8 @@ from forward_c3 import read_aware
 from zoneinfo import ZoneInfo
 
 SCHEMA_PDF="263_APPROVED_COMPACT_MOBILE_PDF_V1"  # stable output schema
-MARKETS=("BTTS_YES","OVER_1.5","OVER_2.5","OVER_3.5")
-MARKET_LABELS=("KG Var","1,5 Ust","2,5 Ust","3,5 Ust")
+MARKETS=("BTTS_YES","BTTS_NO","OVER_2.5","UNDER_2.5")
+MARKET_LABELS=("KG Var","KG Yok","2,5 Ust","2,5 Alt")
 MODELS=("B","C2","C3","M4")
 DIRECTIONS=(("MS1","MS 1"),("MSX","MS X"),("MS2","MS 2"))
 TR=ZoneInfo("Europe/Istanbul")
@@ -80,36 +80,35 @@ def row_data(report,price,root):
         if p["forecast_sha256"]!=f["payload_sha256"]:
             raise MobileBlocked("PRICE_FORECAST_SHA_WRONG")
         if p.get("status")=="READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED":
-            if p.get("original_PAS_decision_sha256")!=r.get("decision_sha256"):
+            if p.get("original_model_only_decision_sha256")!=r.get("decision_sha256"):
                 raise MobileBlocked("PRICE_DECISION_SHA_WRONG")
         d=decision(root,"new100",report["day_turkey"],Path(r["forecast_path"]).stem,f)
-        diagnostic={x["market"]:x for x in (d or {}).get("all_market_diagnostics",[])
-                    if isinstance(x,dict) and "market" in x}
-        cal=[(m,label,number(diagnostic.get(m,{}).get("calibrated_probability")))
-             for m,label in DIRECTIONS]
+        from model_first_decision_263 import verified,SCHEMA as CURRENT_SCHEMA
+        verified(d,CURRENT_SCHEMA)
+        diagnostic={x["market"]:x for x in d["model_market_diagnostics"]}
+        cal=[(m,label,number(diagnostic[m]["calibrated_probability"])) for m,label in DIRECTIONS]
         cal=[x for x in cal if x[2] is not None]
-        choice=max(cal,key=lambda x:x[2]) if cal else (None,"MS —",None)
+        if len(cal)!=3 or abs(sum(x[2] for x in cal)-1)>1e-6:
+            raise MobileBlocked("M4_MS_IS_NOT_ONE_DISTRIBUTION")
+        choice=max(cal,key=lambda x:x[2])
         side=choice[0]
         fair=None
-        if p.get("status")=="READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED" and side:
+        if p.get("status")=="READ_ONLY_SAME_TIME_PINNACLE_AND_CALIBRATED":
             q=p.get("calibrated_MS_research",{}).get(side,{})
             if q.get("status")=="DESCRIPTIVE_CALIBRATED_PINNACLE_RESEARCH" and number(q.get("calibrated_probability")) is not None:
                 if abs(q["calibrated_probability"]-choice[2])>1e-9:
                     raise MobileBlocked("MARKET_AND_MODEL_CALIBRATION_DISAGREE")
                 fair=number(q.get("pinnacle_no_vig"))
-        median=[]
-        for market in MARKETS:
-            vals=[]
-            for name in MODELS:
-                m=f["model_predictions"].get(name,{})
-                if m.get("status")!="AVAILABLE":continue
-                try:
-                    z=canonical_markets(m["goals"]["markets"])
-                    x=number(z.get(market))
-                except (ValueError,TypeError,KeyError):
-                    continue
-                if x is not None:vals.append(x)
-            median.append(statistics.median(vals) if vals else None)
+        # Current expert probabilities only, not old four-model median.
+        goals=[number(diagnostic[k]["calibrated_probability"]) for k in MARKETS]
+        def label(candidate):
+            if candidate is None:return "YOK"
+            labels={"MS1":"MS 1","MSX":"MS X","MS2":"MS 2",
+                    "BTTS_YES":"KG Var","BTTS_NO":"KG Yok",
+                    "OVER_2.5":"2.5 Ust","UNDER_2.5":"2.5 Alt"}
+            return labels[candidate["market"]]+" "+pct(candidate["calibrated_probability"])
+        main=label(d.get("main_candidate")) if d.get("main_candidate") else "MODEL PAS"
+        alt=label(d.get("alternative_candidate"))
         kickoff=read_aware(f["fixture"]["kickoff_utc"]).astimezone(TR)
         rows.append(dict(time=kickoff.strftime("%H:%M"),league=f["fixture"]["league"],
                          home=r["home"],away=r["away"],direction=choice[1],
@@ -121,7 +120,7 @@ def row_data(report,price,root):
                          locked_at=f["created_at_utc"],
                          source=f["fixture"].get("official_source"),
                          quote_status=p.get("status"),
-                         status="PAS / ONAYSIZ",
+                         status="ANA: "+main+" | ALT: "+alt+" (DENEYSEL / ONAYSIZ)",
                          id=Path(r["forecast_path"]).stem))
         matched.add(r["forecast_path"])
     if set(price_rows)!=matched:raise MobileBlocked("ORPHAN_PRICE_ROW")
@@ -142,7 +141,7 @@ def header(c,day,title):
 
 def foot(c,page,extra=""):
     c.setStrokeColor(EDGE);c.line(13,27,W-13,27)
-    text(c,13,15,"MS: ayri DEV tek-pazar (1X2 dagilimi degil) | Fiyat yoksa —",6.2,color=MUTED)
+    text(c,13,15,"MS=M4 ortak dagilim | KG/2.5=C3 | Fiyat 5. referans",6.2,color=MUTED)
     right(c,W-13,15,str(page),7,color=MUTED)
 
 def match(c,r,y,i):
@@ -157,7 +156,7 @@ def match(c,r,y,i):
     text(c,57,y,match_name,9.2,True,INK)
     right(c,W-17,y,r["direction"],8.4,True,INK)
     text(c,57,y-13,r["league"],7,color=MUTED)
-    text(c,123,y-13,"BIZIM (TEK MS)",6.5,color=MUTED)
+    text(c,123,y-13,"BIZIM (M4 MS)",6.5,color=MUTED)
     text(c,208,y-13,"PIYASA",6.5,color=MUTED)
     text(c,307,y-13,"FARK (yp)",6.5,color=MUTED)
     text(c,123,y-26,pct(r["model"]),9.4,True,INK)
@@ -193,9 +192,9 @@ def single_pdf(path,day,r):
     header(c,day,"TEKLI MAC ANALIZI")
     text(c,13,H-76,cut(r["home"]+" – "+r["away"],W-28,FONT_BOLD,14),14,True)
     text(c,13,H-92,r["league"]+" | "+r["time"]+" TSİ | "+r["direction"],9,color=MUTED)
-    for x,label,value in ((13,"BIZIM (TEK MS)",pct(r["model"])),(150,"PIYASA",pct(r["market"])),(290,"FARK (yp)",difference(r["delta"]))):
+    for x,label,value in ((13,"BIZIM (M4 MS)",pct(r["model"])),(150,"PIYASA",pct(r["market"])),(290,"FARK (yp)",difference(r["delta"]))):
         text(c,x,H-125,label,8,color=MUTED);text(c,x,H-146,value,15,True,TEAL)
-    text(c,13,H-175,"GOL BEKLENTILERI (model medyani)",9,True)
+    text(c,13,H-175,"KG / 2.5: C3 HAM UZMAN",9,True)
     for j,(name,pct_value) in enumerate(zip(MARKET_LABELS,r["goals"])):
         x=13+j*101
         c.setFillColor(PALE);c.setStrokeColor(EDGE);c.setLineWidth(.6);c.roundRect(x,H-221,94,35,5,stroke=1,fill=1)
@@ -219,8 +218,8 @@ def single_pdf(path,day,r):
         for x,k in ((112,"MS1"),(180,"MSX"),(248,"MS2"),(316,"BTTS_YES")):
             text(c,x,yy,pct(vals.get(k)),8)
     y=ys-145
-    text(c,13,y,"ANA TERCIH: PAS / RESMI ONAY YOK",9,True)
-    text(c,13,y-19,"Alternatif: YOK | Piyasa verisi yoksa fark gosterilmez.",8,color=MUTED)
+    text(c,13,y,"KARAR: "+cut(r["status"],W-30,FONT_BOLD,8),8,True)
+    text(c,13,y-19,"Oran 5. referans; tahmini ve model PAS secimini degistirmez.",7,color=MUTED)
     text(c,13,y-39,"KAYIT VE KANIT",9,True)
     text(c,13,y-57,"Tahmin SHA: "+r["forecast_sha"],7)
     text(c,13,y-72,"Karar SHA: "+str(r["decision_sha"] or "YOK"),7)
