@@ -118,9 +118,9 @@
   ],
   "validation_status": {
     "decision": "A_ACTIVE",
-    "implementation": "B_NORMAL_SELECT_AND_PDF_AND_MORNING_ENTRYPOINTS_CODED_TESTS_PENDING",
+    "implementation": "B_NORMAL_CORE_36_TESTS_AND_SABAH_OFFLINE_INTEGRATION_AND_PDF_UI_PASSED",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED",
-    "historical_reliability": "B_NORMAL_SELECTOR_CONNECTED_TO_39_REAL_PREMATCH_MATCHES_INDEPENDENT_HOLDOUT_PENDING"
+    "historical_reliability": "B_REAL_NOV8_39_ORIGINAL_SHA_273_MARKET_PAIRS_CONNECTED_NO_INDEPENDENT_HOLDOUT_C"
   },
   "change_process": [
     "Yeni karar oldugu zaman konu, kapsam, karar ID, tarih ve eski ID->yeni ID (supersedes) tek dosyaya kaydedilir.",
