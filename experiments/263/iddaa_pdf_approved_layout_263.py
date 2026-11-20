@@ -139,7 +139,7 @@ def _extract_card(row,session):
     return {"home":row.get("pdf_home") or "?", "away":row.get("pdf_away") or "?",
        "league":row.get("league") or "?", "date":row.get("match_date_tr"),
        "time":row.get("kickoff_time_tr") or "—",
-       "main":LABELS.get(market,"TEKNİK ENGEL / PAS DEĞİL") if not main else LABELS[market],
+       "main":(LABELS[market] if main else "MODEL PAS" if d else "TEKNİK ENGEL"),
        "ours":_p(ours),"fair":_p(fair),"diff":_delta(diff),
        "alternative":(LABELS[alt["market"]]+" "+_p(alt.get("calibrated_probability"))
                      if alt else "YOK"),
@@ -194,7 +194,7 @@ def render_batch(session,target):
                 _right(c,RIGHT-14,top-89,"Ana iddaa oranı: "+r["main_odds"],7.9,True)
             footer_y=H-120-len(chunk)*103-9
             _text(c,LEFT,footer_y,"Bizim %: sabah imzalı uzman model olasılığı. Piyasa %: PDF'deki marjsız oran.",7.4)
-            _text(c,LEFT,footer_y-15,"Oran tahmin seçimini etkilemez. Eksik/kanıtsız seçim TEKNİK ENGEL olarak gösterilir.",7.4)
+            _text(c,LEFT,footer_y-15,"Oran tahmin seçimini etkilemez. Eksik/kanıtsız seçim TEKNİK ENGEL (PAS DEĞİL).",7.4)
             _text(c,LEFT,footer_y-30,"Mühürler ve karar kanıtı ayrı kayıtlıdır. Bu PDF, sunum katmanıdır.",7.4)
             c.showPage()
     if not pages:
