@@ -252,8 +252,14 @@ def render_singles(review,target_dir):
     _fonts();base=Path(target_dir)
     if base.exists():raise FileExistsError("APPROVED_SINGLE_DIRECTORY_ALREADY_EXISTS")
     base.mkdir(parents=True,exist_ok=False)
+    # Do not make a "last-minute review" for unmatched PDF rows, stale
+    # observations or already started games. Original morning record stays.
+    ready=[r for r in review.get("rows",[]) if r.get("status")==
+           "GUNCEL_ORAN_KAYDI_VE_KADRO_DURUMU_HAZIR"]
+    if not ready:
+        raise ValueError("NO_VERIFIED_SECOND_PDF_PREKICKOFF_MATCH_FOR_SINGLE_REPORT")
     made=[]
-    for i,r in enumerate(review.get("rows",[])):
+    for i,r in enumerate(ready):
         target=base/("tekli_"+str(i+1).zfill(2)+".pdf")
         c=canvas.Canvas(str(target),pagesize=A4,pageCompression=1)
         c.setTitle("2.6.3 - Onaylı Tekli Maç İnceleme")
@@ -328,6 +334,6 @@ def render_singles(review,target_dir):
             _text(c,LEFT+18,yy,line,9.6);yy-=15.5
         _text(c,LEFT,H-775,"Kaynak: 1. ve 2. kullanıcı iddaa PDF'si. Kadro bilgisi varsa kaynaklı iddia, otomatik teyit değil.",7.4,color=GRAY,max_width=CW)
         _text(c,LEFT,H-790,"Bu bir ikinci tahmin değildir. Oranlar ilk sabah kararını değiştirmez.",7.4,color=GRAY)
-        _right(c,RIGHT,21,str(i+1)+"/"+str(len(review.get("rows",[]))),8.3,True)
+        _right(c,RIGHT,21,str(i+1)+"/"+str(len(ready)),8.3,True)
         c.showPage();c.save();made.append(target)
     return made
