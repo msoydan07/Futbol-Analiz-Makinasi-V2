@@ -1,0 +1,82 @@
+name: "263 independent mathematical audit - isolated research"
+on:
+  push:
+    branches: [research/263-independent-math-audit]
+    paths:
+      - ".github/workflows/263-independent-math-audit.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  independent-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install research dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 scikit-learn==1.7.2
+      - name: Restore immutable pre-registered audit script from checked-in fragments
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,hashlib,pathlib,zlib
+          root=pathlib.Path('research/263_independent_audit')
+          encoded=''.join((root/('source.part'+str(i))).read_text().strip() for i in range(1,5))
+          assert len(encoded)==9148, 'encoded source length changed'
+          source=zlib.decompress(base64.b64decode(encoded))
+          assert hashlib.sha256(source).hexdigest()=='8208a544eb76be78460bfd2ba254e96acfdf3f032320c0c4f695128cddd343da', 'source SHA changed'
+          (root/'audit.py').write_bytes(source)
+          PY
+          python -m py_compile research/263_independent_audit/audit.py
+      - name: Download only the original signed 4413 match archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: Reconstruct strictly asof original four-model forecast once
+        env:
+          PYTHONPATH: ".:experiments/263"
+        run: |
+          set -euo pipefail
+          python experiments/263/chrono_goal_decision_263.py --source m4_quad_base/historical_results.csv --report /tmp/263_audit_880_source.json --predictions /tmp/263_audit_880_preds.csv
+      - name: One pass mathematical alternatives and fully paired evaluation
+        env:
+          PYTHONPATH: ".:experiments/263"
+        run: |
+          set -euo pipefail
+          python research/263_independent_audit/audit.py --predictions /tmp/263_audit_880_preds.csv --outdir research/263_independent_audit
+          test -s research/263_independent_audit/02_result.json
+          test -s research/263_independent_audit/03_report.md
+      - name: Upload independent audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-independent-20261120
+          retention-days: 45
+          if-no-files-found: ignore
+          path: |
+            research/263_independent_audit/02_result.json
+            research/263_independent_audit/03_report.md
+      - name: Verify original models, score archives and original seals remain untouched
+        run: |
+          set -euo pipefail
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/model_first_decision_263.py experiments/263/model_first_selection_lock_20261120_normal_v3.json data/results_only_263 forward_morning_263 forward_quad_263
+      - name: Publish code and report ONLY to independent research branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/263_independent_audit/audit.py research/263_independent_audit/02_result.json research/263_independent_audit/03_report.md
+          git commit -m "research(263): publish matched exploratory independent audit with hashes [skip ci]"
+          git push origin HEAD:research/263-independent-math-audit
