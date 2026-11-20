@@ -6,7 +6,8 @@ from historical_probability_reliability_263 import similar,rank_candidates
 NOW="2026-11-20T14:00:00+00:00"
 def record(i,p=.58,occurred=True,market="UNDER_2.5",league="ESP1"):
     return {"fixture_id":str(i),"league":league,"market":market,
-            "model_probability":p,"occurred":occurred,
+            "model_probability":p,"model_identity":"C3_RAW_UNCALIBRATED",
+            "occurred":occurred,
             "forecast_created_at_utc":"2026-10-01T10:00:00+00:00",
             "kickoff_utc":"2026-10-01T18:00:00+00:00",
             "result_known_at_utc":"2026-10-01T21:00:00+00:00",
@@ -22,7 +23,7 @@ class ReliabilityTests(unittest.TestCase):
         self.assertEqual(e["wins"],15)
         self.assertEqual(e["observed_hit_rate"],.6)
         self.assertGreater(e["wilson_lower95"],0)
-        self.assertEqual(rank_candidates([{"market":"UNDER_2.5",
+        self.assertEqual(rank_candidates([{"market":"UNDER_2.5","probability_type":"C3_RAW_UNCALIBRATED",
                    "calibrated_probability":.5813}],rows,
                    league="ESP1",asof=NOW)[0]["decision_evidence_status"],
                    "HISTORICALLY_EVALUATED")
@@ -33,8 +34,8 @@ class ReliabilityTests(unittest.TestCase):
                for i in range(25)] +
               [record(100+i,p=.67,occurred=i<12,market="BTTS_NO")
                for i in range(25)])
-        selections=[{"market":"BTTS_NO","calibrated_probability":.67},
-                    {"market":"UNDER_2.5","calibrated_probability":.58}]
+        selections=[{"market":"BTTS_NO","calibrated_probability":.67,"probability_type":"C3_RAW_UNCALIBRATED"},
+                    {"market":"UNDER_2.5","calibrated_probability":.58,"probability_type":"C3_RAW_UNCALIBRATED"}]
         ranked=rank_candidates(selections,rows,league="ESP1",asof=NOW)
         self.assertEqual(ranked[0]["market"],"UNDER_2.5")
         self.assertEqual(ranked[0]["historical_reliability"]["observed_hit_rate"],.72)
