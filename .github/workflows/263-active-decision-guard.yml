@@ -17,6 +17,8 @@ on:
       - experiments/263/sabah_new100_commit_guard_263.py
       - experiments/263/sabah_pinnacle_new100_bridge_263.py
       - experiments/263/sabah_mobile_approved_pdf_263.py
+      - experiments/263/sabah_mobile_model_only_263.py
+      - .github/workflows/263-sabah-new100-on-request.yml
       - experiments/263/test_current_new100_263.py
       - .github/workflows/263-active-decision-guard.yml
   pull_request:
@@ -34,6 +36,8 @@ on:
       - experiments/263/sabah_new100_commit_guard_263.py
       - experiments/263/sabah_pinnacle_new100_bridge_263.py
       - experiments/263/sabah_mobile_approved_pdf_263.py
+      - experiments/263/sabah_mobile_model_only_263.py
+      - .github/workflows/263-sabah-new100-on-request.yml
       - experiments/263/test_current_new100_263.py
       - .github/workflows/263-active-decision-guard.yml
   workflow_dispatch:
