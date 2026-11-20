@@ -26,6 +26,20 @@ class ReliabilityTests(unittest.TestCase):
                    "calibrated_probability":.5813}],rows,
                    league="ESP1",asof=NOW)[0]["decision_evidence_status"],
                    "HISTORICALLY_EVALUATED")
+    def test_choose_highest_observed_realization_not_highest_raw_or_value(self):
+        # Raw model percentage 67% need not be better than 58% once actual
+        # historical same-market prediction outcomes are checked.
+        rows=([record(i,p=.58,occurred=i<18,market="UNDER_2.5")
+               for i in range(25)] +
+              [record(100+i,p=.67,occurred=i<12,market="BTTS_NO")
+               for i in range(25)])
+        selections=[{"market":"BTTS_NO","calibrated_probability":.67},
+                    {"market":"UNDER_2.5","calibrated_probability":.58}]
+        ranked=rank_candidates(selections,rows,league="ESP1",asof=NOW)
+        self.assertEqual(ranked[0]["market"],"UNDER_2.5")
+        self.assertEqual(ranked[0]["historical_reliability"]["observed_hit_rate"],.72)
+        self.assertEqual(ranked[1]["historical_reliability"]["observed_hit_rate"],.48)
+
     def test_sparse_evidence_is_unknown_not_false_success(self):
         e=similar([record(1)],league="ESP1",market="UNDER_2.5",
                   probability=.5813,asof=NOW)
