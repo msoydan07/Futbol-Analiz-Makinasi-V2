@@ -34,7 +34,7 @@ jobs:
           source=zlib.decompress(base64.b64decode(encoded))
           assert hashlib.sha256(source).hexdigest()=='8208a544eb76be78460bfd2ba254e96acfdf3f032320c0c4f695128cddd343da', 'source SHA changed'
           assert source.count(b'random_state=SEED)')==1, 'expected exact sklearn random_state expression'
-          source=source.replace(b'random_state=SEED)',b'random_state=SEED % (2**32)')
+          source=source.replace(b'random_state=SEED)',b'random_state=SEED % (2**32))')
           (root/'audit.py').write_bytes(source)
           PY
           python -m py_compile research/263_independent_audit/audit.py
