@@ -1,0 +1,73 @@
+name: "263 frozen C3 calibration primary choice contract and original SHA verification"
+on:
+  push:
+    branches: [research/263-independent-math-audit]
+    paths:
+      - ".github/workflows/263-frozen-choice-policy-validation.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+jobs:
+  validate-frozen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Pinned dependencies and syntax
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 scikit-learn==1.7.2
+          python -m py_compile research/263_independent_audit/shadow_primary_choice_final.py
+          python -m py_compile research/263_independent_audit/audit_frozen_shadow_validation.py
+      - name: Original 4413 historical source and SHA lock
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: Recreate original retrospective 880 predictions unchanged
+        run: |
+          set -euo pipefail
+          PYTHONPATH=.:experiments/263 python experiments/263/chrono_goal_decision_263.py \
+            --source m4_quad_base/historical_results.csv \
+            --report /tmp/263_frozen_shadow_source.json \
+            --predictions /tmp/263_frozen_shadow_preds.csv
+      - name: Verify frozen coefficients exact selections and authentic Nov8 SHA clocks
+        run: |
+          set -euo pipefail
+          PYTHONPATH=.:experiments/263:research/263_independent_audit python research/263_independent_audit/audit_frozen_shadow_validation.py \
+            --history m4_quad_base/historical_results.csv \
+            --predictions /tmp/263_frozen_shadow_preds.csv \
+            --outdir research/263_independent_audit
+          test -s research/263_independent_audit/21_frozen_shadow_validation.json
+          test -s research/263_independent_audit/22_frozen_shadow_validation_report.md
+      - name: Preserve research outputs even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 263-frozen-primary-choice-contract-evidence
+          retention-days: 45
+          if-no-files-found: ignore
+          path: |
+            research/263_independent_audit/21_frozen_shadow_validation.json
+            research/263_independent_audit/22_frozen_shadow_validation_report.md
+      - name: Deny production forecast/results/locks mutation
+        run: |
+          set -euo pipefail
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/model_first_decision_263.py experiments/263/historical_probability_reliability_263.py experiments/263/model_first_selection_lock_20261120_normal_v3.json data/results_only_263 forward_morning_263 forward_quad_263
+      - name: Record immutable result in research branch only
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/263_independent_audit/21_frozen_shadow_validation.json research/263_independent_audit/22_frozen_shadow_validation_report.md
+          git commit -m "research(263): pass frozen primary pick model and original seal clock contract [skip ci]"
+          git push origin HEAD:research/263-independent-math-audit
