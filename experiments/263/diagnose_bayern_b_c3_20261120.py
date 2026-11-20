@@ -10,7 +10,7 @@ import numpy as np
 from datetime import datetime
 import exp_263_batch as legacy
 from full_match_eligibility_263 import full_match_rows
-from forward_quad import _b_lambdas
+from forward_quad import _b_lambdas,_safe_legacy_poisson_joint
 
 DATA=Path("data/results_only_263/2026-11-10_completed_4617_scores_only.csv")
 SHA="637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89"
@@ -62,6 +62,8 @@ def main():
         c3_raw=[math.exp(float(beta[0])+v(HOME,2)+v(AWAY,2+m)),
                 math.exp(float(beta[1])+v(AWAY,2)+v(HOME,2+m))]
     c3_tail=tail(*c3_raw) if c3_raw else None
+    b_recovered,b_adaptive=_safe_legacy_poisson_joint(*b_lam) if b_lam else (None,False)
+    c3_recovered,c3_adaptive=_safe_legacy_poisson_joint(*c3_lam) if c3_lam else (None,False)
     if fitted is None:c3_reason="FIT_FAILED"
     elif c3_lam is None:c3_reason="PREDICT_OUTSIDE_0_05_TO_5_LAMBDA"
     elif c3_output is None:c3_reason="POISSON_TAIL_OVER_0_001" if c3_tail>0.001 else "OTHER_SCORES_FAIL"
@@ -77,15 +79,29 @@ def main():
              "lambda_home":b_lam[0] if b_lam else None,
              "lambda_away":b_lam[1] if b_lam else None,
              "tail_mass_0_10":b_tail,
-             "original_c1_available":b_original is not None,"reason":b_reason},
+             "original_c1_available":b_original is not None,"reason":b_reason,
+             "new_forward_adapter_available":b_recovered is not None,
+             "adaptive_tail_used":b_adaptive,
+             "new_ms1":b_recovered["markets"]["1X2"]["H"] if b_recovered else None,
+             "new_under_2_5":b_recovered["markets"]["UNDER_2.5"] if b_recovered else None,
+             "new_normalized_tail_mass":b_recovered["tail_mass"] if b_recovered else None},
         "c3":{"optimizer":optim,"fit_returned":fitted is not None,
               "lambda_raw_unbounded":c3_raw,"lambda_validated":c3_lam,
               "tail_mass_0_10":c3_tail,
               "original_scores_available":c3_output is not None,
-              "reason":c3_reason},
+              "reason":c3_reason,
+              "new_forward_adapter_available":c3_recovered is not None,
+              "adaptive_tail_used":c3_adaptive,
+              "new_ms1":c3_recovered["markets"]["1X2"]["H"] if c3_recovered else None,
+              "new_under_2_5":c3_recovered["markets"]["UNDER_2.5"] if c3_recovered else None,
+              "new_normalized_tail_mass":c3_recovered["tail_mass"] if c3_recovered else None},
         "frozen_models_modified":False,"no_pilot_forecasts_rewritten":True}
     print("ROOT_CAUSE_ONE_SHOT_JSON="+json.dumps(result,ensure_ascii=False,allow_nan=False))
     if b_reason!="POISSON_TAIL_OVER_0_001":raise ValueError("B_DIAG_DISAGREES_WITH_PREMATCH_RUN")
     if c3_reason=="AVAILABLE":raise ValueError("C3_DIAG_DISAGREES_WITH_PREMATCH_RUN")
+    if not (b_adaptive and c3_adaptive and b_recovered and c3_recovered):
+        raise ValueError("ONE_SHOT_B_C3_NUMERICAL_EXTENSION_FAILED")
+    if not (b_recovered["tail_mass"]<1e-9 and c3_recovered["tail_mass"]<1e-9):
+        raise ValueError("UNCONTROLLED_POISSON_TAIL")
 
 if __name__=="__main__":main()
