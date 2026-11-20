@@ -72,3 +72,4 @@ jobs:
           git push origin HEAD:research/263-independent-math-audit
 
 # Re-run after canonical fixture-id loader correction.
+# Re-run with corrected nested M4 markets schema.
