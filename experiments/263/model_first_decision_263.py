@@ -1,4 +1,4 @@
-"""Research-only fixed specialist model-FIRST decision, never odds-driven.
+"""Normal fixed-specialist model-FIRST decision: highest realization likelihood.
 
 Nov20 expert routing: M4 coherent MS triple; C3 KG and 2.5 O/U raw vectors.
 Frozen Aug joint calibration applies ONLY to M4 MS; C3 odds percentages
@@ -146,41 +146,64 @@ def select(forecast, baseline, lock, *, now):
             raise EvidenceError("SPECIALIST_BINARY_NOT_NORMALIZED")
     b=baseline.get("markets")
     if not isinstance(b,dict):raise EvidenceError("BASELINE_MARKETS_MISSING")
-    details=[];qualifying=[]
+    # Core objective, not an extra decision layer: determine which of the
+    # seven outcomes is MOST LIKELY TO OCCUR. Never impose a global 60%
+    # probability floor, league-base lift, payout/odds or model-agreement gate.
+    # B/C2 only annotate agreement; frozen goal models and family anchors stay.
+    from historical_probability_reliability_263 import rank_candidates
+    history_cfg=lock.get("historical_reference")
+    if history_cfg is not None:
+        if (history_cfg.get("origin")!="NOV8_PREKICKOFF_SHA_AND_NOV12_TERMINAL_SCORE_ARCHIVE"
+            or history_cfg.get("available_from_utc")!="2026-11-13T00:00:00+00:00"
+            or history_cfg.get("price_influence") is not False
+            or history_cfg.get("ranking")!="HIGHEST_ESTIMATED_REALIZATION"):
+            raise EvidenceError("NORMAL_HISTORY_POLICY_NOT_MATCHED")
+        from normal_historical_reference_263 import load as load_actual_reference
+        history=load_actual_reference(asof=asof,lock=lock)
+    else:
+        # Older SHA-signed research decisions remain verifiable with the old
+        # lock; future operational entrypoints use the v3 lock above.
+        history=[]
+    details=[]
     for family,keys in GROUPS.items():
         for key in keys:
             ref=validprob(b[key]);prob=expert_vectors[family][key]
             available=[name for name,p in raw.items() if p is not None]
-            agreeing=[name for name in available if raw[name][key]>=ref+lock["support_lift"]]
-            why=[]
-            if len(available)<lock["min_available_models"]:why.append("INSUFFICIENT_AVAILABLE_MODELS")
-            if len(agreeing)<lock["min_support_models"]:why.append("INSUFFICIENT_MODEL_AGREEMENT")
-            if prob<lock["min_probability"]:why.append("LOW_MODEL_PROBABILITY")
-            if prob-ref<lock["min_lift"]:why.append("LOW_HISTORICAL_LIFT")
-            rank=(prob-ref)/max(.25,math.sqrt(max(1e-9,ref*(1-ref))))
+            agreeing=[name for name in available if raw[name][key]>=ref+.02]
             expert="M4" if family=="MS" or family in fallback_families else "C3"
-            item={"market":key,"family":family,"anchor_model":expert,
-                  "probability_type":("M4_AUG_JOINT_CALIBRATED" if family=="MS"
-                                      else "C3_RAW_UNCALIBRATED" if expert=="C3"
-                                      else "M4_RAW_FALLBACK_UNCALIBRATED"),
-                  "expert_fallback":family in fallback_families,
-                  "calibrated_probability":round(prob,10),"historical_base":round(ref,10),
-                  "lift_pp":round(100*(prob-ref),6),"confidence_score":round(rank,8),
-                  "agreeing_models":agreeing,"available_models":available,
-                  "qualification_reasons":why}
-            details.append(item)
-            if not why:qualifying.append(item)
-    qualifying.sort(key=lambda v:(-v["confidence_score"],-v["calibrated_probability"],v["market"]))
-    main=qualifying[0] if qualifying else None
-    alternate=next((x for x in qualifying[1:] if x["family"]!=main["family"]),None) if main else None
+            details.append({
+                "market":key,"family":family,"anchor_model":expert,
+                "probability_type":("M4_AUG_JOINT_CALIBRATED" if family=="MS"
+                                    else "C3_RAW_UNCALIBRATED" if expert=="C3"
+                                    else "M4_RAW_FALLBACK_UNCALIBRATED"),
+                "expert_fallback":family in fallback_families,
+                "calibrated_probability":round(prob,10),
+                "historical_base":round(ref,10),
+                "lift_pp":round(100*(prob-ref),6),
+                "confidence_score":round(prob,8),
+                "agreeing_models":agreeing,"available_models":available,
+                "qualification_reasons":[],
+                "support_is_diagnostic_not_a_selection_gate":True})
+    ranked=rank_candidates(details,history,league=fx["league"],asof=asof,
+                           min_samples=(history_cfg or {}).get("min_historical_report_n",20),
+                           min_local_samples=(history_cfg or {}).get("min_same_league_n",8),
+                           prior_strength=(history_cfg or {}).get("prior_strength",20))
+    main=ranked[0] if ranked else None
+    alternate=next((x for x in ranked[1:] if x["family"]!=main["family"]),None) if main else None
     out={"schema":SCHEMA,"status":"RESEARCH_CANDIDATE_NOT_APPROVED" if main else "RESEARCH_PAS_MODEL_ONLY",
          "forecast_sha256":forecast["payload_sha256"],"baseline_sha256":baseline["payload_sha256"],
          "model_policy_sha256":lock["payload_sha256"],"fixture":fx,
-         "main_candidate":main,"alternative_candidate":alternate,"model_market_diagnostics":details,
+         "main_candidate":main,"alternative_candidate":alternate,"model_market_diagnostics":ranked,
          "fixed_family_experts":{"MS":"M4","KG":"C3","O25":"C3"},
          "used_fallback_families":fallback_families,
          "market_prices_not_required_for_model_decision":True,
-         "reason":None if main else "NO_CONFIDENT_MODEL_ONLY_CANDIDATE",
+         "reason":None if main else "NO_COMPUTABLE_MODEL_MARKET",
+         "ranking_objective":"HIGHEST_ESTIMATED_REALIZATION_PROBABILITY",
+         "hard_60pct_model_gate":False,
+         "historical_pre_match_market_observations":len(history),
+         "historical_completed_matches":len({r["fixture_id"] for r in history}),
+         "historical_reference_source":"NOV8_ORIGINAL_SHA_SIGNED_RESULTS" if history else "NONE_ASOF",
+         "historical_reference_is_independently_validated":False,
          "odds_affected_selection":False,"price_used_in_decision":False,
          "new_model_fit":False,"forecast_unchanged":True,"betting_authorized":False,
          "production_modified":False,"official_S1_S2_approved":False}
