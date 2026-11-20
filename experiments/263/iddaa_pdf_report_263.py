@@ -83,9 +83,13 @@ def _render_pick(row,session):
                     "BTTS_YES":"KG Var","BTTS_NO":"KG Yok",
                     "OVER_2.5":"2.5 Ust","UNDER_2.5":"2.5 Alt"}
             def describe(x):
-                return (labels[x["market"]]+" "+_pct(x["calibrated_probability"])+
+                history=x.get("historical_reliability") or {}
+                estimate=x.get("estimated_realization_probability")
+                return (labels[x["market"]]+" model "+_pct(x["calibrated_probability"])+
                         " ["+x["anchor_model"]+", "+
-                        ("ham %" if "UNCALIBRATED" in x["probability_type"] else "kalibre %")+"]")
+                        ("ham %" if "UNCALIBRATED" in x["probability_type"] else "kalibre %")+"]"+
+                        (" | gecmis destekli "+_pct(estimate)+" (n="+str(history.get("n",0))+
+                         ", onaylanmamis)" if estimate is not None else ""))
             main=d.get("main_candidate");alt=d.get("alternative_candidate")
             if not main:
                 return "ANA: PAS (YALNIZ MODEL KURALLARI) | Neden: "+str(d.get("reason"))
