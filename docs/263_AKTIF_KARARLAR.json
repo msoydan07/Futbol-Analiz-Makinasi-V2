@@ -79,8 +79,9 @@
       "topic": "historical_probability_reliability",
       "decision_id": "D-HIST-PROB-20261120",
       "effective_date_tr": "2026-11-20",
-      "status": "ACTIVE_POLICY_RESEARCH_IMPLEMENTATION_NOT_LIVE",
-      "rule": "KULLANICININ ILK HEDEFI DEGISMEZ: Her mac icin gerceklesmesi en yuksek tahmini bulmak. Sabit %60 olasilik baraji kaldirilmasi karari onaylandi; eski aktif selector henüz değiştirilmedi. B C2 C3 M4 ve pazar uzmanlari korunur. Her pazar icin daha once MAC ONCESINDE SHA ile kaydedilmis ayni model/surum, ayni pazar ve benzer olasilik araligindaki gercek isabet gozlemleriyle TAHMININ GERCEKLESME OLASILIGI degerlendirilir. Kanit yeterliyse gerceklesmesi en yuksek tahmin ana tercih, sonra ikinci uygun aile alternatif olur. Tarihsel ornek yetersizse modellerin ham yonu acikca GECICI diye raporlanir; uydurma tarihsel isabet ve sahte onay verilmez. Piyasa orani, EV veya piyasa-yuzde-farki bu siralamaya girmez. Bağımsiz walk-forward dogrulamasi tamamlanmadan canli selector otomatik terfi etmez."
+      "status": "ACTIVE",
+      "rule": "KULLANICININ ILK HEDEFI DEGISMEZ: Her mac icin gerceklesmesi en yuksek tahmini bulmak. Sabit %60 olasilik baraji kaldirilmasi karari onaylandi; eski aktif selector henüz değiştirilmedi. B C2 C3 M4 ve pazar uzmanlari korunur. Her pazar icin daha once MAC ONCESINDE SHA ile kaydedilmis ayni model/surum, ayni pazar ve benzer olasilik araligindaki gercek isabet gozlemleriyle TAHMININ GERCEKLESME OLASILIGI degerlendirilir. Kanit yeterliyse gerceklesmesi en yuksek tahmin ana tercih, sonra ikinci uygun aile alternatif olur. Tarihsel ornek yetersizse modellerin ham yonu acikca GECICI diye raporlanir; uydurma tarihsel isabet ve sahte onay verilmez. Piyasa orani, EV veya piyasa-yuzde-farki bu siralamaya girmez. Bağımsiz walk-forward dogrulamasi tamamlanmadan canli selector otomatik terfi etmez.",
+      "implementation_status": "RESEARCH_MODULE_ONLY_NOT_IN_LIVE_SELECTOR"
     }
   ],
   "superseded_for_pdf_first": [
