@@ -183,6 +183,17 @@ def main():
     assert len(theta)==3 and lock["family_anchors"]=={"MS":"M4","KG":"C3","O25":"C3"}
     rows=load_predictions(a.predictions)
     assert len(rows)==880
+    # The reused 880 CSV loader deliberately omits fixture_id in its public
+    # record dictionaries; reattach from the very same pinned CSV in first-
+    # occurrence order and fail shut on any ordering/collision disagreement.
+    import csv
+    ids=[];seen=set()
+    with Path(a.predictions).open(encoding="utf-8-sig",newline="") as fh:
+        for line in csv.DictReader(fh):
+            fid=line["fixture_id"]
+            if fid not in seen:ids.append(fid);seen.add(fid)
+    assert len(ids)==len(rows)
+    for r,fid in zip(rows,ids):r["id"]=fid
     needed={r["id"] for r in rows if r["date"]>="2026-09-01"}
     lambdas=reconstruct_m4_lambda(a.history,needed)
     for r in rows:
