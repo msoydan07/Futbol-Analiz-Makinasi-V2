@@ -23,6 +23,10 @@ jobs:
           python-version: '3.11'
       - name: Fixed numerical dependencies
         run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: B-C3 adaptive Poisson is part of the normal calculation (no new selector)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_quad_poisson_tail_extension_263.py
       - name: New intake-only tests (not old model acceptance)
         env:
           PYTHONPATH: experiments/263
