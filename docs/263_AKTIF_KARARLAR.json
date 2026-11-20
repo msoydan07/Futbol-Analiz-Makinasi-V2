@@ -116,7 +116,7 @@
   ],
   "validation_status": {
     "decision": "A_ACTIVE",
-    "implementation": "B_EXPERIMENT_BRANCH_PDF_FIRST_AND_NEW100_NOBK_API_CODE_UPDATED_CI_PENDING",
+    "implementation": "B_EXPERIMENT_BRANCH_USER_IDDAA_PDF_ONLY_GUARD_CI_PASSED",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED"
   },
   "change_process": [
