@@ -1,0 +1,52 @@
+{
+  "schema": "263_C3_2025_FROZEN_BINARY_CALIBRATION_SHADOW_V1",
+  "status": "RESEARCH_SHADOW_NOT_LIVE",
+  "source_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "training_year": "2025-2026",
+  "trained_on": "2025/26 asof 2,898 C3 available matches, two different binary families",
+  "n_train": 2898,
+  "m4_ms_source": "M4_AUG_JOINT_CALIBRATED",
+  "c3_binary_source": "C3_RAW_UNCALIBRATED",
+  "calibration_method": "2025_C3_BASE_L2_LOGISTIC",
+  "model_features": [
+    "logit(C3 positive outcome)",
+    "logit(asof league positive outcome prior to match day)"
+  ],
+  "regularization_C": 0.5,
+  "coefficient_precision": "rounded to 7 decimals; validate replication against original sklearn",
+  "coefficients": {
+    "BTTS_YES": {
+      "intercept": 0.120946,
+      "coefficient_c3_logit": 0.2643173,
+      "coefficient_league_logit": 0.5012377
+    },
+    "OVER_2.5": {
+      "intercept": 0.1100003,
+      "coefficient_c3_logit": 0.2639998,
+      "coefficient_league_logit": 0.2514675
+    }
+  },
+  "other_probabilities_are_exact_complements": true,
+  "ms_no_recalibration_in_this_layer": true,
+  "no_xg": true,
+  "no_odds": true,
+  "no_automatic_bet": true,
+  "automatic_pas_for_missing_c3": false,
+  "only_pre_match_forecast_inputs": true,
+  "near_tie_threshold_absolute": 0.02,
+  "rank_basis": "MAXIMUM_MODEL_CALIBRATED_ESTIMATED_EVENT_PROBABILITY_ONE_PER_MATCH",
+  "shadow_observed_raw_2026_873": {
+    "old_hit_pct": 57.617,
+    "candidate_hit_pct": 62.543
+  },
+  "shadow_observed_live_shaped_2026_sept_oct_615": {
+    "old_hit_pct": 56.423,
+    "candidate_hit_pct": 59.512
+  },
+  "original_sha_nov8_39": {
+    "old_hit_pct": 69.231,
+    "candidate_hit_pct": 69.231
+  },
+  "leakage_warning": "2025 M4 development source and 2026 historical repeats are not independent blind validation",
+  "production_promotion_permitted": false
+}
