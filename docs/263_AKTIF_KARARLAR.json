@@ -80,7 +80,7 @@
       "decision_id": "D-HIST-PROB-20261120",
       "effective_date_tr": "2026-11-20",
       "status": "ACTIVE_POLICY_RESEARCH_IMPLEMENTATION_NOT_LIVE",
-      "rule": "Kullanıcı sabit %60 model olasılığı kapısını kaldırmayı onayladı. Yeni karar mantığı her maçın tüm pazar model yönünü gösterir, ardından yalnız gerçek maç öncesi SHA ile kaydedilmiş eski model tahminlerinin aynı pazar ve benzer yüzde aralığındaki gerçekleşme sıklığını esas alır. MS/KG/2.5 pazarları ayrı değerlendirilir; benzer kayıt yoksa tarihsel isabet UYDURULMAZ, geçici model yönü olarak gösterilir. Bağımsız walk-forward doğrulama ve gerçek veri arşivi sağlanmadan eski aktif selector otomatik değiştirilmez. Oran karar girdisi değildir."
+      "rule": "KULLANICININ ILK HEDEFI DEGISMEZ: Her mac icin gerceklesmesi en yuksek tahmini bulmak. Sabit %60 olasilik baraji kaldirilmasi karari onaylandi; eski aktif selector henüz değiştirilmedi. B C2 C3 M4 ve pazar uzmanlari korunur. Her pazar icin daha once MAC ONCESINDE SHA ile kaydedilmis ayni model/surum, ayni pazar ve benzer olasilik araligindaki gercek isabet gozlemleriyle TAHMININ GERCEKLESME OLASILIGI degerlendirilir. Kanit yeterliyse gerceklesmesi en yuksek tahmin ana tercih, sonra ikinci uygun aile alternatif olur. Tarihsel ornek yetersizse modellerin ham yonu acikca GECICI diye raporlanir; uydurma tarihsel isabet ve sahte onay verilmez. Piyasa orani, EV veya piyasa-yuzde-farki bu siralamaya girmez. Bağımsiz walk-forward dogrulamasi tamamlanmadan canli selector otomatik terfi etmez."
     }
   ],
   "superseded_for_pdf_first": [
@@ -130,7 +130,7 @@
     "decision": "A_ACTIVE",
     "implementation": "B_EXPERIMENT_BRANCH_USER_IDDAA_PDF_ONLY_GUARD_CI_PASSED",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED",
-    "historical_reliability": "A_POLICY_APPROVED_B_RESEARCH_MODULE_COMMITTED_C_LIVE_NOT_IMPLEMENTED"
+    "historical_reliability": "A_ORIGINAL_GOAL_MAX_REALIZATION_CONFIRMED_B_RESEARCH_RANKING_AND_SYNTHETIC_TESTS_ADDED_C_NOT_LIVE"
   },
   "change_process": [
     "Yeni karar oldugu zaman konu, kapsam, karar ID, tarih ve eski ID->yeni ID (supersedes) tek dosyaya kaydedilir.",
