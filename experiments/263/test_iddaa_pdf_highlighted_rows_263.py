@@ -27,17 +27,17 @@ XS=(208,224,238,253,268,283,300,313,328,343,359,374,389,404)
 class FakePage:
     def __init__(self,corrupt=False):
         self.blocks=[];self.words=[]
-        self.blocks.append((70,120,160,130,"Bülten\\n",0,0))
+        self.blocks.append((70,120,160,130,"Bülten\n",0,0))
         for i,(title,time,home,away,teambase) in enumerate(ROWS):
             # Real first-page order is not the same as visual order; code
             # must match layout by coordinates instead of stream ordering.
             if i in (0,1,3,4):
                 self.blocks.append((82.5,teambase-15,410,teambase-7,
-                                    title+"\\n1\\n0\\n2\\n",0,0))
+                                    title+"\n1\n0\n2\n",0,0))
             self.blocks.append((104,teambase+.7,122,teambase+13,
-                                "Bugün\\n"+time+"\\n",0,0))
+                                "Bugün\n"+time+"\n",0,0))
             self.blocks.append((129,teambase,202,teambase+13,
-                                home+"\\n"+away+"\\n",0,0))
+                                home+"\n"+away+"\n",0,0))
             # For two German fixtures, a shared heading appears above the
             # first; one is still eligible for the same previous section.
             if i==2:pass
@@ -48,7 +48,7 @@ class FakePage:
                                    token,i,j,0))
             # Several layout fragments after the price row: no guessed heading.
             self.blocks.append((89,teambase+3,410,teambase+10,
-                                "1\\nCANLI\\n"+"\\n".join(prices)+"\\n",0,0))
+                                "1\nCANLI\n"+"\n".join(prices)+"\n",0,0))
     def get_text(self,form=None):
         if form=="blocks":return self.blocks
         if form=="words":return self.words
