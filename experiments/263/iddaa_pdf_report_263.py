@@ -103,9 +103,12 @@ def _render_pick(row,session):
             if not main:
                 return "ANA: PAS (YALNIZ MODEL KURALLARI) | Neden: "+str(d.get("reason"))
             if alt and alt["family"]==main["family"]:raise EvidenceError("ALT_SAME_FAMILY")
+            tie=(" | YAKIN ADAYLAR: ilk iki fark "+str(d.get("top_two_probability_gap_pp"))+
+                 " puan, kesin ustunluk degil"
+                 if d.get("near_tie_within_two_percentage_points") is True else "")
             return ("ANA (ORANDAN BAGIMSIZ): "+describe(main)+
                     (" | ALTERNATIF: "+describe(alt) if alt else " | ALTERNATIF: YOK")+
-                    " | IDDAA SADECE 5. REFERANS, TERCIHI DEGISTIRMEZ")
+                    tie+" | IDDAA SADECE 5. REFERANS, TERCIHI DEGISTIRMEZ")
         except (KeyError,TypeError,ValueError) as exc:
             return "ANA: TEKNIK ENGEL | Model karari veya SHA baglantisi gecersiz: "+str(exc)[:80]
     from iddaa_pdf_first_quote_263 import sha256 as sha
