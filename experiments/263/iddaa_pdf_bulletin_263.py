@@ -157,9 +157,8 @@ def _featured_highlight_row(page, b):
                    for part in x[4].splitlines())]
     if len(teams)!=1:return None
     first,second=(part.strip() for part in teams[0][4].splitlines())
-    if any(mark in first+second for mark in (" - ","…","...")):
-        # Do not invent full names when user PDF truncated them.
-        pass
+    # Truncated club labels are preserved verbatim and quarantined by the
+    # existing TRUNCATED_TEAM_NAME_SINGLE_ROW status later in parse_pdf.
     headings=[]
     for x in blocks:
         if not 70<=x[0]<100 or not 3<=b[1]-x[1]<=70:continue
