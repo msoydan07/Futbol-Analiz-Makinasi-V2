@@ -1,3 +1,5 @@
+> **GÜNCELLEME / AKTİF KARARLARIN ÖNCELİĞİ (20.11.2026):** Bu dosya artık geçmiş kararların **eklemeli açıklama arşividir**. Yürürlükteki tek kısa karar indeksi **[263_AKTIF_KARARLAR.json](263_AKTIF_KARARLAR.json)** dosyasıdır. Aşağıdaki eski başlıklar ve alıntılar sadece tarihsel kanıt olarak korunmuştur. Çelişkili eski anlatım ile ilgili yeni işlem başlatılamaz; `experiments/263/check_active_decisions_263.py` başarısızsa işlem bloke edilir. Yeni kullanıcı kararıyla değişiklik yapılırsa eski karar **SUPERSEDED** olarak arşive işlenir ve aktif indeks bir kez güncellenir. Bu belge tek başına kodu güncellemez.
+
 # Futbol Maç Analiz Makinası 2.6.3 — KARAR DEFTERİ (tek geçerli karar özeti)
 
 **Sürüm:** 2026-11-20 / v3 (eklemeli, eski kayıtlar saklı)  
