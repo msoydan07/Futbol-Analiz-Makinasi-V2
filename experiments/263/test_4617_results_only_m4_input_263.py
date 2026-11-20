@@ -26,6 +26,7 @@ PROVENANCE=ROOT/"data/results_only_263/4617_research_input_provenance.json"
 BASE=ROOT/"m4_quad_base/historical_results.csv"
 M4LOCK=ROOT/"experiments/263/m4_lock.json"
 DEVLOCK=ROOT/"experiments/263/forward_dev_calibration_lock_263.json"
+CURRENTLOCK=ROOT/"experiments/263/model_first_selection_lock_20261120_normal_v3.json"
 RESEARCH_GRADE="APPEND_ONLY_4617_PUBLIC_RESULTS_ONLY_RESEARCH_NOT_OFFICIAL_ID_VERIFIED"
 
 class Active4617Input(unittest.TestCase):
@@ -160,10 +161,11 @@ class Active4617Input(unittest.TestCase):
                 report=morning_batch(
                     "new100","2026-11-11",req,NEW,BASE,PROVENANCE,M4LOCK,
                     root=".",now=now,lookup=test_only_lookup,
-                    dev_lock_path=DEVLOCK)
+                    dev_lock_path=CURRENTLOCK)
                 self.assertEqual(report["new_forecasts"],1,report)
                 self.assertEqual(report["blocked"],0,report)
-                self.assertEqual(report["outcomes"][0]["decision_status"],"RESEARCH_PAS")
+                self.assertEqual(report["outcomes"][0]["decision_status"],
+                                 "RESEARCH_CANDIDATE_NOT_APPROVED")
                 Path("experiments/263/sabah_batch_reports").mkdir(parents=True,exist_ok=True)
                 rp=Path("experiments/263/sabah_batch_reports/mock_only.json")
                 rp.write_text(json.dumps(report),encoding="utf-8")
