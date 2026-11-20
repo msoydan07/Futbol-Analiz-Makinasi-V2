@@ -73,8 +73,8 @@ class CurrentNew100Tests(unittest.TestCase):
         for filename in ("history.csv","baseline.csv","accepted.json","m4_lock.json"):
             Path(filename).write_text("synthetic",encoding="utf-8")
         from test_model_first_decision_263 import HERE
-        (d/"model_first_selection_lock_20261120.json").write_bytes(
-            (HERE/"model_first_selection_lock_20261120.json").read_bytes())
+        (d/"model_first_selection_lock_20261120_normal_v3.json").write_bytes(
+            (HERE/"model_first_selection_lock_20261120_normal_v3.json").read_bytes())
 
     def get(self):
         report=run("new100",DAY,self.manifest,
