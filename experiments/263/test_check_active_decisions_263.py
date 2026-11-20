@@ -14,6 +14,7 @@ NEEDED = (
     "experiments/263/model_first_decision_263.py",
     "experiments/263/model_first_selection_lock_20261120.json",
     "experiments/263/m4_integrated.py",
+    ".github/workflows/263-sabah-new100-on-request.yml",
 )
 
 class Contract(unittest.TestCase):
@@ -29,7 +30,8 @@ class Contract(unittest.TestCase):
     def test_current_single_source_passes(self):
         result=verify_active_policy(self.root)
         self.assertEqual(result["status"],"ACTIVE_DECISIONS_OK")
-        self.assertEqual(result["active_topics"],7)
+        self.assertEqual(result["active_topics"],8)
+        self.assertEqual(result["market"],"USER_IDDAA_PDF_ONLY_FIFTH_REFERENCE")
     def test_same_topic_two_active_decisions_blocks(self):
         path=self.root/NEEDED[0]
         d=json.loads(path.read_text(encoding="utf-8"))
@@ -49,6 +51,19 @@ class Contract(unittest.TestCase):
         path=self.root/"experiments/263/model_first_selection_lock_20261120.json"
         d=json.loads(path.read_text(encoding="utf-8"))
         d["family_anchors"]["KG"]="M4"
+        path.write_text(json.dumps(d),encoding="utf-8")
+        with self.assertRaises(ActiveDecisionConflict):
+            verify_active_policy(self.root)
+    def test_pinnacle_reactivation_in_workflow_blocks(self):
+        path=self.root/".github/workflows/263-sabah-new100-on-request.yml"
+        path.write_text(path.read_text(encoding="utf-8")+"\\nTHE_ODDS_API_KEY: forbidden\\n",
+                        encoding="utf-8")
+        with self.assertRaises(ActiveDecisionConflict):
+            verify_active_policy(self.root)
+    def test_external_price_reference_reactivated_blocks(self):
+        path=self.root/NEEDED[0]
+        d=json.loads(path.read_text(encoding="utf-8"))
+        d["canonical_entrypoints"]["new100_price_reference"]="experiments/263/sabah_pinnacle_new100_bridge_263.py"
         path.write_text(json.dumps(d),encoding="utf-8")
         with self.assertRaises(ActiveDecisionConflict):
             verify_active_policy(self.root)
