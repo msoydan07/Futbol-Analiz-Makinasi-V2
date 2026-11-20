@@ -28,8 +28,10 @@ def validate(p, expected):
     if not isinstance(p,dict) or set(p)!=set(expected):
         raise ValueError("MISSING_OR_EXTRA_FAMILY_PROB")
     out={k:bounded(p[k]) for k in expected}
-    if abs(sum(out.values())-1)>1e-6:
-        raise ValueError("NOT_A_COHERENT_FAMILY")
+    families=(KG,O25) if tuple(expected)==KG+O25 else (tuple(expected),)
+    for keys in families:
+        if abs(sum(out[k] for k in keys)-1)>1e-6:
+            raise ValueError("NOT_A_COHERENT_FAMILY")
     return out
 
 def logit(p):
