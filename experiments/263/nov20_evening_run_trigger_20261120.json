@@ -11,5 +11,5 @@
   "odds_api_allowed": false,
   "source": "user explicitly requested Nov20 after prior 09:53 UTC morning job returned three blocks",
   "commit_original_forecasts": false,
-  "rerun_reason": "fetch_pinned_4413_baseline_as_in_current_sabah_workflow"
+  "rerun_reason": "research_only_show_current_existing_M4_fallback_Bayern_C3_out_of_tail"
 }
