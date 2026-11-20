@@ -134,6 +134,20 @@ class CurrentNew100Tests(unittest.TestCase):
         self.assertEqual(original["payload_sha256"],d["payload_sha256"])
         self.assertEqual(original["main_candidate"]["market"],"MS1")
 
+    def test_named_without_user_pdf_has_zero_prices_and_generates_model_pdf(self):
+        from sabah_mobile_model_only_263 import build_model_only,render
+        report,row,d=self.get()
+        source=Path("batch.json");save_new(source,report)
+        result=build_model_only(report,Path("."))
+        self.assertEqual(len(result),1)
+        self.assertIsNone(result[0]["market"])
+        self.assertIsNone(result[0]["delta"])
+        self.assertIn("ANA: MS 1",result[0]["status"])
+        created=render(source,Path("."),"out_pdf")
+        self.assertEqual(created["status"],"MODEL_ONLY_MOBILE_PDF_NO_PRICE_SOURCE")
+        self.assertEqual(created["odds_api_calls"],0)
+        self.assertTrue((Path("out_pdf")/"toplu.pdf").read_bytes().startswith(b"%PDF-"))
+
     def test_absent_pinnacle_price_cannot_change_model_pick(self):
         report,row,d=self.get()
         source=Path("batch.json");save_new(source,report)
