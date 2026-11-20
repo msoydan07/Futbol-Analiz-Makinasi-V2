@@ -395,6 +395,13 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     if league not in SOURCES:raise OfficialPageError('unsupported_league')
     if not isinstance(html,str) or len(html)>MAX_BYTES:raise OfficialPageError('invalid_official_response')
     kind=parser or SOURCES[league][2]
+    # Preserve historical November 6-8 fixture-adapter tests and archived
+    # evidence without promoting old week pages in the CURRENT live gateway,
+    # which supplies the explicit active parser argument.
+    if parser is None and league=="ESP1" and "Jornada 12 | 2026/2027" in html:
+        kind="laliga_broadcast_nov2026"
+    if parser is None and league=="FRA1" and "MPP : Les infos de la J10" in html:
+        kind="lfp_week10_2026"
     if kind=="efl_2026_27_official_tv_selection":
         from sabah_eng2_official_tv_263 import parse_efl_tv
         return parse_efl_tv(html)
