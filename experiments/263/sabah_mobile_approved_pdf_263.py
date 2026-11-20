@@ -13,7 +13,6 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.colors import HexColor
 from sabah_mobile_screens_263 import load_row,decision,ScreenError
-from sabah_pinnacle_new100_bridge_263 import render as price_render
 from sabah_batch_263 import SCHEMA,sha
 from classification_odds_263 import canonical_markets
 from forward_c3 import read_aware
@@ -231,6 +230,8 @@ def single_pdf(path,day,r):
 
 def run(report,receipt,price,root,day,out):
     """Regenerate price comparison and assert identity, then only render PDF."""
+    # Historical replay-only price report path; never used by new live new100.
+    from sabah_pinnacle_new100_bridge_263 import render as price_render
     from sabah_pinnacle_new100_bridge_263 import read as read_json
     report=read_json(report);receipt=read_json(receipt)
     price_saved=read_json(price)
