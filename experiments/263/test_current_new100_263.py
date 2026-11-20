@@ -31,6 +31,17 @@ def named_fixture(league,home,away):
 
 def predictor(g,history,out_dir,lock,now=None,base=None,source_audit=None):
     f,_=scenario()
+    # The production forecast includes all full-time market lines.
+    # Fill the synthetic auxiliary lines without changing the core MS/KG/O25.
+    import math
+    mu=3.4
+    over15=1-math.exp(-mu)*(1+mu)
+    over35=1-math.exp(-mu)*(1+mu+mu*mu/2+mu**3/6)
+    for m in f["model_predictions"].values():
+        if m.get("status")=="AVAILABLE":
+            marks=m["goals"]["markets"]
+            marks.update({"OVER_1.5":over15,"UNDER_1.5":1-over15,
+                          "OVER_3.5":over35,"UNDER_3.5":1-over35})
     f["fixture"]["official_source"]=g["source_url"]
     f["fixture"]["source_checked_at_utc"]=NOW.isoformat()
     f["data"].update(snapshot_acceptance="APPEND_ONLY_4617_PUBLIC_RESULTS_ONLY_RESEARCH_NOT_OFFICIAL_ID_VERIFIED",
