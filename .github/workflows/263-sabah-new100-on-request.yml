@@ -1,4 +1,4 @@
-name: "263 new100 SABAH B C2 C3 M4 ve tek seferlik Pinnacle oran kilidi"
+name: "263 new100 SABAH B C2 C3 M4 sadece model / iddaa PDF ayri"
 on:
   push:
     branches: [experiment/263-toplu-karsilastirma]
@@ -88,7 +88,7 @@ jobs:
             --report "$REPORT" --mobile /tmp/new100_quick_readonly.md
           python experiments/263/sabah_mobile_screens_263.py \
             --report "$REPORT" --output-dir "$MOBILE"
-      - name: Accept only NEW pre-KO real records and same-SHA PAS mobile before Git
+      - name: Accept only NEW pre-KO real records and model-first same-SHA mobile before Git
         if: steps.intake.outputs.kind == 'real_named_request'
         shell: bash
         env:
@@ -157,102 +157,26 @@ jobs:
               subprocess.check_call(["git","cat-file","-e","origin/"+os.environ["GITHUB_REF_NAME"]+":"+row["forecast_path"]])
           print("NEW100_REMOTE_SHA_FILES_PROVEN",len(receipt["records"]))
           PY
-      - name: Same-morning Pinnacle h2h, Git-reserved one/day league credit (no bets)
+      - name: User-PDF-only pricing rule - never query any bookmaker from this named workflow
         if: steps.intake.outputs.kind == 'real_named_request'
-        shell: bash
-        env:
-          PYTHONPATH: .:experiments/263
-          REPORT: ${{ steps.intake.outputs.report }}
-          RECEIPT: ${{ steps.intake.outputs.receipt }}
-          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
-          GH_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
-          LEDGER=experiments/263/pinnacle_daily_reservations
-          SNAPSHOTS=experiments/263/pinnacle_daily_snapshots
-          BRIDGE=experiments/263/sabah_pinnacle_new100_bridge_263.py
-          PRICE_REPORT="experiments/263/pinnacle_new100_research/new100_${GITHUB_RUN_ID}.json"
-          echo 'SABAH_MODELS_AND_PINNACLE_SAME_BATCH_NO_T_MINUS_60'
-          PRICE_MOBILE="experiments/263/pinnacle_new100_research/new100_${GITHUB_RUN_ID}.md"
-          python "$BRIDGE" plan --report "$REPORT" --receipt "$RECEIPT" \
-            --ledger "$LEDGER" --out /tmp/pinnacle_new100_plan.json
-          if [ -z "${THE_ODDS_API_KEY:-}" ]; then
-            echo "NO_THE_ODDS_API_SECRET_NO_CREDIT_RESERVED"
-          else
-            python -c 'import json; print("\n".join(json.load(open("/tmp/pinnacle_new100_plan.json",encoding="utf-8"))["leagues"]))' > /tmp/pinnacle_new100_morning_leagues.txt
-            while IFS= read -r league; do
-              if [ -z "$league" ]; then continue; fi
-              day="$(TZ=Europe/Istanbul date +%Y-%m-%d)"
-              target="$LEDGER/$day/${league}_pinnacle_h2h.json"
-              snapshot="$SNAPSHOTS/$day/${league}.json"
-              test ! -e "$target"
-              test ! -e "$snapshot"
-              python experiments/263/sabah_pinnacle_capture_263.py reserve \
-                --ledger "$LEDGER" --league "$league" --day "$day"
-              git config user.name 'github-actions[bot]'
-              git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-              git add -- "$target"
-              test "$(git diff --cached --name-status)" = "$(printf 'A\t%s' "$target")"
-              git commit -m "Reserve one-shot Pinnacle h2h credit $league $day"
-              git pull --rebase origin "$GITHUB_REF_NAME"
-              git push origin "HEAD:$GITHUB_REF_NAME"
-              git fetch origin "$GITHUB_REF_NAME"
-              git cat-file -e "origin/$GITHUB_REF_NAME:$target"
-              python "$BRIDGE" prequery --report "$REPORT" --receipt "$RECEIPT" \
-                --league "$league" --out "/tmp/pinnacle_prequery_${league}.json"
-              python experiments/263/sabah_pinnacle_capture_263.py capture \
-                --ledger "$LEDGER" --league "$league" --day "$day" --out "$snapshot"
-              git add -- "$snapshot"
-              test "$(git diff --cached --name-status)" = "$(printf 'A\t%s' "$snapshot")"
-              git commit -m "Preserve one Pinnacle h2h response $league $day, no retry"
-              git pull --rebase origin "$GITHUB_REF_NAME"
-              git push origin "HEAD:$GITHUB_REF_NAME"
-              git fetch origin "$GITHUB_REF_NAME"
-              git cat-file -e "origin/$GITHUB_REF_NAME:$snapshot"
-            done < /tmp/pinnacle_new100_morning_leagues.txt
-          fi
-          python "$BRIDGE" render --report "$REPORT" --receipt "$RECEIPT" \
-            --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
-          python "$BRIDGE" verify --report "$REPORT" --receipt "$RECEIPT" \
-            --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
-          git add -- "$PRICE_REPORT" "$PRICE_MOBILE"
-          test "$(git diff --cached --name-only | wc -l)" -eq 2
-          if git diff --cached --name-only | grep -Evx '^experiments/263/pinnacle_new100_research/new100_[0-9]+[.](json|md)'; then
-            echo 'PRICING_STAGE_OUTSIDE_RESEARCH_DENIED'; exit 1
-          fi
-          git commit -m "Publish independent Pinnacle and calibrated new100 research or PAS"
-          git pull --rebase origin "$GITHUB_REF_NAME"
-          python "$BRIDGE" verify --report "$REPORT" --receipt "$RECEIPT" \
-            --snapshots "$SNAPSHOTS" --out "$PRICE_REPORT" --mobile "$PRICE_MOBILE"
-          git push origin "HEAD:$GITHUB_REF_NAME"
-          git fetch origin "$GITHUB_REF_NAME"
-          for file in "$PRICE_REPORT" "$PRICE_MOBILE"; do
-            git cat-file -e "origin/$GITHUB_REF_NAME:$file"
-          done
-          echo "SABAH_FORECAST_AND_ITS_PINNACLE_QUOTE_SHA_SAVED_SAME_RUN_NO_T60_NO_BET"
-      - name: Produce approved compact and single-match mobile PDFs from SHA-validated frozen data
+          echo "NO_QUOTES_IN_NAMED_ONLY_WORKFLOW"
+          echo "Model decisions remain independent from market data."
+          echo "Use iddaa_pdf_one_step_263.py with the user's ORIGINAL iddaa.com PDF for actual prices."
+      - name: Produce current model-only mobile PDFs from sealed records
         if: steps.intake.outputs.kind == 'real_named_request'
-        # User-approved monochrome boxed PDF is a mandatory delivery output.
-        # Existing SHA/pilot seals remain unchanged if presentation fails.
-        continue-on-error: false
         shell: bash
         env:
           PYTHONPATH: .:experiments/263
           REPORT: ${{ steps.intake.outputs.report }}
-          RECEIPT: ${{ steps.intake.outputs.receipt }}
-          DAY: ${{ steps.intake.outputs.day }}
         run: |
           set -euo pipefail
           python -m pip install --disable-pip-version-check reportlab==4.4.5
-          PRICE_REPORT="experiments/263/pinnacle_new100_research/new100_${GITHUB_RUN_ID}.json"
-          test -f "$PRICE_REPORT"
-          python experiments/263/sabah_mobile_approved_pdf_263.py \
-            --report "$REPORT" --receipt "$RECEIPT" \
-            --price "$PRICE_REPORT" --day "$DAY" \
-            --out "/tmp/new100_approved_mobile_${GITHUB_RUN_ID}"
+          python experiments/263/sabah_mobile_model_only_263.py \
+            --report "$REPORT" --out "/tmp/new100_approved_mobile_${GITHUB_RUN_ID}"
           git diff --quiet
           git diff --cached --quiet
-          echo "PDF_IS_READ_ONLY_FROZEN_SHA_RESEARCH_VIEW_NO_ADDITIONAL_QUOTE"
+          echo "MODEL_ONLY_PDF_NO_MARKET_QUOTE_NO_BOOKMAKER_API"
       - name: Upload approved mobile PDFs without altering forecast or credit receipts
         if: always()
         uses: actions/upload-artifact@v4
@@ -261,16 +185,6 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
           path: /tmp/new100_approved_mobile_*/**/*.pdf
-      - name: Preserve price-eligibility evidence without any API key
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: new100-pinnacle-plan-not-a-betting-instruction
-          retention-days: 14
-          if-no-files-found: ignore
-          path: |
-            /tmp/pinnacle_new100_plan.json
-            /tmp/pinnacle_prequery_*.json
       # Quiet engineering-only sidecar, after the model, mobile, and prices.
       # Its status cannot block the original signed model forecasts.
       - name: Quiet team coverage diagnosis - no model or mobile change
@@ -300,11 +214,11 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
           path: /tmp/263-internal-new100-team-coverage-*.json
-      - name: Upload new100 and optional independent Pinnacle research evidence
+      - name: Upload new100 model-only records and mobile evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: new100-pilot-and-optional-pinnacle-research
+          name: new100-model-only-research
           retention-days: 14
           if-no-files-found: ignore
           path: |
