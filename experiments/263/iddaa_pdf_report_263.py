@@ -172,7 +172,10 @@ def _table_for(row,norm,bold,font):
             diag=next((d for d in row["model_first_decision"]["model_market_diagnostics"]
                       if d.get("market")==market),None)
             selected=diag["anchor_model"] if diag else selected
-            p=(models.get(selected) or {}).get(market)
+            # Show the SAME market-specific probability that the signed
+            # decision layer actually used (M4 August-calibrated MS,
+            # C3 raw KG/O25), not the raw historical M4 column.
+            p=diag.get("calibrated_probability") if diag else None
         else:
             p=m4.get(market)
         if not isinstance(p,(int,float)) or isinstance(p,bool):p=None
@@ -284,7 +287,7 @@ def build(session,output):
             segments+=[Spacer(1,6),Paragraph(
                 escape("  |  ".join(modelbits)),small)]
         segments+=[Spacer(1,5),Paragraph(
-            ("Fark = seçili uzman modelin ham % − piyasa marjsız %. " if row.get("model_first_decision")
+            ("Fark = karar katmanında kullanılan uzman % − piyasa marjsız %. " if row.get("model_first_decision")
              else "Fark = M4 ham % − piyasa marjsız %. ")+
             "Pozitif fark tek başına kalibre bahis avantajı değildir.",small),Spacer(1,20)]
         story.append(KeepTogether(segments))
