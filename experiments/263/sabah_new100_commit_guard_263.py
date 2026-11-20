@@ -12,7 +12,7 @@ from sabah_batch_263 import SCHEMA,DIRS,sha,precommit
 from sabah_mobile_screens_263 import build,load_row,decision
 from market_fifth_baseline_263 import sealed_payload
 
-RECEIPT="263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V1"
+RECEIPT="263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
 MODELS=("B","C2","C3","M4")
 class PilotBlocked(ValueError):pass
 
@@ -94,15 +94,17 @@ def verify(report_path,mobile_dir,*,root=".",now=None):
         if page.read_text(encoding="utf-8")!=singles[stem]:
             raise PilotBlocked("SINGLE_MOBILE_CHANGED_AFTER_SEAL")
         d=decision(root,"new100",report["day_turkey"],stem,f)
-        if d is None or d.get("status")!="RESEARCH_PAS":
-            raise PilotBlocked("NO_VERIFIED_CALIBRATION_PAS")
-        if (d.get("betting_authorized") is not False
-            or d.get("quote_sha256") is not None
-            or d.get("main_candidate") is not None
-            or d.get("alternative_candidate") is not None
+        from model_first_decision_263 import verified,SCHEMA as MODEL_FIRST_SCHEMA
+        if d is None:raise PilotBlocked("CURRENT_MODEL_ONLY_DECISION_MISSING")
+        verified(d,MODEL_FIRST_SCHEMA)
+        if (d.get("status") not in ("RESEARCH_PAS_MODEL_ONLY","RESEARCH_CANDIDATE_NOT_APPROVED")
+            or d.get("betting_authorized") is not False
+            or d.get("price_used_in_decision") is not False
+            or d.get("odds_affected_selection") is not False
             or d.get("forecast_sha256")!=f["payload_sha256"]
             or row.get("decision_status")!=d["status"]
             or row.get("decision_sha256")!=d["payload_sha256"]):
+
             raise PilotBlocked("DECISION_OR_SOURCE_SHA_NOT_RECONCILED")
         base=root/"experiments/263/sabah_research/new100"/report["day_turkey"]/stem/"baseline.json"
         baseline=read(base)
@@ -111,7 +113,7 @@ def verify(report_path,mobile_dir,*,root=".",now=None):
             or baseline.get("forecast_sha256")!=f["payload_sha256"]
             or d.get("baseline_sha256")!=baseline["payload_sha256"]):
             raise PilotBlocked("BASELINE_FORECAST_LINK_INVALID")
-        if not (read_aware(f["created_at_utc"])<=read_aware(d["created_at_utc"])<=now):
+        if not (read_aware(f["created_at_utc"])<=read_aware(baseline["created_at_utc"])<=now):
             raise PilotBlocked("UNSAFE_PREMATCH_TIMING")
         evidence.append({
             "fixture":row["home"]+" - "+row["away"],"league":row["league"],
@@ -130,7 +132,7 @@ def verify(report_path,mobile_dir,*,root=".",now=None):
         "previous_96_and_acceptance3_unchanged":True,
         "all_new_records_are_before_kickoff":True,
         "mobile_sha_equal_to_seal":True,
-        "no_verified_odds":True,"decisions":"RESEARCH_PAS",
+        "no_verified_odds":True,"decisions":"MODEL_FIRST_M4_MS_C3_KG_O25",
         "minimum_available_models":3,"mandatory_models":["C3","M4"],
         "bookmaker_api_calls":0,"betting_authorized":False,
         "records":evidence}
@@ -164,5 +166,5 @@ def main():
     with dest.open("x",encoding="utf-8") as f:
         json.dump(out,f,ensure_ascii=False,indent=2,sort_keys=True,allow_nan=False)
         f.write("\n")
-    print("NEW100_MOBILE_SHA_SEALED",out["new_count"],"RESEARCH_PAS_NO_ODDS")
+    print("NEW100_MOBILE_SHA_SEALED",out["new_count"],"MODEL_FIRST_ODDS_INDEPENDENT")
 if __name__=="__main__":main()
