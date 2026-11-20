@@ -171,7 +171,7 @@ def run(cohort,day,src,history,baseline,acceptance,lock_path,root=".",now=None,
     available=sum(models[m].get("status")=="AVAILABLE" for m in models)
     if available<3 or any(models[m].get("status")!="AVAILABLE" for m in ("C3","M4")):
      raise Blocked("REQUIRES_C3_M4_AND_THREE_AVAILABLE")
-    if models["B"].get("status") not in ("AVAILABLE","UNAVAILABLE_INSUFFICIENT_CONTEXT"):
+    if models["B"].get("status") not in ("AVAILABLE","UNAVAILABLE_INSUFFICIENT_CONTEXT","UNAVAILABLE_LEGACY_POISSON_TAIL"):
      raise Blocked("B_MODEL_UNRECOGNISED_STATUS")
     if models["C2"].get("status") not in ("AVAILABLE","UNAVAILABLE"):
      raise Blocked("C2_MODEL_UNRECOGNISED_STATUS")
