@@ -13,6 +13,7 @@ on:
       - experiments/263/model_first_iddaa_bridge_263.py
       - experiments/263/iddaa_pdf_one_step_263.py
       - experiments/263/sabah_batch_263.py
+      - experiments/263/test_sabah_workflow_263.py
       - docs/263_AKTIF_KARARLAR.json
       - .github/workflows/263-normal-selection-acceptance.yml
 permissions:
