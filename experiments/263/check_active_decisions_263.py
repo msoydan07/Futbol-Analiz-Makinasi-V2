@@ -18,6 +18,7 @@ REQUIRED = {
     "fixed_market_experts":"D-EXPERT-20261120",
     "model_selection":"D-MARKET-006",
     "pdf_sequence":"D-ODDS-001",
+    "exclusive_odds_source":"D-ODDS-SOURCE-20261120",
     "c3_calibration":"D-C3-CAL-010",
     "reporting_and_seals":"D-OPER-004",
 }
@@ -82,11 +83,25 @@ def verify_active_policy(root=ROOT):
     m4=(root/paths["m4_engine"]).read_text(encoding="utf-8")
     _require("def predict_m4(" in m4 and "xg" not in m4.lower(),
              "M4_CORE_XG_POLICY_CONFLICT")
+    _require(paths.get("new100_price_reference")==
+             "experiments/263/iddaa_pdf_one_step_263.py",
+             "NON_IDDAA_PRICE_REFERENCE_REACTIVATED")
+    workflow=(root/".github/workflows/263-sabah-new100-on-request.yml").read_text(encoding="utf-8")
+    # No upstream API quotation or calls on new forecasts. Historical
+    # Pinnacle scripts are intentionally retained for audit only.
+    for forbidden in ("THE_ODDS_API_KEY", "sabah_pinnacle_capture_263.py",
+                      "sabah_pinnacle_new100_bridge_263.py",
+                      "pinnacle_new100_research/", "pinnacle_daily_snapshots/"):
+        _require(forbidden not in workflow,"AUTO_PRICE_FETCH_REACTIVATED:"+forbidden)
+    _require("sabah_mobile_model_only_263.py" in workflow,
+             "MODEL_ONLY_MOBILE_PATH_MISSING")
+    _require("source_bookmaker" in bridge and "iddaa.com" in bridge,
+             "PDF_BOOKMAKER_SOURCE_NOT_EXCLUSIVE")
     historical=p.get("superseded_for_pdf_first",[])
     _require(len(historical)>=2 and all(x.get("status")!="ACTIVE" for x in historical),
              "SUPERSEDED_POLICY_STILL_ACTIVE")
     return {"status":"ACTIVE_DECISIONS_OK", "active_topics":len(active),
-            "first_pdf":"MODEL_FIRST", "market":"FIFTH_REFERENCE_ONLY",
+            "first_pdf":"MODEL_FIRST", "market":"USER_IDDAA_PDF_ONLY_FIFTH_REFERENCE",
             "m4_xg":"NOT_IN_CORE", "live_acceptance":"NOT_YET_VERIFIED"}
 
 def main():
