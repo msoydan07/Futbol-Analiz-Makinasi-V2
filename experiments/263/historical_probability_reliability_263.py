@@ -83,7 +83,7 @@ def similar(records, *, league, market, probability, asof, half_width=.05, min_s
             "wilson_lower95":round(max(0,center-half),6)}
 
 def rank_candidates(candidates, records, *, league, asof, min_samples=20):
-    """Always show model direction; evidence determines confirmed vs unverified.
+    """Rank the most likely realized outcome; evidence labels verified vs unverified.
 
     Do NOT silently equate raw C3 probabilities with calibrated hit rates.
     No fixed 60% or any other model-probability acceptance threshold.
@@ -97,7 +97,15 @@ def rank_candidates(candidates, records, *, league, asof, min_samples=20):
                        "decision_evidence_status":("HISTORICALLY_EVALUATED" if
                           e["status"]=="HISTORICAL_PREMATCH_REFERENCE_AVAILABLE"
                           else "PROVISIONAL_MODEL_DIRECTION")})
+    # User's original objective is MAXIMUM ESTIMATED CHANCE OF OCCURRENCE.
+    # Wilson lower bound is an uncertainty display, NOT a value/edge filter
+    # or the primary rank target. Verified same-market historical success
+    # estimates rank first; provisional raw probability ranks only when there
+    # is not yet a validated similar-match sample.
     return sorted(ranked,key=lambda x:(
         x["historical_reliability"]["observed_hit_rate"] is None,
-        -(x["historical_reliability"]["wilson_lower95"] or 0),
+        -(x["historical_reliability"]["observed_hit_rate"]
+          if x["historical_reliability"]["observed_hit_rate"] is not None
+          else x["calibrated_probability"]),
+        -x["historical_reliability"]["n"],
         -x["calibrated_probability"],x["market"]))
