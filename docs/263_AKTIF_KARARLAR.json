@@ -1,0 +1,111 @@
+{
+  "schema": "263_ACTIVE_DECISIONS_V1",
+  "effective_date_tr": "2026-11-20",
+  "scope": "Futbol Mac Analiz Makinasi 2.6.3 - yeni 10 lig iddaa PDF-first analiz rotasi",
+  "authority": "Kullanicinin en son acik onayli karari; bu dosya o kararlarin kisa ve tek aktif indeksidir. Sohbette yeni acik karar alinirsa bu dosya ve guard birlikte guncellenmeden eski koda donulmez.",
+  "owner_branch": "experiment/263-toplu-karsilastirma",
+  "history_pointer": "docs/263_KARAR_DEFTERI_TEK_GECERLI_KAYNAK.md",
+  "canonical_entrypoints": {
+    "first_pdf": "experiments/263/iddaa_pdf_one_step_263.py",
+    "model_first_bridge": "experiments/263/model_first_iddaa_bridge_263.py",
+    "model_first_selector": "experiments/263/model_first_decision_263.py",
+    "second_pdf_only_review": "experiments/263/iddaa_pdf_last_review_263.py",
+    "m4_engine": "experiments/263/m4_integrated.py",
+    "c3_engine": "experiments/263/exp_263_batch.py"
+  },
+  "active": [
+    {
+      "topic": "league_scope",
+      "decision_id": "D-SCOPE-002",
+      "effective_date_tr": "2026-11-19",
+      "status": "ACTIVE",
+      "rule": "Canli PDF-first kapsam: ENG1 ENG2 GER1 ESP1 ITA1 FRA1 NED1 TUR1 POR1 BEL1. 13 analiz ligi/22 egitim havuzu hedef; canli 10'a otomatik eklenmis degil."
+    },
+    {
+      "topic": "model_math",
+      "decision_id": "D-MODEL-003",
+      "effective_date_tr": "2026-11-19",
+      "status": "ACTIVE",
+      "rule": "B,C2,C3,M4 dondurulmus gol-temelli Poisson matematikleri. Ana M4'e xG, Elo veya ilk 11 katsayisi eklenmez; xG ayri arastirma ve ana kararda kullanilmaz."
+    },
+    {
+      "topic": "fixed_market_experts",
+      "decision_id": "D-EXPERT-20261120",
+      "effective_date_tr": "2026-11-20",
+      "status": "ACTIVE",
+      "rule": "MS1/MSX/MS2 = tek M4 ortak ve Agustos-joint-kalibre olasilik vektoru; KG Var/Yok = ham C3, 2.5 Alt/Ust = ham C3; C3 yoksa bu iki ailede M4 fallback. B/C2 diger modellerle anlasma kontrolunde yer alir. C3 gol/KG kalibrasyonu yalniz ayri research shadow; ana yuzdelere terfi etmedi."
+    },
+    {
+      "topic": "model_selection",
+      "decision_id": "D-MARKET-006",
+      "effective_date_tr": "2026-11-20",
+      "status": "ACTIVE",
+      "rule": "Ana/alternatif/PAS yalniz model olasiligi, gecmis as-of lig frekansi, iki model destegi ve dondurulmus esiklerle belirlenir; odds/EV/no-vig fiyat secimini etkilemez. Fiyatlar secim SHA'sindan sonra 5. aciklayici referanstir."
+    },
+    {
+      "topic": "pdf_sequence",
+      "decision_id": "D-ODDS-001",
+      "effective_date_tr": "2026-11-19",
+      "status": "ACTIVE",
+      "rule": "Ilk iddaa PDF -> tek as-of dort model ve SHA tercih muhrü; ikinci ayni-gun PDF -> yalniz fiyat farki ve kanitli futbol yorumu, yeni tahmin/muhur/model karar degil."
+    },
+    {
+      "topic": "c3_calibration",
+      "decision_id": "D-C3-CAL-010",
+      "effective_date_tr": "2026-11-20",
+      "status": "ACTIVE",
+      "rule": "C3 KG/2.5 frozen kalibrasyon sonucu yeterli terfi kaniti saglamadi; ana karar ham C3 ile surer, frozen kalibre deger yalniz shadow / tanisal gorunur."
+    },
+    {
+      "topic": "reporting_and_seals",
+      "decision_id": "D-OPER-004",
+      "effective_date_tr": "2026-11-20",
+      "status": "ACTIVE",
+      "rule": "Teknik bloke != model PAS. Karar alindi(A), koda uygulandi(B), canli akista dogrulandi(C) ayri tutulur. Eski 96/40 SHA, main, diger projeler ve tum gecmis tahminler degistirilmez."
+    }
+  ],
+  "superseded_for_pdf_first": [
+    {
+      "former_decision": "04.11.2026 odds/EV-gated deger ana secimi",
+      "former_code": "experiments/263/four_model_value_policy_263.py",
+      "superseded_by": "D-MARKET-006",
+      "status": "HISTORICAL_RESEARCH_ONLY_NOT_FIRST_PDF_DECIDER"
+    },
+    {
+      "former_decision": "Eski fiyat-koprusuyle PDF-first karar",
+      "former_code": "experiments/263/iddaa_pdf_value_bridge_263.py",
+      "superseded_by": "D-MARKET-006",
+      "status": "HISTORICAL_RESEARCH_ONLY_NOT_FIRST_PDF_DECIDER"
+    },
+    {
+      "former_decision": "Ayni MS1/MSX/MS2 icin ayri uzman secimi / dinamik meta",
+      "former_code": "experiments/263/meta_market_selector_263.py",
+      "superseded_by": "D-EXPERT-20261120",
+      "status": "RESEARCH_ONLY_NOT_ACTIVE_SELECTOR"
+    }
+  ],
+  "research_only": [
+    {
+      "topic": "m4_xg",
+      "status": "NOT_PROMOTED_TO_CORE",
+      "note": "M4+xG veya xG yan modulleri aktif M4 motorunun girdisi degil."
+    },
+    {
+      "topic": "c3_shadow",
+      "status": "NOT_PROMOTED_TO_DECISION",
+      "note": "C3 frozen kalibrasyon sadece arastirma/diagnostik shadow."
+    }
+  ],
+  "validation_status": {
+    "decision": "A_ACTIVE",
+    "implementation": "B_EXPERIMENT_BRANCH_TESTED",
+    "real_matchday_end_to_end": "C_NOT_YET_VERIFIED"
+  },
+  "change_process": [
+    "Yeni karar oldugu zaman konu, kapsam, karar ID, tarih ve eski ID->yeni ID (supersedes) tek dosyaya kaydedilir.",
+    "Bir topic icin ayni tarihte ve ayni scope icinde yalniz bir ACTIVE kural olabilir; eski belge silinmez, ama executable rotada referans olmaktan cikar.",
+    "Kod kullanmadan once policy gate calistirilir; bilinmeyen/duble aktif konu varsa GUESS yerine BLOCK + rapor.",
+    "Eski kod tarihsel test icin tutulabilir; yeni PDF-first karar rota secicisi olarak kullanilamaz.",
+    "A / B / C onayi ayrica kanitlanmadan tumu bitti denmez; yeni sohbetlerde en once bu dosya okunur."
+  ]
+}
