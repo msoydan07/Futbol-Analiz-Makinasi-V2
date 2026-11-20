@@ -56,8 +56,13 @@ def run(out="."):
             row["forecast_path"]=str(fc_path)
             row["model_states"]={k:v["status"] for k,v in fc["model_predictions"].items()}
             available=sum(x=="AVAILABLE" for x in row["model_states"].values())
-            if (available<3 or any(row["model_states"][m]!="AVAILABLE" for m in ("C3","M4"))):
-                raise ValueError("CURRENT_SPECIALIST_COVERAGE_GATE")
+            # Strict morning pilots still require 3 live models and C3.
+            # This separately labelled research path can display the
+            # already-implemented M4 expert fallback with >=2 models.
+            if available<lock["min_available_models"] or row["model_states"]["M4"]!="AVAILABLE":
+                raise ValueError("INSUFFICIENT_MODELS_FOR_EVENING_RESEARCH")
+            if row["model_states"]["C3"]!="AVAILABLE":
+                row["specialist_warning"]="C3_UNAVAILABLE_M4_FALLBACK_RESEARCH_ONLY_MORNING_GATE_NOT_PASSED"
             base=empirical(fc,HISTORY,now=now)
             decision=model_first(fc,base,lock,now=now)
             row.update(state="PREMATCH_RESEARCH_ONLY_NOT_SEALED",
