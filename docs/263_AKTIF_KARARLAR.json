@@ -1,7 +1,7 @@
 {
   "schema": "263_ACTIVE_DECISIONS_V1",
   "effective_date_tr": "2026-11-20",
-  "scope": "Futbol Mac Analiz Makinasi 2.6.3 - yeni 10 lig iddaa PDF-first analiz rotasi",
+  "scope": "Futbol Mac Analiz Makinasi 2.6.3 - yeni 10 lig ilk Id daa PDF ve yeni kullanici adlandirilmis new100 sabah analiz rotalari",
   "authority": "Kullanicinin en son acik onayli karari; bu dosya o kararlarin kisa ve tek aktif indeksidir. Sohbette yeni acik karar alinirsa bu dosya ve guard birlikte guncellenmeden eski koda donulmez.",
   "owner_branch": "experiment/263-toplu-karsilastirma",
   "history_pointer": "docs/263_KARAR_DEFTERI_TEK_GECERLI_KAYNAK.md",
@@ -11,7 +11,12 @@
     "model_first_selector": "experiments/263/model_first_decision_263.py",
     "second_pdf_only_review": "experiments/263/iddaa_pdf_last_review_263.py",
     "m4_engine": "experiments/263/m4_integrated.py",
-    "c3_engine": "experiments/263/exp_263_batch.py"
+    "c3_engine": "experiments/263/exp_263_batch.py",
+    "new100_named": "experiments/263/sabah_batch_263.py",
+    "new100_receipt": "experiments/263/sabah_new100_commit_guard_263.py",
+    "new100_mobile": "experiments/263/sabah_mobile_screens_263.py",
+    "new100_pdf": "experiments/263/sabah_mobile_approved_pdf_263.py",
+    "new100_price_reference": "experiments/263/sabah_pinnacle_new100_bridge_263.py"
   },
   "active": [
     {
@@ -40,7 +45,7 @@
       "decision_id": "D-MARKET-006",
       "effective_date_tr": "2026-11-20",
       "status": "ACTIVE",
-      "rule": "Ana/alternatif/PAS yalniz model olasiligi, gecmis as-of lig frekansi, iki model destegi ve dondurulmus esiklerle belirlenir; odds/EV/no-vig fiyat secimini etkilemez. Fiyatlar secim SHA'sindan sonra 5. aciklayici referanstir."
+      "rule": "Yeni PDF ve new100 sabah analizinde ana/alternatif/PAS sadece model olasiligi, gecmis as-of lig frekansi, en az iki model destegi ve kilitli model esikleriyle secilir; odds/EV/no-vig fiyat secimini etkilemez. Eski fiyat-gated modullu karar yeni kayitta aktif degil; oranlar sonradan besinci arastirma referansidir."
     },
     {
       "topic": "pdf_sequence",
@@ -69,7 +74,7 @@
       "former_decision": "04.11.2026 odds/EV-gated deger ana secimi",
       "former_code": "experiments/263/four_model_value_policy_263.py",
       "superseded_by": "D-MARKET-006",
-      "status": "HISTORICAL_RESEARCH_ONLY_NOT_FIRST_PDF_DECIDER"
+      "status": "HISTORICAL_RESEARCH_ONLY_NOT_NEW_ANALYSIS_DECIDER"
     },
     {
       "former_decision": "Eski fiyat-koprusuyle PDF-first karar",
@@ -98,7 +103,7 @@
   ],
   "validation_status": {
     "decision": "A_ACTIVE",
-    "implementation": "B_EXPERIMENT_BRANCH_TESTED",
+    "implementation": "B_EXPERIMENT_BRANCH_TESTED_PDF_AND_NEW100",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED"
   },
   "change_process": [
