@@ -1,4 +1,4 @@
-"""Regression: a separate DEV market q must NOT look like 1X2 distribution."""
+"""Historical DEV labels remain distinguishable from current coherent M4 MS."""
 import inspect,sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
@@ -24,13 +24,15 @@ class DisplayTests(unittest.TestCase):
         self.assertIn("1X2 dağılımı değil",rendered)
         self.assertNotIn("Kalibre MS yönü",rendered)
         self.assertIn("PAS",rendered)
-    def test_pdf_legend_and_amount_label_dont_claim_triple_joint_calibration(self):
+    def test_current_pdf_M4_joint_MS_and_C3_specialists_are_labelled(self):
         leg=inspect.getsource(foot)
         matchline=inspect.getsource(match)
         singleline=inspect.getsource(single_pdf)
-        self.assertIn("1X2 dagilimi degil",leg)
-        self.assertIn("BIZIM (TEK MS)",matchline)
-        self.assertIn("BIZIM (TEK MS)",singleline)
+        self.assertIn("MS=M4 ortak dagilim",leg)
+        self.assertIn("KG/2.5=C3",leg)
+        self.assertIn("BIZIM (M4 MS)",matchline)
+        self.assertIn("BIZIM (M4 MS)",singleline)
+        self.assertNotIn("BIZIM (TEK MS)",matchline)
     def test_immutable_seal_remains_unchanged_by_display_functions(self):
         self.assertTrue(callable(single))
         self.assertTrue(callable(match))
