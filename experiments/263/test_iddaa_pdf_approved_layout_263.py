@@ -1,0 +1,81 @@
+"""Regression against exact Nov20 approved visual specification, no live fixtures."""
+import copy
+import tempfile
+import unittest
+from pathlib import Path
+
+from iddaa_pdf_approved_layout_263 import render_batch,render_singles
+from iddaa_pdf_session_263 import SCHEMA as MORNING_SCHEMA
+from iddaa_pdf_last_review_263 import build as review_build
+from test_iddaa_pdf_last_review_263 import make, NOW
+
+class UserApprovedReports(unittest.TestCase):
+    def _row(self,n):
+        prices={"MS1":1.40,"MSX":4.20,"MS2":6.50,
+                "UNDER_2.5":2.30,"OVER_2.5":1.61,
+                "BTTS_YES":1.90,"BTTS_NO":1.82}
+        return {"index":n,"league":"GER1","pdf_home":"Ev Takımı "+str(n),
+                "pdf_away":"Deplasman Takımı "+str(n),
+                "match_date_tr":"2026-11-21","kickoff_time_tr":"17:30",
+                "status":"ONE_ROW_OFFICIAL_ADAPTER_ERROR","prices":prices}
+    def test_six_one_page_not_synthetic_predictions(self):
+        import fitz
+        session={"schema":MORNING_SCHEMA,"pdf_sha256":"a"*64,
+                 "rows":[self._row(i) for i in range(6)]}
+        with tempfile.TemporaryDirectory() as d:
+            p=render_batch(session,Path(d)/"toplu.pdf")
+            with fitz.open(p) as doc:
+                self.assertEqual(len(doc),1)
+                t=doc[0].get_text()
+                for label in ("BUNDESLIGA","ANA TERCİH","BİZİM %",
+                              "PİYASA %","FARK (PUAN)","Alternatif:"):
+                    self.assertIn(label,t)
+                self.assertIn("TEKNİK ENGEL",t)
+                self.assertNotIn("MODEL ÖZETİ",t)
+                for i in range(6):self.assertIn("Ev Takımı "+str(i),t)
+            with self.assertRaises(FileExistsError):render_batch(session,p)
+    def test_seven_matches_paginate_without_overwriting(self):
+        import fitz
+        s={"schema":MORNING_SCHEMA,"rows":[self._row(i) for i in range(7)]}
+        with tempfile.TemporaryDirectory() as d:
+            with fitz.open(render_batch(s,Path(d)/"toplu.pdf")) as pdf:
+                self.assertEqual(len(pdf),2)
+    def test_single_four_symmetric_boxes_and_no_invented_xi(self):
+        import fitz
+        morning,first,last,resolver=make()
+        review=review_build(morning,first,last,[],NOW,resolver=resolver)
+        with tempfile.TemporaryDirectory() as d:
+            output=Path(d)/"tekli"
+            made=render_singles(review,output)
+            self.assertEqual(len(made),5)
+            with fitz.open(made[0]) as doc:
+                self.assertEqual(len(doc),1)
+                page=doc[0]
+                txt=page.get_text()
+                for part in ("MAÇ BİLGİSİ","ANA TAHMİN","BİZİM %",
+                             "PİYASA %","FARK","ORAN KARŞILAŞTIRMASI",
+                             "İLK ORAN","SON ORAN","YENİ FARK","YORUM"):
+                    self.assertIn(part,txt)
+                self.assertNotIn("MODEL ÖZETİ",txt)
+                self.assertIn("İlk 11",txt)
+                # Every major box starts/ends at exactly the same X bounds.
+                drawings=page.get_drawings()
+                big=[x["rect"] for x in drawings if x["rect"].width>470
+                     and x["rect"].height>75]
+                self.assertGreaterEqual(len(big),4)
+                for r in big[:4]:
+                    self.assertAlmostEqual(r.x0,big[0].x0,places=1)
+                    self.assertAlmostEqual(r.x1,big[0].x1,places=1)
+            with self.assertRaises(FileExistsError):render_singles(review,output)
+    def test_unsigned_choice_does_not_become_real_pick(self):
+        # A market price alone can never manufacture a main prediction.
+        s={"schema":MORNING_SCHEMA,"rows":[self._row(0)]}
+        with tempfile.TemporaryDirectory() as d:
+            import fitz
+            with fitz.open(render_batch(s,Path(d)/"r.pdf")) as pdf:
+                t=pdf[0].get_text()
+                self.assertIn("TEKNİK ENGEL",t)
+                self.assertIn("PAS DEĞİL",t)
+                self.assertNotIn("MS 1   %",t)
+if __name__=="__main__":
+    unittest.main()
