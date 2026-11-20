@@ -110,6 +110,16 @@ def select(forecast, baseline, lock, *, now):
         raise EvidenceError("WRONG_MODEL_LOCK")
     if lock.get("payload_sha256")!=digest({k:v for k,v in lock.items() if k!="payload_sha256"}):
         raise EvidenceError("MODEL_LOCK_SHA_MISMATCH")
+    # Versioned lock: preserve the original v3 SHA replay exactly. The
+    # independent 2025/26-trained C3 calibration is activated ONLY by v4.
+    calibration_v4=lock.get("calibration_v4")
+    if calibration_v4 is not None:
+        from model_first_frozen_c3_calibration_263 import verify_policy
+        try: verify_policy(calibration_v4)
+        except ValueError as ex: raise EvidenceError("FROZEN_C3_POLICY_INVALID") from ex
+        if (lock.get("historical_reference",{}).get("ranking")!=
+            "DIAGNOSTIC_ONLY_NOT_USED_FOR_V4_CALIBRATED_MARKET_SELECTION"):
+            raise EvidenceError("V4_HISTORY_MUST_NOT_RANK_NEW_CALIBRATION")
     if (lock.get("family_anchors")!={"MS":"M4","KG":"C3","O25":"C3"}
         or lock.get("historical_20261119_family_anchors")!={"MS":"M4","KG":"M4","O25":"M4"}
         or lock.get("frozen_m4_calibration_only_applies_to_MS") is not True):
@@ -146,6 +156,20 @@ def select(forecast, baseline, lock, *, now):
             raise EvidenceError("SPECIALIST_BINARY_NOT_NORMALIZED")
     b=baseline.get("markets")
     if not isinstance(b,dict):raise EvidenceError("BASELINE_MARKETS_MISSING")
+    if calibration_v4 is not None and raw["C3"] is not None:
+        # C3 market probabilities are not on the same calibrated scale as
+        # August-M4 MS. Do not use original raw Nov8 SHA outcomes to adjust
+        # this new model identity. Correct KG and O25 separately using a
+        # previously frozen 2025/26 C3 reliability transform.
+        from model_first_frozen_c3_calibration_263 import calibrated_binary_pair
+        for fam,pos,neg in (("KG","BTTS_YES","BTTS_NO"),
+                            ("O25","OVER_2.5","UNDER_2.5")):
+            try:
+                yes,no=calibrated_binary_pair(raw["C3"][pos],validprob(b[pos]),
+                                              pos,calibration_v4)
+            except ValueError as ex:
+                raise EvidenceError("FROZEN_C3_CALIBRATION_FAILED") from ex
+            expert_vectors[fam]={pos:yes,neg:no}
     # Core objective, not an extra decision layer: determine which of the
     # seven outcomes is MOST LIKELY TO OCCUR. Never impose a global 60%
     # probability floor, league-base lift, payout/odds or model-agreement gate.
@@ -156,10 +180,15 @@ def select(forecast, baseline, lock, *, now):
         if (history_cfg.get("origin")!="NOV8_PREKICKOFF_SHA_AND_NOV12_TERMINAL_SCORE_ARCHIVE"
             or history_cfg.get("available_from_utc")!="2026-11-13T00:00:00+00:00"
             or history_cfg.get("price_influence") is not False
-            or history_cfg.get("ranking")!="HIGHEST_ESTIMATED_REALIZATION"):
+            or history_cfg.get("ranking")!=(
+                 "DIAGNOSTIC_ONLY_NOT_USED_FOR_V4_CALIBRATED_MARKET_SELECTION"
+                 if calibration_v4 is not None else "HIGHEST_ESTIMATED_REALIZATION")):
             raise EvidenceError("NORMAL_HISTORY_POLICY_NOT_MATCHED")
         from normal_historical_reference_263 import load as load_actual_reference
-        history=load_actual_reference(asof=asof,lock=lock)
+        # Real 8-Nov seals contain RAW C3 identity, not 2025-frozen binary
+        # calibrated identity. They are NOT legitimate reliability examples
+        # for v4 ranking. For v3 keep the old SHA-valid behavior unchanged.
+        history=[] if calibration_v4 is not None else load_actual_reference(asof=asof,lock=lock)
     else:
         # Older SHA-signed research decisions remain verifiable with the old
         # lock; future operational entrypoints use the v3 lock above.
@@ -174,6 +203,7 @@ def select(forecast, baseline, lock, *, now):
             details.append({
                 "market":key,"family":family,"anchor_model":expert,
                 "probability_type":("M4_AUG_JOINT_CALIBRATED" if family=="MS"
+                                    else "C3_2025_FROZEN_BINARY_LOGIT" if calibration_v4 is not None and expert=="C3"
                                     else "C3_RAW_UNCALIBRATED" if expert=="C3"
                                     else "M4_RAW_FALLBACK_UNCALIBRATED"),
                 "expert_fallback":family in fallback_families,
@@ -184,10 +214,24 @@ def select(forecast, baseline, lock, *, now):
                 "agreeing_models":agreeing,"available_models":available,
                 "qualification_reasons":[],
                 "support_is_diagnostic_not_a_selection_gate":True})
-    ranked=rank_candidates(details,history,league=fx["league"],asof=asof,
-                           min_samples=(history_cfg or {}).get("min_historical_report_n",20),
-                           min_local_samples=(history_cfg or {}).get("min_same_league_n",8),
-                           prior_strength=(history_cfg or {}).get("prior_strength",20))
+    if calibration_v4 is not None:
+        # The operational objective is calibrated occurrence probability
+        # itself. Do not perturb ranking using 39 results from a different
+        # C3 calibration version. A close gap is uncertainty, NOT auto-PAS.
+        ranked=sorted(details,key=lambda row:(-row["calibrated_probability"],row["market"]))
+        for row in ranked:
+            row["estimated_realization_probability"]=row["calibrated_probability"]
+            row["decision_evidence_status"]="FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED"
+            row["historical_reliability"]={
+                "status":"NO_SAME_VERSION_LIVE_SHA_REFERENCE","n":0}
+            row["frozen_binary_calibration_train_n"]=(
+                calibration_v4["train_n"] if row["probability_type"]==
+                    "C3_2025_FROZEN_BINARY_LOGIT" else None)
+    else:
+        ranked=rank_candidates(details,history,league=fx["league"],asof=asof,
+                               min_samples=(history_cfg or {}).get("min_historical_report_n",20),
+                               min_local_samples=(history_cfg or {}).get("min_same_league_n",8),
+                               prior_strength=(history_cfg or {}).get("prior_strength",20))
     main=ranked[0] if ranked else None
     alternate=next((x for x in ranked[1:] if x["family"]!=main["family"]),None) if main else None
     out={"schema":SCHEMA,"status":"RESEARCH_CANDIDATE_NOT_APPROVED" if main else "RESEARCH_PAS_MODEL_ONLY",
@@ -202,11 +246,27 @@ def select(forecast, baseline, lock, *, now):
          "hard_60pct_model_gate":False,
          "historical_pre_match_market_observations":len(history),
          "historical_completed_matches":len({r["fixture_id"] for r in history}),
-         "historical_reference_source":"NOV8_ORIGINAL_SHA_SIGNED_RESULTS" if history else "NONE_ASOF",
+         "historical_reference_source":("NONE_FOR_NEW_CALIBRATION_VERSION"
+              if calibration_v4 is not None else
+              "NOV8_ORIGINAL_SHA_SIGNED_RESULTS" if history else "NONE_ASOF"),
          "historical_reference_is_independently_validated":False,
          "odds_affected_selection":False,"price_used_in_decision":False,
          "new_model_fit":False,"forecast_unchanged":True,"betting_authorized":False,
          "production_modified":False,"official_S1_S2_approved":False}
+    if calibration_v4 is not None:
+        out.update({
+            "selection_policy_version":"20261121_C3_2025_FROZEN_V4",
+            "calibration_train_n_2025_26":calibration_v4["train_n"],
+            "nov8_raw_sha_history_used_to_rank":False,
+            "top_two_probability_gap_pp":(
+                round(100*(ranked[0]["calibrated_probability"]-
+                           ranked[1]["calibrated_probability"]),4) if len(ranked)>1 else None),
+            "near_tie_within_two_percentage_points":(
+                ranked[0]["calibrated_probability"]-
+                ranked[1]["calibrated_probability"]<=.02 if len(ranked)>1 else False),
+            "independent_forward_superiority_established":False,
+            "prior_v3_original_forecast_seals_unchanged":True,
+        })
     out["payload_sha256"]=digest(out)
     return out
 
