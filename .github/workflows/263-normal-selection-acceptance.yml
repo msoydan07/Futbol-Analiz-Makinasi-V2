@@ -32,5 +32,11 @@ jobs:
         run: |
           python experiments/263/check_active_decisions_263.py
           python -m unittest -v experiments/263/test_normal_historical_reference_263.py experiments/263/test_historical_probability_reliability_263.py experiments/263/test_model_first_decision_263.py experiments/263/test_check_active_decisions_263.py
+      - name: Verify normal PDF and morning entrypoints remain compatible
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab==4.4.5 pymupdf
+          python -m unittest -v experiments/263/test_model_first_iddaa_bridge_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_sabah_workflow_263.py
       - name: No past forecasts or sealed decisions were rewritten
         run: git diff --exit-code
