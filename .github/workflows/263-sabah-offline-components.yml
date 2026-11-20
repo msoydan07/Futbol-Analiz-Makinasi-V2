@@ -74,22 +74,17 @@ jobs:
         run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
       - name: Install pinned PDF-only report dependencies
         run: python -m pip install --disable-pip-version-check reportlab==4.4.5 pypdf==6.1.3
-      - name: "Static preflight: old free-credit paths cannot query The Odds API"
+      - name: Guard new100 against any automated odds or Pinnacle calls
         run: |
+          set -euo pipefail
           test "$(git hash-object experiments/263/local_leagues/2026-11-06_09_10_league_date_only_candidates.json)" = "803378e8ef0f1f285a3393a7231567eea8f25e80"
-          ! grep -q 'THE_ODDS_API_KEY:.*secrets' .github/workflows/263-quad-forward-on-request.yml
-          ! grep -q 'secrets.THE_ODDS_API_KEY' .github/workflows/263-pinnacle-free-once.yml
-          grep -q 'group: quad-263-append-only' .github/workflows/263-sabah-new100-on-request.yml
-          grep -q 'secrets.THE_ODDS_API_KEY' .github/workflows/263-sabah-new100-on-request.yml
-          grep -q 'origin/$GITHUB_REF_NAME:$target' .github/workflows/263-sabah-new100-on-request.yml
-          grep -q 'sabah_pinnacle_capture_263.py reserve' .github/workflows/263-sabah-new100-on-request.yml
-          grep -q 'sabah_pinnacle_capture_263.py capture' .github/workflows/263-sabah-new100-on-request.yml
-          grep -q 'SABAH_MODELS_AND_PINNACLE_SAME_BATCH_NO_T_MINUS_60' .github/workflows/263-sabah-new100-on-request.yml
-          grep -q 'MORNING_ANALYSIS_TIME_NOT_T_MINUS_60' experiments/263/sabah_pinnacle_new100_bridge_263.py
-          ! grep -q '20<=minutes<=90' experiments/263/sabah_pinnacle_new100_bridge_263.py
-          ! grep -q 'secrets.THE_ODDS_API_KEY' .github/workflows/263-pinnacle-free-once.yml
-          ! grep -q 'THE_ODDS_API_KEY' .github/workflows/263-sabah-live-batch.yml
-          ! grep -q 'THE_ODDS_API_KEY' .github/workflows/263-sabah-10lig-fixture-preflight.yml
+          python experiments/263/check_active_decisions_263.py
+          ! grep -q 'THE_ODDS_API_KEY' .github/workflows/263-sabah-new100-on-request.yml
+          ! grep -q 'sabah_pinnacle_capture_263.py' .github/workflows/263-sabah-new100-on-request.yml
+          ! grep -q 'sabah_pinnacle_new100_bridge_263.py' .github/workflows/263-sabah-new100-on-request.yml
+          grep -q 'sabah_mobile_model_only_263.py' .github/workflows/263-sabah-new100-on-request.yml
+          grep -q 'from model_first_decision_263 import select' experiments/263/model_first_iddaa_bridge_263.py
+          echo "USER_IDDAA_PDF_EXCLUSIVE_PRICE_SOURCE_MODEL_ONLY_NEW100"
       - name: Parse live new100 workflow YAML and require one executable per step
         run: |
           python -m pip install --disable-pip-version-check PyYAML==6.0.3
@@ -104,9 +99,9 @@ jobs:
               assert isinstance(step,dict)
               assert ("run" in step)!=("uses" in step), "INVALID_STEP_RUN_USES_COLLISION"
               assert isinstance(step.get("run",step.get("uses")),str)
-          assert any("reserve" in step.get("run","") for step in steps)
-          assert any("prequery" in step.get("run","") for step in steps)
-          assert any("capture" in step.get("run","") for step in steps)
+          assert not any("sabah_pinnacle_capture_263.py" in step.get("run","") for step in steps)
+          assert not any("THE_ODDS_API_KEY" in step.get("run","") for step in steps)
+          assert any("sabah_mobile_model_only_263.py" in step.get("run","") for step in steps)
           print("NEW100_WORKFLOW_YAML_VALID",len(steps))
           preview=yaml.safe_load(Path(".github/workflows/263-sabah-10lig-fixture-preflight.yml").read_text(encoding="utf-8"))
           preview_steps=preview["jobs"]["ten-league-diagnostic"]["steps"]
