@@ -117,6 +117,23 @@ class CurrentNew100Tests(unittest.TestCase):
         self.assertEqual(receipt["decisions"],"MODEL_FIRST_M4_MS_C3_KG_O25")
         self.assertEqual(receipt["records"][0]["decision_sha256"],d["payload_sha256"])
 
+    def test_pinnacle_price_reference_only_never_reselects(self):
+        from sabah_pinnacle_new100_bridge_263 import calibrated_sidecar
+        report,row,d=self.get()
+        forecast=json.loads(Path(row["forecast_path"]).read_text(encoding="utf-8"))
+        reference={"pinnacle_no_vig_probabilities":{"H":.53,"D":.25,"A":.22},
+                   "odds":{"H":1.78,"D":3.8,"A":4.4}}
+        q,source=calibrated_sidecar(Path("."),report,forecast,row,reference)
+        self.assertEqual(source,d["payload_sha256"])
+        self.assertEqual(set(q),{"MS1","MSX","MS2"})
+        for k in ("MS1","MSX","MS2"):
+            self.assertEqual(q[k]["anchor_model"],"M4")
+            self.assertTrue(q[k]["not_model_selection_input"])
+        original=json.loads((Path("experiments/263/sabah_research/new100")/DAY/
+                            Path(row["forecast_path"]).stem/"decision.json").read_text())
+        self.assertEqual(original["payload_sha256"],d["payload_sha256"])
+        self.assertEqual(original["main_candidate"]["market"],"MS1")
+
     def test_absent_pinnacle_price_cannot_change_model_pick(self):
         report,row,d=self.get()
         source=Path("batch.json");save_new(source,report)
