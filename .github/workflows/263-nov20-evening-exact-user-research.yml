@@ -1,0 +1,39 @@
+name: "263 Nov20 user evening 3-match research ONLY (not sealed)"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/nov20_evening_run_trigger_20261120.json
+permissions:
+  contents: read
+jobs:
+  nov20-exact-three:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned numerical code dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Verify current expert policy and 2026 Nov20 official parser gates
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python experiments/263/check_active_decisions_263.py
+          python -m unittest -v experiments/263/test_nov20_official_adapters_263.py
+      - name: Compute exact three user-named real fixtures using frozen B/C2/C3/M4
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python experiments/263/nov20_evening_user_research_263.py --out /tmp/nov20_user_research
+          git diff --exit-code
+      - name: Upload audit-only output - never an official pilot seal
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nov20_user_evening_three_model_first_research
+          path: /tmp/nov20_user_research/
+          if-no-files-found: warn
+          retention-days: 30
