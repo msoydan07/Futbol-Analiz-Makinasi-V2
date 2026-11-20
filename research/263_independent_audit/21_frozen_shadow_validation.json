@@ -1,0 +1,49 @@
+{
+  "betting_authorized": false,
+  "coefficient_rounding_exact_selection_match": true,
+  "frozen_policy": "263_C3_2025_FROZEN_BINARY_CALIBRATION_SHADOW_V1",
+  "guards": {
+    "guards_passed": 7,
+    "sample_decision": "BTTS_YES",
+    "sample_gap_pp": 3.5554
+  },
+  "metrics": {
+    "2026_aug_oct_raw_ms": {
+      "chosen_brier": 0.2315073,
+      "frozen_vs_exact_max_probability_abs": 1.7084e-08,
+      "hit_pct": 62.543,
+      "mean_pred_pct": 59.721,
+      "n": 873,
+      "selected_event_mismatch": 0
+    },
+    "2026_nov8_real_sha": {
+      "chosen_brier": 0.2053719,
+      "frozen_vs_exact_max_probability_abs": 1.3384e-08,
+      "hit_pct": 69.231,
+      "mean_pred_pct": 60.834,
+      "n": 39,
+      "selected_event_mismatch": 0
+    },
+    "2026_sep_oct_joint_ms": {
+      "chosen_brier": 0.2370109,
+      "frozen_vs_exact_max_probability_abs": 1.6591e-08,
+      "hit_pct": 59.512,
+      "mean_pred_pct": 60.129,
+      "n": 615,
+      "selected_event_mismatch": 0
+    }
+  },
+  "model_coefficients_verified_same_2025_training": true,
+  "no_asof_history_mislabeled_as_sha": true,
+  "no_hidden_future_scores_supplied_to_decide": true,
+  "original_sha256": "35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1",
+  "production_modified": false,
+  "schema": "263_FROZEN_SHADOW_PRIMARY_DECISION_REPLICATION_V1",
+  "source_counts": {
+    "2026_asof": 880,
+    "history_asof": 2922,
+    "live_joint_ms": 621,
+    "sha_real_prematch": 39
+  },
+  "source_train_season": "2025-2026"
+}
