@@ -21,7 +21,6 @@ REQUIRED = {
     "exclusive_odds_source":"D-ODDS-SOURCE-20261120",
     "c3_calibration":"D-C3-CAL-010",
     "reporting_and_seals":"D-OPER-004",
-    "historical_probability_reliability":"D-HIST-PROB-20261120",
 }
 EXPECTED = {"MS":"M4", "KG":"C3", "O25":"C3"}
 
@@ -51,11 +50,14 @@ def verify_active_policy(root=ROOT):
         by_topic[topic]=item
     _require({k:v.get("decision_id") for k,v in by_topic.items()}==REQUIRED,
              "ACTIVE_DECISION_ID_CONFLICT")
-    _require(by_topic["historical_probability_reliability"].get("implementation_status")==
-             "RESEARCH_MODULE_ONLY_NOT_IN_LIVE_SELECTOR",
-             "HISTORICAL_RELIABILITY_NOT_YET_LIVE_MUST_BE_EXPLICIT")
-    _require((root/"experiments/263/historical_probability_reliability_263.py").is_file(),
-             "HISTORICAL_REFERENCE_RESEARCH_MODULE_MISSING")
+    # The original highest-realization objective is in the normal selector,
+    # never in a separate ninth policy topic.
+    _require(len(active)==8,"ORIGINAL_EIGHT_POLICY_TOPICS_REQUIRED")
+    _require("gerceklesme ihtimali en yuksek tahmini" in by_topic["model_selection"]["rule"],
+             "ORIGINAL_MACHINE_OBJECTIVE_MISSING")
+    _require((root/"experiments/263/historical_probability_reliability_263.py").is_file()
+             and (root/"experiments/263/normal_historical_reference_263.py").is_file(),
+             "NORMAL_PREMATCH_HISTORY_MODULES_MISSING")
     paths=p.get("canonical_entrypoints",{})
     _require(paths.get("first_pdf")=="experiments/263/iddaa_pdf_one_step_263.py",
              "FIRST_PDF_ROUTE_CHANGED")
@@ -80,7 +82,16 @@ def verify_active_policy(root=ROOT):
     _require(args==["forecast","baseline","lock"] and
              [arg.arg for arg in named["select"].args.kwonlyargs]==["now"],
              "ODDS_PASSED_TO_MODEL_SELECTION")
-    lock=json.loads((root/"experiments/263/model_first_selection_lock_20261120.json").read_text(encoding="utf-8"))
+    active_lock_rel="experiments/263/model_first_selection_lock_20261120_normal_v3.json"
+    _require(paths.get("model_selection_lock")==active_lock_rel,
+             "NORMAL_SELECTION_LOCK_NOT_ACTIVE")
+    lock=json.loads((root/active_lock_rel).read_text(encoding="utf-8"))
+    _require("min_probability" not in lock and "min_lift" not in lock,
+             "ARBITRARY_PROBABILITY_OR_LIFT_GATE_RETURNED")
+    _require(lock.get("historical_reference",{}).get("ranking")=="HIGHEST_ESTIMATED_REALIZATION"
+             and lock.get("historical_reference",{}).get("price_influence") is False,
+             "HISTORICAL_REALIZATION_NORMAL_RANKING_NOT_ACTIVE")
+
     _require(lock.get("family_anchors")==EXPECTED and
              lock.get("no_odds_input_to_selection") is True and
              lock.get("market_reference_only") is True and
