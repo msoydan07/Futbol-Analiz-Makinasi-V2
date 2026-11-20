@@ -30,10 +30,7 @@ KNOWN_EXTERNAL_VARIANTS={
     "Sint Truiden":"STVV"},
   "ENG1":{"Brighton and Hove Albion":"Brighton & Hove Albion"},
   "ESP1":{"Celta Vigo":"Celta",
-          "Atlético Madrid":"Atlético de Madrid",
-          # Observed verbatim in the user-provided 20 Nov iddaa PDF.
-          "Athletic Bilbao":"Athletic Club",
-          "Espanyol":"RCD Espanyol de Barcelona"},
+          "Atlético Madrid":"Atlético de Madrid"},
   "GER1":{"Bayer Leverkusen":"Bayer 04 Leverkusen",
           "SC Freiburg":"Sport-Club Freiburg"},
   "ITA1":{"AC Milan":"Milan","Atalanta BC":"Atalanta",
@@ -49,7 +46,16 @@ KNOWN_EXTERNAL_VARIANTS={
           "Besiktas JK":"BEŞİKTAŞ A.Ş.",
           "Genclerbirligi SK":"GENÇLERBİRLİĞİ"},
 }
-assert sum(len(x) for x in KNOWN_EXTERNAL_VARIANTS.values())==22
+# Source-separated: two names copied from the 20 Nov user-supplied
+# iddaa.com bulletin, not from the 08 Nov third-party snapshots.
+KNOWN_IDDAA_PDF_VARIANTS={
+  "ESP1":{"Athletic Bilbao":"Athletic Club",
+          "Espanyol":"RCD Espanyol de Barcelona"},
+}
+assert sum(len(x) for x in KNOWN_EXTERNAL_VARIANTS.values())==20
+assert sum(len(x) for x in KNOWN_IDDAA_PDF_VARIANTS.values())==2
+assert all(not set(KNOWN_EXTERNAL_VARIANTS.get(league,{})).intersection(pdf)
+           for league,pdf in KNOWN_IDDAA_PDF_VARIANTS.items())
 
 def normal(s):
     if not isinstance(s,str):return ""
@@ -86,7 +92,9 @@ def index_registry(registry_path=REGISTRY):
                 aliases[token]=tid
         # Add only curated mappings that point to an EXISTING team in the
         # requested league, and cannot collide with another canonical alias.
-        for extra,canonical in KNOWN_EXTERNAL_VARIANTS.get(league,{}).items():
+        curated={**KNOWN_EXTERNAL_VARIANTS.get(league,{}),
+                 **KNOWN_IDDAA_PDF_VARIANTS.get(league,{})}
+        for extra,canonical in curated.items():
             canonical_token=normal(canonical)
             tid=aliases.get(canonical_token)
             if tid is None:raise ValueError("OVERRIDE_CANONICAL_TARGET_MISSING_"+league)
