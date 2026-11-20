@@ -9,6 +9,7 @@ from check_active_decisions_263 import ROOT, ActiveDecisionConflict, verify_acti
 
 NEEDED = (
     "docs/263_AKTIF_KARARLAR.json",
+    "experiments/263/historical_probability_reliability_263.py",
     "experiments/263/iddaa_pdf_one_step_263.py",
     "experiments/263/model_first_iddaa_bridge_263.py",
     "experiments/263/model_first_decision_263.py",
@@ -30,7 +31,7 @@ class Contract(unittest.TestCase):
     def test_current_single_source_passes(self):
         result=verify_active_policy(self.root)
         self.assertEqual(result["status"],"ACTIVE_DECISIONS_OK")
-        self.assertEqual(result["active_topics"],8)
+        self.assertEqual(result["active_topics"],9)
         self.assertEqual(result["market"],"USER_IDDAA_PDF_ONLY_FIFTH_REFERENCE")
     def test_same_topic_two_active_decisions_blocks(self):
         path=self.root/NEEDED[0]
