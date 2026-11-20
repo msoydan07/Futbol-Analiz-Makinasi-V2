@@ -68,11 +68,19 @@ def single(row,f,d):
   pick=d.get("main_candidate")
   lines.append("**Model-first ana:** "+(
                labels[pick["market"]]+" "+fmt(pick["calibrated_probability"])+" (DENEYSEL / ONAYSIZ)"
-               if pick else "PAS (model güven eşikleri sağlanmadı)"))
+               if pick else "HESAPLANAMADI (model kanıtı yetersiz)"))
   alt=d.get("alternative_candidate")
   lines.append("**Alternatif:** "+(
                labels[alt["market"]]+" "+fmt(alt["calibrated_probability"])+" (DENEYSEL / ONAYSIZ)"
                if alt else "YOK"))
+  if pick:
+   ref=pick.get("historical_reliability") or {}
+   lines.append("**Geçmiş tahmin-sonuç referansı:** "+str(ref.get("n",0))+
+                " benzer kayıt; model "+fmt(pick["calibrated_probability"])+
+                "; tarihsel destekli gerçekleşme tahmini "+
+                fmt(pick.get("estimated_realization_probability"))+
+                (" (istatistiksel doğrulama sınırlı)" if not
+                 ref.get("independent_holdout_verified") else "") )
   lines.append("**Uzmanlar:** MS=M4, KG/2.5=C3 ham; B/C2 model desteği.")
   lines.append("**Oran:** Sadece 5. karşılaştırma; eksikliği PAS sebebi değil.")
  elif d:
