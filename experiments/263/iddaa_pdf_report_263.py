@@ -53,6 +53,13 @@ def _render_pick(row,session):
     Actual file SHA + official forecast SHA + as-of baseline SHA are verified
     upstream by iddaa_pdf_value_bridge_263; here require sealed result identity.
     """
+    # A real PDF row with no model calculation is a technical/data hold,
+    # NEVER a legitimate probability-driven model PAS. Keep the distinction
+    # obvious even when no decision/seal exists yet.
+    if isinstance(row.get("status"),str) and row["status"].startswith("ONE_ROW_"):
+        reason=(row.get("model_reason") or row.get("team_identity_reason")
+                or row.get("model_error_type") or row.get("status"))
+        return "ANA: TEKNIK ENGEL (PAS DEGIL) | Neden: "+str(reason)[:145]
     # D-MARKET-006: new research route; ONLY model decision may choose a market.
     # Legacy price-driven records remain readable for historical audit, but
     # are never produced by iddaa_pdf_model_first_one_step_263.py.
