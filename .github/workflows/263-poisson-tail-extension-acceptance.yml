@@ -1,0 +1,36 @@
+name: "263 all-leagues B and C3 adaptive Poisson acceptance"
+on:
+  push:
+    branches: [experiment/263-toplu-karsilastirma]
+    paths:
+      - experiments/263/forward_quad.py
+      - experiments/263/test_quad_poisson_tail_extension_263.py
+      - experiments/263/diagnose_bayern_b_c3_20261120.py
+      - .github/workflows/263-poisson-tail-extension-acceptance.yml
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing pinned numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: Identity-preserving old normal and adaptive big-favorite matrix acceptance
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_quad_poisson_tail_extension_263.py
+      - name: Nov20 real 4617 history Bavaria-C3+B complete root cause and repaired output
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python experiments/263/diagnose_bayern_b_c3_20261120.py
+      - name: Model-only selection and current other contracts cannot regress
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_model_first_decision_263.py experiments/263/test_normal_historical_reference_263.py experiments/263/test_historical_probability_reliability_263.py
+      - name: No previous historic seal, original B/C3 or M4 engine mutated
+        run: git diff --exit-code
