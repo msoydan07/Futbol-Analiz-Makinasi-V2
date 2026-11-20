@@ -1,4 +1,5 @@
 import unittest
+# Regression is intentionally synthetic; it is not empirical performance evidence.
 from datetime import datetime,timedelta,timezone
 from historical_probability_reliability_263 import similar,rank_candidates
 
