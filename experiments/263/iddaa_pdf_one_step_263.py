@@ -25,6 +25,7 @@ from pathlib import Path
 from iddaa_pdf_bulletin_263 import parse_pdf
 from iddaa_pdf_session_263 import run_session
 from model_first_iddaa_bridge_263 import calibrate_session
+from check_active_decisions_263 import verify_active_policy
 from iddaa_pdf_report_263 import build as report_pdf
 
 def _write_once(destination,data):
@@ -63,6 +64,9 @@ def one_step(pdf,*,history,output_root,
              source_baseline=None,source_acceptance=None,
              dev_lock="experiments/263/model_first_selection_lock_20261120.json",
              repo_root=".",now=None,official_lookup=None):
+    # Fail closed before parsing the PDF or creating any model / SHA artifact.
+    # The history stays readable; only the active operational route is accepted.
+    verify_active_policy(repo_root)
     source=Path(pdf)
     if not source.is_file() or not source.suffix.lower()==".pdf":
         raise ValueError("ORIGINAL_USER_IDDAA_PDF_REQUIRED")
