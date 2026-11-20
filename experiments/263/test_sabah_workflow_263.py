@@ -39,15 +39,20 @@ def fake_baseline(f,history,now=None):
  x["payload_sha256"]=sha(x);return x
 
 def fake_decision(f,b,l,observation=None,now=None):
- x={"schema":"263_four_model_value_decision_research_v1",
+ # Synthetic-only model-first decision: previous fake was legacy S2/Pinnacle.
+ x={"schema":"263_MODEL_FIRST_FOUR_MODEL_DECISION_RESEARCH_V2",
     "forecast_sha256":f["payload_sha256"],"betting_authorized":False,
-    "status":"RESEARCH_PAS","quote_sha256":None,
+    "status":"RESEARCH_PAS_MODEL_ONLY","quote_sha256":None,
     "main_candidate":None,"alternative_candidate":None,
-    "all_market_diagnostics":[
+    "odds_affected_selection":False,"price_used_in_decision":False,
+    "model_market_diagnostics":[
       {"market":"MS1","calibrated_probability":.51},
       {"market":"MSX","calibrated_probability":.29},
-      {"market":"MS2","calibrated_probability":.20}],
-    "high_probability_alerts_not_bets":[]}
+      {"market":"MS2","calibrated_probability":.20},
+      {"market":"BTTS_YES","calibrated_probability":.58},
+      {"market":"BTTS_NO","calibrated_probability":.42},
+      {"market":"OVER_2.5","calibrated_probability":.55},
+      {"market":"UNDER_2.5","calibrated_probability":.45}]}
  x["payload_sha256"]=sha(x);return x
 
 class Acceptance(unittest.TestCase):
