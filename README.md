@@ -2,6 +2,17 @@
 
 Temel analiz şartnamesi: **2.6.2 (değişmeyecek)**. Bu depo temiz kod altyapısıdır; eski depo korunur.
 
+## 2.6.3 operasyonel kodun gerçek konumu (20 Kasım 2026)
+
+GitHub varsayılan `main` dalı, eski 2.6.2 başlangıç/iş-akışı iskeletidir; **2.6.3'ün çalıştırılabilir kodu burada yoktur**. Güncel 2.6.3 B/C2/C3/M4 normal maç önü hesaplama kodu, veri/kabul testleri ve isimli `new100` iş akışı `experiment/263-toplu-karsilastirma` dalındadır. Bu yüzden yalnız `forward_quad.py` dosyasını `main` dalına kopyalamak çalışır bir motor sağlamaz.
+
+- [Normal B/C2/C3/M4 hesaplama kodu](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/blob/experiment/263-toplu-karsilastirma/experiments/263/forward_quad.py)
+- [Gerçek `new100` sabah iş akışı](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/blob/experiment/263-toplu-karsilastirma/.github/workflows/263-sabah-new100-on-request.yml)
+- [Dört modelli maç isteği iş akışı](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/blob/experiment/263-toplu-karsilastirma/.github/workflows/263-quad-forward-on-request.yml)
+- [B/C3 adaptif Poisson sınır testi](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/blob/experiment/263-toplu-karsilastirma/experiments/263/test_quad_poisson_tail_extension_263.py)
+
+B/C3 Poisson dağılımı hesaplanırken eski 0–10 gol matrisinin kuyruk olasılığı %0,1'i aşıyorsa, **normal modelin içinde** aynı gol beklentileriyle dağılım hassas biçimde genişletilir. Bu, ayrı bahis/karar kuralı değildir. B/C3 öğrenme matematiği, M4, mevcut mühürler ve eski raporlar değiştirilmez. İki gerçek maç önü giriş noktasında regresyon testi uygulanır. `main` dalına tüm 2.6.3 sistemi için ayrı, tam kapsamlı ve güvenli yayımlama gerekir; bu kayıt o yayımlamanın yapıldığını iddia etmez.
+
 ## Kapsam
 Premier League, Championship, Bundesliga, La Liga, Serie A, Ligue 1, Eredivisie, Süper Lig, Primeira Liga, Pro League. Sezonlar: 2025-26 ve 2026-27.
 
