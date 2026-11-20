@@ -16,7 +16,9 @@
     "new100_receipt": "experiments/263/sabah_new100_commit_guard_263.py",
     "new100_mobile": "experiments/263/sabah_mobile_screens_263.py",
     "new100_pdf": "experiments/263/sabah_mobile_model_only_263.py",
-    "new100_price_reference": "experiments/263/iddaa_pdf_one_step_263.py"
+    "new100_price_reference": "experiments/263/iddaa_pdf_one_step_263.py",
+    "normal_historical_reference": "experiments/263/normal_historical_reference_263.py",
+    "model_selection_lock": "experiments/263/model_first_selection_lock_20261120_normal_v3.json"
   },
   "active": [
     {
@@ -45,7 +47,7 @@
       "decision_id": "D-MARKET-006",
       "effective_date_tr": "2026-11-20",
       "status": "ACTIVE",
-      "rule": "Ana/alternatif/PAS B C2 C3 M4 model-only matemağiyle üretilir; piyasa oranı/EV/Pinnacle/başka bookmaker modelleri ya da PAS'i etkilemez. Piyasa yalnız kullanıcıdan gelen orijinal iddaa.com PDF üzerinden, karar sonrasında beşinci referans olarak alınır."
+      "rule": "Makinenin BASLANGICTAKI asil amaci gerceklesme ihtimali en yuksek tahmini bulmaktir. Bu, mevcut normal model-first secim mekanizmasinin isleyisidir; ayri/yeni karar katmani degildir. M4 MS ortak olasiliklari ve C3 KG/2.5 (C3 yoksa M4 yedek) kullanilir. 7 secenegin model yuzdeleri hesaplanir. Sabit %60 / herhangi bir sabit olasilik baraji, lig bazindan lift, oynanabilir oran/EV veya model destegi ana secimi otomatik PAS yapmaz. 8 Kasim mac ONCESI 40 SHA kaydindan biten 39 macin skor-sonuc kayitlari degismeden, ayni pazar ve ayni model/kalibrasyon turunde benzer olasiliklar icin gerceklesen oranlari referans alinir; az ornekte model olasiligina konservatif kaydirma yapilir, belirsizlik ve ornek sayisi ayri etiketlenir. En yuksek tahmini gerceklesme olasiligi ANA, farkli aileden ikinci secenek ALTERNATIF olur. Destekleyici modeller ve ham lig bazlari sadece teshis; kaynak verisi eksikliginde gecmis isabet UYDURULMAZ, gecici model yonu verilir. Oran karari asla etkilemez; yalniz kullanicinin orijinal iddaa PDFsi besinci referanstir. Eski B C2 C3 M4 ve gecmis SHA degistirilemez; bu yaklasimin istatistiksel ustunlugu gelecekte bagimsiz takipte olculecektir."
     },
     {
       "topic": "pdf_sequence",
@@ -74,14 +76,6 @@
       "effective_date_tr": "2026-11-20",
       "status": "ACTIVE",
       "rule": "Yeni analizlerde TEK oran kaynağı kullanıcının iddaa.com bülten PDF dosyasıdır. Pinnacle, The Odds API, Nesine, Bilyoner, otomatik bookmaker fiyat çağrısı ve alternatif fiyat kaynağı yeni kayıtlarda YASAK. Kullanıcı PDF göndermediyse model-only rapor üret; piyasa fiyatını VERİ YOK yaz; alternatif sağlayıcıya düşme."
-    },
-    {
-      "topic": "historical_probability_reliability",
-      "decision_id": "D-HIST-PROB-20261120",
-      "effective_date_tr": "2026-11-20",
-      "status": "ACTIVE",
-      "rule": "KULLANICININ ILK HEDEFI DEGISMEZ: Her mac icin gerceklesmesi en yuksek tahmini bulmak. Sabit %60 olasilik baraji kaldirilmasi karari onaylandi; eski aktif selector henüz değiştirilmedi. B C2 C3 M4 ve pazar uzmanlari korunur. Her pazar icin daha once MAC ONCESINDE SHA ile kaydedilmis ayni model/surum, ayni pazar ve benzer olasilik araligindaki gercek isabet gozlemleriyle TAHMININ GERCEKLESME OLASILIGI degerlendirilir. Kanit yeterliyse gerceklesmesi en yuksek tahmin ana tercih, sonra ikinci uygun aile alternatif olur. Tarihsel ornek yetersizse modellerin ham yonu acikca GECICI diye raporlanir; uydurma tarihsel isabet ve sahte onay verilmez. Piyasa orani, EV veya piyasa-yuzde-farki bu siralamaya girmez. Bağımsiz walk-forward dogrulamasi tamamlanmadan canli selector otomatik terfi etmez.",
-      "implementation_status": "RESEARCH_MODULE_ONLY_NOT_IN_LIVE_SELECTOR"
     }
   ],
   "superseded_for_pdf_first": [
@@ -120,18 +114,13 @@
       "topic": "c3_shadow",
       "status": "NOT_PROMOTED_TO_DECISION",
       "note": "C3 frozen kalibrasyon sadece arastirma/diagnostik shadow."
-    },
-    {
-      "topic": "historical_probability_reliability",
-      "status": "MODULE_AND_SYNTHETIC_TESTS_ADDED_NOT_CONNECTED_TO_LIVE_SELECTOR",
-      "note": "experiments/263/historical_probability_reliability_263.py; no real sealed forecast+result evidence index validated yet; fixed 60 remains in existing operational selector until evidence-backed cutover"
     }
   ],
   "validation_status": {
     "decision": "A_ACTIVE",
-    "implementation": "B_EXPERIMENT_BRANCH_USER_IDDAA_PDF_ONLY_GUARD_CI_PASSED",
+    "implementation": "B_NORMAL_SELECT_AND_PDF_AND_MORNING_ENTRYPOINTS_CODED_TESTS_PENDING",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED",
-    "historical_reliability": "A_ORIGINAL_GOAL_MAX_REALIZATION_CONFIRMED_B_RESEARCH_RANKING_AND_SYNTHETIC_TESTS_ADDED_C_NOT_LIVE"
+    "historical_reliability": "B_NORMAL_SELECTOR_CONNECTED_TO_39_REAL_PREMATCH_MATCHES_INDEPENDENT_HOLDOUT_PENDING"
   },
   "change_process": [
     "Yeni karar oldugu zaman konu, kapsam, karar ID, tarih ve eski ID->yeni ID (supersedes) tek dosyaya kaydedilir.",
