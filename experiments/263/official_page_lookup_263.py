@@ -19,9 +19,9 @@ SOURCES = {
     'ENG1': ('https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november', 'premierleague.com', 'epl_nov26_confirmed'),
     'ENG2': ('https://www.efl.com/matches/', 'efl.com', 'jsonld'),
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
-    'ESP1': ('https://www.laliga.com/iframes/external-consumer-broadcast', 'laliga.com', 'laliga_broadcast_nov2026'),
+    'ESP1': ('https://www.laliga.com/es-GB/noticias/horarios-de-la-decimotercera-jornada-de-laliga-ea-sports-2026-27', 'laliga.com', 'laliga_j13_nov2026_confirmed'),
     'ITA1': ('https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a', 'legaseriea.it', 'seriea_j11_2026'),
-    'FRA1': ('https://ligue1.com/fr/articles/l1_article_5732-mpp-les-infos-de-la-journee-l1', 'ligue1.com', 'lfp_week10_2026'),
+    'FRA1': ('https://ligue1.com/fr/articles/l1_article_5839-', 'ligue1.com', 'lfp_j11_nov2026_confirmed'),
     'NED1': ('https://www.knvb.nl/competities/eredivisie/programma', 'knvb.nl', 'knvb'),
     'TUR1': ('https://www.tff.org/default.aspx?ftxtID=2966&pageID=600', 'tff.org', 'tff_j11_2026'),
     'POR1': ('https://www.ligaportugal.pt/calendar', 'ligaportugal.pt', 'jsonld'),
@@ -158,6 +158,39 @@ def _laliga_broadcast_nov2026(markup):
         events.append(_event(home,away,dt.date().isoformat(),
                              dt.astimezone(timezone.utc).isoformat(),'laliga_broadcast_nov2026'))
     return events
+
+
+def _laliga_j13_nov2026_confirmed(markup):
+    """Oct-21 official LaLiga J13 announcement, named Nov-20 kickoff only.
+
+    Do not infer times for other games from this article or accept older J12.
+    """
+    lines=[' '.join(v.split()) for v in ''.join(markup.visible).splitlines() if v.strip()]
+    joined=' '.join(lines)
+    if not ('Horarios de la decimotercera jornada de LALIGA EA SPORTS 2026/27' in joined
+            and 'viernes 20 de noviembre' in joined
+            and 'Athletic Club y RCD Espanyol a las 21:00h' in joined):
+        return []
+    kick=datetime(2026,11,20,21,0,tzinfo=ZoneInfo('Europe/Madrid'))
+    return [_event('Athletic Club','RCD Espanyol de Barcelona','2026-11-20',
+                   kick.astimezone(timezone.utc).isoformat(),'laliga_j13_nov2026_confirmed')]
+
+
+def _lfp_j11_nov2026_confirmed(markup):
+    """Official Sep-03 LFP J10/J11 TV grid; exact J11 Friday game only."""
+    lines=[' '.join(v.split()) for v in ''.join(markup.visible).splitlines() if v.strip()]
+    whole=' '.join(lines)
+    if ('Programmations TV : J10 et J11' not in whole
+        or '11e JOURNÉE DE LIGUE 1' not in whole):
+        return []
+    for i,entry in enumerate(lines):
+        if ('Vendredi 20 novembre 2026 à 20h45' in entry
+            and i+1<len(lines) and lines[i+1]=='ESTAC Troyes – Havre AC'):
+            kick=datetime(2026,11,20,20,45,tzinfo=ZoneInfo('Europe/Paris'))
+            return [_event('ESTAC Troyes','Havre AC','2026-11-20',
+                           kick.astimezone(timezone.utc).isoformat(),
+                           'lfp_j11_nov2026_confirmed')]
+    return []
 
 
 def _knvb_events(markup):
@@ -374,7 +407,9 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
            'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026,
            'seriea_j11_2026':_seriea_j11_2026,'tff_j11_2026':_tff_j11_2026,
            'epl_nov26_confirmed':_epl_nov26_confirmed,
-           'laliga_broadcast_nov2026':_laliga_broadcast_nov2026}
+           'laliga_broadcast_nov2026':_laliga_broadcast_nov2026,
+           'laliga_j13_nov2026_confirmed':_laliga_j13_nov2026_confirmed,
+           'lfp_j11_nov2026_confirmed':_lfp_j11_nov2026_confirmed}
     if kind not in funcs:raise OfficialPageError('unsupported_parser')
     events=funcs[kind](m)
     # JSON-LD may supplement a site-specific parser, but never infer a fixture
