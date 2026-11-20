@@ -95,6 +95,17 @@ class FeaturedMobilePdf(unittest.TestCase):
         self.assertIsNone(row["odds"])
         self.assertEqual(row["price_parse"]["status"],"PRICE_COLUMN_ALIGNMENT_UNRESOLVED")
         self.assertEqual(row["price_parse"]["found_slots"],13)
+    def test_missing_stale_data_is_technical_block_not_model_pas(self):
+        from iddaa_pdf_report_263 import _render_pick
+        blocked={"status":"ONE_ROW_FOUR_MODEL_EVIDENCE_BLOCKED",
+                 "model_reason":"GAP_EXCEEDS_LIMIT_REQUIRES_REFRESH",
+                 "model_error_type":"StaleLeagueData"}
+        output=_render_pick(blocked,{"pdf_sha256":"a"*64})
+        self.assertIn("TEKNIK ENGEL (PAS DEGIL)",output)
+        self.assertIn("GAP_EXCEEDS_LIMIT_REQUIRES_REFRESH",output)
+        no_official=_render_pick({"status":"ONE_ROW_OFFICIAL_TIME_INVALID"},{})
+        self.assertIn("TEKNIK ENGEL (PAS DEGIL)",no_official)
+
     def test_only_existing_espanol_and_athletic_identity_ids(self):
         lookup,names,membership=index_registry()
         for league,label in (("FRA1","Troyes"),("FRA1","Le Havre"),
