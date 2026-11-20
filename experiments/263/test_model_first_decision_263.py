@@ -9,7 +9,7 @@ from model_first_decision_263 import (
 )
 
 HERE = Path(__file__).resolve().parent
-LOCK = json.loads((HERE / "model_first_selection_lock_20261120.json").read_text(encoding="utf-8"))
+LOCK = json.loads((HERE / "model_first_selection_lock_20261120_normal_v3.json").read_text(encoding="utf-8"))
 NOW = "2026-11-21T10:05:00+00:00"
 
 def seal(obj):
@@ -47,6 +47,7 @@ class TestNoOddsDecision(unittest.TestCase):
         self.assertFalse(d["price_used_in_decision"])
         self.assertFalse(d["betting_authorized"])
         self.assertEqual(verified(d,SCHEMA),d)
+        self.assertGreaterEqual(d["historical_completed_matches"],1)
 
     def test_market_odds_can_change_but_forecast_sha_cannot(self):
         f,b=scenario();d=select(f,b,LOCK,now=NOW)
@@ -107,7 +108,7 @@ class TestNoOddsDecision(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError,"BAD_PROBABILITY"):
             select(f,b,LOCK,now=NOW)
 
-    def test_low_confidence_is_actual_model_pas(self):
+    def test_balanced_match_always_ranks_a_direction_no_60pct_pas(self):
         f,b=scenario();p=joint_poisson(1.3,1.3)
         for name in ("M4","C3","B"):
             g=f["model_predictions"][name]["goals"]
@@ -116,7 +117,11 @@ class TestNoOddsDecision(unittest.TestCase):
             for k in ("BTTS_YES","BTTS_NO","OVER_2.5","UNDER_2.5"):
                 g["markets"][k]=p[k]
         seal(f);b["forecast_sha256"]=f["payload_sha256"];seal(b)
-        self.assertEqual(select(f,b,LOCK,now=NOW)["status"],"RESEARCH_PAS_MODEL_ONLY")
+        d=select(f,b,LOCK,now=NOW)
+        self.assertEqual(d["status"],"RESEARCH_CANDIDATE_NOT_APPROVED")
+        self.assertIsNotNone(d["main_candidate"])
+        self.assertFalse(d["hard_60pct_model_gate"])
+        self.assertIn("estimated_realization_probability",d["main_candidate"])
 
     def test_forged_pdf_sha_rejected(self):
         f,b=scenario();d=select(f,b,LOCK,now=NOW)
