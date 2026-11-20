@@ -1,3 +1,5 @@
+> **GÜNCEL TEK KARAR KAYNAĞI — 20.11.2026:** [docs/263_AKTIF_KARARLAR.json](docs/263_AKTIF_KARARLAR.json). Bu dosyadaki aktif kararlar, aşağıdaki tarihsel README anlatımıyla çelişirse **aktif indeks geçerlidir**. Yeni 10-lig ilk İddaa PDF rotasında MS=M4, KG/2.5=C3, M4=xG'siz, oran yalnız 5. referans, ikinci PDF yalnız yorumdur. Eski EV/S2 fiyat kapısı ve eski model seçici bu rota için geçersizdir. İşlemden önce `python experiments/263/check_active_decisions_263.py` çalıştır; kontrol başarısızsa **dur, eski yola dönme**. Bu kural ana `main` değil bu deney dalında uygulanır.
+
 # Futbol Maç Analiz Makinası V2
 
 > **PINNACLE T−60 BAĞLANTISI (6 Kasım 2026):** Gerçek ücretsiz API erişimi onaylandı; [aynı-job dört model/piyasa karşılaştırma sözleşmesi](docs/263_PINNACLE_OTOMATIK_ES_ZAMANLI_KARSILASTIRMA.md). Yalnız yeni kullanıcı maç isteklerinde, bir lig için bir h2h sorgusu; geçmiş SHA kayıtları ve S2/PAS değişmez.
