@@ -27,6 +27,7 @@ from iddaa_pdf_session_263 import run_session
 from model_first_iddaa_bridge_263 import calibrate_session
 from check_active_decisions_263 import verify_active_policy
 from iddaa_pdf_report_263 import build as report_pdf
+from iddaa_pdf_approved_layout_263 import render_batch as approved_batch_pdf
 
 def _write_once(destination,data):
     destination.parent.mkdir(parents=True,exist_ok=True)
@@ -50,12 +51,19 @@ def _prior_completed_session(folder,original_sha):
                     separators=(",",":")).encode("utf-8")).hexdigest()!=digest:
         raise ValueError("PREVIOUS_RECEIPT_SHA_TAMPERED")
     report=folder/"futbol_263_iddaa_oranli_rapor.pdf"
+    approved=folder/"toplu_analiz_onayli.pdf"
     source=folder/"iddaa_original_user.pdf"
     if (state.get("pdf_sha256")!=original_sha
         or not report.is_file() or not source.is_file()
         or hashlib.sha256(source.read_bytes()).hexdigest()!=original_sha
         or hashlib.sha256(report.read_bytes()).hexdigest()!=state.get("report_sha256")):
         raise ValueError("PREVIOUS_PDF_OR_REPORT_SHA_CHANGED")
+    # Original sessions remain readable; new approved layout is additionally
+    # content-addressed and cannot be silently replaced on repeated requests.
+    if "approved_report_sha256" in state:
+        if (not approved.is_file() or
+            hashlib.sha256(approved.read_bytes()).hexdigest()!=state["approved_report_sha256"]):
+            raise ValueError("PREVIOUS_APPROVED_REPORT_SHA_CHANGED")
     return {**state["summary"],"already_processed_same_pdf_sha":True}
 
 
@@ -100,7 +108,10 @@ def one_step(pdf,*,history,output_root,
                         original_pdf=copied,repo_root=repo_root,
                         dev_lock_path=dev_lock,now=now,session_dir=folder)
     _write_once(folder/"calibrated_session.json",calibrated)
+    # Preserve detailed historic diagnostic PDF for tests/replay, but make
+    # the exact user-approved visual report the NORMAL first-PDF output.
     final=report_pdf(calibrated,folder/"futbol_263_iddaa_oranli_rapor.pdf")
+    approved=approved_batch_pdf(calibrated,folder/"toplu_analiz_onayli.pdf")
     result={
         "status":"LOCAL_IDDAA_PDF_FIRST_SESSION_RESEARCH_COMPLETE",
         "pdf_sha256":pdf_sha,
@@ -114,11 +125,14 @@ def one_step(pdf,*,history,output_root,
         "research_pas_or_blocked":calibrated["n_pdf_first_pas_or_blocked"],
         "no_bookmaker_api_calls":True,
         "no_old_pilot_changes":True,
-        "pdf_report_path":str(final),
+        "pdf_report_path":str(approved),
+        "technical_pdf_report_path":str(final),
+        "approved_visual_layout":"BUNDESLIGA_STYLE_WHITE_BLACK_RED_6_PER_PAGE_V1",
         "processing_folder":str(folder),
     }
     receipt={"pdf_sha256":pdf_sha,
              "report_sha256":hashlib.sha256(final.read_bytes()).hexdigest(),
+             "approved_report_sha256":hashlib.sha256(approved.read_bytes()).hexdigest(),
              "summary":result}
     receipt["receipt_sha256"]=hashlib.sha256(json.dumps(
         receipt,ensure_ascii=False,sort_keys=True,
