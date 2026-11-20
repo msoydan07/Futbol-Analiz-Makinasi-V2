@@ -1,0 +1,14 @@
+{
+  "schema": "263_NOV20_EXPLICIT_USER_EVENING_RESEARCH_REQUEST",
+  "day_turkey": "2026-11-20",
+  "scope": "exact_three_only",
+  "fixtures": [
+    "GER1 FC Bayern München - 1. FC Köln",
+    "FRA1 ESTAC Troyes - Havre AC",
+    "ESP1 Athletic Club - RCD Espanyol de Barcelona"
+  ],
+  "sealed": false,
+  "odds_api_allowed": false,
+  "source": "user explicitly requested Nov20 after prior 09:53 UTC morning job returned three blocks",
+  "commit_original_forecasts": false
+}
