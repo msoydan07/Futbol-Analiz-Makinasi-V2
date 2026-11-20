@@ -1,0 +1,67 @@
+{
+  "schema": "263_MODEL_FIRST_RESEARCH_LOCK_V2",
+  "family_anchors": {
+    "MS": "M4",
+    "KG": "C3",
+    "O25": "C3"
+  },
+  "historical_20261119_family_anchors": {
+    "MS": "M4",
+    "KG": "M4",
+    "O25": "M4"
+  },
+  "expert_selection_evidence": "2026-11-21: 2898 2025/26 C3-trained calibrator, 2026/27 873 asof + calibrated M4 615 asof + Nov8 genuine 39 SHA, retrospective previously researched not independent blind",
+  "historical_selection_period": "2026-09-01/2026-09-30",
+  "m4_joint_calibration_august": [
+    0.05206617557187415,
+    0.10909064506028164,
+    1.0154151566181202
+  ],
+  "market_reference_only": true,
+  "min_available_models": 2,
+  "no_odds_input_to_selection": true,
+  "officially_approved": false,
+  "rank_basis": "highest_frozen_family_calibrated_occurrence_probability_per_match",
+  "research_only": true,
+  "retrospective_evaluation_reused_not_independent": true,
+  "selection_basis": "M4_AUG_JOINT_MS_PLUS_C3_2025_BINARY_FROZEN_LOGIT_NO_PRICE",
+  "price_may_not_be_gate": true,
+  "frozen_m4_calibration_only_applies_to_MS": true,
+  "historical_reference": {
+    "origin": "NOV8_PREKICKOFF_SHA_AND_NOV12_TERMINAL_SCORE_ARCHIVE",
+    "available_from_utc": "2026-11-13T00:00:00+00:00",
+    "similar_probability_half_width": 0.05,
+    "min_historical_report_n": 20,
+    "min_same_league_n": 8,
+    "prior_strength": 20,
+    "fall_back_when_sparse": "V4_FROZEN_2025_TRAINING_NO_39_SAMPLE_RANK_PERTURBATION",
+    "ranking": "DIAGNOSTIC_ONLY_NOT_USED_FOR_V4_CALIBRATED_MARKET_SELECTION",
+    "price_influence": false
+  },
+  "calibration_v4": {
+    "method": "C3_2025_26_TWO_BINARY_LOGIT_FROZEN_V1",
+    "train_season": "2025-2026",
+    "train_n": 2898,
+    "version": 4,
+    "only_kg_and_over25": true,
+    "same_day_outcomes_forbidden": true,
+    "odds_not_used": true,
+    "xg_not_used": true,
+    "coefficients": {
+      "BTTS_YES": {
+        "intercept": 0.120946,
+        "c3_logit": 0.2643173,
+        "previous_league_logit": 0.5012377
+      },
+      "OVER_2.5": {
+        "intercept": 0.1100003,
+        "c3_logit": 0.2639998,
+        "previous_league_logit": 0.2514675
+      }
+    },
+    "legacy_v3_seals_untouched": true,
+    "historical_nov8_raw_c3_archive_not_reused_as_calibrated_ranking": true,
+    "original_sha_retrospective_not_proof_of_independent_39_new_seals": true
+  },
+  "payload_sha256": "de2493cacf6259219d8252470075ad84f14321ed447b302b810c9cf88b9643b1"
+}
