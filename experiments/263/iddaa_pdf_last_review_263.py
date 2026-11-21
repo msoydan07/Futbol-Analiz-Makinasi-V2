@@ -314,14 +314,17 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
   if (report.get("second_pdf_sha256")!=actual_second_sha or
       report.get("morning_session_sha256")!=old.get("signed_research_session_sha256") or
       report.get("morning_pdf_sha256")!=original_sha or
-      not (target/"summary.md").is_file() or not (target/"review.pdf").is_file()):
+      not (target/"summary.md").is_file() or not (target/"review.pdf").is_file() or
+      not (target/"tekli_rapor.pdf").is_file()):
    raise ValueError("SECOND_REVIEW_ALREADY_DONE_OR_INCOMPLETE_NO_REPEAT")
   ready=[x for x in report["rows"] if x.get("status")=="GUNCEL_ORAN_KAYDI_VE_KADRO_DURUMU_HAZIR"]
   paths=sorted((target/"tekli").glob("tekli_*.pdf"))
   if paths and len(paths)!=len(ready):
    raise ValueError("APPROVED_SINGLE_PDF_COUNT_MISMATCH")
   return {"status":"EXISTING_SAME_SECOND_PDF_REVIEW","already_reviewed":True,
-          "pdf_report":str(target/"review.pdf"),"summary":str(target/"summary.md"),
+          "pdf_report":str(target/"tekli_rapor.pdf"),"technical_legacy_pdf":str(target/"review.pdf"),
+          "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
+          "summary":str(target/"summary.md"),
           "approved_single_pdf_paths":[str(x) for x in paths],
           "approved_match_index":[{"home":r["home"],"away":r["away"],
              "kickoff_time_tr":r["kickoff_time_tr"],"pdf_path":str(p)}
@@ -344,7 +347,7 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
  _write_once(target/"review.json",review)
  with (target/"summary.md").open("x",encoding="utf-8") as f:f.write(summary_md(review))
  render_pdf(review,target/"review.pdf")
- singles=approved_single_pdfs(review,target/"tekli")
+ singles=approved_single_pdfs(review,target/"tekli",bundle_pdf=target/"tekli_rapor.pdf")
  ready=[x for x in review["rows"] if x.get("status")=="GUNCEL_ORAN_KAYDI_VE_KADRO_DURUMU_HAZIR"]
  return {"status":"ONE_FINAL_REVIEW_ATTACHED_TO_ORIGINAL_SEAL","already_reviewed":False,
          "approved_single_pdf_paths":[str(x) for x in singles],
@@ -353,7 +356,8 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
              for r,p in zip(ready,singles)],
          "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
          "matches":review["matches_reviewed"],
-         "pdf_report":str(target/"review.pdf"),
+         "pdf_report":str(target/"tekli_rapor.pdf"),
+         "technical_legacy_pdf":str(target/"review.pdf"),
          "summary":str(target/"summary.md")}
 
 def main():
