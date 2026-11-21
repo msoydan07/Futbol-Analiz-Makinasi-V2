@@ -178,15 +178,20 @@ def predict_quad_from_verified_gate(gate,history_path,out_dir,lock_path,now=None
     # The official awarded score remains in the source snapshot, but its
     # shortened exposure must NOT train models forecasting a full 90 minutes.
     from full_match_eligibility_263 import full_match_rows
-    league_rows,excluded_partial,eligibility_sha=full_match_rows(
-        [r for r in rows if r['league']==league])
+    # Preserve ALL source-accepted results for the public-provider gap audit.
+    # A KNVB-awarded score for an 81-minute abandoned game is an official
+    # completed score, but it is NOT an eligible 90-minute fitting exposure.
+    # Passing the fit-filtered rows to review_gap creates a false
+    # SOURCE_FOUND_UNRECORDED_OVERLAP_MATCHES rejection in NED1.
+    raw_league_rows=[r for r in rows if r['league']==league]
+    league_rows,excluded_partial,eligibility_sha=full_match_rows(raw_league_rows)
     if not league_rows:raise ValueError('missing_league_history')
     latest=max(r['match_date'] for r in league_rows)
     # A 10-day calendar gap may be a fixture break rather than missing games.
     # Do NOT weaken the original limit without a just-fetched, exact-league
     # completed-result cross-check against the accepted 2026-27 history.
     from freshness_gap_guard_263 import review_gap
-    freshness=review_gap(league_rows,league,local_date,now=now)
+    freshness=review_gap(raw_league_rows,league,local_date,now=now)
     if freshness['age_days']>MAX_DATA_AGE_DAYS and freshness['status']!=(
             'BOUNDED_GAP_NO_MISSING_RESULTS_IN_PUBLIC_FEED_RESEARCH_ONLY'):
         raise ValueError('stale_history_refresh_required')
