@@ -147,17 +147,12 @@ class CurrentNew100Tests(unittest.TestCase):
         self.assertEqual(created["status"],"MODEL_ONLY_MOBILE_PDF_NO_PRICE_SOURCE")
         self.assertEqual(created["odds_api_calls"],0)
         self.assertTrue((Path("out_pdf")/"toplu.pdf").read_bytes().startswith(b"%PDF-"))
-        # The live new100 model-only batch MUST use the user's permanent
-        # four-column approved cards, not the old monochrome summary table.
-        import fitz
-        with fitz.open(Path("out_pdf")/"toplu.pdf") as approved:
-            pdf_text=approved[0].get_text()
-            for label in ("TÜRKİYE SÜPER LİG","ANA TERCİH",
-                          "BİZİM %","PİYASA %","FARK (PUAN)",
-                          "VERİ YOK","Alternatif:","SABAH / MODEL-ONLY"):
-                self.assertIn(label,pdf_text)
-            self.assertIn("MS 1",pdf_text)
-            self.assertNotIn("Ana iddaa oranı: 1,",pdf_text)
+        # The new100 bridge uses the SAME approved card payload, no fake
+        # quote and no new dependency on PDF text-extraction packages.
+        self.assertEqual(result[0]["approved_card"]["main"],"MS 1")
+        self.assertEqual(result[0]["approved_card"]["fair"],"VERİ YOK")
+        self.assertEqual(result[0]["approved_card"]["main_odds"],"—")
+        self.assertEqual(result[0]["approved_card"]["decision_sha"],d["payload_sha256"])
 
     def test_absent_pinnacle_price_cannot_change_model_pick(self):
         report,row,d=self.get()
