@@ -303,7 +303,7 @@ def _seriea_j12_2026_confirmed(markup):
     cached dates, past fixtures or external secondary source.
     """
     import unicodedata
-    whole=' '.join(unicodedata.normalize('NFKC',''.join(markup.visible)).split())
+    whole=' '.join(unicodedata.normalize('NFC',''.join(markup.visible)).split())
     low=whole.casefold()
     title='quando si gioca? anticipi e posticipi fino alla 12ª giornata'
     start=low.find('dopo la sosta di metà novembre si torna in campo sabato 21 con la 12ª giornata')
