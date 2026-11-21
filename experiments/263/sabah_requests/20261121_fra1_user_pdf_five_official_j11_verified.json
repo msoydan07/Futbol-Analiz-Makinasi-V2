@@ -1,0 +1,31 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-21",
+  "matches": [
+    {
+      "league": "FRA1",
+      "home": "OGC Nice",
+      "away": "Paris Saint-Germain"
+    },
+    {
+      "league": "FRA1",
+      "home": "LOSC",
+      "away": "Olympique Lyonnais"
+    },
+    {
+      "league": "FRA1",
+      "home": "RC Strasbourg Alsace",
+      "away": "Stade Brestois 29"
+    },
+    {
+      "league": "FRA1",
+      "home": "AS Monaco",
+      "away": "AJ Auxerre"
+    },
+    {
+      "league": "FRA1",
+      "home": "RC Lens",
+      "away": "Toulouse FC"
+    }
+  ]
+}
