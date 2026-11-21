@@ -1,0 +1,126 @@
+name: P1 free historical odds sample - independent methods probe
+on:
+  push:
+    branches: [experiment/p1-market-intelligence-20261121]
+    paths: [.github/workflows/p1-free-sample-methods-20261121.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  p1-free-methods:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Download publisher's free test sample - do not commit odds
+        run: |
+          curl -fLsS --retry 2 --connect-timeout 12 --max-time 110 \
+            https://www.football-charts.com/samples/fc-odds-archive-sample-germany2-2024-25.zip \
+            -o /tmp/p1_sample.zip
+          unzip -t /tmp/p1_sample.zip >/dev/null
+          sha256sum /tmp/p1_sample.zip
+      - name: Compare P0 and P1 on same bookmaker and market phase
+        run: |
+          python - <<'PY'
+          import sys,zipfile,csv,io,math,collections,statistics,json
+          from pathlib import PurePosixPath
+          sys.path.insert(0,'experiments/p1_market_intelligence')
+          from p1_market import analyze_prices,score_observed,MARKETS
+          names=['matches.csv','odds_1x2.csv','odds_ou.csv','odds_bts.csv']
+          with zipfile.ZipFile('/tmp/p1_sample.zip') as z:
+              tables={}
+              for n in names:
+                  files=[f for f in z.namelist() if PurePosixPath(f).name.lower()==n]
+                  if len(files)!=1:raise ValueError(f'MISSING_ARCHIVE_TABLE:{n}:found={len(files)}')
+                  tables[n]=list(csv.DictReader(io.StringIO(z.read(files[0]).decode('utf-8-sig'))))
+          print('SOURCE_ROWS',json.dumps({n:len(tables[n]) for n in names}))
+          print('HEADERS',json.dumps({n:list(tables[n][0]) if tables[n] else [] for n in names}))
+          def get(r,*aliases):
+              low={k.casefold():v for k,v in r.items() if isinstance(k,str)}
+              for a in aliases:
+                  v=low.get(a.casefold())
+                  if v is not None and str(v).strip():return str(v).strip()
+              raise KeyError(aliases)
+          def opt(r,*a):
+              try:return get(r,*a)
+              except KeyError:return ''
+          def identify(r):
+              return get(r,'op_id','match_id'),get(r,'bookmaker_id','bookmaker','book')
+          def is_ft(r):
+              x=opt(r,'scope','period','time_scope','market_scope').lower()
+              return not x or x in ('ft','full_time','full-time','full time','fulltime','90','90min')
+          idx={n:collections.defaultdict(list) for n in names[1:]}
+          rejected=collections.Counter()
+          for n in names[1:]:
+              for row in tables[n]:
+                  if not is_ft(row):continue
+                  if n=='odds_ou.csv':
+                      try:
+                          if abs(float(get(row,'line','total_line','total'))-2.5)>0.00001:continue
+                      except (KeyError,ValueError):continue
+                  try:idx[n][identify(row)].append(row)
+                  except KeyError:rejected['bad_quote_identity']+=1
+          def odds(r,phase,selection):
+              v=float(get(r,f'{phase}_{selection}',f'{selection}_{phase}',f'{phase}_{selection}_odds'))
+              if not math.isfinite(v) or not (1<v<1000):raise ValueError('bad odds')
+              return v
+          results=[];seen=set()
+          for m in tables['matches.csv']:
+              try:
+                  mid=get(m,'op_id','match_id')
+                  if mid in seen:rejected['duplicate_match']+=1;continue
+                  seen.add(mid)
+                  league=opt(m,'league','league_code').lower()
+                  if league and league not in ('germany2','germany-2','de2','2. bundesliga'):
+                      rejected['other_league']+=1;continue
+                  hg=int(get(m,'home_goals','fthg','ft_home_goals'))
+                  ag=int(get(m,'away_goals','ftag','ft_away_goals'))
+                  if min(hg,ag)<0:raise ValueError()
+              except (KeyError,ValueError):rejected['bad_score']+=1;continue
+              common=set(k for k in idx['odds_1x2.csv'] if k[0]==mid)
+              common &=set(k for k in idx['odds_ou.csv'] if k[0]==mid)
+              common &=set(k for k in idx['odds_bts.csv'] if k[0]==mid)
+              if not common:rejected['no_full_same_book']+=1;continue
+              def priority(k):
+                  b=opt(idx['odds_1x2.csv'][k][0],'bookmaker','book').lower()
+                  return (0 if b=='bet365' else 1 if 'bet365' in b else 2 if 'interwetten' in b else 3,b,k[1])
+              for phase in ('open','close'):
+                  evaluated=False
+                  for k in sorted(common,key=priority):
+                      try:
+                          a,u,b=[idx[n][k] for n in names[1:]]
+                          if not(len(a)==len(u)==len(b)==1):continue
+                          prices={
+                            'MS':dict(zip(MARKETS['MS'],[odds(a[0],phase,t) for t in ('home','draw','away')])),
+                            'OU25':dict(zip(MARKETS['OU25'],[odds(u[0],phase,t) for t in ('under','over')])),
+                            'KG':dict(zip(MARKETS['KG'],[odds(b[0],phase,t) for t in ('yes','no')]))}
+                          out=analyze_prices(prices)
+                          s0=score_observed(out['p0'],hg,ag)
+                          s1=score_observed(out['p1']['p1_probabilities'],hg,ag)
+                      except (KeyError,ValueError,OverflowError):continue
+                      truth=set(s0['truth'].values())
+                      results.append({'match':mid,'phase':phase,
+                        'P0_brier':s0['macro_brier'],'P1_brier':s1['macro_brier'],
+                        'P0_log':s0['macro_log_loss'],'P1_log':s1['macro_log_loss'],
+                        'P0_hit':int(out['p0_select']['main']['choice'] in truth),
+                        'P1_hit':int(out['p1_select']['main']['choice'] in truth)})
+                      evaluated=True
+                      break
+                  if not evaluated:rejected['incomplete_'+phase]+=1
+          report={}
+          for phase in ('open','close'):
+              a=[x for x in results if x['phase']==phase]
+              report[phase]={'n_matches':len(set(x['match'] for x in a))}
+              if a:
+                  for k in ('P0_brier','P1_brier','P0_log','P1_log'):
+                      report[phase][k]=round(statistics.mean(x[k] for x in a),5)
+                  for k in ('P0_hit','P1_hit'):
+                      report[phase][k]=sum(x[k] for x in a)
+          print('RESEARCH_RESULTS',json.dumps(report,sort_keys=True))
+          print('EXCLUSIONS',json.dumps(rejected))
+          print('NON-BLIND: original publisher compiled prices after results; labels and timestamps do not prove independent pre-KO seal')
+          print('OUTSIDE_SCOPE: Germany second division not in main ten; no model promotion')
+          PY
