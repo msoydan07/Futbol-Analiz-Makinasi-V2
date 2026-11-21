@@ -1,0 +1,26 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-21",
+  "matches": [
+    {
+      "league": "ITA1",
+      "home": "Como",
+      "away": "Cagliari"
+    },
+    {
+      "league": "ITA1",
+      "home": "Lazio",
+      "away": "Lecce"
+    },
+    {
+      "league": "ITA1",
+      "home": "Parma",
+      "away": "Roma"
+    },
+    {
+      "league": "ITA1",
+      "home": "Napoli",
+      "away": "Torino"
+    }
+  ]
+}
