@@ -1,0 +1,42 @@
+{
+  "schema": "263_SECOND_PDF_ARCHIVE_IMPORT_INDEX_V1",
+  "date": "2026-11-21",
+  "records": [
+    {
+      "match": "Manchester City - Fulham",
+      "path": "ENG1_manchester_city_fulham.json",
+      "record_sha256": "af2d5baaabf8ab6a60af242aae3648d59ef6d404287cefccb4eb372a226d3320",
+      "main_price_first": 1.25,
+      "main_price_second": 1.25,
+      "prob_new": 0.689892,
+      "diff_pp": -1.247648
+    },
+    {
+      "match": "Southampton - Derby County",
+      "path": "ENG2_southampton_derby_county.json",
+      "record_sha256": "563432c6a1bb3060c889115fc5c59c5bf4b36bbb01a9aa749c91241614dfd2bb",
+      "main_price_first": 1.26,
+      "main_price_second": 1.32,
+      "prob_new": 0.655101,
+      "diff_pp": 1.030565
+    },
+    {
+      "match": "Millwall - Queens Park Rangers",
+      "path": "ENG2_millwall_queens_park_rangers.json",
+      "record_sha256": "6b4bba245050e6c2eb679831dd465a968b29978141c0a275177d2ba6085666db",
+      "main_price_first": 1.46,
+      "main_price_second": 1.49,
+      "prob_new": 0.580282,
+      "diff_pp": 0.823567
+    },
+    {
+      "match": "Norwich City - Cardiff City",
+      "path": "ENG2_norwich_city_cardiff_city.json",
+      "record_sha256": "a4be37c89bd3dd931a9a8c4a54283e01203a72794d098911a5bcce5fb9741a96",
+      "main_price_first": 1.25,
+      "main_price_second": 1.25,
+      "prob_new": 0.689826,
+      "diff_pp": -7.039926
+    }
+  ]
+}
