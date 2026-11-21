@@ -24,7 +24,9 @@
     "approved_model_only_batch_route": "experiments/263/sabah_mobile_model_only_263.py",
     "approved_batch_spec": "docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md",
     "approved_single_review_pdf": "experiments/263/iddaa_pdf_approved_layout_263.py",
-    "approved_single_review_spec": "docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md"
+    "approved_single_review_spec": "docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md",
+    "second_pdf_archive": "experiments/263/second_pdf_commentary_archive_263.py",
+    "second_pdf_archive_spec": "docs/263_IKINCI_PDF_ORAN_YORUM_ARSIV_KARARI_20261121.md"
   },
   "active": [
     {
@@ -60,7 +62,7 @@
       "decision_id": "D-ODDS-001",
       "effective_date_tr": "2026-11-19",
       "status": "ACTIVE",
-      "rule": "Sadece kullanıcının iddaa.com kaynaklı PDF'si oran gözlem kaynağıdır. İlk PDF -> as-of B/C2/C3/M4 ve SHA tek mühür + ilk oran karşılaştırması. İkinci PDF -> yalnız oran farkı / doğrulanmış futbol yorumu, hiçbir yeni tahmin ya da ana karar yok."
+      "rule": "Sadece kullanıcının iddaa.com kaynaklı PDF'si oran gözlem kaynağıdır. İlk PDF -> as-of B/C2/C3/M4 ve SHA tek mühür + ilk oran karşılaştırması. İkinci PDF -> yalnız oran farkı / doğrulanmış futbol yorumu, hiçbir yeni tahmin ya da ana karar yok. D-SECOND-ARCHIVE-001 (21.11.2026) zorunlu eki: Kullanıcının 2. PDF'si kabul edildiginde ilk/son 7 iddaa fiyati, marjsiz ilk/son pazar yuzdeleri, kaynak PDF SHA256, eski forecast/decision SHA ve tekli PDF'de gosterilen yorumun birebir metni sonradan degistirilemez arastirma kaydina yazilir. Ayni macin kaydi ustune yazilmaz; ayni icerik idempotent. Ham kullanici PDF'si public GitHub'a konmaz. Yalniz yerel yazim uzak GitHub commit'i sayilmaz; commit ayrica dogrulanir. Mac sonu skoru onceki yoruma geri yazilmaz."
     },
     {
       "topic": "c3_calibration",
@@ -145,7 +147,8 @@
     "implementation": "B_V4_ORIGINAL_V3_SHA_AND_NEW_PDF_NEW100_OFFLINE_REGRESSION_CI_PASSED",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED",
     "historical_reliability": "2025_26_2898_C3_ASOF_TRAIN_2026_615_ASOF_SHADOW_AND_39_NOV8_ORIGINAL_SHA_NO_BLIND_FORWARD_C",
-    "second_pdf_single_layout": "A_APPROVED_B_ROUTE_UPDATED_C_LIVE_END_TO_END_NOT_YET_VERIFIED"
+    "second_pdf_single_layout": "A_APPROVED_B_ROUTE_UPDATED_C_LIVE_END_TO_END_NOT_YET_VERIFIED",
+    "second_pdf_commentary_archive": "A_ACCEPTED_B_FOUR_GITHUB_SAVED_AND_LOCAL_HOOK_STAGED_C_NEW_MATCHDAY_REMOTE_COMMIT_PENDING"
   },
   "change_process": [
     "Yeni karar oldugu zaman konu, kapsam, karar ID, tarih ve eski ID->yeni ID (supersedes) tek dosyaya kaydedilir.",
