@@ -1,0 +1,95 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": false,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_morning_sha_seal": true,
+    "post_kickoff_source_edit_forbidden": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "causality_of_odds_move_not_proven": true,
+    "football_facts_attribution": {
+      "description": "Bundesliga.com: iki teknik ekip yoğun oyun vurgusu; ilk 11 gösterimi tahmini 4-4-2.",
+      "source": "bundesliga.com",
+      "url": "https://www.bundesliga.com/en/bundesliga/matchday/2026-2027/10/eintracht-frankfurt-vs-tsg-hoffenheim/liveticker"
+    },
+    "lineups_no_fabrication": true,
+    "pdf_sha256": "fee3bcc37dcb90348cfae1539b8fbcbcdfd8f5300029e441f8117fdea4871783",
+    "source": "Bundesliga 17:30 onaylı dört kutulu tekli PDF",
+    "text_verbatim": "Sabah mühürlü KG Var (%65,5) korunuyor. KG Var oranı 1,19'dan 1,20'ye, 2.5 Üst 1,19'dan 1,21'e çıktı: gol pazarındaki değişim çok küçük. MS 1 ise 2,27'den 2,20'ye geriledi; piyasa Frankfurt galibiyetini az daha güçlü fiyatlıyor. Bundesliga maç önü açıklamalarında iki teknik ekibin yoğun ve tempolu oyuna dikkat çektiği görülüyor. Ancak resmî sayfada ilk 11 yerine tahmini 4-4-2 kadrolar vardı; kesin ilk 11 doğrulanmadı. Oran hareketi bir oyuncu veya sakatlığa bağlanmıyor."
+  },
+  "match": {
+    "away": "TSG Hoffenheim",
+    "date_tr": "2026-11-21",
+    "home": "Eintracht Frankfurt",
+    "kickoff_tr": "17:30",
+    "league": "GER1"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.6392709192,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/5539b2c7cbea83913746bf33/decision.json",
+    "decision_sha256": "b00e7fb112d82a0fe5ab766aece05b013796732cd1f4b9256dd9d5bd59876740",
+    "forecast_path": "forward_morning_263/2026-11-21/5539b2c7cbea83913746bf33.json",
+    "forecast_sha256": "02538524b70f8273df79f88018318a5b4907b3241d81301d139eadf6efdafb02",
+    "main_market": "BTTS_YES",
+    "main_probability": 0.6549113257,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "LIVE_SECOND_PDF_OBSERVATION_SOURCE_COLLECTED_BEFORE_KICKOFF",
+  "record_sha256": "2011687f0b3e06ff3f33cc4f44f0ee2c622a9723dbbcb2f0107608ba525aa374",
+  "recorded_at_utc": "2026-11-21T14:08:39.751268+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.7258064516,
+    "main_market_no_vig_second": 0.718969555,
+    "main_market_price_first": 1.19,
+    "main_market_price_second": 1.2,
+    "main_no_vig_change_pp": -0.68369,
+    "main_price_delta": 0.01,
+    "our_probability_minus_second_market_pp": -6.405823,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.2,
+          3.07
+        ],
+        "before": [
+          1.19,
+          3.15
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          2.2,
+          3.63,
+          2.34
+        ],
+        "before": [
+          2.27,
+          3.63,
+          2.27
+        ]
+      },
+      "UNDER_OVER_2_5": {
+        "after": [
+          3.03,
+          1.21
+        ],
+        "before": [
+          3.12,
+          1.19
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "7ed2cfd49be26a6c5a3e364bd09cefa4f004b8911142b259a56a6c3147ad06d1",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "1496c1ba3a78579a595c43f7f4a8662d4354841741faf17b9b24f69ab3de8574"
+  }
+}
