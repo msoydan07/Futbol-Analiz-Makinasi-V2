@@ -1,0 +1,95 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "da39a9695851e90ab3847c88ad03e965125f776a0ac41c97c78c26880fd89dc7",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T08:04:53.741317+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 4,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "5b3bcc1028f6331d1f6bc9758524a51d93419fb0cb41756ea7e838d4e0b00c2c",
+  "new_count": 4,
+  "no_verified_odds": true,
+  "payload_sha256": "dc1e55b137a4a74f8344c8862d75d50d3b68653569ed7579614a4809c1cd40d5",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "6e266a9a59669c0c41a47644f19d46663837ed2e43daafaeab9f25288c22fc35",
+      "decision_sha256": "a3344ba7ef34ccfc964530459f2dffe13547d7e3b0897f8b137525994f7b97f3",
+      "fixture": "GENÇLERBİRLİĞİ - GAZİANTEP FUTBOL KULÜBÜ A.Ş.",
+      "forecast_path": "forward_morning_263/2026-11-21/75e3746a8e313ccd7a2c6198.json",
+      "forecast_sha256": "7ba96b52f22e57179b47bbd6d65930f1c3cf586ad865d55103e16c8c204a67e3",
+      "kickoff_utc": "2026-11-21T10:30:00+00:00",
+      "league": "TUR1",
+      "mobile_sha256": "597af5d4ee23f369eb7c2f5b7001fa37bdf86231f176c3a9047c26fc092065d7",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "b57b44f2f1b0449014e9c752fae2747652361f040f58b18bb4cf445cedced14f",
+      "decision_sha256": "4f9877e0bf60e4848e067a4c04244c865a1ab0df652e566522477e010002fc74",
+      "fixture": "AMED SPORTİF FAALİYETLER - ÇAYKUR RİZESPOR A.Ş.",
+      "forecast_path": "forward_morning_263/2026-11-21/033b99b2c8dfc4b2c33e78e1.json",
+      "forecast_sha256": "fdb7c85ace1cf9ec6c2c9a64511693ce069f93410f242a8d2ed027bd3522d8cb",
+      "kickoff_utc": "2026-11-21T13:00:00+00:00",
+      "league": "TUR1",
+      "mobile_sha256": "717b1158d6fe1e4bb827c4bac27ced838e73a6d9bd775b5091f430433dcaeb43",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "ccd63b073beb1d32bb90dd979c68a0fd08e64bfec1357f1db065404a00f33bda",
+      "decision_sha256": "fdbe061fe6778ddf1150708af8c29947a472d139213e5082a59a2958b32c25f8",
+      "fixture": "GALATASARAY A.Ş. - SAMSUNSPOR A.Ş.",
+      "forecast_path": "forward_morning_263/2026-11-21/79a5cacb6de7d4d4751fe748.json",
+      "forecast_sha256": "81d82b3242ee6a24fddcffe3f425354c93e6285731e07f861bdd923ee9fe745f",
+      "kickoff_utc": "2026-11-21T13:00:00+00:00",
+      "league": "TUR1",
+      "mobile_sha256": "4acade3d2f7448bd35960f96be19010bf9dec3a16e2d53d3499c6fa1b5e33f74",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "8cc6dbfd94e8d572f0c1fe90fe085317c9ad2f705aca64ac7d30a66e5d90d81d",
+      "decision_sha256": "3975a02825324ef5cf58f0414375e8be46537b9e98f753cc1c7b59cdc772a6af",
+      "fixture": "KOCAELİSPOR - FENERBAHÇE A.Ş.",
+      "forecast_path": "forward_morning_263/2026-11-21/78c19939ede7a7d195243bd8.json",
+      "forecast_sha256": "a8fc6e0bc6b59400f794d4284609663ec8cbd3d3b88da76470470ada6e8f3867",
+      "kickoff_utc": "2026-11-21T16:00:00+00:00",
+      "league": "TUR1",
+      "mobile_sha256": "a43916c25d0b82b1c23795f85e2ad361813e3bb1927821fc3d68c34f675f933e",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}

@@ -1,0 +1,218 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T08:04:47.161911+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 4,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 4,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "TUR1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "ef9c28c21ec1c838a78abcc41cd34dd9230cb7cf926eaca01c4f0114402a6b54",
+      "parsed_events": 0,
+      "source_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "GAZİANTEP FUTBOL KULÜBÜ A.Ş.",
+      "decision_sha256": "a3344ba7ef34ccfc964530459f2dffe13547d7e3b0897f8b137525994f7b97f3",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/75e3746a8e313ccd7a2c6198.json",
+      "forecast_sha256": "7ba96b52f22e57179b47bbd6d65930f1c3cf586ad865d55103e16c8c204a67e3",
+      "home": "GENÇLERBİRLİĞİ",
+      "kickoff_utc": "2026-11-21T10:30:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 0,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "ef9c28c21ec1c838a78abcc41cd34dd9230cb7cf926eaca01c4f0114402a6b54",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "GAZİANTEP FUTBOL KULÜBÜ A.Ş.",
+        "requested_home": "GENÇLERBİRLİĞİ",
+        "selected_lookup": "EXISTING_LIVE_NAMED_MATCH_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "bf0f8601-77e0-528f-ac2a-5d384a7081c5": "VERI_YETERSIZ",
+        "da9ddb8a-aabc-5492-a4b5-b52eaed65165": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "bf0f8601-77e0-528f-ac2a-5d384a7081c5": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "da9ddb8a-aabc-5492-a4b5-b52eaed65165": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "ÇAYKUR RİZESPOR A.Ş.",
+      "decision_sha256": "4f9877e0bf60e4848e067a4c04244c865a1ab0df652e566522477e010002fc74",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/033b99b2c8dfc4b2c33e78e1.json",
+      "forecast_sha256": "fdb7c85ace1cf9ec6c2c9a64511693ce069f93410f242a8d2ed027bd3522d8cb",
+      "home": "AMED SPORTİF FAALİYETLER",
+      "kickoff_utc": "2026-11-21T13:00:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 0,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "ef9c28c21ec1c838a78abcc41cd34dd9230cb7cf926eaca01c4f0114402a6b54",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "ÇAYKUR RİZESPOR A.Ş.",
+        "requested_home": "AMED SPORTİF FAALİYETLER",
+        "selected_lookup": "EXISTING_LIVE_NAMED_MATCH_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "010ec376-a0df-50e7-a57c-f5850f660053": "VERI_YETERSIZ",
+        "e4f39e90-7f57-5fb8-9601-63d5744e583f": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "010ec376-a0df-50e7-a57c-f5850f660053": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e4f39e90-7f57-5fb8-9601-63d5744e583f": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "SAMSUNSPOR A.Ş.",
+      "decision_sha256": "fdbe061fe6778ddf1150708af8c29947a472d139213e5082a59a2958b32c25f8",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/79a5cacb6de7d4d4751fe748.json",
+      "forecast_sha256": "81d82b3242ee6a24fddcffe3f425354c93e6285731e07f861bdd923ee9fe745f",
+      "home": "GALATASARAY A.Ş.",
+      "kickoff_utc": "2026-11-21T13:00:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 0,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "ef9c28c21ec1c838a78abcc41cd34dd9230cb7cf926eaca01c4f0114402a6b54",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "SAMSUNSPOR A.Ş.",
+        "requested_home": "GALATASARAY A.Ş.",
+        "selected_lookup": "EXISTING_LIVE_NAMED_MATCH_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "ab16f146-5846-5854-b898-f7c1ae3583ba": "VERI_YETERSIZ",
+        "f06aca12-75d2-5b48-aa34-8d0336e953e7": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "ab16f146-5846-5854-b898-f7c1ae3583ba": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f06aca12-75d2-5b48-aa34-8d0336e953e7": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "FENERBAHÇE A.Ş.",
+      "decision_sha256": "3975a02825324ef5cf58f0414375e8be46537b9e98f753cc1c7b59cdc772a6af",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/78c19939ede7a7d195243bd8.json",
+      "forecast_sha256": "a8fc6e0bc6b59400f794d4284609663ec8cbd3d3b88da76470470ada6e8f3867",
+      "home": "KOCAELİSPOR",
+      "kickoff_utc": "2026-11-21T16:00:00+00:00",
+      "league": "TUR1",
+      "official_source_evidence": {
+        "candidate_events_seen": 0,
+        "league": "TUR1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": "requested_fixture_not_observed_on_this_page",
+        "page_observation_status": "NOT_VERIFIED",
+        "page_sha256": "ef9c28c21ec1c838a78abcc41cd34dd9230cb7cf926eaca01c4f0114402a6b54",
+        "page_url": "https://www.tff.org/default.aspx?ftxtID=2966&pageID=600",
+        "requested_away": "FENERBAHÇE A.Ş.",
+        "requested_home": "KOCAELİSPOR",
+        "selected_lookup": "EXISTING_LIVE_NAMED_MATCH_GATE",
+        "source_parser": "tff_j11_2026"
+      },
+      "rotation": {
+        "57907b9b-87ef-5e68-8f97-2e08840a0366": "VERI_YETERSIZ",
+        "b70be320-82df-539d-9dc1-09f05137f08d": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "57907b9b-87ef-5e68-8f97-2e08840a0366": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b70be320-82df-539d-9dc1-09f05137f08d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "da39a9695851e90ab3847c88ad03e965125f776a0ac41c97c78c26880fd89dc7",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}
