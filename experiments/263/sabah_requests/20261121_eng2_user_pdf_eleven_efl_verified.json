@@ -1,0 +1,61 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-21",
+  "matches": [
+    {
+      "league": "ENG2",
+      "home": "Southampton",
+      "away": "Derby County"
+    },
+    {
+      "league": "ENG2",
+      "home": "Millwall",
+      "away": "Queens Park Rangers"
+    },
+    {
+      "league": "ENG2",
+      "home": "Norwich City",
+      "away": "Cardiff City"
+    },
+    {
+      "league": "ENG2",
+      "home": "West Ham United",
+      "away": "Preston North End"
+    },
+    {
+      "league": "ENG2",
+      "home": "Lincoln City",
+      "away": "Wrexham"
+    },
+    {
+      "league": "ENG2",
+      "home": "Middlesbrough",
+      "away": "Bristol City"
+    },
+    {
+      "league": "ENG2",
+      "home": "Wolverhampton Wanderers",
+      "away": "Charlton Athletic"
+    },
+    {
+      "league": "ENG2",
+      "home": "Swansea City",
+      "away": "West Bromwich Albion"
+    },
+    {
+      "league": "ENG2",
+      "home": "Sheffield United",
+      "away": "Watford"
+    },
+    {
+      "league": "ENG2",
+      "home": "Bolton Wanderers",
+      "away": "Portsmouth"
+    },
+    {
+      "league": "ENG2",
+      "home": "Stoke City",
+      "away": "Birmingham City"
+    }
+  ]
+}
