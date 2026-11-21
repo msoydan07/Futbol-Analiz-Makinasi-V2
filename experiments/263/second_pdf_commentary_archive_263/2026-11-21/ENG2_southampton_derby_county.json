@@ -1,0 +1,90 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": true,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_second_pdf_preko_git_seal": true,
+    "odds_and_commentary_saved_to_public_research_branch_only": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "pdf_sha256": "cf042f5847b42a1cf5b244957946bc400bf4d0890203af3fc127f0ab4c7c0410",
+    "provenance_note": "Bu yorum, kullanıcının onayladığı tekli PDF raporundaki asistan metninin aynısıdır; kayıt sırasında güncel kadro/sakatlık için yeni bağımsız kontrol yapılmadı.",
+    "source": "previously delivered approved four-box one-match PDF",
+    "text_verbatim": "Sabahki mühürlü MS 1 tahmini %66,5 olarak korunuyor. İkinci bültende ev sahibi galibiyet oranının 1,26'dan 1,32'ye yükselmesi, piyasanın Southampton galibiyetine verdiği ağırlığın azaldığını gösteriyor. Kulübün maç önü açıklamasında Cyle Larin'in oynayabilecek durumda olduğu, Keven Schlotterbeck'in ise forma giyemeyeceği bildirildi; Derby cephesinde Sammie Szmodics'in sakatlığı sürüyor. Bunlar futbol bağlamıdır, oran hareketinin kesin nedeni oldukları doğrulanmadı. Resmî ilk 11 bu kontrolde teyit edilemedi.",
+    "verify_external_claims_independently_on_reuse": true
+  },
+  "match": {
+    "away": "Derby County",
+    "date_tr": "2026-11-21",
+    "home": "Southampton",
+    "kickoff_tr": "15:30",
+    "league": "ENG2"
+  },
+  "original_seal": {
+    "alternative_market": "BTTS_YES",
+    "alternative_probability": 0.5912663174,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/31dc6762ab5f7ae7bc0a30c9/decision.json",
+    "decision_sha256": "99d20f29228ac7371df171f27b5c49095bfef4a2d597b089871a5ac5b8dbe773",
+    "forecast_path": "forward_morning_263/2026-11-21/31dc6762ab5f7ae7bc0a30c9.json",
+    "forecast_sha256": "e03e6c162e2b8d77dc05ecf2199b0f5ad4282ac051cb9eba362fd4680a5c7de7",
+    "main_market": "MS1",
+    "main_probability": 0.6654071093,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "RETROSPECTIVE_IMPORT_FROM_CHAT_PREMATCH_FILES",
+  "record_sha256": "563432c6a1bb3060c889115fc5c59c5bf4b36bbb01a9aa749c91241614dfd2bb",
+  "recorded_at_utc": "2026-11-21T12:31:34.659900+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.6848496633,
+    "main_market_no_vig_second": 0.6551014587,
+    "main_market_price_first": 1.26,
+    "main_market_price_second": 1.32,
+    "main_no_vig_change_pp": -2.97482,
+    "main_price_delta": 0.06,
+    "our_probability_minus_second_market_pp": 1.030565,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.66,
+          1.8
+        ],
+        "before": [
+          1.69,
+          1.77
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          1.32,
+          4.36,
+          5.9
+        ],
+        "before": [
+          1.26,
+          4.64,
+          6.68
+        ]
+      },
+      "OVER_UNDER_2_5": {
+        "after": [
+          2.06,
+          1.49
+        ],
+        "before": [
+          2.14,
+          1.45
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "1480245fb42a077bd98b6771ceabe93e6d03f7ff5872906cf82c4fdd75953f94",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "e066331756956663737346c6ae4b89b4319d0030f60db8a0c11ae2aefd2d8848"
+  }
+}
