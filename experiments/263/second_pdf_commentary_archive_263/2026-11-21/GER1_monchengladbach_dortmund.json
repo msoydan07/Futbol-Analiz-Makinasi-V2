@@ -1,0 +1,95 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": false,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_morning_sha_seal": true,
+    "post_kickoff_source_edit_forbidden": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "causality_of_odds_move_not_proven": true,
+    "football_facts_attribution": {
+      "description": "Bundesliga.com: BVB 9 maç yenilgisiz; 7 gol yedi, Gladbach 25 gol yedi; iki ekip 3-4-2-1 dizilişinde.",
+      "source": "bundesliga.com",
+      "url": "https://www.bundesliga.com/en/bundesliga/matchday/2026-2027/10/borussia-moenchengladbach-vs-borussia-dortmund/liveticker/"
+    },
+    "lineups_no_fabrication": true,
+    "pdf_sha256": "fee3bcc37dcb90348cfae1539b8fbcbcdfd8f5300029e441f8117fdea4871783",
+    "source": "Bundesliga 17:30 onaylı dört kutulu tekli PDF",
+    "text_verbatim": "Sabahki MS 2 (%64,5) tercihi değişmedi. Dortmund galibiyet oranı 1,44'ten 1,50'ye yükseldi; piyasa deplasman galibiyetine sabaha göre biraz daha az ağırlık veriyor. Bundesliga maç önü verisinde Dortmund dokuz haftada yenilgisiz ve 7 gol yemiş; Mönchengladbach ise 25 golle ligin en çok gol yiyen savunması. Resmî maç sayfası iki takımın dizilişini de 3-4-2-1 gösteriyor. Bu takım profili Dortmund lehine olsa da fiyat hareketinin tek nedeninin kadro veya taktik olduğu doğrulanmadı. Sabah mührü korunuyor."
+  },
+  "match": {
+    "away": "Borussia Dortmund",
+    "date_tr": "2026-11-21",
+    "home": "Borussia Mönchengladbach",
+    "kickoff_tr": "17:30",
+    "league": "GER1"
+  },
+  "original_seal": {
+    "alternative_market": "BTTS_YES",
+    "alternative_probability": 0.5860988771,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/734642f7ac66f61be2de2d42/decision.json",
+    "decision_sha256": "a5589ffe0c6420ea9ff0d583c642c76121dd723ed2f9d85c1f52072f31e60b9c",
+    "forecast_path": "forward_morning_263/2026-11-21/734642f7ac66f61be2de2d42.json",
+    "forecast_sha256": "710319fb4696cb1bcd3e04ce002149f9763a6cac9a3bb3232e6494de537e4d69",
+    "main_market": "MS2",
+    "main_probability": 0.6449547147,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "LIVE_SECOND_PDF_OBSERVATION_SOURCE_COLLECTED_BEFORE_KICKOFF",
+  "record_sha256": "8d0501124d56fc003e0a5321552e8fb89e06eb069a1087b0e31ab0822afd5ea9",
+  "recorded_at_utc": "2026-11-21T14:08:39.750238+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.6005961252,
+    "main_market_no_vig_second": 0.574456921,
+    "main_market_price_first": 1.44,
+    "main_market_price_second": 1.5,
+    "main_no_vig_change_pp": -2.61392,
+    "main_price_delta": 0.06,
+    "our_probability_minus_second_market_pp": 7.049779,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.42,
+          2.2
+        ],
+        "before": [
+          1.46,
+          2.13
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          4.2,
+          3.91,
+          1.5
+        ],
+        "before": [
+          4.68,
+          4.03,
+          1.44
+        ]
+      },
+      "UNDER_OVER_2_5": {
+        "after": [
+          2.33,
+          1.37
+        ],
+        "before": [
+          2.32,
+          1.38
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "7ed2cfd49be26a6c5a3e364bd09cefa4f004b8911142b259a56a6c3147ad06d1",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "1496c1ba3a78579a595c43f7f4a8662d4354841741faf17b9b24f69ab3de8574"
+  }
+}
