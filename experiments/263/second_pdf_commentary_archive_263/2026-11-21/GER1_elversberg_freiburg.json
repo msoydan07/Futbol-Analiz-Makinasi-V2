@@ -1,0 +1,95 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": false,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_morning_sha_seal": true,
+    "post_kickoff_source_edit_forbidden": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "causality_of_odds_move_not_proven": true,
+    "football_facts_attribution": {
+      "description": "Bundesliga.com: Freiburg 9 maçta 20 gol; her maç gol attı; iki takım da 4-2-3-1.",
+      "source": "bundesliga.com",
+      "url": "https://www.bundesliga.com/en/bundesliga/matchday/2026-2027/10/sv-elversberg-vs-sport-club-freiburg/liveticker"
+    },
+    "lineups_no_fabrication": true,
+    "pdf_sha256": "fee3bcc37dcb90348cfae1539b8fbcbcdfd8f5300029e441f8117fdea4871783",
+    "source": "Bundesliga 17:30 onaylı dört kutulu tekli PDF",
+    "text_verbatim": "Sabahki KG Var (%63,9) tercihi değişmedi. KG Var 1,38'den 1,44'e, 2.5 Üst ise 1,42'den 1,52'ye yükseldi; piyasa her iki takımın gol bulması ve toplam gol konusunda daha temkinli fiyatlıyor. Bundesliga verisine göre Freiburg ilk dokuz maçında 20 gol attı ve her maçta gol buldu; Elversberg ise maç başında hızlı gol üretebilen bir takım. Resmî sayfa iki takımı da 4-2-3-1 dizilişinde gösteriyor. Bu futbol bilgileri KG Var senaryosunu açıklasa da oran hareketine kesin neden olarak gösterilemez."
+  },
+  "match": {
+    "away": "SC Freiburg",
+    "date_tr": "2026-11-21",
+    "home": "SV Elversberg",
+    "kickoff_tr": "17:30",
+    "league": "GER1"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.6222406318,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/4c58f36b0d18b088c022110e/decision.json",
+    "decision_sha256": "a4c896c41f7565d96290645a005d6ae44340b7af67ab5097aa82f44a40d9413d",
+    "forecast_path": "forward_morning_263/2026-11-21/4c58f36b0d18b088c022110e.json",
+    "forecast_sha256": "735bfd3364fa920f40487107b23371c7532707d8b33329faf25d7ea2c71942a6",
+    "main_market": "BTTS_YES",
+    "main_probability": 0.6390048815,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "LIVE_SECOND_PDF_OBSERVATION_SOURCE_COLLECTED_BEFORE_KICKOFF",
+  "record_sha256": "edb26a5f07ae3ec64cd399748570f9d2a9cd4bd60b6719d1c1fcf56f6ac78b9e",
+  "recorded_at_utc": "2026-11-21T14:08:39.750602+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.6260162602,
+    "main_market_no_vig_second": 0.5988857939,
+    "main_market_price_first": 1.38,
+    "main_market_price_second": 1.44,
+    "main_no_vig_change_pp": -2.713047,
+    "main_price_delta": 0.06,
+    "our_probability_minus_second_market_pp": 4.011909,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.44,
+          2.15
+        ],
+        "before": [
+          1.38,
+          2.31
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          3.15,
+          3.27,
+          1.87
+        ],
+        "before": [
+          3.12,
+          3.39,
+          1.84
+        ]
+      },
+      "UNDER_OVER_2_5": {
+        "after": [
+          2.0,
+          1.52
+        ],
+        "before": [
+          2.2,
+          1.42
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "7ed2cfd49be26a6c5a3e364bd09cefa4f004b8911142b259a56a6c3147ad06d1",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "1496c1ba3a78579a595c43f7f4a8662d4354841741faf17b9b24f69ab3de8574"
+  }
+}
