@@ -17,7 +17,7 @@ VERSION = '263_official_page_lookup_v1_experimental'
 # Current official schedule surfaces. These are source CANDIDATES, not guaranteed APIs.
 SOURCES = {
     'ENG1': ('https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november', 'premierleague.com', 'epl_nov26_confirmed'),
-    'ENG2': ('https://www.efl.com/matches/', 'efl.com', 'jsonld'),
+    'ENG2': ('https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/', 'efl.com', 'efl_referee_j16_20261121'),
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
     'ESP1': ('https://www.laliga.com/iframes/external-consumer-broadcast', 'laliga.com', 'laliga_broadcast_j13_nov2026'),
     'ITA1': ('https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata', 'legaseriea.it', 'seriea_j12_2026_confirmed'),
@@ -499,6 +499,9 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
     if kind=="efl_2026_27_official_tv_selection":
         from sabah_eng2_official_tv_263 import parse_efl_tv
         return parse_efl_tv(html)
+    if kind=="efl_referee_j16_20261121":
+        from sabah_eng2_referee_nov21_263 import parse_efl_referee_j16
+        return parse_efl_referee_j16(html)
     m=_Markup();m.feed(html)
     from sabah_portugal_official_news_263 import PARSER as POR_NEWS_PARSER,parse_news
     from sabah_belgium_official_nextjs_263 import PARSER as BEL_NEWS_PARSER,parse_proleague

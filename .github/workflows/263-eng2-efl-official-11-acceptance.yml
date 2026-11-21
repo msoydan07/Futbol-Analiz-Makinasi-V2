@@ -1,0 +1,58 @@
+name: "263 ENG2 official EFL 11 named November21 fixtures acceptance"
+on:
+  push:
+    branches: [fix/263-eng2-efl-official-11-fixtures-20261121]
+  pull_request:
+    branches: [experiment/263-toplu-karsilastirma]
+permissions:
+  contents: read
+jobs:
+  official-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Strict EFL November 21 official parser, disallowed incomplete schedule
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_eng2_efl_referee_20261121.py experiments/263/test_sabah_official_fixture_gateway_263.py
+      - name: LIVE EFL public CMS source must prove all 11 pre-KO matches
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from official_page_lookup_263 import SOURCES,_default_fetch,parse_official_events
+          target=SOURCES['ENG2'][0]
+          url,html=_default_fetch(target,'ENG2')
+          obs=parse_official_events('ENG2',html,parser=SOURCES['ENG2'][2])
+          got={(x['home'],x['away'],x['kickoff_utc']) for x in obs}
+          expected={
+           ('Southampton','Derby County','2026-11-21T12:30:00+00:00'),
+           ('Millwall','Queens Park Rangers','2026-11-21T12:30:00+00:00'),
+           ('Norwich City','Cardiff City','2026-11-21T12:30:00+00:00'),
+           ('West Ham United','Preston North End','2026-11-21T15:00:00+00:00'),
+           ('Lincoln City','Wrexham','2026-11-21T15:00:00+00:00'),
+           ('Middlesbrough','Bristol City','2026-11-21T15:00:00+00:00'),
+           ('Wolverhampton Wanderers','Charlton Athletic','2026-11-21T15:00:00+00:00'),
+           ('Swansea City','West Bromwich Albion','2026-11-21T15:00:00+00:00'),
+           ('Sheffield United','Watford','2026-11-21T15:00:00+00:00'),
+           ('Bolton Wanderers','Portsmouth','2026-11-21T15:00:00+00:00'),
+           ('Stoke City','Birmingham City','2026-11-21T15:00:00+00:00')}
+          print('EFL_SOURCE',url,'parsed',len(got),'got',sorted(got))
+          assert expected==got,'OFFICIAL_REFEREE_ARTICLE_MUST_PROVE_11_PREMATCH_FIXTURES'
+          PY
+      - name: Protect math model v4 locks historical outcomes and seals
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin experiment/263-toplu-karsilastirma
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- \
+            experiments/263/m4_integrated.py experiments/263/exp_263_batch.py \
+            experiments/263/model_first_decision_263.py \
+            experiments/263/model_first_selection_lock_20261121_v4.json \
+            data/results_only_263 forward_morning_263

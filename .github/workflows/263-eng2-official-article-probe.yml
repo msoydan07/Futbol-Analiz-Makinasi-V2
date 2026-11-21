@@ -1,0 +1,49 @@
+name: "263 ENG2 EFL official readable article diagnostic"
+on:
+  push:
+    branches: [fix/263-eng2-efl-official-11-fixtures-20261121]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read-only test whether EFL official HTML contains all 11 named fixtures
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python - <<'PY'
+          import urllib.request,re
+          from official_page_lookup_263 import _Markup
+          sources=[
+              'https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/',
+              'https://www.efl.com/match-centre/g2678218',
+              'https://www.efl.com/embeds/fixtures/',
+              'https://www.efl.com/matches/'
+          ]
+          for url in sources:
+            try:
+              req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (fixture verification)','Accept':'text/html'})
+              with urllib.request.urlopen(req,timeout=18) as response:
+                html=response.read(1500000).decode('utf-8','replace')
+              markup=_Markup();markup.feed(html)
+              visible=' '.join(markup.visible)
+              print('PROBE',url,'html_len',len(html),'visible_len',len(visible),
+                    'html_match',(html.lower().count('southampton'),
+                                  html.lower().count('stoke'),
+                                  html.lower().count('millwall')),
+                    'visible_match',(visible.lower().count('southampton'),
+                                     visible.lower().count('stoke'),
+                                     visible.lower().count('millwall')))
+              for term in ['Southampton','Millwall','Wolverhampton','Saturday 21 November','Saturday 21st Nov']:
+                i=visible.find(term);j=html.find(term)
+                print('SEARCH',term,'visible',i,'html',j)
+                if i>=0:print('VIS_SNIP',repr(visible[max(0,i-200):i+300]))
+                if j>=0:print('HTML_SNIP',repr(html[max(0,j-150):j+290]))
+            except Exception as e:print('PROBE_ERROR',url,type(e).__name__,str(e)[:180])
+          PY
