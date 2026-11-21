@@ -1,0 +1,26 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-21",
+  "matches": [
+    {
+      "league": "BEL1",
+      "home": "Sporting Charleroi",
+      "away": "STVV"
+    },
+    {
+      "league": "BEL1",
+      "home": "KRC Genk",
+      "away": "RAAL La Louvière"
+    },
+    {
+      "league": "BEL1",
+      "home": "KV Mechelen",
+      "away": "Club Brugge"
+    },
+    {
+      "league": "BEL1",
+      "home": "SV Zulte Waregem",
+      "away": "Royal Antwerp FC"
+    }
+  ]
+}
