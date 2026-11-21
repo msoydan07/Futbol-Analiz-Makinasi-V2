@@ -1,0 +1,41 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-21",
+  "matches": [
+    {
+      "league": "ENG1",
+      "home": "Manchester City",
+      "away": "Fulham"
+    },
+    {
+      "league": "ENG1",
+      "home": "Coventry City",
+      "away": "Crystal Palace"
+    },
+    {
+      "league": "ENG1",
+      "home": "AFC Bournemouth",
+      "away": "Nottingham Forest"
+    },
+    {
+      "league": "ENG1",
+      "home": "Aston Villa",
+      "away": "Sunderland"
+    },
+    {
+      "league": "ENG1",
+      "home": "Tottenham Hotspur",
+      "away": "Ipswich Town"
+    },
+    {
+      "league": "ENG1",
+      "home": "Chelsea",
+      "away": "Leeds United"
+    },
+    {
+      "league": "ENG1",
+      "home": "Newcastle United",
+      "away": "Arsenal"
+    }
+  ]
+}
