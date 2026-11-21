@@ -1,0 +1,26 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-21",
+  "matches": [
+    {
+      "league": "ESP1",
+      "home": "Deportivo Alavés",
+      "away": "RC Deportivo"
+    },
+    {
+      "league": "ESP1",
+      "home": "Rayo Vallecano",
+      "away": "Valencia CF"
+    },
+    {
+      "league": "ESP1",
+      "home": "Sevilla FC",
+      "away": "Real Betis"
+    },
+    {
+      "league": "ESP1",
+      "home": "Real Madrid",
+      "away": "Celta"
+    }
+  ]
+}
