@@ -1,0 +1,29 @@
+name: "263 KNVB NEC observed label downstream gate acceptance"
+on:
+  push:
+    branches: [fix/263-nec-official-observation-canonicalize-20261121]
+  pull_request:
+    branches: [experiment/263-toplu-karsilastirma]
+permissions:
+  contents: read
+jobs:
+  canonical-verified:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact KNVB observed fixture through the canonical named gate
+        env:
+          PYTHONPATH: .:experiments/263
+        run: python -m unittest -v experiments/263/test_sabah_official_fixture_gateway_263.py experiments/263/test_sabah_official_nov7_sources_263.py
+      - name: Protect model math, old seals and historical source
+        run: |
+          git fetch --quiet origin experiment/263-toplu-karsilastirma
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- \
+            experiments/263/m4_integrated.py experiments/263/exp_263_batch.py \
+            experiments/263/forward_quad.py \
+            experiments/263/model_first_decision_263.py \
+            data/results_only_263 forward_morning_263
