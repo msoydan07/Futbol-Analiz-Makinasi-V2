@@ -1,0 +1,26 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-21",
+  "matches": [
+    {
+      "league": "TUR1",
+      "home": "GENÇLERBİRLİĞİ",
+      "away": "GAZİANTEP FUTBOL KULÜBÜ A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "home": "AMED SPORTİF FAALİYETLER",
+      "away": "ÇAYKUR RİZESPOR A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "home": "GALATASARAY A.Ş.",
+      "away": "SAMSUNSPOR A.Ş."
+    },
+    {
+      "league": "TUR1",
+      "home": "KOCAELİSPOR",
+      "away": "FENERBAHÇE A.Ş."
+    }
+  ]
+}
