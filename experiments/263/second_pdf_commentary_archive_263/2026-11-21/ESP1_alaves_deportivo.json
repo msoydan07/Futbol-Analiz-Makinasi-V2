@@ -1,0 +1,92 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_second_pdf_preko_git_seal": true,
+    "odds_and_commentary_saved_to_public_research_branch_only": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "external_sources": [
+      "İlk ve ikinci kullanıcı iddaa PDF bültenleri; kadro teyidi yok"
+    ],
+    "pdf_sha256": "a68a8584d642afa123c78ba3fddaef6e1ce7d7b66e9819c362cc2b7750a0b4e1",
+    "provenance_note": "İlk-son kullanıcı iddaa PDF kaynaklı; maç önü yorumunda oyuncu değişiminin kesin nedeni doğrulanmamıştır.",
+    "source": "21_Kasim_2026_1600_2_Lig_3_Mac_Onayli_Tekli_Rapor.pdf",
+    "text_verbatim": "Sabah mühürlenen KG Var %55,6 tercihi ve 2.5 Üst %51,0 alternatifi korunuyor. KG Var oranı 1,76’dan 1,71’e, 2.5 Üst 2,02’den 1,90’a düştü; piyasa her iki takımın gol atma ve üç veya daha fazla gol olasılığını biraz daha yüksek fiyatlıyor. Alavés galibiyeti de 2,13’ten 1,91’e kısalırken Deportivo galibiyeti 2,87’den 3,25’e uzadı. Bu genel hareket ev sahibi ve gol pazarları lehine. İki takımın resmî ilk 11’leri ve fiyatların hangi futbol haberinden etkilendiği bağımsız olarak doğrulanmadığı için oyuncu veya kadro nedeni uydurulmadı.",
+    "verify_external_claims_independently_on_reuse": true
+  },
+  "match": {
+    "away": "RC Deportivo",
+    "date_tr": "2026-11-21",
+    "home": "Deportivo Alavés",
+    "kickoff_tr": "16:00",
+    "league": "ESP1"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.5102608974,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/5db5a8f7ef2bc784241bf5a4/decision.json",
+    "decision_sha256": "43720e34707bb2d16faa992da8e4609458e95755e0d38630ed465eba049b9e8e",
+    "forecast_path": "forward_morning_263/2026-11-21/5db5a8f7ef2bc784241bf5a4.json",
+    "forecast_sha256": "1c94a8345c50aeb9d47b0fe73fb422dfec1ad2f157e02ab714c22749bc595d8c",
+    "main_market": "BTTS_YES",
+    "main_probability": 0.5562139649,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "CHAT_SECOND_PDF_ANALYSIS_SOURCE_PRESERVATION",
+  "record_sha256": "3300519f5f671fcccd63de2b1685995063d472ed079639eb745c026fb12899a9",
+  "recorded_at_utc": "2026-11-21T12:48:45.814080+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.49132947976878616,
+    "main_market_no_vig_second": 0.5043478260869565,
+    "main_market_price_first": 1.76,
+    "main_market_price_second": 1.71,
+    "main_no_vig_change_pp": 1.3018346318170337,
+    "main_price_delta": -0.050000000000000044,
+    "our_probability_minus_second_market_pp": 5.186613881304347,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.71,
+          1.74
+        ],
+        "before": [
+          1.76,
+          1.7
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          1.91,
+          3.05,
+          3.25
+        ],
+        "before": [
+          2.13,
+          2.95,
+          2.87
+        ]
+      },
+      "OVER_UNDER_2_5": {
+        "after": [
+          1.58,
+          1.9
+        ],
+        "before": [
+          1.51,
+          2.02
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "75bf5ca7fa00f1be75ed6410970f9cfd18917414249fc51f63be0854af2130f9",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "280e4f69510038d8e2ce944f72fa2a80a1136e2d569d8bf9ae24085939e23ede"
+  }
+}
