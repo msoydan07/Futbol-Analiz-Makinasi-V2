@@ -20,7 +20,7 @@ REQUIRED = {
     "pdf_sequence":"D-ODDS-001",
     "exclusive_odds_source":"D-ODDS-SOURCE-20261120",
     "c3_calibration":"D-C3-CAL-011",
-    "reporting_and_seals":"D-OPER-005",
+    "reporting_and_seals":"D-OPER-006",
 }
 EXPECTED = {"MS":"M4", "KG":"C3", "O25":"C3"}
 
@@ -165,6 +165,29 @@ def verify_active_policy(root=ROOT):
              "render_model_only_batch(report[\"day_turkey\"],rows,folder/\"toplu.pdf\")" in model_only and
              "batch_pdf(folder/\"toplu.pdf\"" not in model_only,
              "USER_APPROVED_BATCH_RENDERER_NOT_ACTIVE")
+    # Second user PDF MUST return the same four-box single design, bundled
+    # one full page per match. The old review.pdf is audit-only.
+    single_spec="docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md"
+    single_renderer="experiments/263/iddaa_pdf_approved_layout_263.py"
+    second_route="experiments/263/iddaa_pdf_last_review_263.py"
+    _require(paths.get("approved_single_review_pdf")==single_renderer and
+             paths.get("approved_single_review_spec")==single_spec and
+             paths.get("second_pdf_only_review")==second_route and
+             (root/single_spec).is_file(),
+             "USER_APPROVED_SECOND_PDF_SINGLE_SPEC_MISSING")
+    _require("İKİNCİ İDDAA PDF RAPORU KALICI" in by_topic["reporting_and_seals"]["rule"],
+             "SECOND_PDF_LAYOUT_POLICY_NOT_LOCKED")
+    second=(root/second_route).read_text(encoding="utf-8")
+    _require("from iddaa_pdf_approved_layout_263 import render_singles as approved_single_pdfs" in second and
+             'singles=approved_single_pdfs(review,target/"tekli",bundle_pdf=target/"tekli_rapor.pdf")' in second and
+             '"pdf_report":str(target/"tekli_rapor.pdf")' in second and
+             '"pdf_report":str(target/"review.pdf")' not in second,
+             "SECOND_PDF_MUST_RETURN_APPROVED_SINGLE_BUNDLE")
+    _require("def _draw_approved_single_page(" in layout and
+             "def render_singles(review,target_dir,bundle_pdf=None):" in layout and
+             "combined.save()" in layout and
+             "_draw_approved_single_page(combined,r,i,len(ready))" in layout,
+             "SECOND_PDF_APPROVED_RENDERER_BUNDLE_MISSING")
     historical=p.get("superseded_for_pdf_first",[])
     _require(len(historical)>=2 and all(x.get("status")!="ACTIVE" for x in historical),
              "SUPERSEDED_POLICY_STILL_ACTIVE")
