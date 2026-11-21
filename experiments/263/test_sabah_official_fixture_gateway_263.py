@@ -105,6 +105,41 @@ class GatewayTests(unittest.TestCase):
     self.assertTrue(g._same("NED1","N.E.C.","N.E.C. Nijmegen"))
     self.assertFalse(g._same("NED1","N.E.C.","PSV"))
     self.assertFalse(g._same("NED1","NEC GUESS","N.E.C. Nijmegen"))
+ def test_knvb_nec_observation_normalized_before_second_named_gate(self):
+    from unittest.mock import patch
+    fetched={"status":"FETCHED_OFFICIAL_PAGE",
+        "effective_url":"https://www.knvb.nl/competities/eredivisie/programma",
+        "source_url":"https://www.knvb.nl/competities/eredivisie/programma",
+        "events":[],"html":"public-dummy","html_sha256":"a"*64,
+        "reason":None,"parser":"knvb"}
+    observed={"status":"VERIFIED_OFFICIAL_FIXTURE",
+        "home":"N.E.C.","away":"PSV","match_date":"2026-11-21",
+        "kickoff_utc":"2026-11-21T15:30:00+00:00",
+        "source_url":fetched["effective_url"],
+        "retrieved_at_utc":"2026-11-21T08:00:00+00:00"}
+    seen=[]
+    def strict_gate(league,h,a,lookup_override=None):
+        if lookup_override is None:return {"status":"NOT_VERIFIED"}
+        actual=lookup_override(h,a)
+        seen.append((actual["home"],actual["away"]))
+        if actual["home"]!="N.E.C. Nijmegen":
+            return {"status":"NOT_VERIFIED","reason":"official_observed_names_unmapped"}
+        return {"status":"VERIFIED","league":league,"home_id":"N","away_id":"P",
+                "source_url":actual["source_url"],
+                "kickoff_utc":actual["kickoff_utc"],
+                "retrieved_at_utc":actual["retrieved_at_utc"]}
+    g=OfficialFixtureGateway(fetcher=make_fetch("<p>none</p>",[]),
+       resolve_id=lambda lg,n:{"N.E.C. Nijmegen":"N","PSV":"P"}[n],
+       gate_runner=strict_gate,
+       clock=lambda:datetime(2026,11,21,8,5,tzinfo=timezone.utc))
+    with patch.object(g,"_get",return_value=fetched),patch(
+        "sabah_official_fixture_gateway_263.official_page_lookup",
+        return_value=observed):
+        outcome=g.lookup("NED1","N.E.C. Nijmegen","PSV")
+    self.assertEqual(outcome["status"],"VERIFIED")
+    self.assertEqual(seen,[("N.E.C. Nijmegen","PSV")])
+    self.assertEqual(g.match_checks[-1]["selected_lookup"],
+                     "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE")
  def test_wrong_order_is_blocked(self):
     called=[];g=self.init(ld("A","B"),called)
     self.assertNotEqual(g.lookup("ESP1","B","A")["status"],"VERIFIED")
