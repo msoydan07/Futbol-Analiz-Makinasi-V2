@@ -33,10 +33,12 @@ GROUP={"MS1":"MS","MSX":"MS","MS2":"MS",
        "BTTS_YES":"KG","BTTS_NO":"KG"}
 LEAGUES={"ENG1":"PREMIER LEAGUE","ENG2":"CHAMPIONSHIP",
 "GER1":"BUNDESLIGA","ESP1":"LA LIGA","ITA1":"SERIE A",
-"FRA1":"LIGUE 1","NED1":"EREDIVISIE","TUR1":"SÜPER LİG",
+"FRA1":"LIGUE 1","NED1":"EREDIVISIE","TUR1":"TÜRKİYE SÜPER LİG",
 "POR1":"PRIMEIRA LIGA","BEL1":"PRO LEAGUE"}
 MONTHS=("","Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz",
         "Ağustos","Eylül","Ekim","Kasım","Aralık")
+WEEKDAYS=("PAZARTESİ","SALI","ÇARŞAMBA","PERŞEMBE","CUMA","CUMARTESİ","PAZAR")
+
 
 def _fonts():
     if FONT in pdfmetrics.getRegisteredFontNames():return
@@ -182,7 +184,9 @@ def _draw_grouped_cards(grouped,target,model_only=False):
         for start in range(0,len(games),6):
             chunk=games[start:start+6];pages+=1
             _text(c,LEFT,H-55,LEAGUES.get(league,league),20,True)
-            _text(c,LEFT,H-73,_date(day)+"  •  "+str(len(games))+" MAÇ",8.5,True)
+            try: weekday=WEEKDAYS[date.fromisoformat(day).weekday()]
+            except (ValueError,TypeError): weekday="GÜN DOĞRULANAMADI"
+            _text(c,LEFT,H-73,_date(day).upper()+"  •  "+weekday+"  •  "+str(len(games))+" MAÇ",8.5,True)
             _text(c,LEFT,H-101,"MS 1-X-2   /   2.5 ALT-ÜST   /   KG VAR-YOK",8.3)
             _right(c,RIGHT,H-60,
                    "SABAH / MODEL-ONLY" if model_only else "SABAH / İLK ORAN PDF",
