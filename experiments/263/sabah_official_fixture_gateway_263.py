@@ -191,6 +191,15 @@ class OfficialFixtureGateway:
             # must not be promoted to a fully verified date/time.
             if observation.get("status")=="VERIFIED_OFFICIAL_FIXTURE":
                 checked=dict(observation)
+                # The official KNVB page prints "N.E.C."; the downstream
+                # canonical named-gate verifies observed names independently,
+                # so normalize only this reviewed exact alias on BOTH sides.
+                # Do not relax any identity, kickoff, or source requirements.
+                aliases=NOV7_ALIASES.get(league,{})
+                for side in ("home","away"):
+                    observed=checked.get(side)
+                    if isinstance(observed,str):
+                        checked[side]=aliases.get(observed,observed)
                 checked["source_origin"]="FETCHED_OFFICIAL_PAGE_BATCH_CACHE"
                 gate=self.gate_runner(league,home,away,
                       lookup_override=lambda _home,_away:checked)
