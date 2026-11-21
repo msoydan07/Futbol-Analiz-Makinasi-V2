@@ -19,6 +19,7 @@ from iddaa_pdf_session_263 import SCHEMA as MORNING_SCHEMA,market_no_vig,PDF_TO_
 from iddaa_pdf_team_alias_preflight_263 import index_registry,resolve_label
 from iddaa_pdf_first_quote_263 import sha256,utc
 from iddaa_pdf_approved_layout_263 import render_singles as approved_single_pdfs
+from second_pdf_commentary_archive_263 import append_review_archive
 
 SCHEMA="263_SINGLE_MORNING_SEAL_ONE_PREKO_REVIEW_V1"
 FIELDS=("MS1","MSX","MS2","OVER_2.5","UNDER_2.5","BTTS_YES","BTTS_NO")
@@ -321,7 +322,10 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
   paths=sorted((target/"tekli").glob("tekli_*.pdf"))
   if paths and len(paths)!=len(ready):
    raise ValueError("APPROVED_SINGLE_PDF_COUNT_MISMATCH")
+  archived=append_review_archive(report,repo_root=Path(__file__).resolve().parents[2])
   return {"status":"EXISTING_SAME_SECOND_PDF_REVIEW","already_reviewed":True,
+          "second_pdf_archive_status":archived["status"],
+          "second_pdf_archive_files":archived["files"],
           "pdf_report":str(target/"tekli_rapor.pdf"),"technical_legacy_pdf":str(target/"review.pdf"),
           "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
           "summary":str(target/"summary.md"),
@@ -348,8 +352,13 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
  with (target/"summary.md").open("x",encoding="utf-8") as f:f.write(summary_md(review))
  render_pdf(review,target/"review.pdf")
  singles=approved_single_pdfs(review,target/"tekli",bundle_pdf=target/"tekli_rapor.pdf")
+ # Mandatory append-only audit of price movements and the EXACT PDF commentary.
+ # Produces Git-trackable JSON; a separate commit is needed for remote durability.
+ archived=append_review_archive(review,repo_root=Path(__file__).resolve().parents[2])
  ready=[x for x in review["rows"] if x.get("status")=="GUNCEL_ORAN_KAYDI_VE_KADRO_DURUMU_HAZIR"]
  return {"status":"ONE_FINAL_REVIEW_ATTACHED_TO_ORIGINAL_SEAL","already_reviewed":False,
+         "second_pdf_archive_status":archived["status"],
+         "second_pdf_archive_files":archived["files"],
          "approved_single_pdf_paths":[str(x) for x in singles],
          "approved_match_index":[{"home":r["home"],"away":r["away"],
              "kickoff_time_tr":r["kickoff_time_tr"],"pdf_path":str(p)}
