@@ -20,7 +20,7 @@ SOURCES = {
     'ENG2': ('https://www.efl.com/matches/', 'efl.com', 'jsonld'),
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
     'ESP1': ('https://www.laliga.com/iframes/external-consumer-broadcast', 'laliga.com', 'laliga_broadcast_j13_nov2026'),
-    'ITA1': ('https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a', 'legaseriea.it', 'seriea_j11_2026'),
+    'ITA1': ('https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata', 'legaseriea.it', 'seriea_j12_2026_confirmed'),
     'FRA1': ('https://ligue1.com/fr/articles/l1_article_5839-', 'ligue1.com', 'lfp_j11_nov2026_confirmed'),
     'NED1': ('https://www.knvb.nl/competities/eredivisie/programma', 'knvb.nl', 'knvb'),
     'TUR1': ('https://www.tff.org/default.aspx?ftxtID=2966&pageID=600', 'tff.org', 'tff_j11_2026'),
@@ -295,6 +295,38 @@ def _lfp_week10_2026(markup):
 
 
 
+def _seriea_j12_2026_confirmed(markup):
+    """Official Lega Serie A 12th-round news, 21-Nov explicit Saturday slots.
+
+    All four named pairs AND their exact local kickoff slots must be present
+    in the same J12 Saturday paragraph. Do not infer from betting odds,
+    cached dates, past fixtures or external secondary source.
+    """
+    import unicodedata
+    whole=' '.join(unicodedata.normalize('NFKC',''.join(markup.visible)).split())
+    low=whole.casefold()
+    title='quando si gioca? anticipi e posticipi fino alla 12ª giornata'
+    start=low.find('dopo la sosta di metà novembre si torna in campo sabato 21 con la 12ª giornata')
+    if title not in low or start<0:return []
+    end=low.find('domenica apre il programma',start)
+    if end<0:return []
+    section=whole[start:end]
+    pattern=(r'alle\s+15[.:]00\s+giocano\s+Como\s*[-–]\s*Cagliari\s+e\s+'
+             r'Lazio\s*[-–]\s*Lecce\s*,\s*alle\s+18[.:]00\s+'
+             r'Parma\s*[-–]\s*Roma\s+e\s+alle\s+20[.:]45\s+'
+             r'Napoli\s*[-–]\s*Torino')
+    if not re.search(pattern,section,re.I):return []
+    fixed=(('Como','Cagliari',15,0),('Lazio','Lecce',15,0),
+           ('Parma','Roma',18,0),('Napoli','Torino',20,45))
+    out=[]
+    for home,away,hr,minute in fixed:
+        local=datetime(2026,11,21,hr,minute,tzinfo=ZoneInfo('Europe/Rome'))
+        out.append(_event(home,away,local.date().isoformat(),
+                          local.astimezone(timezone.utc).isoformat(),
+                          'seriea_j12_2026_confirmed'))
+    return out
+
+
 def _seriea_j11_2026(markup):
     """Exact round-11 Italian official appointments; never infer year/weekday."""
     lines=[' '.join(s.split()) for s in ''.join(markup.visible).splitlines() if s.strip()]
@@ -432,7 +464,8 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
            POR_NEWS_PARSER:lambda _m:parse_news(html),
            'dfl':_dfl_events,'knvb':_knvb_events,'epl':_premier_events,
            'jsonld':_jsonld_events,'lfp_week10_2026':_lfp_week10_2026,
-           'seriea_j11_2026':_seriea_j11_2026,'tff_j11_2026':_tff_j11_2026,
+           'seriea_j11_2026':_seriea_j11_2026,
+            'seriea_j12_2026_confirmed':_seriea_j12_2026_confirmed,'tff_j11_2026':_tff_j11_2026,
            'epl_nov26_confirmed':_epl_nov26_confirmed,
            'laliga_broadcast_nov2026':_laliga_broadcast_nov2026,
             'laliga_broadcast_j13_nov2026':_laliga_broadcast_j13_nov2026,
