@@ -1,0 +1,218 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T09:15:16.688304+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 4,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 4,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "ITA1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "9f6a8306cf14c27b11260da3c0db9f1046bf2af4493c2792c915c36c5e5a444b",
+      "parsed_events": 4,
+      "source_url": "https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "Cagliari",
+      "decision_sha256": "d25f74946677dd1c0fd330fd3ce8612039a37a3324b4a22ed73e5c9ef5415873",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/e066d6889914e1196cb612b2.json",
+      "forecast_sha256": "8fdc778a1f99dffef5cc95d08fc3ef16db370694270cea70cc93444e8fb9f304",
+      "home": "Como",
+      "kickoff_utc": "2026-11-21T14:00:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 4,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9f6a8306cf14c27b11260da3c0db9f1046bf2af4493c2792c915c36c5e5a444b",
+        "page_url": "https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata",
+        "requested_away": "Cagliari",
+        "requested_home": "Como",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j12_2026_confirmed"
+      },
+      "rotation": {
+        "c465a0ed-ae7c-5139-8be5-55037b78459b": "VERI_YETERSIZ",
+        "ecfbc8bf-09bd-5417-8c73-b02d3b027116": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "c465a0ed-ae7c-5139-8be5-55037b78459b": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ecfbc8bf-09bd-5417-8c73-b02d3b027116": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Lecce",
+      "decision_sha256": "58fc60796221f7718d509b18f8c0058ca5abca8100c4ddec20d49bc75e796812",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/7c1fefe962508cdd353a7820.json",
+      "forecast_sha256": "4c311d1d67a32e6eb004e3963930cb82251dda3ecaa42a40c30297a38665e51b",
+      "home": "Lazio",
+      "kickoff_utc": "2026-11-21T14:00:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 4,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9f6a8306cf14c27b11260da3c0db9f1046bf2af4493c2792c915c36c5e5a444b",
+        "page_url": "https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata",
+        "requested_away": "Lecce",
+        "requested_home": "Lazio",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j12_2026_confirmed"
+      },
+      "rotation": {
+        "61387963-91dc-5585-b0b3-97130db6a971": "VERI_YETERSIZ",
+        "6a873074-2e6d-5e10-8cc1-3ef9e0233946": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "61387963-91dc-5585-b0b3-97130db6a971": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "6a873074-2e6d-5e10-8cc1-3ef9e0233946": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Roma",
+      "decision_sha256": "85dff51a98b964e67e117f4e36bb2bea4dbdb95adb442d21f1fddd8967cee5ac",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/a4320f8f3329e94a70e7e927.json",
+      "forecast_sha256": "a1bbe1675e08fe2990de9e4e7afafcef7227b73f990fa8972eae38937f04fb5a",
+      "home": "Parma",
+      "kickoff_utc": "2026-11-21T17:00:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 4,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9f6a8306cf14c27b11260da3c0db9f1046bf2af4493c2792c915c36c5e5a444b",
+        "page_url": "https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata",
+        "requested_away": "Roma",
+        "requested_home": "Parma",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j12_2026_confirmed"
+      },
+      "rotation": {
+        "3d20a1b3-0f96-5db4-ab19-77e84deb0f89": "VERI_YETERSIZ",
+        "40b9cd57-5584-525d-9bb5-bcdb26830ade": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "3d20a1b3-0f96-5db4-ab19-77e84deb0f89": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "40b9cd57-5584-525d-9bb5-bcdb26830ade": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Torino",
+      "decision_sha256": "c0a23c8e407a95d245feba14e9003c53200668cc72cff8afb5f233c7e06ef469",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/41984bb3d8bf2752e90a8af4.json",
+      "forecast_sha256": "f4ea7cbc2853eb89d714dee08acfdf2e306d6db2926a7b3939acc5507d89fd2c",
+      "home": "Napoli",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "ITA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 4,
+        "league": "ITA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "9f6a8306cf14c27b11260da3c0db9f1046bf2af4493c2792c915c36c5e5a444b",
+        "page_url": "https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata",
+        "requested_away": "Torino",
+        "requested_home": "Napoli",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "seriea_j12_2026_confirmed"
+      },
+      "rotation": {
+        "1404171b-d23a-5f5e-8909-2c7f1af827ff": "VERI_YETERSIZ",
+        "4c4f2529-a579-56bd-b1fe-df743ee1e18c": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1404171b-d23a-5f5e-8909-2c7f1af827ff": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "4c4f2529-a579-56bd-b1fe-df743ee1e18c": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "5fbc30d87c2dc829ed0b9b6aa1c854e886f921b813c9a1718abaf6f94673c26a",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}

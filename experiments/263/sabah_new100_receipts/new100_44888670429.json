@@ -1,0 +1,95 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "5fbc30d87c2dc829ed0b9b6aa1c854e886f921b813c9a1718abaf6f94673c26a",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T09:15:20.799149+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 4,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "947f4655cb1ea5f690fdd5db417a863a1df8f2cea61b3115859e23ebffe64fbf",
+  "new_count": 4,
+  "no_verified_odds": true,
+  "payload_sha256": "cf35c214e6a89c620d7dbbc85977f351b21e2de10ebb0596a20fae7f13afb3c3",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "3a27d08df5659e13f98944d745a59c9ca3e48ced2bf865f3b4437143d94ce361",
+      "decision_sha256": "d25f74946677dd1c0fd330fd3ce8612039a37a3324b4a22ed73e5c9ef5415873",
+      "fixture": "Como - Cagliari",
+      "forecast_path": "forward_morning_263/2026-11-21/e066d6889914e1196cb612b2.json",
+      "forecast_sha256": "8fdc778a1f99dffef5cc95d08fc3ef16db370694270cea70cc93444e8fb9f304",
+      "kickoff_utc": "2026-11-21T14:00:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "8da706526d82d81adc02e7206a6af5113640a8e1a030933dc6ed2afaed0e3a57",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "2dc8bfe8497e454014ef8ab68d867f954f1d5ca028b8a015b0582f6bc0b140e1",
+      "decision_sha256": "58fc60796221f7718d509b18f8c0058ca5abca8100c4ddec20d49bc75e796812",
+      "fixture": "Lazio - Lecce",
+      "forecast_path": "forward_morning_263/2026-11-21/7c1fefe962508cdd353a7820.json",
+      "forecast_sha256": "4c311d1d67a32e6eb004e3963930cb82251dda3ecaa42a40c30297a38665e51b",
+      "kickoff_utc": "2026-11-21T14:00:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "538445d7f71ead8a530648dd3932b7e680520aeb2f24260ca0fde73e1317afad",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "3c914ee7edf2a0b8c4f09a83cc5836cfb3f5c405d860f3edc3c57f0080de645f",
+      "decision_sha256": "85dff51a98b964e67e117f4e36bb2bea4dbdb95adb442d21f1fddd8967cee5ac",
+      "fixture": "Parma - Roma",
+      "forecast_path": "forward_morning_263/2026-11-21/a4320f8f3329e94a70e7e927.json",
+      "forecast_sha256": "a1bbe1675e08fe2990de9e4e7afafcef7227b73f990fa8972eae38937f04fb5a",
+      "kickoff_utc": "2026-11-21T17:00:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "d6d634eeeee72e05e70e2540c1087da223c3d5561cb03826d4c2850a5f7cd74f",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "0f7f9097f1baa93b4bfea9f32dfe59ecc38437e0a474410b381d1352f5822b2d",
+      "decision_sha256": "c0a23c8e407a95d245feba14e9003c53200668cc72cff8afb5f233c7e06ef469",
+      "fixture": "Napoli - Torino",
+      "forecast_path": "forward_morning_263/2026-11-21/41984bb3d8bf2752e90a8af4.json",
+      "forecast_sha256": "f4ea7cbc2853eb89d714dee08acfdf2e306d6db2926a7b3939acc5507d89fd2c",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "ITA1",
+      "mobile_sha256": "02c4cbd14d0c9c0a8046628b589bcbad63a321c8f3b1e7591535ea933d7bcf98",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}

@@ -1,0 +1,315 @@
+{
+  "alternative_candidate": {
+    "agreeing_models": [
+      "C3",
+      "M4"
+    ],
+    "anchor_model": "C3",
+    "available_models": [
+      "B",
+      "C2",
+      "C3",
+      "M4"
+    ],
+    "calibrated_probability": 0.5109055561,
+    "confidence_score": 0.51090556,
+    "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+    "estimated_realization_probability": 0.5109055561,
+    "expert_fallback": false,
+    "family": "KG",
+    "frozen_binary_calibration_train_n": 2898,
+    "historical_base": 0.5182926829,
+    "historical_reliability": {
+      "n": 0,
+      "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+    },
+    "lift_pp": -0.738713,
+    "market": "BTTS_NO",
+    "probability_type": "C3_2025_FROZEN_BINARY_LOGIT",
+    "qualification_reasons": [],
+    "support_is_diagnostic_not_a_selection_gate": true
+  },
+  "baseline_sha256": "2dc8bfe8497e454014ef8ab68d867f954f1d5ca028b8a015b0582f6bc0b140e1",
+  "betting_authorized": false,
+  "calibration_train_n_2025_26": 2898,
+  "fixed_family_experts": {
+    "KG": "C3",
+    "MS": "M4",
+    "O25": "C3"
+  },
+  "fixture": {
+    "away_id": "6a873074-2e6d-5e10-8cc1-3ef9e0233946",
+    "fixture_verification": "VERIFIED_BY_LIVE_OFFICIAL_GATE",
+    "home_id": "61387963-91dc-5585-b0b3-97130db6a971",
+    "kickoff_utc": "2026-11-21T14:00:00+00:00",
+    "league": "ITA1",
+    "match_local_date": "2026-11-21",
+    "official_source": "https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata",
+    "source_checked_at_utc": "2026-11-21T09:15:18.980329+00:00"
+  },
+  "forecast_sha256": "4c311d1d67a32e6eb004e3963930cb82251dda3ecaa42a40c30297a38665e51b",
+  "forecast_unchanged": true,
+  "hard_60pct_model_gate": false,
+  "historical_completed_matches": 0,
+  "historical_pre_match_market_observations": 0,
+  "historical_reference_is_independently_validated": false,
+  "historical_reference_source": "NONE_FOR_NEW_CALIBRATION_VERSION",
+  "independent_forward_superiority_established": false,
+  "main_candidate": {
+    "agreeing_models": [
+      "B",
+      "C2",
+      "C3",
+      "M4"
+    ],
+    "anchor_model": "M4",
+    "available_models": [
+      "B",
+      "C2",
+      "C3",
+      "M4"
+    ],
+    "calibrated_probability": 0.5833375787,
+    "confidence_score": 0.58333758,
+    "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+    "estimated_realization_probability": 0.5833375787,
+    "expert_fallback": false,
+    "family": "MS",
+    "frozen_binary_calibration_train_n": null,
+    "historical_base": 0.4056795132,
+    "historical_reliability": {
+      "n": 0,
+      "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+    },
+    "lift_pp": 17.765807,
+    "market": "MS1",
+    "probability_type": "M4_AUG_JOINT_CALIBRATED",
+    "qualification_reasons": [],
+    "support_is_diagnostic_not_a_selection_gate": true
+  },
+  "market_prices_not_required_for_model_decision": true,
+  "model_market_diagnostics": [
+    {
+      "agreeing_models": [
+        "B",
+        "C2",
+        "C3",
+        "M4"
+      ],
+      "anchor_model": "M4",
+      "available_models": [
+        "B",
+        "C2",
+        "C3",
+        "M4"
+      ],
+      "calibrated_probability": 0.5833375787,
+      "confidence_score": 0.58333758,
+      "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+      "estimated_realization_probability": 0.5833375787,
+      "expert_fallback": false,
+      "family": "MS",
+      "frozen_binary_calibration_train_n": null,
+      "historical_base": 0.4056795132,
+      "historical_reliability": {
+        "n": 0,
+        "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+      },
+      "lift_pp": 17.765807,
+      "market": "MS1",
+      "probability_type": "M4_AUG_JOINT_CALIBRATED",
+      "qualification_reasons": [],
+      "support_is_diagnostic_not_a_selection_gate": true
+    },
+    {
+      "agreeing_models": [
+        "C3",
+        "M4"
+      ],
+      "anchor_model": "C3",
+      "available_models": [
+        "B",
+        "C2",
+        "C3",
+        "M4"
+      ],
+      "calibrated_probability": 0.5109055561,
+      "confidence_score": 0.51090556,
+      "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+      "estimated_realization_probability": 0.5109055561,
+      "expert_fallback": false,
+      "family": "KG",
+      "frozen_binary_calibration_train_n": 2898,
+      "historical_base": 0.5182926829,
+      "historical_reliability": {
+        "n": 0,
+        "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+      },
+      "lift_pp": -0.738713,
+      "market": "BTTS_NO",
+      "probability_type": "C3_2025_FROZEN_BINARY_LOGIT",
+      "qualification_reasons": [],
+      "support_is_diagnostic_not_a_selection_gate": true
+    },
+    {
+      "agreeing_models": [
+        "B",
+        "C3",
+        "M4"
+      ],
+      "anchor_model": "C3",
+      "available_models": [
+        "B",
+        "C2",
+        "C3",
+        "M4"
+      ],
+      "calibrated_probability": 0.5077256085,
+      "confidence_score": 0.50772561,
+      "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+      "estimated_realization_probability": 0.5077256085,
+      "expert_fallback": false,
+      "family": "O25",
+      "frozen_binary_calibration_train_n": 2898,
+      "historical_base": 0.5101626016,
+      "historical_reliability": {
+        "n": 0,
+        "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+      },
+      "lift_pp": -0.243699,
+      "market": "UNDER_2.5",
+      "probability_type": "C3_2025_FROZEN_BINARY_LOGIT",
+      "qualification_reasons": [],
+      "support_is_diagnostic_not_a_selection_gate": true
+    },
+    {
+      "agreeing_models": [
+        "C2"
+      ],
+      "anchor_model": "C3",
+      "available_models": [
+        "B",
+        "C2",
+        "C3",
+        "M4"
+      ],
+      "calibrated_probability": 0.4922743915,
+      "confidence_score": 0.49227439,
+      "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+      "estimated_realization_probability": 0.4922743915,
+      "expert_fallback": false,
+      "family": "O25",
+      "frozen_binary_calibration_train_n": 2898,
+      "historical_base": 0.4898373984,
+      "historical_reliability": {
+        "n": 0,
+        "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+      },
+      "lift_pp": 0.243699,
+      "market": "OVER_2.5",
+      "probability_type": "C3_2025_FROZEN_BINARY_LOGIT",
+      "qualification_reasons": [],
+      "support_is_diagnostic_not_a_selection_gate": true
+    },
+    {
+      "agreeing_models": [
+        "C2"
+      ],
+      "anchor_model": "C3",
+      "available_models": [
+        "B",
+        "C2",
+        "C3",
+        "M4"
+      ],
+      "calibrated_probability": 0.4890944439,
+      "confidence_score": 0.48909444,
+      "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+      "estimated_realization_probability": 0.4890944439,
+      "expert_fallback": false,
+      "family": "KG",
+      "frozen_binary_calibration_train_n": 2898,
+      "historical_base": 0.4817073171,
+      "historical_reliability": {
+        "n": 0,
+        "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+      },
+      "lift_pp": 0.738713,
+      "market": "BTTS_YES",
+      "probability_type": "C3_2025_FROZEN_BINARY_LOGIT",
+      "qualification_reasons": [],
+      "support_is_diagnostic_not_a_selection_gate": true
+    },
+    {
+      "agreeing_models": [],
+      "anchor_model": "M4",
+      "available_models": [
+        "B",
+        "C2",
+        "C3",
+        "M4"
+      ],
+      "calibrated_probability": 0.2333449041,
+      "confidence_score": 0.2333449,
+      "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+      "estimated_realization_probability": 0.2333449041,
+      "expert_fallback": false,
+      "family": "MS",
+      "frozen_binary_calibration_train_n": null,
+      "historical_base": 0.2413793103,
+      "historical_reliability": {
+        "n": 0,
+        "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+      },
+      "lift_pp": -0.803441,
+      "market": "MSX",
+      "probability_type": "M4_AUG_JOINT_CALIBRATED",
+      "qualification_reasons": [],
+      "support_is_diagnostic_not_a_selection_gate": true
+    },
+    {
+      "agreeing_models": [],
+      "anchor_model": "M4",
+      "available_models": [
+        "B",
+        "C2",
+        "C3",
+        "M4"
+      ],
+      "calibrated_probability": 0.1833175173,
+      "confidence_score": 0.18331752,
+      "decision_evidence_status": "FROZEN_HISTORICAL_TRAINING_NOT_BLIND_VALIDATED",
+      "estimated_realization_probability": 0.1833175173,
+      "expert_fallback": false,
+      "family": "MS",
+      "frozen_binary_calibration_train_n": null,
+      "historical_base": 0.3529411765,
+      "historical_reliability": {
+        "n": 0,
+        "status": "NO_SAME_VERSION_LIVE_SHA_REFERENCE"
+      },
+      "lift_pp": -16.962366,
+      "market": "MS2",
+      "probability_type": "M4_AUG_JOINT_CALIBRATED",
+      "qualification_reasons": [],
+      "support_is_diagnostic_not_a_selection_gate": true
+    }
+  ],
+  "model_policy_sha256": "de2493cacf6259219d8252470075ad84f14321ed447b302b810c9cf88b9643b1",
+  "near_tie_within_two_percentage_points": false,
+  "new_model_fit": false,
+  "nov8_raw_sha_history_used_to_rank": false,
+  "odds_affected_selection": false,
+  "official_S1_S2_approved": false,
+  "payload_sha256": "58fc60796221f7718d509b18f8c0058ca5abca8100c4ddec20d49bc75e796812",
+  "price_used_in_decision": false,
+  "prior_v3_original_forecast_seals_unchanged": true,
+  "production_modified": false,
+  "ranking_objective": "HIGHEST_ESTIMATED_REALIZATION_PROBABILITY",
+  "reason": null,
+  "schema": "263_MODEL_FIRST_FOUR_MODEL_DECISION_RESEARCH_V2",
+  "selection_policy_version": "20261121_C3_2025_FROZEN_V4",
+  "status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+  "top_two_probability_gap_pp": 7.2432,
+  "used_fallback_families": []
+}
