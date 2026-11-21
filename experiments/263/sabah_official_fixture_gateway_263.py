@@ -25,6 +25,10 @@ NOV7_ALIASES={
     'ESP1':{'Racing Santander':'R. Racing Club','Espanyol':'RCD Espanyol de Barcelona',
             'Deportivo La Coruña':'RC Deportivo','Athletic Bilbao':'Athletic Club'},
     'TUR1':{'Göztepe':'GÖZTEPE A.Ş.','Başakşehir':'İSTANBUL BAŞAKŞEHİR FK'},
+    # KNVB official fixture page prints N.E.C.; canonical 2026/27 identity is
+    # N.E.C. Nijmegen. This is exact, not fuzzy, and applies to both sides
+    # of the same-team comparison (not only the user request label).
+    'NED1':{'N.E.C.':'N.E.C. Nijmegen'},
 }
 NOV7_TFF_DETAIL='https://www.tff.org/Default.aspx?macId=317878&pageId=29'
 class OfficialGatewayError(ValueError): pass
@@ -154,7 +158,9 @@ class OfficialFixtureGateway:
 
     def _same(self,league,left,right):
         try:
-            return self.resolve_id(league,left)==self.resolve_id(league,right)
+            aliases=NOV7_ALIASES.get(league,{})
+            return (self.resolve_id(league,aliases.get(left,left))==
+                    self.resolve_id(league,aliases.get(right,right)))
         except (KeyError,TypeError,ValueError):
             return False
 
