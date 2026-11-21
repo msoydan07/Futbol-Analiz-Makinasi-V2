@@ -19,7 +19,7 @@ SOURCES = {
     'ENG1': ('https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november', 'premierleague.com', 'epl_nov26_confirmed'),
     'ENG2': ('https://www.efl.com/matches/', 'efl.com', 'jsonld'),
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
-    'ESP1': ('https://www.laliga.com/es-GB/noticias/horarios-de-la-decimotercera-jornada-de-laliga-ea-sports-2026-27', 'laliga.com', 'laliga_j13_nov2026_confirmed'),
+    'ESP1': ('https://www.laliga.com/iframes/external-consumer-broadcast', 'laliga.com', 'laliga_broadcast_j13_nov2026'),
     'ITA1': ('https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a', 'legaseriea.it', 'seriea_j11_2026'),
     'FRA1': ('https://ligue1.com/fr/articles/l1_article_5839-', 'ligue1.com', 'lfp_j11_nov2026_confirmed'),
     'NED1': ('https://www.knvb.nl/competities/eredivisie/programma', 'knvb.nl', 'knvb'),
@@ -159,6 +159,26 @@ def _laliga_broadcast_nov2026(markup):
                              dt.astimezone(timezone.utc).isoformat(),'laliga_broadcast_nov2026'))
     return events
 
+
+def _laliga_broadcast_j13_nov2026(markup):
+    """Strict official LaLiga J13 broadcast grid, dates/times/teams only."""
+    lines=[' '.join(v.split()) for v in ''.join(markup.visible).splitlines() if v.strip()]
+    joined=' '.join(lines)
+    if 'Jornada 13' not in joined or '2026/2027' not in joined:return []
+    day=re.compile(r'^(VIE|SAB|DOM|LUN) (20|21|22|23)\.11\.2026$',re.I)
+    tm=re.compile(r'^(?:[01]\d|2[0-3]):[0-5]\d$')
+    events=[]
+    for i,line in enumerate(lines):
+        m=day.fullmatch(line)
+        if not m or i+4>=len(lines):continue
+        if not tm.fullmatch(lines[i+1]) or lines[i+3].upper()!='VS':continue
+        home,away=lines[i+2],lines[i+4]
+        if not home or not away or home==away:continue
+        hh,mm=map(int,lines[i+1].split(':'))
+        local=datetime(2026,11,int(m.group(2)),hh,mm,tzinfo=ZoneInfo('Europe/Madrid'))
+        events.append(_event(home,away,local.date().isoformat(),
+                   local.astimezone(timezone.utc).isoformat(),'laliga_broadcast_j13_nov2026'))
+    return events
 
 def _laliga_j13_nov2026_confirmed(markup):
     """Oct-21 official LaLiga J13 announcement, named Nov-20 kickoff only.
@@ -415,6 +435,7 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
            'seriea_j11_2026':_seriea_j11_2026,'tff_j11_2026':_tff_j11_2026,
            'epl_nov26_confirmed':_epl_nov26_confirmed,
            'laliga_broadcast_nov2026':_laliga_broadcast_nov2026,
+            'laliga_broadcast_j13_nov2026':_laliga_broadcast_j13_nov2026,
            'laliga_j13_nov2026_confirmed':_laliga_j13_nov2026_confirmed,
            'lfp_j11_nov2026_confirmed':_lfp_j11_nov2026_confirmed}
     if kind not in funcs:raise OfficialPageError('unsupported_parser')

@@ -1,0 +1,52 @@
+name: "263 ESP1 21-Nov LaLiga official schedule gate acceptance"
+on:
+  push:
+    branches: [fix/263-esp1-j13-live-laliga-broadcast-20261121]
+  pull_request:
+    branches: [experiment/263-toplu-karsilastirma]
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Precise date-time source parser and old gateways
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_esp1_j13_live_broadcast_263.py experiments/263/test_sabah_official_fixture_gateway_263.py
+      - name: Fetch live official J13 page and assert all four pair/time records
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from official_page_lookup_263 import SOURCES,_default_fetch,parse_official_events
+          u=SOURCES['ESP1'][0]
+          effective,html=_default_fetch(u,'ESP1')
+          events=parse_official_events('ESP1',html,parser=SOURCES['ESP1'][2])
+          found={(r['home'],r['away'],r['kickoff_utc']) for r in events}
+          needed={
+          ('Deportivo Alavés','RC Deportivo','2026-11-21T13:00:00+00:00'),
+          ('Rayo Vallecano','Valencia CF','2026-11-21T15:15:00+00:00'),
+          ('Sevilla FC','Real Betis','2026-11-21T17:30:00+00:00'),
+          ('Real Madrid','Celta','2026-11-21T20:00:00+00:00')}
+          print('SOURCE',effective,'parsed',len(events))
+          print('NOV21_OBSERVED',sorted((h,a,t) for h,a,t in found if t and t.startswith('2026-11-21')))
+          assert needed.issubset(found), 'LALIGA_ALL_FOUR_OFFICIAL_TIMED_FIXTURES_NOT_PRESENT'
+          PY
+      - name: Protect models SHA locks and past sealed records
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin experiment/263-toplu-karsilastirma
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- \
+            experiments/263/m4_integrated.py experiments/263/exp_263_batch.py \
+            experiments/263/model_first_decision_263.py \
+            experiments/263/model_first_selection_lock_20261121_v4.json \
+            data/results_only_263 forward_morning_263
