@@ -1,0 +1,36 @@
+{
+  "schema": "SABAH_TOPLU_V1",
+  "day_turkey": "2026-11-21",
+  "matches": [
+    {
+      "league": "GER1",
+      "home": "SV Elversberg",
+      "away": "Sport-Club Freiburg"
+    },
+    {
+      "league": "GER1",
+      "home": "1. FC Union Berlin",
+      "away": "RB Leipzig"
+    },
+    {
+      "league": "GER1",
+      "home": "Eintracht Frankfurt",
+      "away": "TSG Hoffenheim"
+    },
+    {
+      "league": "GER1",
+      "home": "Bayer 04 Leverkusen",
+      "away": "SC Paderborn 07"
+    },
+    {
+      "league": "GER1",
+      "home": "Borussia Mönchengladbach",
+      "away": "Borussia Dortmund"
+    },
+    {
+      "league": "GER1",
+      "home": "FC Schalke 04",
+      "away": "VfB Stuttgart"
+    }
+  ]
+}
