@@ -188,6 +188,25 @@ def verify_active_policy(root=ROOT):
              "combined.save()" in layout and
              "_draw_approved_single_page(combined,r,i,len(ready))" in layout,
              "SECOND_PDF_APPROVED_RENDERER_BUNDLE_MISSING")
+    # Append-only after-second-PDF historical research records are mandatory;
+    # raw user PDFs remain outside the public GitHub repository.
+    arc="experiments/263/second_pdf_commentary_archive_263.py"
+    arc_spec="docs/263_IKINCI_PDF_ORAN_YORUM_ARSIV_KARARI_20261121.md"
+    _require(paths.get("second_pdf_archive")==arc and
+             paths.get("second_pdf_archive_spec")==arc_spec and
+             (root/arc_spec).is_file(),
+             "SECOND_PDF_ARCHIVE_POLICY_FILES_MISSING")
+    archive_source=(root/arc).read_text(encoding="utf-8")
+    _require("D-SECOND-ARCHIVE-001" in by_topic["pdf_sequence"]["rule"] and
+             "def append_review_archive(" in archive_source and
+             "SECOND_PDF_ARCHIVE_ALREADY_EXISTS_DIFFERENT" in archive_source and
+             "raw_pdfs_committed_to_github" in archive_source,
+             "SECOND_PDF_IMMUTABLE_ARCHIVE_NOT_ENFORCED")
+    _require("from second_pdf_commentary_archive_263 import append_review_archive" in second and
+             "archived=append_review_archive(report," in second and
+             "archived=append_review_archive(review," in second and
+             '"second_pdf_archive_files":archived["files"]' in second,
+             "SECOND_PDF_ARCHIVE_NOT_ATTACHED_TO_BOTH_REVIEW_ROUTES")
     historical=p.get("superseded_for_pdf_first",[])
     _require(len(historical)>=2 and all(x.get("status")!="ACTIVE" for x in historical),
              "SUPERSEDED_POLICY_STILL_ACTIVE")
