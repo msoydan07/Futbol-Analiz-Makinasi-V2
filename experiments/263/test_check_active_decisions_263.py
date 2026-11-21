@@ -16,6 +16,9 @@ NEEDED = (
     "experiments/263/model_first_selection_lock_20261121_v4.json",
     "experiments/263/model_first_frozen_c3_calibration_263.py",
     "experiments/263/sabah_batch_263.py",
+    "experiments/263/iddaa_pdf_approved_layout_263.py",
+    "experiments/263/sabah_mobile_model_only_263.py",
+    "docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md",
     "experiments/263/normal_historical_reference_263.py",
     "experiments/263/m4_integrated.py",
     ".github/workflows/263-sabah-new100-on-request.yml",
@@ -70,6 +73,19 @@ class Contract(unittest.TestCase):
         d=json.loads(path.read_text(encoding="utf-8"))
         d["canonical_entrypoints"]["new100_price_reference"]="experiments/263/sabah_pinnacle_new100_bridge_263.py"
         path.write_text(json.dumps(d),encoding="utf-8")
+        with self.assertRaises(ActiveDecisionConflict):
+            verify_active_policy(self.root)
+    def test_unapproved_model_only_batch_renderer_blocks(self):
+        path=self.root/"experiments/263/sabah_mobile_model_only_263.py"
+        contents=path.read_text(encoding="utf-8")
+        contents=contents.replace(
+            'render_model_only_batch(report["day_turkey"],rows,folder/"toplu.pdf")',
+            'batch_pdf(folder/"toplu.pdf",report["day_turkey"],rows)')
+        path.write_text(contents,encoding="utf-8")
+        with self.assertRaises(ActiveDecisionConflict):
+            verify_active_policy(self.root)
+    def test_template_spec_missing_blocks(self):
+        (self.root/"docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md").unlink()
         with self.assertRaises(ActiveDecisionConflict):
             verify_active_policy(self.root)
     def test_xg_in_main_model_blocks(self):
