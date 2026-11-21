@@ -1,0 +1,90 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": true,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_second_pdf_preko_git_seal": true,
+    "odds_and_commentary_saved_to_public_research_branch_only": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "pdf_sha256": "ee706fa76e4bdb7a185dc88c51ef9d54d65c372f6fff6247d4e0d90bba21bbc9",
+    "provenance_note": "Resmî ilk 11 ve futbol haberlerine ilişkin metin, kullanıcının daha önce aldığı asistan raporunun aynısıdır; bu arşiv işlemi bağımsız yeni haber doğrulaması değildir.",
+    "source": "previously delivered approved four-box one-match PDF",
+    "text_verbatim": "Sabahki MS 1 ana tercihimiz %67,7 olarak korunuyor. City galibiyet oranı 1,25 seviyesinde değişmedi; marjsız piyasa olasılığı %69,1’den %69,0’a geriledi. Buna karşılık 2.5 Üst oranı 1,27’den 1,34’e, KG Var oranı 1,49’dan 1,56’ya çıktı; piyasa gol beklentilerinde bir miktar temkinli görünmektedir. Manchester City’nin resmen açıkladığı ilk 11’de Haaland, Foden ve Doku oynuyor; O’Reilly ve Bouaddi de ilk 11’de, Cherki, Enzo Fernández ve Gvardiol ise yedek. City 4-3-3 dizilişini açıklarken Fulham’da Muniz ve Iwobi ilk 11’de. Resmî kadro değişiklikleri futbol açısından kayda değer olsa da oranlardaki küçük hareketin doğrudan bu tercihlerden kaynaklandığı doğrulanamadı. İkinci PDF yalnızca maç öncesi piyasa ve kadro yorumudur; yeni tahmin ya da mühür oluşturulmadı.",
+    "verify_external_claims_independently_on_reuse": true
+  },
+  "match": {
+    "away": "Fulham",
+    "date_tr": "2026-11-21",
+    "home": "Manchester City",
+    "kickoff_tr": "15:30",
+    "league": "ENG1"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.548874855,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/2e1100978dd9846aa42d4cd9/decision.json",
+    "decision_sha256": "5d896c07090e6b5a86bedd9d8fb278700b8b0bc353a98f67b17b87091db4783e",
+    "forecast_path": "forward_morning_263/2026-11-21/2e1100978dd9846aa42d4cd9.json",
+    "forecast_sha256": "c7098539d39d307fd065e9d547cc245dc7cef1da08d595ab5766ad350b030945",
+    "main_market": "MS1",
+    "main_probability": 0.6774150275,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "RETROSPECTIVE_IMPORT_FROM_CHAT_PREMATCH_FILES",
+  "record_sha256": "af2d5baaabf8ab6a60af242aae3648d59ef6d404287cefccb4eb372a226d3320",
+  "recorded_at_utc": "2026-11-21T12:31:34.659900+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.6914840919,
+    "main_market_no_vig_second": 0.6898915031,
+    "main_market_price_first": 1.25,
+    "main_market_price_second": 1.25,
+    "main_no_vig_change_pp": -0.159259,
+    "main_price_delta": 0.0,
+    "our_probability_minus_second_market_pp": -1.247648,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.56,
+          1.95
+        ],
+        "before": [
+          1.49,
+          2.06
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          1.25,
+          4.9,
+          6.43
+        ],
+        "before": [
+          1.25,
+          5.02,
+          6.34
+        ]
+      },
+      "OVER_UNDER_2_5": {
+        "after": [
+          2.45,
+          1.34
+        ],
+        "before": [
+          2.68,
+          1.27
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "97366b4cab66e64ad23b65108abfc620a0f98ec501c01cbea9434993cc8c8425",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "aeaa25c7903c158fdc93edd1cc896d60eeb6dfe5d5eb2e527b5001da97140541"
+  }
+}
