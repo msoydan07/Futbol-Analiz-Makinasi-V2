@@ -48,3 +48,13 @@ Seven-match **exploratory** macro average (3 market groups equally weighted; mul
 6. Raw user PDFs and licensed/purchased odds archives do not belong on public GitHub. Save only code, provenance summaries, aggregate test metrics and non-sensitive diagnostics.
 
 **State:** Source research completed; historical multi-season seven-market corpus **not acquired**; no blind test or production promotion.
+
+## 2026-11-21 owner-uploaded original PDF recovery (later supplement)
+
+After the first source rights audit, the user's previous-conversation **original** iddaa.com PDF uploads were recovered from their own Library and parsed locally with the fixed fourteen-slot mapping. **Seven PDFs were inspected; 36 distinct, complete, non-truncated seven-quote fixtures** were admitted for purely descriptive P0/P1 replay: ENG1=4, ENG2=10, GER1=4, ESP1=3, ITA1=3, FRA1=5, NED1=3, TUR1=3, BEL1=1; POR1=0. Match dates 2026-11-20 (2) and 2026-11-21 (34). The original PDFs remain in the private conversation working folder; neither PDFs nor original seven-price vectors are committed here.
+
+The independent research replay inverted all 36 quotes. P0 and P1 agree on the top event on **34/36**, disagree on Aston Villa–Sunderland (P0 BTTS YES / P1 MS1) and Utrecht–SC Cambuur (P0 BTTS YES / P1 OVER 2.5). Mean maximum three-family residual 1.12 percentage points, largest 2.43. Differences in event selection/fit are not demonstrated prediction skill; the 36 are not a settled matched, independently timestamp-certified blind outcomes evaluation.
+
+Method notes: PDF embedded creation times were checked as before kickoff using Europe/Istanbul; such metadata is source evidence, NOT independent trusted timestamp proof. The oldest qualifying complete quote for a fixture is kept; later PDFs never back-change earlier price records. Truncated names or incomplete/shifted price slot rows excluded. The old German five missing O/U prices from the separate commentary archive remain incomplete; this new corpus does not retrospectively rewrite those records. The earlier seven-game micro results came from different archived first-PDF transcriptions and MUST NOT be added to 36 as an independent 43-game cohort.
+
+**Research artifact available separately to the user:** `P1_Tarihsel_Kaynak_Arastirmasi_20261121.zip`, containing private-local replay scripts, auditable per-fixture P0/P1 derived diagnostics, league counts and original-PDF SHA reference. The package does not distribute raw user PDFs. This audit does not change production files, SHA seals, v4, or GitHub 2.6.3 live workflows. Broad 2024/25–2026/27 season odds collection and legal rights remain unresolved.
