@@ -21,7 +21,7 @@ SOURCES = {
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
     'ESP1': ('https://www.laliga.com/iframes/external-consumer-broadcast', 'laliga.com', 'laliga_broadcast_j13_nov2026'),
     'ITA1': ('https://www.legaseriea.it/serie-a/news/quando-si-gioca-anticipi-e-posticipi-fino-alla-12a-giornata', 'legaseriea.it', 'seriea_j12_2026_confirmed'),
-    'FRA1': ('https://ligue1.com/fr/articles/l1_article_5839-', 'ligue1.com', 'lfp_j11_nov2026_confirmed'),
+    'FRA1': ('https://ligue1.com/fr/articles/l1_article_5839-', 'ligue1.com', 'lfp_j11_sat_nov2026_verified'),
     'NED1': ('https://www.knvb.nl/competities/eredivisie/programma', 'knvb.nl', 'knvb'),
     'TUR1': ('https://www.tff.org/default.aspx?ftxtID=2966&pageID=600', 'tff.org', 'tff_j11_2026'),
     'POR1': ('https://www.ligaportugal.pt/calendar', 'ligaportugal.pt', 'jsonld'),
@@ -194,6 +194,48 @@ def _laliga_j13_nov2026_confirmed(markup):
     kick=datetime(2026,11,20,21,0,tzinfo=ZoneInfo('Europe/Madrid'))
     return [_event('Athletic Club','RCD Espanyol de Barcelona','2026-11-20',
                    kick.astimezone(timezone.utc).isoformat(),'laliga_j13_nov2026_confirmed')]
+
+
+def _lfp_j11_sat_nov2026_verified(markup):
+    """Official 2026/27 Ligue 1 J11 TV grid, 21 Nov exact matches.
+
+    Derive dates and times from source headings only. No odds,
+    invented game or fuzzy team matching. Fail closed for other rounds.
+    """
+    lines=[' '.join(v.split()) for v in ''.join(markup.visible).splitlines()
+           if v.strip()]
+    joined=' '.join(lines)
+    if ('Programmations TV : J10 et J11' not in joined or
+        '11e JOURNÉE DE LIGUE 1' not in joined):
+        return []
+    headers=re.compile(
+        r'^(Vendredi|Samedi|Dimanche)\s+(20|21|22)\s+novembre\s+2026'
+        r'\s+à\s+(\d{1,2})h(\d{2})\b',re.I)
+    expected={
+        'OGC Nice – Paris Saint-Germain':('OGC Nice','Paris Saint-Germain'),
+        'LOSC – Olympique Lyonnais':('LOSC','Olympique Lyonnais'),
+        'RC Lens – Toulouse FC':('RC Lens','Toulouse FC'),
+        'AS Monaco – AJ Auxerre':('AS Monaco','AJ Auxerre'),
+        'RC Strasbourg Alsace – Stade Brestois 29':
+            ('RC Strasbourg Alsace','Stade Brestois 29')}
+    found=[];active=None;seen=set()
+    for line in lines:
+        hit=headers.match(line)
+        if hit:
+            wd,day,hh,mm=hit.groups()
+            active=(int(hh),int(mm)) if (
+                wd.casefold()=='samedi' and int(day)==21 and
+                (int(hh),int(mm)) in ((17,15),(20,45))) else None
+            continue
+        if active is None or line not in expected:continue
+        h,a=expected[line]
+        if (h,a) in seen:continue
+        seen.add((h,a))
+        kick=datetime(2026,11,21,*active,tzinfo=ZoneInfo('Europe/Paris'))
+        found.append(_event(h,a,'2026-11-21',
+                    kick.astimezone(timezone.utc).isoformat(),
+                    'lfp_j11_sat_nov2026_verified'))
+    return found
 
 
 def _lfp_j11_nov2026_confirmed(markup):
@@ -470,7 +512,8 @@ def parse_official_events(league: str, html: str, parser: str|None=None) -> list
            'laliga_broadcast_nov2026':_laliga_broadcast_nov2026,
             'laliga_broadcast_j13_nov2026':_laliga_broadcast_j13_nov2026,
            'laliga_j13_nov2026_confirmed':_laliga_j13_nov2026_confirmed,
-           'lfp_j11_nov2026_confirmed':_lfp_j11_nov2026_confirmed}
+           'lfp_j11_nov2026_confirmed':_lfp_j11_nov2026_confirmed,
+            'lfp_j11_sat_nov2026_verified':_lfp_j11_sat_nov2026_verified}
     if kind not in funcs:raise OfficialPageError('unsupported_parser')
     events=funcs[kind](m)
     # JSON-LD may supplement a site-specific parser, but never infer a fixture
