@@ -1,0 +1,112 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "1b2457b76397cddbfa2fe11c8ccd5c156e74275b0448d21922ef2d64f67fd562",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T09:21:22.662160+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 5,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "36eea0487766aba44ab639d794873569147bf38fbb202b042241425b86c75b32",
+  "new_count": 5,
+  "no_verified_odds": true,
+  "payload_sha256": "7de24c85b91ac8a00f6cb23beffede9b76913c369bd924be647a6d925f3f65f6",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "b9e493d6be723b07b101fc1bf6beea2955fd097847b83d99f75cde8e80c8f283",
+      "decision_sha256": "4ce5b3c17ddebf2ed675c999aad37693eef9c57fcc69801f22404cc8dcb44197",
+      "fixture": "OGC Nice - Paris Saint-Germain",
+      "forecast_path": "forward_morning_263/2026-11-21/1869ab8cedbdea0fbd1cc74b.json",
+      "forecast_sha256": "8f42458d3f12363f454ab289c538a8d2c2fd1ceec6792a3dc43040178e91f75d",
+      "kickoff_utc": "2026-11-21T16:15:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "57244500076ce445fb47faa47c2f3bc1d877698aeee87b436c6b135c0599d567",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "8a6a25b6e76cfc68074a4da2e00aa21195fb0fa6aa67a2970c665ef78882525f",
+      "decision_sha256": "e1a1da14bd9ea228ace303eef6db6561823505aa8ff4bede1fbaa4c857f07a9e",
+      "fixture": "LOSC - Olympique Lyonnais",
+      "forecast_path": "forward_morning_263/2026-11-21/3509421314449b4f05240554.json",
+      "forecast_sha256": "ff8661f1359dba30f4de262c238bbca3186b2ab8cb5a192b4590d9151a7a3862",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "f76b9a20fabc3fa8fadc27c4c3890026ec5e9e945e6ca1c85e84235644edb765",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "d35f98ea668ed9c2c98193ede1bc496610962b2a56451d0662bf0442b5f1a429",
+      "decision_sha256": "f03e0f2067d0088446a6a9dcb19cc17f778fcfb4da2a6286333d06783590d375",
+      "fixture": "RC Strasbourg Alsace - Stade Brestois 29",
+      "forecast_path": "forward_morning_263/2026-11-21/b56db816e63398793936de12.json",
+      "forecast_sha256": "712b45723123a5b02747d41883cc2a5e306e7237c15087689f76a754987ab1c6",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "b48958fe98c40b6cfe235134b9de3661ccb432905868951287e6b487f3e3b3c2",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "46b76a3dd179cf0904866d4cbdedbf186478a4b63a4b674ac7b9746a250a0ad0",
+      "decision_sha256": "f5863a091ef80bdeff3ca7fac32ba455df07c7d4b64c0c8a6198d192d12fc95d",
+      "fixture": "AS Monaco - AJ Auxerre",
+      "forecast_path": "forward_morning_263/2026-11-21/0715d969a1198c422cfb3769.json",
+      "forecast_sha256": "f032964b9b3a0880dbcb20fb71fa4a4806d85fae768a7f0fdbe241b7cbaedb89",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "a58253a7f455dd56c66be3cb790fb7c40bb528396df27914611c913b419f0dec",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "1aaa7c0473fca1c184e643455b264f8db61be8e74376c91395aef49cd9934beb",
+      "decision_sha256": "3582af0e8befdc4c1ef99ca62c5d7b57894e39fe7215bc3bcb84cb9ebbb4fb0d",
+      "fixture": "RC Lens - Toulouse FC",
+      "forecast_path": "forward_morning_263/2026-11-21/c286ddc9ac958be13a9ec084.json",
+      "forecast_sha256": "bb82a66f674ef176577c11836232ae7a7a85407fb6e40b789277867b75846183",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "FRA1",
+      "mobile_sha256": "a8f30af217a91026897d259ec65e26a8397923e0906cf9d24de7f966bf748c35",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}

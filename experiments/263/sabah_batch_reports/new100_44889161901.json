@@ -1,0 +1,265 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T09:21:18.159955+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 5,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 5,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "FRA1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "e565c0488bd2141ae0e5735cf9ad644ccef993c75f5f365da4c7f9c3748ba744",
+      "parsed_events": 5,
+      "source_url": "https://ligue1.com/fr/articles/l1_article_5839-",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "Paris Saint-Germain",
+      "decision_sha256": "4ce5b3c17ddebf2ed675c999aad37693eef9c57fcc69801f22404cc8dcb44197",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/1869ab8cedbdea0fbd1cc74b.json",
+      "forecast_sha256": "8f42458d3f12363f454ab289c538a8d2c2fd1ceec6792a3dc43040178e91f75d",
+      "home": "OGC Nice",
+      "kickoff_utc": "2026-11-21T16:15:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 5,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "e565c0488bd2141ae0e5735cf9ad644ccef993c75f5f365da4c7f9c3748ba744",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5839-",
+        "requested_away": "Paris Saint-Germain",
+        "requested_home": "OGC Nice",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_j11_sat_nov2026_verified"
+      },
+      "rotation": {
+        "089ac458-9f7d-500f-9f62-44dfa8032f37": "VERI_YETERSIZ",
+        "a23cb5ad-b4b2-5f33-9ab5-ecabbf91996b": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "089ac458-9f7d-500f-9f62-44dfa8032f37": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "a23cb5ad-b4b2-5f33-9ab5-ecabbf91996b": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Olympique Lyonnais",
+      "decision_sha256": "e1a1da14bd9ea228ace303eef6db6561823505aa8ff4bede1fbaa4c857f07a9e",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/3509421314449b4f05240554.json",
+      "forecast_sha256": "ff8661f1359dba30f4de262c238bbca3186b2ab8cb5a192b4590d9151a7a3862",
+      "home": "LOSC",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 5,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "e565c0488bd2141ae0e5735cf9ad644ccef993c75f5f365da4c7f9c3748ba744",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5839-",
+        "requested_away": "Olympique Lyonnais",
+        "requested_home": "LOSC",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_j11_sat_nov2026_verified"
+      },
+      "rotation": {
+        "3f7ee66e-ea78-5826-a6ad-55142f1b5c4a": "VERI_YETERSIZ",
+        "b8051c2b-f40f-5620-aca4-3ec5711567e1": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "3f7ee66e-ea78-5826-a6ad-55142f1b5c4a": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b8051c2b-f40f-5620-aca4-3ec5711567e1": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Stade Brestois 29",
+      "decision_sha256": "f03e0f2067d0088446a6a9dcb19cc17f778fcfb4da2a6286333d06783590d375",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/b56db816e63398793936de12.json",
+      "forecast_sha256": "712b45723123a5b02747d41883cc2a5e306e7237c15087689f76a754987ab1c6",
+      "home": "RC Strasbourg Alsace",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 5,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "e565c0488bd2141ae0e5735cf9ad644ccef993c75f5f365da4c7f9c3748ba744",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5839-",
+        "requested_away": "Stade Brestois 29",
+        "requested_home": "RC Strasbourg Alsace",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_j11_sat_nov2026_verified"
+      },
+      "rotation": {
+        "5e8c20e5-5593-5891-a8ae-6d5864e44646": "VERI_YETERSIZ",
+        "9b4b87e9-b145-5869-8913-ef8712e21dad": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "5e8c20e5-5593-5891-a8ae-6d5864e44646": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "9b4b87e9-b145-5869-8913-ef8712e21dad": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "AJ Auxerre",
+      "decision_sha256": "f5863a091ef80bdeff3ca7fac32ba455df07c7d4b64c0c8a6198d192d12fc95d",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/0715d969a1198c422cfb3769.json",
+      "forecast_sha256": "f032964b9b3a0880dbcb20fb71fa4a4806d85fae768a7f0fdbe241b7cbaedb89",
+      "home": "AS Monaco",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 5,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "e565c0488bd2141ae0e5735cf9ad644ccef993c75f5f365da4c7f9c3748ba744",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5839-",
+        "requested_away": "AJ Auxerre",
+        "requested_home": "AS Monaco",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_j11_sat_nov2026_verified"
+      },
+      "rotation": {
+        "b7d45edc-75b9-5e0d-8ea2-5372071a457a": "VERI_YETERSIZ",
+        "e1d9d0f3-df1e-5be0-b101-84f949df9219": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "b7d45edc-75b9-5e0d-8ea2-5372071a457a": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e1d9d0f3-df1e-5be0-b101-84f949df9219": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Toulouse FC",
+      "decision_sha256": "3582af0e8befdc4c1ef99ca62c5d7b57894e39fe7215bc3bcb84cb9ebbb4fb0d",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/c286ddc9ac958be13a9ec084.json",
+      "forecast_sha256": "bb82a66f674ef176577c11836232ae7a7a85407fb6e40b789277867b75846183",
+      "home": "RC Lens",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "FRA1",
+      "official_source_evidence": {
+        "candidate_events_seen": 5,
+        "league": "FRA1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "e565c0488bd2141ae0e5735cf9ad644ccef993c75f5f365da4c7f9c3748ba744",
+        "page_url": "https://ligue1.com/fr/articles/l1_article_5839-",
+        "requested_away": "Toulouse FC",
+        "requested_home": "RC Lens",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "lfp_j11_sat_nov2026_verified"
+      },
+      "rotation": {
+        "558d465a-c00b-5294-a04a-17dbfb07e96a": "VERI_YETERSIZ",
+        "f5fd5f35-351b-5c16-9eb6-09a660f73630": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "558d465a-c00b-5294-a04a-17dbfb07e96a": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f5fd5f35-351b-5c16-9eb6-09a660f73630": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "1b2457b76397cddbfa2fe11c8ccd5c156e74275b0448d21922ef2d64f67fd562",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}
