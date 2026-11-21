@@ -1,0 +1,162 @@
+name: P1 licensed cross-league consensus research once
+
+on:
+  push:
+    branches:
+      - experiment/p1-market-intelligence-20261121
+    paths:
+      - .github/workflows/p1-consensus-crossleague-once.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  crossleague:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Confirm P1 existing mathematical checks
+        run: python -m unittest discover -s experiments/p1_market_intelligence -p 'test_*.py' -q
+      - name: Retrieve non-commercial CC BY-NC 4.0 sample at pinned immutable commit
+        run: |
+          curl --fail --retry 3 --location --silent --show-error \
+            https://raw.githubusercontent.com/msellin/oddsintel-football-closes-sample/622bd876667ce1d1b6e831e25b3a2b4ed5e1f9fc/oddsintel_football_closes_2026-10-10_to_2026-10-22.csv \
+            --output /tmp/p1_consensus_source.csv
+          test "$(wc -c </tmp/p1_consensus_source.csv)" -gt 800000
+          sha256sum /tmp/p1_consensus_source.csv
+      - name: Single independent read-only historical fit and chronological holdout
+        run: |
+          python - <<'PY'
+          import csv, hashlib, json, math, statistics, sys
+          from collections import Counter
+          from datetime import datetime, timezone
+          sys.path.insert(0,'experiments/p1_market_intelligence')
+          from p1_market import MARKETS, fit_inverse_poisson, score_observed, best_choices
+
+          f='/tmp/p1_consensus_source.csv'
+          source='https://github.com/msellin/oddsintel-football-closes-sample'
+          cols={'MS':[('MS1','1x2_home'),('MSX','1x2_draw'),('MS2','1x2_away')],
+                'OU25':[('UNDER_2.5','ou25_under'),('OVER_2.5','ou25_over')],
+                'KG':[('BTTS_YES','btts_yes'),('BTTS_NO','btts_no')]}
+          rows=[]; seen=set(); excluded=Counter(); overrounds={m:[] for m in cols}
+          with open(f,encoding='utf-8',newline='') as stream:
+              reader=csv.DictReader(stream)
+              raw_count=0
+              for d in reader:
+                  raw_count+=1
+                  try:
+                      identity=d['match_id']; k=datetime.fromisoformat(d['kickoff_utc'].replace('Z','+00:00'))
+                      if not identity or identity in seen or not d['competition'] or k.tzinfo is None:
+                          raise ValueError('INVALID_IDENTITY_OR_TIME')
+                      seen.add(identity)
+                      h=int(d['home_goals']);a=int(d['away_goals'])
+                      if h<0 or a<0 or max(h,a)>40 or d['result']!=('home' if h>a else 'away' if a>h else 'draw'):
+                          raise ValueError('INCONSISTENT_FINAL_SCORE')
+                      if k.astimezone(timezone.utc)>datetime(2026,11,21,tzinfo=timezone.utc):
+                          raise ValueError('FUTURE_KICKOFF')
+                      p0={}
+                      for market,mfields in cols.items():
+                          odds=[];prob=[]
+                          for name,stem in mfields:
+                              if not d[stem+'_close'] or not d[stem+'_fair_p']:
+                                  raise ValueError('INCOMPLETE_SEVEN_QUOTES')
+                              o=float(d[stem+'_close']);p=float(d[stem+'_fair_p'])
+                              if not math.isfinite(o) or not math.isfinite(p) or not 1<o<5000 or not 0<p<1:
+                                  raise ValueError('INVALID_PRICE_OR_PROBABILITY')
+                              if abs(1/o-p)>.006:
+                                  raise ValueError('CLOSE_IS_NOT_MARGIN_FREE_FAIR_PRICE')
+                              odds.append(o);prob.append(p)
+                          if abs(sum(prob)-1)>.003 or abs(sum(1/x for x in odds)-1)>.007:
+                              raise ValueError('UNEXPECTED_NONFAIR_CONSENSUS')
+                          overrounds[market].append(sum(1/x for x in odds))
+                          p0[market]={name:x/sum(prob) for (name,_),x in zip(mfields,prob)}
+                      rows.append({'id':identity,'day':k.date().isoformat(),'competition':d['competition'],
+                                   'score':(h,a),'p0':p0})
+                  except (ValueError,KeyError,TypeError,OverflowError,ZeroDivisionError) as exc:
+                      excluded[str(exc)[:80]]+=1
+          assert raw_count==4468, ('UNEXPECTED_SOURCE_VERSION',raw_count)
+          assert len(rows)>2500, ('TOO_FEW_COMPLETE_MARKETS',len(rows),excluded)
+          days=sorted(set(r['day'] for r in rows))
+          assert len(days)>=10, ('TOO_FEW_DAYS',days)
+          cutoff=days[int(.7*len(days))]
+          for r in rows:
+              r['p1']=fit_inverse_poisson(r['p0'])['p1_probabilities']
+              r['truth']=score_observed(r['p0'],*r['score'])['truth']
+          training=[r for r in rows if r['day']<cutoff]
+          holdout=[r for r in rows if r['day']>=cutoff]
+          assert training and holdout
+          def tempfit(model,market):
+              grid=[.55+.025*i for i in range(41)]
+              best=(float('inf'),1.)
+              for t in grid:
+                  ll=0
+                  for r in training:
+                      p=r[model][market]
+                      keys=list(p)
+                      numerator=p[r['truth'][market]]**t
+                      denom=sum(v**t for v in p.values())
+                      ll-=math.log(max(1e-15,numerator/denom))
+                  if ll<best[0]:best=(ll,t)
+              return best[1]
+          params={model:{g:round(tempfit(model,g),3) for g in cols} for model in ('p0','p1')}
+          def tempmap(p,model):
+              d={}
+              for g,v in p.items():
+                  t=params[model][g]
+                  z={key:val**t for key,val in v.items()}
+                  den=sum(z.values()); d[g]={key:v/den for key,v in z.items()}
+              return d
+          def aggregate(group):
+              scores={m:{'brier':[],'logloss':[],'hits':[],'groups':{g:[] for g in cols}}
+                     for m in ('p0','p1','p0cal','p1cal')}
+              for r in group:
+                  variants={'p0':r['p0'],'p1':r['p1'],
+                            'p0cal':tempmap(r['p0'],'p0'),'p1cal':tempmap(r['p1'],'p1')}
+                  for model,p in variants.items():
+                      outcome=score_observed(p,*r['score'])
+                      cur=scores[model]
+                      cur['brier'].append(outcome['macro_brier'])
+                      cur['logloss'].append(outcome['macro_log_loss'])
+                      main=best_choices(p)['main']
+                      cur['hits'].append(r['truth'][main['family']]==main['choice'])
+                      for g in cols:cur['groups'][g].append(outcome['brier_by_market'][g])
+              return {m:{'brier':round(statistics.fmean(c['brier']),6),
+                         'logloss':round(statistics.fmean(c['logloss']),6),
+                         'main_hits':sum(c['hits']),'main_rate':round(statistics.fmean(c['hits']),6),
+                         'brier_by_market':{g:round(statistics.fmean(v),6) for g,v in c['groups'].items()}}
+                      for m,c in scores.items()}
+          report={'schema':'P1_LICENSED_CONSENSUS_MULTI_LEAGUE_RESEARCH_V1',
+                  'credit':'OddsIntel (oddsintel.app) CC BY-NC 4.0',
+                  'source_url':source,
+                  'source_commit':'622bd876667ce1d1b6e831e25b3a2b4ed5e1f9fc',
+                  'source_sha256':hashlib.sha256(open(f,'rb').read()).hexdigest(),
+                  'source_is_not_one_bookmaker':True,
+                  'source_prices_are_fair_margin_removed':True,
+                  'prematch_price_timestamp_not_independently_verified':True,
+                  'not_blind_forecast_and_no_production_promotion':True,
+                  'source_days':days,
+                  'raw_rows':raw_count,'accepted_full_seven_prices':len(rows),
+                  'excluded':dict(excluded),'competitions':len(set(r['competition'] for r in rows)),
+                  'fair_price_inverse_sum_by_market':{g:round(statistics.fmean(x),6)
+                      for g,x in overrounds.items()},'chrono_cutoff':cutoff,
+                  'train_n':len(training),'holdout_n':len(holdout),
+                  'training_fit_only_temperatures':params,
+                  'train_metrics':aggregate(training),
+                  'holdout_metrics':aggregate(holdout)}
+          with open('/tmp/p1_license_research_summary.json','w') as o:
+              json.dump(report,o,ensure_ascii=False,indent=2)
+          print('P1_LICENSED_RESULT_START')
+          print(json.dumps(report,ensure_ascii=False))
+          print('P1_LICENSED_RESULT_END')
+          PY
+      - name: Store aggregate only; NEVER upload raw third-party rows
+        uses: actions/upload-artifact@v4
+        with:
+          name: p1-noncommercial-consensus-aggregate
+          path: /tmp/p1_license_research_summary.json
+          retention-days: 30
