@@ -282,3 +282,20 @@ Açık engel:
 **C — CANLI:** Bu kuralın yeni bir iddaa ikinci PDF'si ile yeni kod üzerinde tam uçtan uca CI/canlı kabulü **henüz ayrı doğrulanmadı**. Tekli birleştirme ve yönlendirme kodu GitHub'da doğrulanmıştır; yeni gün gerçek uçtan uca geçişte C kabulü kaydedilecek.
 
 **Tek ayrıntı kaynağı:** `docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md`. Önceki tasarım genel PDF'si tekrar varsayılan gösterilemez.
+
+
+---
+
+## 21 Kasım 2026 — D-SECOND-ARCHIVE-001 — İkinci PDF ORAN + ASİSTAN YORUMU KALICI KAYIT
+
+**Kullanıcı onayı:** “Yapalım ortak ilerde dönüp bakarız ikinci PDF den sonra ki oran değişikliği senin yorumunu kaydedelim mutlaka.”
+
+**A / KARAR:** İkinci kullanıcı iddaa PDF'sindeki ilk-son MS 1/X/2, 2.5 Alt/Üst, KG Var/Yok oranları, model−marjsız-piyasa yüzdesi farkı, ikinci PDF SHA'sı, sabah model ve karar SHA'sı ve tekli raporun **asistan yorumunun tam metni**, maç bazlı ve **append-only** araştırma kaydı olacaktır. Maç sonucu ayrı sonradan eşlenir; yorumlara maç sonucu geriye yazılmaz. **D-ODDS-001** iki PDF tek mühür ve **D-OPER-006** onaylı tekli sayfa değişmez.
+
+**B / UYGULAMA:** `experiments/263/second_pdf_commentary_archive_263.py` birinci/ikinci PDF SHA, mühür, ilk-son fiyatlar, pazar farkı ve onaylı sayfada gösterilen yorumun aynı metnini maç bazlı JSON üretir; var olan dosyaya farklı içerik yazılmasını ve post-kickoff ikinci PDF incelemesini reddeder. `iddaa_pdf_last_review_263.py` hem yeni hem mevcut aynı ikinci PDF rotasında bu arşivi hazırlar. `check_active_decisions_263.py` bağlantıyı fail-closed doğrular. Birim testi: ilk kayıt, aynı içeriğe idempotent tekrar, değiştirilmiş içerikte blok, KO sonrası blok PASS. Ham iddaa kullanıcı PDF dosyası açık GitHub'a konmaz.
+
+**İlk kayıtlar:** 21 Kasım 2026 15.30 için Manchester City–Fulham, Southampton–Derby County, Millwall–QPR, Norwich–Cardiff. Dört özgün sabah forecast/decision SHA'sı GitHub üzerinden doğrulandı. Kaynak kullanıcı PDF'si ve daha önce kullanıcıya verilen dört-kutulu raporlarla karşılaştırılarak oranlar ve asistan yorumunun tam metni **araştırma dalına ayrı JSON dosyaları** olarak commit edildi. Bunlar sohbetten **geriye dönük aktarım**dır; GitHub'a geçmişte kickoff öncesi kaydedilmiş gibi gösterilemez.
+
+**C / KAYIT SINIRI:** Dört dosyanın GitHub varlığı doğrulanmıştır. Gelecekte yeni ikinci PDF'nin yerel kopyasında oluşan JSON'un uzak GitHub'a **ayrıca commit edilmesi gerekir**; yalnız yerel stage için “uzakta kalıcı kaydedildi” denmez. Yüzde/ana tercih/mühür değişmedi; ikinci PDF'nin futboldaki nedenselliği ispatlandı denmez.
+
+**Kanonik ayrıntı:** `docs/263_IKINCI_PDF_ORAN_YORUM_ARSIV_KARARI_20261121.md`. Aktif karar indeksi: `docs/263_AKTIF_KARARLAR.json`.
