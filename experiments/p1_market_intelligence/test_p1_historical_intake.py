@@ -42,6 +42,14 @@ class TestHistoricalIntake(unittest.TestCase):
     def test_untimed_opening(self):
         x=self.run_one(dict(self.row,observed_at_utc=''))
         self.assertIn('UNTIMESTAMPED',x['accepted'][0]['time_grade'])
+    def test_new_scope_accepts_any_external_league(self):
+        self.assertEqual(self.run_one(dict(self.row,league='USA_MLS'))['n_accepted'],1)
+
+    def test_optional_research_source_scope_still_works(self):
+        self.meta=dict(self.meta,allowed_leagues=['ENG1'])
+        self.assertEqual(self.run_one(dict(self.row,league='USA_MLS'))['n_rejected'],1)
+        self.assertEqual(self.run_one(self.row)['n_accepted'],1)
+
     def test_result_source_missing(self):
         x=self.run_one(dict(self.row,result_source=''))
         self.assertEqual(x['n_rejected'],1)
