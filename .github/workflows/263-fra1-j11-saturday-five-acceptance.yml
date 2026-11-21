@@ -1,0 +1,52 @@
+name: "263 FRA1 Ligue1 J11 five real Saturday fixtures acceptance"
+on:
+  push:
+    branches: [fix/263-fra1-j11-saturday-fixtures-20261121]
+  pull_request:
+    branches: [experiment/263-toplu-karsilastirma]
+permissions:
+  contents: read
+jobs:
+  official-j11:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Saturday J11 strict parser and previous source guards
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_fra1_j11_saturday_263.py experiments/263/test_sabah_official_fixture_gateway_263.py
+      - name: Live Ligue1 official fixture page requires all five exact times
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from official_page_lookup_263 import _default_fetch,parse_official_events,SOURCES
+          url,html=_default_fetch(SOURCES['FRA1'][0],'FRA1')
+          data=parse_official_events('FRA1',html,parser=SOURCES['FRA1'][2])
+          observed={(e['home'],e['away'],e['kickoff_utc']) for e in data}
+          expected={
+            ('OGC Nice','Paris Saint-Germain','2026-11-21T16:15:00+00:00'),
+            ('LOSC','Olympique Lyonnais','2026-11-21T19:45:00+00:00'),
+            ('RC Strasbourg Alsace','Stade Brestois 29','2026-11-21T19:45:00+00:00'),
+            ('AS Monaco','AJ Auxerre','2026-11-21T19:45:00+00:00'),
+            ('RC Lens','Toulouse FC','2026-11-21T19:45:00+00:00')}
+          print('SOURCE_URL',url,'PARSED',len(data))
+          print('SATURDAY_OBSERVED',sorted(observed))
+          assert expected.issubset(observed),'FRA1_OFFICIAL_J11_NOT_ALL_FIVE_TIMED'
+          PY
+      - name: Protect model maths, old SHA and historical data
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin experiment/263-toplu-karsilastirma
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- \
+            experiments/263/m4_integrated.py experiments/263/exp_263_batch.py \
+            experiments/263/model_first_decision_263.py \
+            experiments/263/model_first_selection_lock_20261121_v4.json \
+            data/results_only_263 forward_morning_263
