@@ -1,0 +1,226 @@
+{
+  "code": {
+    "B_C2_C3": "FROZEN_EXISTING_MODEL_FUNCTIONS",
+    "frozen_batch_sha256": "1a0c519b6c8f2947de43545fcd0c5d4e8abcc9a4f8b47f8372bee43f53beb96f",
+    "frozen_c2_sha256": "d3d1c2d4875aa52c2c2a3f631516e1425eb02273d1333c7e9eaffb7c8caae0a5",
+    "m4": "m4_venue_opponent_time_poisson_v1",
+    "m4_engine_sha256": "eac755e54086738f40d7f30a514b2c9bb789b2c428ffef4ee70bb2fd2b49bc45",
+    "m4_lock_sha256": "b195e435f8c3ac39afe91da42a63802b50e844304dd2f7c0fb02dc4c7c4e6f2b",
+    "quad_forward_sha256": "c0dcab9a671fc4ff6673d2215d89c7265a563a7c2431ca3230d2bdc4966cf4c3"
+  },
+  "created_at_utc": "2026-11-21T09:31:12.953007+00:00",
+  "data": {
+    "current_season_gap_check": {
+      "age_days": 14,
+      "betting_authorized": false,
+      "historical_overlap_matches_verified": 60,
+      "history_not_modified": true,
+      "last_completed_date": "2026-11-07",
+      "league": "ENG2",
+      "next_unplayed_provider_fixtures": 0,
+      "not_independent_federation_verified": true,
+      "provider_completed_before_target": 180,
+      "provider_last_result_date": "2026-11-07",
+      "provider_source_sha256": "bdd804d2f60d84045368c8dea5abd76b29ad369dadf3c6ef6547873b72f34e4d",
+      "provider_source_url": "https://www.football-data.co.uk/mmz4281/2627/E1.csv",
+      "schema": "263_MATCH_GAP_PUBLIC_PROVIDER_CHECK_V1",
+      "source_network_called": true,
+      "status": "BOUNDED_GAP_NO_MISSING_RESULTS_IN_PUBLIC_FEED_RESEARCH_ONLY",
+      "target_date": "2026-11-21",
+      "verified_at_utc": "2026-11-21T09:31:10.576467+00:00"
+    },
+    "cutoff_rule": "strictly_before_local_kickoff_date",
+    "full_match_policy_sha256": "41a82e1bb96909d9fbb7b10d2f397a9250ceb3007cee9b7d6b764ecfb1c43e99",
+    "human_source_acceptance": false,
+    "league_history_rows": 732,
+    "league_latest_result_date": "2026-11-07",
+    "research_shadow_unverified_source": false,
+    "snapshot_acceptance": "APPEND_ONLY_4617_PUBLIC_RESULTS_ONLY_RESEARCH_NOT_OFFICIAL_ID_VERIFIED",
+    "snapshot_sha256": "637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89",
+    "training_excluded_partial_match_ids": []
+  },
+  "fixture": {
+    "away_id": "723987e4-7eef-5a34-a3a1-4d8f02fb9f19",
+    "fixture_verification": "VERIFIED_BY_LIVE_OFFICIAL_GATE",
+    "home_id": "8ba3366b-c0ef-5a7b-b51a-e3d65442271b",
+    "kickoff_utc": "2026-11-21T12:30:00+00:00",
+    "league": "ENG2",
+    "match_local_date": "2026-11-21",
+    "official_source": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+    "source_checked_at_utc": "2026-11-21T09:31:12.953022+00:00"
+  },
+  "m4_learned_settings": {
+    "half_life_days": 360,
+    "ridge_shared": 4,
+    "ridge_venue": 48
+  },
+  "model_predictions": {
+    "B": {
+      "goals": {
+        "distribution": "legacy_truncated_poisson_0_to_10_normalized",
+        "lambda_away": 0.8850269066418668,
+        "lambda_home": 1.8149346741975476,
+        "markets": {
+          "1X2": {
+            "A": 0.17970712915662834,
+            "D": 0.227079598349916,
+            "H": 0.5932132724934557
+          },
+          "BTTS_NO": 0.5083438439829207,
+          "BTTS_YES": 0.49165615601707935,
+          "OVER_1.5": 0.751331791383481,
+          "OVER_2.5": 0.506364429965437,
+          "OVER_3.5": 0.28589694183599623,
+          "UNDER_1.5": 0.24866820861651895,
+          "UNDER_2.5": 0.49363557003456304,
+          "UNDER_3.5": 0.7141030581640038
+        },
+        "tail_mass": 3.3781993625803253e-06,
+        "top_scores": {
+          "0-0": 0.06720832181184523,
+          "1-0": 0.12197871365094524,
+          "1-1": 0.10795444361865013,
+          "2-0": 0.11069169845955715,
+          "2-1": 0.09796513147859616
+        }
+      },
+      "status": "AVAILABLE"
+    },
+    "C2": {
+      "goals": {
+        "correct_scores": [
+          {
+            "probability": 0.10204339745280554,
+            "score": "1-1"
+          },
+          {
+            "probability": 0.09889659553090778,
+            "score": "2-1"
+          },
+          {
+            "probability": 0.09175184940894467,
+            "score": "1-0"
+          },
+          {
+            "probability": 0.08892241699817774,
+            "score": "2-0"
+          },
+          {
+            "probability": 0.06389788953683427,
+            "score": "3-1"
+          }
+        ],
+        "lambda_away": 1.112167200009132,
+        "lambda_home": 1.938324242421404,
+        "markets": {
+          "12": 0.7805160195978142,
+          "1X": 0.7854070290917831,
+          "1X2": {
+            "A": 0.21459297090821688,
+            "D": 0.21948398040218575,
+            "H": 0.5659230486895973
+          },
+          "AWAY_OVER_0.5": 0.6711544857380219,
+          "AWAY_OVER_1.5": 0.30542329090571446,
+          "AWAY_OVER_2.5": 0.10204617144939361,
+          "BTTS_NO": 0.4254548229832176,
+          "BTTS_YES": 0.5745451770167824,
+          "HOME_OVER_0.5": 0.8560550353544835,
+          "HOME_OVER_1.5": 0.5770430208075872,
+          "HOME_OVER_2.5": 0.3066351449460457,
+          "MS1": 0.5659230486895973,
+          "MS2": 0.21459297090821688,
+          "MSX": 0.21948398040218575,
+          "OVER_0.5": 0.9526643440757228,
+          "OVER_1.5": 0.8082673307568792,
+          "OVER_2.5": 0.5880264040360489,
+          "OVER_3.5": 0.36407871662442753,
+          "OVER_4.5": 0.1932910906241127,
+          "UNDER_0.5": 0.04733565592427724,
+          "UNDER_1.5": 0.19173266924312082,
+          "UNDER_2.5": 0.4119735959639511,
+          "UNDER_3.5": 0.6359212833755725,
+          "UNDER_4.5": 0.8067089093758872,
+          "X2": 0.43407695131040264
+        },
+        "model": "INDEPENDENT_POISSON",
+        "probability_sum": 1.0,
+        "truncation_tail": 4.706235401386039e-13
+      },
+      "status": "AVAILABLE"
+    },
+    "C3": {
+      "goals": {
+        "distribution": "legacy_truncated_poisson_0_to_10_normalized",
+        "lambda_away": 1.1757992018624057,
+        "lambda_home": 1.7169142997806268,
+        "markets": {
+          "1X2": {
+            "A": 0.2613608845025231,
+            "D": 0.23818700942867388,
+            "H": 0.500452106068803
+          },
+          "BTTS_NO": 0.43276646601753643,
+          "BTTS_YES": 0.5672335339824636,
+          "OVER_1.5": 0.7842435331021377,
+          "OVER_2.5": 0.5523480817674005,
+          "OVER_3.5": 0.32874571408553427,
+          "UNDER_1.5": 0.21575646689786232,
+          "UNDER_2.5": 0.44765191823259953,
+          "UNDER_3.5": 0.6712542859144657
+        },
+        "tail_mass": 2.0534945738281962e-06,
+        "top_scores": {
+          "1-0": 0.09516121932187718,
+          "1-1": 0.11189048572691654,
+          "1-2": 0.06578037190685268,
+          "2-0": 0.08169182911914573,
+          "2-1": 0.09605318747697157
+        }
+      },
+      "status": "AVAILABLE"
+    },
+    "M4": {
+      "goals": {
+        "distribution": "independent_poisson",
+        "lambda_away": 1.0686948423472236,
+        "lambda_home": 1.721990090328233,
+        "markets": {
+          "1X2": {
+            "A": 0.23506426283265686,
+            "D": 0.23824432424077643,
+            "H": 0.5266914129265665
+          },
+          "BTTS_NO": 0.46078747542069987,
+          "BTTS_YES": 0.5392125245793001,
+          "OVER_1.5": 0.7673309470914552,
+          "OVER_2.5": 0.5283228839585092,
+          "OVER_3.5": 0.30599081710082354,
+          "UNDER_1.5": 0.23266905290854478,
+          "UNDER_2.5": 0.47167711604149076,
+          "UNDER_3.5": 0.6940091828991765
+        },
+        "tail_mass": 9.969802761133906e-14,
+        "top_scores": {
+          "0-1": 0.06559559056829253,
+          "1-0": 0.10569430341755903,
+          "1-1": 0.11295495692782785,
+          "2-0": 0.09100227154459108,
+          "2-1": 0.097253658241586
+        }
+      },
+      "status": "AVAILABLE",
+      "train_rows": 732
+    }
+  },
+  "payload_sha256": "ed00c85fafa030ab9527dc5861ff683379dc178e861e70886139690f398a6f49",
+  "pilot_restrictions": [
+    "No odds, EV, bet or production promotion",
+    "No first-half or corner estimates",
+    "C2 missing context is reported, never imputed",
+    "Any machine-stage shadow data is NOT human verified and is NOT part of accepted 96-cohort",
+    "Human-attested updated data is not independently reverified by this code"
+  ],
+  "schema": "quad_forward_263_v1",
+  "status": "EXPERIMENTAL_PREMATCH_FOUR_MODEL_NO_BETTING"
+}

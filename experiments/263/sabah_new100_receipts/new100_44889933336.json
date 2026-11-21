@@ -1,0 +1,214 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "25f64e3538ed17d5e06ddea167e134f4bfb3abdd5bbed808ad7ef253e277b076",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T09:31:16.786308+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 11,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "d7c22b59daf05a7a73ec1817d8957aaa55e82ee3599159faf6c28462f991b54f",
+  "new_count": 11,
+  "no_verified_odds": true,
+  "payload_sha256": "0221403cff999ba39ee92bdd27d87c55e418b95a2d9dded595204258ed1dc8c5",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "0d38735ce8c1639ae2d62b795d3019e8cd864505b08295fad20a5e4cffcf3bc3",
+      "decision_sha256": "99d20f29228ac7371df171f27b5c49095bfef4a2d597b089871a5ac5b8dbe773",
+      "fixture": "Southampton - Derby County",
+      "forecast_path": "forward_morning_263/2026-11-21/31dc6762ab5f7ae7bc0a30c9.json",
+      "forecast_sha256": "e03e6c162e2b8d77dc05ecf2199b0f5ad4282ac051cb9eba362fd4680a5c7de7",
+      "kickoff_utc": "2026-11-21T12:30:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "eced72ac9eda0493870c4b4af2de61c12fb57abbe910449a64b2f5c24f4de018",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "076b5997681e15a57f1bb78f0bf09678f1ede5067f88bc2a3a3efd12cfc2d195",
+      "decision_sha256": "02dfef79a1559cfee4d1d567d68cbdf61a9ea71abfffaedf6bca3cc8380c8032",
+      "fixture": "Millwall - Queens Park Rangers",
+      "forecast_path": "forward_morning_263/2026-11-21/8f809e4968bd6dc1da409ae6.json",
+      "forecast_sha256": "ed00c85fafa030ab9527dc5861ff683379dc178e861e70886139690f398a6f49",
+      "kickoff_utc": "2026-11-21T12:30:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "f10be4ce5d621353c5cd619a7244f67dc0d48ca8b2e8de0aeeee70ff3f24a282",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "082666269fc43e1be6ed84b3c0945755cf39c7ca3da7e7600d12bd7d78593187",
+      "decision_sha256": "c99d22ecd045e0235e1092b11f03bf9eaf97852a24e5d599c22787429d2e30ce",
+      "fixture": "Norwich City - Cardiff City",
+      "forecast_path": "forward_morning_263/2026-11-21/4bde94fc2cbd13dcd6f241f4.json",
+      "forecast_sha256": "8b1b0c82b3829ba0c3c488cc047cbe8529e62d669f59ef84ffd55f973f08433e",
+      "kickoff_utc": "2026-11-21T12:30:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "a4bdfb0437bf97062a48df0a067ba47f63638af4356381f3644c819f1316e66c",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "35eed1827b432312717687c48bd31fb6b8f8a015e8304b1916f725ac76f169fa",
+      "decision_sha256": "61367133891c55d2140273059a9ea2b7789cc5bbc2c16569c7443b184c0d01db",
+      "fixture": "West Ham United - Preston North End",
+      "forecast_path": "forward_morning_263/2026-11-21/470982dd321790bb1fb3830f.json",
+      "forecast_sha256": "f5a7f6aaa238ef1b25d32397ab6eb2fec3164c5e6b8ac368ffae2b818e20874d",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "156f235a2a5b7b5cbf92f546843dacc6e7588a364522599df667e8cef74af081",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "5aa5234da4cdf90bd3062f07313232ea2804df96900b60d082084d7ce544ae87",
+      "decision_sha256": "fe1085b35160f0922a38cbe5f17992c1d162a146358c08e18a5016ef7a967d02",
+      "fixture": "Lincoln City - Wrexham",
+      "forecast_path": "forward_morning_263/2026-11-21/da3773d16259e98b8fe2f29e.json",
+      "forecast_sha256": "f3ba81c6734e09e8f929297fb662ee6ac02dbf65fac5c02326c22d67413b3d4d",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "1fd1083ef35b1829a3f09826d8a7c3f9180d0ef28c678d0e87400dfa31b26a77",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "1bd161201f5288bd0a745d2a35b0a5ed4525f63ec2475d50282624a86e17f4dd",
+      "decision_sha256": "3033c90873e59b342cad25e34e01bf890a1a504e1680108e14846a5638982e1e",
+      "fixture": "Middlesbrough - Bristol City",
+      "forecast_path": "forward_morning_263/2026-11-21/e67f60e3fd7432924fc841b4.json",
+      "forecast_sha256": "7018e69b32d29798343d393da648935cee4336960ceb948386d9a031a89462af",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "bc5614e97ae8525c9c6312b67128ee8a9239815434d0a0b7e870d0777889296a",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "20dcbb3e1ad5b54497358ff8de91f934d9d48b9140f0aaefee1363fc30c9ffc8",
+      "decision_sha256": "aa0b4086851ca833532d7fdbff128081aa5b9c040bb12af35169f5e1dc1706e7",
+      "fixture": "Wolverhampton Wanderers - Charlton Athletic",
+      "forecast_path": "forward_morning_263/2026-11-21/fe86700ef4fda64c8b8fa872.json",
+      "forecast_sha256": "1e814968604fe45c4e398536536c3bd5344785cb2e7fd50d75c15051fd1187b8",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "074cfcdb0058b9e2411626bc3dbc1c281e0c4f846cfc14c669511794f1aaa547",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "fd39add63ab3498c285c76594080ef96f039146f53bf7cc18efb59f1953e34c4",
+      "decision_sha256": "917587daf8761200b023cb8dfe36ff6c05eb04d0fc1ca7907a82c1e9e892ae4b",
+      "fixture": "Swansea City - West Bromwich Albion",
+      "forecast_path": "forward_morning_263/2026-11-21/cc22c601d99db0652e57173b.json",
+      "forecast_sha256": "0fb9a411ad7fe5f80d668eb9263d82e0a82a34dae0a4ad9ade582de7e3f7414e",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "6a382085c47061080f4036ca0ad5657ffbde0a665b6ab3120681d4a9f5bd4744",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "66d3f76bc6f6746637997c376cc2ed9dcbde5267fd99e79e38353d0dab0bcee1",
+      "decision_sha256": "287cf0344cdf7981b31126de12e9c3e4b0ab19ab45aff110bb7ef6a9af8a1c8e",
+      "fixture": "Sheffield United - Watford",
+      "forecast_path": "forward_morning_263/2026-11-21/edbb4898b81dac43b9e84866.json",
+      "forecast_sha256": "0cc9f3a3c6cab4f05e6bb3145355dee9c0d460b4837f7d097e828f6160910de3",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "1a2a059d264c541741b3d0c1cff49eb273d5b91d9a9abc7ed3eb1ca9c515bfc2",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "667e9a6d9c37b3ce399492a6115fd529ceadd8cd0c937a486c1da867a16dd941",
+      "decision_sha256": "75707e59f7a45c5504169b2022d8d9220c8cf5480c1e14ce77b60ae5d3b4eb3d",
+      "fixture": "Bolton Wanderers - Portsmouth",
+      "forecast_path": "forward_morning_263/2026-11-21/37cc74f7f5cb3ee9ce42afb6.json",
+      "forecast_sha256": "42a336d7c2b034d4628054fd7b9e76663af565bed3eea3f2ef2bd1f14d259c54",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "2d1754a767bb071f77ae3af68f2c599f86ce0077e93aee73e1aac1ea2d45a33d",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "6615454caad232c027203302f69de47ca7c86cfdce1217ee262866eff76caf93",
+      "decision_sha256": "892c3103d3c9c349202765b433b705c54bac552c18a96c836705bca14ee3ca9e",
+      "fixture": "Stoke City - Birmingham City",
+      "forecast_path": "forward_morning_263/2026-11-21/c6cf76525c3e719132e8ad31.json",
+      "forecast_sha256": "52bd0538774374d8dca1e859801538357d687ef23518f7be1af970fa65e53738",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "mobile_sha256": "712d36651a768476f4c477c75ae77142a17520c7cc2235c3bc3fab0354c9588d",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}

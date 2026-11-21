@@ -1,0 +1,547 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T09:31:10.520288+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 11,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 11,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "ENG2": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+      "parsed_events": 11,
+      "source_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "Derby County",
+      "decision_sha256": "99d20f29228ac7371df171f27b5c49095bfef4a2d597b089871a5ac5b8dbe773",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/31dc6762ab5f7ae7bc0a30c9.json",
+      "forecast_sha256": "e03e6c162e2b8d77dc05ecf2199b0f5ad4282ac051cb9eba362fd4680a5c7de7",
+      "home": "Southampton",
+      "kickoff_utc": "2026-11-21T12:30:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Derby County",
+        "requested_home": "Southampton",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "3859533c-c10b-524b-a397-b77af7372482": "VERI_YETERSIZ",
+        "6c87a0db-ad9a-5e71-8d13-f7d07b8e4144": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "3859533c-c10b-524b-a397-b77af7372482": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "6c87a0db-ad9a-5e71-8d13-f7d07b8e4144": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Queens Park Rangers",
+      "decision_sha256": "02dfef79a1559cfee4d1d567d68cbdf61a9ea71abfffaedf6bca3cc8380c8032",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/8f809e4968bd6dc1da409ae6.json",
+      "forecast_sha256": "ed00c85fafa030ab9527dc5861ff683379dc178e861e70886139690f398a6f49",
+      "home": "Millwall",
+      "kickoff_utc": "2026-11-21T12:30:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Queens Park Rangers",
+        "requested_home": "Millwall",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "723987e4-7eef-5a34-a3a1-4d8f02fb9f19": "VERI_YETERSIZ",
+        "8ba3366b-c0ef-5a7b-b51a-e3d65442271b": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "723987e4-7eef-5a34-a3a1-4d8f02fb9f19": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "8ba3366b-c0ef-5a7b-b51a-e3d65442271b": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Cardiff City",
+      "decision_sha256": "c99d22ecd045e0235e1092b11f03bf9eaf97852a24e5d599c22787429d2e30ce",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/4bde94fc2cbd13dcd6f241f4.json",
+      "forecast_sha256": "8b1b0c82b3829ba0c3c488cc047cbe8529e62d669f59ef84ffd55f973f08433e",
+      "home": "Norwich City",
+      "kickoff_utc": "2026-11-21T12:30:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Cardiff City",
+        "requested_home": "Norwich City",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "a2f57044-1537-5485-8851-179a0f6eaa37": "VERI_YETERSIZ",
+        "f13c0daf-b3f9-5838-a214-376dcd77a334": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "a2f57044-1537-5485-8851-179a0f6eaa37": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f13c0daf-b3f9-5838-a214-376dcd77a334": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Preston North End",
+      "decision_sha256": "61367133891c55d2140273059a9ea2b7789cc5bbc2c16569c7443b184c0d01db",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/470982dd321790bb1fb3830f.json",
+      "forecast_sha256": "f5a7f6aaa238ef1b25d32397ab6eb2fec3164c5e6b8ac368ffae2b818e20874d",
+      "home": "West Ham United",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Preston North End",
+        "requested_home": "West Ham United",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "1c190104-8bcc-56bd-a5ad-efeafef3a141": "VERI_YETERSIZ",
+        "7ba6a3c4-555d-5302-9fbb-6dccaa04d43d": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1c190104-8bcc-56bd-a5ad-efeafef3a141": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "7ba6a3c4-555d-5302-9fbb-6dccaa04d43d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Wrexham",
+      "decision_sha256": "fe1085b35160f0922a38cbe5f17992c1d162a146358c08e18a5016ef7a967d02",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/da3773d16259e98b8fe2f29e.json",
+      "forecast_sha256": "f3ba81c6734e09e8f929297fb662ee6ac02dbf65fac5c02326c22d67413b3d4d",
+      "home": "Lincoln City",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Wrexham",
+        "requested_home": "Lincoln City",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "64d28a58-961a-57bc-b50b-46b4be8c020e": "VERI_YETERSIZ",
+        "f4eb50ff-0c4f-59ef-b29f-3bfa1b527645": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "64d28a58-961a-57bc-b50b-46b4be8c020e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f4eb50ff-0c4f-59ef-b29f-3bfa1b527645": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Bristol City",
+      "decision_sha256": "3033c90873e59b342cad25e34e01bf890a1a504e1680108e14846a5638982e1e",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/e67f60e3fd7432924fc841b4.json",
+      "forecast_sha256": "7018e69b32d29798343d393da648935cee4336960ceb948386d9a031a89462af",
+      "home": "Middlesbrough",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Bristol City",
+        "requested_home": "Middlesbrough",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "1700c1d6-185c-5f12-84ed-613b6830285f": "VERI_YETERSIZ",
+        "417a4d42-480e-56f3-9da4-c2d1a2926a1d": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1700c1d6-185c-5f12-84ed-613b6830285f": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "417a4d42-480e-56f3-9da4-c2d1a2926a1d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Charlton Athletic",
+      "decision_sha256": "aa0b4086851ca833532d7fdbff128081aa5b9c040bb12af35169f5e1dc1706e7",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/fe86700ef4fda64c8b8fa872.json",
+      "forecast_sha256": "1e814968604fe45c4e398536536c3bd5344785cb2e7fd50d75c15051fd1187b8",
+      "home": "Wolverhampton Wanderers",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Charlton Athletic",
+        "requested_home": "Wolverhampton Wanderers",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "b1cfc7c1-e2e7-5455-8695-9f8ccf2a9afb": "VERI_YETERSIZ",
+        "b3cb203e-2740-5208-bcfc-e2cc9117d4bc": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "b1cfc7c1-e2e7-5455-8695-9f8ccf2a9afb": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b3cb203e-2740-5208-bcfc-e2cc9117d4bc": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "West Bromwich Albion",
+      "decision_sha256": "917587daf8761200b023cb8dfe36ff6c05eb04d0fc1ca7907a82c1e9e892ae4b",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/cc22c601d99db0652e57173b.json",
+      "forecast_sha256": "0fb9a411ad7fe5f80d668eb9263d82e0a82a34dae0a4ad9ade582de7e3f7414e",
+      "home": "Swansea City",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "West Bromwich Albion",
+        "requested_home": "Swansea City",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "977174b7-0fc4-5c4e-a413-55bb007f355a": "VERI_YETERSIZ",
+        "d45802e4-e05e-5266-a206-e19c9d12863f": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "977174b7-0fc4-5c4e-a413-55bb007f355a": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "d45802e4-e05e-5266-a206-e19c9d12863f": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Watford",
+      "decision_sha256": "287cf0344cdf7981b31126de12e9c3e4b0ab19ab45aff110bb7ef6a9af8a1c8e",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/edbb4898b81dac43b9e84866.json",
+      "forecast_sha256": "0cc9f3a3c6cab4f05e6bb3145355dee9c0d460b4837f7d097e828f6160910de3",
+      "home": "Sheffield United",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Watford",
+        "requested_home": "Sheffield United",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "2316b187-cbb1-55df-bb33-707d37a1a31c": "VERI_YETERSIZ",
+        "bea340a4-401d-5098-9d5e-3f0a33a9aa79": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "2316b187-cbb1-55df-bb33-707d37a1a31c": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "bea340a4-401d-5098-9d5e-3f0a33a9aa79": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Portsmouth",
+      "decision_sha256": "75707e59f7a45c5504169b2022d8d9220c8cf5480c1e14ce77b60ae5d3b4eb3d",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/37cc74f7f5cb3ee9ce42afb6.json",
+      "forecast_sha256": "42a336d7c2b034d4628054fd7b9e76663af565bed3eea3f2ef2bd1f14d259c54",
+      "home": "Bolton Wanderers",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Portsmouth",
+        "requested_home": "Bolton Wanderers",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "31732df7-0f83-5e59-986c-29ee8b1bb125": "VERI_YETERSIZ",
+        "e934c36b-171e-52e1-ab9a-86a128cbc691": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "31732df7-0f83-5e59-986c-29ee8b1bb125": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e934c36b-171e-52e1-ab9a-86a128cbc691": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Birmingham City",
+      "decision_sha256": "892c3103d3c9c349202765b433b705c54bac552c18a96c836705bca14ee3ca9e",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/c6cf76525c3e719132e8ad31.json",
+      "forecast_sha256": "52bd0538774374d8dca1e859801538357d687ef23518f7be1af970fa65e53738",
+      "home": "Stoke City",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG2",
+      "official_source_evidence": {
+        "candidate_events_seen": 11,
+        "league": "ENG2",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "a353d7621a9cf1cb5b9bd60a795e627cec5abe93eed31c3efa2275a4e47fb7c6",
+        "page_url": "https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/",
+        "requested_away": "Birmingham City",
+        "requested_home": "Stoke City",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "efl_referee_j16_20261121"
+      },
+      "rotation": {
+        "1923b451-f0c7-54e7-a599-d0b211fa684e": "VERI_YETERSIZ",
+        "e6080aec-0f50-5a18-be0e-500e910329ee": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1923b451-f0c7-54e7-a599-d0b211fa684e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e6080aec-0f50-5a18-be0e-500e910329ee": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "25f64e3538ed17d5e06ddea167e134f4bfb3abdd5bbed808ad7ef253e277b076",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}
