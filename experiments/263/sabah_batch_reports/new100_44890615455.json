@@ -1,0 +1,218 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T09:39:55.324669+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 4,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 4,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "BEL1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "b93108f62e84ad3523d8c6de0ade9cb9233a55f7cb2c93352085153d283c041e",
+      "parsed_events": 9,
+      "source_url": "https://www.proleague.be/jpl-kalender!",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "STVV",
+      "decision_sha256": "1b2d7e1e5bf52d40e619b66a69afc8de1fe949fc1ac5cbe54bbc3fcc9f8ff945",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/c04cf4e4247e87076d50bd10.json",
+      "forecast_sha256": "7bd256ce645d1cfae64c3f8845e77f129a1e90ee474be0e6756d0f3d4c6f453d",
+      "home": "Sporting Charleroi",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "b93108f62e84ad3523d8c6de0ade9cb9233a55f7cb2c93352085153d283c041e",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "STVV",
+        "requested_home": "Sporting Charleroi",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "rotation": {
+        "004ff4be-4bde-5548-bd6e-b84b851b14a3": "VERI_YETERSIZ",
+        "562a223c-b91e-5b36-aca9-89af15514215": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "004ff4be-4bde-5548-bd6e-b84b851b14a3": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "562a223c-b91e-5b36-aca9-89af15514215": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "RAAL La Louvière",
+      "decision_sha256": "79b806c5238a2e97403ed1446229e64d5a79d673e8ac0064bf1cac3de9be6e02",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/a395cdfae954017d22dd0cef.json",
+      "forecast_sha256": "274fe39a4b938362f3355a0f1cc01aab7eb4eaccf61e3c1ebef4ec4329115d50",
+      "home": "KRC Genk",
+      "kickoff_utc": "2026-11-21T17:15:00+00:00",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "b93108f62e84ad3523d8c6de0ade9cb9233a55f7cb2c93352085153d283c041e",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "RAAL La Louvière",
+        "requested_home": "KRC Genk",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "rotation": {
+        "360960ec-271d-510a-9e6f-0b74d0562222": "VERI_YETERSIZ",
+        "77e47d4e-eed4-50b2-8a8a-6e5ceb31285a": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "360960ec-271d-510a-9e6f-0b74d0562222": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "77e47d4e-eed4-50b2-8a8a-6e5ceb31285a": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Club Brugge",
+      "decision_sha256": "886d9fd97f3a2c78516e4a254bedddb8a44a5a4311af5196ec90b5e1c8dd92b1",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/dca11d011332c8142065019b.json",
+      "forecast_sha256": "3b66e1ca3a397dc4ee060d57e2b7e8a80d42b882931a2202dac7b3d484b8d824",
+      "home": "KV Mechelen",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "b93108f62e84ad3523d8c6de0ade9cb9233a55f7cb2c93352085153d283c041e",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "Club Brugge",
+        "requested_home": "KV Mechelen",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "rotation": {
+        "9a359176-6fe4-534b-8510-982255d1626d": "VERI_YETERSIZ",
+        "9cdec74d-e405-576f-adbf-c5ef040290e5": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "9a359176-6fe4-534b-8510-982255d1626d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "9cdec74d-e405-576f-adbf-c5ef040290e5": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Royal Antwerp FC",
+      "decision_sha256": "e141889f33453b79968de80a17c268847b4b5c73066540b31a336801c5a68ce8",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/aef96935f147a408cc0a52aa.json",
+      "forecast_sha256": "60ec5321b871b902e1fa396f766d044e11de785b8792106619b0a0dd05b56ca2",
+      "home": "SV Zulte Waregem",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "BEL1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "BEL1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "b93108f62e84ad3523d8c6de0ade9cb9233a55f7cb2c93352085153d283c041e",
+        "page_url": "https://www.proleague.be/jpl-kalender!",
+        "requested_away": "Royal Antwerp FC",
+        "requested_home": "SV Zulte Waregem",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "belgium_proleague_nextjs_jpl"
+      },
+      "rotation": {
+        "88ea2377-315a-586e-aa7d-2a8c12d30089": "VERI_YETERSIZ",
+        "b1ebc57a-ab1a-53a4-8da7-f550b860737e": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "88ea2377-315a-586e-aa7d-2a8c12d30089": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b1ebc57a-ab1a-53a4-8da7-f550b860737e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "045b4be63a1d44d68cac7b43d0263a8dc561de2d378c76b9adfb9c4963530ba2",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}

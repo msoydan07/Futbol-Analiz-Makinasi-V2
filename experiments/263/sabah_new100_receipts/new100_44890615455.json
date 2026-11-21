@@ -1,0 +1,95 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "045b4be63a1d44d68cac7b43d0263a8dc561de2d378c76b9adfb9c4963530ba2",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T09:40:00.590078+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 4,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "2701c2672c44fecd2149075236f64049249ca6cc133dbe5d754cd7da918a878d",
+  "new_count": 4,
+  "no_verified_odds": true,
+  "payload_sha256": "96378749390946b5dd704181e9be15746ab7b51c39480092561f245fae51fe71",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "c5d05d0a6899d01f719173391c9d695fd6cb150cf58cd1129955262b8251d3cc",
+      "decision_sha256": "1b2d7e1e5bf52d40e619b66a69afc8de1fe949fc1ac5cbe54bbc3fcc9f8ff945",
+      "fixture": "Sporting Charleroi - STVV",
+      "forecast_path": "forward_morning_263/2026-11-21/c04cf4e4247e87076d50bd10.json",
+      "forecast_sha256": "7bd256ce645d1cfae64c3f8845e77f129a1e90ee474be0e6756d0f3d4c6f453d",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "BEL1",
+      "mobile_sha256": "678de2db33e5cf1a4f16aef5c767998bf3281aea1e5dd362846961a38a589ce5",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "8dc03859b13ffdc9ff35691278f17d659dafd5fc529228d7acfb1c5f396c4bf2",
+      "decision_sha256": "79b806c5238a2e97403ed1446229e64d5a79d673e8ac0064bf1cac3de9be6e02",
+      "fixture": "KRC Genk - RAAL La Louvière",
+      "forecast_path": "forward_morning_263/2026-11-21/a395cdfae954017d22dd0cef.json",
+      "forecast_sha256": "274fe39a4b938362f3355a0f1cc01aab7eb4eaccf61e3c1ebef4ec4329115d50",
+      "kickoff_utc": "2026-11-21T17:15:00+00:00",
+      "league": "BEL1",
+      "mobile_sha256": "612a7cf63d351c90e1e0f4d4d7a64e906bc5a68a6d6548f8662a27deb67fef09",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "94b7a2b278ab5b85fa2a1faf9ffcdadec3da259c9b717a9969ea039d8d4cf4f2",
+      "decision_sha256": "886d9fd97f3a2c78516e4a254bedddb8a44a5a4311af5196ec90b5e1c8dd92b1",
+      "fixture": "KV Mechelen - Club Brugge",
+      "forecast_path": "forward_morning_263/2026-11-21/dca11d011332c8142065019b.json",
+      "forecast_sha256": "3b66e1ca3a397dc4ee060d57e2b7e8a80d42b882931a2202dac7b3d484b8d824",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "BEL1",
+      "mobile_sha256": "ac75babb8dd6af4d887ad07d484207cdeb73b98a6bd9ef27a4a3ef132ce48aa2",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "3b0c0d4ce29d884db04f303a8f52abbc8a0767ebea4534785b107ffdde017af8",
+      "decision_sha256": "e141889f33453b79968de80a17c268847b4b5c73066540b31a336801c5a68ce8",
+      "fixture": "SV Zulte Waregem - Royal Antwerp FC",
+      "forecast_path": "forward_morning_263/2026-11-21/aef96935f147a408cc0a52aa.json",
+      "forecast_sha256": "60ec5321b871b902e1fa396f766d044e11de785b8792106619b0a0dd05b56ca2",
+      "kickoff_utc": "2026-11-21T19:45:00+00:00",
+      "league": "BEL1",
+      "mobile_sha256": "44f1191e23fb022a291576f85dd44a96158b2cc325949490200d5d6c39fc9b92",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}
