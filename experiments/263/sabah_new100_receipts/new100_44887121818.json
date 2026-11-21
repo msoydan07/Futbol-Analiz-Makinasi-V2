@@ -1,0 +1,95 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "48f656ace6a76814f23342644228b326950d4519c98ee61d21627e40f528de18",
+  "betting_authorized": false,
+  "blocked_count": 1,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T08:55:56.115235+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 5,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "7af30ed2f81c5faed7329ad49687ab7b835f14ab3876b5f709c30e47fd111279",
+  "new_count": 4,
+  "no_verified_odds": true,
+  "payload_sha256": "d834e470f1dff3b997f76ce9e5b757b55a091b1594ce065fe4b96866c7010d8b",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "8de85ab80c09f24213e02d66f93cfa4f8ec04a3e5e40f069755a5514c9fe52ca",
+      "decision_sha256": "87fc7c4edcaff21869677aadbe21be0c1508b33a99a90ee24cec577f392fc65a",
+      "fixture": "Feyenoord - Excelsior Rotterdam",
+      "forecast_path": "forward_morning_263/2026-11-21/c9b1b54e607358e8b96700f9.json",
+      "forecast_sha256": "d710c5f9cf5090e1711b3ad086ce067e1b10da3834d44bd8437f048956cf5ffd",
+      "kickoff_utc": "2026-11-21T17:45:00+00:00",
+      "league": "NED1",
+      "mobile_sha256": "32a498bd97838b1f27954ecf1a876d8d15755cdc682cd5380887989ebceaf890",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "3316269c852e41a503012c86e7140d2724502199c22ed7532e96cfc12bab048c",
+      "decision_sha256": "30554a63eda70ae60a11e38c742f4dae5dbd64ffca78946de3a8b54380b2ffbb",
+      "fixture": "FC Utrecht - SC Cambuur",
+      "forecast_path": "forward_morning_263/2026-11-21/f5018a6c78dd8b808f40043c.json",
+      "forecast_sha256": "904d324519e44458e0445ce2454c7fec350b4568077acb6ac4cb022aab733bb5",
+      "kickoff_utc": "2026-11-21T17:45:00+00:00",
+      "league": "NED1",
+      "mobile_sha256": "89badbfc3467954bc7ff441c6af0f66c379480d53c0e2f44876c40f3a58fcbed",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "e024a9e2ea8fd718621764c6854546f41d2ac5e11ea56da25a0f55d95d208137",
+      "decision_sha256": "08d8e6d4f8a1f77d7890f5e24bbadb99529420ce2b9eb5d84dd37ec90fc1b1cb",
+      "fixture": "Telstar - PEC Zwolle",
+      "forecast_path": "forward_morning_263/2026-11-21/4f3c237285508bea672ba71c.json",
+      "forecast_sha256": "2af529cad9b9206592f6edda2e606aa69a15f8be45f4cd6540a33fd5ca11a238",
+      "kickoff_utc": "2026-11-21T20:00:00+00:00",
+      "league": "NED1",
+      "mobile_sha256": "a6ef189a69f0eb82707f08d08f2d9424368e24bccf30ffd2d01b29a359da8959",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "9d9d93ca8ea7223cc2e3be5878e896eac234c6b74dff07b2f0f8797d3d41d89b",
+      "decision_sha256": "807371343288c6ca14994f4cc997b8bb51653f57cbefcbc4f650d303a06dc231",
+      "fixture": "FC Groningen - sc Heerenveen",
+      "forecast_path": "forward_morning_263/2026-11-21/57844284928b57f5bb492de1.json",
+      "forecast_sha256": "8fdc0b5f43ffa4848056e5fd52f42e23303c39ffd858d2f0ade15b2513a46c42",
+      "kickoff_utc": "2026-11-21T20:00:00+00:00",
+      "league": "NED1",
+      "mobile_sha256": "d673166acda1f95c8ffaa6df48027fe8cb4369e536437ecc550a85c4c6b30abe",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}
