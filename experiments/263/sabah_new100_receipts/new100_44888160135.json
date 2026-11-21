@@ -1,0 +1,95 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "a82d7b788c8a1edd2af3c487563643bc49640d9b794b54485eda2e66e9b8bc60",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T09:08:59.775875+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 4,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "587900799f7b27962a4eec675845958f0098395f96cb548fedcf825bcc230afb",
+  "new_count": 4,
+  "no_verified_odds": true,
+  "payload_sha256": "6b7845bdc31603a6ec4e6a1319079fdb63ab632b7f9e043252f47331cfe7b831",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "129ebf2576290da8f888157815ee1e0a61fbf441d1fe131341e84023155f3c21",
+      "decision_sha256": "43720e34707bb2d16faa992da8e4609458e95755e0d38630ed465eba049b9e8e",
+      "fixture": "Deportivo Alavés - RC Deportivo",
+      "forecast_path": "forward_morning_263/2026-11-21/5db5a8f7ef2bc784241bf5a4.json",
+      "forecast_sha256": "1c94a8345c50aeb9d47b0fe73fb422dfec1ad2f157e02ab714c22749bc595d8c",
+      "kickoff_utc": "2026-11-21T13:00:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "d910ef515a0fd9c41f794d6f9d7bf5b4724cb7f05e129e9257ca599e3a353fd6",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "85b1f387b3e1f4fbec1b77f78a3cff45f7014e8c4a3f579e9a5f94cc1a4e97dd",
+      "decision_sha256": "250efa5d25e4db5f724255a3153474e269afda4639aedcd86c0d4892d38779f4",
+      "fixture": "Rayo Vallecano - Valencia CF",
+      "forecast_path": "forward_morning_263/2026-11-21/b7b519ff8d609e74fbfb3e46.json",
+      "forecast_sha256": "d89718ab5331c6fc1cc0d7a8a1043ed1812313937e3154d9588ca6a288b7f6af",
+      "kickoff_utc": "2026-11-21T15:15:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "8d5599569981b90b9258e9086e8475d6a11fdb09e27c6fe6dfa5d6430302552b",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "74a5af8e1e36d566e1edb0c9c626fc14ad45dce74fa092132b4e2f6871dfa876",
+      "decision_sha256": "7528f0bf3d4c2ddadc2e874c4df5aa9471b979a47e10a5c373dde31f271218d4",
+      "fixture": "Sevilla FC - Real Betis",
+      "forecast_path": "forward_morning_263/2026-11-21/3eaf7d0cf1792f8fe1db952f.json",
+      "forecast_sha256": "76c06f770069a715fd1ed22ffaa2f3d1074ce6e8f73bc4ecb0916b8c2ed31eb8",
+      "kickoff_utc": "2026-11-21T17:30:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "f4d7a853fc0c0afcd8c6d81d15dc00547137f8171a2170a46f725b9d9a2ff4a0",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "bd3fbfd5fe6b111aa0ea001d7d030648cf222a38b5647e71a94c9f1ce86d5171",
+      "decision_sha256": "e00b03e746d2799230fdb18abe6597812d9932d25b4022a5a5788981cdf9213b",
+      "fixture": "Real Madrid - Celta",
+      "forecast_path": "forward_morning_263/2026-11-21/cefe1606c3cc3b240380586b.json",
+      "forecast_sha256": "048637f6650b8ad2c4f7d3e31d284cb10dbc2c9e813f62222b2cdc453d285a78",
+      "kickoff_utc": "2026-11-21T20:00:00+00:00",
+      "league": "ESP1",
+      "mobile_sha256": "7680cb61b628801a5c86454dd676c477ae23939630de22f71c6d0da7e77545f4",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}

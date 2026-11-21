@@ -1,0 +1,218 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T09:08:56.938151+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 4,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 4,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "ESP1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "d38601885661c2d41796ac57b973f0edbdb5f09106132855a52cc2f4989b4017",
+      "parsed_events": 10,
+      "source_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "RC Deportivo",
+      "decision_sha256": "43720e34707bb2d16faa992da8e4609458e95755e0d38630ed465eba049b9e8e",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/5db5a8f7ef2bc784241bf5a4.json",
+      "forecast_sha256": "1c94a8345c50aeb9d47b0fe73fb422dfec1ad2f157e02ab714c22749bc595d8c",
+      "home": "Deportivo Alavés",
+      "kickoff_utc": "2026-11-21T13:00:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "d38601885661c2d41796ac57b973f0edbdb5f09106132855a52cc2f4989b4017",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "RC Deportivo",
+        "requested_home": "Deportivo Alavés",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_j13_nov2026"
+      },
+      "rotation": {
+        "0e06d1f5-ca04-5138-bfbb-7c47db6bcba0": "VERI_YETERSIZ",
+        "b52b5283-f419-51ba-9c77-d8af65323cf6": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "0e06d1f5-ca04-5138-bfbb-7c47db6bcba0": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "b52b5283-f419-51ba-9c77-d8af65323cf6": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Valencia CF",
+      "decision_sha256": "250efa5d25e4db5f724255a3153474e269afda4639aedcd86c0d4892d38779f4",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/b7b519ff8d609e74fbfb3e46.json",
+      "forecast_sha256": "d89718ab5331c6fc1cc0d7a8a1043ed1812313937e3154d9588ca6a288b7f6af",
+      "home": "Rayo Vallecano",
+      "kickoff_utc": "2026-11-21T15:15:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "d38601885661c2d41796ac57b973f0edbdb5f09106132855a52cc2f4989b4017",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Valencia CF",
+        "requested_home": "Rayo Vallecano",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_j13_nov2026"
+      },
+      "rotation": {
+        "5f2c15a6-2ae6-5d02-be4e-2f0aad8a6329": "VERI_YETERSIZ",
+        "85146ecc-4e9b-5294-b887-3dfa8fbf4a43": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "5f2c15a6-2ae6-5d02-be4e-2f0aad8a6329": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "85146ecc-4e9b-5294-b887-3dfa8fbf4a43": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Real Betis",
+      "decision_sha256": "7528f0bf3d4c2ddadc2e874c4df5aa9471b979a47e10a5c373dde31f271218d4",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/3eaf7d0cf1792f8fe1db952f.json",
+      "forecast_sha256": "76c06f770069a715fd1ed22ffaa2f3d1074ce6e8f73bc4ecb0916b8c2ed31eb8",
+      "home": "Sevilla FC",
+      "kickoff_utc": "2026-11-21T17:30:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "d38601885661c2d41796ac57b973f0edbdb5f09106132855a52cc2f4989b4017",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Real Betis",
+        "requested_home": "Sevilla FC",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_j13_nov2026"
+      },
+      "rotation": {
+        "91862a7d-290b-50c5-9991-71ac9b47b872": "VERI_YETERSIZ",
+        "ec5b2a37-17d1-550d-af88-2f5a6b74a951": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "91862a7d-290b-50c5-9991-71ac9b47b872": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ec5b2a37-17d1-550d-af88-2f5a6b74a951": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Celta",
+      "decision_sha256": "e00b03e746d2799230fdb18abe6597812d9932d25b4022a5a5788981cdf9213b",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/cefe1606c3cc3b240380586b.json",
+      "forecast_sha256": "048637f6650b8ad2c4f7d3e31d284cb10dbc2c9e813f62222b2cdc453d285a78",
+      "home": "Real Madrid",
+      "kickoff_utc": "2026-11-21T20:00:00+00:00",
+      "league": "ESP1",
+      "official_source_evidence": {
+        "candidate_events_seen": 10,
+        "league": "ESP1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "d38601885661c2d41796ac57b973f0edbdb5f09106132855a52cc2f4989b4017",
+        "page_url": "https://www.laliga.com/iframes/external-consumer-broadcast",
+        "requested_away": "Celta",
+        "requested_home": "Real Madrid",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "laliga_broadcast_j13_nov2026"
+      },
+      "rotation": {
+        "62cb11a9-ee81-5d52-99f0-d04607fd248c": "VERI_YETERSIZ",
+        "6ad330c9-ad3c-5944-818d-c9a67a993f8e": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "62cb11a9-ee81-5d52-99f0-d04607fd248c": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "6ad330c9-ad3c-5944-818d-c9a67a993f8e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "a82d7b788c8a1edd2af3c487563643bc49640d9b794b54485eda2e66e9b8bc60",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}
