@@ -1,0 +1,41 @@
+name: P1 isolated market research checks
+
+on:
+  push:
+    branches:
+      - experiment/p1-market-intelligence-20261121
+    paths:
+      - experiments/p1_market_intelligence/**
+      - .github/workflows/p1-research-test.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  independent-p1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Mathematical regression tests
+        run: python -m unittest discover -s experiments/p1_market_intelligence -p 'test_*.py' -v
+      - name: Read-only archived real quotes diagnostic (no live odds, no wagers)
+        run: |
+          python experiments/p1_market_intelligence/p1_market.py --archive-dir experiments/263/second_pdf_commentary_archive_263/2026-11-21 --output /tmp/p1_diagnostic.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/p1_diagnostic.json'))
+          print('Archive price records:', x['total_archive_files'])
+          print('Full market price records:', x['full_quotes_analyzed'])
+          print('Excluded records:',len(x['excluded']))
+          print('Historical performance:',x['historical_outcome_comparison'])
+          assert x['total_archive_files']==12
+          assert x['full_quotes_analyzed']==7, x['excluded']
+          assert len(x['excluded'])==5
+          assert all('INCOMPLETE_FIRST_PDF_GROUP:OVER_UNDER_2_5' in v['reason'] for v in x['excluded'])
+          assert x['claims_of_better_predictive_accuracy'] is False
+          PY
