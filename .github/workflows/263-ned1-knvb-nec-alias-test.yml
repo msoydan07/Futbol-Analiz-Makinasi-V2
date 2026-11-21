@@ -1,0 +1,30 @@
+name: "263 NED1 KNVB NEC exact alias acceptance"
+on:
+  push:
+    branches: [fix/263-ned1-nec-knvb-alias-20261121]
+  pull_request:
+    branches: [experiment/263-toplu-karsilastirma]
+permissions:
+  contents: read
+jobs:
+  knvb-exact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Exact KNVB identity and current official page gates
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          set -euo pipefail
+          python -m unittest -v experiments/263/test_sabah_official_fixture_gateway_263.py experiments/263/test_sabah_official_nov7_sources_263.py
+      - name: Protect old forecasts, v4 lock and original historical data
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin experiment/263-toplu-karsilastirma
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- \
+            experiments/263/model_first_decision_263.py \
+            experiments/263/model_first_selection_lock_20261121_v4.json \
+            data/results_only_263 forward_morning_263

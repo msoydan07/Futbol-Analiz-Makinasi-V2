@@ -95,6 +95,16 @@ class GatewayTests(unittest.TestCase):
                              gate_runner=gate_runner,clock=lambda:NOW)
     self.assertEqual(g.lookup("ESP1","A","B")["status"],"NOT_VERIFIED")
     self.assertIsNone(g.coverage()["ESP1"]["page_sha256"])
+ def test_knvb_nec_short_name_exact_identity_no_fuzzy_guess(self):
+    pairs={"N.E.C. Nijmegen":"nijmegen","PSV":"psv"}
+    def strict(league,name):
+        if league!="NED1" or name not in pairs:raise ValueError("NO_IDENTITY")
+        return pairs[name]
+    g=OfficialFixtureGateway(fetcher=make_fetch("<p>none</p>",[]),
+        resolve_id=strict,gate_runner=gate_runner,clock=lambda:NOW)
+    self.assertTrue(g._same("NED1","N.E.C.","N.E.C. Nijmegen"))
+    self.assertFalse(g._same("NED1","N.E.C.","PSV"))
+    self.assertFalse(g._same("NED1","NEC GUESS","N.E.C. Nijmegen"))
  def test_wrong_order_is_blocked(self):
     called=[];g=self.init(ld("A","B"),called)
     self.assertNotEqual(g.lookup("ESP1","B","A")["status"],"VERIFIED")
