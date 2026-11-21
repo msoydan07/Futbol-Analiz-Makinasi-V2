@@ -130,6 +130,53 @@ jobs:
                          'main_hits':sum(c['hits']),'main_rate':round(statistics.fmean(c['hits']),6),
                          'brier_by_market':{g:round(statistics.fmean(v),6) for g,v in c['groups'].items()}}
                       for m,c in scores.items()}
+          # NEW: paired, event-wise uncertainty audit; resample calendar days,
+          # never pretend 535 within four days are independent calendar regimes.
+          import random
+          paired_rows=[]
+          for row in holdout:
+              sc0=score_observed(row['p0'],*row['score'])
+              sc1=score_observed(row['p1'],*row['score'])
+              pick0=best_choices(row['p0'])['main']
+              pick1=best_choices(row['p1'])['main']
+              hit0=int(row['truth'][pick0['family']]==pick0['choice'])
+              hit1=int(row['truth'][pick1['family']]==pick1['choice'])
+              paired_rows.append((row['day'],sc1['macro_brier']-sc0['macro_brier'],
+                                  sc1['macro_log_loss']-sc0['macro_log_loss'],
+                                  hit1-hit0,hit0,hit1))
+          blocks={}
+          for z in paired_rows: blocks.setdefault(z[0],[]).append(z)
+          assert len(blocks)>=3, ('INSUFFICIENT_TEST_DAYS',len(blocks))
+          days_holdout=sorted(blocks)
+          rng=random.Random(26320261121)
+          draws=[]
+          for k in range(2000):
+              sample_days=[rng.choice(days_holdout) for _ in days_holdout]
+              sample=[row for d in sample_days for row in blocks[d]]
+              draws.append([statistics.fmean(z[c] for z in sample) for c in (1,2,3)])
+          def day_boot_ci(idx):
+              a=sorted(sample[idx] for sample in draws)
+              return [round(a[int(.025*len(a))],7),round(a[int(.975*len(a))-1],7)]
+          discord_p0_only=sum(1 for z in paired_rows if z[4]==1 and z[5]==0)
+          discord_p1_only=sum(1 for z in paired_rows if z[4]==0 and z[5]==1)
+          n_discord=discord_p0_only+discord_p1_only
+          exact_p=min(1.0,2*sum(math.comb(n_discord,k) for k in range(min(discord_p0_only,discord_p1_only)+1))*(.5**n_discord)) if n_discord else 1.0
+          paired_holdout={
+              'comparison':'P1 minus P0; positive loss is worse for P1',
+              'test_days_count':len(days_holdout),
+              'test_days':days_holdout,
+              'n':len(paired_rows),
+              'delta_brier':round(statistics.fmean(z[1] for z in paired_rows),7),
+              'delta_log_loss':round(statistics.fmean(z[2] for z in paired_rows),7),
+              'delta_main_hit_rate':round(statistics.fmean(z[3] for z in paired_rows),7),
+              'paired_calendar_day_bootstrap_95pct_ci_brier':day_boot_ci(0),
+              'paired_calendar_day_bootstrap_95pct_ci_log_loss':day_boot_ci(1),
+              'paired_calendar_day_bootstrap_95pct_ci_main_hit':day_boot_ci(2),
+              'p0_correct_p1_wrong':discord_p0_only,
+              'p1_correct_p0_wrong':discord_p1_only,
+              'exact_mcnemar_p_value_unadjusted_for_day_clustering':round(exact_p,6),
+              'caution':'Only four holdout dates from one 13-day slice; wide and non-generalizable; no independent quotation-time certification.'
+          }
           report={'schema':'P1_LICENSED_CONSENSUS_MULTI_LEAGUE_RESEARCH_V1',
                   'credit':'OddsIntel (oddsintel.app) CC BY-NC 4.0',
                   'source_url':source,
@@ -147,7 +194,8 @@ jobs:
                   'train_n':len(training),'holdout_n':len(holdout),
                   'training_fit_only_temperatures':params,
                   'train_metrics':aggregate(training),
-                  'holdout_metrics':aggregate(holdout)}
+                  'holdout_metrics':aggregate(holdout),
+                  'paired_holdout':paired_holdout}
           with open('/tmp/p1_license_research_summary.json','w') as o:
               json.dump(report,o,ensure_ascii=False,indent=2)
           print('P1_LICENSED_RESULT_START')
