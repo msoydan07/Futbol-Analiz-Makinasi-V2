@@ -268,3 +268,17 @@ Açık engel:
 **Bugünkü somut araştırma yönü:** MS=M4 (mevcut korunur), 2.5 Alt/Üst=M4+xG **aday**, KG=M4 (mevcut korunur). Eski dört-model 242 karşılaştırması KG'de C3'ün daha düşük hata verdiğine işaret ediyor ama terfi kanıtı yok. Özel xG tarihsel yayımlanma sürümü as-of teyidi ve kör sonraki-maç kanıtı olmadığı için bu karar **üretime otomatik terfi değildir**.
 
 **Kilitli piyasa sözleşmesi:** D-MARKET-006 uyarınca oranlar beşinci bağımsız referanstır; model-aile seçiminde, ana/alternatif/PAS'ta hiçbir etkisi yoktur. Önceki araştırma dosyasındaki EV şartı yürürlükten kalkmıştır.
+
+---
+
+## 21 Kasım 2026 — D-OPER-006 — İkinci PDF tekli şablonu KALICI ve KANONİK
+
+**Kullanıcı talebi / neden:** Aynı gün Championship ikinci PDF için ilk hazırlanmış serbest dört bölümlü sunum onaylanan simetrik dört kutulu tekli rapor değildi. Kullanıcı düzeltmeyi açıkça onayladı ve "ikinci PDF de bu tasarım olsun, her seferinde düzeltme olmasın" dedi. Bu, ikinci PDF için eski D-OPER-005'in muğlak kalan tekli sunum kısmının yerini alır; sabah altı kartlı toplu rapor kuralı değişmez.
+
+**A — KARAR ALINDI:** Her ikinci PDF'de lig ayırmadan yalnız onaylı A4 simetrik tekli ekranı. Bir maç = bir sayfa; birden çok maç = tek çok sayfalı tekli rapor. Dört kutu: MAÇ BİLGİSİ, ANA TAHMİN, ORAN KARŞILAŞTIRMASI, YORUM. Sabah ana tercih/alternatif/yüzdeler ve SHA değişmez. İlk-son yedi iddaa oranı, marjsız piyasa ve güncel fark ayrı; doğrulanmamış ilk 11/oyuncu nedeni uydurulmaz. Tasarım: beyaz/siyah, ince simetrik yuvarlatılmış kenarlar, kırmızı yalnız fark ve alternatif.
+
+**B — KODA İŞLENDİ:** `experiments/263/iddaa_pdf_approved_layout_263.py` tek dört-kutulu sayfayı hem bağımsız PDF'lere hem `tekli_rapor.pdf` çok sayfalı dosyasına çiziyor. `experiments/263/iddaa_pdf_last_review_263.py` artık `pdf_report` olarak **yalnız `tekli_rapor.pdf`** döndürüyor; eski genel `review.pdf` arşiv artifaktı olarak `technical_legacy_pdf` adıyla kalıyor. `check_active_decisions_263.py` bu yönlendirmeyi ve aktif `D-OPER-006` kararını fail-closed denetler. Sayısal modeller ve eski mühürler değiştirilmedi.
+
+**C — CANLI:** Bu kuralın yeni bir iddaa ikinci PDF'si ile yeni kod üzerinde tam uçtan uca CI/canlı kabulü **henüz ayrı doğrulanmadı**. Tekli birleştirme ve yönlendirme kodu GitHub'da doğrulanmıştır; yeni gün gerçek uçtan uca geçişte C kabulü kaydedilecek.
+
+**Tek ayrıntı kaynağı:** `docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md`. Önceki tasarım genel PDF'si tekrar varsayılan gösterilemez.
