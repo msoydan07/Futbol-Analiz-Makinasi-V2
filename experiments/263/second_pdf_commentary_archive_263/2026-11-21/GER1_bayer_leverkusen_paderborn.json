@@ -1,0 +1,95 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": false,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_morning_sha_seal": true,
+    "post_kickoff_source_edit_forbidden": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "causality_of_odds_move_not_proven": true,
+    "football_facts_attribution": {
+      "description": "Bundesliga.com: Leverkusen 20 gol, Schick 8 gol; Paderborn 4 maç yenilgisiz; ilk 11 tahmini.",
+      "source": "bundesliga.com",
+      "url": "https://www.bundesliga.com/en/bundesliga/matchday/2026-2027/10/bayer-04-leverkusen-vs-sc-paderborn-07/liveticker/"
+    },
+    "lineups_no_fabrication": true,
+    "pdf_sha256": "fee3bcc37dcb90348cfae1539b8fbcbcdfd8f5300029e441f8117fdea4871783",
+    "source": "Bundesliga 17:30 onaylı dört kutulu tekli PDF",
+    "text_verbatim": "Sabah mühürlü MS 1 (%63,9) aynı kalıyor. Leverkusen galibiyet fiyatı 1,15'ten 1,18'e yükseldi; marjsız piyasa beklentisi %75,2'den yaklaşık %73,0'a indi. Bundesliga maç önü verisinde Leverkusen 9 maçta 20 gol attı; Patrik Schick bunların 8'ini kaydetti. Paderborn ise son dört maçta yenilmedi ve deplasmanda dirençli bir profil sergiliyor. Resmî ilk 11 henüz doğrulanmış görünmüyor. Paderborn'un formu, piyasanın ev sahibi lehine biraz geri çekilmesiyle uyumlu olabilir; ancak bu hareketin kanıtlanmış nedeni değil."
+  },
+  "match": {
+    "away": "SC Paderborn",
+    "date_tr": "2026-11-21",
+    "home": "Bayer Leverkusen",
+    "kickoff_tr": "17:30",
+    "league": "GER1"
+  },
+  "original_seal": {
+    "alternative_market": "BTTS_YES",
+    "alternative_probability": 0.5868953999,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/3948a6b6b1eb0d5d47992794/decision.json",
+    "decision_sha256": "dec8e52261e5e3e3d479f5dc320db0c2f593c3181136cc6446c30f3ca9e5c453",
+    "forecast_path": "forward_morning_263/2026-11-21/3948a6b6b1eb0d5d47992794.json",
+    "forecast_sha256": "eae33198ef4ebcce808240e0002c3ccbccc98fa1706beee5544d98a40f1f7dea",
+    "main_market": "MS1",
+    "main_probability": 0.6386705539,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "LIVE_SECOND_PDF_OBSERVATION_SOURCE_COLLECTED_BEFORE_KICKOFF",
+  "record_sha256": "4a310d026b0ec3e1f8a9a4a32e771810a84c34a2efbf652e45ffeb529a5804a0",
+  "recorded_at_utc": "2026-11-21T14:08:39.751686+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.7521762356,
+    "main_market_no_vig_second": 0.7299153603,
+    "main_market_price_first": 1.15,
+    "main_market_price_second": 1.18,
+    "main_no_vig_change_pp": -2.226088,
+    "main_price_delta": 0.03,
+    "our_probability_minus_second_market_pp": -9.124481,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.42,
+          2.19
+        ],
+        "before": [
+          1.44,
+          2.14
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          1.18,
+          5.75,
+          7.16
+        ],
+        "before": [
+          1.15,
+          6.18,
+          8.02
+        ]
+      },
+      "UNDER_OVER_2_5": {
+        "after": [
+          3.2,
+          1.18
+        ],
+        "before": [
+          3.34,
+          1.17
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "7ed2cfd49be26a6c5a3e364bd09cefa4f004b8911142b259a56a6c3147ad06d1",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "1496c1ba3a78579a595c43f7f4a8662d4354841741faf17b9b24f69ab3de8574"
+  }
+}
