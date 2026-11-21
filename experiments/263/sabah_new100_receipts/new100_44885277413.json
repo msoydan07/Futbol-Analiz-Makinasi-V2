@@ -1,0 +1,146 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "23c52e5f7587f4bf15778cd48d1962df421363fbe4ecb3394b45bdae3683bc8a",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T08:31:43.175184+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 7,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "f98737d48e55efaf338477e0d49ef7f800b24de124c5040bec053c4312f362fd",
+  "new_count": 7,
+  "no_verified_odds": true,
+  "payload_sha256": "e2595876e0e97940743968af423dc786dbdb33e70cedaeb96bab3af1792a989d",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "423a6ad1b931358bc27383afde3d6741e83c09c3c7b3e95b5f250b5708763cf5",
+      "decision_sha256": "5d896c07090e6b5a86bedd9d8fb278700b8b0bc353a98f67b17b87091db4783e",
+      "fixture": "Manchester City - Fulham",
+      "forecast_path": "forward_morning_263/2026-11-21/2e1100978dd9846aa42d4cd9.json",
+      "forecast_sha256": "c7098539d39d307fd065e9d547cc245dc7cef1da08d595ab5766ad350b030945",
+      "kickoff_utc": "2026-11-21T12:30:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "64ee49c08c8a0ca8beeb857711e010ae4a8303e1deaa6518d502e84f10da0233",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "e34928821a4dde334b0ca0691f6028f8c91c9af0346c24baf42c7121513ecfb9",
+      "decision_sha256": "5f7656af76ce6c6c4811c160d591d5509e783711d7c6c8a20e8465ac4e61ad87",
+      "fixture": "Coventry City - Crystal Palace",
+      "forecast_path": "forward_morning_263/2026-11-21/56b07ab81157a89db5e23afa.json",
+      "forecast_sha256": "5de3118c4abe3f444175b33b20dc74cd22fa1a08f0520bfc4824bc86eef6ec9c",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "3de1f27a1348527ac6ce185d57641e4408cc8596cc43f1c3d086dce42693aedd",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "6e3070a4cb032aa7ebf8c7c216c398c37fe92ae600c100ba8a73be6371949f1e",
+      "decision_sha256": "a38a020e74885ec6c67d05ef1f48283fcc6178efdbaddfa75fc9975d279adea3",
+      "fixture": "AFC Bournemouth - Nottingham Forest",
+      "forecast_path": "forward_morning_263/2026-11-21/4b10759ce2320403fbdf0824.json",
+      "forecast_sha256": "bb69618666802b201d437aa166d2cb2a4e7a939fcc2555f1e25f9408b9e1f752",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "517e0ae2906e7ca653bc9a2084ee8371be2f011d53d6ba4ab4a7033f6b655f07",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "361ea9abaffe638c810f214b185c01cf290d84701f8953c685197f29c93ad4f2",
+      "decision_sha256": "551ec636b249f908cd5211df6e96a46f439bc2d7b2082d803ecbdbb09063bc77",
+      "fixture": "Aston Villa - Sunderland",
+      "forecast_path": "forward_morning_263/2026-11-21/77d40878e9dd45156803fdb5.json",
+      "forecast_sha256": "49eb4e1396cb8f54c7f968e8b5b278f40e8512a58a89f032b169882b5e32c74f",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "1102ce82c418f88484e05bdec47350453e4ce9fc3198ba8de18f9de1704886f4",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "92a6c21a62f02ae6b95ac9dd510dea8f06a97fdcdcb7e47e13e89831d9e5dc5b",
+      "decision_sha256": "31fb352cd17a177d2495cac89c35698f84992e2ff6c91cd558372f3376727602",
+      "fixture": "Tottenham Hotspur - Ipswich Town",
+      "forecast_path": "forward_morning_263/2026-11-21/7933e5c9f54f8e8d652d92b0.json",
+      "forecast_sha256": "4c55f004970e0956928377d693f52994aa06e2731c83a85ac43a6bdcdf08ed35",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "e2b994bd69a5777f11e43df660fae8890ee47e8c876392090882898f3ee4d8f0",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "91769706c07bcc4544be938863ce36a470a694b5160ab2244474709333413fa7",
+      "decision_sha256": "2747c0a7559466d4f8949596331121367d021107239f98e8cb89d4a5ce1169a5",
+      "fixture": "Chelsea - Leeds United",
+      "forecast_path": "forward_morning_263/2026-11-21/de0e30edac7661b60a9ca4c0.json",
+      "forecast_sha256": "ebb6aa3ddb0ae4ca8dfc29976226c0c9bc7cb4efc633a65c81300b844a0bc378",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "696b0dd67d18845f78ea57152de26cb19a8caec61d9f65839bc7fb32bbf90f98",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "9f72122b6aea26853db945bd5377168ce298ef1a646908e2a8f8c77ec4469662",
+      "decision_sha256": "b679c1d8f182f07153849eb68e6ea7a64d8e3b44ac409dcc2baee53fcaa0559e",
+      "fixture": "Newcastle United - Arsenal",
+      "forecast_path": "forward_morning_263/2026-11-21/4714a066fef08d752a530091.json",
+      "forecast_sha256": "aea950f815d4f2f62e91239554ebd6a8e5edead6880e66e6a97915ab070e09e0",
+      "kickoff_utc": "2026-11-21T17:30:00+00:00",
+      "league": "ENG1",
+      "mobile_sha256": "f312fa2c238c950f49babc2a9c50785cd6784cadae438dffceafa2c768a94812",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}

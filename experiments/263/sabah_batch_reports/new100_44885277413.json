@@ -1,0 +1,471 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T08:31:38.625152+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 7,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 7,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "ENG1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "823a021d000b086a0191ede4e888a8f7c97ea2e1cfb2efb9c0141877b896e298",
+      "parsed_events": 30,
+      "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "Fulham",
+      "decision_sha256": "5d896c07090e6b5a86bedd9d8fb278700b8b0bc353a98f67b17b87091db4783e",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/2e1100978dd9846aa42d4cd9.json",
+      "forecast_sha256": "c7098539d39d307fd065e9d547cc245dc7cef1da08d595ab5766ad350b030945",
+      "home": "Manchester City",
+      "kickoff_utc": "2026-11-21T12:30:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "823a021d000b086a0191ede4e888a8f7c97ea2e1cfb2efb9c0141877b896e298",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Fulham",
+        "requested_home": "Manchester City",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "3b2f5981-4bcd-5794-b3f5-c7b52429a332": "VERI_YETERSIZ",
+        "f7ba382d-cc35-5b2b-953b-ec56ef312010": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "3b2f5981-4bcd-5794-b3f5-c7b52429a332": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 193.6,
+              "opponent": "dbb1abd7-b219-5f87-b63e-04289b4dda45",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-29T14:05:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 193.6,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f7ba382d-cc35-5b2b-953b-ec56ef312010": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 196.0,
+              "opponent": "5b218a5c-83ce-5c00-879b-1a8d5b70c572",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-29T16:30:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 196.0,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Crystal Palace",
+      "decision_sha256": "5f7656af76ce6c6c4811c160d591d5509e783711d7c6c8a20e8465ac4e61ad87",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/56b07ab81157a89db5e23afa.json",
+      "forecast_sha256": "5de3118c4abe3f444175b33b20dc74cd22fa1a08f0520bfc4824bc86eef6ec9c",
+      "home": "Coventry City",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "823a021d000b086a0191ede4e888a8f7c97ea2e1cfb2efb9c0141877b896e298",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Crystal Palace",
+        "requested_home": "Coventry City",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "4090fd8e-e904-56ad-a458-55ee6831441c": "VERI_YETERSIZ",
+        "f4766b24-4533-540f-ab07-af3be2f16914": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "4090fd8e-e904-56ad-a458-55ee6831441c": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 168.0,
+              "opponent": "e77c3788-0016-55f9-9435-1ca3bd9f88b0",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-28T15:00:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 168.0,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "f4766b24-4533-540f-ab07-af3be2f16914": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 191.1,
+              "opponent": "beb4f31c-567e-5df8-8305-557d179cdbba",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-29T14:05:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 191.1,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Nottingham Forest",
+      "decision_sha256": "a38a020e74885ec6c67d05ef1f48283fcc6178efdbaddfa75fc9975d279adea3",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/4b10759ce2320403fbdf0824.json",
+      "forecast_sha256": "bb69618666802b201d437aa166d2cb2a4e7a939fcc2555f1e25f9408b9e1f752",
+      "home": "AFC Bournemouth",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "823a021d000b086a0191ede4e888a8f7c97ea2e1cfb2efb9c0141877b896e298",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Nottingham Forest",
+        "requested_home": "AFC Bournemouth",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "01a8f309-8c6f-5cf2-aafc-4909a6b5a1f1": "VERI_YETERSIZ",
+        "dbb1abd7-b219-5f87-b63e-04289b4dda45": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "01a8f309-8c6f-5cf2-aafc-4909a6b5a1f1": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 149.0,
+              "opponent": "331335be-3469-59aa-8083-32e2637c064e",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-27T20:00:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 149.0,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "dbb1abd7-b219-5f87-b63e-04289b4dda45": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 191.1,
+              "opponent": "3b2f5981-4bcd-5794-b3f5-c7b52429a332",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-29T14:05:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 191.1,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Sunderland",
+      "decision_sha256": "551ec636b249f908cd5211df6e96a46f439bc2d7b2082d803ecbdbb09063bc77",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/77d40878e9dd45156803fdb5.json",
+      "forecast_sha256": "49eb4e1396cb8f54c7f968e8b5b278f40e8512a58a89f032b169882b5e32c74f",
+      "home": "Aston Villa",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "823a021d000b086a0191ede4e888a8f7c97ea2e1cfb2efb9c0141877b896e298",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Sunderland",
+        "requested_home": "Aston Villa",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "54562038-3366-538d-a2cb-96301351a0ab": "VERI_YETERSIZ",
+        "ae84a5fa-13c8-5d19-9151-4624f1159182": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "54562038-3366-538d-a2cb-96301351a0ab": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 191.1,
+              "opponent": "354a2ed8-e82f-5373-bca8-1d9ac1accf90",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-29T14:05:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 191.1,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ae84a5fa-13c8-5d19-9151-4624f1159182": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 170.5,
+              "opponent": "28ce5115-c798-51cd-8aea-22ac5d6ffef0",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-28T17:30:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 170.5,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Ipswich Town",
+      "decision_sha256": "31fb352cd17a177d2495cac89c35698f84992e2ff6c91cd558372f3376727602",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/7933e5c9f54f8e8d652d92b0.json",
+      "forecast_sha256": "4c55f004970e0956928377d693f52994aa06e2731c83a85ac43a6bdcdf08ed35",
+      "home": "Tottenham Hotspur",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "823a021d000b086a0191ede4e888a8f7c97ea2e1cfb2efb9c0141877b896e298",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Ipswich Town",
+        "requested_home": "Tottenham Hotspur",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "28ce5115-c798-51cd-8aea-22ac5d6ffef0": "VERI_YETERSIZ",
+        "354a2ed8-e82f-5373-bca8-1d9ac1accf90": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "28ce5115-c798-51cd-8aea-22ac5d6ffef0": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 170.5,
+              "opponent": "ae84a5fa-13c8-5d19-9151-4624f1159182",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-28T17:30:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 170.5,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "354a2ed8-e82f-5373-bca8-1d9ac1accf90": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 191.1,
+              "opponent": "54562038-3366-538d-a2cb-96301351a0ab",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-29T14:05:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 191.1,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Leeds United",
+      "decision_sha256": "2747c0a7559466d4f8949596331121367d021107239f98e8cb89d4a5ce1169a5",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/de0e30edac7661b60a9ca4c0.json",
+      "forecast_sha256": "ebb6aa3ddb0ae4ca8dfc29976226c0c9bc7cb4efc633a65c81300b844a0bc378",
+      "home": "Chelsea",
+      "kickoff_utc": "2026-11-21T15:00:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "823a021d000b086a0191ede4e888a8f7c97ea2e1cfb2efb9c0141877b896e298",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Leeds United",
+        "requested_home": "Chelsea",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "331335be-3469-59aa-8083-32e2637c064e": "VERI_YETERSIZ",
+        "e77c3788-0016-55f9-9435-1ca3bd9f88b0": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "331335be-3469-59aa-8083-32e2637c064e": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 149.0,
+              "opponent": "01a8f309-8c6f-5cf2-aafc-4909a6b5a1f1",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-27T20:00:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 149.0,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e77c3788-0016-55f9-9435-1ca3bd9f88b0": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 168.0,
+              "opponent": "4090fd8e-e904-56ad-a458-55ee6831441c",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-28T15:00:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 168.0,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Arsenal",
+      "decision_sha256": "b679c1d8f182f07153849eb68e6ea7a64d8e3b44ac409dcc2baee53fcaa0559e",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/4714a066fef08d752a530091.json",
+      "forecast_sha256": "aea950f815d4f2f62e91239554ebd6a8e5edead6880e66e6a97915ab070e09e0",
+      "home": "Newcastle United",
+      "kickoff_utc": "2026-11-21T17:30:00+00:00",
+      "league": "ENG1",
+      "official_source_evidence": {
+        "candidate_events_seen": 30,
+        "league": "ENG1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "823a021d000b086a0191ede4e888a8f7c97ea2e1cfb2efb9c0141877b896e298",
+        "page_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+        "requested_away": "Arsenal",
+        "requested_home": "Newcastle United",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "epl_nov26_confirmed"
+      },
+      "rotation": {
+        "5b218a5c-83ce-5c00-879b-1a8d5b70c572": "VERI_YETERSIZ",
+        "624547ca-7438-532c-913b-0134501671b2": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "5b218a5c-83ce-5c00-879b-1a8d5b70c572": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 191.0,
+              "opponent": "f7ba382d-cc35-5b2b-953b-ec56ef312010",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-29T16:30:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 191.0,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "624547ca-7438-532c-913b-0134501671b2": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 188.6,
+              "opponent": "383619c8-7306-5814-a1c1-f7a2299da9ed",
+              "source_url": "https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november",
+              "utc": "2026-11-29T14:05:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 188.6,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "23c52e5f7587f4bf15778cd48d1962df421363fbe4ecb3394b45bdae3683bc8a",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}

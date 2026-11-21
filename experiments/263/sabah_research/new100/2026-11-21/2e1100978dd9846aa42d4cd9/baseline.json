@@ -1,0 +1,25 @@
+{
+  "created_at_utc": "2026-11-21T08:31:38.673737+00:00",
+  "forecast_created_at_utc": "2026-11-21T08:31:38.673737+00:00",
+  "forecast_sha256": "c7098539d39d307fd065e9d547cc245dc7cef1da08d595ab5766ad350b030945",
+  "historical_match_count": 480,
+  "last_result_date": "2026-11-08",
+  "league": "ENG1",
+  "markets": {
+    "BTTS_NO": 0.45435684647302904,
+    "BTTS_YES": 0.5456431535269709,
+    "MS1": 0.4244306418219462,
+    "MS2": 0.3022774327122153,
+    "MSX": 0.2732919254658385,
+    "OVER_1.5": 0.7800829875518672,
+    "OVER_2.5": 0.533195020746888,
+    "OVER_3.5": 0.29045643153526973,
+    "UNDER_1.5": 0.21991701244813278,
+    "UNDER_2.5": 0.46680497925311204,
+    "UNDER_3.5": 0.7095435684647303
+  },
+  "method": "PAST_RESULTS_LEAGUE_MARKET_RATE",
+  "payload_sha256": "423a6ad1b931358bc27383afde3d6741e83c09c3c7b3e95b5f250b5708763cf5",
+  "schema": "263_asof_market_baseline_v2",
+  "source_snapshot_sha256": "637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89"
+}
