@@ -17,7 +17,7 @@ SCHEMA = 'P1_HISTORICAL_ACCEPTANCE_RESEARCH_V1'
 FIELDS = ('league','match_date','kickoff_utc','home','away','MS1','MSX','MS2',
           'UNDER_2.5','OVER_2.5','BTTS_YES','BTTS_NO','FTHG','FTAG','result_source')
 ODDS_FIELDS = tuple(k for keys in MARKETS.values() for k in keys)
-ALLOWED_LEAGUES = frozenset(('ENG1','ENG2','GER1','ESP1','ITA1','FRA1','NED1','TUR1','POR1','BEL1'))
+# Historical P1 research is league-agnostic. Production 2.6.3 scope is unchanged.
 MAX_MATCH_DAY = datetime(2026,11,21).date()
 
 
@@ -38,6 +38,10 @@ def review_manifest(obj):
     for k in ('source_name','source_url','bookmaker','price_phase'):
         if not isinstance(obj.get(k),str) or not obj[k]:
             raise ValueError('MANIFEST_FIELD_MISSING:'+k)
+    allowed=obj.get('allowed_leagues')
+    if allowed is not None and (not isinstance(allowed,list) or not allowed or
+       any(not isinstance(x,str) or not x.strip() or len(x)>128 for x in allowed)):
+        raise ValueError('INVALID_OPTIONAL_RESEARCH_LEAGUE_SCOPE')
     if obj['price_phase'] not in ('OPENING','CLOSING','PDF_MORNING'):
         raise ValueError('UNKNOWN_PRICE_PHASE')
     if not obj['source_url'].startswith('https://'):
@@ -65,7 +69,9 @@ def inspect(local_csv: Path, manifest: dict):
                     raise ValueError('MATCH_DATE_AND_KICKOFF_INCONSISTENT')
                 identity=(r['league'].strip(),date,r['home'].strip().casefold(),r['away'].strip().casefold())
                 if not all(identity) or identity in seen: raise ValueError('DUPLICATE_OR_EMPTY_IDENTITY')
-                if identity[0] not in ALLOWED_LEAGUES: raise ValueError('OUT_OF_TEN_LEAGUES')
+                if len(identity[0])>128: raise ValueError('UNREASONABLY_LONG_LEAGUE_ID')
+                scope=manifest.get('allowed_leagues')
+                if scope is not None and identity[0] not in scope: raise ValueError('OUT_OF_OPTIONAL_RESEARCH_SCOPE')
                 if d > MAX_MATCH_DAY: raise ValueError('FUTURE_MATCH_RESULT_PROHIBITED')
                 seen.add(identity)
                 odds={key:float(r[key]) for key in ODDS_FIELDS}
