@@ -36,6 +36,8 @@ class TestP1(unittest.TestCase):
         self.assertAlmostEqual(recovered['lambda_home'],1.82,delta=0.0008)
         self.assertAlmostEqual(recovered['lambda_away'],0.95,delta=0.0008)
         self.assertLess(recovered['max_residual_pp'],0.03)
+        self.assertEqual(len(recovered['top_scorelines']),5)
+        self.assertGreater(recovered['top_scorelines'][0]['probability'],recovered['top_scorelines'][-1]['probability'])
 
     def test_real_archived_price_first_only(self):
         a=analyze_prices(self.amed)
