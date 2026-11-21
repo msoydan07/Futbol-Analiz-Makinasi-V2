@@ -1,0 +1,95 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": false,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_morning_sha_seal": true,
+    "post_kickoff_source_edit_forbidden": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "causality_of_odds_move_not_proven": true,
+    "football_facts_attribution": {
+      "description": "Bundesliga.com: Leipzig 9 maçta 27 gol, son 3 maçta 11 gol; ilk 11 oluşumları 4-1-3-2 / 4-2-3-1.",
+      "source": "bundesliga.com",
+      "url": "https://www.bundesliga.com/en/bundesliga/matchday/2026-2027/10/1-fc-union-berlin-vs-rb-leipzig/liveticker"
+    },
+    "lineups_no_fabrication": true,
+    "pdf_sha256": "fee3bcc37dcb90348cfae1539b8fbcbcdfd8f5300029e441f8117fdea4871783",
+    "source": "Bundesliga 17:30 onaylı dört kutulu tekli PDF",
+    "text_verbatim": "Sabahki KG Var (%61,3) korunuyor. KG Var 1,44'ten 1,43'e, 2.5 Üst 1,31'den 1,29'a indi; gol yönünde çok hafif güçlenme var. RB Leipzig galibiyet oranı ise 1,34'te sabit. Bundesliga maç önü verisine göre Leipzig ilk dokuz haftada 27 gol, son üç maçında 11 gol üretti. Resmî sayfada Union 4-1-3-2, Leipzig 4-2-3-1 dizilişinde görünüyor. Hücum profili gollü maçı destekleyebilir; ama oran hareketini belirli bir ilk 11 veya oyuncuya kesin bağlamak doğru değil."
+  },
+  "match": {
+    "away": "RB Leipzig",
+    "date_tr": "2026-11-21",
+    "home": "Union Berlin",
+    "kickoff_tr": "17:30",
+    "league": "GER1"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.5943891224,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/0fc933cd29bb6337be6aa990/decision.json",
+    "decision_sha256": "44b4f7c15da3f4ba54972dd0feb47210057ef5952c1517f2afa1c47c90572c2b",
+    "forecast_path": "forward_morning_263/2026-11-21/0fc933cd29bb6337be6aa990.json",
+    "forecast_sha256": "217d7d755958d9a98880629463ec43615d18525a2ea2835e93b71bd3fa0f3ef4",
+    "main_market": "BTTS_YES",
+    "main_probability": 0.6128032666,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "LIVE_SECOND_PDF_OBSERVATION_SOURCE_COLLECTED_BEFORE_KICKOFF",
+  "record_sha256": "f1d7d57d88b77b51734b372b671ac3dffddea57e57ad5e7e794d718bc6b3926b",
+  "recorded_at_utc": "2026-11-21T14:08:39.751912+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.5988857939,
+    "main_market_no_vig_second": 0.6038781163,
+    "main_market_price_first": 1.44,
+    "main_market_price_second": 1.43,
+    "main_no_vig_change_pp": 0.499232,
+    "main_price_delta": -0.01,
+    "our_probability_minus_second_market_pp": 0.892515,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.43,
+          2.18
+        ],
+        "before": [
+          1.44,
+          2.15
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          5.36,
+          4.56,
+          1.34
+        ],
+        "before": [
+          5.22,
+          4.51,
+          1.34
+        ]
+      },
+      "UNDER_OVER_2_5": {
+        "after": [
+          2.62,
+          1.29
+        ],
+        "before": [
+          2.55,
+          1.31
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "7ed2cfd49be26a6c5a3e364bd09cefa4f004b8911142b259a56a6c3147ad06d1",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "1496c1ba3a78579a595c43f7f4a8662d4354841741faf17b9b24f69ab3de8574"
+  }
+}
