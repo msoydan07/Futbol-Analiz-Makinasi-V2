@@ -1,0 +1,90 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": true,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_second_pdf_preko_git_seal": true,
+    "odds_and_commentary_saved_to_public_research_branch_only": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "pdf_sha256": "cf042f5847b42a1cf5b244957946bc400bf4d0890203af3fc127f0ab4c7c0410",
+    "provenance_note": "Bu yorum, kullanıcının onayladığı tekli PDF raporundaki asistan metninin aynısıdır; kayıt sırasında güncel kadro/sakatlık için yeni bağımsız kontrol yapılmadı.",
+    "source": "previously delivered approved four-box one-match PDF",
+    "text_verbatim": "KG Var ana tahmini %61,9 olarak sabit kalıyor. İkinci bültende Norwich galibiyeti 1,62'den 1,46'ya ve 2.5 Üst 1,21'den 1,17'ye geriledi: piyasa ev sahibi ile gollü maç beklentisini daha güçlü fiyatlıyor. KG Var fiyatı 1,25'te sabit, KG Yok 2,83'ten 2,78'e indiği için marjsız KG Var piyasa payı az da olsa düşüyor. Bu hareketleri belirli bir ilk 11 veya oyuncu haberine dayandıracak doğrulanmış kanıt bulunmuyor.",
+    "verify_external_claims_independently_on_reuse": true
+  },
+  "match": {
+    "away": "Cardiff City",
+    "date_tr": "2026-11-21",
+    "home": "Norwich City",
+    "kickoff_tr": "15:30",
+    "league": "ENG2"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.5911805663,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/4bde94fc2cbd13dcd6f241f4/decision.json",
+    "decision_sha256": "c99d22ecd045e0235e1092b11f03bf9eaf97852a24e5d599c22787429d2e30ce",
+    "forecast_path": "forward_morning_263/2026-11-21/4bde94fc2cbd13dcd6f241f4.json",
+    "forecast_sha256": "8b1b0c82b3829ba0c3c488cc047cbe8529e62d669f59ef84ffd55f973f08433e",
+    "main_market": "BTTS_YES",
+    "main_probability": 0.6194270389,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "RETROSPECTIVE_IMPORT_FROM_CHAT_PREMATCH_FILES",
+  "record_sha256": "a4be37c89bd3dd931a9a8c4a54283e01203a72794d098911a5bcce5fb9741a96",
+  "recorded_at_utc": "2026-11-21T12:31:34.659900+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.693627451,
+    "main_market_no_vig_second": 0.6898263027,
+    "main_market_price_first": 1.25,
+    "main_market_price_second": 1.25,
+    "main_no_vig_change_pp": -0.380115,
+    "main_price_delta": 0.0,
+    "our_probability_minus_second_market_pp": -7.039926,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.25,
+          2.78
+        ],
+        "before": [
+          1.25,
+          2.83
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          1.46,
+          4.34,
+          4.16
+        ],
+        "before": [
+          1.62,
+          3.89,
+          3.55
+        ]
+      },
+      "OVER_UNDER_2_5": {
+        "after": [
+          3.24,
+          1.17
+        ],
+        "before": [
+          3.02,
+          1.21
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "1480245fb42a077bd98b6771ceabe93e6d03f7ff5872906cf82c4fdd75953f94",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "e066331756956663737346c6ae4b89b4319d0030f60db8a0c11ae2aefd2d8848"
+  }
+}
