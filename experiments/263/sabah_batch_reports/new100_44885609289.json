@@ -1,0 +1,312 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T08:35:53.072204+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 6,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 6,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "GER1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "7b99466405cd329fa4a6295414ae04e641a3a24cc81c2d3efbc66538d2ad9474",
+      "parsed_events": 9,
+      "source_url": "https://products.bundesliga.com/fixtures",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "Sport-Club Freiburg",
+      "decision_sha256": "a4c896c41f7565d96290645a005d6ae44340b7af67ab5097aa82f44a40d9413d",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/4c58f36b0d18b088c022110e.json",
+      "forecast_sha256": "735bfd3364fa920f40487107b23371c7532707d8b33329faf25d7ea2c71942a6",
+      "home": "SV Elversberg",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "7b99466405cd329fa4a6295414ae04e641a3a24cc81c2d3efbc66538d2ad9474",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "Sport-Club Freiburg",
+        "requested_home": "SV Elversberg",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "deffb017-2cc9-515c-8610-7ebf8c760f22": "VERI_YETERSIZ",
+        "fa8640d2-1a1b-544f-8f22-c22488508f4d": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "deffb017-2cc9-515c-8610-7ebf8c760f22": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "fa8640d2-1a1b-544f-8f22-c22488508f4d": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "RB Leipzig",
+      "decision_sha256": "44b4f7c15da3f4ba54972dd0feb47210057ef5952c1517f2afa1c47c90572c2b",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/0fc933cd29bb6337be6aa990.json",
+      "forecast_sha256": "217d7d755958d9a98880629463ec43615d18525a2ea2835e93b71bd3fa0f3ef4",
+      "home": "1. FC Union Berlin",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "7b99466405cd329fa4a6295414ae04e641a3a24cc81c2d3efbc66538d2ad9474",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "RB Leipzig",
+        "requested_home": "1. FC Union Berlin",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "df9a3778-f7f8-585d-a996-e0cda64dcab5": "VERI_YETERSIZ",
+        "ea18c9c4-9bc4-57c2-b57b-6bc8205a1683": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "df9a3778-f7f8-585d-a996-e0cda64dcab5": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "ea18c9c4-9bc4-57c2-b57b-6bc8205a1683": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "TSG Hoffenheim",
+      "decision_sha256": "b00e7fb112d82a0fe5ab766aece05b013796732cd1f4b9256dd9d5bd59876740",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/5539b2c7cbea83913746bf33.json",
+      "forecast_sha256": "02538524b70f8273df79f88018318a5b4907b3241d81301d139eadf6efdafb02",
+      "home": "Eintracht Frankfurt",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "7b99466405cd329fa4a6295414ae04e641a3a24cc81c2d3efbc66538d2ad9474",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "TSG Hoffenheim",
+        "requested_home": "Eintracht Frankfurt",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383": "VERI_YETERSIZ",
+        "fcbfdf2b-827c-5930-a6c0-5931c4738864": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "fcbfdf2b-827c-5930-a6c0-5931c4738864": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "SC Paderborn 07",
+      "decision_sha256": "dec8e52261e5e3e3d479f5dc320db0c2f593c3181136cc6446c30f3ca9e5c453",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/3948a6b6b1eb0d5d47992794.json",
+      "forecast_sha256": "eae33198ef4ebcce808240e0002c3ccbccc98fa1706beee5544d98a40f1f7dea",
+      "home": "Bayer 04 Leverkusen",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "7b99466405cd329fa4a6295414ae04e641a3a24cc81c2d3efbc66538d2ad9474",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "SC Paderborn 07",
+        "requested_home": "Bayer 04 Leverkusen",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "bec22b9c-1ac9-5351-b1a1-11ed122fe9f9": "VERI_YETERSIZ",
+        "e656e2cc-ba29-5cd5-8da3-e61f1ee01a08": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "bec22b9c-1ac9-5351-b1a1-11ed122fe9f9": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e656e2cc-ba29-5cd5-8da3-e61f1ee01a08": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "Borussia Dortmund",
+      "decision_sha256": "a5589ffe0c6420ea9ff0d583c642c76121dd723ed2f9d85c1f52072f31e60b9c",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/734642f7ac66f61be2de2d42.json",
+      "forecast_sha256": "710319fb4696cb1bcd3e04ce002149f9763a6cac9a3bb3232e6494de537e4d69",
+      "home": "Borussia Mönchengladbach",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "7b99466405cd329fa4a6295414ae04e641a3a24cc81c2d3efbc66538d2ad9474",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "Borussia Dortmund",
+        "requested_home": "Borussia Mönchengladbach",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "aec30ffc-fb2e-5d50-adac-f5472690a4a9": "VERI_YETERSIZ",
+        "e05b54ee-124a-519f-a867-afbae14cb771": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "aec30ffc-fb2e-5d50-adac-f5472690a4a9": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "e05b54ee-124a-519f-a867-afbae14cb771": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    },
+    {
+      "away": "VfB Stuttgart",
+      "decision_sha256": "235e10751b6b3068f137ab77e4c692f3f2561397a10e2cde29d077a24b3b27cd",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/4336a9d85876ef940c7b9013.json",
+      "forecast_sha256": "15ab84097edf17633f6a2b621a0455e0a22260311cf8604748bbe51f568d64be",
+      "home": "FC Schalke 04",
+      "kickoff_utc": "2026-11-21T17:30:00+00:00",
+      "league": "GER1",
+      "official_source_evidence": {
+        "candidate_events_seen": 9,
+        "league": "GER1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "7b99466405cd329fa4a6295414ae04e641a3a24cc81c2d3efbc66538d2ad9474",
+        "page_url": "https://products.bundesliga.com/fixtures",
+        "requested_away": "VfB Stuttgart",
+        "requested_home": "FC Schalke 04",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "dfl"
+      },
+      "rotation": {
+        "4d6798e9-6702-53ac-b979-06b67f82ea0e": "VERI_YETERSIZ",
+        "6aa36235-a890-5482-9fe3-06efab06f2f9": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "4d6798e9-6702-53ac-b979-06b67f82ea0e": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "6aa36235-a890-5482-9fe3-06efab06f2f9": {
+          "last_rest_hours": null,
+          "next_10_days": [],
+          "next_match_gap_hours": null,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "a2f1402e2ae333f9dc68262f1dcca7066e806724d96c1c6d3d4fc83c1b6f1442",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}

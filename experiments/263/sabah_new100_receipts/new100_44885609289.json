@@ -1,0 +1,129 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "a2f1402e2ae333f9dc68262f1dcca7066e806724d96c1c6d3d4fc83c1b6f1442",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T08:35:57.940186+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 6,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "68e466068bad119388ce42cd446d7e51371523cf8ee9c667d5059f2cf3f10660",
+  "new_count": 6,
+  "no_verified_odds": true,
+  "payload_sha256": "f4ef45d9b95cc8db63821d404900cecd4225f86b47165f08f7490aaadb535df4",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 3,
+      "baseline_sha256": "391f00e7cbd0d0d9557450ec9a98442a07904f4b93f4850ae1f4004645956e59",
+      "decision_sha256": "a4c896c41f7565d96290645a005d6ae44340b7af67ab5097aa82f44a40d9413d",
+      "fixture": "SV Elversberg - Sport-Club Freiburg",
+      "forecast_path": "forward_morning_263/2026-11-21/4c58f36b0d18b088c022110e.json",
+      "forecast_sha256": "735bfd3364fa920f40487107b23371c7532707d8b33329faf25d7ea2c71942a6",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "c14076e1606aa7ad3ea3ae76e58fd4168708a4b0a79855fcee36fc95451b16f2",
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "18c683ffa833969d697f3fa481ace66f3cb8fa1c59b2127ce5866a2f42b99483",
+      "decision_sha256": "44b4f7c15da3f4ba54972dd0feb47210057ef5952c1517f2afa1c47c90572c2b",
+      "fixture": "1. FC Union Berlin - RB Leipzig",
+      "forecast_path": "forward_morning_263/2026-11-21/0fc933cd29bb6337be6aa990.json",
+      "forecast_sha256": "217d7d755958d9a98880629463ec43615d18525a2ea2835e93b71bd3fa0f3ef4",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "070aaf61566209de78902f47635a8dd08cb5a2dac6f4a08f3b02258b55d8ed6c",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "6a5cfbc0137066b479c16d26159ac645a0e9831e729a6c15102f10db2a478844",
+      "decision_sha256": "b00e7fb112d82a0fe5ab766aece05b013796732cd1f4b9256dd9d5bd59876740",
+      "fixture": "Eintracht Frankfurt - TSG Hoffenheim",
+      "forecast_path": "forward_morning_263/2026-11-21/5539b2c7cbea83913746bf33.json",
+      "forecast_sha256": "02538524b70f8273df79f88018318a5b4907b3241d81301d139eadf6efdafb02",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "0d7256ce9242d7ff0125d109939f12c03a3d1a6f33847dafa123ef8d2d4265f8",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 3,
+      "baseline_sha256": "cb93bc4961bb7c07a102836d19b19024d8b700745884b495f86bc4b37e2732ab",
+      "decision_sha256": "dec8e52261e5e3e3d479f5dc320db0c2f593c3181136cc6446c30f3ca9e5c453",
+      "fixture": "Bayer 04 Leverkusen - SC Paderborn 07",
+      "forecast_path": "forward_morning_263/2026-11-21/3948a6b6b1eb0d5d47992794.json",
+      "forecast_sha256": "eae33198ef4ebcce808240e0002c3ccbccc98fa1706beee5544d98a40f1f7dea",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "2f2ae5a42e98ac189b7108f6b7fd1cb159a21bc69f20c0ff0dec0075c13ae576",
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 4,
+      "baseline_sha256": "116427bcf06cf154b57b585da2b31999022d410e4f5ab289de54a3d426df6188",
+      "decision_sha256": "a5589ffe0c6420ea9ff0d583c642c76121dd723ed2f9d85c1f52072f31e60b9c",
+      "fixture": "Borussia Mönchengladbach - Borussia Dortmund",
+      "forecast_path": "forward_morning_263/2026-11-21/734642f7ac66f61be2de2d42.json",
+      "forecast_sha256": "710319fb4696cb1bcd3e04ce002149f9763a6cac9a3bb3232e6494de537e4d69",
+      "kickoff_utc": "2026-11-21T14:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "f000d64a8f4efada24c3a43f1eaf2354eb9db2e054b370c0ec97c7300e268a57",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    },
+    {
+      "available_models": 3,
+      "baseline_sha256": "2d1772145d36c80dcb4126975a66b4196c83efd3dda772a8ccc0e69dae948beb",
+      "decision_sha256": "235e10751b6b3068f137ab77e4c692f3f2561397a10e2cde29d077a24b3b27cd",
+      "fixture": "FC Schalke 04 - VfB Stuttgart",
+      "forecast_path": "forward_morning_263/2026-11-21/4336a9d85876ef940c7b9013.json",
+      "forecast_sha256": "15ab84097edf17633f6a2b621a0455e0a22260311cf8604748bbe51f568d64be",
+      "kickoff_utc": "2026-11-21T17:30:00+00:00",
+      "league": "GER1",
+      "mobile_sha256": "62d7a76beeacb0497d1f7d89f6ad4e9765332eee5ac44da2e82c77671c49ee3a",
+      "model_statuses": {
+        "B": "UNAVAILABLE_INSUFFICIENT_CONTEXT",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}
