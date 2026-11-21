@@ -28,7 +28,7 @@ jobs:
           import sys,zipfile,csv,io,math,collections,statistics,json
           from pathlib import PurePosixPath
           sys.path.insert(0,'experiments/p1_market_intelligence')
-          from p1_market import analyze_prices,score_observed,MARKETS
+          from p1_market import analyze_prices,score_observed,MARKETS,no_vig,fit_inverse_poisson,best_choices
           names=['matches.csv','odds_1x2.csv','odds_ou.csv','odds_bts.csv']
           with zipfile.ZipFile('/tmp/p1_sample.zip') as z:
               tables={}
@@ -87,7 +87,41 @@ jobs:
               common=set(k for k in idx['odds_1x2.csv'] if k[0]==mid)
               common &=set(k for k in idx['odds_ou.csv'] if k[0]==mid)
               common &=set(k for k in idx['odds_bts.csv'] if k[0]==mid)
-              if not common:rejected['no_full_same_book']+=1;continue
+              if not common:
+                  rejected['strict_same_book_missing']+=1
+                  # Separate derived consensus experiment. Every raw quote remains
+                  # labeled to its own bookmaker; never manufacture 7 bookmaker odds.
+                  for phase in ('open','close'):
+                      try:
+                          p0={}
+                          for filename,market,sels in (
+                              ('odds_1x2.csv','MS',('home','draw','away')),
+                              ('odds_ou.csv','OU25',('under','over')),
+                              ('odds_bts.csv','KG',('yes','no'))):
+                              observed=[]
+                              for key,arr in idx[filename].items():
+                                  if key[0]!=mid or len(arr)!=1:continue
+                                  try:
+                                      raw=dict(zip(MARKETS[market],[odds(arr[0],phase,t) for t in sels]))
+                                      observed.append(no_vig(raw)['probabilities'])
+                                  except (ValueError,KeyError,OverflowError):continue
+                              if not observed:raise ValueError('NO_VALID_QUOTES_FOR_MARKET:'+market)
+                              consensus={k:statistics.median(q[k] for q in observed) for k in MARKETS[market]}
+                              total=sum(consensus.values())
+                              p0[market]={k:v/total for k,v in consensus.items()}
+                          fit=fit_inverse_poisson(p0)
+                          s0=score_observed(p0,hg,ag)
+                          s1=score_observed(fit['p1_probabilities'],hg,ag)
+                          truth=set(s0['truth'].values())
+                          results.append({'match':mid,'phase':phase,
+                              'P0_brier':s0['macro_brier'],'P1_brier':s1['macro_brier'],
+                              'P0_log':s0['macro_log_loss'],'P1_log':s1['macro_log_loss'],
+                              'P0_hit':int(best_choices(p0)['main']['choice'] in truth),
+                              'P1_hit':int(best_choices(fit['p1_probabilities'])['main']['choice'] in truth)})
+                          rejected['cross_book_consensus_evaluated_'+phase]+=1
+                      except (ValueError,KeyError,OverflowError):
+                          rejected['cross_book_consensus_incomplete_'+phase]+=1
+                  continue
               def priority(k):
                   b=opt(idx['odds_1x2.csv'][k][0],'bookmaker','book').lower()
                   return (0 if b=='bet365' else 1 if 'bet365' in b else 2 if 'interwetten' in b else 3,b,k[1])
@@ -123,8 +157,9 @@ jobs:
                       report[phase][k]=round(statistics.mean(x[k] for x in a),5)
                   for k in ('P0_hit','P1_hit'):
                       report[phase][k]=sum(x[k] for x in a)
-          print('RESEARCH_RESULTS',json.dumps(report,sort_keys=True))
+          print('RESEARCH_RESULTS_CROSS_BOOK_CONSENSUS_WHERE_STRICT_UNAVAILABLE',json.dumps(report,sort_keys=True))
           print('EXCLUSIONS',json.dumps(rejected))
           print('NON-BLIND: original publisher compiled prices after results; labels and timestamps do not prove independent pre-KO seal')
+          print('CONSENSUS: median of separate book-specific de-vig probabilities per market; NOT a seven-quote single-book sample')
           print('OUTSIDE_SCOPE: Germany second division not in main ten; no model promotion')
           PY
