@@ -25,7 +25,8 @@ class AggregateTest(unittest.TestCase):
         self.assertIsNone(out['cohorts'][0]['brier']['paired_bootstrap_95pct'])
         self.assertFalse(out['cohorts'][0]['claim_of_superiority_allowed'])
     def test_bootstrap_fixed_seed(self):
-        self.assertEqual(_paired_interval([-.1]*40),[-.1,-.1])
+        for bound in _paired_interval([-.1]*40):
+            self.assertAlmostEqual(bound, -0.1, places=12)
     def test_reject_duplicate(self):
         obj=audit()
         obj['accepted'][1]['identity']=obj['accepted'][0]['identity']
