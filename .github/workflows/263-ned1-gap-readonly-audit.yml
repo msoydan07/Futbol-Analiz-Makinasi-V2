@@ -1,0 +1,52 @@
+name: "263 NED1 21-Nov score overlap read-only diagnostic"
+on:
+  push:
+    branches: [research/263-ned1-gap-audit-20261121]
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install existing frozen numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0
+      - name: NED1 21-day overlap exact canonical date score diff (no model)
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python - <<'PY'
+          from datetime import date,datetime,timezone,timedelta
+          from pathlib import Path
+          from exp_263_batch import clean_rows
+          from freshness_gap_guard_263 import _source,_identity,_count,parse_date
+          import hashlib,json
+          p=Path('data/results_only_263/2026-11-10_completed_4617_scores_only.csv')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='637b8597ac5bf479934a0b66aaed726b5fc30c20d9a5e9b4a770913cf9d68a89'
+          hist=[r for r in clean_rows(p) if r['league']=='NED1' and r['season']=='2026-2027']
+          latest=max(date.fromisoformat(x['match_date']) for x in hist)
+          start=latest-timedelta(days=21)
+          archived={(date.fromisoformat(r['match_date']),r['home_id'],r['away_id']):(int(r['home_goals']),int(r['away_goals']))
+                    for r in hist if start<=date.fromisoformat(r['match_date'])<=latest}
+          raw,sha,url=_source('NED1',now=datetime.now(timezone.utc))
+          resolve=_identity('NED1',None)
+          provider={}
+          for r in raw:
+            h=str(r.get('HomeTeam') or '').strip()
+            a=str(r.get('AwayTeam') or '').strip()
+            if not h or not a: continue
+            d=date.fromisoformat(parse_date(r.get('Date','')))
+            hg=_count(r.get('FTHG'));ag=_count(r.get('FTAG'))
+            if hg is None or ag is None or d>=date(2026,11,21) or d<start or d>latest:continue
+            key=(d,resolve(h),resolve(a))
+            provider[key]={'score':(hg,ag),'raw_home':h,'raw_away':a}
+          missing=[(k,v) for k,v in archived.items() if k not in provider]
+          added=[(k,v) for k,v in provider.items() if k not in archived]
+          conflict=[(k,v,provider[k]) for k,v in archived.items() if k in provider and provider[k]['score']!=v]
+          print('DIAGNOSTIC_JSON',json.dumps({'snapshot_last':latest.isoformat(),'span':start.isoformat(),'snapshot_overlaps':len(archived),'provider_overlaps':len(provider),'provider_sha':sha,'added':[{'date':k[0].isoformat(),'home_id':k[1],'away_id':k[2],**v} for k,v in added],'missing':[{'date':k[0].isoformat(),'home_id':k[1],'away_id':k[2],'score':v} for k,v in missing],'conflict':[{'date':k[0].isoformat(),'score':v,'provider':w} for k,v,w in conflict]},ensure_ascii=False,sort_keys=True))
+          print('READ_ONLY; no archive modification; no forecasts; no odds.')
+          PY
