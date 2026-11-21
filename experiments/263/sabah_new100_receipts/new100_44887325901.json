@@ -1,0 +1,44 @@
+{
+  "all_new_records_are_before_kickoff": true,
+  "batch_report_sha256": "dd66d2908673dca6dbd3b4576ffd4de0043fd415b57491369bd81b66edd7dd2d",
+  "betting_authorized": false,
+  "blocked_count": 0,
+  "bookmaker_api_calls": 0,
+  "checked_at_utc": "2026-11-21T08:58:31.666975+00:00",
+  "cohort": "new100",
+  "day_turkey": "2026-11-21",
+  "decisions": "MODEL_FIRST_M4_MS_C3_KG_O25",
+  "existing_same_cohort_count": 0,
+  "input_count": 1,
+  "mandatory_models": [
+    "C3",
+    "M4"
+  ],
+  "minimum_available_models": 3,
+  "mobile_sha_equal_to_seal": true,
+  "mobile_summary_sha256": "0730ef46af120f51b35e3c66ac57ce9e5d2d50cca0b151b39e56f57d40c17c48",
+  "new_count": 1,
+  "no_verified_odds": true,
+  "payload_sha256": "6b0ec40b7af2c14728039849e994be1f550f59553ffb27cfa77d051fcf4ba470",
+  "previous_96_and_acceptance3_unchanged": true,
+  "records": [
+    {
+      "available_models": 4,
+      "baseline_sha256": "be4c443b40394dc8f6a6807516812ef29426e803a6f8ebe0f5f90bcf72908500",
+      "decision_sha256": "97cc4fc3c5c41a42c4a59d6a353ada7e704dd3f0d5b76bf3f5c4cf901033c4ee",
+      "fixture": "N.E.C. Nijmegen - PSV",
+      "forecast_path": "forward_morning_263/2026-11-21/04687bfb19f4ed909d4c259d.json",
+      "forecast_sha256": "b782f9c6d9c94eda3bb74711fab5338a4429868fca5a9c3624c2eb5995fb18f4",
+      "kickoff_utc": "2026-11-21T15:30:00+00:00",
+      "league": "NED1",
+      "mobile_sha256": "de13f0c509a534a1e5f10aee0bf0b4f49839d861d21d144cc345252af81bd511",
+      "model_statuses": {
+        "B": "AVAILABLE",
+        "C2": "AVAILABLE",
+        "C3": "AVAILABLE",
+        "M4": "AVAILABLE"
+      }
+    }
+  ],
+  "schema": "263_NEW100_FORWARD_MOBILE_ACCEPTANCE_V2"
+}

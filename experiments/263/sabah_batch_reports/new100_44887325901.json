@@ -1,0 +1,93 @@
+{
+  "already_sealed": 0,
+  "betting_authorized": false,
+  "blocked": 0,
+  "cohort": "new100",
+  "created_at_utc": "2026-11-21T08:58:27.448556+00:00",
+  "day_turkey": "2026-11-21",
+  "input_count": 1,
+  "m4_xg_support_private_only": true,
+  "new_forecasts": 1,
+  "odds_api_calls": 0,
+  "official_S1_S2_approved": false,
+  "official_source_page_coverage": {
+    "NED1": {
+      "all_competitions_covered": false,
+      "failure": null,
+      "league_fixtures_complete": false,
+      "page_sha256": "193f50c1848245db5f4f33f1f388b7e61fb073b8a001edc8e10b38ad08a42394",
+      "parsed_events": 95,
+      "source_url": "https://www.knvb.nl/competities/eredivisie/programma",
+      "status": "FETCHED_OFFICIAL_PAGE"
+    }
+  },
+  "outcomes": [
+    {
+      "away": "PSV",
+      "decision_sha256": "97cc4fc3c5c41a42c4a59d6a353ada7e704dd3f0d5b76bf3f5c4cf901033c4ee",
+      "decision_status": "RESEARCH_CANDIDATE_NOT_APPROVED",
+      "forecast_path": "forward_morning_263/2026-11-21/04687bfb19f4ed909d4c259d.json",
+      "forecast_sha256": "b782f9c6d9c94eda3bb74711fab5338a4429868fca5a9c3624c2eb5995fb18f4",
+      "home": "N.E.C. Nijmegen",
+      "kickoff_utc": "2026-11-21T15:30:00+00:00",
+      "league": "NED1",
+      "official_source_evidence": {
+        "candidate_events_seen": 95,
+        "league": "NED1",
+        "page_fetch_failure": null,
+        "page_fetch_status": "FETCHED_OFFICIAL_PAGE",
+        "page_observation_reason": null,
+        "page_observation_status": "VERIFIED_OFFICIAL_FIXTURE",
+        "page_sha256": "193f50c1848245db5f4f33f1f388b7e61fb073b8a001edc8e10b38ad08a42394",
+        "page_url": "https://www.knvb.nl/competities/eredivisie/programma",
+        "requested_away": "PSV",
+        "requested_home": "N.E.C. Nijmegen",
+        "selected_lookup": "CACHED_OFFICIAL_PAGE_AND_CANONICAL_GATE",
+        "source_parser": "knvb"
+      },
+      "rotation": {
+        "0dd70a13-dbba-5c9e-b69b-0a5f006f43c5": "VERI_YETERSIZ",
+        "9915dcfe-aece-5cfa-be79-ce1028945c62": "VERI_YETERSIZ"
+      },
+      "rotation_applied_to_model_probabilities": false,
+      "rotation_evidence": {
+        "0dd70a13-dbba-5c9e-b69b-0a5f006f43c5": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 170.2,
+              "opponent": "9dcd8da7-0ce9-571d-81ef-f46eca9ffc5e",
+              "source_url": "https://www.knvb.nl/competities/eredivisie/programma",
+              "utc": "2026-11-28T17:45:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 170.2,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        },
+        "9915dcfe-aece-5cfa-be79-ce1028945c62": {
+          "last_rest_hours": null,
+          "next_10_days": [
+            {
+              "competition": "LIG",
+              "hours_from_target": 195.5,
+              "opponent": "fc941d55-dc93-5926-8030-6a0bb4e7f90c",
+              "source_url": "https://www.knvb.nl/competities/eredivisie/programma",
+              "utc": "2026-11-29T19:00:00+00:00"
+            }
+          ],
+          "next_match_gap_hours": 195.5,
+          "past_7_days": [],
+          "reason": "TUM_KUPA_VE_LIG_FIKSTURU_DOGRULANMADI"
+        }
+      },
+      "status": "REGISTERED_FOUR_MODELS_EXPERIMENTAL",
+      "xg_status": "PRIVATE_XG_FILE_NOT_AVAILABLE_M4_UNCHANGED"
+    }
+  ],
+  "payload_sha256": "dd66d2908673dca6dbd3b4576ffd4de0043fd415b57491369bd81b66edd7dd2d",
+  "schema": "SABAH_TOPLU_KAYIT_V1",
+  "xg_private_results": 0,
+  "xg_source_configured": false
+}
