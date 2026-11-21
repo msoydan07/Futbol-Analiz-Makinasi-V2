@@ -1,0 +1,92 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_second_pdf_preko_git_seal": true,
+    "odds_and_commentary_saved_to_public_research_branch_only": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "external_sources": [
+      "Anadolu Ajansı, 20–21.11.2026: Amed–Rizespor maç önü"
+    ],
+    "pdf_sha256": "a68a8584d642afa123c78ba3fddaef6e1ce7d7b66e9819c362cc2b7750a0b4e1",
+    "provenance_note": "İlk-son kullanıcı iddaa PDF kaynaklı; maç önü yorumunda oyuncu değişiminin kesin nedeni doğrulanmamıştır.",
+    "source": "21_Kasim_2026_1600_2_Lig_3_Mac_Onayli_Tekli_Rapor.pdf",
+    "text_verbatim": "Sabah mühürlenen MS 1 tercihi %77,1 ile korunuyor. Ev sahibi galibiyeti oranı 1,70’ten 1,69’a indi; piyasanın ev sahibine bakışında önemli bir hareket yok. Buna karşılık 2.5 Üst ve KG Var oranları biraz geriledi; gollü maç ihtimali hafif güçlenmiş görünüyor. Anadolu Ajansı maç önü haberinde Amed’in 11 haftada 23, Rizespor’un 14 puanı olduğunu; Rizespor’un altı deplasman maçından 11 puan çıkardığını bildiriyor. Modelin Amed galibiyetine verdiği %77,1 ile piyasanın yaklaşık %51 beklentisi arasında çok büyük fark var; bu farkı tek başına üstünlük kanıtı saymıyoruz. Resmî ilk 11 ve oran hareketinin futbol içi kesin nedeni doğrulanmadı.",
+    "verify_external_claims_independently_on_reuse": true
+  },
+  "match": {
+    "away": "Çaykur Rizespor",
+    "date_tr": "2026-11-21",
+    "home": "Amed Sportif Faaliyetler",
+    "kickoff_tr": "16:00",
+    "league": "TUR1"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.6159426151,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/033b99b2c8dfc4b2c33e78e1/decision.json",
+    "decision_sha256": "4f9877e0bf60e4848e067a4c04244c865a1ab0df652e566522477e010002fc74",
+    "forecast_path": "forward_morning_263/2026-11-21/033b99b2c8dfc4b2c33e78e1.json",
+    "forecast_sha256": "fdb7c85ace1cf9ec6c2c9a64511693ce069f93410f242a8d2ed027bd3522d8cb",
+    "main_market": "MS1",
+    "main_probability": 0.7706905999,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "CHAT_SECOND_PDF_ANALYSIS_SOURCE_PRESERVATION",
+  "record_sha256": "9f7776e6ff91aa6a1049ac5667a39d66c69d373783fd82afeb488736803b7b8a",
+  "recorded_at_utc": "2026-11-21T12:48:45.807847+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.5083147509688887,
+    "main_market_no_vig_second": 0.5104750009244461,
+    "main_market_price_first": 1.7,
+    "main_market_price_second": 1.69,
+    "main_no_vig_change_pp": 0.2160249955557414,
+    "main_price_delta": -0.010000000000000009,
+    "our_probability_minus_second_market_pp": 26.02155989755539,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.39,
+          2.28
+        ],
+        "before": [
+          1.42,
+          2.21
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          1.69,
+          3.56,
+          3.49
+        ],
+        "before": [
+          1.7,
+          3.51,
+          3.52
+        ]
+      },
+      "OVER_UNDER_2_5": {
+        "after": [
+          2.24,
+          1.41
+        ],
+        "before": [
+          2.15,
+          1.44
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "492a7bad3b32414f6b6654030694822dbfab4c051902e40d069dbd54f5baa897",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "280e4f69510038d8e2ce944f72fa2a80a1136e2d569d8bf9ae24085939e23ede"
+  }
+}
