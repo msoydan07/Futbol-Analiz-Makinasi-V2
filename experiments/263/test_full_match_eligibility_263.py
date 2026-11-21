@@ -87,6 +87,11 @@ class FullMatchEligibilityAcceptance(unittest.TestCase):
             gate={"source_url":"https://example.com/synthetic-only"}
             kickoff=datetime(2026,11,6,18,0,tzinfo=timezone.utc)
             observed=[]
+            gap_source_rows=[]
+            def gap_checked(past,*args,**kwargs):
+                gap_source_rows.append({r["fixture_id"] for r in past})
+                return {"status":"WITHIN_NORMAL_TEN_DAY_LIMIT",
+                        "age_days":1,"source_network_called":False}
             def c1_checked(past,*args):
                 observed.append({r["fixture_id"] for r in past})
                 return None
@@ -99,6 +104,7 @@ class FullMatchEligibilityAcceptance(unittest.TestCase):
             with (patch("forward_quad.valid_gate",return_value=("NED1","NEW_H","NEW_A",kickoff,NOW,"2026-11-06")),
                   patch("forward_quad.clean_rows",return_value=rows),
                   patch("forward_quad.verify_snapshot",return_value=("APPEND_ONLY_HUMAN_SOURCE_ATTESTED_NOT_INDEPENDENTLY_RECHECKED",digest)),
+                  patch("freshness_gap_guard_263.review_gap",side_effect=gap_checked),
                   patch("forward_quad.c1",side_effect=c1_checked),
                   patch("forward_quad.fit_c3",side_effect=c3_checked),
                   patch("forward_quad.canonical_c2_lambda",return_value=(None,"SYNTHETIC_NO_COVERAGE")),
@@ -110,6 +116,8 @@ class FullMatchEligibilityAcceptance(unittest.TestCase):
             self.assertTrue(target.exists())
             self.assertEqual(len(observed),3)
             self.assertTrue(all(EXCEPTION_ID not in each for each in observed))
+            self.assertEqual(len(gap_source_rows),1)
+            self.assertIn(EXCEPTION_ID,gap_source_rows[0])
             self.assertEqual(record["data"]["league_history_rows"],150)
             self.assertEqual(record["data"]["training_excluded_partial_match_ids"],[EXCEPTION_ID])
             self.assertEqual(record["data"]["full_match_policy_sha256"],
