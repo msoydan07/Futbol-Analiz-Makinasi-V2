@@ -1,0 +1,90 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "import_committed_after_kickoff": true,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_second_pdf_preko_git_seal": true,
+    "odds_and_commentary_saved_to_public_research_branch_only": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "pdf_sha256": "cf042f5847b42a1cf5b244957946bc400bf4d0890203af3fc127f0ab4c7c0410",
+    "provenance_note": "Bu yorum, kullanıcının onayladığı tekli PDF raporundaki asistan metninin aynısıdır; kayıt sırasında güncel kadro/sakatlık için yeni bağımsız kontrol yapılmadı.",
+    "source": "previously delivered approved four-box one-match PDF",
+    "text_verbatim": "Sabahki KG Var tercihi %58,9 ile değişmeden duruyor. KG Var oranı 1,46'dan 1,49'a yükselirken KG Yok 2,12'den 2,06'ya geriledi; bu, karşılıklı gol beklentisinde hafif bir zayıflama anlamına geliyor. 2.5 Üst oranı da 1,58'den 1,60'a yükseldi. MS 1 fiyatının 2,39'dan 2,34'e düşmesi ev sahibi yönünde küçük bir hareket. Bu değişimlere bir sakatlık veya ilk 11 nedeni kesin olarak bağlanamaz; resmî ilk 11 bilgisi doğrulanmadı.",
+    "verify_external_claims_independently_on_reuse": true
+  },
+  "match": {
+    "away": "Queens Park Rangers",
+    "date_tr": "2026-11-21",
+    "home": "Millwall",
+    "kickoff_tr": "15:30",
+    "league": "ENG2"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.5501243695,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/8f809e4968bd6dc1da409ae6/decision.json",
+    "decision_sha256": "02dfef79a1559cfee4d1d567d68cbdf61a9ea71abfffaedf6bca3cc8380c8032",
+    "forecast_path": "forward_morning_263/2026-11-21/8f809e4968bd6dc1da409ae6.json",
+    "forecast_sha256": "ed00c85fafa030ab9527dc5861ff683379dc178e861e70886139690f398a6f49",
+    "main_market": "BTTS_YES",
+    "main_probability": 0.5885173571,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "RETROSPECTIVE_IMPORT_FROM_CHAT_PREMATCH_FILES",
+  "record_sha256": "6b4bba245050e6c2eb679831dd465a968b29978141c0a275177d2ba6085666db",
+  "recorded_at_utc": "2026-11-21T12:31:34.659900+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.5921787709,
+    "main_market_no_vig_second": 0.5802816901,
+    "main_market_price_first": 1.46,
+    "main_market_price_second": 1.49,
+    "main_no_vig_change_pp": -1.189708,
+    "main_price_delta": 0.03,
+    "our_probability_minus_second_market_pp": 0.823567,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.49,
+          2.06
+        ],
+        "before": [
+          1.46,
+          2.12
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          2.34,
+          3.21,
+          2.39
+        ],
+        "before": [
+          2.39,
+          3.21,
+          2.33
+        ]
+      },
+      "OVER_UNDER_2_5": {
+        "after": [
+          1.87,
+          1.6
+        ],
+        "before": [
+          1.92,
+          1.58
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "1480245fb42a077bd98b6771ceabe93e6d03f7ff5872906cf82c4fdd75953f94",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "e066331756956663737346c6ae4b89b4319d0030f60db8a0c11ae2aefd2d8848"
+  }
+}
