@@ -1,0 +1,92 @@
+{
+  "archival_safety": {
+    "does_not_modify_original_sha": true,
+    "does_not_prove_odds_movement_cause": true,
+    "no_new_model_calculation": true,
+    "no_results_used_in_commentary": true,
+    "not_an_original_second_pdf_preko_git_seal": true,
+    "odds_and_commentary_saved_to_public_research_branch_only": true
+  },
+  "commentary": {
+    "author": "ChatGPT assistant",
+    "external_sources": [
+      "Galatasaray.org, 20.11.2026: Maça Doğru Galatasaray–Samsunspor"
+    ],
+    "pdf_sha256": "a68a8584d642afa123c78ba3fddaef6e1ce7d7b66e9819c362cc2b7750a0b4e1",
+    "provenance_note": "İlk-son kullanıcı iddaa PDF kaynaklı; maç önü yorumunda oyuncu değişiminin kesin nedeni doğrulanmamıştır.",
+    "source": "21_Kasim_2026_1600_2_Lig_3_Mac_Onayli_Tekli_Rapor.pdf",
+    "text_verbatim": "En belirgin piyasa hareketi bu maçta: Galatasaray MS 1 oranı 1,05’ten 1,16’ya yükselirken beraberlik ve Samsunspor galibiyeti oranları düştü. Ev sahibi için marjsız piyasa olasılığı %82,1’den %74,7’ye geriledi; sabahki %81,5 model kararımız ise değişmedi. İlginç biçimde KG Var oranı 1,70’ten 1,50’ye düşerek iki takımın gol bulma beklentisini artırdı. Galatasaray’ın 20 Kasım resmî maç önü duyurusu ligde üst üste beş galibiyet ve 41 maçlık iç saha yenilmezlik serisini bildiriyor. Ancak güncel piyasa hareketinin kesin kadro, oyuncu veya taktik nedeni doğrulanamadı; yayımlanan muhtemel 11’leri resmî ilk 11 olarak kullanmadık.",
+    "verify_external_claims_independently_on_reuse": true
+  },
+  "match": {
+    "away": "Samsunspor",
+    "date_tr": "2026-11-21",
+    "home": "Galatasaray",
+    "kickoff_tr": "16:00",
+    "league": "TUR1"
+  },
+  "original_seal": {
+    "alternative_market": "OVER_2.5",
+    "alternative_probability": 0.5973961772,
+    "decision_path": "experiments/263/sabah_research/new100/2026-11-21/79a5cacb6de7d4d4751fe748/decision.json",
+    "decision_sha256": "fdbe061fe6778ddf1150708af8c29947a472d139213e5082a59a2958b32c25f8",
+    "forecast_path": "forward_morning_263/2026-11-21/79a5cacb6de7d4d4751fe748.json",
+    "forecast_sha256": "81d82b3242ee6a24fddcffe3f425354c93e6285731e07f861bdd923ee9fe745f",
+    "main_market": "MS1",
+    "main_probability": 0.8152361358,
+    "model_selection_version": "20261121_C3_2025_FROZEN_V4"
+  },
+  "record_kind": "CHAT_SECOND_PDF_ANALYSIS_SOURCE_PRESERVATION",
+  "record_sha256": "ed06cd53a9acf84db3d40b750d0979d1931960eee0e0459f734bcf10d08a9895",
+  "recorded_at_utc": "2026-11-21T12:48:45.812790+00:00",
+  "schema": "263_SECOND_PDF_COMMENTARY_APPEND_ONLY_V1",
+  "second_pdf_observation": {
+    "main_market_no_vig_first": 0.8213238850830374,
+    "main_market_no_vig_second": 0.7469764719070335,
+    "main_market_price_first": 1.05,
+    "main_market_price_second": 1.16,
+    "main_no_vig_change_pp": -7.434741317600391,
+    "main_price_delta": 0.10999999999999988,
+    "our_probability_minus_second_market_pp": 6.825966389296645,
+    "quoted_families": {
+      "BTTS_YES_NO": {
+        "after": [
+          1.5,
+          2.03
+        ],
+        "before": [
+          1.7,
+          1.75
+        ]
+      },
+      "MS_1_X_2": {
+        "after": [
+          1.16,
+          5.96,
+          8.05
+        ],
+        "before": [
+          1.05,
+          7.73,
+          12.85
+        ]
+      },
+      "OVER_UNDER_2_5": {
+        "after": [
+          3.03,
+          1.21
+        ],
+        "before": [
+          3.2,
+          1.18
+        ]
+      }
+    },
+    "same_user_bookmaker": "iddaa.com"
+  },
+  "source_pdf_fingerprints": {
+    "first_pdf_sha256": "492a7bad3b32414f6b6654030694822dbfab4c051902e40d069dbd54f5baa897",
+    "raw_user_pdfs_committed_to_github": false,
+    "second_pdf_sha256": "280e4f69510038d8e2ce944f72fa2a80a1136e2d569d8bf9ae24085939e23ede"
+  }
+}
