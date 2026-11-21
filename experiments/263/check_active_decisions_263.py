@@ -20,7 +20,7 @@ REQUIRED = {
     "pdf_sequence":"D-ODDS-001",
     "exclusive_odds_source":"D-ODDS-SOURCE-20261120",
     "c3_calibration":"D-C3-CAL-011",
-    "reporting_and_seals":"D-OPER-004",
+    "reporting_and_seals":"D-OPER-005",
 }
 EXPECTED = {"MS":"M4", "KG":"C3", "O25":"C3"}
 
@@ -145,6 +145,26 @@ def verify_active_policy(root=ROOT):
              "MODEL_ONLY_MOBILE_PATH_MISSING")
     _require("source_bookmaker" in bridge and "iddaa.com" in bridge,
              "PDF_BOOKMAKER_SOURCE_NOT_EXCLUSIVE")
+    # The user-approved 21-Nov card report is canonical for BOTH first-iddaa
+    # and new100-model-only output; no silent fallback to old batch tables.
+    approved="experiments/263/iddaa_pdf_approved_layout_263.py"
+    new100_batch="experiments/263/sabah_mobile_model_only_263.py"
+    spec="docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md"
+    _require(paths.get("approved_batch_card_pdf")==approved
+             and paths.get("approved_model_only_batch_route")==new100_batch
+             and paths.get("approved_batch_spec")==spec,
+             "USER_APPROVED_BATCH_CARD_ROUTE_MISSING")
+    _require("KALICI TOPLU RAPOR" in by_topic["reporting_and_seals"]["rule"],
+             "USER_APPROVED_LAYOUT_DECISION_MISSING")
+    layout=(root/approved).read_text(encoding="utf-8")
+    model_only=(root/new100_batch).read_text(encoding="utf-8")
+    _require((root/spec).is_file() and
+             "def _draw_grouped_cards(" in layout and
+             "def render_model_only_batch(" in layout and
+             "return _draw_grouped_cards(grouped,target,model_only=True)" in layout and
+             "render_model_only_batch(report[\"day_turkey\"],rows,folder/\"toplu.pdf\")" in model_only and
+             "batch_pdf(folder/\"toplu.pdf\"" not in model_only,
+             "USER_APPROVED_BATCH_RENDERER_NOT_ACTIVE")
     historical=p.get("superseded_for_pdf_first",[])
     _require(len(historical)>=2 and all(x.get("status")!="ACTIVE" for x in historical),
              "SUPERSEDED_POLICY_STILL_ACTIVE")

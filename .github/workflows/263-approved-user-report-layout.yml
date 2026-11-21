@@ -1,12 +1,21 @@
 name: "263 user-approved mobile batch and single PDF live routes"
 on:
   push:
+    branches: [experiment/263-toplu-karsilastirma, feature/263-approved-batch-card-format-20261121]
+  pull_request:
     branches: [experiment/263-toplu-karsilastirma]
     paths:
       - experiments/263/iddaa_pdf_approved_layout_263.py
       - experiments/263/iddaa_pdf_one_step_263.py
       - experiments/263/iddaa_pdf_last_review_263.py
       - experiments/263/test_iddaa_pdf_approved_layout_263.py
+      - experiments/263/test_toplu_approved_card_263.py
+      - experiments/263/sabah_mobile_model_only_263.py
+      - experiments/263/test_current_new100_263.py
+      - experiments/263/check_active_decisions_263.py
+      - experiments/263/test_check_active_decisions_263.py
+      - docs/263_AKTIF_KARARLAR.json
+      - docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md
       - experiments/263/test_iddaa_pdf_one_step_263.py
       - .github/workflows/263-approved-user-report-layout.yml
 permissions:
@@ -29,13 +38,14 @@ jobs:
           PYTHONPATH: .:experiments/263
         run: |
           set -euo pipefail
-          python -m unittest -v experiments/263/test_iddaa_pdf_approved_layout_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_last_review_263.py
+          python -m unittest -v experiments/263/test_iddaa_pdf_approved_layout_263.py experiments/263/test_iddaa_pdf_one_step_263.py experiments/263/test_iddaa_pdf_last_review_263.py experiments/263/test_toplu_approved_card_263.py experiments/263/test_current_new100_263.py
       - name: Mathematical engines and existing v3 seals unchanged; v4 selector explicitly versioned
         env:
           PYTHONPATH: .:experiments/263
         run: |
           set -euo pipefail
           git diff --exit-code
-          test "$(git diff --name-only HEAD~5 HEAD -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/analysis_math_core.py experiments/263/model_first_selection_lock_20261120_normal_v3.json forward_morning_263 forward_quad_263 | wc -l)" -eq 0
+          git fetch --quiet origin experiment/263-toplu-karsilastirma
+          git diff --exit-code origin/experiment/263-toplu-karsilastirma -- experiments/263/m4_integrated.py experiments/263/exp_263_batch.py experiments/263/analysis_math_core.py experiments/263/model_first_selection_lock_20261120_normal_v3.json forward_morning_263 forward_quad_263
           python experiments/263/check_active_decisions_263.py
-          python -m unittest -v experiments/263/test_model_first_decision_263.py experiments/263/test_model_first_decision_v4_263.py
+          python -m unittest -v experiments/263/test_model_first_decision_263.py experiments/263/test_model_first_decision_v4_263.py experiments/263/test_check_active_decisions_263.py

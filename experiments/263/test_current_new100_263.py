@@ -147,6 +147,12 @@ class CurrentNew100Tests(unittest.TestCase):
         self.assertEqual(created["status"],"MODEL_ONLY_MOBILE_PDF_NO_PRICE_SOURCE")
         self.assertEqual(created["odds_api_calls"],0)
         self.assertTrue((Path("out_pdf")/"toplu.pdf").read_bytes().startswith(b"%PDF-"))
+        # The new100 bridge uses the SAME approved card payload, no fake
+        # quote and no new dependency on PDF text-extraction packages.
+        self.assertEqual(result[0]["approved_card"]["main"],"MS 1")
+        self.assertEqual(result[0]["approved_card"]["fair"],"VERİ YOK")
+        self.assertEqual(result[0]["approved_card"]["main_odds"],"—")
+        self.assertEqual(result[0]["approved_card"]["decision_sha"],d["payload_sha256"])
 
     def test_absent_pinnacle_price_cannot_change_model_pick(self):
         report,row,d=self.get()
