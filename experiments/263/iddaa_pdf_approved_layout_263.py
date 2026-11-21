@@ -163,6 +163,18 @@ def render_batch(session,target):
           if row.get("status")!="SKIPPED_OUT_OF_10_LEAGUES"]
     grouped={}
     for r in rows:grouped.setdefault((r["league"],r["date"]),[]).append(r)
+    return _draw_grouped_cards(grouped,target)
+
+
+def _draw_grouped_cards(grouped,target,model_only=False):
+    """THE ONLY approved 6-card white/black/red batch layout, all routes.
+
+    Presentation only. First-PDF records are fully SHA-verified by
+    render_batch; model-only rows must be verified by the new100 caller.
+    This centralizes exact geometry so later manual/chat PDF outputs cannot
+    silently drift to the older two-card/table layouts.
+    """
+    _fonts()
     c=canvas.Canvas(str(target),pagesize=A4,pageCompression=1)
     c.setTitle("2.6.3 - Onaylı Toplu Analiz")
     pages=0
@@ -172,7 +184,9 @@ def render_batch(session,target):
             _text(c,LEFT,H-55,LEAGUES.get(league,league),20,True)
             _text(c,LEFT,H-73,_date(day)+"  •  "+str(len(games))+" MAÇ",8.5,True)
             _text(c,LEFT,H-101,"MS 1-X-2   /   2.5 ALT-ÜST   /   KG VAR-YOK",8.3)
-            _right(c,RIGHT,H-60,"SABAH / İLK ORAN PDF",8.5,True)
+            _right(c,RIGHT,H-60,
+                   "SABAH / MODEL-ONLY" if model_only else "SABAH / İLK ORAN PDF",
+                   8.5,True)
             for i,r in enumerate(chunk):
                 top=H-120-i*103;bottom=top-98
                 _box(c,LEFT,bottom,CW,98)
@@ -193,8 +207,12 @@ def render_batch(session,target):
                 _text(c,LEFT+17,top-89,"Alternatif: "+r["alternative"],8,True,RED,max_width=290)
                 _right(c,RIGHT-14,top-89,"Ana iddaa oranı: "+r["main_odds"],7.9,True)
             footer_y=H-120-len(chunk)*103-9
-            _text(c,LEFT,footer_y,"Bizim %: sabah imzalı uzman model olasılığı. Piyasa %: PDF'deki marjsız oran.",7.4)
-            _text(c,LEFT,footer_y-15,"Oran tahmin seçimini etkilemez. Eksik/kanıtsız seçim TEKNİK ENGEL (PAS DEĞİL).",7.4)
+            if model_only:
+                _text(c,LEFT,footer_y,"Bizim %: SHA ile kayıtlı v4 model olasılığı. Piyasa %: VERİ YOK (kullanıcı PDF'si gelmedi).",7.4)
+                _text(c,LEFT,footer_y-15,"Oran araması yapılmaz; fiyatsızlık model PAS değildir. Karar önceden mühürlüdür.",7.4)
+            else:
+                _text(c,LEFT,footer_y,"Bizim %: sabah imzalı uzman model olasılığı. Piyasa %: PDF'deki marjsız oran.",7.4)
+                _text(c,LEFT,footer_y-15,"Oran tahmin seçimini etkilemez. Eksik/kanıtsız seçim TEKNİK ENGEL (PAS DEĞİL).",7.4)
             _text(c,LEFT,footer_y-30,"Mühürler ve karar kanıtı ayrı kayıtlıdır. Bu PDF, sunum katmanıdır.",7.4)
             c.showPage()
     if not pages:
@@ -203,6 +221,29 @@ def render_batch(session,target):
         c.showPage()
     c.save()
     return target
+
+
+def render_model_only_batch(day,rows,target):
+    """Reuse the identical approved cards for SHA-linked NEW100 without odds.
+
+    Callers MUST provide the approved_card payload derived from an actual
+    original forecast and verified same-SHA model-first decision.
+    No fictitious bookmaker quotes, market %, odds or effect on selection.
+    """
+    target=Path(target)
+    if target.exists():raise FileExistsError("APPROVED_BATCH_PDF_NEVER_OVERWRITE")
+    grouped={}
+    for row in rows:
+        card=row.get("approved_card")
+        if not isinstance(card,dict):raise ValueError("MODEL_ONLY_CARD_NOT_SHA_VERIFIED")
+        if (not card.get("forecast_sha") or not card.get("decision_sha") or
+            card.get("fair")!="VERİ YOK" or card.get("diff")!="—" or
+            card.get("main_odds")!="—"):
+            raise ValueError("MODEL_ONLY_CARD_INVALID_OR_FORGED_PRICE")
+        if card.get("date")!=day or card.get("league")!=row.get("league"):
+            raise ValueError("MODEL_ONLY_CARD_DATE_LEAGUE_MISMATCH")
+        grouped.setdefault((card["league"],day),[]).append(card)
+    return _draw_grouped_cards(grouped,target,model_only=True)
 
 def _lines(s, max_width, size, max_lines):
     words=str(s).split();out=[];line=""
