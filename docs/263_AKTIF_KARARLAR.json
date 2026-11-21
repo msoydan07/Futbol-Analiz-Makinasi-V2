@@ -22,7 +22,9 @@
     "c3_binary_calibrator": "experiments/263/model_first_frozen_c3_calibration_263.py",
     "approved_batch_card_pdf": "experiments/263/iddaa_pdf_approved_layout_263.py",
     "approved_model_only_batch_route": "experiments/263/sabah_mobile_model_only_263.py",
-    "approved_batch_spec": "docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md"
+    "approved_batch_spec": "docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md",
+    "approved_single_review_pdf": "experiments/263/iddaa_pdf_approved_layout_263.py",
+    "approved_single_review_spec": "docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md"
   },
   "active": [
     {
@@ -69,10 +71,10 @@
     },
     {
       "topic": "reporting_and_seals",
-      "decision_id": "D-OPER-005",
+      "decision_id": "D-OPER-006",
       "effective_date_tr": "2026-11-21",
       "status": "ACTIVE",
-      "rule": "Teknik bloke != model PAS. Karar alındı(A), koda uygulandı(B), canlı akışta doğrulandı(C) ayrı. Eski 96/40 SHA, main ve geçmiş tahminler değişmez. Kullanıcının 21 Kasım 2026'da örnek görselle kesin onayladığı KALICI TOPLU RAPOR: A4 beyaz/siyah/kırmızı, sayfa başına en fazla 6 eşit yuvarlatılmış kart, başlık lig+tarih+maç sayısı, her kartta saat/ev-deplasman/sıra, ANA TERCİH-BİZİM %-PİYASA %-FARK(PUAN), ALT (kırmızı), Ana iddaa oranı; yalnız fark ve alternatif kırmızı, diğerleri siyah. Oran yoksa PİYASA VERİ YOK, FARK —, ORAN —. Hem ilk iddaa PDF'si hem new100 model-only toplu PDF'si ve sohbetten hazırlanan tüm toplu raporlar aynı ortak renderer iddaa_pdf_approved_layout_263.py kullanır. Kullanıcı açıkça değiştirmedikçe farklı tasarım, iki-sayfalık tablolama, kurgu veri veya piyasa yüzdesi uydurma yok. Tekli rapor eski onaylı dört kutusunda kalır. Tam ayrıntı docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md."
+      "rule": "Teknik bloke != model PAS. Karar alındı(A), koda uygulandı(B), canlı akışta doğrulandı(C) ayrı. Eski 96/40 SHA, main ve geçmiş tahminler değişmez. Kullanıcının 21 Kasım 2026'da örnek görselle kesin onayladığı KALICI TOPLU RAPOR: A4 beyaz/siyah/kırmızı, sayfa başına en fazla 6 eşit yuvarlatılmış kart, başlık lig+tarih+maç sayısı, her kartta saat/ev-deplasman/sıra, ANA TERCİH-BİZİM %-PİYASA %-FARK(PUAN), ALT (kırmızı), Ana iddaa oranı; yalnız fark ve alternatif kırmızı, diğerleri siyah. Oran yoksa PİYASA VERİ YOK, FARK —, ORAN —. Hem ilk iddaa PDF'si hem new100 model-only toplu PDF'si ve sohbetten hazırlanan tüm toplu raporlar aynı ortak renderer iddaa_pdf_approved_layout_263.py kullanır. Kullanıcı açıkça değiştirmedikçe farklı tasarım, iki-sayfalık tablolama, kurgu veri veya piyasa yüzdesi uydurma yok. İKİNCİ İDDAA PDF RAPORU KALICI: her maç için A4 tek sayfa, dört simetrik kutu (MAÇ BİLGİSİ / ANA TAHMİN / ORAN KARŞILAŞTIRMASI / YORUM), sabah mühürlü seçim/yüzde değişmez. Birden fazla maçta kanonik tek çok sayfalı tekli_rapor.pdf; her sayfada bir maç. Piyasa % ilk PDF marjsız, YENİ FARK ikinci PDF marjsız; ana oran ilk→son, oran farkı ve yeni fark görünür. Alternatif ve farklar kırmızı, kalan siyah, arka plan beyaz, Arial benzeri, yuvarlak ince çerçeve simetrik. Eski genel review.pdf yalnız teknik arşiv, kullanıcıya kanonik pdf_report olarak ASLA dönmez. Her ikinci PDF'de aynı tasarım; farklı rapor sunulmaz. Tekli ayrıntı docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md. Tam ayrıntı docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md."
     },
     {
       "topic": "exclusive_odds_source",
@@ -118,6 +120,12 @@
       "former_code": "experiments/263/sabah_mobile_approved_pdf_263.py::batch_pdf (new100 eski toplu yol)",
       "superseded_by": "D-OPER-005",
       "status": "HISTORICAL_RENDERER_ONLY_NEW100_APPROVED_CARDS_ACTIVE"
+    },
+    {
+      "former_decision": "21.11.2026 D-OPER-005, tekli onaylı ama kanonik ikinci PDF çıktısı eski genel review.pdf olabiliyordu",
+      "former_code": "experiments/263/iddaa_pdf_last_review_263.py::process legacy pdf_report",
+      "superseded_by": "D-OPER-006",
+      "status": "HISTORICAL_ONLY_SECOND_PDF_CANONICAL_FOUR_BOX"
     }
   ],
   "research_only": [
@@ -136,7 +144,8 @@
     "decision": "A_ACTIVE",
     "implementation": "B_V4_ORIGINAL_V3_SHA_AND_NEW_PDF_NEW100_OFFLINE_REGRESSION_CI_PASSED",
     "real_matchday_end_to_end": "C_NOT_YET_VERIFIED",
-    "historical_reliability": "2025_26_2898_C3_ASOF_TRAIN_2026_615_ASOF_SHADOW_AND_39_NOV8_ORIGINAL_SHA_NO_BLIND_FORWARD_C"
+    "historical_reliability": "2025_26_2898_C3_ASOF_TRAIN_2026_615_ASOF_SHADOW_AND_39_NOV8_ORIGINAL_SHA_NO_BLIND_FORWARD_C",
+    "second_pdf_single_layout": "A_APPROVED_B_ROUTE_UPDATED_C_LIVE_END_TO_END_NOT_YET_VERIFIED"
   },
   "change_process": [
     "Yeni karar oldugu zaman konu, kapsam, karar ID, tarih ve eski ID->yeni ID (supersedes) tek dosyaya kaydedilir.",
