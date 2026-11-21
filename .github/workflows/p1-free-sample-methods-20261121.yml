@@ -63,6 +63,10 @@ jobs:
                       except (KeyError,ValueError):continue
                   try:idx[n][identify(row)].append(row)
                   except KeyError:rejected['bad_quote_identity']+=1
+          print('JOIN_DIAG_SCOPES',json.dumps({n:dict(collections.Counter(opt(row,'scope','period','time_scope','market_scope') for row in tables[n]).most_common(7)) for n in names[1:]}))
+          print('JOIN_DIAG_2_5_COUNTS',sum(1 for r in tables['odds_ou.csv'] if opt(r,'line','total_line','total')=='2.5'))
+          print('JOIN_DIAG_KEYS',{n:len(idx[n]) for n in names[1:]})
+          print('JOIN_DIAG_KEY_EXAMPLES',{n:list(idx[n].keys())[:2] for n in names[1:]})
           def odds(r,phase,selection):
               v=float(get(r,f'{phase}_{selection}',f'{selection}_{phase}',f'{phase}_{selection}_odds'))
               if not math.isfinite(v) or not (1<v<1000):raise ValueError('bad odds')
