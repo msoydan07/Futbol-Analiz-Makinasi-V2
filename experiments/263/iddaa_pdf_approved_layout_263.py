@@ -290,95 +290,109 @@ def _single_commentary(r,market,old,new):
     parts.append("İkinci kontrol yeni tahmin veya ikinci mühür oluşturmadı.")
     return " ".join(parts)
 
-def render_singles(review,target_dir):
-    """One immutable second-user-PDF observation -> one card PDF per matched fixture."""
+def _draw_approved_single_page(c,r,i,n):
+    """Draw the ONLY approved second-PDF A4 four-symmetric-box layout."""
+    # User-approved symmetrical four-box layout on A4.
+    for y,height in ((H-135,104),(H-304,154),(H-529,209),(H-758,214)):
+        _box(c,LEFT,y,CW,height)
+    def section(y,label):
+        _text(c,LEFT+17,y,label,10.5,True)
+        c.setStrokeColor(BORDER);c.setLineWidth(.45)
+        c.line(LEFT+17,y-11,RIGHT-17,y-11)
+    section(H-54,"MAÇ BİLGİSİ")
+    _text(c,LEFT+17,H-85,r.get("home","?")+" - "+r.get("away","?"),14,True,max_width=CW-35)
+    _text(c,LEFT+17,H-105,LEAGUES.get(r.get("league"),"LİG")+
+          "  •  "+_date(r.get("match_date_tr")),8.7)
+    _right(c,RIGHT-17,H-105,"Saat: "+str(r.get("kickoff_time_tr") or "—"),9,True)
+    section(H-169,"ANA TAHMİN")
+    main=r.get("morning_main_choice") or {}
+    alt=r.get("morning_alternative_choice") or {}
+    market=main.get("market")
+    ours=main.get("calibrated_probability")
+    firstfair=(r.get("morning_market_no_vig") or {}).get(GROUP.get(market),{})
+    latefair=(r.get("latest_market_no_vig") or {}).get(GROUP.get(market),{})
+    f0=((firstfair.get("no_vig") or {}).get(market)
+        if firstfair.get("status")=="FULL_MARKET_QUOTE_AVAILABLE" else None)
+    f1=((latefair.get("no_vig") or {}).get(market)
+        if latefair.get("status")=="FULL_MARKET_QUOTE_AVAILABLE" else None)
+    if not isinstance(ours,(int,float)) or isinstance(ours,bool) or not 0<=ours<=1:ours=None
+    diff=100*(ours-f0) if ours is not None and isinstance(f0,(int,float)) else None
+    xs=[LEFT+66,LEFT+196,LEFT+324,LEFT+447]
+    headings=["ANA TERCİH","BİZİM %","PİYASA %","FARK"]
+    values=[LABELS.get(market,"TEKNİK ENGEL"),_p(ours),_p(f0),_delta(diff)+" puan" if diff is not None else "—"]
+    for idx,(x,h,v) in enumerate(zip(xs,headings,values)):
+        _center(c,x,H-199,h,8,True,RED if idx==3 else BLACK)
+        _center(c,x,H-226,v,12.5,True,RED if idx==3 else BLACK)
+    for x in (LEFT+130,LEFT+260,LEFT+385):
+        c.setStrokeColor(BORDER);c.setLineWidth(.35)
+        c.line(x,H-236,x,H-189)
+    alttext=(LABELS[alt["market"]]+" "+_p(alt.get("calibrated_probability"))
+             if alt and alt.get("market") in LABELS else "YOK")
+    _text(c,LEFT+18,H-266,"Alternatif: "+alttext,9,True,RED,max_width=CW-35)
+    _text(c,LEFT+18,H-282,"Sabahki tahmin, model olasılığı ve SHA mührü değişmez.",7.5,color=GRAY)
+    section(H-323,"ORAN KARŞILAŞTIRMASI")
+    odds0=r.get("morning_odds") or {};odds1=r.get("latest_odds") or {}
+    main0=odds0.get(market);main1=odds1.get(market)
+    x0=LEFT+17;split=LEFT+360
+    _text(c,x0,H-352,"PAZAR",7.5,True)
+    _text(c,LEFT+138,H-352,"İLK ORAN",7.5,True)
+    _text(c,LEFT+245,H-352,"SON ORAN",7.5,True)
+    groups=(("MS 1 / X / 2",("MS1","MSX","MS2")),
+           ("2.5 ALT / ÜST",("UNDER_2.5","OVER_2.5")),
+           ("KG VAR / YOK",("BTTS_YES","BTTS_NO")))
+    for j,(name,marks) in enumerate(groups):
+        yy=H-386-j*33
+        _text(c,x0,yy,name,8,True)
+        _text(c,LEFT+135,yy,_row_odds(odds0,marks),8,max_width=98)
+        _text(c,LEFT+240,yy,_row_odds(odds1,marks),8,max_width=105)
+        c.setStrokeColor(BORDER);c.line(x0,yy-15,split-12,yy-15)
+    c.setStrokeColor(BORDER);c.line(split,H-346,split,H-516)
+    _text(c,split+14,H-362,"ANA ORAN",8,True)
+    _text(c,split+14,H-386,_o(main0)+"  →  "+_o(main1),10,True)
+    odiff=main1-main0 if isinstance(main1,(float,int)) and isinstance(main0,(float,int)) else None
+    _text(c,split+14,H-422,"ORAN FARKI",8,True,RED)
+    _text(c,split+14,H-444,("%+.2f"%odiff).replace(".",",") if odiff is not None else "—",11,True,RED)
+    newdiff=100*(ours-f1) if ours is not None and isinstance(f1,(float,int)) else None
+    _text(c,split+14,H-480,"YENİ FARK",8,True,RED)
+    _text(c,split+14,H-501,(_delta(newdiff)+" puan") if newdiff is not None else "—",11,True,RED)
+    section(H-548,"YORUM")
+    commentary=_single_commentary(r,market,main0,main1)
+    comment_lines=_lines(commentary,CW-36,9.6,12)
+    yy=H-578
+    for line in comment_lines:
+        _text(c,LEFT+18,yy,line,9.6);yy-=15.5
+    _text(c,LEFT,H-775,"Kaynak: 1. ve 2. kullanıcı iddaa PDF'si. Kadro bilgisi varsa kaynaklı iddia, otomatik teyit değil.",7.4,color=GRAY,max_width=CW)
+    _text(c,LEFT,H-790,"Bu bir ikinci tahmin değildir. Oranlar ilk sabah kararını değiştirmez.",7.4,color=GRAY)
+    _right(c,RIGHT,21,str(i+1)+"/"+str(n),8.3,True)
+    c.showPage()
+
+def render_singles(review,target_dir,bundle_pdf=None):
+    """Approved singles plus optional canonical one-page-per-fixture bundle."""
     if review.get("schema")!="263_SINGLE_MORNING_SEAL_ONE_PREKO_REVIEW_V1":
         raise ValueError("APPROVED_SINGLE_REVIEW_SCHEMA_INVALID")
     _fonts();base=Path(target_dir)
     if base.exists():raise FileExistsError("APPROVED_SINGLE_DIRECTORY_ALREADY_EXISTS")
-    base.mkdir(parents=True,exist_ok=False)
-    # Do not make a "last-minute review" for unmatched PDF rows, stale
-    # observations or already started games. Original morning record stays.
     ready=[r for r in review.get("rows",[]) if r.get("status")==
            "GUNCEL_ORAN_KAYDI_VE_KADRO_DURUMU_HAZIR"]
     if not ready:
         raise ValueError("NO_VERIFIED_SECOND_PDF_PREKICKOFF_MATCH_FOR_SINGLE_REPORT")
+    bundle=Path(bundle_pdf) if bundle_pdf is not None else None
+    if bundle is not None and bundle.exists():
+        raise FileExistsError("APPROVED_SINGLE_BUNDLE_ALREADY_EXISTS")
+    base.mkdir(parents=True,exist_ok=False)
+    combined=(canvas.Canvas(str(bundle),pagesize=A4,pageCompression=1)
+              if bundle is not None else None)
+    if combined is not None:
+        combined.setTitle("2.6.3 - Onaylı İkinci PDF Tekli Maç Raporları")
     made=[]
     for i,r in enumerate(ready):
         target=base/("tekli_"+str(i+1).zfill(2)+".pdf")
         c=canvas.Canvas(str(target),pagesize=A4,pageCompression=1)
         c.setTitle("2.6.3 - Onaylı Tekli Maç İnceleme")
-        # User-approved symmetrical four-box layout on A4.
-        for y,height in ((H-135,104),(H-304,154),(H-529,209),(H-758,214)):
-            _box(c,LEFT,y,CW,height)
-        def section(y,label):
-            _text(c,LEFT+17,y,label,10.5,True)
-            c.setStrokeColor(BORDER);c.setLineWidth(.45)
-            c.line(LEFT+17,y-11,RIGHT-17,y-11)
-        section(H-54,"MAÇ BİLGİSİ")
-        _text(c,LEFT+17,H-85,r.get("home","?")+" - "+r.get("away","?"),14,True,max_width=CW-35)
-        _text(c,LEFT+17,H-105,LEAGUES.get(r.get("league"),"LİG")+
-              "  •  "+_date(r.get("match_date_tr")),8.7)
-        _right(c,RIGHT-17,H-105,"Saat: "+str(r.get("kickoff_time_tr") or "—"),9,True)
-        section(H-169,"ANA TAHMİN")
-        main=r.get("morning_main_choice") or {}
-        alt=r.get("morning_alternative_choice") or {}
-        market=main.get("market")
-        ours=main.get("calibrated_probability")
-        firstfair=(r.get("morning_market_no_vig") or {}).get(GROUP.get(market),{})
-        latefair=(r.get("latest_market_no_vig") or {}).get(GROUP.get(market),{})
-        f0=((firstfair.get("no_vig") or {}).get(market)
-            if firstfair.get("status")=="FULL_MARKET_QUOTE_AVAILABLE" else None)
-        f1=((latefair.get("no_vig") or {}).get(market)
-            if latefair.get("status")=="FULL_MARKET_QUOTE_AVAILABLE" else None)
-        if not isinstance(ours,(int,float)) or isinstance(ours,bool) or not 0<=ours<=1:ours=None
-        diff=100*(ours-f0) if ours is not None and isinstance(f0,(int,float)) else None
-        xs=[LEFT+66,LEFT+196,LEFT+324,LEFT+447]
-        headings=["ANA TERCİH","BİZİM %","PİYASA %","FARK"]
-        values=[LABELS.get(market,"TEKNİK ENGEL"),_p(ours),_p(f0),_delta(diff)+" puan" if diff is not None else "—"]
-        for idx,(x,h,v) in enumerate(zip(xs,headings,values)):
-            _center(c,x,H-199,h,8,True,RED if idx==3 else BLACK)
-            _center(c,x,H-226,v,12.5,True,RED if idx==3 else BLACK)
-        for x in (LEFT+130,LEFT+260,LEFT+385):
-            c.setStrokeColor(BORDER);c.setLineWidth(.35)
-            c.line(x,H-236,x,H-189)
-        alttext=(LABELS[alt["market"]]+" "+_p(alt.get("calibrated_probability"))
-                 if alt and alt.get("market") in LABELS else "YOK")
-        _text(c,LEFT+18,H-266,"Alternatif: "+alttext,9,True,RED,max_width=CW-35)
-        _text(c,LEFT+18,H-282,"Sabahki tahmin, model olasılığı ve SHA mührü değişmez.",7.5,color=GRAY)
-        section(H-323,"ORAN KARŞILAŞTIRMASI")
-        odds0=r.get("morning_odds") or {};odds1=r.get("latest_odds") or {}
-        main0=odds0.get(market);main1=odds1.get(market)
-        x0=LEFT+17;split=LEFT+360
-        _text(c,x0,H-352,"PAZAR",7.5,True)
-        _text(c,LEFT+138,H-352,"İLK ORAN",7.5,True)
-        _text(c,LEFT+245,H-352,"SON ORAN",7.5,True)
-        groups=(("MS 1 / X / 2",("MS1","MSX","MS2")),
-               ("2.5 ALT / ÜST",("UNDER_2.5","OVER_2.5")),
-               ("KG VAR / YOK",("BTTS_YES","BTTS_NO")))
-        for j,(name,marks) in enumerate(groups):
-            yy=H-386-j*33
-            _text(c,x0,yy,name,8,True)
-            _text(c,LEFT+135,yy,_row_odds(odds0,marks),8,max_width=98)
-            _text(c,LEFT+240,yy,_row_odds(odds1,marks),8,max_width=105)
-            c.setStrokeColor(BORDER);c.line(x0,yy-15,split-12,yy-15)
-        c.setStrokeColor(BORDER);c.line(split,H-346,split,H-516)
-        _text(c,split+14,H-362,"ANA ORAN",8,True)
-        _text(c,split+14,H-386,_o(main0)+"  →  "+_o(main1),10,True)
-        odiff=main1-main0 if isinstance(main1,(float,int)) and isinstance(main0,(float,int)) else None
-        _text(c,split+14,H-422,"ORAN FARKI",8,True,RED)
-        _text(c,split+14,H-444,("%+.2f"%odiff).replace(".",",") if odiff is not None else "—",11,True,RED)
-        newdiff=100*(ours-f1) if ours is not None and isinstance(f1,(float,int)) else None
-        _text(c,split+14,H-480,"YENİ FARK",8,True,RED)
-        _text(c,split+14,H-501,(_delta(newdiff)+" puan") if newdiff is not None else "—",11,True,RED)
-        section(H-548,"YORUM")
-        commentary=_single_commentary(r,market,main0,main1)
-        comment_lines=_lines(commentary,CW-36,9.6,12)
-        yy=H-578
-        for line in comment_lines:
-            _text(c,LEFT+18,yy,line,9.6);yy-=15.5
-        _text(c,LEFT,H-775,"Kaynak: 1. ve 2. kullanıcı iddaa PDF'si. Kadro bilgisi varsa kaynaklı iddia, otomatik teyit değil.",7.4,color=GRAY,max_width=CW)
-        _text(c,LEFT,H-790,"Bu bir ikinci tahmin değildir. Oranlar ilk sabah kararını değiştirmez.",7.4,color=GRAY)
-        _right(c,RIGHT,21,str(i+1)+"/"+str(len(ready)),8.3,True)
-        c.showPage();c.save();made.append(target)
+        _draw_approved_single_page(c,r,i,len(ready))
+        c.save();made.append(target)
+        if combined is not None:
+            _draw_approved_single_page(combined,r,i,len(ready))
+    if combined is not None:
+        combined.save()
     return made
