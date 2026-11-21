@@ -19,7 +19,10 @@
     "new100_price_reference": "experiments/263/iddaa_pdf_one_step_263.py",
     "normal_historical_reference": "experiments/263/normal_historical_reference_263.py",
     "model_selection_lock": "experiments/263/model_first_selection_lock_20261121_v4.json",
-    "c3_binary_calibrator": "experiments/263/model_first_frozen_c3_calibration_263.py"
+    "c3_binary_calibrator": "experiments/263/model_first_frozen_c3_calibration_263.py",
+    "approved_batch_card_pdf": "experiments/263/iddaa_pdf_approved_layout_263.py",
+    "approved_model_only_batch_route": "experiments/263/sabah_mobile_model_only_263.py",
+    "approved_batch_spec": "docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md"
   },
   "active": [
     {
@@ -66,10 +69,10 @@
     },
     {
       "topic": "reporting_and_seals",
-      "decision_id": "D-OPER-004",
-      "effective_date_tr": "2026-11-20",
+      "decision_id": "D-OPER-005",
+      "effective_date_tr": "2026-11-21",
       "status": "ACTIVE",
-      "rule": "Teknik bloke != model PAS. Karar alindi(A), koda uygulandi(B), canli akista dogrulandi(C) ayri tutulur. Eski 96/40 SHA, main, diger projeler ve tum gecmis tahminler degistirilmez."
+      "rule": "Teknik bloke != model PAS. Karar alındı(A), koda uygulandı(B), canlı akışta doğrulandı(C) ayrı. Eski 96/40 SHA, main ve geçmiş tahminler değişmez. Kullanıcının 21 Kasım 2026'da örnek görselle kesin onayladığı KALICI TOPLU RAPOR: A4 beyaz/siyah/kırmızı, sayfa başına en fazla 6 eşit yuvarlatılmış kart, başlık lig+tarih+maç sayısı, her kartta saat/ev-deplasman/sıra, ANA TERCİH-BİZİM %-PİYASA %-FARK(PUAN), ALT (kırmızı), Ana iddaa oranı; yalnız fark ve alternatif kırmızı, diğerleri siyah. Oran yoksa PİYASA VERİ YOK, FARK —, ORAN —. Hem ilk iddaa PDF'si hem new100 model-only toplu PDF'si ve sohbetten hazırlanan tüm toplu raporlar aynı ortak renderer iddaa_pdf_approved_layout_263.py kullanır. Kullanıcı açıkça değiştirmedikçe farklı tasarım, iki-sayfalık tablolama, kurgu veri veya piyasa yüzdesi uydurma yok. Tekli rapor eski onaylı dört kutusunda kalır. Tam ayrıntı docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md."
     },
     {
       "topic": "exclusive_odds_source",
@@ -109,6 +112,12 @@
       "former_code": "experiments/263/model_first_selection_lock_20261120_normal_v3.json",
       "superseded_by": "D-MARKET-007",
       "status": "V3_LOCK_AND_SEALS_REPLAY_ONLY"
+    },
+    {
+      "former_decision": "20.11.2026 D-OPER-004 toplu PDF serbest sunumu ve mono model-only farkli kart düzeni",
+      "former_code": "experiments/263/sabah_mobile_approved_pdf_263.py::batch_pdf (new100 eski toplu yol)",
+      "superseded_by": "D-OPER-005",
+      "status": "HISTORICAL_RENDERER_ONLY_NEW100_APPROVED_CARDS_ACTIVE"
     }
   ],
   "research_only": [
