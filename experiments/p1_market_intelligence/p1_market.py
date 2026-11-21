@@ -156,7 +156,11 @@ def fit_inverse_poisson(reference: dict) -> dict:
     residuals = {g: {k: 100 * (predicted[g][k] - reference[g][k])
                      for k in MARKETS[g]} for g in MARKETS}
     max_gap = max(abs(v) for d in residuals.values() for v in d.values())
+    ph, pa = _poisson_probs(h), _poisson_probs(a)
+    top = sorted(((ph[i] * pa[j], f'{i}-{j}') for i in range(15) for j in range(15)),
+                 reverse=True)[:5]
     return {'lambda_home': h, 'lambda_away': a,
+            'top_scorelines': [{'score': score, 'probability': probability} for probability, score in top],
             'kl_mismatch': loss,
             'p1_probabilities': predicted,
             'residual_points': residuals,
