@@ -109,6 +109,45 @@ class TestRealFrozenPDFResearchFallback(unittest.TestCase):
                     self.assertIn(t,txt)
                 self.assertNotIn("Şart 1",txt)
 
+    def test_one_step_default_automatically_uses_pdf_math_when_site_unavailable(self):
+        from unittest.mock import patch
+        from iddaa_pdf_bulletin_263 import SCHEMA as BULLETIN_SCHEMA
+        from iddaa_pdf_one_step_263 import one_step
+        b,_=make()
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d)
+            original=root/"uploaded-original.pdf"
+            original.write_bytes(b"synthetic-only-original-PDF-for-unit-test")
+            original_sha=hashlib.sha256(original.read_bytes()).hexdigest()
+            b["pdf_sha256"]=original_sha
+            b["schema"]=BULLETIN_SCHEMA
+            b["total_visible_fixtures"]=2
+            b["potential_ten_league_rows"]=2
+            def unavailable(home,away):
+                return {"status":"NOT_VERIFIED","reason":"fixture_not_unique"}
+            with patch("iddaa_pdf_one_step_263.parse_pdf",return_value=b), \
+                 patch("model_first_iddaa_bridge_263.verify_original_pdf",
+                       return_value=original_sha):
+                result=one_step(
+                    original,history=HISTORY,source_baseline=BASE,
+                    source_acceptance=AUDIT,output_root=root/"sessions",
+                    official_lookup=unavailable,now=NOW,repo_root=str(ROOT),
+                    m4_lock=str(M4),dev_lock=str(LOCK))
+            self.assertEqual(result["official_confirmed_rows"],0)
+            self.assertEqual(result["signed_four_model_forecasts"],0)
+            self.assertEqual(result["pdf_source_only_research_decisions"],2)
+            self.assertTrue(result["pdf_source_only_not_official_seals"])
+            with fitz.open(result["pdf_report_path"]) as doc:
+                t=" ".join(pg.get_text() for pg in doc)
+                self.assertIn("PDF KAYNAKLI",t)
+                self.assertIn("RESMÎ ONAY YOK",t)
+                self.assertIn("ANA MAKİNE",t)
+            saved=Path(result["processing_folder"])/"calibrated_session.json"
+            import json
+            rows=json.loads(saved.read_text(encoding="utf-8"))["rows"]
+            self.assertEqual(sum("pdf_source_research" in x for x in rows),2)
+            self.assertTrue(all("model_first_decision" not in x for x in rows))
+
     def test_second_pdf_preserves_pdf_only_morning_choices_with_source_grade(self):
         from iddaa_pdf_bulletin_263 import SCHEMA as BULLETIN_SCHEMA
         from iddaa_pdf_last_review_263 import build as build_review
