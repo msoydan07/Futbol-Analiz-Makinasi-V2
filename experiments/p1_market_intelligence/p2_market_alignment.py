@@ -105,9 +105,24 @@ def _p0_from_prices(prices: dict) -> dict:
     return p0
 
 
-def _align(decision: dict, prices: dict, *, source: dict) -> dict:
+def _align(decision: dict, prices: dict, *, source: dict,
+           unquoted_market_keys: tuple[str, ...] = ()) -> dict:
     selected, model_prob = _validate_decision(decision)
     p0 = _p0_from_prices(prices)
+    if (len(set(unquoted_market_keys)) != len(unquoted_market_keys)
+        or any(key not in CHOICE_FAMILIES for key in unquoted_market_keys)
+        or any(key in p0.get(CHOICE_FAMILIES[key], {}) for key in unquoted_market_keys)):
+        raise AlignmentError("UNQUOTED_MARKET_CONTRADICTS_COMPLETE_PRICES")
+    # Real comparisons still exist for OTHER complete groups when the model's
+    # chosen event has no published bookmaker quote. Never make new estimates.
+    comparisons = sorted((
+        {"market": row["market"], "model_probability": row["calibrated_probability"],
+         "p0_probability": p0[CHOICE_FAMILIES[row["market"]]][row["market"]],
+         "model_minus_p0_pp": 100*(row["calibrated_probability"] -
+             p0[CHOICE_FAMILIES[row["market"]]][row["market"]])}
+        for row in decision["model_market_diagnostics"]
+        if CHOICE_FAMILIES[row["market"]] in p0
+    ), key=lambda item: (-item["model_probability"], item["market"]))
     family = CHOICE_FAMILIES[selected]
     p0_top = best_choices(p0)["main"] if set(p0) == set(MARKETS) else (
         sorted(((prob, market) for group in p0.values()
@@ -118,12 +133,16 @@ def _align(decision: dict, prices: dict, *, source: dict) -> dict:
         return {
             "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
             "p0_probabilities": p0,
+            "unquoted_pdf_selections": list(unquoted_market_keys),
+            "other_complete_market_comparisons": comparisons,
             "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
             "model_probability": model_prob, "p0_same_choice_probability": None,
             "signed_gap_pp": None, "absolute_gap_pp": None,
             "p0_highest_choice": p0_top["choice"], "p0_highest_probability": p0_top["probability"],
             "p0_highest_is_global": False,
-            "p0_main_choice_matches": False, "status": "P0_SAME_MARKET_UNAVAILABLE",
+            "p0_main_choice_matches": False,
+            "status": ("MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF"
+                       if selected in unquoted_market_keys else "P0_SAME_MARKET_UNAVAILABLE"),
             "window_sensitivity": {}, "no_new_probability": True,
             "main_decision_changed": False, "threshold_validated": False,
         }
@@ -135,6 +154,8 @@ def _align(decision: dict, prices: dict, *, source: dict) -> dict:
         return {
             "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
             "p0_probabilities": p0,
+            "unquoted_pdf_selections": list(unquoted_market_keys),
+            "other_complete_market_comparisons": comparisons,
             "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
             "model_probability": model_prob, "p0_same_choice_probability": implied,
             "signed_gap_pp": gap, "absolute_gap_pp": abs(gap),
@@ -152,6 +173,8 @@ def _align(decision: dict, prices: dict, *, source: dict) -> dict:
     return {
         "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
         "p0_probabilities": p0,
+        "unquoted_pdf_selections": list(unquoted_market_keys),
+        "other_complete_market_comparisons": comparisons,
         "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
         "model_probability": model_prob, "p0_same_choice_probability": implied,
         "signed_gap_pp": gap, "absolute_gap_pp": abs(gap),
@@ -191,6 +214,25 @@ def align_first_pdf_snapshot(decision: dict, snapshot: dict) -> dict:
     if not isinstance(pdf_sha, str) or len(pdf_sha) != 64 or any(c not in "0123456789abcdef" for c in pdf_sha):
         raise AlignmentError("SOURCE_PDF_SHA_MISSING")
     groups = snapshot.get("groups", {})
+    unquoted = snapshot.get("not_offered_pdf_market_keys", [])
+    raw_partial = snapshot.get("partial_quoted_prices_no_no_vig", {})
+    if (not isinstance(unquoted, list) or
+        any(not isinstance(x, str) for x in unquoted) or
+        len(unquoted) != len(set(unquoted)) or
+        any(x not in CHOICE_FAMILIES for x in unquoted)):
+        raise AlignmentError("PDF_UNQUOTED_MARKET_KEYS_INVALID")
+    if (not isinstance(raw_partial, dict) or
+        not set(raw_partial).issubset(GROUP_NAMES)):
+        raise AlignmentError("INVALID_PARTIAL_QUOTES")
+    for label, pairs in raw_partial.items():
+        canonical_group = GROUP_NAMES[label]
+        if (label in groups or not isinstance(pairs, dict) or
+            not set(pairs).issubset(MARKETS[canonical_group]) or
+            len(pairs) == len(MARKETS[canonical_group]) or
+            any(not isinstance(x, (float,int)) or isinstance(x,bool)
+                or not math.isfinite(x) or x <= 1 for x in pairs.values()) or
+            any(key in unquoted for key in pairs)):
+            raise AlignmentError("PARTIAL_QUOTES_INCONSISTENT")
     if not isinstance(groups, dict) or not set(groups).issubset(GROUP_NAMES):
         raise AlignmentError("INVALID_PDF_MARKET_GROUPS")
     prices = {}
@@ -208,12 +250,19 @@ def align_first_pdf_snapshot(decision: dict, snapshot: dict) -> dict:
                for k in check):
             raise AlignmentError("PDF_FAIR_VALUES_DO_NOT_MATCH_PRICES")
         prices[category] = odds
-    return _align(decision, prices, source={
+    if (any(choice in prices.get(CHOICE_FAMILIES[choice], {}) for choice in unquoted)
+        or any(choice not in [key for g in raw_partial.values() for key in g]
+               and CHOICE_FAMILIES[choice] in [GROUP_NAMES[k] for k in groups]
+               for choice in unquoted)):
+        raise AlignmentError("UNQUOTED_PDF_KEYS_CONTRADICT_COMPLETE_GROUP")
+    result = _align(decision, prices, unquoted_market_keys=tuple(unquoted), source={
         "kind": "SHA_LINKED_ORIGINAL_USER_IDDAA_FIRST_PDF",
         "source_pdf_sha256": pdf_sha, "snapshot_sha256": snapshot["payload_sha256"],
         "independently_download_verified": False,
         "first_pdf_observed_at_utc": observed.isoformat(),
     })
+    result["partially_quoted_unpriced_families"] = raw_partial
+    return result
 
 
 def align_legacy_archive(decision: dict, archived: dict, archive_name: str) -> dict:
