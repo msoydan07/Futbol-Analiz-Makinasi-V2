@@ -1,8 +1,8 @@
 """One coherent batch of read-only team label tests for user supplied iddaa PDF.
 
 The 86 historical external labels are PINNACLE snapshots, NOT iddaa verified.
-Twenty curated aliases came from those snapshots; two further observed
-spellings are user-iddaa PDF labels. Keep provenance separate; test all 22.
+Twenty curated aliases came from those snapshots; four further observed
+spellings are user-iddaa PDF labels (Nov 20 and 22). Test all 24.
 """
 import json,unittest
 from pathlib import Path
@@ -25,15 +25,17 @@ class IdDaaPdfTeamNameSafety(unittest.TestCase):
             self.assertGreaterEqual(len(self.index[league]),len(self.members[league]))
             self.assertTrue(set(self.index[league].values()).issubset(self.members[league]))
 
-    def test_all_22_curated_labels_exact_same_canonical_identity_no_collision(self):
+    def test_all_24_curated_labels_exact_same_canonical_identity_no_collision(self):
         registry=json.loads((ROOT/"experiments/263/evidence/identity_index_263.json")
                             .read_text(encoding="utf-8"))
         self.assertEqual(len(registry["teams"]),215)
         self.assertEqual(sum(map(len,KNOWN_EXTERNAL_VARIANTS.values())),20)
-        self.assertEqual(sum(map(len,KNOWN_IDDAA_PDF_VARIANTS.values())),2)
+        self.assertEqual(sum(map(len,KNOWN_IDDAA_PDF_VARIANTS.values())),4)
         self.assertEqual(KNOWN_IDDAA_PDF_VARIANTS,{
             "ESP1":{"Athletic Bilbao":"Athletic Club",
-                    "Espanyol":"RCD Espanyol de Barcelona"}})
+                    "Espanyol":"RCD Espanyol de Barcelona",
+                    "Racing Santander":"R. Racing Club"},
+            "BEL1":{"Standard Liege":"Standard de Liège"}})
         total=0
         for origin,collection in (("NOV8_EXTERNAL_SPELLING",KNOWN_EXTERNAL_VARIANTS),
                                   ("NOV20_USER_IDDAA_PDF",KNOWN_IDDAA_PDF_VARIANTS)):
@@ -56,7 +58,7 @@ class IdDaaPdfTeamNameSafety(unittest.TestCase):
                         self.assertEqual(t["verification"],"FEDERATION_VERIFIED")
                         self.assertTrue(t["official_name_evidence_url"].startswith("https://"))
                         total+=1
-        self.assertEqual(total,22)
+        self.assertEqual(total,24)
 
     def test_iddaa_athletic_and_espanyol_are_distinct_clubs_not_swapped(self):
         athletic=resolve_label("ESP1","Athletic Bilbao",self.index)["team_id"]

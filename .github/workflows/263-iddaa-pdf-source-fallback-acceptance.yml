@@ -1,0 +1,57 @@
+name: 263 original iddaa PDF fallback M4/C3, source grade and SHA acceptance
+on:
+  push:
+    branches:
+      - experiment/263-pdf-fixture-fallback-20261122
+      - experiment/263-toplu-karsilastirma
+    paths:
+      - experiments/263/iddaa_pdf_source_fallback_263.py
+      - experiments/263/iddaa_pdf_team_alias_preflight_263.py
+      - experiments/263/iddaa_pdf_one_step_263.py
+      - experiments/263/iddaa_pdf_approved_layout_263.py
+      - experiments/263/iddaa_pdf_last_review_263.py
+      - experiments/263/test_iddaa_pdf_source_fallback_263.py
+      - experiments/263/test_iddaa_pdf_team_alias_preflight_263.py
+      - experiments/263/check_active_decisions_263.py
+      - experiments/263/test_check_active_decisions_263.py
+      - docs/263_AKTIF_KARARLAR.json
+      - docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md
+      - .github/workflows/263-iddaa-pdf-source-fallback-acceptance.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  original-pdf-without-false-federation-seal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install frozen core numerical and PDF dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 PyMuPDF==1.26.5 reportlab
+      - name: Restore frozen 4413 base and check original SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: Regression exact 25-match math, safe source grade, original one-step and V3 reports
+        env:
+          PYTHONPATH: .:experiments/263:experiments/p1_market_intelligence
+        run: |
+          set -euo pipefail
+          python -m unittest -v \
+            experiments/263/test_iddaa_pdf_source_fallback_263.py \
+            experiments/263/test_iddaa_pdf_one_step_263.py \
+            experiments/263/test_iddaa_pdf_team_alias_preflight_263.py \
+            experiments/263/test_iddaa_pdf_approved_layout_263.py \
+            experiments/263/test_three_machine_reports_v3_263.py \
+            experiments/263/test_iddaa_pdf_last_review_263.py \
+            experiments/263/test_model_first_iddaa_bridge_263.py \
+            experiments/263/test_check_active_decisions_263.py
+          python experiments/263/check_active_decisions_263.py

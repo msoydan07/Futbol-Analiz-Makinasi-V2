@@ -136,6 +136,36 @@ def _extract_card(row,session):
     signed morning session. It cannot steer or override model selection.
     """
     d=_valid_decision(row,session)
+    research=row.get("pdf_source_research")
+    if d is None and isinstance(research,dict):
+        # The lower-trust PDF-only record has its OWN SHA and a mandatory
+        # visible grade. It MUST NOT masquerade as an official M4/C3 seal.
+        from iddaa_pdf_source_fallback_263 import verify_research_record
+        from model_first_decision_263 import digest
+        verify_research_record(research,session["pdf_sha256"],row)
+        main=research["main"];alt=research["alternative"]
+        p0=research.get("p0")
+        p0_market=p0["choice"] if p0 else None
+        p0_prob=p0["probability"] if p0 else None
+        p2_status={"UYUMLU":"UYUMLU","FARKLI":"FARKLI",
+                   "YUZDELER_UZAK":"YÜZDELER UZAK",
+                   "ORAN_EKSIK":"ORAN EKSİK"}.get(
+                    research.get("p2_status"),"KONTROL EDİLEMEDİ")
+        gap=research.get("percentage_point_gap")
+        return {
+            "home":row["pdf_home"],"away":row["pdf_away"],"league":row["league"],
+            "date":row["match_date_tr"],"time":row["kickoff_time_tr"],
+            "main":LABELS[main["market"]],"ours":_p(main["calibrated_probability"]),
+            "p0":LABELS.get(p0_market,"—"),"p0_pct":_p(p0_prob),
+            "p2_status":p2_status,
+            "p0_odds":_o((row.get("prices") or {}).get(p0_market)),
+            "p2_gap":("%.2f"%gap).replace(".",",")+" puan"
+                       if isinstance(gap,(int,float)) else "—",
+            "alternative":LABELS[alt["market"]]+" "+_p(alt["calibrated_probability"])
+                           if alt else "YOK",
+            "source_note":"PDF KAYNAKLI · RESMÎ ONAY YOK",
+            "forecast_sha":None,"decision_sha":None,
+        }
     main=d.get("main_candidate") if d else None
     alt=d.get("alternative_candidate") if d else None
     model_market=main.get("market") if isinstance(main,dict) else None
@@ -262,8 +292,12 @@ def _draw_grouped_cards(grouped,target,model_only=False):
                 _text(c,xx[2]+8,top-64,"Oran: "+str(r.get("p0_odds","—")),9,True)
                 _text(c,xx[2]+8,top-82,"Fark: "+str(r.get("p2_gap","—")),
                       8.9,True,RED,max_width=col_w-14)
+                note=r.get("source_note")
                 _text(c,LEFT+15,top-97,"Alternatif: "+str(r.get("alternative","YOK")),
-                      8.2,True,RED,max_width=CW-30)
+                      8.2,True,RED,max_width=CW-(232 if note else 30))
+                if note:
+                    _right(c,RIGHT-12,top-97,note,6.7,True,
+                           max_width=202,color=GRAY)
             footer=H-113-len(chunk)*107-5
             _text(c,LEFT,footer,
                   "ANA ve P0 kendi en yüksek tercihlerini bağımsız seçer; P2 sadece karşılaştırır.",7.2)
@@ -319,7 +353,11 @@ def _row_odds(d,markets):
 
 def _single_commentary(r,market,old,new):
     name=LABELS.get(market,"ana tercih")
-    parts=["Sabahki "+name+" tercihi ve model yüzdesi korunuyor."]
+    parts=([
+      "İlk iddaa PDF'sinden hesaplanan "+name+
+      " araştırma tercihi korunuyor; federasyon fikstürü bağımsız doğrulanmadı."
+    ] if r.get("morning_source_grade")=="PDF_ONLY_NOT_FEDERATION_VERIFIED"
+      else ["Sabahki "+name+" tercihi ve model yüzdesi korunuyor."])
     if isinstance(old,(int,float)) and isinstance(new,(int,float)):
         move=new-old
         if abs(move)<.015:
@@ -362,12 +400,30 @@ def _draw_approved_single_page(c,r,i,n):
     _text(c,LEFT,H-105,LEAGUES.get(r.get("league"),r.get("league") or "LİG"),
           8.5,color=GRAY)
     c.line(LEFT,H-119,RIGHT,H-119)
+    if r.get("morning_source_grade")=="PDF_ONLY_NOT_FEDERATION_VERIFIED":
+        _right(c,RIGHT,H-106,"PDF KAYNAKLI · RESMÎ ONAY YOK",7.5,True,color=RED)
 
     main=r.get("morning_main_choice") or {}
     alt=r.get("morning_alternative_choice") or {}
     p2=r.get("morning_p2_agreement")
+    lower=r.get("morning_pdf_source_research")
     p0_choice=None;p0_pct=None;p0_probs={}
-    if isinstance(p2,dict):
+    if isinstance(lower,dict):
+        from iddaa_pdf_source_fallback_263 import verify_research_record
+        synthetic_source={
+            "index":lower["row_index"],"league":r["league"],
+            "pdf_home":r["home"],"pdf_away":r["away"]}
+        verify_research_record(lower,r.get("morning_pdf_sha256"),synthetic_source)
+        if (lower["payload_sha256"]!=r.get("morning_decision_sha256")
+            or lower.get("main")!=main or lower.get("alternative")!=alt
+            or r.get("morning_source_grade")!="PDF_ONLY_NOT_FEDERATION_VERIFIED"
+            or p2 is not None):
+            raise ValueError("SINGLE_PDF_ONLY_RESEARCH_SOURCE_MISMATCH")
+        p0=lower.get("p0")
+        p0_choice=p0["choice"] if p0 else None
+        p0_pct=p0["probability"] if p0 else None
+        p0_probs=lower.get("p0_probabilities") or {}
+    elif isinstance(p2,dict):
         if (p2.get("model_decision_sha256")!=r.get("morning_decision_sha256") or
             p2.get("forecast_sha256") not in
                 (None,r.get("morning_model_sha256"))):

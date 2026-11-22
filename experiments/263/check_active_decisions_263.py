@@ -68,6 +68,23 @@ def verify_active_policy(root=ROOT):
     one=(root/paths["first_pdf"]).read_text(encoding="utf-8")
     bridge=(root/paths["model_first_bridge"]).read_text(encoding="utf-8")
     selector=(root/paths["model_first_selector"]).read_text(encoding="utf-8")
+    # The owner-approved PDF-only mathematical research fallback is a
+    # distinct LOWER-TRUST source grade; never remove it or fake an official
+    # fixture when an out-of-date league adapter fails.
+    fallback_path="experiments/263/iddaa_pdf_source_fallback_263.py"
+    source_policy="docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md"
+    _require(paths.get("pdf_fixture_lower_trust_model")==fallback_path
+             and paths.get("pdf_fixture_source_grade_spec")==source_policy
+             and (root/source_policy).is_file(),
+             "APPROVED_PDF_ONLY_SOURCE_GRADE_POLICY_MISSING")
+    fallback=(root/fallback_path).read_text(encoding="utf-8")
+    _require("attach_pdf_research" in one and
+             "verify_research_record" in fallback and
+             "official_fixture_verified" in fallback and
+             "official_seal_created" in fallback and
+             "price_affected_main_selection" in fallback and
+             "USER_IDDAA_PDF_ONLY_NOT_OFFICIAL_FIXTURE_VERIFIED" in fallback,
+             "PDF_ONLY_MATH_WITHOUT_FAKE_OFFICIAL_SOURCE_GRADE_NOT_CONNECTED")
     _require("from model_first_iddaa_bridge_263 import calibrate_session" in one,
              "OLD_OR_MISSING_FIRST_PDF_DECIDER")
     _require("from iddaa_pdf_value_bridge_263 import calibrate_session" not in one,

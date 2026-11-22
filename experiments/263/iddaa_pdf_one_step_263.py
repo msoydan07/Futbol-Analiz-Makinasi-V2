@@ -107,6 +107,15 @@ def one_step(pdf,*,history,output_root,
     calibrated=calibrate_session(bulletin,session,
                         original_pdf=copied,repo_root=repo_root,
                         dev_lock_path=dev_lock,now=now,session_dir=folder)
+    # Distinguish official crawler failure from model mathematics. A separate
+    # SHA-linked PDF-only research sidecar can compute M4/C3 WITHOUT falsely
+    # declaring an official fixture verified or changing existing seals.
+    # The original parse + full PDF bytes were SHA checked above.
+    from iddaa_pdf_source_fallback_263 import attach as attach_pdf_research
+    calibrated=attach_pdf_research(
+        bulletin,calibrated,history=history,
+        source_baseline=source_baseline,source_acceptance=source_acceptance,
+        m4_lock=m4_lock,dev_lock=dev_lock,now=now)
     _write_once(folder/"calibrated_session.json",calibrated)
     # Preserve detailed historic diagnostic PDF for tests/replay, but make
     # the exact user-approved visual report the NORMAL first-PDF output.
@@ -120,6 +129,11 @@ def one_step(pdf,*,history,output_root,
         "official_confirmed_rows":session["n_official"],
         "signed_four_model_forecasts":session["n_forecast"],
         "calibrated_price_decisions":calibrated["n_pdf_first_decisions"],
+        "pdf_source_only_research_decisions":calibrated.get(
+            "pdf_source_model_math_count",0),
+        "pdf_source_only_not_official_seals":True,
+        "pdf_source_research_blocked_count":calibrated.get(
+            "pdf_source_research_blocked_count",0),
         "model_only_decisions":calibrated["n_pdf_first_decisions"],
         "decision_policy":"D_MARKET_006_MODEL_FIRST_M4_MS_C3_KG_O25",
         "research_pas_or_blocked":calibrated["n_pdf_first_pas_or_blocked"],
