@@ -47,7 +47,8 @@ class OneStepTests(unittest.TestCase):
             self.assertIn("Besiktas JK",content)
             self.assertIn("MS 1",content)
             self.assertIn("KG VAR",content)
-            self.assertIn("PAS",content)
+            self.assertIn("TEKNİK ENGEL",content)
+            self.assertIn("P2:",content)
             self.assertNotIn("1.5 Üst",content)
             # Reusing the same PDF is append-only blocked, not silently
             # replacing stored odds/forecast at another timestamp.
@@ -122,10 +123,10 @@ class OneStepTests(unittest.TestCase):
             self.assertEqual(done["official_confirmed_rows"],1)
             with fitz.open(done["pdf_report_path"]) as generated:
                 text=" ".join(page.get_text() for page in generated)
-            self.assertIn("ANA TERCİH",text)
-            self.assertIn("BİZİM %",text)
-            self.assertIn("PİYASA %",text)
-            self.assertIn("FARK (PUAN)",text)
+            self.assertIn("ANA MAKİNE",text)
+            self.assertIn("P0",text)
+            self.assertIn("P2:",text)
+            self.assertIn("Alternatif:",text)
             self.assertNotIn("1.5 Üst",text)
             self.assertNotIn("3.5 Alt",text)
             # Traversal/symlink access via untrusted row JSON is prohibited.
