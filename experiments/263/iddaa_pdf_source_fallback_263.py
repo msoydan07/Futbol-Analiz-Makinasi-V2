@@ -263,6 +263,17 @@ def attach(bulletin,calibrated,*,history,source_baseline,source_acceptance,
             raise ValueError("PDF_ORIGINAL_ROW_IDENTITY_OR_ORDER_INVALID")
         if current.get("model_first_decision") is not None:
             continue
+        # ONLY an unavailable/unmatched official lookup can switch to
+        # PDF-only research. A positive official time/identity CONTRADICTION
+        # or a genuine numerical/data gate failure must never be bypassed.
+        source_lookup_unavailable={
+            "ONE_ROW_OFFICIAL_FIXTURE_NOT_VERIFIED",
+            "ONE_ROW_OFFICIAL_ADAPTER_ERROR",
+        }
+        if current.get("status") not in source_lookup_unavailable:
+            continue
+        if current.get("official") is not None:
+            raise ValueError("OFFICIAL_FIXTURE_ALREADY_CONFIRMED_NO_PDF_FALLBACK")
         if parsed.get("status")!="PDF_ROW_READY_FOR_ONE_OFFICIAL_FIXTURE_CHECK":
             continue
         if (parsed.get("league") is None or parsed.get("league") not in members):
