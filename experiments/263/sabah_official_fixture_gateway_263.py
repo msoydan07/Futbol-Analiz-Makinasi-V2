@@ -102,6 +102,7 @@ class OfficialFixtureGateway:
                     if not is_approved_url(pdf_url,"ITA1") or len(pdf_events)!=10:
                         raise OfficialGatewayError("ITALY_PDF_SOURCE_OR_EVENT_COUNT_INVALID")
                     entry.update(effective_url=pdf_url,events=pdf_events,
+                                 html=None,html_sha256=None,
                                  parser=ITA_PDF_PARSER,
                                  official_pdf_sha256=pdf_sha,
                                  source_document_type="LEGA_SERIE_A_OFFICIAL_PDF",
