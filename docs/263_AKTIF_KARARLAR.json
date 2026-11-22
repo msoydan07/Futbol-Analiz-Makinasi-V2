@@ -26,7 +26,9 @@
     "approved_single_review_pdf": "experiments/263/iddaa_pdf_approved_layout_263.py",
     "approved_single_review_spec": "docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md",
     "second_pdf_archive": "experiments/263/second_pdf_commentary_archive_263.py",
-    "second_pdf_archive_spec": "docs/263_IKINCI_PDF_ORAN_YORUM_ARSIV_KARARI_20261121.md"
+    "second_pdf_archive_spec": "docs/263_IKINCI_PDF_ORAN_YORUM_ARSIV_KARARI_20261121.md",
+    "p0_p2_audit": "experiments/p1_market_intelligence/p2_market_alignment.py",
+    "approved_layout_version": "THREE_MACHINE_FIRST_AND_SECOND_V3_20261122"
   },
   "active": [
     {
@@ -74,9 +76,9 @@
     {
       "topic": "reporting_and_seals",
       "decision_id": "D-OPER-006",
-      "effective_date_tr": "2026-11-21",
+      "effective_date_tr": "2026-11-22",
       "status": "ACTIVE",
-      "rule": "Teknik bloke != model PAS. Karar alındı(A), koda uygulandı(B), canlı akışta doğrulandı(C) ayrı. Eski 96/40 SHA, main ve geçmiş tahminler değişmez. Kullanıcının 21 Kasım 2026'da örnek görselle kesin onayladığı KALICI TOPLU RAPOR: A4 beyaz/siyah/kırmızı, sayfa başına en fazla 6 eşit yuvarlatılmış kart, başlık lig+tarih+maç sayısı, her kartta saat/ev-deplasman/sıra, ANA TERCİH-BİZİM %-PİYASA %-FARK(PUAN), ALT (kırmızı), Ana iddaa oranı; yalnız fark ve alternatif kırmızı, diğerleri siyah. Oran yoksa PİYASA VERİ YOK, FARK —, ORAN —. Hem ilk iddaa PDF'si hem new100 model-only toplu PDF'si ve sohbetten hazırlanan tüm toplu raporlar aynı ortak renderer iddaa_pdf_approved_layout_263.py kullanır. Kullanıcı açıkça değiştirmedikçe farklı tasarım, iki-sayfalık tablolama, kurgu veri veya piyasa yüzdesi uydurma yok. İKİNCİ İDDAA PDF RAPORU KALICI: her maç için A4 tek sayfa, dört simetrik kutu (MAÇ BİLGİSİ / ANA TAHMİN / ORAN KARŞILAŞTIRMASI / YORUM), sabah mühürlü seçim/yüzde değişmez. Birden fazla maçta kanonik tek çok sayfalı tekli_rapor.pdf; her sayfada bir maç. Piyasa % ilk PDF marjsız, YENİ FARK ikinci PDF marjsız; ana oran ilk→son, oran farkı ve yeni fark görünür. Alternatif ve farklar kırmızı, kalan siyah, arka plan beyaz, Arial benzeri, yuvarlak ince çerçeve simetrik. Eski genel review.pdf yalnız teknik arşiv, kullanıcıya kanonik pdf_report olarak ASLA dönmez. Her ikinci PDF'de aynı tasarım; farklı rapor sunulmaz. Tekli ayrıntı docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md. Tam ayrıntı docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md."
+      "rule": "Teknik bloke != model PAS. Karar A, kod uygulaması B, canlı doğrulama C ayrıdır. Önceki SHA mühürleri, ana model, M4/C3 ve seçim matematiği değişmez. KALICI TOPLU RAPOR V3: A4, en çok altı eşit kart; her kart ANA MAKİNE (bağımsız en yüksek olay ve kendi yüzde), P0 (ilk kullanıcı iddaa PDF'sinden bağımsız en yüksek olay ve kendi marjsız yüzde), P2: UYUMLU/FARKLI/YÜZDELER UZAK/ORAN EKSİK. Üçüncü sütunun altı ilk iddaa ham P0 lider oranı, ardından sadece aynı olay seçilmişse yüzde puan farkı. Kart altı alternatif kırmızı. Şart 1/Şart 2 teknik yazıları raporda görünmez. Arka plan beyaz, yazı siyah, fark ve alternatif kırmızı, simetrik. İLK iddaa PDF'si ve new100 model-only aynı iddaa_pdf_approved_layout_263.py renderer. Eksik fiyat uydurulmaz, P0 tam 7 olay lideri bilinmiyorsa yok yazılır. İKİNCİ İDDAA PDF RAPORU KALICI V3: A4 tek sayfa/her maç. ANA TERCİH, ALTERNATİF, P0 PİYASA üç eşit kutu, her biri kendi sabah seçimi/yüzdesi ile İlk oran/Son oran/Fark (son-ilk). Altında 7 seçeneğin Tercihler, sabah P0 Yüzdeler ve son iddaa Oranlar satırları; altında tek MAÇ YORUMU. İkinci PDF sabah model ve P0 tercihlerini asla değiştirmez. P2 kontrolü yalnız ilk toplu PDF'de sunulur; P1 ayrı araştırmadır. Her iki raporun varsayılan üreticisi experiments/263/iddaa_pdf_approved_layout_263.py; kullanıcı yolları toplu_analiz_onayli.pdf ve last_football_review/tekli_rapor.pdf. Teknik futbol_263_iddaa_oranli_rapor.pdf / review.pdf kanonik kullanıcı dosyası değildir. Ayrıntı docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md ve docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md. Bu belge V3 tasarımını geçmiş V1/V2 görünümünün yerine geçirir; eski PDF'ler değiştirilemez."
     },
     {
       "topic": "exclusive_odds_source",
