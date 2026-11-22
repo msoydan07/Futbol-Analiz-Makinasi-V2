@@ -176,6 +176,56 @@ class TestP2(unittest.TestCase):
         with self.assertRaisesRegex(AlignmentError, "PARTIAL_QUOTES_INCONSISTENT"):
             align_first_pdf_snapshot(decision(), data)
 
+    def test_model_top_choice_unquoted_each_of_seven_event_types(self):
+        # Covers favorite away MS2 (as well as MS1, MSX, KG and 2.5 events).
+        group_for={k:g for g,markets in {
+            "MS": ("MS1","MSX","MS2"),
+            "OU25": ("UNDER_2.5","OVER_2.5"),
+            "KG": ("BTTS_YES","BTTS_NO"),
+        }.items() for k in markets}
+        group_to_pdf={"MS":"MS","OU25":"GOALS_2.5","KG":"KG"}
+        for target in group_for:
+            with self.subTest(model_choice_unquoted=target):
+                d=decision()
+                # Preserve internally coherent separate market-family
+                # distributions. Target is the biggest of all seven events.
+                if group_for[target] == "MS":
+                    new={"MS1":.10, "MSX":.10,"MS2":.10}
+                    new[target]=.80
+                    rem=[k for k in new if k != target]
+                    new[rem[0]]=new[rem[1]]=.10
+                else:
+                    mates=[k for k in group_for if group_for[k]==group_for[target]
+                           and k!=target]
+                    new={target:.80,mates[0]:.20}
+                for row in d["model_market_diagnostics"]:
+                    if row["market"] in new:
+                        row["calibrated_probability"]=new[row["market"]]
+                d["main_candidate"]={"family": "O25" if group_for[target]=="OU25"
+                                           else group_for[target],
+                                      "market":target,"calibrated_probability":.80}
+                d["payload_sha256"]=_sha_json({
+                    k:v for k,v in d.items() if k!="payload_sha256"})
+                group=group_for[target]
+                complete={g:odds for g,odds in ODDS.items() if g!=group}
+                partial={k:v for k,v in ODDS[group].items() if k!=target}
+                snap=snapshot(complete)
+                snap["not_offered_pdf_market_keys"]=[target]
+                snap["partial_quoted_prices_no_no_vig"]={group_to_pdf[group]:partial}
+                snap["payload_sha256"]=_sha_json({
+                    k:v for k,v in snap.items() if k!="payload_sha256"})
+                result=align_first_pdf_snapshot(d,snap)
+                self.assertEqual(result["status"],"MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF")
+                self.assertEqual(result["model_choice"],target)
+                self.assertEqual(result["model_probability"],.80)
+                self.assertIsNone(result["p0_same_choice_probability"])
+                self.assertFalse(result["p0_highest_is_global"])
+                self.assertEqual(result["unquoted_pdf_selections"],[target])
+                self.assertFalse(result["main_decision_changed"])
+                self.assertTrue(result["no_new_probability"])
+                self.assertEqual(result["partially_quoted_unpriced_families"]
+                                 [group_to_pdf[group]], partial)
+
     def test_decision_and_pdf_hashes_protected(self):
         d, s = decision(), snapshot()
         d["main_candidate"]["calibrated_probability"] += .01
