@@ -211,55 +211,66 @@ def render_batch(session,target):
 
 
 def _draw_grouped_cards(grouped,target,model_only=False):
-    """THE ONLY approved 6-card white/black/red batch layout, all routes.
+    """Permanent mobile three-column first-PDF layout, maximum six cards/page.
 
-    Presentation only. First-PDF records are fully SHA-verified by
-    render_batch; model-only rows must be verified by the new100 caller.
-    This centralizes exact geometry so later manual/chat PDF outputs cannot
-    silently drift to the older two-card/table layouts.
+    Exactly: ANA MAKİNE | P0 | P2: UYUMLU/FARKLI/ORAN EKSİK.
+    P2 underneath: original iddaa price, then same-event percentage-point gap.
+    No public 'Şart 1/2' labels, no price-driven change to main decision.
+    This same geometry is also used by price-free NEW100 reports.
     """
     _fonts()
     c=canvas.Canvas(str(target),pagesize=A4,pageCompression=1)
-    c.setTitle("2.6.3 - Onaylı Toplu Analiz")
+    c.setTitle("2.6.3 - Üç Makine Sabah Toplu Analiz v3")
     pages=0
     for (league,day),games in grouped.items():
         for start in range(0,len(games),6):
             chunk=games[start:start+6];pages+=1
-            _text(c,LEFT,H-55,LEAGUES.get(league,league),20,True)
+            _text(c,LEFT,H-49,LEAGUES.get(league,league),18.5,True)
             try: weekday=WEEKDAYS[date.fromisoformat(day).weekday()]
-            except (ValueError,TypeError): weekday="GÜN DOĞRULANAMADI"
-            _text(c,LEFT,H-73,_date(day).upper()+"  •  "+weekday+"  •  "+str(len(games))+" MAÇ",8.5,True)
-            _text(c,LEFT,H-101,"MS 1-X-2   /   2.5 ALT-ÜST   /   KG VAR-YOK",8.3)
-            _right(c,RIGHT,H-60,
-                   "SABAH / MODEL-ONLY" if model_only else "SABAH / İLK ORAN PDF",
-                   8.5,True)
+            except (ValueError,TypeError): weekday="TARİH DOĞRULANAMADI"
+            _text(c,LEFT,H-69,_date(day).upper()+"  ·  "+weekday+"  ·  "+str(len(games))+" MAÇ",8.4,True)
+            _right(c,RIGHT,H-53,"SABAH / MODEL-ONLY" if model_only
+                   else "SABAH / İLK İDDAA PDF",8,True)
+            _text(c,LEFT,H-94,"MS 1-X-2   /   2.5 ALT-ÜST   /   KG VAR-YOK",8.1)
             for i,r in enumerate(chunk):
-                top=H-120-i*103;bottom=top-98
-                _box(c,LEFT,bottom,CW,98)
-                _box(c,LEFT+12,top-30,57,20)
-                _text(c,LEFT+20,top-24,r["time"],8.5,True)
-                _text(c,LEFT+79,top-25,r["home"]+" - "+r["away"],10,True,max_width=CW-150)
-                _right(c,RIGHT-14,top-24,str(start+i+1).zfill(2)+"/"+str(len(games)).zfill(2),8.4,True)
-                c.setStrokeColor(BORDER);c.setLineWidth(.5)
-                c.line(LEFT+13,top-36,RIGHT-13,top-36)
-                xs=(LEFT+17,LEFT+205,LEFT+301,LEFT+417)
-                labs=("ANA TERCİH","BİZİM %","PİYASA %","FARK (PUAN)")
-                vals=(r["main"],r["ours"],r["fair"],r["diff"])
-                for idx,(x,lab,val) in enumerate(zip(xs,labs,vals)):
-                    col=RED if idx==3 else BLACK
-                    _text(c,x,top-51,lab,7,True,col)
-                    _text(c,x,top-72,val,13 if idx<1 else 12.8,True,col,
-                          max_width=(170 if idx==0 else 100))
-                _text(c,LEFT+17,top-89,"Alternatif: "+r["alternative"],8,True,RED,max_width=290)
-                _right(c,RIGHT-14,top-89,"Ana iddaa oranı: "+r["main_odds"],7.9,True)
-            footer_y=H-120-len(chunk)*103-9
-            if model_only:
-                _text(c,LEFT,footer_y,"Bizim %: SHA ile kayıtlı v4 model olasılığı. Piyasa %: VERİ YOK (kullanıcı PDF'si gelmedi).",7.4)
-                _text(c,LEFT,footer_y-15,"Oran araması yapılmaz; fiyatsızlık model PAS değildir. Karar önceden mühürlüdür.",7.4)
-            else:
-                _text(c,LEFT,footer_y,"Bizim %: sabah imzalı uzman model olasılığı. Piyasa %: PDF'deki marjsız oran.",7.4)
-                _text(c,LEFT,footer_y-15,"Oran tahmin seçimini etkilemez. Eksik/kanıtsız seçim TEKNİK ENGEL (PAS DEĞİL).",7.4)
-            _text(c,LEFT,footer_y-30,"Mühürler ve karar kanıtı ayrı kayıtlıdır. Bu PDF, sunum katmanıdır.",7.4)
+                top=H-113-i*107;bottom=top-104
+                _box(c,LEFT,bottom,CW,104)
+                _box(c,LEFT+10,top-29,55,19)
+                _text(c,LEFT+17,top-23,r.get("time","—"),8.2,True)
+                _text(c,LEFT+72,top-22,
+                    str(r.get("home","?"))+" - "+str(r.get("away","?")),9.6,True,
+                    max_width=CW-141)
+                _right(c,RIGHT-12,top-22,
+                       str(start+i+1).zfill(2)+"/"+str(len(games)).zfill(2),8.0,True)
+                c.setStrokeColor(BORDER);c.setLineWidth(.45)
+                c.line(LEFT+12,top-34,RIGHT-12,top-34)
+                col_w=(CW-28)/3
+                xx=(LEFT+13,LEFT+13+col_w,LEFT+13+2*col_w)
+                for col in (1,2):
+                    x=LEFT+12+col*col_w
+                    c.line(x,top-39,x,top-88)
+                _text(c,xx[0]+5,top-46,"ANA MAKİNE",7.6,True)
+                _text(c,xx[0]+5,top-64,r.get("main","TEKNİK ENGEL"),12.3,True,
+                      max_width=col_w-12)
+                _text(c,xx[0]+5,top-81,r.get("ours","—"),12.1,True)
+                _text(c,xx[1]+8,top-46,"P0",7.6,True)
+                _text(c,xx[1]+8,top-64,r.get("p0","—"),12.3,True,max_width=col_w-16)
+                _text(c,xx[1]+8,top-81,r.get("p0_pct","—"),12.1,True)
+                _text(c,xx[2]+8,top-46,"P2: "+str(r.get("p2_status") or
+                      ("ORAN EKSİK" if model_only else "—")),
+                      8.0,True,max_width=col_w-14)
+                _text(c,xx[2]+8,top-64,"Oran: "+str(r.get("p0_odds","—")),9,True)
+                _text(c,xx[2]+8,top-82,"Fark: "+str(r.get("p2_gap","—")),
+                      8.9,True,RED,max_width=col_w-14)
+                _text(c,LEFT+15,top-97,"Alternatif: "+str(r.get("alternative","YOK")),
+                      8.2,True,RED,max_width=CW-30)
+            footer=H-113-len(chunk)*107-5
+            _text(c,LEFT,footer,
+                  "ANA ve P0 kendi en yüksek tercihlerini bağımsız seçer; P2 sadece karşılaştırır.",7.2)
+            _text(c,LEFT,footer-15,
+                  "Oran: ilk iddaa PDF'sindeki P0 lideri. Fark: yalnız aynı tercihse yüzde puanı.",7.2)
+            _text(c,LEFT,footer-29,
+                  "Eksik fiyat uydurulmaz. Mühürlü model kararı ve alternatif değiştirilmez.",7.2)
             c.showPage()
     if not pages:
         _text(c,LEFT,H-60,"TOPLU ANALİZ",18,True)
@@ -267,7 +278,6 @@ def _draw_grouped_cards(grouped,target,model_only=False):
         c.showPage()
     c.save()
     return target
-
 
 def render_model_only_batch(day,rows,target):
     """Reuse the identical approved cards for SHA-linked NEW100 without odds.
