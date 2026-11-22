@@ -54,4 +54,11 @@ jobs:
           assert all(row['alignment']['main_decision_changed'] is False for row in x['records'])
           assert all(row['alignment']['no_new_probability'] is True for row in x['records'])
           assert all(row['alignment']['threshold_validated'] is False for row in x['records'])
+          for row in x['records']:
+              a=row['alignment']
+              print('P2_COMPARE',row['match']['home'],'-',row['match']['away'],
+                    'main',a['model_choice'],round(a['model_probability']*100,2),
+                    'P0same',round(a['p0_same_choice_probability']*100,2),
+                    'P0top',a['p0_highest_choice'],
+                    'gappp',round(a['signed_gap_pp'],2),'status',a['status'])
           PY
