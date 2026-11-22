@@ -224,9 +224,15 @@ def attach(bulletin,calibrated,*,history,source_baseline,source_acceptance,
                    if k!="signed_research_session_sha256"}):
         raise ValueError("ORIGINAL_SESSION_SHA_INVALID")
     if source_baseline is None or source_acceptance is None:
-        # No historical provenance relaxation: the official route can still
-        # emit its own technical/PDF-source issue report.
-        return calibrated
+        # Frozen legacy 4413 source already has its own accepted SHA and
+        # needs NO extra human/4617 attestation; allow it normally. Unknown
+        # or updated unapproved files must not trigger PDF-only math.
+        from forward_quad import FROZEN as FROZEN_SHA
+        from forward_c3 import sha256_file
+        if sha256_file(Path(history))!=FROZEN_SHA:
+            return calibrated
+        source_baseline=None
+        source_acceptance=None
     now=now or datetime.now(timezone.utc)
     if now.tzinfo is None:raise ValueError("AWARE_TIME_REQUIRED")
     now=now.astimezone(timezone.utc)
