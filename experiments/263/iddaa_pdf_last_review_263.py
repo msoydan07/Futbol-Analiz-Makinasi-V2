@@ -164,6 +164,8 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
      "morning_main_choice":(frozen.get("main_candidate") if frozen else None),
      "morning_alternative_choice":(frozen.get("alternative_candidate") if frozen else None),
      "morning_decision_sha256":(frozen.get("payload_sha256") if frozen else None),
+     # Own, first-PDF P0 top and agreement stay frozen from signed morning.
+     "morning_p2_agreement":m.get("p2_agreement"),
      "latest_odds":None,"latest_market_no_vig":{},
      "market_no_vig_change_pp":{},
      "lineups":{"status":"KADRO_KANITI_YOK","comments":[]},
