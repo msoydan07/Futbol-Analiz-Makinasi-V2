@@ -28,10 +28,9 @@ class ApprovedCardContract(unittest.TestCase):
                 page=pdf[0]
                 txt=page.get_text()
                 for phrase in ("TÜRKİYE SÜPER LİG","21 KASIM 2026",
-                               "CUMARTESİ","4 MAÇ","ANA TERCİH",
-                               "BİZİM %","PİYASA %","FARK (PUAN)",
-                               "Alternatif:", "Ana iddaa oranı:",
-                               "VERİ YOK","SABAH / MODEL-ONLY",
+                               "CUMARTESİ","4 MAÇ","ANA MAKİNE",
+                               "P0","P2:","Alternatif:",
+                               "ORAN EKSİK","SABAH / MODEL-ONLY",
                                "01/04","04/04"):
                     self.assertIn(phrase,txt)
                 self.assertNotIn("SABAH / İLK ORAN PDF",txt)
