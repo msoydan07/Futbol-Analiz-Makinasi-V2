@@ -7,6 +7,9 @@ on:
     paths:
       - experiments/263/iddaa_pdf_source_fallback_263.py
       - experiments/263/iddaa_pdf_official_lookup_batch_263.py
+      - experiments/263/serie_a_official_pdf_round12_263.py
+      - experiments/263/sabah_official_fixture_gateway_263.py
+      - verify_match_on_demand.py
       - experiments/263/test_iddaa_pdf_official_lookup_batch_263.py
       - experiments/263/iddaa_pdf_team_alias_preflight_263.py
       - experiments/263/iddaa_pdf_one_step_263.py
@@ -50,6 +53,9 @@ jobs:
           python -m unittest -v \
             experiments/263/test_iddaa_pdf_source_fallback_263.py \
             experiments/263/test_iddaa_pdf_official_lookup_batch_263.py \
+            experiments/263/test_sabah_official_fixture_gateway_263.py \
+            experiments/263/test_sabah_premier_nov2026_263.py \
+            test_verify_match_on_demand.py \
             experiments/263/test_iddaa_pdf_session_263.py \
             experiments/263/test_iddaa_pdf_one_step_263.py \
             experiments/263/test_iddaa_pdf_team_alias_preflight_263.py \
