@@ -117,6 +117,7 @@ def _align(decision: dict, prices: dict, *, source: dict) -> dict:
     if family not in p0:
         return {
             "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
+            "p0_probabilities": p0,
             "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
             "model_probability": model_prob, "p0_same_choice_probability": None,
             "signed_gap_pp": None, "absolute_gap_pp": None,
@@ -134,6 +135,7 @@ def _align(decision: dict, prices: dict, *, source: dict) -> dict:
     }
     return {
         "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
+        "p0_probabilities": p0,
         "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
         "model_probability": model_prob, "p0_same_choice_probability": implied,
         "signed_gap_pp": gap, "absolute_gap_pp": abs(gap),
@@ -246,13 +248,71 @@ def run_archive(repo_root: Path, archive_dir: Path) -> dict:
     }
 
 
+def run_signed_session(session: dict, *, include_p1_research: bool = False) -> dict:
+    """Observe the existing PDF-first signed session, without changing it.
+
+    Only decision rows already independently built and verified by the 2.6.3
+    workflow can be joined. This never generates fresh model decisions.
+    """
+    _checked_sha(session, "signed_research_session_sha256", "SESSION_SHA_INVALID")
+    if (session.get("source_original_pdf_verified_once_locally") is not True
+        or session.get("new_bookmaker_network_calls") != 0
+        or session.get("pilot_count_changed") is not False
+        or session.get("source_bookmaker") != "iddaa.com"):
+        raise AlignmentError("NOT_ORIGINAL_SIGNED_IDDAA_FIRST_SESSION")
+    records, excluded = [], []
+    rows = session.get("rows")
+    if not isinstance(rows, list):
+        raise AlignmentError("INVALID_SESSION_ROWS")
+    for row in rows:
+        if not isinstance(row, dict) or (
+            "model_first_decision" not in row and "pdf_first_price_snapshot" not in row
+        ):
+            continue
+        try:
+            d = row["model_first_decision"]
+            snap = row["pdf_first_price_snapshot"]
+            alignment = align_first_pdf_snapshot(d, snap)
+            if include_p1_research:
+                groups = snap.get("groups", {})
+                if set(groups) == set(GROUP_NAMES):
+                    prices = {GROUP_NAMES[k]: v["prices"] for k, v in groups.items()}
+                    p1 = analyze_prices(prices)
+                    alignment["p1_price_reexpression_research_only"] = {
+                        "probabilities": p1["p1"]["p1_probabilities"],
+                        "top_choice": p1["p1_select"]["main"],
+                        "not_independent_evidence": True,
+                    }
+                else:
+                    alignment["p1_price_reexpression_research_only"] = {
+                        "status": "SEVEN_PRICES_REQUIRED_FOR_P1",
+                    }
+            records.append({"row_index": row.get("index"), "alignment": alignment})
+        except (ValueError, KeyError, TypeError, ArithmeticError) as exc:
+            excluded.append({"row_index": row.get("index"), "reason": str(exc)})
+    return {
+        "schema": "P2_SIGNED_FIRST_PDF_SESSION_RESEARCH_V1",
+        "analyzed": len(records), "excluded": excluded, "records": records,
+        "threshold_pp": 5.0, "threshold_validated": False,
+        "no_new_seals": True, "no_model_selection_changes": True,
+        "not_an_accuracy_or_profitability_claim": True,
+    }
+
+
 def cli() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=Path("."))
-    parser.add_argument("--archive-dir", type=Path, required=True)
+    sources = parser.add_mutually_exclusive_group(required=True)
+    sources.add_argument("--archive-dir", type=Path)
+    sources.add_argument("--session-file", type=Path)
+    parser.add_argument("--include-p1-research", action="store_true")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    result = run_archive(args.repo_root, args.archive_dir)
+    if args.archive_dir is not None:
+        result = run_archive(args.repo_root, args.archive_dir)
+    else:
+        session = json.loads(args.session_file.read_text(encoding="utf-8"))
+        result = run_signed_session(session, include_p1_research=args.include_p1_research)
     payload = json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
