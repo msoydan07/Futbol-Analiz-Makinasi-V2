@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install PDF text reader for the league's official 12th-round announcement
+        run: python -m pip install --disable-pip-version-check PyMuPDF==1.26.5
       - name: Fresh official pages, read-only, one per league; report successes AND failures
         env:
           PYTHONPATH: .:experiments/263
