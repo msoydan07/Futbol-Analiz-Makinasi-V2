@@ -5,7 +5,7 @@ import unittest
 from p1_market import _sha_json, no_vig
 from p2_market_alignment import (
     AlignmentError, PDF_SCHEMA, DECISION_SCHEMA, _p0_from_prices,
-    align_first_pdf_snapshot, _align,
+    align_first_pdf_snapshot, _align, run_signed_session,
 )
 
 ODDS = {
@@ -166,6 +166,40 @@ class TestP2(unittest.TestCase):
         d["payload_sha256"] = _sha_json({k: v for k, v in d.items() if k != "payload_sha256"})
         with self.assertRaisesRegex(AlignmentError, "MODEL_TOP_CHOICE_NOT_FROZEN_MAXIMUM"):
             align_first_pdf_snapshot(d, snapshot())
+
+    def test_immutable_first_pdf_session_route(self):
+        session = {
+            "source_original_pdf_verified_once_locally": True,
+            "source_bookmaker": "iddaa.com",
+            "new_bookmaker_network_calls": 0,
+            "pilot_count_changed": False,
+            "rows": [{"index": 0, "model_first_decision": decision(),
+                      "pdf_first_price_snapshot": snapshot()}],
+        }
+        session["signed_research_session_sha256"] = _sha_json(session)
+        report = run_signed_session(session)
+        self.assertEqual(report["analyzed"], 1)
+        self.assertEqual(report["excluded"], [])
+        self.assertEqual(report["records"][0]["alignment"]["status"], "UYUMLU")
+        self.assertEqual(len(report["records"][0]["alignment"]["p0_probabilities"]), 3)
+        self.assertTrue(report["no_new_seals"])
+        self.assertTrue(report["no_model_selection_changes"])
+        session["rows"][0]["model_first_decision"]["main_candidate"]["market"] = "MS2"
+        with self.assertRaisesRegex(AlignmentError, "SESSION_SHA_INVALID"):
+            run_signed_session(session)
+
+    def test_session_blocks_unproven_pdf_origin(self):
+        session = {
+            "source_original_pdf_verified_once_locally": False,
+            "source_bookmaker": "iddaa.com",
+            "new_bookmaker_network_calls": 0,
+            "pilot_count_changed": False,
+            "rows": [{"index": 0, "model_first_decision": decision(),
+                      "pdf_first_price_snapshot": snapshot()}],
+        }
+        session["signed_research_session_sha256"] = _sha_json(session)
+        with self.assertRaisesRegex(AlignmentError, "NOT_ORIGINAL_SIGNED_IDDAA"):
+            run_signed_session(session)
 
 
 if __name__ == "__main__":
