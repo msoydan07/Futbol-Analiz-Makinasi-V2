@@ -332,6 +332,11 @@ def attach(bulletin,calibrated,*,history,source_baseline,source_acceptance,
             from model_first_decision_263 import digest
             calc["payload_sha256"]=digest(calc)
             verify_research_record(calc,bulletin["pdf_sha256"],current)
+            # Same canonical UUIDs are carried to the near-kickoff second
+            # PDF matcher; without this the user would lose second reports
+            # solely because an unrelated official website parser failed.
+            current["home_id"]=h["team_id"]
+            current["away_id"]=a["team_id"]
             current["pdf_source_research"]=calc
             current["pdf_source_research_status"]="PDF_SOURCE_MATH_READY_NOT_OFFICIAL_SEAL"
             count+=1
