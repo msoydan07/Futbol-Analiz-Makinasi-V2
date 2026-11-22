@@ -1,3 +1,5 @@
+> **GEÇMİŞ / YÜRÜRLÜKTEN KALKMIŞ TASARIM (20 Kasım).** Kullanıcının 22 Kasım 2026'da onayladığı V3 artık kalıcıdır. Güncel kaynak: `docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md` ve `docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md`; mevcut aktif karar: `docs/263_AKTIF_KARARLAR.json` D-OPER-006. Aşağıdaki tarihsel dört-sütun/dört-kutu talimatları gelecekteki PDF üretiminde kullanılmaz.
+
 # 2.6.3 — Kullanıcının onayladığı günlük PDF rapor ekranları
 
 **20 Kasım 2026 kesin görünüm ve normal işleyiş.** Bu bir yeni model,
