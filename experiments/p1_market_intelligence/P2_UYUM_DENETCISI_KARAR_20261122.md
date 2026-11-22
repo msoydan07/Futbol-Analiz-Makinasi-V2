@@ -61,3 +61,17 @@ Aksi hâlde UYUMLU_TAHMIN_BULUNAMADI; seçili piyasa grubu eksikse P0_SAME_MARKE
 Toplam: 7 eşleşme, **4 betimsel uyum, 3 uyumsuzluk**. Bu bir **tahmin isabet testi değildir**; 21 Kasım arşivinde ilk oranlar sonradan korunmuş PDF transkripsiyonlarıdır. 5 puan eşiği sonuçlara göre öğrenilmedi ve üretimde bahis/tahmin kapısı olarak kullanılmayacak.
 
 Mühendislik kabul kanıtı: [GitHub Actions P1/P2 tek toplu CI](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45002444047); 48 birim testi başarılı ve geçmişteki 7 SHA eşleşmesi başarılı.
+
+## 22 Kasım ek kararı: iddaa'da '−' görülen favori seçim
+
+Kullanıcının Trabzonspor–Eyüpspor ekranında **MS1 `-`**; MSX **8.21**, MS2 **16.50**. Bu durum sayfada **seçenek oranının yayımlanmaması** olarak kabul edilir. Bunun nedeninin favorinin büyük üstünlüğü olduğu, platformun genel eşiği veya bilinçli oran kısıtı olduğu **kaynak veriden kanıtlanamaz**.
+
+- PDF parse edilen **14 slot** yapısını yine kesin korur. Literal `-` varsa ilgili seçim `not_offered_pdf_market_keys` içine, fiyatı görünen ama grup tamamlanmamış diğer karşılıklar `partial_quoted_prices_no_no_vig` içine eklenir. Kayıt SHA ile korunur.
+- Örnekte MS 1/X/2 üçlüsü **tam olmadığı** için MS marketinin no-vig olasılığı hesaplanmaz. MSX/MS2'nin görünen fiyatları kayıtlı kalır; MS1 fiyatı/yüzdesi **türetilmez**.
+- KG ve 2.5 Alt/Üst'ün kendi iki karşılıkları tam ise P0 hesapları sürer. P1 yedi fiyatı gerektiriyorsa araştırma analizi açıkça **tam fiyat yok** etiketlidir.
+- M4/C3'ün önceden oluşturulmuş MS1 tahmini bu piyasa eksikliğinden **etkilenmez**.
+- P2'de modelin ana olayı PDF'de `-` ile fiyatlanmamışsa **MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF**; diğer tam pazarların model/P0 karşılaştırmaları yine ayrı listelenir. Asla bu gözlemi bir yenilgi, model hatası, UYUMLU ya da sahte tam-yedi-market başarısı gibi sunmaz.
+- Bir başka grupta fiyat eksikse, tam yedi olay üzerinden küresel tepe bilinmediğinden `P0_SEVEN_MARKETS_INCOMPLETE` korunur. Sahte pozitif uyum etiketi verilmez.
+- Bu bir **araştırma dalı kod düzeltmesidir**; mevcut ana mühürler ve onaylı üretim değiştirilmedi.
+
+Doğrulama: [22 Kasım unquoted-favorite CI: 53 P0/P1/P2 testi + 1 ilk-PDF kaynak anomali testi + 5 model-köprüsü testi, başarı](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45005090400).
