@@ -90,7 +90,7 @@ class TestP2(unittest.TestCase):
         self.assertTrue(report["condition_1_same_top_choice"])
         self.assertTrue(report["condition_2_top_probabilities_close"])
         self.assertEqual(report["status"], "UYUMLU")
-        self.assertEqual(report["window_sensitivity"]["3"], "UYUMLU_TAHMIN_BULUNAMADI")
+        self.assertEqual(report["window_sensitivity"]["3"], "YUZDELER_UZAK")
         self.assertEqual(report["window_sensitivity"]["5"], "UYUMLU")
         self.assertTrue(report["p0_main_choice_matches"])
         self.assertTrue(report["no_new_probability"])
