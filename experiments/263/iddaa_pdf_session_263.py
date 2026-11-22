@@ -142,6 +142,16 @@ def analyze_one(n,row,*,index,team_names,pdf_time,now,
     verified=_check_official(observed,league,h,a,index,now)
     if verified["status"]!="OFFICIAL_READY":
         output["status"]="ONE_ROW_"+verified["status"]
+        # A source-parser no-match is NOT a failure of M4/C3 math and does
+        # NOT prove that the fixture does not exist. Keep a small, safe
+        # diagnostic so each official adapter can be repaired independently.
+        output["official_lookup_diagnostic"]={
+            "adapter":OFFICIAL_ADAPTERS[league],
+            "source_status":observed.get("status") if isinstance(observed,dict) else None,
+            "source_reason":str(observed.get("reason",""))[:96] if isinstance(observed,dict) else "",
+            "validator_status":verified["status"],
+            "verified_by_federation":False,
+        }
         return output
     if (verified["local_date_tr"],verified["local_time_tr"])!=(
             row["match_date_tr"],row["kickoff_time_tr"]):
