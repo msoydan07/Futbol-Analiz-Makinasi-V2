@@ -45,3 +45,19 @@ Aksi hâlde UYUMLU_TAHMIN_BULUNAMADI; seçili piyasa grubu eksikse P0_SAME_MARKE
 - GitHub P1 isolated market research CI kapsamında P2 hash, kaynak, zaman, karşılaştırma ve oturum testleri.
 - P0/P1'nin 2.131 maçlık 22 Kasım denetiminde, 1.066 maçlık testte P0 olasılık kalitesi Brier/log-loss açısından daha iyi; P1'in bir ekstra doğru tercihi istatistiksel üstünlük değil. Tarihsel 1xBet kapanış veri kaynağını iddaa olarak sunmuyoruz.
 - Üretim seçimine terfi: **HAYIR**. Yeni, bağımsız P2 yan raporu: **EVET**. Gerçek maç sonuçlarında uyum eşiklerinin doğruluğu: **HENÜZ GÖSTERİLMEDİ**.
+
+## 21 Kasım geçmiş fiyatlarıyla yedi maçın karşılaştırması
+
+| Maç | Ana seçilen olay | M4/C3 | P0 aynı olay | P0 kendi zirvesi | Uyum (geçici 5 puan) |
+|---|---|---:|---:|---|---|
+| Manchester City–Fulham | MS1 | %67,74 | %69,15 | MS1 | UYUMLU |
+| Millwall–QPR | KG Var | %58,85 | %59,22 | KG Var | UYUMLU |
+| Norwich–Cardiff | KG Var | %61,94 | %69,36 | 2.5 Üst | UYUMSUZ |
+| Southampton–Derby | MS1 | %66,54 | %68,48 | MS1 | UYUMLU |
+| Alavés–Deportivo | KG Var | %55,62 | %49,13 | 2.5 Alt | UYUMSUZ |
+| Amed–Rizespor | MS1 | %77,07 | %50,83 | KG Var | UYUMSUZ |
+| Galatasaray–Samsunspor | MS1 | %81,52 | %82,13 | MS1 | UYUMLU |
+
+Toplam: 7 eşleşme, **4 betimsel uyum, 3 uyumsuzluk**. Bu bir **tahmin isabet testi değildir**; 21 Kasım arşivinde ilk oranlar sonradan korunmuş PDF transkripsiyonlarıdır. 5 puan eşiği sonuçlara göre öğrenilmedi ve üretimde bahis/tahmin kapısı olarak kullanılmayacak.
+
+Mühendislik kabul kanıtı: [GitHub Actions P1/P2 tek toplu CI](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45002444047); 48 birim testi başarılı ve geçmişteki 7 SHA eşleşmesi başarılı.
