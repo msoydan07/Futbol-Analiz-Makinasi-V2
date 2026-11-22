@@ -127,7 +127,7 @@ def one_step(pdf,*,history,output_root,
         "no_old_pilot_changes":True,
         "pdf_report_path":str(approved),
         "technical_pdf_report_path":str(final),
-        "approved_visual_layout":"BUNDESLIGA_STYLE_WHITE_BLACK_RED_6_PER_PAGE_V1",
+        "approved_visual_layout":"ANA_P0_P2_THREE_COLUMNS_6_PER_PAGE_V3",
         "processing_folder":str(folder),
     }
     receipt={"pdf_sha256":pdf_sha,
