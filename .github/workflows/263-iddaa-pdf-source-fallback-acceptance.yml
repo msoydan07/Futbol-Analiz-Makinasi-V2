@@ -11,6 +11,10 @@ on:
       - experiments/263/iddaa_pdf_last_review_263.py
       - experiments/263/test_iddaa_pdf_source_fallback_263.py
       - experiments/263/test_iddaa_pdf_team_alias_preflight_263.py
+      - experiments/263/check_active_decisions_263.py
+      - experiments/263/test_check_active_decisions_263.py
+      - docs/263_AKTIF_KARARLAR.json
+      - docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md
       - .github/workflows/263-iddaa-pdf-source-fallback-acceptance.yml
   workflow_dispatch:
 permissions:
@@ -47,5 +51,6 @@ jobs:
             experiments/263/test_iddaa_pdf_approved_layout_263.py \
             experiments/263/test_three_machine_reports_v3_263.py \
             experiments/263/test_iddaa_pdf_last_review_263.py \
-            experiments/263/test_model_first_iddaa_bridge_263.py
+            experiments/263/test_model_first_iddaa_bridge_263.py \
+            experiments/263/test_check_active_decisions_263.py
           python experiments/263/check_active_decisions_263.py
