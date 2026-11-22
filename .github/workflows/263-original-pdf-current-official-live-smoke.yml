@@ -48,4 +48,16 @@ jobs:
               "probed":len(results),
               "verified":sum(x["status"]=="VERIFIED_OFFICIAL_FIXTURE" for x in results),
               "no_false_verified":True},ensure_ascii=False))
+          # Direct official league PDF is a newer, revised round-12 source.
+          # Never report as verified until actual PDF bytes have been fetched.
+          try:
+              from serie_a_official_pdf_round12_263 import fetch_and_parse
+              official_pdf_url,events,pdfsha=fetch_and_parse()
+              print("ONE_LIVE_SERIE_A_REVISED_PDF",json.dumps({
+                  "status":"TEN_FIXTURES_PARSED","url":official_pdf_url,
+                  "pdf_sha256":pdfsha,"matches":events},ensure_ascii=False))
+          except Exception as exc:
+              print("ONE_LIVE_SERIE_A_REVISED_PDF",json.dumps({
+                  "status":"NOT_VERIFIED",
+                  "reason":type(exc).__name__+":"+str(exc)[:150]}))
           PY
