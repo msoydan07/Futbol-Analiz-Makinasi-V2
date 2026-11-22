@@ -116,6 +116,16 @@ class TestP2(unittest.TestCase):
         self.assertIsNone(report["p0_same_choice_probability"])
         self.assertIsNone(report["absolute_gap_pp"])
 
+
+    def test_missing_other_group_cannot_claim_seven_event_top(self):
+        partial = {k: v for k, v in ODDS.items() if k != "KG"}
+        report = align_first_pdf_snapshot(decision(), snapshot(partial))
+        self.assertIsNotNone(report["p0_same_choice_probability"])
+        self.assertLess(report["absolute_gap_pp"], 5)
+        self.assertEqual(report["status"], "P0_SEVEN_MARKETS_INCOMPLETE")
+        self.assertFalse(report["p0_highest_is_global"])
+        self.assertEqual(report["window_sensitivity"], {})
+
     def test_decision_and_pdf_hashes_protected(self):
         d, s = decision(), snapshot()
         d["main_candidate"]["calibrated_probability"] += .01
