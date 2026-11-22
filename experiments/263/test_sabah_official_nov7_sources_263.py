@@ -27,22 +27,22 @@ def same(x,y):return x==y
 
 class StrictOfficialWeekTests(unittest.TestCase):
  def test_both_source_urls_are_not_generic(self):
-    self.assertIn('le-designazioni-arbitrali-della-11a',SOURCES['ITA1'][0])
+    self.assertIn('12a-giornata',SOURCES['ITA1'][0])
     self.assertIn('ftxtID=2966',SOURCES['TUR1'][0])
  def test_italy_complete_all_four_and_utc(self):
-    e=parse_official_events('ITA1',ITA)
+    e=parse_official_events('ITA1',ITA,parser='seriea_j11_2026')
     self.assertEqual(len(e),4)
     self.assertEqual(e[0]['home'],'CAGLIARI')
     self.assertEqual(e[0]['kickoff_utc'],'2026-11-07T14:00:00+00:00')
     self.assertEqual(e[-1]['kickoff_utc'],'2026-11-07T19:45:00+00:00')
  def test_italy_wrong_weekday_cannot_verify(self):
-    self.assertEqual(parse_official_events('ITA1',ITA.replace('Sabato 7/11','Domenica 7/11')),[])
+    self.assertEqual(parse_official_events('ITA1',ITA.replace('Sabato 7/11','Domenica 7/11'),parser='seriea_j11_2026'),[])
  def test_italy_missing_anchor_or_year_is_rejected(self):
-    self.assertEqual(parse_official_events('ITA1',ITA.replace('04/11/2026','04/11/2025')),[])
-    self.assertEqual(parse_official_events('ITA1',ITA.replace('designazioni arbitrali','unrelated article')),[])
+    self.assertEqual(parse_official_events('ITA1',ITA.replace('04/11/2026','04/11/2025'),parser='seriea_j11_2026'),[])
+    self.assertEqual(parse_official_events('ITA1',ITA.replace('designazioni arbitrali','unrelated article'),parser='seriea_j11_2026'),[])
  def test_italy_must_not_flip_home_away(self):
-    self.assertEqual(official_page_lookup('ITA1','FROSINONE','CAGLIARI',now=NOW,html=ITA,same_team=same)['status'],'NOT_VERIFIED')
-    self.assertEqual(official_page_lookup('ITA1','CAGLIARI','FROSINONE',now=NOW,html=ITA,same_team=same)['status'],'VERIFIED_OFFICIAL_FIXTURE')
+    self.assertEqual(official_page_lookup('ITA1','FROSINONE','CAGLIARI',now=NOW,html=ITA,same_team=same,parser='seriea_j11_2026',source_url='https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a')['status'],'NOT_VERIFIED')
+    self.assertEqual(official_page_lookup('ITA1','CAGLIARI','FROSINONE',now=NOW,html=ITA,same_team=same,parser='seriea_j11_2026',source_url='https://www.legaseriea.it/serie-a/news/le-designazioni-arbitrali-della-11a')['status'],'VERIFIED_OFFICIAL_FIXTURE')
  def test_tff_only_top_division_and_local_time(self):
     e=parse_official_events('TUR1',TFF)
     self.assertEqual(len(e),2)
