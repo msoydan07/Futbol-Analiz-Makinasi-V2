@@ -23,6 +23,12 @@ NEEDED = (
     "experiments/263/m4_integrated.py",
     ".github/workflows/263-sabah-new100-on-request.yml",
     "experiments/263/historical_probability_reliability_263.py",
+    # Single-screen official layout, append-only second PDF archive.
+    # Test temporary copies must include ALL files required by guard.
+    "experiments/263/iddaa_pdf_last_review_263.py",
+    "experiments/263/second_pdf_commentary_archive_263.py",
+    "docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md",
+    "docs/263_IKINCI_PDF_ORAN_YORUM_ARSIV_KARARI_20261121.md",
 )
 
 class Contract(unittest.TestCase):
