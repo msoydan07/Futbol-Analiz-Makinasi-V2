@@ -8,6 +8,10 @@ on:
       - experiments/263/iddaa_pdf_approved_layout_263.py
       - experiments/263/model_first_iddaa_bridge_263.py
       - experiments/263/iddaa_pdf_last_review_263.py
+      - experiments/263/check_active_decisions_263.py
+      - docs/263_AKTIF_KARARLAR.json
+      - docs/263_TOPLU_RAPOR_KALICI_KART_SABLONU_20261121.md
+      - docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md
       - experiments/263/test_three_machine_reports_v3_263.py
       - experiments/263/test_iddaa_pdf_approved_layout_263.py
       - experiments/263/test_toplu_approved_card_263.py
