@@ -8,6 +8,7 @@ on:
       - experiments/263/serie_a_official_pdf_round12_263.py
       - experiments/263/sabah_official_fixture_gateway_263.py
       - experiments/263/iddaa_pdf_official_lookup_batch_263.py
+      - verify_match_on_demand.py
   workflow_dispatch:
 permissions:
   contents: read
