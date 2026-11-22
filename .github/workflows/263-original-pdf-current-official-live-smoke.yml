@@ -6,6 +6,8 @@ on:
     paths:
       - .github/workflows/263-original-pdf-current-official-live-smoke.yml
       - experiments/263/serie_a_official_pdf_round12_263.py
+      - experiments/263/sabah_official_fixture_gateway_263.py
+      - experiments/263/iddaa_pdf_official_lookup_batch_263.py
   workflow_dispatch:
 permissions:
   contents: read
