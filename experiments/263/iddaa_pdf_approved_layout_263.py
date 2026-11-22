@@ -353,7 +353,11 @@ def _row_odds(d,markets):
 
 def _single_commentary(r,market,old,new):
     name=LABELS.get(market,"ana tercih")
-    parts=["Sabahki "+name+" tercihi ve model yüzdesi korunuyor."]
+    parts=([
+      "İlk iddaa PDF'sinden hesaplanan "+name+
+      " araştırma tercihi korunuyor; federasyon fikstürü bağımsız doğrulanmadı."
+    ] if r.get("morning_source_grade")=="PDF_ONLY_NOT_FEDERATION_VERIFIED"
+      else ["Sabahki "+name+" tercihi ve model yüzdesi korunuyor."])
     if isinstance(old,(int,float)) and isinstance(new,(int,float)):
         move=new-old
         if abs(move)<.015:
@@ -396,12 +400,30 @@ def _draw_approved_single_page(c,r,i,n):
     _text(c,LEFT,H-105,LEAGUES.get(r.get("league"),r.get("league") or "LİG"),
           8.5,color=GRAY)
     c.line(LEFT,H-119,RIGHT,H-119)
+    if r.get("morning_source_grade")=="PDF_ONLY_NOT_FEDERATION_VERIFIED":
+        _right(c,RIGHT,H-106,"PDF KAYNAKLI · RESMÎ ONAY YOK",7.5,True,color=RED)
 
     main=r.get("morning_main_choice") or {}
     alt=r.get("morning_alternative_choice") or {}
     p2=r.get("morning_p2_agreement")
+    lower=r.get("morning_pdf_source_research")
     p0_choice=None;p0_pct=None;p0_probs={}
-    if isinstance(p2,dict):
+    if isinstance(lower,dict):
+        from iddaa_pdf_source_fallback_263 import verify_research_record
+        synthetic_source={
+            "index":lower["row_index"],"league":r["league"],
+            "pdf_home":r["home"],"pdf_away":r["away"]}
+        verify_research_record(lower,r.get("morning_pdf_sha256"),synthetic_source)
+        if (lower["payload_sha256"]!=r.get("morning_decision_sha256")
+            or lower.get("main")!=main or lower.get("alternative")!=alt
+            or r.get("morning_source_grade")!="PDF_ONLY_NOT_FEDERATION_VERIFIED"
+            or p2 is not None):
+            raise ValueError("SINGLE_PDF_ONLY_RESEARCH_SOURCE_MISMATCH")
+        p0=lower.get("p0")
+        p0_choice=p0["choice"] if p0 else None
+        p0_pct=p0["probability"] if p0 else None
+        p0_probs=lower.get("p0_probabilities") or {}
+    elif isinstance(p2,dict):
         if (p2.get("model_decision_sha256")!=r.get("morning_decision_sha256") or
             p2.get("forecast_sha256") not in
                 (None,r.get("morning_model_sha256"))):
