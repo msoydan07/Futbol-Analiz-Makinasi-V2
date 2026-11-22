@@ -136,16 +136,27 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
   if k:idx[k].append(r)
  rows=[]
  for m in morning["rows"]:
-  if m.get("status")!="FOUR_MODELS_FORECAST_SHA_CREATED" or m.get("model_forecast_created") is not True:
-   continue
-  if not isinstance(m.get("model_forecast_sha256"),str) or len(m["model_forecast_sha256"])!=64:
-   raise ValueError("ORIGINAL_MODEL_SHA_NOT_PRESENT")
-  key=_id(m);ko=utc(m["official"]["kickoff_utc"])
+  official=(m.get("status")=="FOUR_MODELS_FORECAST_SHA_CREATED" and
+            m.get("model_forecast_created") is True)
+  lower=m.get("pdf_source_research")
+  if not official and lower is None:continue
+  if official:
+   if not isinstance(m.get("model_forecast_sha256"),str) or len(m["model_forecast_sha256"])!=64:
+    raise ValueError("ORIGINAL_MODEL_SHA_NOT_PRESENT")
+   ko=utc(m["official"]["kickoff_utc"])
+  else:
+   # This SHA-linked PDF-only model is NOT an official fixture seal.
+   from iddaa_pdf_source_fallback_263 import verify_research_record
+   verify_research_record(lower,morning["pdf_sha256"],m)
+   from zoneinfo import ZoneInfo
+   ko=datetime.fromisoformat(m["match_date_tr"]+"T"+m["kickoff_time_tr"]+":00").replace(
+       tzinfo=ZoneInfo("Europe/Istanbul")).astimezone(timezone.utc)
+   if not isinstance(m.get("home_id"),str) or not isinstance(m.get("away_id"),str):
+    raise ValueError("PDF_ONLY_MORNING_CANONICAL_IDS_MISSING")
+  key=_id(m)
   if not utc(m["price_capture_utc"])<ko:
    raise ValueError("MORNING_TIME_NOT_PRE_MATCH")
-  # Carry through only the already verified/SEALED morning decision.
-  # No second computation changes any original model probability.
-  frozen=m.get("model_first_decision")
+  frozen=m.get("model_first_decision") if official else None
   if frozen is not None:
    from model_first_decision_263 import verified as verify_decision,SCHEMA as MODEL_SCHEMA
    verify_decision(frozen,MODEL_SCHEMA)
@@ -161,11 +172,12 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
      "morning_model_probabilities":m.get("model_1x2_and_core_markets",{}),
      "morning_odds":m.get("prices",{}),
      "morning_market_no_vig":m.get("market_no_vig") or {},
-     "morning_main_choice":(frozen.get("main_candidate") if frozen else None),
-     "morning_alternative_choice":(frozen.get("alternative_candidate") if frozen else None),
-     "morning_decision_sha256":(frozen.get("payload_sha256") if frozen else None),
-     # Own, first-PDF P0 top and agreement stay frozen from signed morning.
-     "morning_p2_agreement":m.get("p2_agreement"),
+     "morning_main_choice":(frozen.get("main_candidate") if frozen else lower.get("main") if lower else None),
+     "morning_alternative_choice":(frozen.get("alternative_candidate") if frozen else lower.get("alternative") if lower else None),
+     "morning_decision_sha256":(frozen.get("payload_sha256") if frozen else lower.get("payload_sha256") if lower else None),
+     "morning_pdf_source_research":lower if not official else None,
+     "morning_source_grade":"OFFICIAL_FIXTURE_VERIFIED" if official else "PDF_ONLY_NOT_FEDERATION_VERIFIED",
+     "morning_p2_agreement":m.get("p2_agreement") if official else None,
      "latest_odds":None,"latest_market_no_vig":{},
      "market_no_vig_change_pp":{},
      "lineups":{"status":"KADRO_KANITI_YOK","comments":[]},
