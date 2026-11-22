@@ -14,7 +14,13 @@
 - Belçika kodu sabit, geçmiş bir KV Mechelen-Genk eşleşmesine özel yazılmıştı.
 - Racing Santander, AC Milan, Standard Liege PDF yazımları eski kanonik kulüp kimliğiyle birebir aynı değildi; yeni sözlükte kesin eşleşme, federasyon tarafından önceden doğrulanmış mevcut UUID'ye bağlandı. Küme dışı/fuzzy isimler varsayılmaz.
 
-Resmî doğrulayıcıların bu yetersizlikleri düzeltilmiş olarak **sunulmaz**. Resmî site bulunamadıysa kaynak durumu **doğrulanamadı** kalır.
+**22 Kasım güncellemesi:** Resmî doğrulama ilk yolu düzeltildi: orijinal ilk PDF, artık `iddaa_pdf_official_lookup_batch_263.py` üzerinden mevcut `sabah_official_fixture_gateway_263.py`'nin güncel resmî lig sayfası + kanonik takım ID'si + saat kapısını çağırır. 10 lig için kaynaklar lig başına 10 dakika tekilleştirilir; eski dönemlik tek-maç adapterleri sadece ikinci resmî deneme olarak kalır. Bir kaynak eşleşme vermezse bunun sonucu **doğrulanamadı** olur; matematiksel PDF-only kanalının önünü kesmez. Resmî maçın açıkça farklı tarihi/saati doğrulandığında bu çelişki manuel incelemeye alınır.
+
+**Yeni canlı kabul (22 Kasım 2026 saat yaklaşık 14:16 TSİ):** beş örnekten beşi, bağımsız resmî kaynaklardan takım/sıra/tarih/saat eşleşmesini geçti: Hull City–Brighton, Liverpool–Manchester United (Premier League resmî Kasım revizyonu), Barcelona–Villarreal (LaLiga resmî yayın fihristi), SK Beveren–KAA Gent (Pro League), Juventus–Venezia (Lega Serie A'nın resmî düzeltilmiş 12. hafta PDF'si). İtalyan PDF'sinin gerçek indirilmiş bayt SHA-256 değeri `ca098884ba076c25f372a073497dbf7c711077441828f3bd990c1a696ee2a652` olarak kaydedildi; on ayrı satırın kulüpleri, tarihi ve saati ayrıştırıldı.
+
+Canlı örnek kaydı: https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45016503828
+
+**Sınır:** 5/5 örnek, diğer 20 maçın resmî doğrulandığı veya gelecekteki haftaların kaynaklarının otomatik eksiksiz okunacağı anlamına gelmez. Lige ait kaynakların biçimi/değişen hafta haberleri zamanla yenilenebilir. Yayımlanan resmî belge okunamazsa "PDF KAYNAKLI · RESMÎ ONAY YOK" etiketiyle matematik yine üretilir; resmî mühür taklidi yapılmaz.
 
 ## Kalıcı iki kanallı hesaplama
 
@@ -45,4 +51,4 @@ Araştırma kendi içerik SHA'sına ve orijinal PDF SHA'sına sahiptir; kayıt y
 
 `.github/workflows/263-iddaa-pdf-source-fallback-acceptance.yml` ile orijinal ilk/ikinci V3 rapor üreticileri, 2.6.3 donmuş M4/C3 yüzdeleri, iddaa fiyat sütunları, Twente yayımlanmayan favori fiyatı, kaynak SHA bütünlüğü ve geçmiş resmî rapor testleri sınanır.
 
-**Durum:** Araştırma dalında kabul edildikten sonra ilgili kod ve belge mevcut 2.6.3 aktif araştırma dalına aktarılır. `main` veya eski mühürlere otomatik yazılmaz.
+**Durum: AKTİF.** Düzeltme `experiment/263-toplu-karsilastirma` 2.6.3 çalışma dalında. Son doğrulamalar: [92 fiyat/futbol/rapor güvenlik testi](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45016739123), [175 bütünleşik offline kabul testi](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45016830651), [5/5 canlı resmî kaynak örneği](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45016503828). `main`, eski SHA mühürleri ve pilotlar değiştirilmedi.
