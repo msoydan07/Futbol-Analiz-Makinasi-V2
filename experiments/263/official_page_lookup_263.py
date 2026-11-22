@@ -16,7 +16,7 @@ from zoneinfo import ZoneInfo
 VERSION = '263_official_page_lookup_v1_experimental'
 # Current official schedule surfaces. These are source CANDIDATES, not guaranteed APIs.
 SOURCES = {
-    'ENG1': ('https://www.premierleague.com/en/news/4725574/fixture-amendments-for-premier-league-matches-in-november', 'premierleague.com', 'epl_nov26_confirmed'),
+    'ENG1': ('https://www.premierleague.com/en/news/4725574/fixture-amendments-for-november', 'premierleague.com', 'epl_nov26_confirmed'),
     'ENG2': ('https://www.efl.com/news/2026/november/18/referee-appointments--20---26-november/', 'efl.com', 'efl_referee_j16_20261121'),
     'GER1': ('https://products.bundesliga.com/fixtures', 'bundesliga.com', 'dfl'),
     'ESP1': ('https://www.laliga.com/iframes/external-consumer-broadcast', 'laliga.com', 'laliga_broadcast_j13_nov2026'),
