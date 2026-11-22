@@ -164,6 +164,8 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
      "morning_main_choice":(frozen.get("main_candidate") if frozen else None),
      "morning_alternative_choice":(frozen.get("alternative_candidate") if frozen else None),
      "morning_decision_sha256":(frozen.get("payload_sha256") if frozen else None),
+     # Own, first-PDF P0 top and agreement stay frozen from signed morning.
+     "morning_p2_agreement":m.get("p2_agreement"),
      "latest_odds":None,"latest_market_no_vig":{},
      "market_no_vig_change_pp":{},
      "lineups":{"status":"KADRO_KANITI_YOK","comments":[]},
@@ -327,7 +329,7 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
           "second_pdf_archive_status":archived["status"],
           "second_pdf_archive_files":archived["files"],
           "pdf_report":str(target/"tekli_rapor.pdf"),"technical_legacy_pdf":str(target/"review.pdf"),
-          "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
+          "approved_single_layout":"THREE_CARDS_SEVEN_MARKET_STRIP_ONE_COMMENT_V3",
           "summary":str(target/"summary.md"),
           "approved_single_pdf_paths":[str(x) for x in paths],
           "approved_match_index":[{"home":r["home"],"away":r["away"],
@@ -363,7 +365,7 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
          "approved_match_index":[{"home":r["home"],"away":r["away"],
              "kickoff_time_tr":r["kickoff_time_tr"],"pdf_path":str(p)}
              for r,p in zip(ready,singles)],
-         "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
+         "approved_single_layout":"THREE_CARDS_SEVEN_MARKET_STRIP_ONE_COMMENT_V3",
          "matches":review["matches_reviewed"],
          "pdf_report":str(target/"tekli_rapor.pdf"),
          "technical_legacy_pdf":str(target/"review.pdf"),
