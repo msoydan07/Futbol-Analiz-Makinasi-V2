@@ -30,7 +30,10 @@
     "p0_p2_audit": "experiments/p1_market_intelligence/p2_market_alignment.py",
     "approved_layout_version": "THREE_MACHINE_FIRST_AND_SECOND_V3_20261122",
     "pdf_fixture_lower_trust_model": "experiments/263/iddaa_pdf_source_fallback_263.py",
-    "pdf_fixture_source_grade_spec": "docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md"
+    "pdf_fixture_source_grade_spec": "docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md",
+    "first_pdf_official_fixture_gateway": "experiments/263/iddaa_pdf_official_lookup_batch_263.py",
+    "current_official_fixture_source_cache": "experiments/263/sabah_official_fixture_gateway_263.py",
+    "italy_round12_revised_official_pdf": "experiments/263/serie_a_official_pdf_round12_263.py"
   },
   "active": [
     {
@@ -66,7 +69,7 @@
       "decision_id": "D-ODDS-001",
       "effective_date_tr": "2026-11-19",
       "status": "ACTIVE",
-      "rule": "Sadece kullanıcının iddaa.com kaynaklı PDF'si oran gözlem kaynağıdır. İlk PDF -> as-of B/C2/C3/M4 ve SHA tek mühür + ilk oran karşılaştırması. İkinci PDF -> yalnız oran farkı / doğrulanmış futbol yorumu, hiçbir yeni tahmin ya da ana karar yok. D-SECOND-ARCHIVE-001 (21.11.2026) zorunlu eki: Kullanıcının 2. PDF'si kabul edildiginde ilk/son 7 iddaa fiyati, marjsiz ilk/son pazar yuzdeleri, kaynak PDF SHA256, eski forecast/decision SHA ve tekli PDF'de gosterilen yorumun birebir metni sonradan degistirilemez arastirma kaydina yazilir. Ayni macin kaydi ustune yazilmaz; ayni icerik idempotent. Ham kullanici PDF'si public GitHub'a konmaz. Yalniz yerel yazim uzak GitHub commit'i sayilmaz; commit ayrica dogrulanir. Mac sonu skoru onceki yoruma geri yazilmaz. 22 Kasım kalıcı kaynak kalite ayrımı: resmî fikstür parserı başarısızsa ana M4/C3 matematik arızası raporlanmaz. Orijinal SHA'lı iddaa PDF'si, kayıtlı takım ID'si, pre-KO saat, geçmiş kaynak kabulü ve dondurulmuş modeller güvenliyse yalnız PDF_SOURCE_ONLY araştırma tercihi hesaplanır; bu resmî federasyon doğrulaması veya pilot SHA mührü değildir. İlk ve ikinci V3 raporda PDF KAYNAKLI / RESMÎ ONAY YOK etiketi zorunludur. Tekli P0 da sabah orijinal PDF lideri olup ikinci oranlarla değişmez. Ayrıntı: docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md."
+      "rule": "Sadece kullanıcının iddaa.com kaynaklı PDF'si oran gözlem kaynağıdır. İlk PDF -> as-of B/C2/C3/M4 ve SHA tek mühür + ilk oran karşılaştırması. İkinci PDF -> yalnız oran farkı / doğrulanmış futbol yorumu, hiçbir yeni tahmin ya da ana karar yok. D-SECOND-ARCHIVE-001 (21.11.2026) zorunlu eki: Kullanıcının 2. PDF'si kabul edildiginde ilk/son 7 iddaa fiyati, marjsiz ilk/son pazar yuzdeleri, kaynak PDF SHA256, eski forecast/decision SHA ve tekli PDF'de gosterilen yorumun birebir metni sonradan degistirilemez arastirma kaydina yazilir. Ayni macin kaydi ustune yazilmaz; ayni icerik idempotent. Ham kullanici PDF'si public GitHub'a konmaz. Yalniz yerel yazim uzak GitHub commit'i sayilmaz; commit ayrica dogrulanir. Mac sonu skoru onceki yoruma geri yazilmaz. 22 Kasım kalıcı kaynak kalite ayrımı: resmî fikstür parserı başarısızsa ana M4/C3 matematik arızası raporlanmaz. Orijinal SHA'lı iddaa PDF'si, kayıtlı takım ID'si, pre-KO saat, geçmiş kaynak kabulü ve dondurulmuş modeller güvenliyse yalnız PDF_SOURCE_ONLY araştırma tercihi hesaplanır; bu resmî federasyon doğrulaması veya pilot SHA mührü değildir. İlk ve ikinci V3 raporda PDF KAYNAKLI / RESMÎ ONAY YOK etiketi zorunludur. Tekli P0 da sabah orijinal PDF lideri olup ikinci oranlarla değişmez. Ayrıntı: docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md. Yeni ilk PDF doğrulama sırası: resmî lig sayfasını ve takım kimliği/saatini güncel 10-lig geçidinden kontrol et; site tarama başarısızsa, ancak resmî kaynakta çelişki veya veri/matematik hatası yoksa ayrı PDF-kaynaklı araştırma hesabı yap. PDF-only araştırma resmî tahmin mührü/pilotu değildir. İki kaynak türü raporda açıkça ayrıdır. Dönemlik resmî duyurular gelecekteki her haftayı kapsamaz; yeni haftada kaynak başarısı ayrı doğrulanır. Kapsam ve test kanıtı: docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md."
     },
     {
       "topic": "c3_calibration",
