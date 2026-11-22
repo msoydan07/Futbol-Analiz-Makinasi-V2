@@ -256,13 +256,24 @@ def run_session(bulletin,*,now=None,official_lookup=None,forecast_options=None,
     if not isinstance(rows,list) or len(rows)>300:
         raise ValueError("IMPLAUSIBLE_PDF_BATCH_SIZE")
     by_number=[None]*len(rows)
+    # One shared fresh official-page cache per original PDF. This is the
+    # already-tested official gateway, NOT a new probabilistic or fuzzy
+    # fixture inference. Explicit caller-supplied lookups retain their
+    # existing deterministic test/operator behavior.
+    batch_gateway=None
+    if official_lookup is None:
+        from iddaa_pdf_official_lookup_batch_263 import OriginalPdfOfficialGateway
+        batch_gateway=OriginalPdfOfficialGateway(
+            clock=(lambda:now) if fixed_clock else None)
     def task(i,row):
-        # For real execution use the actual per-row as-of clock, rather than
-        # incorrectly backdating all forecasts to the start of a long batch.
+        # Use true per-row clock rather than backdating a long PDF batch.
         row_now=now if fixed_clock else datetime.now(timezone.utc)
         baseline_clock=(lambda:now) if fixed_clock else (lambda:datetime.now(timezone.utc))
+        selected=official_lookup
+        if batch_gateway is not None:
+            selected=lambda h,a:batch_gateway.lookup(row.get("league"),h,a)
         return analyze_one(i,row,index=index,team_names=names,
-            pdf_time=pdf_time,now=row_now,official_lookup=official_lookup,
+            pdf_time=pdf_time,now=row_now,official_lookup=selected,
             forecast_options=forecast_options,baseline_clock=baseline_clock)
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures={pool.submit(task,i,r):i for i,r in enumerate(rows)}
