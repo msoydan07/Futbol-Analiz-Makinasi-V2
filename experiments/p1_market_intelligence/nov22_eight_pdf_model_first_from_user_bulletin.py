@@ -78,8 +78,22 @@ def one(row,all_rows,reg,lock,setting,acceptance):
     if now>=kickoff:
         out["model_status"]="MATCH_STARTED_BEFORE_THIS_RESEARCH_RUN"
         return out
+    # Exact, reviewable book->federation club-name crosswalks confirmed from
+    # the existing 215-team canonical registry. NO fuzzy matching and NO
+    # change to the source PDF or production identity cache.
+    reviewed_book_alias={
+        ("ESP1","Racing Santander"):"R. Racing Club",
+        ("ITA1","AC Milan"):"Milan",
+        ("BEL1","Standard Liege"):"Standard de Liège",
+    }
+    def resolve_source_alias(label):
+        official=reviewed_book_alias.get((league,label),label)
+        tid=resolve(reg,league,official)
+        if official!=label:
+            out.setdefault("book_to_canonical_name_match",{})[label]=official
+        return tid
     try:
-        hid=resolve(reg,league,hn);aid=resolve(reg,league,an)
+        hid=resolve_source_alias(hn);aid=resolve_source_alias(an)
         if hid==aid:raise ValueError("HOME_AWAY_RESOLVED_TO_IDENTICAL_CLUB")
         out["resolved_club_ids"]={"home":hid,"away":aid}
     except (KeyError,ValueError) as e:
