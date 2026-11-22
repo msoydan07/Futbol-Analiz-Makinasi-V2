@@ -6,6 +6,8 @@ on:
       - experiment/263-toplu-karsilastirma
     paths:
       - experiments/263/iddaa_pdf_source_fallback_263.py
+      - experiments/263/iddaa_pdf_official_lookup_batch_263.py
+      - experiments/263/test_iddaa_pdf_official_lookup_batch_263.py
       - experiments/263/iddaa_pdf_team_alias_preflight_263.py
       - experiments/263/iddaa_pdf_one_step_263.py
       - experiments/263/iddaa_pdf_approved_layout_263.py
@@ -47,6 +49,8 @@ jobs:
           set -euo pipefail
           python -m unittest -v \
             experiments/263/test_iddaa_pdf_source_fallback_263.py \
+            experiments/263/test_iddaa_pdf_official_lookup_batch_263.py \
+            experiments/263/test_iddaa_pdf_session_263.py \
             experiments/263/test_iddaa_pdf_one_step_263.py \
             experiments/263/test_iddaa_pdf_team_alias_preflight_263.py \
             experiments/263/test_iddaa_pdf_approved_layout_263.py \
