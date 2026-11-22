@@ -86,7 +86,9 @@ class TestP2(unittest.TestCase):
         s = snapshot()
         report = align_first_pdf_snapshot(d, s)
         expected = no_vig(ODDS["MS"])["probabilities"]["MS1"]
-        self.assertAlmostEqual(report["p0_same_choice_probability"], expected)
+        self.assertAlmostEqual(report["p0_highest_probability"], expected)
+        self.assertTrue(report["condition_1_same_top_choice"])
+        self.assertTrue(report["condition_2_top_probabilities_close"])
         self.assertEqual(report["status"], "UYUMLU")
         self.assertEqual(report["window_sensitivity"]["3"], "UYUMLU_TAHMIN_BULUNAMADI")
         self.assertEqual(report["window_sensitivity"]["5"], "UYUMLU")
@@ -100,28 +102,32 @@ class TestP2(unittest.TestCase):
         odds["KG"] = {"BTTS_YES": 1.3, "BTTS_NO": 3.1}
         report = align_first_pdf_snapshot(decision(), snapshot(odds))
         self.assertEqual(report["p0_highest_choice"], "BTTS_YES")
-        self.assertLess(report["absolute_gap_pp"], 5)
-        self.assertEqual(report["status"], "UYUMLU_TAHMIN_BULUNAMADI")
+        self.assertIsNone(report["absolute_gap_pp"])
+        self.assertFalse(report["condition_1_same_top_choice"])
+        self.assertIsNone(report["condition_2_top_probabilities_close"])
+        self.assertEqual(report["status"], "TERCIHLER_FARKLI")
 
     def test_not_aligned_when_large_gap(self):
         report = align_first_pdf_snapshot(decision(.72), snapshot())
         self.assertGreater(report["absolute_gap_pp"], 7)
-        self.assertEqual(report["status"], "UYUMLU_TAHMIN_BULUNAMADI")
+        self.assertEqual(report["status"], "YUZDELER_UZAK")
+        self.assertTrue(report["condition_1_same_top_choice"])
+        self.assertFalse(report["condition_2_top_probabilities_close"])
         self.assertFalse(report["main_decision_changed"])
 
     def test_missing_selected_market_never_imputed(self):
         partial = {k: v for k, v in ODDS.items() if k != "MS"}
         report = align_first_pdf_snapshot(decision(), snapshot(partial))
-        self.assertEqual(report["status"], "P0_SAME_MARKET_UNAVAILABLE")
-        self.assertIsNone(report["p0_same_choice_probability"])
+        self.assertEqual(report["status"], "P0_SEVEN_MARKETS_INCOMPLETE")
+        self.assertIsNone(report["p0_highest_probability"])
         self.assertIsNone(report["absolute_gap_pp"])
 
 
     def test_missing_other_group_cannot_claim_seven_event_top(self):
         partial = {k: v for k, v in ODDS.items() if k != "KG"}
         report = align_first_pdf_snapshot(decision(), snapshot(partial))
-        self.assertIsNotNone(report["p0_same_choice_probability"])
-        self.assertLess(report["absolute_gap_pp"], 5)
+        self.assertIsNone(report["p0_highest_probability"])
+        self.assertIsNone(report["absolute_gap_pp"])
         self.assertEqual(report["status"], "P0_SEVEN_MARKETS_INCOMPLETE")
         self.assertFalse(report["p0_highest_is_global"])
         self.assertEqual(report["window_sensitivity"], {})
@@ -139,10 +145,11 @@ class TestP2(unittest.TestCase):
         got = align_first_pdf_snapshot(decision(), data)
         self.assertEqual(got["status"], "MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF")
         self.assertEqual(got["unquoted_pdf_selections"], ["MS1"])
-        self.assertIsNone(got["p0_same_choice_probability"])
+        self.assertIsNone(got["p0_highest_probability"])
         self.assertFalse(got["p0_highest_is_global"])
-        self.assertEqual(got["partially_quoted_unpriced_families"]["MS"]["MSX"], 8.21)
-        self.assertEqual(len(got["other_complete_market_comparisons"]), 4)
+        self.assertIsNone(got["condition_1_same_top_choice"])
+        self.assertIsNone(got["condition_2_top_probabilities_close"])
+        self.assertEqual(len(got["p0_probabilities"]), 2)
         self.assertTrue(got["no_new_probability"])
         self.assertFalse(got["main_decision_changed"])
 
@@ -155,7 +162,7 @@ class TestP2(unittest.TestCase):
             k: v for k,v in data.items() if k != "payload_sha256"})
         got = align_first_pdf_snapshot(decision(), data)
         self.assertEqual(got["status"], "P0_SEVEN_MARKETS_INCOMPLETE")
-        self.assertIsNotNone(got["p0_same_choice_probability"])
+        self.assertIsNone(got["p0_highest_probability"])
         self.assertFalse(got["p0_highest_is_global"])
 
     def test_unquoted_cannot_coexist_with_full_quoted_price(self):
@@ -218,13 +225,45 @@ class TestP2(unittest.TestCase):
                 self.assertEqual(result["status"],"MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF")
                 self.assertEqual(result["model_choice"],target)
                 self.assertEqual(result["model_probability"],.80)
-                self.assertIsNone(result["p0_same_choice_probability"])
+                self.assertIsNone(result["p0_highest_probability"])
                 self.assertFalse(result["p0_highest_is_global"])
                 self.assertEqual(result["unquoted_pdf_selections"],[target])
                 self.assertFalse(result["main_decision_changed"])
                 self.assertTrue(result["no_new_probability"])
-                self.assertEqual(result["partially_quoted_unpriced_families"]
-                                 [group_to_pdf[group]], partial)
+                self.assertEqual(result["missing_complete_market_groups"],[group])
+                self.assertIsNone(result["condition_1_same_top_choice"])
+
+
+    def test_two_independent_tops_not_model_pick_lookup(self):
+        # Model selects MS1, P0 independently selects BTTS_YES. Nearness
+        # to P0's MS1 percent must not be used by P2 at all.
+        odds=copy.deepcopy(ODDS)
+        odds["KG"]={"BTTS_YES":1.25,"BTTS_NO":3.75}
+        r=align_first_pdf_snapshot(decision(),snapshot(odds))
+        self.assertEqual(r["model_choice"],"MS1")
+        self.assertEqual(r["p0_highest_choice"],"BTTS_YES")
+        self.assertFalse(r["condition_1_same_top_choice"])
+        self.assertIsNone(r["condition_2_top_probabilities_close"])
+        self.assertIsNone(r["absolute_gap_pp"])
+        self.assertNotIn("p0_same_choice_probability",r)
+        self.assertEqual(r["status"],"TERCIHLER_FARKLI")
+
+    def test_same_independently_top_choice_but_far_percentages(self):
+        # Both pick MS1 on their own; only now the second condition runs.
+        d=decision(.80)
+        r=align_first_pdf_snapshot(d,snapshot())
+        self.assertEqual(r["model_choice"],r["p0_highest_choice"])
+        self.assertTrue(r["condition_1_same_top_choice"])
+        self.assertFalse(r["condition_2_top_probabilities_close"])
+        self.assertGreater(r["absolute_gap_pp"],5)
+        self.assertEqual(r["status"],"YUZDELER_UZAK")
+
+    def test_near_pct_only_after_same_independent_top(self):
+        r=align_first_pdf_snapshot(decision(),snapshot())
+        self.assertEqual(r["p0_highest_choice"],r["model_choice"])
+        self.assertTrue(r["condition_1_same_top_choice"])
+        self.assertTrue(r["condition_2_top_probabilities_close"])
+        self.assertEqual(r["status"],"UYUMLU")
 
     def test_decision_and_pdf_hashes_protected(self):
         d, s = decision(), snapshot()
