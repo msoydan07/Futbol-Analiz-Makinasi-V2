@@ -126,6 +126,56 @@ class TestP2(unittest.TestCase):
         self.assertFalse(report["p0_highest_is_global"])
         self.assertEqual(report["window_sensitivity"], {})
 
+
+    def test_pdf_explicit_dash_unquoted_not_parser_error(self):
+        # Trabzon-like MS1 '-' while MSX and MS2 are still displayed.
+        remaining = {"OU25": ODDS["OU25"], "KG": ODDS["KG"]}
+        data = snapshot(remaining)
+        data["not_offered_pdf_market_keys"] = ["MS1"]
+        data["partial_quoted_prices_no_no_vig"] = {
+            "MS": {"MSX": 8.21, "MS2": 16.50}}
+        data["payload_sha256"] = _sha_json({
+            k: v for k, v in data.items() if k != "payload_sha256"})
+        got = align_first_pdf_snapshot(decision(), data)
+        self.assertEqual(got["status"], "MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF")
+        self.assertEqual(got["unquoted_pdf_selections"], ["MS1"])
+        self.assertIsNone(got["p0_same_choice_probability"])
+        self.assertFalse(got["p0_highest_is_global"])
+        self.assertEqual(got["partially_quoted_unpriced_families"]["MS"]["MSX"], 8.21)
+        self.assertEqual(len(got["other_complete_market_comparisons"]), 4)
+        self.assertTrue(got["no_new_probability"])
+        self.assertFalse(got["main_decision_changed"])
+
+    def test_dash_in_other_family_does_not_create_fake_full_agreement(self):
+        only = {"MS": ODDS["MS"], "OU25": ODDS["OU25"]}
+        data = snapshot(only)
+        data["not_offered_pdf_market_keys"] = ["BTTS_NO"]
+        data["partial_quoted_prices_no_no_vig"] = {"KG": {"BTTS_YES": 1.8}}
+        data["payload_sha256"] = _sha_json({
+            k: v for k,v in data.items() if k != "payload_sha256"})
+        got = align_first_pdf_snapshot(decision(), data)
+        self.assertEqual(got["status"], "P0_SEVEN_MARKETS_INCOMPLETE")
+        self.assertIsNotNone(got["p0_same_choice_probability"])
+        self.assertFalse(got["p0_highest_is_global"])
+
+    def test_unquoted_cannot_coexist_with_full_quoted_price(self):
+        data = snapshot()
+        data["not_offered_pdf_market_keys"] = ["MS1"]
+        data["payload_sha256"] = _sha_json({
+            k:v for k,v in data.items() if k != "payload_sha256"})
+        with self.assertRaisesRegex(AlignmentError, "UNQUOTED_PDF_KEYS_CONTRADICT"):
+            align_first_pdf_snapshot(decision(), data)
+
+    def test_partial_odds_cannot_forge_a_complete_market(self):
+        data = snapshot({"OU25": ODDS["OU25"], "KG": ODDS["KG"]})
+        data["not_offered_pdf_market_keys"] = ["MS1"]
+        data["partial_quoted_prices_no_no_vig"] = {
+            "MS": {"MSX": 8.21, "MS2": 16.50, "MS1": 1.01}}
+        data["payload_sha256"] = _sha_json({
+            k:v for k,v in data.items() if k != "payload_sha256"})
+        with self.assertRaisesRegex(AlignmentError, "PARTIAL_QUOTES_INCONSISTENT"):
+            align_first_pdf_snapshot(decision(), data)
+
     def test_decision_and_pdf_hashes_protected(self):
         d, s = decision(), snapshot()
         d["main_candidate"]["calibrated_probability"] += .01
