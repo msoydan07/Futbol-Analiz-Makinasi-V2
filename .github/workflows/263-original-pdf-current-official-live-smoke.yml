@@ -1,0 +1,51 @@
+name: 263 read-only fresh official fixture gateway live probe
+on:
+  push:
+    branches:
+      - experiment/263-pdf-fixture-fallback-20261122
+    paths:
+      - .github/workflows/263-original-pdf-current-official-live-smoke.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-fetch-once:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Fresh official pages, read-only, one per league; report successes AND failures
+        env:
+          PYTHONPATH: .:experiments/263
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime,timezone
+          from iddaa_pdf_official_lookup_batch_263 import OriginalPdfOfficialGateway
+          bridge=OriginalPdfOfficialGateway()
+          cases=[
+             ("ENG1","Hull City","Brighton & Hove Albion"),
+             ("ENG1","Liverpool","Manchester United"),
+             ("ITA1","Juventus","Venezia"),
+             ("ESP1","Barcelona","Villarreal"),
+             ("BEL1","SK Beveren","KAA Gent"),
+          ]
+          results=[]
+          for league,home,away in cases:
+              r=bridge.lookup(league,home,away)
+              evidence=bridge.gateway.latest_match_evidence(league,home,away)
+              item={"league":league,"home":home,"away":away,
+                    "status":r.get("status"),"reason":r.get("reason"),
+                    "kickoff_utc":r.get("kickoff_utc"),
+                    "source_url":r.get("source_url"),
+                    "evidence":evidence}
+              results.append(item)
+              print("ONE_LIVE_OFFICIAL_RESULT",json.dumps(item,ensure_ascii=False),flush=True)
+          print("ONE_LIVE_OFFICIAL_SUMMARY",json.dumps({
+              "probed":len(results),
+              "verified":sum(x["status"]=="VERIFIED_OFFICIAL_FIXTURE" for x in results),
+              "no_false_verified":True},ensure_ascii=False))
+          PY
