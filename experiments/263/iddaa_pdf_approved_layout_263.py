@@ -136,6 +136,36 @@ def _extract_card(row,session):
     signed morning session. It cannot steer or override model selection.
     """
     d=_valid_decision(row,session)
+    research=row.get("pdf_source_research")
+    if d is None and isinstance(research,dict):
+        # The lower-trust PDF-only record has its OWN SHA and a mandatory
+        # visible grade. It MUST NOT masquerade as an official M4/C3 seal.
+        from iddaa_pdf_source_fallback_263 import verify_research_record
+        from model_first_decision_263 import digest
+        verify_research_record(research,session["pdf_sha256"],row)
+        main=research["main"];alt=research["alternative"]
+        p0=research.get("p0")
+        p0_market=p0["choice"] if p0 else None
+        p0_prob=p0["probability"] if p0 else None
+        p2_status={"UYUMLU":"UYUMLU","FARKLI":"FARKLI",
+                   "YUZDELER_UZAK":"YÜZDELER UZAK",
+                   "ORAN_EKSIK":"ORAN EKSİK"}.get(
+                    research.get("p2_status"),"KONTROL EDİLEMEDİ")
+        gap=research.get("percentage_point_gap")
+        return {
+            "home":row["pdf_home"],"away":row["pdf_away"],"league":row["league"],
+            "date":row["match_date_tr"],"time":row["kickoff_time_tr"],
+            "main":LABELS[main["market"]],"ours":_p(main["calibrated_probability"]),
+            "p0":LABELS.get(p0_market,"—"),"p0_pct":_p(p0_prob),
+            "p2_status":p2_status,
+            "p0_odds":_o((row.get("prices") or {}).get(p0_market)),
+            "p2_gap":("%.2f"%gap).replace(".",",")+" puan"
+                       if isinstance(gap,(int,float)) else "—",
+            "alternative":LABELS[alt["market"]]+" "+_p(alt["calibrated_probability"])
+                           if alt else "YOK",
+            "source_note":"PDF KAYNAKLI · RESMÎ ONAY YOK",
+            "forecast_sha":None,"decision_sha":None,
+        }
     main=d.get("main_candidate") if d else None
     alt=d.get("alternative_candidate") if d else None
     model_market=main.get("market") if isinstance(main,dict) else None
@@ -262,8 +292,12 @@ def _draw_grouped_cards(grouped,target,model_only=False):
                 _text(c,xx[2]+8,top-64,"Oran: "+str(r.get("p0_odds","—")),9,True)
                 _text(c,xx[2]+8,top-82,"Fark: "+str(r.get("p2_gap","—")),
                       8.9,True,RED,max_width=col_w-14)
+                note=r.get("source_note")
                 _text(c,LEFT+15,top-97,"Alternatif: "+str(r.get("alternative","YOK")),
-                      8.2,True,RED,max_width=CW-30)
+                      8.2,True,RED,max_width=CW-(232 if note else 30))
+                if note:
+                    _right(c,RIGHT-12,top-97,note,6.7,True,
+                           max_width=202,color=GRAY)
             footer=H-113-len(chunk)*107-5
             _text(c,LEFT,footer,
                   "ANA ve P0 kendi en yüksek tercihlerini bağımsız seçer; P2 sadece karşılaştırır.",7.2)
