@@ -343,78 +343,121 @@ def _single_commentary(r,market,old,new):
     return " ".join(parts)
 
 def _draw_approved_single_page(c,r,i,n):
-    """Draw the ONLY approved second-PDF A4 four-symmetric-box layout."""
-    # User-approved symmetrical four-box layout on A4.
-    for y,height in ((H-135,104),(H-304,154),(H-529,209),(H-758,214)):
-        _box(c,LEFT,y,CW,height)
-    def section(y,label):
-        _text(c,LEFT+17,y,label,10.5,True)
-        c.setStrokeColor(BORDER);c.setLineWidth(.45)
-        c.line(LEFT+17,y-11,RIGHT-17,y-11)
-    section(H-54,"MAÇ BİLGİSİ")
-    _text(c,LEFT+17,H-85,r.get("home","?")+" - "+r.get("away","?"),14,True,max_width=CW-35)
-    _text(c,LEFT+17,H-105,LEAGUES.get(r.get("league"),"LİG")+
-          "  •  "+_date(r.get("match_date_tr")),8.7)
-    _right(c,RIGHT-17,H-105,"Saat: "+str(r.get("kickoff_time_tr") or "—"),9,True)
-    section(H-169,"ANA TAHMİN")
+    """Permanent 2nd-PDF one-page layout: main | alternative | P0 + 7-row strip.
+
+    Each card shows its OWN morning choice and percentage plus observed first
+    and second decimal prices and raw price delta. P0 never reselects itself
+    from second-PDF odds. No P2 mechanics, no seven-market odds table and
+    no copied/estimated missing favorite quotes.
+    """
+    _fonts()
+    _text(c,LEFT,H-45,"TEKLİ MAÇ RAPORU",15,True)
+    _right(c,RIGHT,H-44,"MAÇ SAATİNE YAKIN  ·  2. RAPOR",8,True,color=GRAY)
+    c.setStrokeColor(BORDER);c.setLineWidth(.6)
+    c.line(LEFT,H-58,RIGHT,H-58)
+    _text(c,LEFT,H-87,str(r.get("home","?"))+" - "+str(r.get("away","?")),
+          13.4,True,max_width=CW-170)
+    _right(c,RIGHT,H-86,_date(r.get("match_date_tr"))+" · "+
+           str(r.get("kickoff_time_tr") or "—"),8.6)
+    _text(c,LEFT,H-105,LEAGUES.get(r.get("league"),r.get("league") or "LİG"),
+          8.5,color=GRAY)
+    c.line(LEFT,H-119,RIGHT,H-119)
+
     main=r.get("morning_main_choice") or {}
     alt=r.get("morning_alternative_choice") or {}
-    market=main.get("market")
-    ours=main.get("calibrated_probability")
-    firstfair=(r.get("morning_market_no_vig") or {}).get(GROUP.get(market),{})
-    latefair=(r.get("latest_market_no_vig") or {}).get(GROUP.get(market),{})
-    f0=((firstfair.get("no_vig") or {}).get(market)
-        if firstfair.get("status")=="FULL_MARKET_QUOTE_AVAILABLE" else None)
-    f1=((latefair.get("no_vig") or {}).get(market)
-        if latefair.get("status")=="FULL_MARKET_QUOTE_AVAILABLE" else None)
-    if not isinstance(ours,(int,float)) or isinstance(ours,bool) or not 0<=ours<=1:ours=None
-    diff=100*(ours-f0) if ours is not None and isinstance(f0,(int,float)) else None
-    xs=[LEFT+66,LEFT+196,LEFT+324,LEFT+447]
-    headings=["ANA TERCİH","BİZİM %","PİYASA %","FARK"]
-    values=[LABELS.get(market,"TEKNİK ENGEL"),_p(ours),_p(f0),_delta(diff)+" puan" if diff is not None else "—"]
-    for idx,(x,h,v) in enumerate(zip(xs,headings,values)):
-        _center(c,x,H-199,h,8,True,RED if idx==3 else BLACK)
-        _center(c,x,H-226,v,12.5,True,RED if idx==3 else BLACK)
-    for x in (LEFT+130,LEFT+260,LEFT+385):
-        c.setStrokeColor(BORDER);c.setLineWidth(.35)
-        c.line(x,H-236,x,H-189)
-    alttext=(LABELS[alt["market"]]+" "+_p(alt.get("calibrated_probability"))
-             if alt and alt.get("market") in LABELS else "YOK")
-    _text(c,LEFT+18,H-266,"Alternatif: "+alttext,9,True,RED,max_width=CW-35)
-    _text(c,LEFT+18,H-282,"Sabahki tahmin, model olasılığı ve SHA mührü değişmez.",7.5,color=GRAY)
-    section(H-323,"ORAN KARŞILAŞTIRMASI")
-    odds0=r.get("morning_odds") or {};odds1=r.get("latest_odds") or {}
-    main0=odds0.get(market);main1=odds1.get(market)
-    x0=LEFT+17;split=LEFT+360
-    _text(c,x0,H-352,"PAZAR",7.5,True)
-    _text(c,LEFT+138,H-352,"İLK ORAN",7.5,True)
-    _text(c,LEFT+245,H-352,"SON ORAN",7.5,True)
-    groups=(("MS 1 / X / 2",("MS1","MSX","MS2")),
-           ("2.5 ALT / ÜST",("UNDER_2.5","OVER_2.5")),
-           ("KG VAR / YOK",("BTTS_YES","BTTS_NO")))
-    for j,(name,marks) in enumerate(groups):
-        yy=H-386-j*33
-        _text(c,x0,yy,name,8,True)
-        _text(c,LEFT+135,yy,_row_odds(odds0,marks),8,max_width=98)
-        _text(c,LEFT+240,yy,_row_odds(odds1,marks),8,max_width=105)
-        c.setStrokeColor(BORDER);c.line(x0,yy-15,split-12,yy-15)
-    c.setStrokeColor(BORDER);c.line(split,H-346,split,H-516)
-    _text(c,split+14,H-362,"ANA ORAN",8,True)
-    _text(c,split+14,H-386,_o(main0)+"  →  "+_o(main1),10,True)
-    odiff=main1-main0 if isinstance(main1,(float,int)) and isinstance(main0,(float,int)) else None
-    _text(c,split+14,H-422,"ORAN FARKI",8,True,RED)
-    _text(c,split+14,H-444,("%+.2f"%odiff).replace(".",",") if odiff is not None else "—",11,True,RED)
-    newdiff=100*(ours-f1) if ours is not None and isinstance(f1,(float,int)) else None
-    _text(c,split+14,H-480,"YENİ FARK",8,True,RED)
-    _text(c,split+14,H-501,(_delta(newdiff)+" puan") if newdiff is not None else "—",11,True,RED)
-    section(H-548,"YORUM")
-    commentary=_single_commentary(r,market,main0,main1)
-    comment_lines=_lines(commentary,CW-36,9.6,12)
-    yy=H-578
-    for line in comment_lines:
-        _text(c,LEFT+18,yy,line,9.6);yy-=15.5
-    _text(c,LEFT,H-775,"Kaynak: 1. ve 2. kullanıcı iddaa PDF'si. Kadro bilgisi varsa kaynaklı iddia, otomatik teyit değil.",7.4,color=GRAY,max_width=CW)
-    _text(c,LEFT,H-790,"Bu bir ikinci tahmin değildir. Oranlar ilk sabah kararını değiştirmez.",7.4,color=GRAY)
+    p2=r.get("morning_p2_agreement")
+    p0_choice=None;p0_pct=None;p0_probs={}
+    if isinstance(p2,dict):
+        if (p2.get("model_decision_sha256")!=r.get("morning_decision_sha256") or
+            p2.get("forecast_sha256") not in
+                (None,r.get("morning_model_sha256"))):
+            raise ValueError("SINGLE_REPORT_P0_ORIGINAL_MORNING_SHA_MISMATCH")
+        if p2.get("p0_highest_is_global") is True:
+            p0_choice=p2.get("p0_highest_choice")
+            p0_pct=p2.get("p0_highest_probability")
+            if (p0_choice not in LABELS or
+                not isinstance(p0_pct,(int,float)) or isinstance(p0_pct,bool)
+                or not 0<=p0_pct<=1):
+                raise ValueError("SINGLE_REPORT_P0_INVALID_MORNING_PEAK")
+        p0_probs=p2.get("p0_probabilities") or {}
+    else:
+        p0_probs={}
+    first=r.get("morning_odds") or {}
+    final=r.get("latest_odds") or {}
+
+    cards=(("ANA TERCİH",main.get("market"),
+            main.get("calibrated_probability"),BLACK),
+           ("ALTERNATİF",alt.get("market"),
+            alt.get("calibrated_probability"),RED),
+           ("P0 PİYASA",p0_choice,p0_pct,BLACK))
+    gap=8
+    cw=(CW-2*gap)/3
+    card_top=H-141
+    card_height=197
+    for j,(heading,key,prob,color) in enumerate(cards):
+        x=LEFT+j*(cw+gap);card_bottom=card_top-card_height
+        _box(c,x,card_bottom,cw,card_height)
+        _text(c,x+12,card_top-21,heading,8.4,True,color)
+        _text(c,x+12,card_top-47,LABELS.get(key,"BELİRLENEMİYOR" if j==2
+              else "YOK"),12.7,True,color,max_width=cw-23)
+        _text(c,x+12,card_top-68,_p(prob),12.5,True,color)
+        c.setStrokeColor(BORDER);c.setLineWidth(.4)
+        c.line(x+12,card_top-79,x+cw-12,card_top-79)
+        old=first.get(key) if key else None
+        new=final.get(key) if key else None
+        dd=(new-old if isinstance(new,(int,float)) and
+            not isinstance(new,bool) and isinstance(old,(int,float)) and
+            not isinstance(old,bool) else None)
+        for k,(label,value) in enumerate((
+            ("İlk oran",_o(old)),("Son oran",_o(new)),
+            ("Fark",("%+.2f"%dd).replace(".",",") if dd is not None else "—"))):
+            yy=card_top-105-k*27
+            _text(c,x+12,yy,label,8.2,True if k==2 else False,
+                  RED if k==2 else GRAY)
+            _right(c,x+cw-12,yy,value,9.3,True,
+                   RED if k==2 else BLACK,max_width=65)
+
+    # A compact aligned comparison strip, not a seven-price table or
+    # a second computation. P0 % = frozen first-PDF probabilities;
+    # latest odds = only the user's second PDF.
+    strip_top=H-361
+    strip_bottom=strip_top-110
+    _box(c,LEFT,strip_bottom,CW,110)
+    seven=("MS1","MSX","MS2","OVER_2.5","UNDER_2.5","BTTS_YES","BTTS_NO")
+    short=("MS 1","MS X","MS 2","ÜST","ALT","VAR","YOK")
+    rows=(("Tercihler",short),(
+           "Yüzdeler",tuple(_p((p0_probs.get({
+                 "MS1":"MS","MSX":"MS","MS2":"MS",
+                 "OVER_2.5":"OU25","UNDER_2.5":"OU25",
+                 "BTTS_YES":"KG","BTTS_NO":"KG"}[key],{}) or {}).get(key))
+                 for key in seven)),(
+           "Oranlar",tuple(_o(final.get(key)) for key in seven)))
+    label_w=93
+    part=(CW-label_w-10)/7
+    for ri,(label,values) in enumerate(rows):
+        yy=strip_top-25-ri*33
+        _text(c,LEFT+13,yy,label,8.6,True)
+        for index,value in enumerate(values):
+            xx=LEFT+label_w+(index+.5)*part
+            _center(c,xx,yy,value,8.0 if ri else 8.4,ri==0)
+        if ri<2:
+            c.setStrokeColor(BORDER);c.setLineWidth(.35)
+            c.line(LEFT+12,yy-12,RIGHT-12,yy-12)
+
+    comment_top=H-491
+    comment_bottom=H-740
+    _box(c,LEFT,comment_bottom,CW,comment_top-comment_bottom)
+    _text(c,LEFT+15,comment_top-25,"MAÇ YORUMU",10.0,True)
+    c.setStrokeColor(BORDER);c.setLineWidth(.4)
+    c.line(LEFT+15,comment_top-36,RIGHT-15,comment_top-36)
+    commentary=_single_commentary(r,main.get("market"),
+                                   first.get(main.get("market")),
+                                   final.get(main.get("market")))
+    lines=_lines(commentary,CW-34,9.1,12)
+    for j,line in enumerate(lines):
+        _text(c,LEFT+15,comment_top-57-j*15.5,line,9.1,max_width=CW-34)
+    _text(c,LEFT,H-757,"Yüzdeler: P0 ilk PDF  ·  Oranlar: son PDF",7.4,color=GRAY)
+    _text(c,LEFT,H-772,"Ana/alternatif ve piyasa sabah tercihleri değişmez.",7.4,color=GRAY)
     _right(c,RIGHT,21,str(i+1)+"/"+str(n),8.3,True)
     c.showPage()
 
