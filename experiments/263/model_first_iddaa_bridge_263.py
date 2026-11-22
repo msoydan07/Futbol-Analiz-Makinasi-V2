@@ -64,6 +64,17 @@ def calibrate_session(bulletin, session, *, original_pdf, repo_root=".",
                 or ref["forecast_sha256"]!=f["payload_sha256"]):
                 raise EvidenceError("MARKET_WRONG_MODEL_DECISION")
             r["market_fifth_reference"]=ref
+            # Permanent P2 presentation sidecar, AFTER the independent frozen
+            # football selection and original first-PDF SHA verification.
+            # Same PDF, no bookmaker request, no new market probabilities.
+            if original_price_snapshot.get("schema")=="263_iddaa_pdf_first_sha_price_v1":
+                from experiments.p1_market_intelligence.p2_market_alignment import align_first_pdf_snapshot
+                if d.get("main_candidate") is not None:
+                    r["p2_agreement"]=align_first_pdf_snapshot(d,original_price_snapshot)
+                else:
+                    r["p2_agreement"]={"status":"NO_MODEL_MAIN_CHOICE",
+                                     "model_decision_sha256":d["payload_sha256"],
+                                     "p0_highest_choice":None,"p0_highest_probability":None}
             # Optional frozen C3 calibration SHADOW: a SECOND diagnostic,
             # never a second forecast or decision. Main/alternative/PAS
             # remain those already SHA-signed in d above.
@@ -85,6 +96,7 @@ def calibrate_session(bulletin, session, *, original_pdf, repo_root=".",
             r.pop("model_first_decision",None)
             r.pop("market_fifth_reference",None)
             r.pop("pdf_first_price_snapshot",None)
+            r.pop("p2_agreement",None)
             r["model_only_decision_status"]="TECHNICAL_BLOCKED_NOT_PAS"
             r["model_only_technical_reason"]=(type(e).__name__+":"+str(e))[:180]
             technical+=1
