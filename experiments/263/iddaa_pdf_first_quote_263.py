@@ -57,7 +57,7 @@ def build_snapshot(bulletin,session,session_row,forecast,*,source_pdf=None,
     """Only accept proof of ORIGINAL PDF identity. Test injection may set
     verified_pdf_sha, but normal CLI MUST use source_pdf via verify_original_pdf.
     """
-    from iddaa_pdf_session_263 import pdf_prices,market_no_vig,SCHEMA as SESSION
+    from iddaa_pdf_session_263 import pdf_prices,market_no_vig,PDF_TO_MARKET,SCHEMA as SESSION
     from iddaa_pdf_bulletin_263 import SCHEMA as BULLETIN
     if source_pdf is not None:
         actual_sha=verify_original_pdf(source_pdf,bulletin)
@@ -129,6 +129,20 @@ def build_snapshot(bulletin,session,session_row,forecast,*,source_pdf=None,
         if set(prices)!=set(keys) or set(fair)!=set(keys):
             raise ValueError("PDF_FIRST_INCOMPLETE_MARKET_IN_COMPLETE_GROUP")
         complete[group]={"prices":prices,"no_vig":fair}
+    # A literal '-' in an otherwise aligned original PDF row is an explicit
+    # bookmaker-UNQUOTED selection. It is NOT a PDF parsing failure or a
+    # permission to invent an implied price for the missing side.
+    # Keep raw still-visible prices in incomplete families separately; never
+    # give them margin-free probabilities without all their opposites.
+    parsed_pdf_odds=r.get("odds") or {}
+    unquoted=[market for pdf_key,market in PDF_TO_MARKET.items()
+              if pdf_key in parsed_pdf_odds and parsed_pdf_odds[pdf_key] is None]
+    raw_partial={}
+    available_prices=pdf_prices(r)
+    for group,keys in GROUPS.items():
+        if group not in complete:
+            subset={key:available_prices[key] for key in keys if key in available_prices}
+            if subset:raw_partial[group]=subset
     snap={
         "schema":SCHEMA,
         "source_domain":"iddaa.com",
@@ -148,6 +162,8 @@ def build_snapshot(bulletin,session,session_row,forecast,*,source_pdf=None,
         "observed_at_utc":observed.isoformat(),
         "created_after_pdf_forecast_utc":created.isoformat(),
         "groups":complete,
+        "not_offered_pdf_market_keys":sorted(unquoted),
+        "partial_quoted_prices_no_no_vig":raw_partial,
         "missing_or_invalid_groups":[g for g in GROUPS if g not in complete],
         "price_age_class":"ARCHIVED_PDF_PRE_FORECAST",
         "is_current_live_quote":False,
