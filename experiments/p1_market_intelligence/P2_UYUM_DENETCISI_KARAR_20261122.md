@@ -7,17 +7,17 @@ Tarih: 22 Kasım 2026. Dal: experiment/p1-market-intelligence-20261121.
 - Ana 2.6.3: MS 1/X/2 için M4; KG Var/Yok ve 2.5 Alt/Üst için C3. Mevcut model-first v4 kararından yedi olayın en yüksek gerçekleşme olasılıklı ana tercihi. Önceden mühürlenmiş karar, SHA ve alternatif korunur.
 - P0: Kullanıcının **ilk** iddaa.com PDF'sindeki MS, 2.5 ve KG oranlarını üç **ayrı** pazar içinde marjdan arındırır. Yedi olay yüzdesini gösterir; yedi olay birbirini dışlayan tek dağılım değildir.
 - P1: Aynı oranlara bağımsız Poisson uyduran **piyasa yeniden ifadesi**. Bağımsız futbol verisi içermez; araştırma için saklanır.
-- P2: Sadece ana makinenin SHA'lı main_candidate.market ve calibrated_probability alanlarını P0'daki **aynı olayın** marjdan arınmış yüzdesiyle karşılaştırır. Ayrıca P0'ın zirvedeki seçimi de aynı mı diye işaretler. Yeni hibrit yüzde ve yeni seçim üretmez.
+- P2: **İki bağımsız zirve kararını** yan yana koyar: (A) ana makinenin SHA'lı 7 olay içindeki kendi en yüksek kararı; (B) P0'ın üç tam pazarından bağımsız seçtiği kendi en yüksek kararı. **Önce olay kodu aynı mı? Yalnız aynıysa iki makinenin kendi zirve yüzdeleri yakın mı?** Model tercihine P0'ın verdiği yardımcı yüzdeyi ana karşılaştırma yerine kullanmaz. Yeni hibrit yüzde ve yeni seçim üretmez.
 
 ## Başlangıç uyum göstergesi
 
 Betimsel UYUMLU etiketi için **iki şart birlikte** gerekir:
 1. Ana makinenin zirvedeki tercihi, P0'ın yedi olay içindeki zirvedeki tercihiyle aynı olmalı.
-2. P0'ın **aynı olaya** verdiği yüzdeyle model yüzdesinin mutlak farkı **en çok 5 yüzde puanı** olmalı.
+2. Şart 1 sağlanmışsa **ana makinenin kendi zirve yüzdesi** ile **P0'ın kendi zirve yüzdesi** arasındaki mutlak fark **en çok 5 yüzde puanı** olmalı. Şart 1 sağlanmadıysa yüzdeler karşılaştırılmaz; `yüzde farkı = —`.
 
-Aksi hâlde UYUMLU_TAHMIN_BULUNAMADI; seçili piyasa grubu eksikse P0_SAME_MARKET_UNAVAILABLE. Seçili grubun fiyatları olsa da **diğer iki pazar ailesinden biri eksikse**, yedi olayın piyasa zirvesi doğrulanamayacağı için P0_SEVEN_MARKETS_INCOMPLETE; bu durumda yakın yüzdeye bakarak yanlış UYUMLU etiketi verilmez. 3/5/7 yüzde puanı sınırları aynı raporda yalnız duyarlılık amaçlı görünür. Bu eşikler **sonuçlarla doğrulanmamıştır**; risk ya da isabet garantisi değildir.
+Şart 1 sağlanmazsa `TERCIHLER_FARKLI`; şart 1 sağlanır ama yüzdeler yakın değilse `YUZDELER_UZAK`; iki şart sağlanırsa `UYUMLU`. **Herhangi bir piyasa grubu eksikse**, yedi olayın gerçek piyasa zirvesi bilinmediğinden `P0_SEVEN_MARKETS_INCOMPLETE` (`-` ile ana tercih fiyatlanmamışsa `MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF`). Böyle bir durumda P0'ın zirvesi ve iki şart `DEĞERLENDİRİLEMEDİ` olarak kalır, eksik sayı uydurulmaz. 3/5/7 yüzde puanı sınırları aynı raporda yalnız duyarlılık amaçlı görünür. Bu eşikler **sonuçlarla doğrulanmamıştır**; risk ya da isabet garantisi değildir.
 
-Örnek: model MS1 %62, P0 aynı MS1 %59; P0'ın en yüksek olayı da MS1 ise betimsel uyum var. P0 KG Var'ı daha yüksek buluyorsa yüzdeler yakın olsa da zirve tercihleri uyuşmaz.
+Örnek: Ana makinenin **kendi zirvesi MS1 %62** ve piyasanın **kendi zirvesi MS1 %59** ise 3 puan farkla betimsel uyum var. Piyasanın zirvesi **KG Var %60** ise, ana MS1 %62 ile farklı olaylar olduğundan **yüzde farkı hesaplanmaz**, yalnızca `TERCIHLER_FARKLI` bildirilir.
 
 ## Güvenlik ve kaynak
 
@@ -46,21 +46,20 @@ Aksi hâlde UYUMLU_TAHMIN_BULUNAMADI; seçili piyasa grubu eksikse P0_SAME_MARKE
 - P0/P1'nin 2.131 maçlık 22 Kasım denetiminde, 1.066 maçlık testte P0 olasılık kalitesi Brier/log-loss açısından daha iyi; P1'in bir ekstra doğru tercihi istatistiksel üstünlük değil. Tarihsel 1xBet kapanış veri kaynağını iddaa olarak sunmuyoruz.
 - Üretim seçimine terfi: **HAYIR**. Yeni, bağımsız P2 yan raporu: **EVET**. Gerçek maç sonuçlarında uyum eşiklerinin doğruluğu: **HENÜZ GÖSTERİLMEDİ**.
 
-## 21 Kasım geçmiş fiyatlarıyla yedi maçın karşılaştırması
+## Geçmiş kayıtlar ve yeni iki şartlı format
 
-| Maç | Ana seçilen olay | M4/C3 | P0 aynı olay | P0 kendi zirvesi | Uyum (geçici 5 puan) |
-|---|---|---:|---:|---|---|
-| Manchester City–Fulham | MS1 | %67,74 | %69,15 | MS1 | UYUMLU |
-| Millwall–QPR | KG Var | %58,85 | %59,22 | KG Var | UYUMLU |
-| Norwich–Cardiff | KG Var | %61,94 | %69,36 | 2.5 Üst | UYUMSUZ |
-| Southampton–Derby | MS1 | %66,54 | %68,48 | MS1 | UYUMLU |
-| Alavés–Deportivo | KG Var | %55,62 | %49,13 | 2.5 Alt | UYUMSUZ |
-| Amed–Rizespor | MS1 | %77,07 | %50,83 | KG Var | UYUMSUZ |
-| Galatasaray–Samsunspor | MS1 | %81,52 | %82,13 | MS1 | UYUMLU |
+21 Kasım ilk fiyat arşivinde tam yedi piyasası bulunan 7 kayıttan 4'ü iki zirve kriterine göre betimsel uyumlu, 3'ü değil. Eski tasarımın "model tercihi için P0 yüzdesi" sütunu **yeni üçüncü makine ekranında kullanılmaz**. Yalnız iki **bağımsız lider** gösterilir; farklı liderlerde yüzdeler arası fark sütunu boş olur.
 
-Toplam: 7 eşleşme, **4 betimsel uyum, 3 uyumsuzluk**. Bu bir **tahmin isabet testi değildir**; 21 Kasım arşivinde ilk oranlar sonradan korunmuş PDF transkripsiyonlarıdır. 5 puan eşiği sonuçlara göre öğrenilmedi ve üretimde bahis/tahmin kapısı olarak kullanılmayacak.
+22 Kasım'daki **araştırma** örneği (özgün PDF GitHub koşucusunda yeniden açılmadı, resmî mühür olarak sunulmaz):
 
-Mühendislik kabul kanıtı: [GitHub Actions P1/P2 tek toplu CI](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45002444047); 48 birim testi başarılı ve geçmişteki 7 SHA eşleşmesi başarılı.
+| Maç | Ana makine kendi zirvesi | P0 kendi zirvesi | Şart 1 | Şart 2 | P2 |
+|---|---|---|---|---|---|
+| Erzurumspor–Göztepe | MS2 %52,72 | 2.5 Alt %55,30 | HAYIR | BAKILMAZ | TERCIHLER_FARKLI |
+| Konyaspor–Beşiktaş | KG Var %54,91 | MS2 %60,30 | HAYIR | BAKILMAZ | TERCIHLER_FARKLI |
+| Kasımpaşa–Alanyaspor | KG Var %52,40 | KG Var %52,74 | EVET | EVET (0,34 puan) | UYUMLU |
+| Trabzonspor–Eyüpspor | MS1 %85,54 | P0 yedi seçenek zirvesi belirlenemiyor (MS1 `-`) | DEĞERLENDİRİLEMEZ | BAKILMAZ | MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF |
+
+**Not:** P0 ve P1 aynı oran verisinin farklı matematiksel ifadeleridir. Ana P2 kıyasının piyasa tarafı P0'dır, P1 ayrı araştırma göstergesidir. 5 puan eşiği tarihsel başarıya göre doğrulanmış değildir.
 
 ## 22 Kasım ek kararı: iddaa'da '−' görülen favori seçim
 
@@ -81,3 +80,7 @@ Doğrulama: [22 Kasım unquoted-favorite CI: 53 P0/P1/P2 testi + 1 ilk-PDF kayna
 Fiyatlanmamış (`-`) seçim kuralı **MS1, MSX, MS2, 2.5 Alt, 2.5 Üst, KG Var, KG Yok** için aynıdır. Favorinin ev/deplasman olmasına göre istisna yaratılmaz. Yalnız ilgili fiyat grubunun piyasa olasılığı boş kalır; tamamlanmış başka gruplar hesaplanır; ana M4/C3 SHA/tercih korunur. Oran verilmeme sebebi kaynakta açıkça açıklanmıyorsa **uydurulmaz**.
 
 Denetim: yedi farklı fiyatlanmamış seçim için gerçek PDF-first fiyat-snapshot yolu ve yedi farklı ana-model seçim türü için P2 karşılaştırması ayrı alt testler olarak denendi. [GitHub tek kabul koşusu: 54 P0/P1/P2 + 2 PDF kaynağı + 5 model köprüsü testi, toplam 61 test başarılı](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45005264328). Üretim dalı değiştirilmedi.
+
+## Nihai düzeltme — 22 Kasım iki bağımsız zirve kararı
+
+P2 kodunun `_align` fonksiyonu artık önce ana modelin zirve seçimini, ardından **ana seçime bakmadan** P0'ın yedi sonuç içindeki bağımsız zirvesini belirler. `condition_1_same_top_choice` şart 1, `condition_2_top_probabilities_close` şart 2'dir. Farklı seçime ait yüzdeler karşılaştırılmaz: `signed_gap_pp` ve `absolute_gap_pp` null olur; ikinci şart null olur. Fiyatı tam olmayan piyasalarda P0 küresel zirvesi uydurulmaz; şartlar null olur. Tam kaynak SHA, orijinal model tahmini ve mühür değişmez. Canlı üretime henüz aktarılmaz.
