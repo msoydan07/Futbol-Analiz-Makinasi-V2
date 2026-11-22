@@ -32,6 +32,7 @@ Araştırma kendi içerik SHA'sına ve orijinal PDF SHA'sına sahiptir; kayıt y
 
 ## Güvenlik ve sınırlar
 
+- **Kesin kaynak çelişkisi istisnası:** Resmî kaynakta maçın farklı tarihi/saati veya takım sırası açıkça doğrulanmışsa PDF'ye geri düşülmez; maç manuel incelemeye ayrılır. Resmî fixture geçip model geçmiş veri kontrolü reddettiyse model matematiği de daha düşük güvenli bir kaynakla zorlanmaz. PDF-only ayrı hesap sadece resmî lookup adapterı kaynağa erişemediğinde veya eşleşme bulamadığında kullanılabilir.
 - Geçmiş maç sonucu, mevcut maçın başlangıcı veya sonrası hiçbir tahmin hesabına giremez.
 - Orijinal PDF'nin SHA kaydı, 7 oranın doğru kolonlarda okunması, kaynak saati, mevcut takım ID'si, accepted 4413/4617 tarihi, son maç boşluğu ve model kilidi kontrol edilir.
 - Yeni 4617 verisi için orijinal sabit 4413 kaynağının ve tarihsel kabul kanıtının doğrulaması sürer. Onaysız CSV'ye gevşetme yapılmaz.
