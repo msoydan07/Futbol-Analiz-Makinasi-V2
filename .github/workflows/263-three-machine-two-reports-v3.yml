@@ -1,0 +1,82 @@
+name: "263 permanent three-machine first + second PDF v3 acceptance"
+on:
+  push:
+    branches:
+      - experiment/20261122-four-match-live-pdf-probe
+      - experiment/263-toplu-karsilastirma
+    paths:
+      - experiments/263/iddaa_pdf_approved_layout_263.py
+      - experiments/263/model_first_iddaa_bridge_263.py
+      - experiments/263/iddaa_pdf_last_review_263.py
+      - experiments/263/test_three_machine_reports_v3_263.py
+      - experiments/263/test_iddaa_pdf_approved_layout_263.py
+      - experiments/263/test_toplu_approved_card_263.py
+      - experiments/p1_market_intelligence/p2_market_alignment.py
+      - .github/workflows/263-three-machine-two-reports-v3.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-approved-outputs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install unchanged model and PDF dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 reportlab PyMuPDF==1.26.5
+      - name: SHA and user-approved layout contract, first + second route
+        env:
+          PYTHONPATH: .:experiments/263:experiments/p1_market_intelligence
+        run: |
+          set -euo pipefail
+          python -m unittest -v \
+            experiments/263/test_three_machine_reports_v3_263.py \
+            experiments/263/test_iddaa_pdf_approved_layout_263.py \
+            experiments/263/test_toplu_approved_card_263.py \
+            experiments/263/test_model_first_iddaa_bridge_263.py \
+            experiments/263/test_iddaa_pdf_one_step_263.py \
+            experiments/263/test_iddaa_pdf_last_review_263.py \
+            experiments/p1_market_intelligence/test_p2_market_alignment.py
+          python experiments/263/check_active_decisions_263.py
+      - name: Save two actual generated PDFs for visual inspection
+        env:
+          PYTHONPATH: .:experiments/263:experiments/p1_market_intelligence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/user_approved_v3
+          python - <<'PY'
+          from pathlib import Path
+          from iddaa_pdf_approved_layout_263 import render_batch,render_singles
+          from test_three_machine_reports_v3_263 import sample_immutable_first_pdf
+          from test_iddaa_pdf_last_review_263 import make,NOW
+          from iddaa_pdf_last_review_263 import build
+          first,d,p2=sample_immutable_first_pdf()
+          render_batch(first,Path('/tmp/user_approved_v3/toplu_analiz_onayli.pdf'))
+          session,initial,second,resolver=make()
+          review=build(session,initial,second,[],NOW,resolver=resolver)
+          row=review['rows'][0]
+          row.update({
+              'morning_main_choice':d['main_candidate'],
+              'morning_alternative_choice':d['alternative_candidate'],
+              'morning_decision_sha256':d['payload_sha256'],
+              'morning_model_sha256':d['forecast_sha256'],
+              'morning_p2_agreement':p2,
+              'morning_odds':{k:v for a in __import__(
+                    'experiments.p1_market_intelligence.test_p2_market_alignment',
+                    fromlist=['ODDS']).ODDS.values() for k,v in a.items()},
+          })
+          render_singles(review,Path('/tmp/user_approved_v3/tekli'),
+                         bundle_pdf=Path('/tmp/user_approved_v3/tekli_rapor.pdf'))
+          print('GENERATED_SAME_OPERATIONAL_ENTRYPOINTS')
+          PY
+      - name: Upload exact sample PDFs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: approved-first-second-v3-pdf-visual-audit
+          path: /tmp/user_approved_v3/*.pdf
+          if-no-files-found: warn
