@@ -27,8 +27,8 @@ class UserApprovedReports(unittest.TestCase):
             with fitz.open(p) as doc:
                 self.assertEqual(len(doc),1)
                 t=doc[0].get_text()
-                for label in ("BUNDESLIGA","ANA TERCİH","BİZİM %",
-                              "PİYASA %","FARK (PUAN)","Alternatif:"):
+                for label in ("BUNDESLIGA","ANA MAKİNE","P0",
+                              "P2:","Alternatif:"):
                     self.assertIn(label,t)
                 self.assertIn("TEKNİK ENGEL",t)
                 self.assertNotIn("MODEL ÖZETİ",t)
@@ -40,7 +40,7 @@ class UserApprovedReports(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             with fitz.open(render_batch(s,Path(d)/"toplu.pdf")) as pdf:
                 self.assertEqual(len(pdf),2)
-    def test_single_four_symmetric_boxes_and_no_invented_xi(self):
+    def test_single_three_cards_seven_strip_and_no_invented_xi(self):
         import fitz
         morning,first,last,resolver=make()
         review=review_build(morning,first,last,[],NOW,resolver=resolver)
@@ -52,21 +52,23 @@ class UserApprovedReports(unittest.TestCase):
                 self.assertEqual(len(doc),1)
                 page=doc[0]
                 txt=page.get_text()
-                for part in ("MAÇ BİLGİSİ","ANA TAHMİN","BİZİM %",
-                             "PİYASA %","FARK","ORAN KARŞILAŞTIRMASI",
-                             "İLK ORAN","SON ORAN","YENİ FARK","YORUM"):
+                for part in ("TEKLİ MAÇ RAPORU","ANA TERCİH","ALTERNATİF",
+                             "P0 PİYASA","İlk oran","Son oran","Fark",
+                             "Tercihler","Yüzdeler","Oranlar","MAÇ YORUMU"):
                     self.assertIn(part,txt)
                 self.assertNotIn("MODEL ÖZETİ",txt)
+                self.assertNotIn("Şart 1",txt)
+                self.assertNotIn("ORAN KARŞILAŞTIRMASI",txt)
                 self.assertIn("İlk 11",txt)
-                # Every major box starts/ends at exactly the same X bounds.
                 drawings=page.get_drawings()
-                big=[x["rect"] for x in drawings if x["rect"].width>470
-                     and x["rect"].height>75]
-                self.assertGreaterEqual(len(big),4)
-                for r in big[:4]:
-                    self.assertAlmostEqual(r.x0,big[0].x0,places=1)
-                    self.assertAlmostEqual(r.x1,big[0].x1,places=1)
+                boxes=[x["rect"] for x in drawings
+                       if 150 < x["rect"].width < 185 and x["rect"].height>180]
+                self.assertGreaterEqual(len(boxes),3)
+                self.assertAlmostEqual(boxes[0].y0,boxes[1].y0,places=1)
+                self.assertAlmostEqual(boxes[1].y0,boxes[2].y0,places=1)
+                self.assertAlmostEqual(boxes[0].width,boxes[2].width,places=1)
             with self.assertRaises(FileExistsError):render_singles(review,output)
+
     def test_second_pdf_unmatched_match_has_no_single_report(self):
         morning,first,last,resolver=make()
         last["rows"][0]["home_label"]="Wrong team"
@@ -96,7 +98,7 @@ class UserApprovedReports(unittest.TestCase):
             with fitz.open(render_batch(s,Path(d)/"r.pdf")) as pdf:
                 t=pdf[0].get_text()
                 self.assertIn("TEKNİK ENGEL",t)
-                self.assertIn("PAS DEĞİL",t)
+                self.assertIn("P2: TEKNİK ENGEL",t)
                 self.assertNotIn("MS 1   %",t)
 if __name__=="__main__":
     unittest.main()
