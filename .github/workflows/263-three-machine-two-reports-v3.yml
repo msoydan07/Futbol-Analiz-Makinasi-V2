@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/user_approved_v3/tekli
+          mkdir -p /tmp/user_approved_v3
           python - <<'PY'
           from pathlib import Path
           from iddaa_pdf_approved_layout_263 import render_batch,render_singles
