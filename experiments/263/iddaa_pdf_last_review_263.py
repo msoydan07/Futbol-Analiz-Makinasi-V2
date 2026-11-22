@@ -176,6 +176,7 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
      "morning_alternative_choice":(frozen.get("alternative_candidate") if frozen else lower.get("alternative") if lower else None),
      "morning_decision_sha256":(frozen.get("payload_sha256") if frozen else lower.get("payload_sha256") if lower else None),
      "morning_pdf_source_research":lower if not official else None,
+     "morning_pdf_sha256":morning["pdf_sha256"],
      "morning_source_grade":"OFFICIAL_FIXTURE_VERIFIED" if official else "PDF_ONLY_NOT_FEDERATION_VERIFIED",
      "morning_p2_agreement":m.get("p2_agreement") if official else None,
      "latest_odds":None,"latest_market_no_vig":{},
