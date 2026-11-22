@@ -29,6 +29,8 @@ NEEDED = (
     "experiments/263/second_pdf_commentary_archive_263.py",
     "docs/263_IKINCI_PDF_TEKLI_RAPOR_KALICI_SABLON_20261121.md",
     "docs/263_IKINCI_PDF_ORAN_YORUM_ARSIV_KARARI_20261121.md",
+    "experiments/263/iddaa_pdf_source_fallback_263.py",
+    "docs/263_IDDAA_PDF_FIKSTUR_GRADE_CALISMA_KARARI_20261122.md",
 )
 
 class Contract(unittest.TestCase):
@@ -46,6 +48,15 @@ class Contract(unittest.TestCase):
         self.assertEqual(result["status"],"ACTIVE_DECISIONS_OK")
         self.assertEqual(result["active_topics"],8)
         self.assertEqual(result["market"],"USER_IDDAA_PDF_ONLY_FIFTH_REFERENCE")
+    def test_pdf_source_fallback_cannot_be_silently_removed(self):
+        path=self.root/"experiments/263/iddaa_pdf_source_fallback_263.py"
+        source=path.read_text(encoding="utf-8").replace(
+            "USER_IDDAA_PDF_ONLY_NOT_OFFICIAL_FIXTURE_VERIFIED",
+            "OFFICIAL_FIXTURE_VERIFIED")
+        path.write_text(source,encoding="utf-8")
+        with self.assertRaises(ActiveDecisionConflict):
+            verify_active_policy(self.root)
+
     def test_same_topic_two_active_decisions_blocks(self):
         path=self.root/NEEDED[0]
         d=json.loads(path.read_text(encoding="utf-8"))
