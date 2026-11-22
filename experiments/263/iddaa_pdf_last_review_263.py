@@ -329,7 +329,7 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
           "second_pdf_archive_status":archived["status"],
           "second_pdf_archive_files":archived["files"],
           "pdf_report":str(target/"tekli_rapor.pdf"),"technical_legacy_pdf":str(target/"review.pdf"),
-          "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
+          "approved_single_layout":"THREE_CARDS_SEVEN_MARKET_STRIP_ONE_COMMENT_V3",
           "summary":str(target/"summary.md"),
           "approved_single_pdf_paths":[str(x) for x in paths],
           "approved_match_index":[{"home":r["home"],"away":r["away"],
@@ -365,7 +365,7 @@ def process(morning_dir,second_pdf,xi_json=None,now=None):
          "approved_match_index":[{"home":r["home"],"away":r["away"],
              "kickoff_time_tr":r["kickoff_time_tr"],"pdf_path":str(p)}
              for r,p in zip(ready,singles)],
-         "approved_single_layout":"FOUR_SYMMETRIC_BOXES_FIRST_SECOND_ODDS_ONE_COMMENT_V1",
+         "approved_single_layout":"THREE_CARDS_SEVEN_MARKET_STRIP_ONE_COMMENT_V3",
          "matches":review["matches_reviewed"],
          "pdf_report":str(target/"tekli_rapor.pdf"),
          "technical_legacy_pdf":str(target/"review.pdf"),
