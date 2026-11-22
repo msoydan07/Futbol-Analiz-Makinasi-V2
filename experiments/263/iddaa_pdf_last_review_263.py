@@ -167,7 +167,7 @@ def build(morning,first,last,xi_evidence,now,*,resolver):
   r={"league":m["league"],"home":m["pdf_home"],"away":m["pdf_away"],
      "home_id":m["home_id"],"away_id":m["away_id"],
      "match_date_tr":m["match_date_tr"],"kickoff_time_tr":m["kickoff_time_tr"],
-     "kickoff_utc":ko.isoformat(),"morning_model_sha256":m["model_forecast_sha256"],
+     "kickoff_utc":ko.isoformat(),"morning_model_sha256":m.get("model_forecast_sha256") if official else None,
      "morning_models_not_recalculated":True,
      "morning_model_probabilities":m.get("model_1x2_and_core_markets",{}),
      "morning_odds":m.get("prices",{}),
