@@ -107,86 +107,74 @@ def _p0_from_prices(prices: dict) -> dict:
 
 def _align(decision: dict, prices: dict, *, source: dict,
            unquoted_market_keys: tuple[str, ...] = ()) -> dict:
-    selected, model_prob = _validate_decision(decision)
+    """Compare TWO INDEPENDENT seven-outcome winners; never select by the other.
+
+    Gate 1: independently selected event codes identical?
+    Gate 2: ONLY IF gate 1 passes, are their OWN highest percentages close?
+    The provisional 5 percentage-point threshold is not result-calibrated.
+    """
+    model_top_choice, model_top_probability = _validate_decision(decision)
     p0 = _p0_from_prices(prices)
     if (len(set(unquoted_market_keys)) != len(unquoted_market_keys)
         or any(key not in CHOICE_FAMILIES for key in unquoted_market_keys)
         or any(key in p0.get(CHOICE_FAMILIES[key], {}) for key in unquoted_market_keys)):
         raise AlignmentError("UNQUOTED_MARKET_CONTRADICTS_COMPLETE_PRICES")
-    # Real comparisons still exist for OTHER complete groups when the model's
-    # chosen event has no published bookmaker quote. Never make new estimates.
-    comparisons = sorted((
-        {"market": row["market"], "model_probability": row["calibrated_probability"],
-         "p0_probability": p0[CHOICE_FAMILIES[row["market"]]][row["market"]],
-         "model_minus_p0_pp": 100*(row["calibrated_probability"] -
-             p0[CHOICE_FAMILIES[row["market"]]][row["market"]])}
-        for row in decision["model_market_diagnostics"]
-        if CHOICE_FAMILIES[row["market"]] in p0
-    ), key=lambda item: (-item["model_probability"], item["market"]))
-    family = CHOICE_FAMILIES[selected]
-    p0_top = best_choices(p0)["main"] if set(p0) == set(MARKETS) else (
-        sorted(((prob, market) for group in p0.values()
-                for market, prob in group.items()), reverse=True)[0])
-    if isinstance(p0_top, tuple):
-        p0_top = {"choice": p0_top[1], "probability": p0_top[0]}
-    if family not in p0:
-        return {
-            "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
-            "p0_probabilities": p0,
-            "unquoted_pdf_selections": list(unquoted_market_keys),
-            "other_complete_market_comparisons": comparisons,
-            "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
-            "model_probability": model_prob, "p0_same_choice_probability": None,
-            "signed_gap_pp": None, "absolute_gap_pp": None,
-            "p0_highest_choice": p0_top["choice"], "p0_highest_probability": p0_top["probability"],
-            "p0_highest_is_global": False,
-            "p0_main_choice_matches": False,
-            "status": ("MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF"
-                       if selected in unquoted_market_keys else "P0_SAME_MARKET_UNAVAILABLE"),
-            "window_sensitivity": {}, "no_new_probability": True,
-            "main_decision_changed": False, "threshold_validated": False,
-        }
-    implied = p0[family][selected]
-    gap = 100 * (model_prob - implied)
-    # A missing OTHER group also makes the seven-event P0 peak unknowable.
-    # Display the same-event comparison, but never infer full top-choice agreement.
-    if set(p0) != set(MARKETS):
-        return {
-            "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
-            "p0_probabilities": p0,
-            "unquoted_pdf_selections": list(unquoted_market_keys),
-            "other_complete_market_comparisons": comparisons,
-            "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
-            "model_probability": model_prob, "p0_same_choice_probability": implied,
-            "signed_gap_pp": gap, "absolute_gap_pp": abs(gap),
-            "p0_highest_choice": p0_top["choice"], "p0_highest_probability": p0_top["probability"],
-            "p0_highest_is_global": False, "p0_main_choice_matches": False,
-            "status": "P0_SEVEN_MARKETS_INCOMPLETE", "window_sensitivity": {},
-            "no_new_probability": True, "main_decision_changed": False,
-            "threshold_validated": False,
-        }
-    same_top = p0_top["choice"] == selected
-    sensitivity = {
-        str(int(w)): "UYUMLU" if same_top and abs(gap) <= w else "UYUMLU_TAHMIN_BULUNAMADI"
-        for w in PROVISIONAL_WINDOWS_PP
-    }
-    return {
-        "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
-        "p0_probabilities": p0,
-        "unquoted_pdf_selections": list(unquoted_market_keys),
-        "other_complete_market_comparisons": comparisons,
-        "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
-        "model_probability": model_prob, "p0_same_choice_probability": implied,
-        "signed_gap_pp": gap, "absolute_gap_pp": abs(gap),
-        "p0_highest_choice": p0_top["choice"], "p0_highest_probability": p0_top["probability"],
-        "p0_highest_is_global": True,
-        "p0_main_choice_matches": same_top,
-        "status": sensitivity["5"], "window_sensitivity": sensitivity,
-        "threshold_validated": False,
-        "no_new_probability": True, "main_decision_changed": False,
-        "meaning": "DESCRIPTIVE_AGREEMENT_NOT_HIGHER_ACCURACY_OR_BETTING_EDGE",
-    }
 
+    all_seven_available = set(p0) == set(MARKETS)
+    # This P0 selection is made from all P0 odds independently; it does NOT
+    # accept the original model's pick as an input.
+    market_top = best_choices(p0)["main"] if all_seven_available else None
+    same_choice = (model_top_choice == market_top["choice"]
+                   if market_top is not None else None)
+    signed_gap = (100 * (model_top_probability - market_top["probability"])
+                  if same_choice is True else None)
+    absolute_gap = abs(signed_gap) if signed_gap is not None else None
+    near = (absolute_gap <= 5.0 if absolute_gap is not None else None)
+    sensitivity = ({
+        str(int(w)): ("UYUMLU" if absolute_gap <= w else "YUZDELER_UZAK")
+        for w in PROVISIONAL_WINDOWS_PP
+    } if same_choice is True else {})
+
+    if not all_seven_available:
+        status = ("MODEL_TOP_CHOICE_NOT_OFFERED_IN_PDF"
+                  if model_top_choice in unquoted_market_keys
+                  else "P0_SEVEN_MARKETS_INCOMPLETE")
+    elif same_choice is False:
+        status = "TERCIHLER_FARKLI"
+    elif near is False:
+        status = "YUZDELER_UZAK"
+    else:
+        status = "UYUMLU"
+
+    return {
+        "schema": SCHEMA,
+        "source": source,
+        "model_decision_sha256": decision["payload_sha256"],
+        "forecast_sha256": decision["forecast_sha256"],
+        # Each engine has exactly ONE independently decided highest outcome.
+        "model_choice": model_top_choice,
+        "model_probability": model_top_probability,
+        "p0_highest_choice": market_top["choice"] if market_top else None,
+        "p0_highest_probability": market_top["probability"] if market_top else None,
+        "p0_highest_is_global": all_seven_available,
+        "p0_probabilities": p0,
+        "missing_complete_market_groups": sorted(set(MARKETS) - set(p0)),
+        "unquoted_pdf_selections": list(unquoted_market_keys),
+        # Explicit two gates. None means NOT EVALUATED, not a negative vote.
+        "condition_1_same_top_choice": same_choice,
+        "condition_2_top_probabilities_close": near,
+        "p0_main_choice_matches": same_choice,
+        # A gap between DIFFERENT events is meaningless for agreement: NULL.
+        "signed_gap_pp": signed_gap,
+        "absolute_gap_pp": absolute_gap,
+        "window_sensitivity": sensitivity,
+        "threshold_pp": 5.0,
+        "threshold_validated": False,
+        "status": status,
+        "no_new_probability": True,
+        "main_decision_changed": False,
+        "meaning": "TWO_INDEPENDENT_TOPS_AND_TWO_CONDITIONS_NOT_FORECAST_ACCURACY",
+    }
 
 def align_first_pdf_snapshot(decision: dict, snapshot: dict) -> dict:
     """Only the SHA-linked iddaa first-PDF snapshot, never later price movements."""
