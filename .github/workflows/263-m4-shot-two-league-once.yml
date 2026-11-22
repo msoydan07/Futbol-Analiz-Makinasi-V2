@@ -1,0 +1,24 @@
+name: "Research only - ENG GER M4 shot ablation"
+on:
+  push:
+    branches:
+      - experiment/m4-shot-ablation-20261122
+    paths:
+      - 'experiments/263/m4_shot_two_league_ablation_20261122.py'
+      - '.github/workflows/263-m4-shot-two-league-once.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  paired-shots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install needed numerical libraries
+        run: python -m pip install --disable-pip-version-check numpy scipy
+      - name: Fixed-M4 paired ablation, no writes
+        run: python experiments/263/m4_shot_two_league_ablation_20261122.py
