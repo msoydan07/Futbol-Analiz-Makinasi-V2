@@ -1,0 +1,152 @@
+{
+  "schema": "P0_ORAN_HAFIZASI_22_LIG_20K_SOURCE_INVENTORY_V1",
+  "checked_on": "2026-11-22",
+  "purpose": "Independent historical odds-only memory model; never changes main football engine or original SHA seals",
+  "active_leagues": [
+    "ENG1",
+    "ENG2",
+    "GER1",
+    "ESP1",
+    "ITA1",
+    "FRA1",
+    "NED1",
+    "TUR1",
+    "POR1",
+    "BEL1"
+  ],
+  "research_leagues": [
+    "ENG3",
+    "ENG4",
+    "ENG5",
+    "GER2",
+    "ESP2",
+    "ITA2",
+    "FRA2",
+    "GRE1",
+    "AUT1",
+    "SCO1",
+    "CHE1",
+    "DNK1"
+  ],
+  "target_full_seven_odds_and_FT_score": 20000,
+  "historical_score_only_archive": {
+    "approximately": 9460,
+    "complete_seven_odds_not_proven": true,
+    "do_not_add_to_odds_counter": true
+  },
+  "public_external_aggregated_odds_candidate": {
+    "project": "nm2890/football-data",
+    "repository": "https://github.com/nm2890/football-data",
+    "source_bookmaker": "AVERAGE_MULTIPLE_BOOKMAKERS_NOT_IDDAA",
+    "independent_actual_preKO_odds_timestamp": "UNVERIFIED",
+    "explicit_reuse_license": "NOT_PRESENT_IN_REPO",
+    "republication_permission": "NOT_VERIFIED",
+    "source_data_transferred_to_user_project": false,
+    "seven_price_usable_screened_candidates": 25063,
+    "leagues_covered": 7,
+    "seasons": "2012/13–2024/25 approx, uneven coverage, latest incomplete",
+    "seven_markets": [
+      "MS1",
+      "MSX",
+      "MS2",
+      "UNDER_2.5",
+      "OVER_2.5",
+      "BTTS_YES",
+      "BTTS_NO"
+    ],
+    "checks": "All seven prices >1, all three source-family margin sums in (1.00,1.30), valid FT home and away integer goals, no season/date/home/away duplicate per file",
+    "league_rows": [
+      {
+        "code": "ENG1",
+        "name": "England Premier League",
+        "screened_candidates": 4411,
+        "source_file": "data/england/premier-league.csv"
+      },
+      {
+        "code": "ESP1",
+        "name": "Spain LaLiga",
+        "screened_candidates": 4455,
+        "source_file": "data/spain/laliga.csv"
+      },
+      {
+        "code": "GER1",
+        "name": "Germany Bundesliga",
+        "screened_candidates": 3612,
+        "source_file": "data/germany/bundesliga.csv"
+      },
+      {
+        "code": "ITA1",
+        "name": "Italy Serie A",
+        "screened_candidates": 4442,
+        "source_file": "data/italy/serie-a.csv"
+      },
+      {
+        "code": "FRA1",
+        "name": "France Ligue 1",
+        "screened_candidates": 4294,
+        "source_file": "data/france/ligue-1.csv"
+      },
+      {
+        "code": "NED1",
+        "name": "Netherlands Eredivisie",
+        "screened_candidates": 3738,
+        "source_file": "data/netherlands/eredivisie.csv"
+      },
+      {
+        "code": "BEL1",
+        "name": "Belgium Pro League",
+        "screened_candidates": 111,
+        "source_file": "data/belgium/jupiler-pro-league.csv"
+      }
+    ],
+    "leagues_not_covered_by_this_provider": [
+      "ENG2",
+      "TUR1",
+      "POR1",
+      "ENG3",
+      "ENG4",
+      "ENG5",
+      "GER2",
+      "ESP2",
+      "ITA2",
+      "FRA2",
+      "GRE1",
+      "AUT1",
+      "SCO1",
+      "CHE1",
+      "DNK1"
+    ]
+  },
+  "prior_user_licensed_manual_export_research": {
+    "provider": "Footiqo official manual export, site attributes odds to 1xBet",
+    "accepted_rows_in_prior_private_local_report": 2131,
+    "actual_raw_rows_in_public_github": 0,
+    "cannot_add_to_other_provider_without_de_duplication": true,
+    "public_source": "https://footiqo.com/database/",
+    "terms": "https://footiqo.com/dataset-licence/",
+    "automated_site_scraping_and_bulk_download": "PROHIBITED_UNLESS_WRITTEN_PERMISSION",
+    "downloaded_raw_files_should_remain_private": true
+  },
+  "status": "25K_PUBLIC_CANDIDATES_LOCATED_NOT_20K_ACCEPTED_IDDAA_HISTORICAL_QUOTES",
+  "schema_requirements": [
+    "match_date",
+    "league",
+    "provider",
+    "market_quote_timestamp_if_known",
+    "home",
+    "away",
+    "FTGH",
+    "FTGA",
+    "MS1",
+    "MSX",
+    "MS2",
+    "UNDER_2.5",
+    "OVER_2.5",
+    "BTTS_YES",
+    "BTTS_NO",
+    "raw_source_fingerprint",
+    "source_rights"
+  ],
+  "next_step": "Fill 15 unrepresented leagues using authorised 7-market odds sources; verify bookmaker/time comparability; ingest only privately and evaluate chronological generalisation",
+  "no_model_changes": true
+}
