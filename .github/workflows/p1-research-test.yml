@@ -39,3 +39,19 @@ jobs:
           assert all('INCOMPLETE_FIRST_PDF_GROUP:OVER_UNDER_2_5' in v['reason'] for v in x['excluded'])
           assert x['claims_of_better_predictive_accuracy'] is False
           PY
+      - name: P2 immutable morning reference alignment (descriptive archive only)
+        run: |
+          python experiments/p1_market_intelligence/p2_market_alignment.py --repo-root . --archive-dir experiments/263/second_pdf_commentary_archive_263/2026-11-21 --output /tmp/p2_alignment.json
+          python - <<'PY'
+          import json
+          x=json.load(open('/tmp/p2_alignment.json'))
+          print('P2 archived records:', x['total_records'])
+          print('P2 validated joins:', x['analyzed'])
+          print('P2 exclusions:', x['excluded'])
+          assert x['total_records']==12
+          assert x['analyzed']==7, x['excluded']
+          assert len(x['excluded'])==5
+          assert all(row['alignment']['main_decision_changed'] is False for row in x['records'])
+          assert all(row['alignment']['no_new_probability'] is True for row in x['records'])
+          assert all(row['alignment']['threshold_validated'] is False for row in x['records'])
+          PY
