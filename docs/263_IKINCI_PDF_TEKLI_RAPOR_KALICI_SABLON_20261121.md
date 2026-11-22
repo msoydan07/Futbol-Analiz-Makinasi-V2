@@ -1,27 +1,43 @@
-# 2.6.3 — İKİNCİ PDF / KALICI ONAYLI TEKLİ MAÇ RAPORU
+# GEÇERLİ KALICI İKİNCİ PDF TEKLİ RAPOR — 22 Kasım 2026 V3
 
-**Karar tarihi:** 21 Kasım 2026  
-**Karar ID:** D-OPER-006, önceki D-OPER-005 raporlama kararını genişleterek yerine geçer (toplu sabah kart şablonu değişmez).  
-**Kullanıcı onayı:** Önceki yanlış sunum reddedildi; yeniden hazırlanmış `21_Kasim_2026_Championship_1530_Onayli_Tekli_Mac_Raporu.pdf` ve esas referans `Bundesliga_3_Tekli_Mac_Raporu_Simetrik_v5.pdf` düzeni ikinci PDF için kalıcı tercih edildi.
+**Önceki dört geniş kutulu ekran, kullanıcının açık onayıyla bu tasarımla değiştirildi.**
+Karar D-OPER-006 sunum ekidir; eski futbol kararları ve SHA'lar korunur.
 
-## Zorunlu tekli sunum
+## Kanonik işlem
+İkinci orijinal kullanıcı PDF'si: `experiments/263/iddaa_pdf_last_review_263.py::process`.
+Varsayılan kullanıcı dosyası: `<processing_folder>/last_football_review/tekli_rapor.pdf`.
+Ayrı maç yan çıktıları: `last_football_review/tekli/tekli_XX.pdf`.
+Tek renderer: `experiments/263/iddaa_pdf_approved_layout_263.py::render_singles`.
 
-Kullanıcı aynı maçların ikinci iddaa PDF'sini gönderdiğinde **toplu 6 kart düzeni, eski genel inceleme tablosu veya serbest bir özet** gösterme. Birden çok maç varsa tek **çok sayfalı PDF** üret: **her maç bir tam A4 dikey sayfa**, aynı simetrik dört yuvarlatılmış kutu ve aynı hizalar. İstenirse her maçın ayrı PDF'si de yan çıktı olarak üretilebilir. Kanonik kullanıcıya sunulan PDF **`tekli_rapor.pdf`** olmalıdır.
+## Tek maç, tek A4 sayfa
 
-1. **MAÇ BİLGİSİ:** Ev / deplasman adı, lig, tarih ve Türkiye maç saati.
-2. **ANA TAHMİN:** `ANA TERCİH | BİZİM % | PİYASA % | FARK` başlıkları hizalı. Sabah mühürlü v4 ana tercih/alternatif/yüzde hiç değişmez; alt satırda **Alternatif** kırmızı. Buradaki `PİYASA %` sabah **ilk PDF** marjsız piyasa oranıdır, `FARK` ilk piyasa ile sabah model yüzdesinin farkıdır.
-3. **ORAN KARŞILAŞTIRMASI:** Aynı hizada `MS 1/X/2`, `2.5 ALT/ÜST`, `KG VAR/YOK` için ilk ve son iddaa oranları; sağ sütunda **ANA ORAN** (ilk → son), **ORAN FARKI**, **YENİ FARK** (sabit bizim % eksi ikinci PDF marjsız piyasa %). Son ikisi kırmızı.
-4. **YORUM:** Tek, bütünlüklü futbol değerlendirmesi. Kaynaklı kadro / sakatlık / ilk 11 / taktik / rotasyon bilgisi varsa neden olabileceği ihtiyatla değerlendirilir. Doğrulanamıyorsa açıkça belirtilir; ilk 11, neden veya sonuç **uydurulmaz**.
+Başlık: **Ev - Deplasman, gün ve TSİ maç saati**.
 
-**Görünüm:** A4 beyaz zemin; Arial'e yakın Arimo ya da uygun Unicode sans font, siyah yazı, ince açık gri yuvarlak kutu kenarları, yalnız farklar ve alternatif kırmızı; dengeli ve simetrik. Üste "Bundesliga / TEKLİ MAÇ YAYINI", "model özeti" veya ilave gereksiz bölüm ekleme. Bir maçta piyasa verisi eksikse `VERİ YOK / —`; hiçbir fiyat / model yüzdesi uydurulmaz.
+Üstte **üç aynı boyda kutu**:
 
-## Uygulama ve güvenlik sözleşmesi
-- Kanonik hesap/çizim: `experiments/263/iddaa_pdf_approved_layout_263.py::render_singles(review, target_dir, bundle_pdf=...)`.
-- İkinci PDF işlemi: `experiments/263/iddaa_pdf_last_review_263.py::process`.
-- Kanonik **kullanıcı raporu:** `last_football_review/tekli_rapor.pdf`, üç maç varsa üç sayfa.
-- Yan çıktılar: `last_football_review/tekli/tekli_01.pdf`, vb.
-- Eski `review.pdf` teknik denetim artifaktı olarak tutulabilir; **kullanıcıya dönen `pdf_report` alanına atanamaz**.
-- **Sadece ikinci kullanıcı iddaa PDF'si**, sabah SHA ve isteğe bağlı **kaynaklı** XI bilgisiyle yorum; oranlar beşinci referans, yeni tahmin/model fit/karar seçimi/mühür yok.
-- İç test/regresyon koruması: karar indeksindeki `D-OPER-006` ve kanonik bundle rotası fail-closed guard tarafından doğrulanır. Canlı uçtan uca kabul ayrı C statüsüdür.
+| ANA TERCİH | ALTERNATİF | P0 PİYASA |
+|---|---|---|
+| KG Var %52,40 | 2.5 Üst %50,30 | KG Var %52,74 |
+| İlk oran: 1,64 | İlk oran: 1,73 | İlk oran: 1,64 |
+| Son oran: 1,65 | Son oran: 1,73 | Son oran: 1,65 |
+| Fark: +0,01 | Fark: 0,00 | Fark: +0,01 |
 
-**Not:** Bu kural tüm 10 kapsam ligine ve gelecekteki ikinci PDF'lere uygulanır. Kullanıcı açıkça farklı tasarım istemedikçe şablon değişmez.
+Ardından tek hizalı **üç satırlık özet şeridi**:
+- **Tercihler:** MS 1 | MS X | MS 2 | Üst | Alt | Var | Yok
+- **Yüzdeler:** ilk PDF'den P0'ın yedi marjsız yüzdesi (var olan tam gruplar).
+- **Oranlar:** ikinci kullanıcı PDF'sinin yedi son **ham iddaa oranı**.
+
+En altta tek büyük **MAÇ YORUMU** kutusu. Yalnız kaynaklı ilk 11/sakatlık/kadro veya ölçülen fiyat değişimi konuşulur; doğrulanmayan nedeni veya lineup olayı uydurulmaz.
+
+### Değişmez mühür kuralları
+- Ana tercih, alternatif, her ikisinin sabah yüzdesi ve **P0'ın kendi sabah en yüksek tercihi** ilk PDF'nin imzalı kaynak zincirinden gelir.
+- İkinci PDF, seçim veya model yüzdelerini değiştiremez; sadece son ham oranları ve futbol yorumunu değiştirir.
+- Üç kutunun her birinde `Fark = son oran − ilk oran` ham ondalık oran farkıdır, P2 yüzde puanı farkı değildir.
+- İkinci ekranda **P2 denetim kutusu, teknik şart metni, yedi fiyatlı geniş bahis tablosu ve model özet bloğu** gösterilmez.
+- Eksik iddaa fiyatı veya yedi olay P0 lideri için kanıt yoksa `—/BELİRLENEMİYOR`; sayı uydurulmaz.
+- Beyaz zemin, siyah ana metin, kırmızı alternatif ve farklar, ince simetrik çizgiler, Arial benzeri Unicode font.
+- Mevcut `review.pdf` teknik denetim artifaktıdır ve kullanıcıya kanonik `pdf_report` olarak ASLA sunulmaz.
+- Önceki SHA'lı raporlar tekrar üretilmez, yeniden mühürlenmez; bu görsel sürüm yalnız bundan sonraki yeni PDF oturumlarında geçerlidir.
+
+## Kabul
+`.github/workflows/263-three-machine-two-reports-v3.yml` ile iki gerçek render çağrısı, veri bütünlüğü ve çoklu maç bundle sınanır. Canlı maç doğruluk kanıtı değildir.
