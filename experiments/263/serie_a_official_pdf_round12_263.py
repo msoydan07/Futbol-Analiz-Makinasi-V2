@@ -58,7 +58,13 @@ def parse_pdf_events(raw):
         if not tm:continue
         hr,minute=map(int,tm.groups())
         if hr>23:continue
-        pair=PAIR_RE.search(line[dm.end():])
+        # The final table column is the TV license holder. Never let
+        # its words be absorbed into the away-team name (e.g. "Inter DAZN").
+        # This exact official round-12 format always shows DAZN(/SKY).
+        license_holder=re.search(r"\\s+DAZN(?:/SKY)?\\s*$",line,re.I)
+        if license_holder is None:continue
+        match_area=line[dm.end():license_holder.start()]
+        pair=PAIR_RE.search(match_area)
         if not pair:continue
         home,away=(x.strip() for x in pair.groups())
         if home.casefold()==away.casefold():continue
