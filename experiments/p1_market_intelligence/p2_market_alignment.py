@@ -122,12 +122,28 @@ def _align(decision: dict, prices: dict, *, source: dict) -> dict:
             "model_probability": model_prob, "p0_same_choice_probability": None,
             "signed_gap_pp": None, "absolute_gap_pp": None,
             "p0_highest_choice": p0_top["choice"], "p0_highest_probability": p0_top["probability"],
+            "p0_highest_is_global": False,
             "p0_main_choice_matches": False, "status": "P0_SAME_MARKET_UNAVAILABLE",
             "window_sensitivity": {}, "no_new_probability": True,
             "main_decision_changed": False, "threshold_validated": False,
         }
     implied = p0[family][selected]
     gap = 100 * (model_prob - implied)
+    # A missing OTHER group also makes the seven-event P0 peak unknowable.
+    # Display the same-event comparison, but never infer full top-choice agreement.
+    if set(p0) != set(MARKETS):
+        return {
+            "schema": SCHEMA, "source": source, "model_decision_sha256": decision["payload_sha256"],
+            "p0_probabilities": p0,
+            "forecast_sha256": decision["forecast_sha256"], "model_choice": selected,
+            "model_probability": model_prob, "p0_same_choice_probability": implied,
+            "signed_gap_pp": gap, "absolute_gap_pp": abs(gap),
+            "p0_highest_choice": p0_top["choice"], "p0_highest_probability": p0_top["probability"],
+            "p0_highest_is_global": False, "p0_main_choice_matches": False,
+            "status": "P0_SEVEN_MARKETS_INCOMPLETE", "window_sensitivity": {},
+            "no_new_probability": True, "main_decision_changed": False,
+            "threshold_validated": False,
+        }
     same_top = p0_top["choice"] == selected
     sensitivity = {
         str(int(w)): "UYUMLU" if same_top and abs(gap) <= w else "UYUMLU_TAHMIN_BULUNAMADI"
@@ -140,6 +156,7 @@ def _align(decision: dict, prices: dict, *, source: dict) -> dict:
         "model_probability": model_prob, "p0_same_choice_probability": implied,
         "signed_gap_pp": gap, "absolute_gap_pp": abs(gap),
         "p0_highest_choice": p0_top["choice"], "p0_highest_probability": p0_top["probability"],
+        "p0_highest_is_global": True,
         "p0_main_choice_matches": same_top,
         "status": sensitivity["5"], "window_sensitivity": sensitivity,
         "threshold_validated": False,
