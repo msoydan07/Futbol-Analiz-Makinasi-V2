@@ -5,6 +5,7 @@ on:
       - experiment/263-pdf-fixture-fallback-20261122
     paths:
       - .github/workflows/263-original-pdf-current-official-live-smoke.yml
+      - experiments/263/serie_a_official_pdf_round12_263.py
   workflow_dispatch:
 permissions:
   contents: read
