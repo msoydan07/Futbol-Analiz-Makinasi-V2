@@ -15,7 +15,7 @@ Betimsel UYUMLU etiketi için **iki şart birlikte** gerekir:
 1. Ana makinenin zirvedeki tercihi, P0'ın yedi olay içindeki zirvedeki tercihiyle aynı olmalı.
 2. P0'ın **aynı olaya** verdiği yüzdeyle model yüzdesinin mutlak farkı **en çok 5 yüzde puanı** olmalı.
 
-Aksi hâlde UYUMLU_TAHMIN_BULUNAMADI; seçili piyasa grubu eksikse P0_SAME_MARKET_UNAVAILABLE. 3/5/7 yüzde puanı sınırları aynı raporda yalnız duyarlılık amaçlı görünür. Bu eşikler **sonuçlarla doğrulanmamıştır**; risk ya da isabet garantisi değildir.
+Aksi hâlde UYUMLU_TAHMIN_BULUNAMADI; seçili piyasa grubu eksikse P0_SAME_MARKET_UNAVAILABLE. Seçili grubun fiyatları olsa da **diğer iki pazar ailesinden biri eksikse**, yedi olayın piyasa zirvesi doğrulanamayacağı için P0_SEVEN_MARKETS_INCOMPLETE; bu durumda yakın yüzdeye bakarak yanlış UYUMLU etiketi verilmez. 3/5/7 yüzde puanı sınırları aynı raporda yalnız duyarlılık amaçlı görünür. Bu eşikler **sonuçlarla doğrulanmamıştır**; risk ya da isabet garantisi değildir.
 
 Örnek: model MS1 %62, P0 aynı MS1 %59; P0'ın en yüksek olayı da MS1 ise betimsel uyum var. P0 KG Var'ı daha yüksek buluyorsa yüzdeler yakın olsa da zirve tercihleri uyuşmaz.
 
