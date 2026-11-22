@@ -1,0 +1,43 @@
+name: Nov22 FOUR real TFF football model vs market research probe
+on:
+  push:
+    branches:
+      - experiment/20261122-four-match-live-pdf-probe
+    paths:
+      - experiments/p1_market_intelligence/nov22_four_real_match_probe.py
+      - .github/workflows/nov22-four-three-machine-probe.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  nov22-one-pass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install unchanged frozen core numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 PyMuPDF==1.26.5
+      - name: Fetch immutable old 4413 source artifact, check SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: One pass, four real TFF fixtures, no main mutation and no official bet seal
+        env:
+          PYTHONPATH: .:experiments/263:experiments/p1_market_intelligence
+        run: python experiments/p1_market_intelligence/nov22_four_real_match_probe.py
+      - name: Export model/P0/P1/P2 probe output for traceable inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nov22-four-real-fixture-three-machine-research
+          path: /tmp/nov22_three_machine_probe.json
+          if-no-files-found: warn
+          retention-days: 10
