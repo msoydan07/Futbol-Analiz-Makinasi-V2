@@ -75,3 +75,9 @@ Kullanıcının Trabzonspor–Eyüpspor ekranında **MS1 `-`**; MSX **8.21**, MS
 - Bu bir **araştırma dalı kod düzeltmesidir**; mevcut ana mühürler ve onaylı üretim değiştirilmedi.
 
 Doğrulama: [22 Kasım unquoted-favorite CI: 53 P0/P1/P2 testi + 1 ilk-PDF kaynak anomali testi + 5 model-köprüsü testi, başarı](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45005090400).
+
+## 22 Kasım ek güvenlik denetimi — MS1 ile sınırlı DEĞİL
+
+Fiyatlanmamış (`-`) seçim kuralı **MS1, MSX, MS2, 2.5 Alt, 2.5 Üst, KG Var, KG Yok** için aynıdır. Favorinin ev/deplasman olmasına göre istisna yaratılmaz. Yalnız ilgili fiyat grubunun piyasa olasılığı boş kalır; tamamlanmış başka gruplar hesaplanır; ana M4/C3 SHA/tercih korunur. Oran verilmeme sebebi kaynakta açıkça açıklanmıyorsa **uydurulmaz**.
+
+Denetim: yedi farklı fiyatlanmamış seçim için gerçek PDF-first fiyat-snapshot yolu ve yedi farklı ana-model seçim türü için P2 karşılaştırması ayrı alt testler olarak denendi. [GitHub tek kabul koşusu: 54 P0/P1/P2 + 2 PDF kaynağı + 5 model köprüsü testi, toplam 61 test başarılı](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45005264328). Üretim dalı değiştirilmedi.
