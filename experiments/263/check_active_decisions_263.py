@@ -188,6 +188,21 @@ def verify_active_policy(root=ROOT):
              "combined.save()" in layout and
              "_draw_approved_single_page(combined,r,i,len(ready))" in layout,
              "SECOND_PDF_APPROVED_RENDERER_BUNDLE_MISSING")
+    # 22 Nov user-approved V3 is the ONE canonical layout. Prevent a later
+    # run from silently falling back to old four-column/four-box visuals.
+    _require(paths.get("approved_layout_version")==
+             "THREE_MACHINE_FIRST_AND_SECOND_V3_20261122" and
+             "KALICI TOPLU RAPOR V3" in by_topic["reporting_and_seals"]["rule"] and
+             "İKİNCİ İDDAA PDF RAPORU KALICI V3" in
+                by_topic["reporting_and_seals"]["rule"],
+             "APPROVED_THREE_MACHINE_REPORT_V3_POLICY_MISSING")
+    _require("ANA MAKİNE" in layout and
+             '"P0 PİYASA"' in layout and
+             '"Tercihler"' in layout and '"Yüzdeler"' in layout and
+             '"Oranlar"' in layout and '"P2: "' in layout and
+             "p2_agreement" in bridge and
+             "morning_p2_agreement" in second,
+             "APPROVED_THREE_MACHINE_REPORT_V3_RENDERER_MISSING")
     # Append-only after-second-PDF historical research records are mandatory;
     # raw user PDFs remain outside the public GitHub repository.
     arc="experiments/263/second_pdf_commentary_archive_263.py"
