@@ -46,6 +46,9 @@ def main():
         kickoff=utc(fx["kickoff_utc"]);created=utc(forecast["created_at_utc"])
         baseline_utc=utc(baseline["created_at_utc"])
         assert created<=baseline_utc<kickoff, f"NOT_PREMATCH_{token}"
+        if (baseline["last_result_date"]>=DATE
+            or baseline["source_snapshot_sha256"]!=forecast["data"]["snapshot_sha256"]):
+            raise ValueError("HISTORY_DATE_OR_SNAPSHOT_LEAKAGE")
         if (fx["match_local_date"]!=DATE
             or fx["fixture_verification"]!="VERIFIED_BY_LIVE_OFFICIAL_GATE"):
             raise ValueError("UNEXPECTED_DATE_OR_LIVE_FIXTURE_SOURCE")
@@ -56,10 +59,25 @@ def main():
             raise ValueError("PILOT_CANDIDATE_RESEARCH_STATUS_NOT_APPROVED")
         main=decision["main_candidate"];alt=decision["alternative_candidate"]
         if main is None or alt is None:raise ValueError("MISSING_MAIN_OR_ALT")
+        vectors={x["market"]:x["calibrated_probability"] for x in decision["model_market_diagnostics"]}
+        expected={"MS1","MSX","MS2","BTTS_YES","BTTS_NO","OVER_2.5","UNDER_2.5"}
+        if set(vectors)!=expected or len(decision["model_market_diagnostics"])!=7:
+            raise ValueError("SEVEN_EVENTS_INCOMPLETE_OR_DUPLICATE")
+        for group in [("MS1","MSX","MS2"),("BTTS_YES","BTTS_NO"),
+                      ("OVER_2.5","UNDER_2.5")]:
+            if abs(sum(vectors[k] for k in group)-1)>0.00000001:
+                raise ValueError("SEVEN_MARKET_PROBS_NOT_NORMALIZED")
+        if main["calibrated_probability"]!=max(vectors.values()) or vectors[main["market"]]!=main["calibrated_probability"]:
+            raise ValueError("MAIN_CHANGED_FROM_HIGHEST_SEVEN_EVENT")
+        if vectors[alt["market"]]!=alt["calibrated_probability"]:
+            raise ValueError("ALTERNATIVE_NOT_FROM_SIGNED_SEVEN_EVENT")
+        if main["family"]==alt["family"]:
+            raise ValueError("ALTERNATIVE_MUST_BE_DIFFERENT_FAMILY")
         rec={"league":fx["league"],"home":team.get(fx["home_id"]), "away":team.get(fx["away_id"]),
              "kickoff_utc":fx["kickoff_utc"],"kickoff_tr":kickoff.astimezone(TR).strftime("%H:%M"),
              "main_market":main["market"],"main_prob":main["calibrated_probability"],
-             "main_expert":main["anchor_model"],"alt_market":alt["market"],
+             "main_expert":main["anchor_model"],"seven_model_probabilities":vectors,
+             "alt_market":alt["market"],
              "alt_prob":alt["calibrated_probability"],"alt_expert":alt["anchor_model"],
              "model_selection_version":decision["selection_policy_version"],
              "status":decision["status"],"betting_authorized":decision["betting_authorized"],
