@@ -50,10 +50,12 @@ KNOWN_EXTERNAL_VARIANTS={
 # iddaa.com bulletin, not from the 08 Nov third-party snapshots.
 KNOWN_IDDAA_PDF_VARIANTS={
   "ESP1":{"Athletic Bilbao":"Athletic Club",
-          "Espanyol":"RCD Espanyol de Barcelona"},
+          "Espanyol":"RCD Espanyol de Barcelona",
+          "Racing Santander":"R. Racing Club"},
+  "BEL1":{"Standard Liege":"Standard de Liège"},
 }
 assert sum(len(x) for x in KNOWN_EXTERNAL_VARIANTS.values())==20
-assert sum(len(x) for x in KNOWN_IDDAA_PDF_VARIANTS.values())==2
+assert sum(len(x) for x in KNOWN_IDDAA_PDF_VARIANTS.values())==4
 assert all(not set(KNOWN_EXTERNAL_VARIANTS.get(league,{})).intersection(pdf)
            for league,pdf in KNOWN_IDDAA_PDF_VARIANTS.items())
 
