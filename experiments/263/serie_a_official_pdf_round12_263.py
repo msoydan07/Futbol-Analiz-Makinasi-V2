@@ -61,7 +61,7 @@ def parse_pdf_events(raw):
         # The final table column is the TV license holder. Never let
         # its words be absorbed into the away-team name (e.g. "Inter DAZN").
         # This exact official round-12 format always shows DAZN(/SKY).
-        license_holder=re.search(r"\\s+DAZN(?:/SKY)?\\s*$",line,re.I)
+        license_holder=re.search(r"\s+DAZN(?:/SKY)?\s*$",line,re.I)
         if license_holder is None:continue
         match_area=line[dm.end():license_holder.start()]
         pair=PAIR_RE.search(match_area)
