@@ -98,7 +98,7 @@ class UserApprovedReports(unittest.TestCase):
             with fitz.open(render_batch(s,Path(d)/"r.pdf")) as pdf:
                 t=pdf[0].get_text()
                 self.assertIn("TEKNİK ENGEL",t)
-                self.assertIn("PAS DEĞİL",t)
+                self.assertIn("P2: TEKNİK ENGEL",t)
                 self.assertNotIn("MS 1   %",t)
 if __name__=="__main__":
     unittest.main()
