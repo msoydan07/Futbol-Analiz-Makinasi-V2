@@ -97,8 +97,10 @@ def _validate_decision(decision: dict) -> tuple[str, float]:
 
 
 def _p0_from_prices(prices: dict) -> dict:
-    if not isinstance(prices, dict) or not prices:
-        raise AlignmentError("NO_COMPLETE_MARKET")
+    if not isinstance(prices, dict):
+        raise AlignmentError("INVALID_MARKET_PRICES")
+    # An iddaa PDF may have no complete opposites at all; do NOT block
+    # a valid independent football decision over an unavailable bookmaker price.
     p0 = {}
     for group, values in prices.items():
         if group not in MARKETS or not isinstance(values, dict) or set(values) != set(MARKETS[group]):
