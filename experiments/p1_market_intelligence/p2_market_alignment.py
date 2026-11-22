@@ -14,8 +14,14 @@ import json
 import math
 from pathlib import Path
 
-from p1_market import MARKETS, MarketDataError, _sha_json, archive_record_to_input, \
-    best_choices, no_vig, analyze_prices
+try:
+    # Imports when used by the existing experiments/263 first-PDF app.
+    from .p1_market import MARKETS, MarketDataError, _sha_json, archive_record_to_input, \
+        best_choices, no_vig, analyze_prices
+except ImportError:
+    # Preserve stand-alone research CLI and existing unit-test imports.
+    from p1_market import MARKETS, MarketDataError, _sha_json, archive_record_to_input, \
+        best_choices, no_vig, analyze_prices
 
 SCHEMA = "P2_MARKET_MODEL_AGREEMENT_RESEARCH_V1"
 DECISION_SCHEMA = "263_MODEL_FIRST_FOUR_MODEL_DECISION_RESEARCH_V2"
