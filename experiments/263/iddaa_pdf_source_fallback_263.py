@@ -278,6 +278,26 @@ def attach(bulletin,calibrated,*,history,source_baseline,source_acceptance,
             continue
         try:
             raw=make_input_row(parsed)
+            # The PDF's local creation instant and kickoff must both predate
+            # the decision. Never replay an already-started match as a new tip.
+            from iddaa_pdf_session_263 import read_aware
+            captured=read_aware(current["price_capture_utc"])
+            kickoff=datetime.fromisoformat(
+                parsed["match_date_tr"]+"T"+parsed["kickoff_time_tr"]+":00"
+            ).replace(tzinfo=ZoneInfo("Europe/Istanbul")).astimezone(timezone.utc)
+            if not captured<=now<kickoff or captured>=kickoff:
+                current["pdf_source_research_status"]="PDF_CAPTURE_OR_RUN_AFTER_KICKOFF"
+                excluded+=1
+                continue
+            # Compare the quote vector with the already parsed canonical
+            # row; a nonmatching/shifted quote stops this individual match.
+            expected_quote={
+                "MS1":raw[5],"MSX":raw[6],"MS2":raw[7],
+                "UNDER_2.5":raw[8],"OVER_2.5":raw[9],
+                "BTTS_YES":raw[10],"BTTS_NO":raw[11]}
+            observed_quote=current.get("prices") or {}
+            if {k:v for k,v in expected_quote.items() if v is not None}!=observed_quote:
+                raise ValueError("ORIGINAL_PDF_QUOTE_SHIFT_OR_TAMPER")
             calc=one(raw,records,reg,lock,setting,source_status,now=now)
             if calc.get("model_status")!="RESEARCH_MODEL_CALCULATED_FROM_USER_PDF_FIXTURE_NO_OFFICIAL_SEAL":
                 current["pdf_source_research_status"]=calc.get("model_status","RESEARCH_BLOCKED")
@@ -287,6 +307,19 @@ def attach(bulletin,calibrated,*,history,source_baseline,source_acceptance,
                 calc["resolved_club_ids"]["away"]!=a["team_id"] or
                 calc["date"]!=parsed["match_date_tr"]):
                 raise ValueError("PDF_RESEARCH_CANONICAL_ID_OR_DATE_MISMATCH")
+            # P0 is a frozen first-PDF observation: respect the canonical
+            # original session's *margin and complete-opposites* checks.
+            from experiments.p1_market_intelligence.p1_market import best_choices
+            norm={}
+            for key,group in (current.get("market_no_vig") or {}).items():
+                if group.get("status")=="FULL_MARKET_QUOTE_AVAILABLE":
+                    norm[{"MS":"MS","GOALS_2.5":"OU25","KG":"KG"}[key]]=group["no_vig"]
+            canonical_p0=(best_choices(norm)["main"] if len(norm)==3 else None)
+            if bool(calc["p0"])!=bool(canonical_p0):
+                raise ValueError("PDF_P0_INCOMPLETE_MARKET_CONTRADICTION")
+            if canonical_p0 and (calc["p0"]["choice"]!=canonical_p0["choice"] or
+                 abs(calc["p0"]["probability"]-canonical_p0["probability"])>1e-9):
+                raise ValueError("PDF_P0_FIRST_PRICE_CALCULATION_MISMATCH")
             calc.update({
                 "schema":RESEARCH_SCHEMA,
                 "row_index":idxrow,
