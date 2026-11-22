@@ -167,6 +167,19 @@ class TestRealFrozenPDFResearchFallback(unittest.TestCase):
                          "PDF_CAPTURE_OR_RUN_AFTER_KICKOFF")
         self.assertNotIn("pdf_source_research",out["rows"][0])
 
+    def test_confirmed_source_conflict_and_true_model_error_cannot_fallback(self):
+        b,s=make()
+        s["rows"][0]["status"]="ONE_ROW_OFFICIAL_PDF_TIME_OR_DATE_DIFFER"
+        s["rows"][0]["official_date_tr"]="2026-11-23"
+        s["rows"][1]["status"]="ONE_ROW_FOUR_MODEL_EVIDENCE_BLOCKED"
+        s["rows"][1]["model_reason"]="stale_history_refresh_required"
+        s["signed_research_session_sha256"]=sha256({
+            k:v for k,v in s.items() if k!="signed_research_session_sha256"})
+        out=run(b,s)
+        self.assertEqual(out["pdf_source_model_math_count"],0)
+        self.assertTrue(all("pdf_source_research" not in row for row in out["rows"]))
+        self.assertEqual(out["rows"][0]["official_date_tr"],"2026-11-23")
+
     def test_missing_history_provenance_never_bypasses_data_gate(self):
         b,s=make()
         self.assertEqual(attach(b,s,history=HISTORY,source_baseline=None,
