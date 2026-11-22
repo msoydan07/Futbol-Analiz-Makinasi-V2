@@ -22,7 +22,8 @@ def verify_requested_fixture(league,home,away,kickoff_iso,source_url,retrieved_a
   # lookalike site, unrelated image or other league.
   pdf_attachment=(league=="ITA1" and actual=="images.legaseriea.it"
                   and urlparse(source_url).path.startswith(
-                      "/image/private/fl_attachment/prd/"))
+                      "/image/private/fl_attachment/prd/")
+                  and urlparse(source_url).path.lower().endswith(".pdf"))
   if not actual or not expected or not (actual==expected or actual.endswith("."+expected) or (league=="TUR1" and actual=="www.bjk.com.tr")
       or (league=="NED1" and actual in ("knvb.nl","www.knvb.nl"))
       or pdf_attachment):
