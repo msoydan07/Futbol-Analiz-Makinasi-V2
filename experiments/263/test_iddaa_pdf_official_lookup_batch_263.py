@@ -86,6 +86,45 @@ class TestPdfCurrentOfficialGateway(unittest.TestCase):
         self.assertEqual(result["rows"][0]["status"],"ONE_OFFICIAL_SOURCE_CONFIRMED")
         self.assertEqual(len(calls),1)
 
+    def test_genuine_italian_pdf_evidence_is_passed_through_named_gate(self):
+        from serie_a_official_pdf_round12_263 import PDF_URL,PARSER
+        from official_page_lookup_263 import _event
+        from unittest.mock import patch
+        calls=[]
+        def fetched_article(url,league):
+            calls.append(url)
+            return url,"<h1>Quando si gioca? 12ª giornata</h1>"
+        data=[
+            _event("Juventus","Venezia","2026-11-22",
+                   "2026-11-22T11:30:00+00:00",PARSER)]
+        for i in range(9):
+            data.append(_event("Team"+str(i),"Rival"+str(i),
+                 "2026-11-22","2026-11-22T17:00:00+00:00",PARSER))
+        def named_gate(league,home,away,lookup_override=None):
+            if lookup_override is None:return {"status":"NOT_VERIFIED"}
+            observed=lookup_override(home,away)
+            if observed["source_url"]!=PDF_URL:
+                return {"status":"NOT_VERIFIED"}
+            return {"status":"VERIFIED","league":league,
+                    "source_url":observed["source_url"],
+                    "kickoff_utc":observed["kickoff_utc"],
+                    "retrieved_at_utc":observed["retrieved_at_utc"],
+                    "home_id":home,"away_id":away}
+        gateway=OfficialFixtureGateway(fetcher=fetched_article,
+          clock=lambda:NOW,
+          resolve_id=lambda league,n:n,
+          gate_runner=named_gate)
+        with patch("serie_a_official_pdf_round12_263.fetch_and_parse",
+                   return_value=(PDF_URL,data,"f"*64)):
+            found=OriginalPdfOfficialGateway(gateway=gateway).lookup(
+                "ITA1","Juventus","Venezia")
+        self.assertEqual(found["status"],"VERIFIED_OFFICIAL_FIXTURE")
+        self.assertEqual(found["kickoff_utc"],"2026-11-22T11:30:00+00:00")
+        self.assertEqual(gateway.cache["ITA1"]["official_pdf_sha256"],"f"*64)
+        self.assertEqual(gateway.latest_match_evidence(
+             "ITA1","Juventus","Venezia")["selected_lookup"],
+             "LEGA_SERIE_A_REVISED_OFFICIAL_PDF")
+
     def test_verified_italian_official_pdf_host_only_and_lookalikes_blocked(self):
         from verify_match_on_demand import verify_named_match
         good="https://images.legaseriea.it/image/private/fl_attachment/prd/w2zepi8iww3zamzewn8y.pdf"
