@@ -1,32 +1,30 @@
-# 2.6.3 — KALICI / ONAYLI TOPLU RAPOR KART ŞABLONU
+# GEÇERLİ KALICI TOPLU RAPOR — 22 Kasım 2026 V3
 
-**Karar:** 21 Kasım 2026 — Kullanıcının görsel örneğiyle onaylandı.  
-**Karar ID:** D-OPER-005 (D-OPER-004 üzerine sunum düzeni eklenmiştir).  
-**İşletim dalı:** \`experiment/263-toplu-karsilastirma\`.
+**Önceki dört-sütun şablon, kullanıcının son onayıyla yürürlükten kalktı.**
+D-OPER-006 kapsamında onaylı görsel sunum. Ana hesaplama ve mühürlere dokunulmaz.
 
-## Varsayılan tek şablon — değiştirilmez
-İlk iddaa PDF'si, adlandırılmış new100 sabah MODEL-ONLY çıktısı ve sohbet içinde hazırlanıp kullanıcıya verilen **tüm toplu analiz PDF'leri** aynı aşağıdaki A4 dikey kart düzenini kullanır. Seçicinin sayısal kararları bu görsel değişiklikten etkilenmez.
+## Kanonik işlem
+İlk iddaa PDF'si: `experiments/263/iddaa_pdf_one_step_263.py`.
+Kullanıcıya dönülecek dosya: `<processing_folder>/toplu_analiz_onayli.pdf`.
+Kodun varsayılan üreticisi: `experiments/263/iddaa_pdf_approved_layout_263.py::render_batch`.
 
-- Başlık: **LİG ADI** büyük ve solda (TUR1 => **TÜRKİYE SÜPER LİG**); altında \`GÜN AY YIL · HAFTANIN GÜNÜ · N MAÇ\`.
-- Başlık altında bir satır: \`MS 1-X-2 / 2.5 ALT-ÜST / KG VAR-YOK\`.
-- **Sayfa başına en çok 6 maç**, hepsi aynı genişlik ve aynı yükseklikte tek tek yuvarlak köşeli kutular.
-- Kutunun üstü: sol köşede kapsül **HH:MM**, ortada takım adları **EV - DEPLASMAN**, sağda **01/06** vb. sıra.
-- İnce yatay ayraç altında dört sütun, hizaları tüm kutularda aynı:
-  **ANA TERCİH | BİZİM % | PİYASA % | FARK (PUAN)**.
-  Büyük rakamlar, % bir ondalık Türkçe virgülle; fark yüzde değil **yüzde puan**, açık \`+/-\` işaretiyle.
-- Kutunun alt solu **Alternatif: ... %...**; alt sağı **Ana iddaa oranı: ...**. Yalnız fark ve alternatif kırmızı; diğer her şey siyah; zemin beyaz; çizgiler ince açık gri. Arial'e yakın Arimo, sade ve dengeli.
-- Alt dipnot: **Piyasa %**, yalnızca kullanıcının ilk orijinal iddaa PDF'sindeki aynı pazar ailesi oranları marjdan arındırılabildiyse gösterilir. \`Fark = Bizim % - Piyasa %\`. Oranlar ana/alternatif tercihi değiştirmez. Veri olmadığı yerde **VERİ YOK / —**; başka bookmaker, varsayılan veya uydurma oran kullanılamaz.
-- Teknik veri blokajı \`TEKNİK ENGEL\`; hesap yapılmamış maçlarda yüzdelik veya sahte tercih yok. Model tarafından geçerli PAS, teknik engelden farklıdır.
-- Örnek tasarımda kurgusal değerler olabilir; **örneğin rakamlarını gerçek maç raporuna kopyalama**. Yalnız gerçek model-first v4 SHA'lı tercih/olasılık ve kullanıcının kaynağı kullanılır.
-- **Tekli rapor** ayrı, zaten onaylanmış dört-kutulu sayfa düzeninde korunur. Bunun düzeni veya eski imzalar bu değişiklikle değiştirilmez.
+## Her maçın tek kartı — üç simetrik sütun
 
-## Tek uygulama kaynağı
+| ANA MAKİNE | P0 | P2: UYUMLU |
+|---|---|---|
+| KG Var | KG Var | Oran: 1,64 |
+| %52,40 | %52,74 | Fark: 0,34 puan |
 
-- Ortak kart geometrisi: \`experiments/263/iddaa_pdf_approved_layout_263.py::_draw_grouped_cards\`.
-- Kullanıcı iddaa PDF'siyle: \`render_batch(session,target)\` — SHA zinciri doğrulanır, piyasa oranları yalnız kullanıcı PDF'sinden hesaplanır.
-- Oransız yeni sabah: \`render_model_only_batch(day,rows,target)\` — özgün v4 SHA imzası ve karar kimliği doğrulandıktan sonra aynı kartlar, piyasa/oran **VERİ YOK**. \`sabah_mobile_model_only_263.py\` bu fonksiyonu kullanır.
-- Sohbet sırasında ayrı PDF sunumu üretilirse de burada belirtilen aynı beyaz kart geometrisine uyulur; iki-sayfalık model olasılık tablosu artık varsayılan **toplu** rapor değildir.
-- Sürüm yükseltme için kullanıcıdan açık farklı tasarım onayı gerekir; onaysız başlık, kutu sırası, vurgular veya sütunlar değiştirilmez.
+- ANA MAKİNE: M4/C3'ün **yedi olay içindeki kendi bağımsız lideri** ve kalibre/karar yüzdesi.
+- P0: İlk kullanıcı iddaa PDF'sinden üç tam grup içinde komisyonsuzlaştırılmış **kendi bağımsız lideri** ve yüzdesi.
+- P2: Yalnız iki lider olay aynıysa aradaki yüzde farkının geçici 5 puan yakınlık eşiğini kontrol eder; **UYUMLU**, **FARKLI**, **YÜZDELER UZAK** veya **ORAN EKSİK** yazar. `Şart 1/Şart 2` kelimeleri raporda yoktur.
+- Üçüncü sütunda sıralama: **P2 durumu → P0 liderinin orijinal iddaa oranı → uygun olduğunda yüzde puan farkı**. Farklı olayların yüzdeleri çıkarılmaz.
+- Kart altında **Alternatif** (kırmızı). Altı maç A4 sayfa başına; maç/saat/numara üst satır; beyaz zemin, siyah yazı, ince simetrik çerçeve, Arial benzeri Unicode font; yalnız fark ve alternatif kırmızı.
+- Piyasa oranı yayımlanmamışsa (MS1/MSX/MS2/2.5/KG) uydurulmaz; yedi piyasa olayının lideri kesin belirlenemiyorsa P0 ve P2 `— / ORAN EKSİK` gösterir.
+- Oransız new100 raporunda **aynı kart geometrisi** kullanılır, P0/P2 fiyat bilgisi yoktur. Mühürlü ana karar değişmez.
+- Tam teknik tablo `futbol_263_iddaa_oranli_rapor.pdf` ayrı denetim yan dosyasıdır, varsayılan kullanıcı ekranı değildir.
+- Önceki tamamlanmış PDF/SHA dosyaları değiştirilemez, yeniden yazılamaz. Yeni girişler yalnız bu V3 sunumu kullanır.
 
-## Kanıt sınırları
-Bu kalıcı görsel düzen analizin güvenirliğini veya bağımsız ileri doğrulamasını artırdığı iddiasını taşımaz. Önceden mühürlü B/C2/C3/M4 modelleri, M4+kalibre C3 v4 karar katmanı, tahmin SHA'ları, sonuç arşivi, iddaa 1. PDF/2. PDF ayrımı değişmez.
+## Kabul sınırı
+GitHub Actions: `.github/workflows/263-three-machine-two-reports-v3.yml`.
+Testler sentetik/yerel kaynaklarla gerçek render yollarını doğrular; canlı maç isabetini doğrulamaz.
