@@ -109,6 +109,43 @@ class TestRealFrozenPDFResearchFallback(unittest.TestCase):
                     self.assertIn(t,txt)
                 self.assertNotIn("Şart 1",txt)
 
+    def test_second_pdf_preserves_pdf_only_morning_choices_with_source_grade(self):
+        from iddaa_pdf_bulletin_263 import SCHEMA as BULLETIN_SCHEMA
+        from iddaa_pdf_last_review_263 import build as build_review
+        from iddaa_pdf_approved_layout_263 import render_singles
+        b,s=make()
+        original=run(b,s)
+        original["bookmaker_reverification_calls"]=0
+        original["signed_research_session_sha256"]=sha256({
+            k:v for k,v in original.items() if k!="signed_research_session_sha256"})
+        first={**b,"schema":BULLETIN_SCHEMA}
+        last=copy.deepcopy(first)
+        last["pdf_sha256"]="e"*64
+        last["pdf_capture_utc"]="2026-11-22T14:50:00+00:00"
+        last["rows"][0]["odds"]["BTTS_YES"]=1.43
+        idx,_,_=index_registry()
+        def resolve(lg,name):
+            result=resolve_label(lg,name,idx)
+            return result["team_id"] if result["status"]=="MAPPED" else None
+        review=build_review(original,first,last,[],
+                datetime(2026,11,22,15,0,tzinfo=timezone.utc),resolver=resolve)
+        self.assertEqual(review["matches_reviewed"],2)
+        go=next(x for x in review["rows"] if x["home"]=="Go Ahead Eagles")
+        self.assertEqual(go["morning_source_grade"],
+                         "PDF_ONLY_NOT_FEDERATION_VERIFIED")
+        self.assertEqual(go["morning_main_choice"]["market"],"BTTS_YES")
+        self.assertAlmostEqual(go["morning_p2_agreement"] or 0,0)
+        self.assertEqual(go["latest_odds"]["BTTS_YES"],1.43)
+        with tempfile.TemporaryDirectory() as d:
+            outputs=render_singles(review,Path(d)/"singles")
+            self.assertEqual(len(outputs),1)
+            with fitz.open(outputs[0]) as doc:
+                text=doc[0].get_text()
+                for word in ("ANA TERCİH","ALTERNATİF","P0 PİYASA",
+                             "Tercihler","Yüzdeler","Oranlar","MAÇ YORUMU",
+                             "PDF KAYNAKLI","RESMÎ ONAY YOK"):
+                    self.assertIn(word,text)
+
     def test_bad_row_cannot_reuse_other_pdf_research_record(self):
         b,s=make();out=run(b,s)
         one=out["rows"][0];rec=copy.deepcopy(one["pdf_source_research"])
