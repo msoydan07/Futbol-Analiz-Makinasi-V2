@@ -17,8 +17,15 @@ def verify_requested_fixture(league,home,away,kickoff_iso,source_url,retrieved_a
   from urllib.parse import urlparse
   expected=urlparse(OFFICIAL[league]["url"]).hostname
   actual=urlparse(source_url).hostname
+  # Official Lega Serie A links match program PDF files from its exact
+  # images subdomain. Allow this official attachment path only, never a
+  # lookalike site, unrelated image or other league.
+  pdf_attachment=(league=="ITA1" and actual=="images.legaseriea.it"
+                  and urlparse(source_url).path.startswith(
+                      "/image/private/fl_attachment/prd/"))
   if not actual or not expected or not (actual==expected or actual.endswith("."+expected) or (league=="TUR1" and actual=="www.bjk.com.tr")
-      or (league=="NED1" and actual in ("knvb.nl","www.knvb.nl"))):
+      or (league=="NED1" and actual in ("knvb.nl","www.knvb.nl"))
+      or pdf_attachment):
    return {"status":"REJECTED","reason":"not_registered_official_domain"}
   kickoff=datetime.fromisoformat(kickoff_iso.replace("Z","+00:00"))
   retrieved=datetime.fromisoformat(retrieved_at_iso.replace("Z","+00:00"))
