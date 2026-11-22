@@ -129,25 +129,67 @@ def _valid_decision(row,session):
     return d
 
 def _extract_card(row,session):
+    """Fixed v3 3-column display; each engine's highest event is INDEPENDENT.
+
+    Model-first decision is SHA-verified by the existing stage. P2 sidecar is
+    generated from first iddaa PDF AFTER the model decision and carried in the
+    signed morning session. It cannot steer or override model selection.
+    """
     d=_valid_decision(row,session)
     main=d.get("main_candidate") if d else None
     alt=d.get("alternative_candidate") if d else None
-    market=main.get("market") if isinstance(main,dict) else None
+    model_market=main.get("market") if isinstance(main,dict) else None
+    p2=row.get("p2_agreement")
+    p0_market=None;p0_prob=None;p2_status="ORAN EKSİK";p2_gap=None
+    if d and isinstance(p2,dict):
+        if p2.get("model_decision_sha256")!=d.get("payload_sha256"):
+            raise ValueError("REPORT_P2_DIFFERENT_FROZEN_MODEL_SHA")
+        if p2.get("forecast_sha256") not in (None,row.get("model_forecast_sha256")):
+            raise ValueError("REPORT_P2_WRONG_FORECAST_SHA")
+        snap=row.get("pdf_first_price_snapshot") or {}
+        if (p2.get("source",{}).get("snapshot_sha256")
+            and p2["source"]["snapshot_sha256"]!=snap.get("payload_sha256")):
+            raise ValueError("REPORT_P2_DIFFERENT_PDF_PRICE_SHA")
+        if p2.get("p0_highest_is_global") is True:
+            p0_market=p2.get("p0_highest_choice")
+            p0_prob=p2.get("p0_highest_probability")
+            if p0_market not in LABELS or not isinstance(p0_prob,(int,float)):
+                raise ValueError("REPORT_P0_LEADER_INVALID")
+            p2_status={"UYUMLU":"UYUMLU",
+                       "TERCIHLER_FARKLI":"FARKLI",
+                       "YUZDELER_UZAK":"YÜZDELER UZAK"}.get(p2.get("status"),"—")
+            if p2_status=="—":raise ValueError("REPORT_P2_UNKNOWN_STATUS")
+            if p2_status=="UYUMLU" or p2_status=="YÜZDELER UZAK":
+                p2_gap=p2.get("absolute_gap_pp")
+                if not isinstance(p2_gap,(int,float)) or p2_gap<0:
+                    raise ValueError("REPORT_P2_INVALID_GAP")
+        else:
+            p2_status="ORAN EKSİK"
+    if not d:p2_status="TEKNİK ENGEL"
+    if d and not main:p2_status="MODEL PAS"
     ours=main.get("calibrated_probability") if main else None
-    fair=_fair(row,market) if market else None
-    if not isinstance(ours,(float,int)) or isinstance(ours,bool) or not 0<=ours<=1:ours=None
-    if not isinstance(fair,(float,int)) or isinstance(fair,bool) or not 0<=fair<=1:fair=None
-    diff=100*(ours-fair) if ours is not None and fair is not None else None
-    return {"home":row.get("pdf_home") or "?", "away":row.get("pdf_away") or "?",
-       "league":row.get("league") or "?", "date":row.get("match_date_tr"),
-       "time":row.get("kickoff_time_tr") or "—",
-       "main":(LABELS[market] if main else "MODEL PAS" if d else "TEKNİK ENGEL"),
-       "ours":_p(ours),"fair":_p(fair),"diff":_delta(diff),
-       "alternative":(LABELS[alt["market"]]+" "+_p(alt.get("calibrated_probability"))
-                     if alt else "YOK"),
-       "main_odds":_o((row.get("prices") or {}).get(market)) if market else "—",
-       "forecast_sha":row.get("model_forecast_sha256"),
-       "decision_sha":d.get("payload_sha256") if d else None}
+    return {
+        "home":row.get("pdf_home") or "?",
+        "away":row.get("pdf_away") or "?",
+        "league":row.get("league") or "?",
+        "date":row.get("match_date_tr"),"time":row.get("kickoff_time_tr") or "—",
+        "main":LABELS[model_market] if main else "MODEL PAS" if d else "TEKNİK ENGEL",
+        "ours":_p(ours),
+        "p0":LABELS.get(p0_market,"—"),
+        "p0_pct":_p(p0_prob),
+        "p2_status":p2_status,
+        "p0_odds":_o((row.get("prices") or {}).get(p0_market)) if p0_market else "—",
+        "p2_gap":(("%.2f"%p2_gap).replace(".",",")+" puan"
+                  if p2_gap is not None else "—"),
+        # Original compatibility fields used by model-only SHA gate.
+        "fair":_p(p0_prob),
+        "diff":_delta(p2_gap) if p2_gap is not None else "—",
+        "alternative":(LABELS[alt["market"]]+" "+_p(alt.get("calibrated_probability"))
+                       if alt else "YOK"),
+        "main_odds":_o((row.get("prices") or {}).get(model_market)) if model_market else "—",
+        "forecast_sha":row.get("model_forecast_sha256"),
+        "decision_sha":d.get("payload_sha256") if d else None,
+    }
 
 def render_batch(session,target):
     """Render no invented selection: only verified, signed decision and user PDF odds."""
