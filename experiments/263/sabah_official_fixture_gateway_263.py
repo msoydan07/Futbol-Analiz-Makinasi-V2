@@ -87,6 +87,27 @@ class OfficialFixtureGateway:
                          effective_url=effective,events=events,html=html,
                          html_sha256=hashlib.sha256(html.encode("utf-8")).hexdigest(),
                          parser=SOURCES[league][2])
+            # The later Lega Serie A official revision PDF supersedes the
+            # older 12th-round article for 21-23 November 2026. It contains
+            # all TEN pair/date/local-time rows, not only Saturday fixtures.
+            # Trust this format ONLY in its stated matchweek, never as a
+            # permanent hard-coded future Italian schedule.
+            if (league=="ITA1" and
+                "2026-11-21"<=now.astimezone(
+                    ZoneInfo("Europe/Istanbul")).date().isoformat()<="2026-11-23"):
+                try:
+                    from serie_a_official_pdf_round12_263 import (
+                         fetch_and_parse,PARSER as ITA_PDF_PARSER)
+                    pdf_url,pdf_events,pdf_sha=fetch_and_parse()
+                    if not is_approved_url(pdf_url,"ITA1") or len(pdf_events)!=10:
+                        raise OfficialGatewayError("ITALY_PDF_SOURCE_OR_EVENT_COUNT_INVALID")
+                    entry.update(effective_url=pdf_url,events=pdf_events,
+                                 parser=ITA_PDF_PARSER,
+                                 official_pdf_sha256=pdf_sha,
+                                 source_document_type="LEGA_SERIE_A_OFFICIAL_PDF",
+                                 reason=None)
+                except (OSError,ValueError,TypeError,ImportError) as exc:
+                    entry["italy_revised_pdf_status"]=type(exc).__name__+":"+str(exc)[:100]
             # The EFL match centre is JavaScript-rendered. As an explicitly
             # PARTIAL fallback, read only official TV-selected fixtures with
             # independently printed team names/date/KO; never infer all games.
@@ -179,7 +200,51 @@ class OfficialFixtureGateway:
                   "page_fetch_failure":entry["reason"],
                   "selected_lookup":"NONE"}
         observation=None
-        if entry["status"]=="FETCHED_OFFICIAL_PAGE":
+        # A PDF is not HTML. Its full official matchweek table has already
+        # been parsed and SHA'd from the *actual* league-hosted PDF bytes.
+        # Recheck both canonical club IDs, unique kickoff and freshness
+        # before asking the unchanged official named gate to accept it.
+        from serie_a_official_pdf_round12_263 import PARSER as ITA_PDF_PARSER
+        if (league=="ITA1" and entry.get("parser")==ITA_PDF_PARSER
+            and entry["status"]=="FETCHED_OFFICIAL_PAGE"):
+            matches=[x for x in entry["events"]
+                     if self._same(league,x["home"],home)
+                     and self._same(league,x["away"],away)]
+            if len(matches)==1:
+                e=matches[0]
+                try:
+                    ko=datetime.fromisoformat(e["kickoff_utc"].replace("Z","+00:00"))
+                    if (ko.tzinfo is None or
+                        not self.now()<=ko.astimezone(timezone.utc)<=
+                            self.now()+timedelta(days=7)):
+                        raise OfficialGatewayError("ITALY_PDF_TIME_OUTSIDE_PREMATCH")
+                    proof={"status":"VERIFIED_OFFICIAL_FIXTURE",
+                           "home":e["home"],"away":e["away"],
+                           "match_date":e["match_date"],
+                           "kickoff_utc":ko.astimezone(timezone.utc).isoformat(),
+                           "source_url":entry["effective_url"],
+                           "retrieved_at_utc":entry["fetched_at"].isoformat(),
+                           "source_parser":ITA_PDF_PARSER,
+                           "source_origin":"FETCHED_OFFICIAL_PAGE_BATCH_CACHE"}
+                    aliases=NOV7_ALIASES.get(league,{})
+                    for side in ("home","away"):
+                        proof[side]=aliases.get(proof[side],proof[side])
+                    accepted=self.gate_runner(league,home,away,
+                                   lookup_override=lambda _h,_a:proof)
+                    if isinstance(accepted,dict) and accepted.get("status")=="VERIFIED":
+                        evidence["selected_lookup"]="LEGA_SERIE_A_REVISED_OFFICIAL_PDF"
+                        evidence["official_pdf_sha256"]=entry.get("official_pdf_sha256")
+                        evidence["page_observation_status"]="VERIFIED_OFFICIAL_FIXTURE"
+                        self.match_checks.append(evidence)
+                        return accepted
+                    evidence["italy_pdf_named_gate_rejected"]=(
+                        accepted.get("reason") if isinstance(accepted,dict)
+                        else "INVALID_NAMED_GATE_RESPONSE")
+                except (OSError,ValueError,TypeError) as exc:
+                    evidence["italy_pdf_named_gate_rejected"]=str(exc)[:100]
+            else:
+                evidence["italy_pdf_match_count"]=len(matches)
+        if entry["status"]=="FETCHED_OFFICIAL_PAGE" and entry.get("html") is not None and entry.get("parser")!=ITA_PDF_PARSER:
             observation=official_page_lookup(
                 league,home,away,now=self.now(),
                 source_url=entry["effective_url"],html=entry["html"],
