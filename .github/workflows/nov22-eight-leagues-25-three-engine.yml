@@ -1,0 +1,44 @@
+name: Nov22 eight uploaded iddaa PDFs 25 real pre-match three-engine audit
+on:
+  push:
+    branches:
+      - experiment/20261122-eight-league-25-pdf-probe
+    paths:
+      - experiments/p1_market_intelligence/nov22_eight_pdf_real_probe.py
+      - experiments/p1_market_intelligence/nov22_eight_pdf_research_input.json
+      - .github/workflows/nov22-eight-leagues-25-three-engine.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  eight-pdf-one-pass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install exact frozen-core numerical dependencies
+        run: python -m pip install --disable-pip-version-check numpy==2.3.5 scipy==1.17.0 PyMuPDF==1.26.5 reportlab
+      - name: Restore earlier source audit artifact and verify SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p m4_quad_base
+          gh run download 41251343847 --repo "$GITHUB_REPOSITORY" -n team-source-audit -D m4_quad_base
+          echo '35c5e7b4e0fad45c592fd51cf094616f2ff60330ce52bcf21cd595968169f5a1  m4_quad_base/historical_results.csv' | sha256sum -c -
+      - name: 25 real official fixture gates, frozen model then independent market
+        env:
+          PYTHONPATH: .:experiments/263:experiments/p1_market_intelligence
+        run: python experiments/p1_market_intelligence/nov22_eight_pdf_real_probe.py
+      - name: Upload all one-pass decisions and explicit block reasons
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nov22-eight-uploaded-leagues-25-three-machine-onepass
+          path: /tmp/eight_league_25_three_machine_research.json
+          if-no-files-found: warn
+          retention-days: 14
