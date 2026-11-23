@@ -1,0 +1,67 @@
+{
+  "schema": "HAKEM_RETROSPECTIVE_THREE_EXPERT_REBUILD_V1",
+  "created_date": "2026-11-23",
+  "scope": "RESEARCH_ONLY_NOT_ORIGINAL_M4_4617_SNAPSHOT_NOT_PREMATCH_SIGNED",
+  "source_sha256": "f80d9646af7d68249afa4445266fa7c721d64ed14b88b53579bf47a691ff13d0",
+  "archive_matches": 35938,
+  "train_history": 35075,
+  "evaluation_2026_27": 863,
+  "august_excluded_due_to_existing_m4_aug_calibration": true,
+  "teacher_weight_fit": "2026-09-01_TO_2026-10-31",
+  "teacher_holdout": "2026-11-01_TO_2026-11-22",
+  "source_labels": [
+    "FUTBOL_M4_C3_V4_REBUILT",
+    "ARSIV_P0_PROXY",
+    "HAFIZA_V1_2_RETRO"
+  ],
+  "teacher_source_prior": [
+    0.5,
+    0.3,
+    0.2
+  ],
+  "effective_weight_fit_rule": "softmax(log(prior)-8*n/(n+200)*(family_brier-min_family_brier))",
+  "teacher_family_weights": {
+    "MS": [
+      0.47239174310082654,
+      0.31890219863616304,
+      0.20870605826301036
+    ],
+    "OU25": [
+      0.489007480792282,
+      0.3076137279736414,
+      0.2033787912340766
+    ],
+    "KG": [
+      0.4962055367995911,
+      0.30559545481795525,
+      0.1981990083824537
+    ]
+  },
+  "training_family_source_losses": {
+    "MS": [
+      0.5973867914387383,
+      0.5768008175803521,
+      0.5800296699448751
+    ],
+    "OU25": [
+      0.23926284732210754,
+      0.23100539138187237,
+      0.2324562653435891
+    ],
+    "KG": [
+      0.24348475734417785,
+      0.23892803731108223,
+      0.24373406954297339
+    ]
+  },
+  "scored_training_matches": 504,
+  "scored_holdout_matches": 167,
+  "scored_total_matches": 671,
+  "memory_algo": "ORIGINAL_V1_2_SEVEN_PROBABILITY_L_INF_RADIUS_MIN100_FROM_35075_GECMIS",
+  "model_algo": "SOURCE_MATH_M4_HALF_LIFE_360_RIDGE_4_48_C3_RIDGE_6_FROZEN_V4_2025_CALIBRATORS",
+  "model_training_data": "FOOTIQO_2025_26_PLUS_2026_27_PRIOR_DATE_REBUILT_NOT_OFFICIAL_4617_INPUT",
+  "prediction_provenance": "RETROSPECTIVE_BACKTEST_NOT_PREMATCH_SEAL",
+  "market_provenance": "FOOTIQO_1XBET_P0_PROXY_NOT_IDDAA_PDF",
+  "test_not_blind": "2026_27_RESULTS_PREVIOUSLY_INSPECTED_IN_OTHER_RESEARCH",
+  "significance": "NONE_CLAIMED_NO_BETTING_GUARANTEE"
+}
