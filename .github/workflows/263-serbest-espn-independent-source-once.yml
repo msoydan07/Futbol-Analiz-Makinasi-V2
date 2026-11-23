@@ -28,7 +28,7 @@ jobs:
           out={'schema':'263_SECONDARY_SCOREBOARD_AVAILABILITY_V1',
                'not_official_federation':True,'leagues':{}}
           for league,code in codes.items():
-              url='https://site.api.espn.com/apis/site/v2/sports/soccer/'+code+'/scoreboard?dates=20261120-20261123&limit=200'
+              url='https://site.api.espn.com/apis/site/v2/sports/soccer/'+code+'/scoreboard?dates=202611&limit=500'
               try:
                   req=Request(url,headers={'User-Agent':'Mozilla/5.0 FootballResearchAudit/263','Accept':'application/json'})
                   with urlopen(req,timeout=17) as resp:
@@ -40,7 +40,19 @@ jobs:
                   obj=json.loads(b)
                   events=obj.get('events',[])
                   finished=sum(1 for e in events if e.get('status',{}).get('type',{}).get('completed'))
+                  compact=[]
+                  for e in events:
+                      d=e.get('date','')
+                      if not (d.startswith('2026-11-19') or d.startswith('2026-11-20') or d.startswith('2026-11-21') or d.startswith('2026-11-22') or d.startswith('2026-11-23')):
+                          continue
+                      comp=(e.get('competitions') or [{}])[0]
+                      sides=[]
+                      for c in comp.get('competitors',[]):
+                          team=c.get('team') or {}
+                          sides.append({'side':c.get('homeAway'),'name':team.get('displayName'),'short':team.get('shortDisplayName'),'score':c.get('score')})
+                      compact.append({'event_id':e.get('id'),'date':d,'name':e.get('name'),'completed':e.get('status',{}).get('type',{}).get('completed'),'sides':sides})
                   out['leagues'][league]={'status':'FETCHED','n_events':len(events),'completed':finished,
+                      'matches_in_window':compact,
                       'sample': [{'date':e.get('date'),'name':e.get('name'),'completed':e.get('status',{}).get('type',{}).get('completed')} for e in events[:2]],
                       'url':url}
                   print(league,'FETCHED',len(events),'COMPLETED',finished,'SAMPLE',events[0].get('name','') if events else '')
