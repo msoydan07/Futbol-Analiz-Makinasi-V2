@@ -57,17 +57,58 @@ def latest_result_age(history,league,date):
     return age,latest
 
 def validate_source_locks(engine_root,history):
-    lock=Path(engine_root)/'experiments/263/m4_lock.json'
-    provenance=Path(engine_root)/'data/results_only_263/4617_research_input_provenance.json'
-    eng=Path(engine_root)/'experiments/263/m4_integrated.py'
-    if not all(x.is_file() for x in (lock,provenance,eng)):
+    """Only SHA-pinned original 4,617 OR separately accepted 4,700 research data.
+
+    Research 4,700 has 83 results cross-checked against a SECOND public source.
+    It is not a federation-certified score archive and never rewrites the 4,617
+    input or original prematch seals. A file alone cannot self-authorize.
+    """
+    root=Path(engine_root).resolve()
+    lock=root/'experiments/263/m4_lock.json'
+    eng=root/'experiments/263/m4_integrated.py'
+    old_prov=root/'data/results_only_263/4617_research_input_provenance.json'
+    new_file=root/'data/research_263/2026-11-23_4700_two_source_research.csv'
+    new_prov=root/'data/research_263/2026-11-23_4700_two_source_provenance.json'
+    new_ledger=root/'data/research_263/2026-11-23_83_two_source_match_ledger.json'
+    if not all(x.is_file() for x in (lock,eng,old_prov)):
         raise GateError('M4_LOCK_OR_SOURCE_PROVENANCE_UNAVAILABLE')
-    a=json.loads(lock.read_text());b=json.loads(provenance.read_text())
-    sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
-    if a.get('m4_engine_sha256')!=sha(eng):raise GateError('M4_MATH_UNEXPECTED_SHA')
-    if b.get('source_snapshot_sha256')!=sha(history) or b.get('usable_total_rows')!=4617:
-        raise GateError('FOOTBALL_HISTORY_PROVENANCE_NOT_VERIFIED')
-    return {'engine_sha256':sha(eng),'history_sha256':sha(history),'provenance_schema':b['schema']}
+    a=json.loads(lock.read_text(encoding='utf-8'))
+    digest=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+    if a.get('m4_engine_sha256')!=digest(eng):
+        raise GateError('M4_MATH_UNEXPECTED_SHA')
+    h=Path(history).resolve();live_sha=digest(h)
+    old=json.loads(old_prov.read_text(encoding='utf-8'))
+    if (h==(root/old['source_snapshot_path']).resolve() and
+          old.get('source_snapshot_sha256')==live_sha and
+          old.get('usable_total_rows')==4617):
+        return {'engine_sha256':digest(eng),'history_sha256':live_sha,
+                'provenance_schema':old['schema'],'research_rows':4617,
+                'score_evidence':'LEGACY_RESEARCH'}
+    if h!=new_file.resolve() or not all(x.is_file() for x in (new_prov,new_ledger)):
+        raise GateError('FOOTBALL_HISTORY_NOT_ON_WHITELIST')
+    b=json.loads(new_prov.read_text(encoding='utf-8'))
+    ledger=json.loads(new_ledger.read_text(encoding='utf-8'))
+    if (b.get('schema')!='263_RESEARCH_HISTORY_4700_TWO_SECONDARY_SOURCES_PIN_V1'
+        or b.get('status')!='RESEARCH_APPROVED_SECONDARY_SCORE_AGREEMENT_NOT_FEDERATION_VERIFIED'
+        or b.get('source_snapshot_sha256')!=live_sha
+        or live_sha!='37bf74e820df85325213c2e0ef8ce9a88a16c1f452edf5bd2a41814f10f261bd'
+        or b.get('source_snapshot_path')!='data/research_263/2026-11-23_4700_two_source_research.csv'
+        or b.get('score_ledger_path')!='data/research_263/2026-11-23_83_two_source_match_ledger.json'
+        or b.get('usable_total_rows')!=4700
+        or b.get('accepted_legacy_rows')!=4617
+        or b.get('new_concordant_results')!=83
+        or b.get('asof_exclusive')!='2026-11-23'
+        or b.get('independent_federation_evidence') is not False
+        or ledger.get('source_snapshot_sha256')!=live_sha
+        or len(ledger.get('matches',[]))!=83
+        or not all(row.get('score_agrees') is True for row in ledger['matches'])):
+        raise GateError('RESEARCH_4700_PROVENANCE_OR_SECOND_SOURCE_AUDIT_INVALID')
+    # A true current research calculation requires accepted provenance; no
+    # retroactive prematch seal or claim of official independent score review.
+    return {'engine_sha256':digest(eng),'history_sha256':live_sha,
+            'provenance_schema':b['schema'],'research_rows':4700,
+            'score_evidence':'83_TWO_PUBLIC_SECONDARY_SOURCES_NOT_FEDERATIONS'}
+
 
 def official_named(league,home,away,weights,engine_root,history,registry,
                    *,gateway_factory=None,clock=None,max_gap_days=10):
