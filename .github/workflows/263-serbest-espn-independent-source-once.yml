@@ -1,0 +1,57 @@
+name: 263 Serbest - second public scoreboard availability one-shot
+on:
+  push:
+    branches: [experiment/p0-oran-hafizasi-22-lig-20261122]
+    paths: [.github/workflows/263-serbest-espn-independent-source-once.yml]
+permissions: {contents: read}
+jobs:
+  public_independent_read_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check second independent public sports scoreboard (not a federation)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from urllib.request import Request,urlopen
+          from urllib.parse import urlsplit
+          from pathlib import Path
+          import json,time,datetime
+          codes={'ENG1':'eng.1','ENG2':'eng.2','GER1':'ger.1','ESP1':'esp.1',
+            'ITA1':'ita.1','FRA1':'fra.1','NED1':'ned.1','TUR1':'tur.1',
+            'POR1':'por.1','BEL1':'bel.1'}
+          out={'schema':'263_SECONDARY_SCOREBOARD_AVAILABILITY_V1',
+               'not_official_federation':True,'leagues':{}}
+          for league,code in codes.items():
+              url='https://site.api.espn.com/apis/site/v2/sports/soccer/'+code+'/scoreboard?dates=20261120-20261123&limit=200'
+              try:
+                  req=Request(url,headers={'User-Agent':'Mozilla/5.0 FootballResearchAudit/263','Accept':'application/json'})
+                  with urlopen(req,timeout=17) as resp:
+                      u=urlsplit(resp.geturl())
+                      if resp.status!=200 or u.scheme!='https' or u.hostname!='site.api.espn.com':
+                          raise RuntimeError('UNTRUSTED_FINAL_HOST')
+                      b=resp.read(2_000_001)
+                  if len(b)>2_000_000:raise ValueError('SOURCE_OVERSIZE')
+                  obj=json.loads(b)
+                  events=obj.get('events',[])
+                  finished=sum(1 for e in events if e.get('status',{}).get('type',{}).get('completed'))
+                  out['leagues'][league]={'status':'FETCHED','n_events':len(events),'completed':finished,
+                      'sample': [{'date':e.get('date'),'name':e.get('name'),'completed':e.get('status',{}).get('type',{}).get('completed')} for e in events[:2]],
+                      'url':url}
+                  print(league,'FETCHED',len(events),'COMPLETED',finished,'SAMPLE',events[0].get('name','') if events else '')
+              except Exception as exc:
+                  out['leagues'][league]={'status':'FAILED','reason':type(exc).__name__+':'+str(exc)[:150]}
+                  print(league,'FAILED',type(exc).__name__,str(exc)[:150])
+          Path('espn_secondary_feasibility_20261123.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          PY
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: serbest-20261123-espn-secondary-feasibility
+          path: espn_secondary_feasibility_20261123.json
+          if-no-files-found: ignore
