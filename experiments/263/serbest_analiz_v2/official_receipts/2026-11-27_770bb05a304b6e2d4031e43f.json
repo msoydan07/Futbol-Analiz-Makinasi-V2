@@ -1,0 +1,71 @@
+{
+  "schema": "SERBEST_NAMED_OFFICIAL_PREKO_RESEARCH_V2",
+  "match": "SV Werder Bremen - Borussia Mönchengladbach",
+  "league": "GER1",
+  "kickoff_utc": "2026-11-27T19:30:00+00:00",
+  "observed_at_utc": "2026-11-23T20:29:57.146736+00:00",
+  "official_source_url": "https://products.bundesliga.com/fixtures",
+  "official_check_utc": "2026-11-23T20:29:58.478839+00:00",
+  "home_id": "299eb8c9-0d9e-58fd-bf1b-ef8c3491dce2",
+  "away_id": "e05b54ee-124a-519f-a867-afbae14cb771",
+  "football_history_latest": "2026-11-22",
+  "football_history_age_days": 5,
+  "engine_acceptance": {
+    "engine_sha256": "eac755e54086738f40d7f30a514b2c9bb789b2c428ffef4ee70bb2fd2b49bc45",
+    "history_sha256": "37bf74e820df85325213c2e0ef8ce9a88a16c1f452edf5bd2a41814f10f261bd",
+    "provenance_schema": "263_RESEARCH_HISTORY_4700_TWO_SECONDARY_SOURCES_PIN_V1",
+    "research_rows": 4700,
+    "score_evidence": "83_TWO_PUBLIC_SECONDARY_SOURCES_NOT_FEDERATIONS"
+  },
+  "freshness_gap_review": {
+    "status": "WITHIN_NORMAL_TEN_DAY_LIMIT",
+    "age_days": 5
+  },
+  "predictions": {
+    "M4_C3_V4": {
+      "MS1": 0.5242691895937591,
+      "MSX": 0.22258728514393328,
+      "MS2": 0.25314352526230754,
+      "OVER_2.5": 0.5711577587484478,
+      "UNDER_2.5": 0.42884224125155224,
+      "BTTS_YES": 0.596669163592438,
+      "BTTS_NO": 0.40333083640756195
+    }
+  },
+  "decision": {
+    "ana_tercih": "BTTS_YES",
+    "ana_tercih_tr": "KG Var",
+    "hakem_arastirma_yuzdesi": 59.67,
+    "alternatif_tercih": "OVER_2.5",
+    "alternatif_tr": "2.5 Üst",
+    "alternatif_yuzdesi": 57.12,
+    "tum_7_hakem_yuzdeleri": {
+      "MS1": 52.43,
+      "MSX": 22.26,
+      "MS2": 25.31,
+      "OVER_2.5": 57.12,
+      "UNDER_2.5": 42.88,
+      "BTTS_YES": 59.67,
+      "BTTS_NO": 40.33
+    },
+    "classification": "ONE_SOURCE_DIRECT_CHOICE",
+    "sources_used": [
+      "M4_C3_V4"
+    ],
+    "family_sources_used": {
+      "MS": [
+        "M4_C3_V4"
+      ],
+      "OU25": [
+        "M4_C3_V4"
+      ],
+      "KG": [
+        "M4_C3_V4"
+      ]
+    },
+    "warning": "When fewer than 3 complete sources are available, these weights were NOT trained or independently validated for this combination."
+  },
+  "status": "OFFICIAL_FIXTURE_VERIFIED_MODEL_RESEARCH_RECEIPT_NOT_GIT_SEALED",
+  "note": "KO verified independently from gateway. Git SHA pre-KO commit is separately required to call this a sealed record.",
+  "payload_sha256": "770bb05a304b6e2d4031e43f43bb5f70470b87eb49a4a39761ce7719f0a9fe10"
+}
