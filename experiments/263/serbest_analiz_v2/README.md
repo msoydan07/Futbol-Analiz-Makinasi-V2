@@ -1,7 +1,7 @@
 # Üçlü Sistem — Serbest Analiz V2 / Operasyon Paketi
 
 **Tarih:** 23 Kasım 2026  
-**Durum:** Modüler araştırma kodu ve mobil V1.3 kısmi oran ekranı yerel testlerden geçti. Ana 2.6.3 model kaynakları, eski mühürler ve Hakem V1 katsayıları değiştirilmedi. Resmî ön maç GitHub commit akışı **kuruldu ancak henüz gerçek yeni maç üzerinde denenmedi**.
+**Güncel durum (24 Kasım 2026):** Modüler araştırma kodu, iki kaynaktan doğrulanmış 4.700 maçlık araştırma verisi ve Mobil Hafıza V1.3 eksik oran ekranı hazır. **İki ayrı gerçek gelecek maç** için resmî fikstür → M4/C3 → KO öncesi GitHub SHA kaydı yolu başarıyla denendi. Bu kayıtlar yalnız **araştırma dalında**; ana 2.6.3 matematiği, Hakem V1 katsayıları ve önceki mühürler değiştirilmedi. PDF akışı ayrı/local çalışır; ana üretim dalına dağıtım yapılmadı.
 
 ## Üç bağımsız çalışma yolu
 
@@ -44,18 +44,27 @@ python GUNLUK_SERBEST_ANALIZ_KAPISI_V2.py \
 Depo `msoydan07/Futbol-Analiz-Makinasi-V2`, araştırma dalı `experiment/p0-oran-hafizasi-22-lig-20261122`.
 
 - `experiments/263/serbest_analiz_v2/` altında gerçek modüler Python kaynakları + 9 resmî kapı test dosyası tutuluyor.
-- `.github/workflows/263-serbest-analiz-v2.yml`: kod güncellemesinde 9 regresyon kontrolü, ayrıca manuel `workflow_dispatch` ile doğrulanmış isimli kayıt yolu. GitHub Actions tetikleme arayüzü iş akışının default dalında olmamasından etkilenebilir.
+- `.github/workflows/263-serbest-analiz-v2.yml`: kod güncellemesinde modüler analiz, KO, SHA ve veri kilidi regresyon kontrolleri, ayrıca manuel `workflow_dispatch` ile doğrulanmış isimli kayıt yolu. GitHub Actions tetikleme arayüzü iş akışının default dalında olmamasından etkilenebilir.
 - `.github/workflows/263-serbest-analiz-request-v2.yml`: chat'ten tek maç adıyla gönderilebilecek `requests/<benzersiz>.json` dosyasının araştırma dalına GitHub commit edilmesi üzerine çalışır; resmî fikstür + güncel veri + gerçek KO şartını sağlarsa yalnız **yeni** `official_receipts/` dosyasını başlangıç öncesi Git commit eder. Kaynak yoksa işlem başarısız olur; sahte sonuç yazılmaz.
 - Kaydedilecek talep şeması: `{"schema":"SERBEST_NAMED_REQUEST_V2","league":"TUR1","home":"Besiktas","away":"Kasimpasa"}`. Bu yalnız **istek örneğidir**, gerçek maç doğrulaması değildir. Kullanıcı isteği olmadan otomatik sahte talep gönderilmez.
-- **Önemli:** Workflow ve GitHub write permissions uygulama ortamında henüz gerçek yeni maç için doğrulanmadı. Bunun doğrulanması ve güncel ana futbol veri beslemesi halen operasyonel kabul kriteridir. Bu koda, bu koşul sağlanmadan “canlı olarak tam otomatik” denmemeli.
+- **Kanıt:** [Werder Bremen–Mönchengladbach GitHub çalışması](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45259881704) ve [Hamburger SV–Bayern Münih ikinci çalışma](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/actions/runs/45265694055) başarıyla GitHub'a iki farklı pre-KO araştırma kaydı ekledi. İkinci kayıt oluşturulurken ilk kayıt değişmedi. **Bu araştırma kaydıdır; main üretim mührü olarak tanıtılmaz.**
 
 ## Yerel testler
 
-- Python modüler yönlendirici + eksik fiyat + P0/Hafıza + Hakem: **27/27**.
-- Bağımsız saat/KO/gate/append-only güvenliği: **9/9**.
+- Python modüler yönlendirici + eksik fiyat + P0/Hafıza + Hakem: **27/27** (ilk kabul).
+- Bağımsız saat/KO/gate güvenliği: **9/9**. Eski mühür yanında ikinci kayıt ve SHA/staging güvenliği: **11/11**. Yeni 4.700 kaynak kilidi: **3/3**; GitHub regresyonu başarılı.
 - Yeni Mobil V1.3: Chrome tabanlı tarayıcı DOM'da PDF.js'in metin öğeleri için simüle edilmiş geometrik çıktı ile **4/4 maç**, bir fiyatın kasıtlı eksiltilmesi, tam **35.938 Hafıza dosyası yükleme**, **4/4 benzerlik sayımı** doğrulandı. Cihazda gerçek PDF.js CDN indirimi ve Android dosya izinleri ayrıca denenmeli.
-- Gerçek resmî yeni fikstür üzerinden GitHub Actions SHA mühürü **henüz denenmedi**; testlerde sahte takımlar gerçek maç gibi kaydedilmedi.
+- Gerçek resmî yeni fikstür üzerinden araştırma dalına **iki ayrı** GitHub ön maç SHA kaydı başarılı. İkisi de henüz oynanmamış maçlar; geçmişe yönelik tahmin yazılmadı.
 
 ## İlk kullanım sınırları
 
-PDF varsa ilk analiz yapılıyor. 10 ligden maç adı verilirse model kaynakları bulunduğunda araştırma analizi yapılabiliyor. Yeni canlı M4/C3 için güncel, kaynak onaylı maç geçmişi hâlâ gerekli. Orijinal resmî tahmin dalının sabah iş akışı *bu sürümde kapatılmadı*; yeni modüler yol ayrı bir alternatiftir. Bu düzeyde tamamlanan işler çalışır; canlı operasyonun son kabulü için gerçek bir yeni maç koşusu gerekir.
+PDF varsa ilk analiz yapılıyor. 10 ligden maç adı verilirse model kaynakları bulunduğunda araştırma analizi yapılabiliyor. Yeni canlı M4/C3, 4.700 satırlık SHA kilitli araştırma kaynak sürümüne bağlandı; 83 yeni skor Football-Data ve ESPN'de uyumlu, fakat resmî federasyon tarafından tek tek teyit edilmiş sayılmaz. Orijinal resmî tahmin dalının sabah iş akışı *bu sürümde kapatılmadı*; yeni modüler yol ayrı bir alternatiftir. Bu düzeyde tamamlanan işler çalışır; canlı operasyonun son kabulü için gerçek bir yeni maç koşusu gerekir.
+
+## Güncel gerçek veri ve iki canlı kayıt kanıtı
+
+- **Model geçmişi:** [4.700 satırlık araştırma dosyası](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/blob/experiment/p0-oran-hafizasi-22-lig-20261122/data/research_263/2026-11-23_4700_two_source_research.csv); SHA `37bf74e820df85325213c2e0ef8ce9a88a16c1f452edf5bd2a41814f10f261bd`; eski 4.617 korunuyor. [83 maçlık iki kaynaklı skor defteri](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/blob/experiment/p0-oran-hafizasi-22-lig-20261122/data/research_263/2026-11-23_83_two_source_match_ledger.json).
+- **İlk gerçek pre-KO kayıt:** [Werder Bremen–Mönchengladbach, 27 Kasım](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/blob/experiment/p0-oran-hafizasi-22-lig-20261122/experiments/263/serbest_analiz_v2/official_receipts/2026-11-27_770bb05a304b6e2d4031e43f.json). Araştırma ana tercihi KG Var %59,67.
+- **İkinci gerçek pre-KO kayıt:** [Hamburger SV–Bayern Münih, 28 Kasım](https://github.com/msoydan07/Futbol-Analiz-Makinasi-V2/blob/experiment/p0-oran-hafizasi-22-lig-20261122/experiments/263/serbest_analiz_v2/official_receipts/2026-11-28_47dab11049caeb3343339380.json). Araştırma ana tercihi MS 2 %80,48. İlk dosyanın SHA'sı aynen korundu.
+- **Tetikleme:** 10 ligden istenen yeni maçın `requests/<benzersiz>.json` dosyasını araştırma dalına commit et; `263-serbest-analiz-request-v2.yml` yalnız resmî kimlik + güncel futbol geçmişi + KO sonrası olmayan an için sonuç yazabilir. Saat sabah/akşam fark etmez; eğer GitHub commit KO öncesine yetişmezse pre-KO mühür verilmez.
+- **PDF kullanımı:** Kullanıcı iddaa PDF'si + özel `oran_hafizasi_tam.json` ile Python yerel akışı veya Mobil V1.3 kullanılabilir. Eski PDF'leri aynen işlemek mümkündür; PDF girişinin otomatik GitHub tahmini üreten üretim servisi kurulduğu iddia edilmez. Bu arşiv **GitHub'a yüklenmemeli**.
+- **Sınırlar:** 23 Kasım'da oynanan yeni maçlar bu as-of `2026-11-23` dışlama tarihli 4.700 verisine ekli değildir. Aynı maç için birden fazla analiz üretilirse ilk GitHub kaydı üzerine yazılmaz, ek kayıtların farklı sürüm olarak değerlendirilmesi gerekir. Üretim `main` dalı değişmedi.
