@@ -58,7 +58,7 @@ jobs:
             --league "$REQUEST_LEAGUE" --home "$REQUEST_HOME" --away "$REQUEST_AWAY" \
             --rule experiments/263/serbest_analiz_v2/hakem_karar_kurali_v1.json \
             --engine-root . \
-            --history data/results_only_263/2026-11-10_completed_4617_scores_only.csv \
+            --history data/research_263/2026-11-23_4700_two_source_research.csv \
             --registry experiments/263/evidence/identity_index_263.json \
             --out-dir experiments/263/serbest_analiz_v2/official_receipts
       - name: Verify one new receipt; exclude any previously committed seals
