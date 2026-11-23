@@ -4,6 +4,7 @@ on:
     branches: [experiment/p0-oran-hafizasi-22-lig-20261122]
     paths:
       - '.github/workflows/263-serbest-append-preview-once.yml'
+      - 'experiments/263/serbest_analiz_v2/APPEND_ONLY_4617_STAGE_V2.py'
 permissions:
   contents: read
 jobs:
