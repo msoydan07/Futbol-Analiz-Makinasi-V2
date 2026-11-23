@@ -1,0 +1,87 @@
+name: 263 Serbest - 83 score two-source acceptance and append-only 4700 research data
+on:
+  push:
+    branches: [experiment/p0-oran-hafizasi-22-lig-20261122]
+    paths: [.github/workflows/263-serbest-4700-two-source-promotion-once.yml]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  verify_publish_research_only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install isolated score-name audit tools (not an M4 model change)
+        run: python -m pip install 'scipy>=1.10,<2' 'rapidfuzz>=3,<4'
+      - name: Retrieve two pinned independent source evidence snapshots
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p audit_in/stage audit_in/espn
+          gh run download 45256214539 --repo "$GITHUB_REPOSITORY" \
+            -n serbest-4617-append-only-unverified-stage-once -D audit_in/stage
+          gh run download 45258650625 --repo "$GITHUB_REPOSITORY" \
+            -n serbest-20261123-espn-secondary-feasibility -D audit_in/espn
+          test -f audit_in/stage/append_preview_20261123/research_appended_history_4617.csv
+          test -f audit_in/espn/espn_secondary_feasibility_20261123.json
+      - name: Independent per-fixture result concordance, immutable base and timestamp audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit_out data/research_263
+          python experiments/263/serbest_analiz_v2/VERIFY_83_TWO_PUBLIC_SCORES_V1.py \
+            --source-dir audit_in/stage/provider_2026_27_20261123 \
+            --espn-file audit_in/espn/espn_secondary_feasibility_20261123.json \
+            --stage-file audit_in/stage/append_preview_20261123/research_appended_history_4617.csv \
+            --preview-audit-file audit_in/stage/append_preview_20261123/append_preview_audit.json \
+            --out-file audit_out/2026-11-23_83_public_scores_two_source_audit.json
+      - name: Save only new secondary-reviewed research history and signed provenance (no original overwrite)
+        shell: bash
+        run: |
+          set -euo pipefail
+          dest=data/research_263/2026-11-23_4700_two_source_research.csv
+          receipt=data/research_263/2026-11-23_4700_two_source_provenance.json
+          ledger=data/research_263/2026-11-23_83_two_source_match_ledger.json
+          test ! -e "$dest"
+          test ! -e "$receipt"
+          test ! -e "$ledger"
+          cp audit_in/stage/append_preview_20261123/research_appended_history_4617.csv "$dest"
+          cp audit_out/2026-11-23_83_public_scores_two_source_audit.json "$ledger"
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json
+          audit=json.loads(Path('audit_out/2026-11-23_83_public_scores_two_source_audit.json').read_text())
+          d={k:v for k,v in audit.items() if k!='matches'}
+          d.update({'schema':'263_RESEARCH_HISTORY_4700_TWO_SECONDARY_SOURCES_PIN_V1',
+                    'source_snapshot_path':'data/research_263/2026-11-23_4700_two_source_research.csv',
+                    'score_ledger_path':'data/research_263/2026-11-23_83_two_source_match_ledger.json'})
+          source=Path(d['source_snapshot_path']).read_bytes()
+          if hashlib.sha256(source).hexdigest()!=d['source_snapshot_sha256']:raise SystemExit('PIN_MISMATCH')
+          Path('data/research_263/2026-11-23_4700_two_source_provenance.json').write_text(
+             json.dumps(d,ensure_ascii=False,indent=2)+'\n')
+          print('FINAL_RESEARCH_SOURCE_SHA',d['source_snapshot_sha256'],'ROWS',d['usable_total_rows'],
+                'NEW',d['new_concordant_results'])
+          PY
+          git config user.name 'serbest-audit[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$dest" "$receipt" "$ledger"
+          if [ "$(git diff --cached --name-only | wc -l)" -ne 3 ]; then
+            echo 'UNEXPECTED_STAGED_PATHS';exit 1
+          fi
+          git commit -m 'research: pin 4700 score inputs, 83 independently concordant ESPN/Football-Data'
+          git push origin HEAD:experiment/p0-oran-hafizasi-22-lig-20261122
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: serbest-4700-83-independent-source-public-proof
+          path: audit_out/*.json
+          if-no-files-found: ignore
