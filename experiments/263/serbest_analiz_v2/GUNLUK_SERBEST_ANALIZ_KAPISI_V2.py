@@ -84,8 +84,24 @@ def official_named(league,home,away,weights,engine_root,history,registry,
     date=checked['local_date']
     age,latest=latest_result_age(history,league,date)
     lock=validate_source_locks(engine_root,history)
+    gap_evidence={'status':'WITHIN_NORMAL_TEN_DAY_LIMIT','age_days':age}
     if age>max_gap_days:
-        raise GateError(f'RESEARCH_FOOTBALL_SOURCE_STALE:{age} days latest={latest}; no current model claim')
+        # The original main machine already has a verified no-games-during-break
+        # exemption. Reuse its strict exact-league, same-snapshot source check.
+        # Never treat a calendar gap as proof there were no missing games.
+        import csv
+        sd=Path(engine_root).resolve()/'experiments/263'
+        sys.path.insert(0,str(sd))
+        sys.path.insert(0,str(Path(engine_root).resolve()))
+        from freshness_gap_guard_263 import review_gap
+        with Path(history).open(encoding='utf-8-sig',newline='') as f:
+            accepted_rows=list(csv.DictReader(f))
+        try:
+            gap_evidence=review_gap(accepted_rows,league,date,now=now)
+        except Exception as exc:
+            raise GateError('FRESHNESS_GAP_NOT_VERIFIED:'+str(exc)) from exc
+        if gap_evidence.get('status')!='BOUNDED_GAP_NO_MISSING_RESULTS_IN_PUBLIC_FEED_RESEARCH_ONLY':
+            raise GateError('FRESHNESS_GAP_NOT_ACCEPTED')
     m=recompute_m4_v4_named(engine_root,history,registry,league,home,away,date)
     model=m['seven']
     main=decide({'M4_C3_V4':model},weights)
@@ -97,7 +113,8 @@ def official_named(league,home,away,weights,engine_root,history,registry,
              'official_check_utc':checked['official_check_utc'],
              'home_id':checked['home_id'],'away_id':checked['away_id'],
              'football_history_latest':latest,'football_history_age_days':age,
-             'engine_acceptance':lock,'predictions':{'M4_C3_V4':model},
+             'engine_acceptance':lock,'freshness_gap_review':gap_evidence,
+             'predictions':{'M4_C3_V4':model},
              'decision':main,'status':'OFFICIAL_FIXTURE_VERIFIED_MODEL_RESEARCH_RECEIPT_NOT_GIT_SEALED',
              'note':'KO verified independently from gateway. Git SHA pre-KO commit is separately required to call this a sealed record.'}
     return receipt
