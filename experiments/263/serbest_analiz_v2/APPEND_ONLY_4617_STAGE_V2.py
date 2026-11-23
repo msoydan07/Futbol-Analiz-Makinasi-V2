@@ -33,7 +33,7 @@ def create(base,index,raw_files,cutoff):
     for r in base:
         key=tuple(r[k] for k in ('league','season','match_date','home_id','away_id'))
         pair=tuple(r[k] for k in ('league','season','home_id','away_id'))
-        if key in bykey or pair in by_pair or r['fixture_id'] in all_ids:
+        if key in bykey or r['fixture_id'] in all_ids:
             raise RefreshError('BASE_DUPLICATE_MATCH_IDENTITY')
         bykey[key]=r;by_pair[pair]=r;all_ids.add(r['fixture_id'])
     new=[];audit={};seen=set()
