@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: serbest-v2-named-${{ github.ref }}
+  group: serbest-v2-preko-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   named_single:
@@ -61,26 +61,19 @@ jobs:
             --history data/results_only_263/2026-11-10_completed_4617_scores_only.csv \
             --registry experiments/263/evidence/identity_index_263.json \
             --out-dir experiments/263/serbest_analiz_v2/official_receipts
-      - name: Reverify that match has not started before Git commit
+      - name: Verify one new receipt; exclude any previously committed seals
         shell: bash
         run: |
           set -euo pipefail
-          python - <<'PY'
-          import json,datetime as dt,glob
-          paths=glob.glob('experiments/263/serbest_analiz_v2/official_receipts/*.json')
-          if len(paths)!=1:raise SystemExit('ONE_NEW_RECEIPT_REQUIRED')
-          r=json.load(open(paths[0],encoding='utf-8'))
-          ko=dt.datetime.fromisoformat(r['kickoff_utc']);now=dt.datetime.now(dt.timezone.utc)
-          if ko.tzinfo is None or now>=ko:raise SystemExit('MATCH_KICKOFF_PASSED')
-          if dt.datetime.fromisoformat(r['observed_at_utc'])>=ko:raise SystemExit('NOT_PREMATCH')
-          PY
-      - name: Write-once Git commit (no old seals rewritten)
+          python experiments/263/serbest_analiz_v2/PREKO_KAYIT_GUARD_V2.py
+      - name: Safely append only this new pre-kickoff record
         shell: bash
         run: |
           set -euo pipefail
+          receipt="$(python experiments/263/serbest_analiz_v2/PREKO_KAYIT_GUARD_V2.py --path)"
           git config user.name 'serbest-analiz-v2[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- experiments/263/serbest_analiz_v2/official_receipts/
-          test -n "$(git diff --cached --name-only)"
+          git add -- "$receipt"
+          python experiments/263/serbest_analiz_v2/PREKO_KAYIT_GUARD_V2.py --staged "$receipt"
           git commit -m 'research: official before-kickoff named M4/C3 receipt'
           git push origin HEAD:experiment/p0-oran-hafizasi-22-lig-20261122
