@@ -46,8 +46,9 @@ class ForwardTests(unittest.TestCase):
            "retrieved_at_utc":NOW.isoformat(),"source_url":"https://example.org/official"}
         b=[{"source_row":1,"league":"GER1","home":"A","away":"B","date_local_tr":"2026-11-24"}]
         with patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.verify_mobile",return_value={}),\
-             patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.pdf_rows",return_value=([a["records"][0]["seven_raw_odds"]],[])),\
-             patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.independent_pdf_fixture_rows",return_value=([{"kickoff_time":"18:00","match_label":"A - B"}])):
+             patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.read_iddaa_pdf",return_value={"rows":[
+                 {"time":"16:00","match":"UNRELATED - MISSING","error":"MISSING_ODDS","raw":{}},
+                 {"time":"18:00","match":"A - B","raw":a["records"][0]["seven_raw_odds"]}]}):
              records=make_records(a,b"original_pdf_bytes",b,lambda *args:official,now=NOW)
              self.assertEqual(len(records),1)
              self.assertEqual(check_receipt(records[0])["expert_probabilities"]["P0"],SEVEN)
@@ -58,8 +59,9 @@ class ForwardTests(unittest.TestCase):
         a=stage();b=[{"source_row":1,"league":"XYZ","home":"A","away":"B",
                       "date_local_tr":"2026-11-24"}]
         with patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.verify_mobile",return_value={}),\
-             patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.pdf_rows",return_value=([a["records"][0]["seven_raw_odds"]],[])),\
-             patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.independent_pdf_fixture_rows",return_value=([{"kickoff_time":"18:00","match_label":"A - B"}])):
+             patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.read_iddaa_pdf",return_value={"rows":[
+                 {"time":"16:00","match":"UNRELATED - MISSING","error":"MISSING_ODDS","raw":{}},
+                 {"time":"18:00","match":"A - B","raw":a["records"][0]["seven_raw_odds"]}]}):
             with self.assertRaises(OddsForwardError):
                 make_records(a,b"original_pdf_bytes",b,lambda *args:None,now=NOW)
     def test_provisional_score_correctness(self):
