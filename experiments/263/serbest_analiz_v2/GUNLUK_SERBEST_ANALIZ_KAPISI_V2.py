@@ -178,6 +178,7 @@ def main():
     p.add_argument('--home');p.add_argument('--away');p.add_argument('--date')
     p.add_argument('--archive',type=Path)
     p.add_argument('--rule',required=True,type=Path)
+    p.add_argument('--hakem2-rule',type=Path,help='Optional frozen Hakem2 selector; no blend on missing expert')
     p.add_argument('--model-index',type=Path)
     p.add_argument('--engine-root',type=Path)
     p.add_argument('--history',type=Path)
@@ -189,6 +190,9 @@ def main():
     if a.pdf:
         d=run_pdf(a.pdf,a.archive,weights,model_index=a.model_index, date=a.date,
                   engine_root=a.engine_root, history=a.history,registry=a.registry)
+        if a.hakem2_rule:
+            from HAKEM2_GUNLUK_SECICI_V1 import load_h2_rule,apply_hakem2
+            d=apply_hakem2(d,load_h2_rule(a.hakem2_rule))
         out,md=save_run(d,a.out_dir)
         print(json.dumps({'type':'PDF_INDEPENDENT','count':d['count'],'json':str(out),'report':str(md),
                'researched':sum(bool(r['decision']) for r in d['matches'])},ensure_ascii=False))
@@ -198,6 +202,9 @@ def main():
         if not a.date:p.error('--date is required for unverified research')
         d=run_named(a.league,a.home,a.away,a.date,weights,model_index=a.model_index,
                     engine_root=a.engine_root,history=a.history,registry=a.registry)
+        if a.hakem2_rule:
+            from HAKEM2_GUNLUK_SECICI_V1 import load_h2_rule,apply_hakem2
+            d=apply_hakem2(d,load_h2_rule(a.hakem2_rule))
         out,md=save_run(d,a.out_dir)
         print(json.dumps({'type':'NAMED_RESEARCH_NO_SEAL','json':str(out),'report':str(md)},ensure_ascii=False));return
     if not all((a.engine_root,a.history,a.registry)):
