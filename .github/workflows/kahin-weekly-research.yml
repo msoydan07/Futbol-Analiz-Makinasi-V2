@@ -1,0 +1,28 @@
+name: Kahin weekly research data
+on:
+  push:
+    branches: [experiment/p0-oran-hafizasi-22-lig-20261122]
+    paths: [mobile/weekly/input.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kahin-weekly-research
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/experiment/p0-oran-hafizasi-22-lig-20261122'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check and build only reviewed Wednesday package
+        run: python3 mobile/weekly/build_weekly.py
+      - name: Publish package only
+        run: |
+          git config user.name "kahin-research-bot"
+          git config user.email "kahin-research-bot@users.noreply.github.com"
+          git add -- mobile/weekly/latest.json
+          git diff --cached --quiet && exit 1
+          git commit -m "Publish reviewed Kahin Wednesday data"
+          git push origin HEAD:experiment/p0-oran-hafizasi-22-lig-20261122
