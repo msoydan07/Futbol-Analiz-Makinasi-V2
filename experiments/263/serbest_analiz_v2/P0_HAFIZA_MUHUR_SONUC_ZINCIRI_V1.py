@@ -14,8 +14,8 @@ import argparse,datetime as dt,hashlib,json,math,sys
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from MOBIL_HAKEM_STAGING_DOGRULAYICI_V1 import validate as verify_mobile,EVENTS
-from HAKEM_PDF_HAFIZA_M4_KOPRU_V1 import (
-    pdf_rows,independent_pdf_fixture_rows,_display_label_identity,split_match)
+from HAKEM_PDF_HAFIZA_M4_KOPRU_V1 import _display_label_identity,split_match
+from ORAN_TAMAMLAYICI_V1 import read_iddaa_pdf
 from GUNLUK_SERBEST_ANALIZ_KAPISI_V2 import gate_result,TZ,TEN_LEAGUES
 
 RECEIPT_SCHEMA="P0_HAFIZA_OFFICIAL_GATE_PREKO_RESEARCH_V1"
@@ -57,18 +57,28 @@ def make_records(staging, raw_pdf, bindings, gateway_lookup, *, now=None):
     """
     now=utc(now or dt.datetime.now(dt.timezone.utc))
     verify_mobile(staging,raw_pdf)
-    prices,days=pdf_rows(raw_pdf)
-    fixtures=independent_pdf_fixture_rows(raw_pdf)
+    # The original bulletin may contain OTHER matches with missing odds.
+    # Match each selected mobile row against independent parser evidence by
+    # name, clock and ALL SEVEN offered prices; never zip by row index.
+    pdf_all=read_iddaa_pdf(raw_pdf)["rows"]
     rows=staging["records"]
-    if len(prices)!=len(rows) or len(fixtures)!=len(rows):
-        raise OddsForwardError("INDEPENDENT_PDF_ROWS_NOT_EQUAL_STAGING")
-    for n,(price,fix,row) in enumerate(zip(prices,fixtures,rows),1):
-        if (fix["kickoff_time"]!=row["kickoff_local_time_user_label"] or
-            _display_label_identity(fix["match_label"])!=
-              _display_label_identity(row["match_name_pdf"])):
-            raise OddsForwardError("SOURCE_PDF_NAME_OR_TIME_CHANGED_ROW_"+str(n))
-        if any(abs(float(row["seven_raw_odds"][k])-float(price[k]))>1e-9 for k in EVENTS):
-            raise OddsForwardError("SOURCE_PDF_ODDS_DISAGREE_ROW_"+str(n))
+    verified_rows=set();seen_pdf=set()
+    for n,row in enumerate(rows,1):
+        candidates=[]
+        for j,pdf_row in enumerate(pdf_all):
+            if (pdf_row.get("error") or
+                pdf_row.get("time")!=row["kickoff_local_time_user_label"] or
+                _display_label_identity(pdf_row.get("match",""))!=
+                    _display_label_identity(row["match_name_pdf"])):
+                continue
+            if all(pdf_row["raw"].get(k) is not None and
+                   abs(float(row["seven_raw_odds"][k])-float(pdf_row["raw"][k]))<1e-9
+                   for k in EVENTS):
+                candidates.append(j)
+        if len(candidates)==1 and candidates[0] not in seen_pdf:
+            seen_pdf.add(candidates[0]);verified_rows.add(n)
+        # Rows which cannot be independently reproduced stay research staging
+        # and may NOT enter official-gateway pre-KO receipt creation.
     seen=set();out=[]
     for b in bindings:
         index=b.get("source_row")
@@ -76,6 +86,8 @@ def make_records(staging, raw_pdf, bindings, gateway_lookup, *, now=None):
             raise OddsForwardError("INVALID_OR_DUPLICATE_SOURCE_ROW")
         seen.add(index)
         row=rows[index-1]
+        if index not in verified_rows:
+            raise OddsForwardError("ORIGINAL_PDF_ROW_NOT_INDEPENDENTLY_REPRODUCIBLE")
         league=b.get("league")
         if league not in TEN_LEAGUES:
             raise OddsForwardError("NO_OFFICIAL_GATE_FOR_LEAGUE_RESEARCH_ONLY")
@@ -96,8 +108,6 @@ def make_records(staging, raw_pdf, bindings, gateway_lookup, *, now=None):
         if (local_tr.date().isoformat()!=expected_date or
             local_tr.strftime("%H:%M")!=row["kickoff_local_time_user_label"]):
             raise OddsForwardError("OFFICIAL_KO_NOT_MATCHING_PDF_DATE_TIME")
-        if days and (local_tr.day,local_tr.month) not in days:
-            raise OddsForwardError("OFFICIAL_KO_NOT_MATCHING_PRINTED_PDF_DATE")
         key=hash_obj({"league":league,"home":checked["home_id"],
                       "away":checked["away_id"],"kickoff":checked["kickoff_utc"]})
         original={
