@@ -58,8 +58,10 @@ class ForwardTests(unittest.TestCase):
         a=stage();b=[{"source_row":1,"league":"XYZ","home":"A","away":"B",
                       "date_local_tr":"2026-11-24"}]
         with patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.verify_mobile",return_value={}),\
-             patch("P0_HAFIZA_MUHUR_SONUС_ZINCIRI_V1.pdf_rows",return_value=([a["records"][0]["seven_raw_odds"]],[])):
-            pass
+             patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.pdf_rows",return_value=([a["records"][0]["seven_raw_odds"]],[])),\
+             patch("P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.independent_pdf_fixture_rows",return_value=([{"kickoff_time":"18:00","match_label":"A - B"}])):
+            with self.assertRaises(OddsForwardError):
+                make_records(a,b"original_pdf_bytes",b,lambda *args:None,now=NOW)
     def test_provisional_score_correctness(self):
         r=receipt()
         d={"schema":SCORE_SCHEMA,"scores":[
