@@ -9,7 +9,7 @@ import argparse, csv, datetime as dt, hashlib, io, json, os, re, subprocess, sys
 from functools import lru_cache
 from pathlib import Path
 from urllib.parse import urlencode, urlparse
-from urllib.request import Request, urlopen
+from urllib.request import Request, build_opener, HTTPRedirectHandler
 from zoneinfo import ZoneInfo
 from P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1 import check_receipt, evaluate_once, utc, SCORE_SCHEMA
 from GUNLUK_SERBEST_ANALIZ_KAPISI_V2 import TZ
@@ -23,15 +23,19 @@ CODES=dict(ENG1=("E0","eng.1"),ENG2=("E1","eng.2"),GER1=("D1","ger.1"),
            NED1=("N1","ned.1"),TUR1=("T1","tur.1"),POR1=("P1","por.1"),BEL1=("B1","bel.1"))
 class Pending(ValueError): pass
 
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise Pending('SOURCE_REDIRECT_BLOCKED')
+
 @lru_cache(maxsize=128)
 def fetch(url):
     host=urlparse(url).hostname
-    if host not in {"api.github.com","www.football-data.co.uk","site.api.espn.com"}:
+    if urlparse(url).scheme!='https' or host not in {"api.github.com","www.football-data.co.uk","site.api.espn.com"}:
         raise Pending("SOURCE_HOST_NOT_ALLOWED")
     headers={"User-Agent":"263-research-result-verifier/1","Accept":"application/json" if host!="www.football-data.co.uk" else "text/csv"}
     if host=="api.github.com" and os.environ.get("GITHUB_TOKEN"):
         headers["Authorization"]="Bearer "+os.environ["GITHUB_TOKEN"]
-    with urlopen(Request(url,headers=headers),timeout=20) as f:
+    with build_opener(NoRedirect()).open(Request(url,headers=headers),timeout=20) as f:
         if urlparse(f.geturl()).hostname!=host:
             raise Pending("SOURCE_REDIRECT_HOST_CHANGED")
         raw=f.read(12_000_001)
@@ -92,9 +96,9 @@ def source_pair(doc,fd,espn,resolve):
         if row.get("FTR") not in ("H","D","A"):raise Pending("FOOTBALL_DATA_NOT_FINAL")
         h,v=score_int(row.get("FTHG")),score_int(row.get("FTAG"))
         if row["FTR"]!=("H" if h>v else "A" if h<v else "D"):raise Pending("FOOTBALL_DATA_SCORE_CONFLICT")
-        # Football-Data kickoff time, if present, must match the seal.
+        # Validate optional clock syntax; ESPN supplies exact UTC kickoff.
         if row.get("Time"):
-            try:clock=dt.time.fromisoformat(row["Time"])
+            try:dt.time.fromisoformat(row["Time"])
             except ValueError:raise Pending("BAD_FOOTBALL_DATA_CLOCK")
             # Football-Data time is not guaranteed league-local; no guessed timezone.
         a.append((h,v))
