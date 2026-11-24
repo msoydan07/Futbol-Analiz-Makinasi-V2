@@ -355,7 +355,7 @@ def run_named(league,home,away,date,weights,model_index=None,repo_root=None,
 
 
 def format_md(result):
-    lines=['# Serbest Analiz - Bagimsiz motorlar / Hakem V1','',
+    lines=['# Serbest Analiz - Bagimsiz motorlar / '+('Hakem 2' if result.get('referee_mode') else 'Hakem V1'),'',
       f"Mod: **{result['mode']}** · Mac: **{result['count']}**",'',
       '| Mac | Kaynaklar | Ana tercih | Alternatif | Kayıt durumu |',
       '|---|---|---|---|---|']
@@ -365,7 +365,7 @@ def format_md(result):
         alt=(f"{d['alternatif_tr']} %{d['alternatif_yuzdesi']:.2f}" if d.get('alternatif_tr') else '-')
         lines.append('| '+r['match'].replace('|','/')+' | '+', '.join(r.get('experts',{}))+' | '+main+' | '+alt+' | '+r['status']+' |')
     lines+=['','## Sınırlar','- Her mevcut motor tek başına analiz üretebilir.',
-            '- Üç kaynak tam olduğunda yalnız dondurulmuş Hakem V1 uygulanır; daha az kaynakta koşullu yeniden ölçekleme deneysel bir yedektir.',
+            ('- Hakem 2 modu: uc kaynak varsa tek uzmani secer; iki kaynak varsa karar harmanlamaz. Tek uzmanda dogrudan uzman tercihi gosterilir.' if result.get('referee_mode') else '- Uc kaynak tam oldugunda dondurulmus Hakem V1 uygulanir; eksik kaynakta bu agirliklar bagimsiz kalibre degildir.'),
             '- Eksik piyasa oranı diğer fiyatlar ve marjdan teorik olarak hesaplanabilir; **iddaa tarafından sunulduğu anlamına gelmez**.',
             '- Futbol modelinin mevcut olmaması P0/Hafıza analizini engellemez; PDF olmaması da futbol analizini engellemez.',
             '- Hiçbir analiz gerçek doğrulanmış başlangıç ve bağımsız saatli Git commit olmadan yeni maç önü mühürü sayılmaz.',
@@ -400,6 +400,7 @@ def main():
     p.add_argument('--pdf-league',help='Optional single-league PDF metadata, e.g. GER1, TUR1')
     p.add_argument('--archive',type=Path,help='Full private odds history; never uploaded')
     p.add_argument('--rule',required=True,type=Path)
+    p.add_argument('--hakem2-rule',type=Path,help='Opt-in frozen expert selector, NO weighted mixing')
     p.add_argument('--model-index',type=Path)
     p.add_argument('--repo-root',type=Path)
     p.add_argument('--engine-root',type=Path)
@@ -420,6 +421,9 @@ def main():
                 raise RouterError('NAMED_MODE_REQUIRES_LEAGUE_HOME_AWAY_DATE')
             result=run_named(a.league,a.home,a.away,a.date,weights,a.model_index,a.repo_root,
                   a.engine_root,a.history,a.registry)
+        if a.hakem2_rule:
+            from HAKEM2_GUNLUK_SECICI_V1 import load_h2_rule,apply_hakem2
+            result=apply_hakem2(result,load_h2_rule(a.hakem2_rule))
         jf,mf=save_run(result,a.out_dir)
         print(json.dumps({'mode':result['mode'],'matches':result['count'],
             'analysed':sum(x['decision'] is not None for x in result['matches']),
