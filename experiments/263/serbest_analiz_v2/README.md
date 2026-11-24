@@ -68,3 +68,35 @@ PDF varsa ilk analiz yapılıyor. 10 ligden maç adı verilirse model kaynaklar�
 - **Tetikleme:** 10 ligden istenen yeni maçın `requests/<benzersiz>.json` dosyasını araştırma dalına commit et; `263-serbest-analiz-request-v2.yml` yalnız resmî kimlik + güncel futbol geçmişi + KO sonrası olmayan an için sonuç yazabilir. Saat sabah/akşam fark etmez; eğer GitHub commit KO öncesine yetişmezse pre-KO mühür verilmez.
 - **PDF kullanımı:** Kullanıcı iddaa PDF'si + özel `oran_hafizasi_tam.json` ile Python yerel akışı veya Mobil V1.3 kullanılabilir. Eski PDF'leri aynen işlemek mümkündür; PDF girişinin otomatik GitHub tahmini üreten üretim servisi kurulduğu iddia edilmez. Bu arşiv **GitHub'a yüklenmemeli**.
 - **Sınırlar:** 23 Kasım'da oynanan yeni maçlar bu as-of `2026-11-23` dışlama tarihli 4.700 verisine ekli değildir. Aynı maç için birden fazla analiz üretilirse ilk GitHub kaydı üzerine yazılmaz, ek kayıtların farklı sürüm olarak değerlendirilmesi gerekir. Üretim `main` dalı değişmedi.
+
+
+## 24 Kasim 2026 — Hakem 2 ve P0/Hafiza yeni mac izleme koprusu
+
+**Araştırma dalı; ana üretim M4/C3 ve önceki SHA mühürleri değişmedi.**
+
+- Donmuş 504 eğitim maçlık **Hakem 2** kuralı `hakem2_kural_504_v1.json` olarak bu dalda sabitlendi. `HAKEM2_GUNLUK_SECICI_V1.py`, tek uzmanı MS / OU25 / KG pazar ailesi bazında seçer; olasılıkları harmanlamaz. P0'ın seçilmesi araştırma eğitim kaynağı olan **1xBet arşiv vekilinden** gelir; canlı iddaa üstünlüğü kanıtı değildir.
+- Serbest analiz yönlendiricisi ve günlük kapı yeni **isteğe bağlı** `--hakem2-rule experiments/263/serbest_analiz_v2/hakem2_kural_504_v1.json` argümanı kabul eder. Üç uzman varsa Hakem 2; iki uzmansa **Hakem kararı yok**, uzmanların bireysel tahminleri var. Tek kaynak varsa yalnız doğrudan uzman kararı. V1 varsayılan/karşılaştırma yolu korunur; canlı üretime geçiş yapılmadı.
+- `P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.py` özel mobil JSON + **orijinal PDF** bütünlüğünü yeniden doğrular. PDF'nin tamamı ile seçilmiş satırların sayısı eşit olmak zorunda değildir: kayıtlar **maç adı + saat + gerçek yedi oran** üzerinden bağımsız eşleşir. Bağımsız ayrıştırılamayan satır resmî kapıya GİREMEZ.
+- `capture` komutu yalnız 10 lig için bağımsız `OfficialFixtureGateway.lookup` doğrulaması, eşleşmiş resmi KO ve gelecekte kickoff varsa **yeni**, SHA içerik adresli araştırma adayı oluşturur. Dış liglerde P0/Hafıza çalışır ama 10-lig gateway'i dışına resmî pre-KO kanıtı uydurulmaz. Bu kayıt ancak KO **öncesi GitHub'a kabul edilip** `263-p0-hafiza-preko-guard-v1.yml` başarılı olunca Git tabanlı araştırma mühürü sayılabilir.
+- `evaluate` komutu gerçekleşen skoru dışarıdan verilmiş kaynak dosyasıyla eşleştirerek P0/Hafıza ayrı isabet/Brier raporu çıkarır. **Bu skor girdisini kendi başına internette doğrulamaz.** Resmî sonucu otomatik getiren kapsam-geniş sonuç kaynağı henüz bağlı değildir; değerlendirme geçici etiketlidir.
+- Özel 35.938 arşiv, ham mobil JSON ve orijinal PDF **Github'a yüklenmez**. Kaydedilecek özet yalnız resmî doğrulanmış fikstür, pazar olasılıkları ve kaynak SHA'larını içerir.
+- 24 Kasım `deneme1.pdf`: kaynak PDF ayrıştırıcısı toplam 27 maç satırı buldu; mobil tam-yedi-oran aktarımı 19 satır. Yerel bağımsız satır denetiminde 19'dan **18'i birebir** yeniden yakalandı, Cong An Nha… — Vissel Kobe satırı bağımsız ikinci ayrıştırıcıda yakalanamadı. O satır kaynak matematiği doğrulanmış olsa da resmî kayıt kapısına giremez. 19 kaydın hiçbirinde yetkili fikstür kimliği / KO yok; **resmî maç önü mühür oluşturulmadı**.
+
+### İlgili kullanım (özel PC ortamında)
+
+```bash
+python experiments/263/serbest_analiz_v2/GUNLUK_SERBEST_ANALIZ_KAPISI_V2.py \
+  --pdf bulten.pdf --archive oran_hafizasi_tam.json \
+  --rule experiments/263/serbest_analiz_v2/hakem_karar_kurali_v1.json \
+  --hakem2-rule experiments/263/serbest_analiz_v2/hakem2_kural_504_v1.json \
+  --out-dir /tmp/serbest_hakem2
+
+# Resmî doğrulanmış 10 lig eşleşmeleri için satır listesi ayrı özel dosyada olmalı.
+# Orijinal PDF + staging + satır bindings olmadan capture ASLA mühür yapmaz.
+python experiments/263/serbest_analiz_v2/P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.py capture \
+  --staging mobil_hakem_aktarim_v1_2.json --pdf bulten.pdf \
+  --bindings matches_to_verify.json --engine-root . \
+  --out-dir experiments/263/serbest_analiz_v2/odds_receipts
+```
+
+**Kalan gerçek operasyon bağı:** Desteklenen maçlar için yeni KO öncesi P0/Hafıza kaydının GitHub kapısından canlı geçmesi ve sonuç sağlayıcısının bağımsız otomatik sorgu katmanı. Bunlar tamamlanmadan uçtan uca otomatik üretim hazır denmeyecektir.
