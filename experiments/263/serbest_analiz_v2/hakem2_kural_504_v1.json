@@ -1,0 +1,45 @@
+{
+  "schema": "HAKEM2_PERFORMANCE_SELECTOR_RESEARCH_V1",
+  "status": "RESEARCH_ONLY_NOT_LIVE_CALIBRATED",
+  "training_n": 504,
+  "train_cutoff_exclusive": "2026-11-01",
+  "source_order": [
+    "FUTBOL_M4_C3_V4_REBUILT",
+    "ARSIV_P0_PROXY",
+    "HAFIZA_V1_2_RETRO"
+  ],
+  "chosen_by_family": {
+    "MS": "ARSIV_P0_PROXY",
+    "OU25": "ARSIV_P0_PROXY",
+    "KG": "ARSIV_P0_PROXY"
+  },
+  "training_family_brier": {
+    "MS": {
+      "FUTBOL_M4_C3_V4_REBUILT": 0.5973867914387383,
+      "ARSIV_P0_PROXY": 0.5768008175803521,
+      "HAFIZA_V1_2_RETRO": 0.5800296699448751
+    },
+    "OU25": {
+      "FUTBOL_M4_C3_V4_REBUILT": 0.23926284732210754,
+      "ARSIV_P0_PROXY": 0.23100539138187237,
+      "HAFIZA_V1_2_RETRO": 0.2324562653435891
+    },
+    "KG": {
+      "FUTBOL_M4_C3_V4_REBUILT": 0.24348475734417785,
+      "ARSIV_P0_PROXY": 0.23892803731108223,
+      "HAFIZA_V1_2_RETRO": 0.24373406954297339
+    }
+  },
+  "source_archive_sha256": "f80d9646af7d68249afa4445266fa7c721d64ed14b88b53579bf47a691ff13d0",
+  "selection_protocol": "Sept train 238 / Oct validation 266: global best vs band. Global selected by Oct Brier before November; Sep+Oct 504 refit.",
+  "holdout": {
+    "n": 167,
+    "HAKEM1_hits": 104,
+    "HAKEM2_hits": 108,
+    "P0_hits": 108,
+    "HAKEM2_brier": 0.34024,
+    "HAKEM1_brier": 0.342525
+  },
+  "research_only": true,
+  "not_original_iddaa_or_sealed_m4": true
+}
