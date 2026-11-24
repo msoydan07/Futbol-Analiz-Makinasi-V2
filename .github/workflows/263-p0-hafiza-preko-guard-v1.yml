@@ -1,0 +1,27 @@
+name: 263 P0 Hafiza pre-KO research receipt guard
+on:
+  push:
+    branches: [experiment/p0-oran-hafizasi-22-lig-20261122]
+    paths:
+      - 'experiments/263/serbest_analiz_v2/odds_receipts/*.json'
+permissions:
+  contents: read
+jobs:
+  verify-preko-research-receipts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned major-range dependencies
+        run: python -m pip install 'numpy>=1.24,<3' 'scipy>=1.10,<2' 'pymupdf>=1.23,<2'
+      - name: Verify only new records, independent fixture metadata, SHA and clock before KO
+        env:
+          BEFORE_COMMIT: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          python experiments/263/serbest_analiz_v2/PREKO_ORAN_KAYIT_GUARD_V1.py --root .
