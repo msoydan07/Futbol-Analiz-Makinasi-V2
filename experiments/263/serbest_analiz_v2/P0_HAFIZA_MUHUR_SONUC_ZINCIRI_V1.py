@@ -67,7 +67,7 @@ def make_records(staging, raw_pdf, bindings, gateway_lookup, *, now=None):
             _display_label_identity(fix["match_label"])!=
               _display_label_identity(row["match_name_pdf"])):
             raise OddsForwardError("SOURCE_PDF_NAME_OR_TIME_CHANGED_ROW_"+str(n))
-        if any(abs(float(row["seven_raw_odds"][k])-price[k])>1e-9 for k in EVENTS):
+        if any(abs(float(row["seven_raw_odds"][k])-float(price[k]))>1e-9 for k in EVENTS):
             raise OddsForwardError("SOURCE_PDF_ODDS_DISAGREE_ROW_"+str(n))
     seen=set();out=[]
     for b in bindings:
