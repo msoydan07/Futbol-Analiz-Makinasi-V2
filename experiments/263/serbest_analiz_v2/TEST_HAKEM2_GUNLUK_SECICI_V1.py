@@ -49,4 +49,30 @@ class Hakem2DailyTests(unittest.TestCase):
     def test_fabricated_source_blocks(self):
         ex=experts();ex["UNKNOWN"]=ex.pop("HAFIZA")
         with self.assertRaises(Hakem2Error):select_three(ex,self.rule)
+class DailyEntryTests(unittest.TestCase):
+    def test_default_and_explicit_legacy_in_both_cli_paths(self):
+        from unittest.mock import patch
+        import sys
+        import GUNLUK_SERBEST_ANALIZ_KAPISI_V2 as gate
+        import SERBEST_ANALIZ_YONLENDIRICI_V1 as router
+        for module in (gate,router):
+            for legacy in (False,True):
+                sample=batch(experts())
+                sample["matches"][0]["decision"]["ana_tercih_tr"]="KG Var"
+                sample.update(mode="PDF",count=1)
+                args=["cli","--pdf","sample.pdf","--rule","old.json","--out-dir","unused"]
+                if legacy:args.append("--legacy-hakem1")
+                with patch.object(sys,"argv",args),patch.object(module,"load_weights",return_value=({},None)),patch.object(module,"run_pdf",return_value=sample),patch.object(module,"save_run",return_value=("a","b")) as saved:
+                    module.main()
+                    row=saved.call_args.args[0]["matches"][0]
+                    self.assertEqual(row["decision"]["model_surum"],"LEGACY_V1" if legacy else "HAKEM2_504_TRAIN_FROZEN_V1")
+    def test_two_experts_in_report_are_separate(self):
+        from SERBEST_ANALIZ_YONLENDIRICI_V1 import format_md
+        ex=experts();del ex["M4_C3_V4"]
+        d=batch(ex);d.update(mode="PDF",count=1)
+        report=format_md(apply_hakem2(d,load_h2_rule(RULE)))
+        self.assertIn("P0:",report)
+        self.assertIn("HAFIZA:",report)
+        self.assertIsNone(d["matches"][0]["decision"])
+
 if __name__=="__main__":unittest.main()

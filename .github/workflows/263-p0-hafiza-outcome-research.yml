@@ -1,0 +1,38 @@
+name: 263 P0 Hafiza read-only outcome research
+on:
+  push:
+    branches: [experiment/p0-oran-hafizasi-22-lig-20261122]
+    paths:
+      - '.github/workflows/263-p0-hafiza-outcome-research.yml'
+      - 'experiments/263/serbest_analiz_v2/outcome_requests/*.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: p0-hafiza-outcome-research
+  cancel-in-progress: false
+jobs:
+  research-outcome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: experiment/p0-oran-hafizasi-22-lig-20261122
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'numpy>=1.24,<3' 'scipy>=1.10,<2' 'pymupdf>=1.23,<2'
+      - name: Check accepted receipts and two-source final scores, no repository writes
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python experiments/263/serbest_analiz_v2/P0_HAFIZA_OTOMATIK_SONUC_V1.py --root . --out "$RUNNER_TEMP/p0_hafiza_outcome.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: p0-hafiza-outcome-research
+          path: ${{ runner.temp }}/p0_hafiza_outcome.json
+          if-no-files-found: error
+          retention-days: 30

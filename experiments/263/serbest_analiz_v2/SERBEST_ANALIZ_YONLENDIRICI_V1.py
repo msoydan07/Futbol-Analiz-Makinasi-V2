@@ -371,6 +371,12 @@ def format_md(result):
             '- Hiçbir analiz gerçek doğrulanmış başlangıç ve bağımsız saatli Git commit olmadan yeni maç önü mühürü sayılmaz.',
             '- Bu araştırma kazanç, kalibrasyon veya bahis avantajı garantisi değildir.','']
     for i,r in enumerate(result['matches'],1):
+        if result.get('referee_mode') and r.get('uzman_ayri_tercihler'):
+            lines.append(f"### {i}. {r['match']} - bagimsiz uzmanlar")
+            for source,choice in r['uzman_ayri_tercihler'].items():
+                label=(f"{choice['main_tr']} %{choice['probability_pct']:.2f}" if 'main_tr' in choice else 'Eksik olasilik; tam tercih yok')
+                lines.append(f"- {source}: {label}")
+            lines.append('')
         if r.get('piyasa',{}).get('estimated_quotes'):
             lines.append(f"### {i}. {r['match']} - teorik oranlar")
             for k,val in r['piyasa']['estimated_quotes'].items():
@@ -400,7 +406,9 @@ def main():
     p.add_argument('--pdf-league',help='Optional single-league PDF metadata, e.g. GER1, TUR1')
     p.add_argument('--archive',type=Path,help='Full private odds history; never uploaded')
     p.add_argument('--rule',required=True,type=Path)
-    p.add_argument('--hakem2-rule',type=Path,help='Opt-in frozen expert selector, NO weighted mixing')
+    referee=p.add_mutually_exclusive_group()
+    referee.add_argument('--hakem2-rule',type=Path,default=Path(__file__).with_name('hakem2_kural_504_v1.json'),help='Frozen Hakem 2 research rule (default)')
+    referee.add_argument('--legacy-hakem1',action='store_true',help='Explicit legacy comparison only')
     p.add_argument('--model-index',type=Path)
     p.add_argument('--repo-root',type=Path)
     p.add_argument('--engine-root',type=Path)
@@ -421,7 +429,7 @@ def main():
                 raise RouterError('NAMED_MODE_REQUIRES_LEAGUE_HOME_AWAY_DATE')
             result=run_named(a.league,a.home,a.away,a.date,weights,a.model_index,a.repo_root,
                   a.engine_root,a.history,a.registry)
-        if a.hakem2_rule:
+        if not a.legacy_hakem1:
             from HAKEM2_GUNLUK_SECICI_V1 import load_h2_rule,apply_hakem2
             result=apply_hakem2(result,load_h2_rule(a.hakem2_rule))
         jf,mf=save_run(result,a.out_dir)

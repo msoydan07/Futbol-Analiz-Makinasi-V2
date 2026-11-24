@@ -100,3 +100,9 @@ python experiments/263/serbest_analiz_v2/P0_HAFIZA_MUHUR_SONUC_ZINCIRI_V1.py cap
 ```
 
 **Kalan gerçek operasyon bağı:** Desteklenen maçlar için yeni KO öncesi P0/Hafıza kaydının GitHub kapısından canlı geçmesi ve sonuç sağlayıcısının bağımsız otomatik sorgu katmanı. Bunlar tamamlanmadan uçtan uca otomatik üretim hazır denmeyecektir.
+
+## 24 Kasım — günlük araştırma varsayılanı ve otomatik sonuç bağlantısı
+
+- Günlük Serbest V2 ve bağımsız yönlendirici CLI artık mevcut donmuş Hakem 2 kuralını varsayılan olarak yükler; Hakem 1 yalnız açık `--legacy-hakem1` karşılaştırma seçeneğiyle kullanılır. İki uzman olduğunda rapor ayrı uzmanları gösterir, birleşik karar üretmez. Resmî tek futbol kaydı, ana model, eski mühürler ve özel arşiv değişmez. Hakem 2 canlı iddaa üstünlüğü iddiası değildir.
+- `P0_HAFIZA_OTOMATIK_SONUC_V1.py` GitHub KO öncesi başarılı kabul koşusu ve Football-Data/ESPN iki kaynak uyuşması olmadan sonuç değerlendirmez. İki kaynak eşleşmesi federasyon doğrulaması değildir. Rapor repo dışında oluşturulur.
+- `.github/workflows/263-p0-hafiza-outcome-research.yml` araştırma dalındaki istek dosyası veya manuel tetiklemede salt-okunur sonuç raporu üretir. GitHub zamanlanmış iş akışı varsayılan dal gerektirdiğinden bu dal tek başına günlük saatli otomasyon değildir. Ana dal değiştirilmedi; otomatik günlük zamanlama ve ilk gerçek P0/Hafıza kabulü bekliyor. Eski `deneme1.pdf` mobil aktarımının 19 satırı resmî 10 lig kapsamına girmez; canlı kabul için yeni uygun PDF+mobil JSON gereklidir.
