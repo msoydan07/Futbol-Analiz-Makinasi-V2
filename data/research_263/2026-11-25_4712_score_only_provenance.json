@@ -1,0 +1,176 @@
+{
+  "schema": "KAHIN_RESEARCH_SCORE_ONLY_APPEND_V1",
+  "status": "RESEARCH_SCORE_ONLY_APPEND_NOT_WEEKLY_RELEASE",
+  "source_snapshot_path": "data/research_263/2026-11-25_4712_score_only_research.csv",
+  "source_snapshot_sha256": "c85fbc24861861c834afe1a287ed0e0dae60b9cc0ae24646aabcd1894c9b955a",
+  "usable_total_rows": 4712,
+  "all_source_scores_identical": true,
+  "base_snapshot_path": "data/research_263/2026-11-23_4700_two_source_research.csv",
+  "base_snapshot_sha256": "37bf74e820df85325213c2e0ef8ce9a88a16c1f452edf5bd2a41814f10f261bd",
+  "base_rows_preserved": true,
+  "new_score_only_rows": 12,
+  "asof_exclusive": "2026-11-25",
+  "full_ten_league_completeness_certified": false,
+  "source_row_ids_missing_for_appended_rows": true,
+  "non_score_fields_blank": true,
+  "production_model_modified": false,
+  "previous_prematch_seals_rewritten": false,
+  "evidence": [
+    {
+      "fixture_id": "ccf60900-9012-53d4-81de-4c6f7948a28f",
+      "league": "ENG1",
+      "match_date": "2026-11-23",
+      "home_id": "b26a259a-4bdf-57f1-8102-85eb5149dc81",
+      "away_id": "e5429756-1bab-5f06-8969-63e1faa0173b",
+      "home_goals": 4,
+      "away_goals": 0,
+      "sources": [
+        "https://www.premierleague.com/en/news/4764886/brentford-score-four-to-beat-10-man-everton",
+        "https://www.livescore.mobi/football/2026-11-23/?tz=3"
+      ]
+    },
+    {
+      "fixture_id": "80597b65-511c-5167-92f8-6a20c2bf6002",
+      "league": "ITA1",
+      "match_date": "2026-11-23",
+      "home_id": "36a81f9b-184f-5b4e-a9b6-15b62c826573",
+      "away_id": "78a9204d-45dd-5943-afbf-8529605ac7e8",
+      "home_goals": 3,
+      "away_goals": 0,
+      "sources": [
+        "https://www.legaseriea.it/serie-a/news/monza-fiorentina-2026-2027-3-0-cronaca-risultato-gol",
+        "https://www.livescore.mobi/football/2026-11-23/?tz=3"
+      ]
+    },
+    {
+      "fixture_id": "392e9d09-2c80-51e5-a628-94c403edda3e",
+      "league": "ESP1",
+      "match_date": "2026-11-23",
+      "home_id": "5e616a0f-2d33-5c0d-b116-d11cb33d0580",
+      "away_id": "e353c708-7867-52e9-a755-dc0cb27d016f",
+      "home_goals": 1,
+      "away_goals": 1,
+      "sources": [
+        "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-13",
+        "https://www.livescore.mobi/football/2026-11-23/?tz=3"
+      ]
+    },
+    {
+      "fixture_id": "2cafca62-3d4d-57ff-9426-43c8b7cb1e3a",
+      "league": "TUR1",
+      "match_date": "2026-11-23",
+      "home_id": "ac6c7e86-b7c7-5502-a560-6098c3e7b35f",
+      "away_id": "95647a3b-0347-5eb9-ae2f-d444d31a7d3b",
+      "home_goals": 4,
+      "away_goals": 2,
+      "sources": [
+        "https://beinsports.com.tr/haber/istanbul-basaksehir-arca-corum-fk",
+        "https://www.aa.com.tr/tr/spor/istanbul-basaksehirden-geri-donusle-4-gollu-galibiyet/4135036"
+      ]
+    },
+    {
+      "fixture_id": "cc6587bc-ccc1-575f-a32a-335fdc144854",
+      "league": "ENG2",
+      "match_date": "2026-11-24",
+      "home_id": "b3cb203e-2740-5208-bcfc-e2cc9117d4bc",
+      "away_id": "3859533c-c10b-524b-a397-b77af7372482",
+      "home_goals": 3,
+      "away_goals": 0,
+      "sources": [
+        "https://www.rte.ie/sport/results/soccer/championship/38070/results/",
+        "https://ontourfootball.com/fixtures/2026-11-24"
+      ]
+    },
+    {
+      "fixture_id": "8aa1bca5-fe23-547d-85ab-3c44de31fa9c",
+      "league": "ENG2",
+      "match_date": "2026-11-24",
+      "home_id": "1700c1d6-185c-5f12-84ed-613b6830285f",
+      "away_id": "f4eb50ff-0c4f-59ef-b29f-3bfa1b527645",
+      "home_goals": 1,
+      "away_goals": 1,
+      "sources": [
+        "https://www.rte.ie/sport/results/soccer/championship/38070/results/",
+        "https://ontourfootball.com/fixtures/2026-11-24"
+      ]
+    },
+    {
+      "fixture_id": "e025f1a4-4eb4-50e3-bef3-92cefee4723d",
+      "league": "ENG2",
+      "match_date": "2026-11-24",
+      "home_id": "a2f57044-1537-5485-8851-179a0f6eaa37",
+      "away_id": "7ba6a3c4-555d-5302-9fbb-6dccaa04d43d",
+      "home_goals": 0,
+      "away_goals": 4,
+      "sources": [
+        "https://www.rte.ie/sport/results/soccer/championship/38070/results/",
+        "https://ontourfootball.com/fixtures/2026-11-24"
+      ]
+    },
+    {
+      "fixture_id": "c012510b-3d8d-5b48-9e75-0d1a65a16bdd",
+      "league": "ENG2",
+      "match_date": "2026-11-24",
+      "home_id": "b1cfc7c1-e2e7-5455-8695-9f8ccf2a9afb",
+      "away_id": "64d28a58-961a-57bc-b50b-46b4be8c020e",
+      "home_goals": 4,
+      "away_goals": 0,
+      "sources": [
+        "https://www.rte.ie/sport/results/soccer/championship/38070/results/",
+        "https://ontourfootball.com/fixtures/2026-11-24"
+      ]
+    },
+    {
+      "fixture_id": "074e0be8-baae-5a1d-8fc0-374281ef63cd",
+      "league": "ENG2",
+      "match_date": "2026-11-24",
+      "home_id": "417a4d42-480e-56f3-9da4-c2d1a2926a1d",
+      "away_id": "977174b7-0fc4-5c4e-a413-55bb007f355a",
+      "home_goals": 2,
+      "away_goals": 1,
+      "sources": [
+        "https://www.rte.ie/sport/results/soccer/championship/38070/results/",
+        "https://ontourfootball.com/fixtures/2026-11-24"
+      ]
+    },
+    {
+      "fixture_id": "84a112ec-13af-51f2-b472-5baee2cd42ee",
+      "league": "ENG2",
+      "match_date": "2026-11-24",
+      "home_id": "f13c0daf-b3f9-5838-a214-376dcd77a334",
+      "away_id": "723987e4-7eef-5a34-a3a1-4d8f02fb9f19",
+      "home_goals": 1,
+      "away_goals": 1,
+      "sources": [
+        "https://www.rte.ie/sport/results/soccer/championship/38070/results/",
+        "https://ontourfootball.com/fixtures/2026-11-24"
+      ]
+    },
+    {
+      "fixture_id": "a32fe1f6-cbf4-55fb-b0f0-71ef10aa5b1b",
+      "league": "ENG2",
+      "match_date": "2026-11-24",
+      "home_id": "e934c36b-171e-52e1-ab9a-86a128cbc691",
+      "away_id": "1c190104-8bcc-56bd-a5ad-efeafef3a141",
+      "home_goals": 1,
+      "away_goals": 0,
+      "sources": [
+        "https://www.rte.ie/sport/results/soccer/championship/38070/results/",
+        "https://ontourfootball.com/fixtures/2026-11-24"
+      ]
+    },
+    {
+      "fixture_id": "02440da3-96a3-56f9-b40a-7789ba3798c8",
+      "league": "ENG2",
+      "match_date": "2026-11-24",
+      "home_id": "2316b187-cbb1-55df-bb33-707d37a1a31c",
+      "away_id": "6c87a0db-ad9a-5e71-8d13-f7d07b8e4144",
+      "home_goals": 1,
+      "away_goals": 1,
+      "sources": [
+        "https://www.rte.ie/sport/results/soccer/championship/38070/results/",
+        "https://ontourfootball.com/fixtures/2026-11-24"
+      ]
+    }
+  ]
+}
