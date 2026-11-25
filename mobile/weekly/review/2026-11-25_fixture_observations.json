@@ -1,0 +1,401 @@
+{
+  "schema": "KAHIN_WEEKLY_FIXTURE_REVIEW_V1",
+  "status": "PARTIAL_OFFICIAL_OBSERVATIONS_NOT_PUBLISHABLE",
+  "week_start": "2026-11-25",
+  "week_end": "2026-12-01",
+  "base_blob_sha": "527d213f56b1a680265d6f20c7c00e9493d4af17",
+  "note": "Official schedule observations, team membership and historical pair checks. Not a certification of all fixtures in the window; check amendments before publication. No fixture IDs assigned. No odds or private archives included.",
+  "counts": {
+    "ENG1": 10,
+    "GER1": 9,
+    "ESP1": 10,
+    "FRA1": 9,
+    "TUR1": 9
+  },
+  "remaining_leagues": [
+    "ENG2",
+    "ITA1",
+    "NED1",
+    "POR1",
+    "BEL1"
+  ],
+  "errors": [],
+  "fixtures": [
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "01a8f309-8c6f-5cf2-aafc-4909a6b5a1f1",
+      "away_id": "331335be-3469-59aa-8083-32e2637c064e",
+      "kickoff_utc": "2026-11-27T20:00:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "e77c3788-0016-55f9-9435-1ca3bd9f88b0",
+      "away_id": "4090fd8e-e904-56ad-a458-55ee6831441c",
+      "kickoff_utc": "2026-11-28T15:00:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "8c661a94-3348-5ee8-88cd-fed3afc9e03d",
+      "away_id": "b26a259a-4bdf-57f1-8102-85eb5149dc81",
+      "kickoff_utc": "2026-11-28T15:00:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "28ce5115-c798-51cd-8aea-22ac5d6ffef0",
+      "away_id": "ae84a5fa-13c8-5d19-9151-4624f1159182",
+      "kickoff_utc": "2026-11-28T17:30:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "e5429756-1bab-5f06-8969-63e1faa0173b",
+      "away_id": "ce71ab24-a25e-54ac-9023-c753dc549c88",
+      "kickoff_utc": "2026-11-29T12:00:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "383619c8-7306-5814-a1c1-f7a2299da9ed",
+      "away_id": "624547ca-7438-532c-913b-0134501671b2",
+      "kickoff_utc": "2026-11-29T14:05:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "f4766b24-4533-540f-ab07-af3be2f16914",
+      "away_id": "beb4f31c-567e-5df8-8305-557d179cdbba",
+      "kickoff_utc": "2026-11-29T14:05:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "3b2f5981-4bcd-5794-b3f5-c7b52429a332",
+      "away_id": "dbb1abd7-b219-5f87-b63e-04289b4dda45",
+      "kickoff_utc": "2026-11-29T14:05:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "54562038-3366-538d-a2cb-96301351a0ab",
+      "away_id": "354a2ed8-e82f-5373-bca8-1d9ac1accf90",
+      "kickoff_utc": "2026-11-29T14:05:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "home_id": "5b218a5c-83ce-5c00-879b-1a8d5b70c572",
+      "away_id": "f7ba382d-cc35-5b2b-953b-ec56ef312010",
+      "kickoff_utc": "2026-11-29T16:30:00.000Z",
+      "source_url": "https://www.premierleague.com/en/news/4725574"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "299eb8c9-0d9e-58fd-bf1b-ef8c3491dce2",
+      "away_id": "e05b54ee-124a-519f-a867-afbae14cb771",
+      "kickoff_utc": "2026-11-27T19:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "47fb66a4-831b-567e-bd78-a7bfd9c93e0b",
+      "away_id": "df9a3778-f7f8-585d-a996-e0cda64dcab5",
+      "kickoff_utc": "2026-11-28T14:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "99ab0073-a700-5c51-89c6-a1c3abc58c7a",
+      "away_id": "c8be3a92-94db-5ef4-9cb4-7a9877fc7bbe",
+      "kickoff_utc": "2026-11-28T14:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "86c2df96-ecbc-5200-93f2-2b56083efbe6",
+      "away_id": "fa8640d2-1a1b-544f-8f22-c22488508f4d",
+      "kickoff_utc": "2026-11-28T14:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "e656e2cc-ba29-5cd5-8da3-e61f1ee01a08",
+      "away_id": "4d6798e9-6702-53ac-b979-06b67f82ea0e",
+      "kickoff_utc": "2026-11-28T14:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "6aa36235-a890-5482-9fe3-06efab06f2f9",
+      "away_id": "fcbfdf2b-827c-5930-a6c0-5931c4738864",
+      "kickoff_utc": "2026-11-28T17:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "deffb017-2cc9-515c-8610-7ebf8c760f22",
+      "away_id": "ea18c9c4-9bc4-57c2-b57b-6bc8205a1683",
+      "kickoff_utc": "2026-11-29T14:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "1c773c3c-f4dd-5fd2-ae9e-3d1f584fc383",
+      "away_id": "9ad66a68-e4df-530a-a7ae-f2bdaea9d862",
+      "kickoff_utc": "2026-11-29T16:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "GER1",
+      "season": "2026-2027",
+      "home_id": "aec30ffc-fb2e-5d50-adac-f5472690a4a9",
+      "away_id": "bec22b9c-1ac9-5351-b1a1-11ed122fe9f9",
+      "kickoff_utc": "2026-11-29T18:30:00.000Z",
+      "source_url": "https://products.bundesliga.com/fixtures"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "5e616a0f-2d33-5c0d-b116-d11cb33d0580",
+      "away_id": "1688f876-3917-57bf-89b1-bfe2bce478a8",
+      "kickoff_utc": "2026-11-27T20:00:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "91862a7d-290b-50c5-9991-71ac9b47b872",
+      "away_id": "85146ecc-4e9b-5294-b887-3dfa8fbf4a43",
+      "kickoff_utc": "2026-11-28T13:00:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "c7ba76da-a25a-598d-948c-abc14e65aebd",
+      "away_id": "81715b99-691b-599e-bd2e-245163ce9a67",
+      "kickoff_utc": "2026-11-28T15:15:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "e353c708-7867-52e9-a755-dc0cb27d016f",
+      "away_id": "edbec58b-b78d-5be6-8218-ba6ed96c0776",
+      "kickoff_utc": "2026-11-28T17:30:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "62cb11a9-ee81-5d52-99f0-d04607fd248c",
+      "away_id": "0e06d1f5-ca04-5138-bfbb-7c47db6bcba0",
+      "kickoff_utc": "2026-11-28T20:00:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "5f2c15a6-2ae6-5d02-be4e-2f0aad8a6329",
+      "away_id": "ff367e9a-2aed-53bb-aa1e-5e01de88b281",
+      "kickoff_utc": "2026-11-29T13:00:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "b52b5283-f419-51ba-9c77-d8af65323cf6",
+      "away_id": "aa66d325-fc60-5b5c-b510-900f1f30c3cc",
+      "kickoff_utc": "2026-11-29T15:15:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "6ad330c9-ad3c-5944-818d-c9a67a993f8e",
+      "away_id": "1b2fb7db-bdb3-53ad-86f5-8c2992ee5293",
+      "kickoff_utc": "2026-11-29T17:30:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "4d3fba55-3549-5874-b15c-5697f4e8f3f2",
+      "away_id": "ec5b2a37-17d1-550d-af88-2f5a6b74a951",
+      "kickoff_utc": "2026-11-29T20:00:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "home_id": "31ea963f-fa01-5f2a-b1cb-6cbe9d5d681e",
+      "away_id": "ee32e224-3f69-5103-9630-17f18670bc56",
+      "kickoff_utc": "2026-11-30T20:00:00.000Z",
+      "source_url": "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-14"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "5e8c20e5-5593-5891-a8ae-6d5864e44646",
+      "away_id": "14e73e05-1391-5731-a3cd-3a36b2a36e7c",
+      "kickoff_utc": "2026-11-27T19:45:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "23f10546-64fe-5ffc-a908-c5b67897859e",
+      "away_id": "f5fd5f35-351b-5c16-9eb6-09a660f73630",
+      "kickoff_utc": "2026-11-28T16:15:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "089ac458-9f7d-500f-9f62-44dfa8032f37",
+      "away_id": "74ebd71e-0912-536a-831e-e14e473d6163",
+      "kickoff_utc": "2026-11-28T19:45:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "ffd2c2e1-5862-519b-843c-d370656e56c9",
+      "away_id": "3f7ee66e-ea78-5826-a6ad-55142f1b5c4a",
+      "kickoff_utc": "2026-11-28T19:45:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "5c7c7667-36a2-59aa-b536-59b33ef230b6",
+      "away_id": "9b4b87e9-b145-5869-8913-ef8712e21dad",
+      "kickoff_utc": "2026-11-28T19:45:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "a23cb5ad-b4b2-5f33-9ab5-ecabbf91996b",
+      "away_id": "c1f3ed13-b24c-5aec-89dc-62fa9ee0241a",
+      "kickoff_utc": "2026-11-28T19:45:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "b7d45edc-75b9-5e0d-8ea2-5372071a457a",
+      "away_id": "4179dd45-fbcc-51ac-b48e-df05403a79ff",
+      "kickoff_utc": "2026-11-29T14:00:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "558d465a-c00b-5294-a04a-17dbfb07e96a",
+      "away_id": "9d896e45-c3bb-5fbb-a637-9cbad967075a",
+      "kickoff_utc": "2026-11-29T16:15:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "FRA1",
+      "season": "2026-2027",
+      "home_id": "b8051c2b-f40f-5620-aca4-3ec5711567e1",
+      "away_id": "e1d9d0f3-df1e-5be0-b101-84f949df9219",
+      "kickoff_utc": "2026-11-29T19:45:00.000Z",
+      "source_url": "https://ligue1.com/en/articles/l1_article_5843-"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "525fd705-b724-5426-af7b-45dff87b352e",
+      "away_id": "bb38e922-20db-5aef-a48a-af74e163b6f3",
+      "kickoff_utc": "2026-11-27T17:00:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "010ec376-a0df-50e7-a57c-f5850f660053",
+      "away_id": "41b9043e-2819-52dc-963f-a5756b6e88c3",
+      "kickoff_utc": "2026-11-27T17:00:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "f06aca12-75d2-5b48-aa34-8d0336e953e7",
+      "away_id": "bf0f8601-77e0-528f-ac2a-5d384a7081c5",
+      "kickoff_utc": "2026-11-28T13:00:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "da9ddb8a-aabc-5492-a4b5-b52eaed65165",
+      "away_id": "e4f39e90-7f57-5fb8-9601-63d5744e583f",
+      "kickoff_utc": "2026-11-28T16:00:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "95647a3b-0347-5eb9-ae2f-d444d31a7d3b",
+      "away_id": "57907b9b-87ef-5e68-8f97-2e08840a0366",
+      "kickoff_utc": "2026-11-29T10:30:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "fdfd35c2-83d9-532a-a0d8-bb4ecab26b29",
+      "away_id": "ac6c7e86-b7c7-5502-a560-6098c3e7b35f",
+      "kickoff_utc": "2026-11-29T13:00:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "b70be320-82df-539d-9dc1-09f05137f08d",
+      "away_id": "08d3f80d-eb65-50ac-9dd4-e49110a61a82",
+      "kickoff_utc": "2026-11-29T16:00:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "c645771f-4bd8-5ea1-b6c5-49ddd518f45e",
+      "away_id": "17017361-4cc8-5b8f-8787-3b5e7e1260de",
+      "kickoff_utc": "2026-11-30T16:00:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "home_id": "4e0b2072-7256-59f1-a14a-1be0aa41827c",
+      "away_id": "ab16f146-5846-5854-b898-f7c1ae3583ba",
+      "kickoff_utc": "2026-11-30T18:00:00.000Z",
+      "source_url": "https://www.tff.org/Default.aspx?pageId=198"
+    }
+  ]
+}
