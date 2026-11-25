@@ -1,0 +1,168 @@
+{
+  "schema": "KAHIN_WEEKLY_RESULT_CANDIDATES_V1",
+  "status": "CANDIDATES_NOT_IMPORTED_NOT_PUBLISHED",
+  "week_start": "2026-11-25",
+  "base_history": "data/research_263/2026-11-23_4700_two_source_research.csv",
+  "base_blob_sha": "527d213f56b1a680265d6f20c7c00e9493d4af17",
+  "base_rows": 4700,
+  "candidate_count": 12,
+  "scope": "Two displayed score sources agree; independent underlying provider not certified. Completeness across ten leagues, canonical provider row IDs and ingestion review pending. Do not consume as weekly input.",
+  "candidates": [
+    {
+      "league": "ENG1",
+      "season": "2026-2027",
+      "match_date": "2026-11-23",
+      "home_id": "b26a259a-4bdf-57f1-8102-85eb5149dc81",
+      "away_id": "e5429756-1bab-5f06-8969-63e1faa0173b",
+      "home_goals": 4,
+      "away_goals": 0,
+      "sources": [
+        "https://www.premierleague.com/en/news/4764886/brentford-score-four-to-beat-10-man-everton",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ITA1",
+      "season": "2026-2027",
+      "match_date": "2026-11-23",
+      "home_id": "36a81f9b-184f-5b4e-a9b6-15b62c826573",
+      "away_id": "78a9204d-45dd-5943-afbf-8529605ac7e8",
+      "home_goals": 3,
+      "away_goals": 0,
+      "sources": [
+        "https://www.legaseriea.it/serie-a/news/monza-fiorentina-2026-2027-3-0-cronaca-risultato-gol",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ESP1",
+      "season": "2026-2027",
+      "match_date": "2026-11-23",
+      "home_id": "5e616a0f-2d33-5c0d-b116-d11cb33d0580",
+      "away_id": "e353c708-7867-52e9-a755-dc0cb27d016f",
+      "home_goals": 1,
+      "away_goals": 1,
+      "sources": [
+        "https://www.laliga.com/laliga-easports/resultados/2026-27/jornada-13",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "TUR1",
+      "season": "2026-2027",
+      "match_date": "2026-11-23",
+      "home_id": "ac6c7e86-b7c7-5502-a560-6098c3e7b35f",
+      "away_id": "95647a3b-0347-5eb9-ae2f-d444d31a7d3b",
+      "home_goals": 4,
+      "away_goals": 2,
+      "sources": [
+        "https://beinsports.com.tr/haber/istanbul-basaksehir-arca-corum-fk",
+        "https://www.aa.com.tr/tr/spor/istanbul-basaksehirden-geri-donusle-4-gollu-galibiyet/4135036"
+      ]
+    },
+    {
+      "league": "ENG2",
+      "season": "2026-2027",
+      "match_date": "2026-11-24",
+      "home_id": "b3cb203e-2740-5208-bcfc-e2cc9117d4bc",
+      "away_id": "3859533c-c10b-524b-a397-b77af7372482",
+      "home_goals": 3,
+      "away_goals": 0,
+      "sources": [
+        "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ENG2",
+      "season": "2026-2027",
+      "match_date": "2026-11-24",
+      "home_id": "1700c1d6-185c-5f12-84ed-613b6830285f",
+      "away_id": "f4eb50ff-0c4f-59ef-b29f-3bfa1b527645",
+      "home_goals": 1,
+      "away_goals": 1,
+      "sources": [
+        "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ENG2",
+      "season": "2026-2027",
+      "match_date": "2026-11-24",
+      "home_id": "a2f57044-1537-5485-8851-179a0f6eaa37",
+      "away_id": "7ba6a3c4-555d-5302-9fbb-6dccaa04d43d",
+      "home_goals": 0,
+      "away_goals": 4,
+      "sources": [
+        "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ENG2",
+      "season": "2026-2027",
+      "match_date": "2026-11-24",
+      "home_id": "b1cfc7c1-e2e7-5455-8695-9f8ccf2a9afb",
+      "away_id": "64d28a58-961a-57bc-b50b-46b4be8c020e",
+      "home_goals": 4,
+      "away_goals": 0,
+      "sources": [
+        "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ENG2",
+      "season": "2026-2027",
+      "match_date": "2026-11-24",
+      "home_id": "417a4d42-480e-56f3-9da4-c2d1a2926a1d",
+      "away_id": "977174b7-0fc4-5c4e-a413-55bb007f355a",
+      "home_goals": 2,
+      "away_goals": 1,
+      "sources": [
+        "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ENG2",
+      "season": "2026-2027",
+      "match_date": "2026-11-24",
+      "home_id": "f13c0daf-b3f9-5838-a214-376dcd77a334",
+      "away_id": "723987e4-7eef-5a34-a3a1-4d8f02fb9f19",
+      "home_goals": 1,
+      "away_goals": 1,
+      "sources": [
+        "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ENG2",
+      "season": "2026-2027",
+      "match_date": "2026-11-24",
+      "home_id": "e934c36b-171e-52e1-ab9a-86a128cbc691",
+      "away_id": "1c190104-8bcc-56bd-a5ad-efeafef3a141",
+      "home_goals": 1,
+      "away_goals": 0,
+      "sources": [
+        "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+        "https://www.theguardian.com/football/results"
+      ]
+    },
+    {
+      "league": "ENG2",
+      "season": "2026-2027",
+      "match_date": "2026-11-24",
+      "home_id": "2316b187-cbb1-55df-bb33-707d37a1a31c",
+      "away_id": "6c87a0db-ad9a-5e71-8d13-f7d07b8e4144",
+      "home_goals": 1,
+      "away_goals": 1,
+      "sources": [
+        "https://www.footballwebpages.co.uk/championship/fixtures-results/november",
+        "https://www.theguardian.com/football/results"
+      ]
+    }
+  ]
+}
